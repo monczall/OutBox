@@ -1,10 +1,7 @@
-package java;
+package main.java;
 
 import javafx.application.Application;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import java.awt.geom.Rectangle2D;
 
 public class App extends Application {
 

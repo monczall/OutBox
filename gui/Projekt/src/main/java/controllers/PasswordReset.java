@@ -1,4 +1,4 @@
-package java.controllers;
+package main.java.controllers;
 
 public class PasswordReset {
 }
