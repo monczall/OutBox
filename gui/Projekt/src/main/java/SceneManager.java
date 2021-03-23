@@ -41,6 +41,7 @@ public class SceneManager {
     }
 
     public static void setStage(Stage _stage){
+
         stage = _stage;
     }
 }

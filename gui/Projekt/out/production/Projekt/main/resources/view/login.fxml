@@ -26,7 +26,7 @@
          <children>
             <ImageView fx:id="login_logo_imageView" fitHeight="150.0" fitWidth="200.0" layoutX="90.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="410.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="45.0">
                <image>
-                  <Image url="@../../main/resources/images/outbox_black.png" />
+                  <Image url="@../../../main/resources/images/outbox_black.png" />
                </image>
             </ImageView>
             <Label fx:id="login_slogan_label" layoutX="42.0" layoutY="195.0" text="Przesyłkami zajmujemy się od lat">
@@ -62,14 +62,14 @@
             <Circle fill="ORANGE" layoutX="276.0" layoutY="268.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
             <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="259.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../main/resources/images/user.png" />
+                  <Image url="@../../../main/resources/images/user.png" />
                </image>
             </ImageView>
             <PasswordField layoutX="276.0" layoutY="333.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" prefHeight="35.0" prefWidth="250.0" AnchorPane.topAnchor="325.0" />
             <Circle fill="ORANGE" layoutX="276.0" layoutY="343.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
             <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="259.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../main/resources/images/password.png" />
+                  <Image url="@../../../main/resources/images/password.png" />
                </image>
             </ImageView>
             <Label layoutX="429.0" layoutY="368.0" text="Nie pamiętasz hasła?" textFill="#424242">

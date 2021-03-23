@@ -20,5 +20,6 @@ public class App extends Application {
 
         SceneManager.renderScene("login");
         primaryStage.setResizable(false);
+
     }
 }
