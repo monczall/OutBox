@@ -83,4 +83,10 @@ public class Client implements Initializable {
     public void homeButton(MouseEvent mouseEvent) {
 
     }
+
+    public void packageButton(MouseEvent mouseEvent) {
+    }
+
+    public void btnHome(MouseEvent mouseEvent) {
+    }
 }
