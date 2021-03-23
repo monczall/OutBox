@@ -17,8 +17,9 @@ public class App extends Application {
         SceneManager.addScene("login", "../resources/view/login.fxml");
         SceneManager.addScene("register", "../resources/view/register.fxml");
         SceneManager.addScene("password_reset", "../resources/view/passwordReset.fxml");
+        SceneManager.addScene("client", "../resources/view/client.fxml");
 
-        SceneManager.renderScene("login");
+        SceneManager.renderScene("client");
         primaryStage.setResizable(false);
 
     }
