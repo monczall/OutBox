@@ -1,0 +1,56 @@
+.mainBackground{
+    -fx-background-color: #121212;
+}
+.sideBackground{
+    -fx-background-color: #ffa500;
+}
+.sideButtons{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    /*-fx-text-alignment: right;*/
+    -fx-alignment: BASELINE_LEFT;
+    -fx-background-radius: 0;
+}
+.sideButtons:hover{
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffa500;
+    -fx-cursor: hand;
+}
+.icons:hover{
+    -fx-cursor: hand;
+}
+.welcomeHello, .welcomeUser{
+    -fx-font-size: 20px;
+    -fx-fill: white;
+}
+.welcomeUser{
+    -fx-fill: #ffa500;
+    -fx-underline: true;
+}
+
+/*-------------MENU - HOME-------------*/
+
+.homeBlock{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/*-------------MENU - SETTINGS-------------*/
+
+.btnLanguage, .btnTheme, .btnEdit{
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffa500;
+    -fx-font-weight: bold;
+}
+
+.btnLanguage:hover{
+    -fx-border-style: solid;
+    -fx-border-color: #ffa500;
+    -fx-border-width: 0 0 3 0;
+}
