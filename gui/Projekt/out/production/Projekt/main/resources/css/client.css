@@ -21,3 +21,20 @@
 .icons:hover{
     -fx-cursor: hand;
 }
+.welcomeHello, .welcomeUser{
+    -fx-font-size: 20px;
+    -fx-fill: white;
+}
+.welcomeUser{
+    -fx-fill: #ffa500;
+    -fx-underline: true;
+}
+
+/*-------------MENU - HOME-------------*/
+
+.homeBlock{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
