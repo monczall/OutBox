@@ -14,11 +14,12 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         SceneManager.setStage(primaryStage);
 
-        SceneManager.addScene("login", "../resources/view/login.fxml");
+        SceneManager.addScene("courier", "../resources/view/courier.fxml");
         SceneManager.addScene("register", "../resources/view/register.fxml");
         SceneManager.addScene("password_reset", "../resources/view/passwordReset.fxml");
+        SceneManager.addScene("courierHome", "../resources/view/courier.fxml");
 
-        SceneManager.renderScene("login");
+        SceneManager.renderScene("courier");
         primaryStage.setResizable(false);
 
     }
