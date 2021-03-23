@@ -14,18 +14,24 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         SceneManager.setStage(primaryStage);
 
-        SceneManager.addScene("courier", "../resources/view/courier.fxml");
+        SceneManager.addScene("login", "../resources/view/login.fxml");
         SceneManager.addScene("register", "../resources/view/register.fxml");
-        SceneManager.addScene("password_reset", "../resources/view/passwordReset.fxml");
-<<<<<<< HEAD
+        SceneManager.addScene("passwordReset", "../resources/view/passwordReset.fxml");
+
+        SceneManager.addScene("client", "../resources/view/client/client.fxml");
+
+        SceneManager.addScene("courier", "../resources/view/courier.fxml");
         SceneManager.addScene("courierHome", "../resources/view/courier.fxml");
 
-        SceneManager.renderScene("courier");
-=======
-        SceneManager.addScene("client", "../resources/view/client.fxml");
+        //TU SCENY KURIERA MIEDZYODDZIALOWEGO
 
-        SceneManager.renderScene("client");
->>>>>>> 1ab4e8366b163178106cc386bb0948d8d9e9ea02
+        //TU SCENY KIEROWNIKA
+
+        SceneManager.addScene("admin", "../resources/view/admin/admin.fxml");
+
+
+        SceneManager.renderScene("login");
+
         primaryStage.setResizable(false);
 
     }
