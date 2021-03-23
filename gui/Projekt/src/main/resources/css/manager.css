@@ -1,0 +1,26 @@
+.mainBackground{
+    -fx-background-color: #121212;
+}
+.mainBackgroundRight{
+    -fx-background-color: #fff;
+}
+.sideBackground{
+    -fx-background-color: #ffa500;
+}
+.sideButtons{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    /*-fx-text-alignment: right;*/
+    -fx-alignment: BASELINE_LEFT;
+    -fx-background-radius: 0;
+}
+.sideButtons:hover{
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffa500;
+    -fx-cursor: hand;
+}
+.icons:hover{
+    -fx-cursor: hand;
+}
