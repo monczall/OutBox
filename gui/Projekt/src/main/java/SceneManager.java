@@ -1,12 +1,18 @@
 package main.java;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.controllers.Courier;
 
 import java.io.IOException;
+import java.security.AccessController;
 import java.util.Hashtable;
+
+import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 public class SceneManager {
     private static Stage stage;
@@ -16,6 +22,13 @@ public class SceneManager {
     public static void addScene(String name,String path)throws IOException {
         view.put(name,path);
     }
+
+    public static void loadScene(String path, AnchorPane anchorPane) throws IOException {
+        Node newLoadedPane = FXMLLoader.load(Courier.class.getResource(path));
+        anchorPane.getChildren().clear();
+        anchorPane.getChildren().add(newLoadedPane);
+    }
+
     public static void removeScene(String name){
         view.remove(name);
     }
