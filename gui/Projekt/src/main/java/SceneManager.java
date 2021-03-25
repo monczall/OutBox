@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.security.AccessController;
 import java.util.Hashtable;
 
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 public class SceneManager {
     private static Stage stage;
@@ -43,7 +42,7 @@ public class SceneManager {
 
             stage.setTitle("OutBox");
             stage.show();
-            stage.setResizable(false);
+//            stage.setResizable(false);
 
         } catch (IOException e) {
             e.printStackTrace();
