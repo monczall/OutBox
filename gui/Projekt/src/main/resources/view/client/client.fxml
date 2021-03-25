@@ -1,4 +1,4 @@
- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
@@ -22,41 +22,66 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="mainBackground">
          <children>
-            <AnchorPane id="mainWindow" layoutX="215.0" layoutY="25.0" opacity="0.0" prefHeight="675.0" prefWidth="879.0" style="-fx-background-color: magenta;">
+            <AnchorPane fx:id="mainWindow" layoutX="71.0" layoutY="30.0" prefHeight="672.0" prefWidth="1033.0" style="-fx-background-color: transparent;" />
+            <VBox fx:id="paneRight" layoutX="65.0" layoutY="18.0" prefHeight="680.0" prefWidth="163.0" styleClass="sideBackground" visible="false">
                <children>
-                  <Text id="test" fill="WHITE" layoutX="155.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-               </children></AnchorPane>
-            <ImageView fitHeight="204.0" fitWidth="87.0" layoutX="988.0" layoutY="580.0" pickOnBounds="true" preserveRatio="true">
+                  <Pane prefHeight="71.0" prefWidth="156.0" />
+                  <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#viewHome" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Home" wrapText="true" />
+                  <Button mnemonicParsing="false" onAction="#viewTrackPackage" onMouseClicked="#packageButton" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Sledź przesyłke" />
+                  <Button mnemonicParsing="false" onAction="#viewRegisterPackage" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Rejestracja paczki" />
+                  <Button mnemonicParsing="false" onAction="#viewHistory" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Historia" />
+                  <Button id="btnSettings" mnemonicParsing="false" onAction="#viewSettings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Ustawienia" />
+                  <Button mnemonicParsing="false" onAction="#logout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Wyloguj" />
+                  <Pane prefHeight="71.0" prefWidth="156.0" />
+               </children>
+            </VBox>
+            <AnchorPane layoutY="13.0" prefHeight="685.0" prefWidth="72.0" styleClass="sideBackground" AnchorPane.bottomAnchor="2.0">
+               <children>
+                  <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
+                  <Button layoutX="-2.0" layoutY="82.0" mnemonicParsing="false" onAction="#viewHome" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="HOME" size="36" styleClass="icons" text="" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="-2.0" layoutY="139.0" mnemonicParsing="false" onAction="#viewTrackPackage" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="TRUCK" size="36" styleClass="icons" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="-2.0" layoutY="197.0" mnemonicParsing="false" onAction="#viewRegisterPackage" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="DROPBOX" size="36" styleClass="icons" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="-2.0" layoutY="256.0" mnemonicParsing="false" onAction="#viewHistory" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="BOOK" size="36" styleClass="icons" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="-2.0" layoutY="313.0" mnemonicParsing="false" onAction="#viewSettings" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                     <graphic>
+                        <FontAwesomeIconView id="iconSettings" glyphName="COG" size="36" styleClass="icons" text="" />
+                     </graphic>
+                  </Button>
+                  <Button layoutX="-2.0" layoutY="371.0" mnemonicParsing="false" onAction="#logout" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="POWER_OFF" size="36" styleClass="icons" />
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Pane fx:id="welcomeMessage" layoutX="72.0" layoutY="25.0" prefHeight="41.0" prefWidth="200.0">
+               <children>
+                  <Text fill="WHITE" layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="Witaj" />
+                  <Text layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
+                  <Text fill="WHITE" layoutX="185.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="!" />
+               </children>
+            </Pane>
+            <ImageView fitHeight="71.0" fitWidth="87.0" layoutX="1013.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/outbox_white.png" />
                </image>
             </ImageView>
-            <VBox fx:id="paneRight" layoutX="65.0" layoutY="18.0" prefHeight="680.0" prefWidth="163.0" styleClass="sideBackground">
-               <children>
-                  <Pane prefHeight="71.0" prefWidth="156.0" />
-                  <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onMouseClicked="#btnHome" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Home" wrapText="true" />
-                  <Button mnemonicParsing="false" onMouseClicked="#packageButton" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Sledź przesyłke" />
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Rejestracja paczki" />
-                  <Button fx:id="testButton" mnemonicParsing="false" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Historia" />
-                  <Button id="btnSettings" mnemonicParsing="false" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Ustawienia" />
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Wyloguj" />
-                  <Pane prefHeight="71.0" prefWidth="156.0" />
-               </children>
-            </VBox>
-            <AnchorPane layoutY="13.0" prefHeight="685.0" prefWidth="72.0" styleClass="sideBackground">
-               <children>
-                  <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
-                  <FontAwesomeIconView glyphName="HOME" layoutX="16.0" layoutY="117.0" size="36" styleClass="icons" text="" />
-                  <FontAwesomeIconView glyphName="TRUCK" layoutX="14.0" layoutY="175.0" size="36" styleClass="icons" />
-                  <FontAwesomeIconView glyphName="BOOK" layoutX="17.0" layoutY="295.0" size="36" styleClass="icons" />
-                  <FontAwesomeIconView id="iconSettings" glyphName="COG" layoutX="17.0" layoutY="349.0" size="36" styleClass="icons" text="" />
-                  <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="18.0" layoutY="410.0" size="36" styleClass="icons" />
-                  <FontAwesomeIconView glyphName="DROPBOX" layoutX="17.0" layoutY="233.0" size="36" styleClass="icons" />
-               </children>
-            </AnchorPane>
-            <Text fill="WHITE" layoutX="234.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="Witaj" />
-            <Text layoutX="284.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
-            <Text fill="WHITE" layoutX="414.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="!" />
          </children>
       </AnchorPane>
    </children>
