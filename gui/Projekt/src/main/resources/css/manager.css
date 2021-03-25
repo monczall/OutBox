@@ -1,3 +1,4 @@
+
 .mainBackground{
     -fx-background-color: #121212;
 }
@@ -24,3 +25,29 @@
 .icons:hover{
     -fx-cursor: hand;
 }
+
+.textLabel{
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffa500;
+    -fx-fill: #ffa500;
+    -fx-font-weight: bold;
+}
+
+/*HOME*/
+
+.homeBlock{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.homeBlock:hover{
+    -fx-background-color: #cc8502;
+}
+
+.icons:hover > homeBlock{
+    -fx-background-color: #cc8502;
+}
+

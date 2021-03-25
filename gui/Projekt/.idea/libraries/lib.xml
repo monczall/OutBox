@@ -1,19 +1,14 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-<<<<<<< HEAD
-      <root url="file://$PROJECT_DIR$/../../../../../../../Program Files/JetBrains/openjfx-15.0.1_windows-x64_bin-sdk/javafx-sdk-15.0.1/lib" />
-      <root url="jar://D:/Programy/fontawesomefx-8.9.jar!/" />
-=======
-      <root url="file://$PROJECT_DIR$/../../../../../../../../Program Files/JetBrains/openjfx-15.0.1_windows-x64_bin-sdk/javafx-sdk-15.0.1/lib" />
+      <root url="file://$PROJECT_DIR$/../../../../../Program Files/JetBrains/openjfx-15.0.1_windows-x64_bin-sdk/javafx-sdk-15.0.1/lib" />
       <root url="jar://$APPLICATION_HOME_DIR$/lib/fontawesomefx-8.9.jar!/" />
->>>>>>> f731f8ada8964ec3f9106e1aa05f872089d2fad6
+      <root url="jar://F:/Systemowe/Pobrane/fontawesomefx-8.9.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/../../../../../../../Program Files/JetBrains/openjfx-15.0.1_windows-x64_bin-sdk/javafx-sdk-15.0.1/lib" />
+      <root url="file://$PROJECT_DIR$/../../../../../Program Files/JetBrains/openjfx-15.0.1_windows-x64_bin-sdk/javafx-sdk-15.0.1/lib" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/../../../../../../../Program Files/JetBrains/openjfx-15.0.1_windows-x64_bin-sdk/javafx-sdk-15.0.1/lib" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../../../../../../../Program Files/JetBrains/openjfx-15.0.1_windows-x64_bin-sdk/javafx-sdk-15.0.1/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../Program Files/JetBrains/openjfx-15.0.1_windows-x64_bin-sdk/javafx-sdk-15.0.1/lib" recursive="false" type="SOURCES" />
   </library>
 </component>

@@ -16,9 +16,9 @@ public class App extends Application {
 
         SceneManager.addScene("login", "../resources/view/login.fxml");
         SceneManager.addScene("register", "../resources/view/register.fxml");
-<<<<<<< HEAD
+
         SceneManager.addScene("password_reset", "../resources/view/passwordReset.fxml");
-=======
+
         SceneManager.addScene("passwordReset", "../resources/view/passwordReset.fxml");
 
         SceneManager.addScene("client", "../resources/view/client/client.fxml");
@@ -29,12 +29,14 @@ public class App extends Application {
         //TU SCENY KURIERA MIEDZYODDZIALOWEGO
 
         //TU SCENY KIEROWNIKA
+        SceneManager.addScene("manager", "../resources/view/manager/manager.fxml");
 
+        //TU ADMINA
         SceneManager.addScene("admin", "../resources/view/admin/admin.fxml");
 
 
-        SceneManager.renderScene("login");
->>>>>>> e63fa5f0662cb180f94c1c75e3401291fb48262d
+        SceneManager.renderScene("manager");
+
 
         primaryStage.setResizable(false);
 
