@@ -129,8 +129,8 @@ public class Client implements Initializable {
     }
 
     @FXML
-    void viewRegisterPackage(ActionEvent event) {
-
+    void viewRegisterPackage(ActionEvent event) throws IOException {
+        SceneManager.loadScene("../../resources/view/client/clientRegisterPackage.fxml", mainWindow);
     }
 
     @FXML

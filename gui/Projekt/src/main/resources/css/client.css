@@ -72,16 +72,19 @@
 
 .textOption{
     -fx-text-fill: #8f8f8f;
+    -fx-fill: #8f8f8f;
     -fx-font-size: 16px;
 }
 
 .inputBox{
     -fx-text-fill: #ffa500;
-    -fx-background-color: #202020;
+    -fx-font-size: 15px;
+    -fx-background-color: transparent; /*#202020*/
     -fx-mark-color: #ffa500;
     -fx-border-style: solid;
     -fx-border-width: 2px;
     -fx-border-color: #ffa500;
+    -fx-border-width: 0 0 2 0;
 }
 .userIconSettings{
     -fx-fill: #ffa500;
@@ -106,6 +109,23 @@
     /*-fx-background-color: #ffa500;*/
     /*-fx-text-fill: #121212;*/
     -fx-border-width: 5px;
+}
+
+/*-------------MENU - REGISTER PACKAGE-------------*/
+
+.packageBlock{
+    -fx-background-color: #171717;
+    -fx-border-color: #8f8f8f;
+}
+.toggleButton{
+    -fx-background-color: transparent;
+}
+.toggleButton:hover > .packageBlock{
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 5, 0, 0, 0);
+}
+.toggleButton:selected > .packageBlock{
+    -fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 10, 0, 0, 0);
+    -fx-border-color: #ffa500;
 }
 
 
