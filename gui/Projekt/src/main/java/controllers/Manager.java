@@ -16,11 +16,11 @@ import static main.java.SceneManager.loadScene;
 public class Manager implements Initializable {
 
     @FXML
-    private AnchorPane mainAnchorPane;
+    public AnchorPane mainAnchorPane;
 
     public void openHome(MouseEvent actionEvent) throws IOException {
         System.out.println("HOME");
-        SceneManager.loadScene("../../resources/view/manager/managerHome.fxml", mainAnchorPane);
+        SceneManager.renderScene("manager");
     }
 
     public void openCouriers(MouseEvent mouseEvent) throws IOException {
@@ -44,14 +44,12 @@ public class Manager implements Initializable {
     }
 
     public void logout(MouseEvent mouseEvent) {
-        System.out.println("Logout");
+        System.out.println("ogout");
         SceneManager.renderScene("login");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-
+        System.out.println("Start program");
     }
-
-
 }

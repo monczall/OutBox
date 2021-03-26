@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="873.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.ManagerPackages">
+   <children>
+      <Button alignment="BOTTOM_CENTER" layoutX="635.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#findPackages" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="Dodaj kuriera" />
+      <Text layoutX="150.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="DODAWANIE KURIERA" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="USER_PLUS" layoutX="100.0" layoutY="70.0" size="38" />
+      <TextField layoutX="100.0" layoutY="135.0" prefHeight="25.0" prefWidth="233.0" promptText="Imie" styleClass="inputBox" />
+      <TextField layoutX="100.0" layoutY="185.0" prefHeight="25.0" prefWidth="233.0" promptText="Nazwisko" styleClass="inputBox" />
+      <TextField layoutX="100.0" layoutY="235.0" prefHeight="25.0" prefWidth="233.0" promptText="Ulica i numer mieszkania" styleClass="inputBox" />
+      <TextField layoutX="100.0" layoutY="285.0" prefHeight="25.0" prefWidth="233.0" promptText="Miejscowość" styleClass="inputBox" />
+      <TextField layoutX="100.0" layoutY="335.0" prefHeight="25.0" prefWidth="233.0" promptText="Pesel" styleClass="inputBox" />
+      <TextField layoutX="100.0" layoutY="385.0" prefHeight="25.0" prefWidth="233.0" promptText="Numer telefonu" styleClass="inputBox" />
+   </children>
+</AnchorPane>

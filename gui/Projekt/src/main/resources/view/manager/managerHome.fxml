@@ -5,18 +5,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="873.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.Manager">
+<AnchorPane prefHeight="650.0" prefWidth="873.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.ManagerHome">
    <children>
-      <Button alignment="BOTTOM_CENTER" layoutX="515.0" layoutY="341.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Wyloguj" />
-      <Button alignment="BOTTOM_CENTER" layoutX="224.0" layoutY="187.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="195.0" styleClass="homeBlock" text="Kurierzy" />
-      <Button alignment="BOTTOM_CENTER" layoutX="441.0" layoutY="187.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="208.0" styleClass="homeBlock" text="Paczki" />
-      <Button alignment="BOTTOM_CENTER" layoutX="224.0" layoutY="341.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Raporty" />
-      <Button alignment="BOTTOM_CENTER" layoutX="369.0" layoutY="341.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Ustawienia" />
-      <FontAwesomeIconView glyphName="USERS" layoutX="289.0" layoutY="263.0" size="60" styleClass="icons" />
-      <FontAwesomeIconView glyphName="CUBES" layoutX="509.0" layoutY="263.0" size="60" />
-      <FontAwesomeIconView glyphName="LINE_CHART" layoutX="252.0" layoutY="414.0" size="65" />
-      <FontAwesomeIconView glyphName="COG" layoutX="402.0" layoutY="416.0" size="70" />
-      <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="548.0" layoutY="416.0" size="70" />
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="515.0" layoutY="341.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Wyloguj">
+         <graphic>
+            <FontAwesomeIconView glyphName="SIGN_OUT" onMouseClicked="#logout" size="70" styleClass="blockIcon" />
+         </graphic></Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="224.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="123.0" prefWidth="195.0" styleClass="homeBlock" text="Kurierzy">
+         <graphic>
+            <FontAwesomeIconView glyphName="USERS" size="60" styleClass="blockIcon" />
+         </graphic></Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="441.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="123.0" prefWidth="208.0" styleClass="homeBlock" text="Paczki">
+         <graphic>
+            <FontAwesomeIconView glyphName="CUBES" size="60" styleClass="blockIcon" />
+         </graphic></Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="224.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Raporty">
+         <graphic>
+            <FontAwesomeIconView glyphName="LINE_CHART" size="65" styleClass="blockIcon" />
+         </graphic></Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="369.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Ustawienia">
+         <graphic>
+            <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon" />
+         </graphic></Button>
       <Text layoutX="160.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="HOME" />
       <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="100.0" layoutY="70.0" size="48" />
    </children>
