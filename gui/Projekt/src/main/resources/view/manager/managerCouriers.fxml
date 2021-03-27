@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="873.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.ManagerCouriers">
+   <children>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="224.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="123.0" prefWidth="200.0" styleClass="homeBlock" text="Dodaj kuriera">
+         <graphic>
+            <FontAwesomeIconView glyphName="USER_PLUS" size="60" styleClass="blockIcon" />
+         </graphic></Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="439.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#deleteCourier" prefHeight="123.0" prefWidth="200.0" styleClass="homeBlock" text="Usuń kuriera">
+         <graphic>
+            <FontAwesomeIconView glyphName="USER_TIMES" size="60" styleClass="blockIcon" />
+         </graphic></Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="224.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#editCourier" prefHeight="123.0" prefWidth="200.0" styleClass="homeBlock" text="Edytuj kuriera">
+         <graphic>
+            <FontAwesomeIconView glyphName="USER" size="70" styleClass="blockIcon" />
+         </graphic></Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="439.0" layoutY="202.0" mnemonicParsing="false" onMouseClicked="#mapCourier" prefHeight="123.0" prefWidth="200.0" styleClass="homeBlock" text="Obszar pracy">
+         <graphic>
+            <FontAwesomeIconView glyphName="MAP" size="65" styleClass="blockIcon" />
+         </graphic></Button>
+      <Text layoutX="155.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="KURIERZY" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="USERS" layoutX="100.0" layoutY="70.0" size="38" />
+      <AnchorPane fx:id="courierOptions" prefHeight="650.0" prefWidth="873.0" visible="false" />
+   </children>
+</AnchorPane>

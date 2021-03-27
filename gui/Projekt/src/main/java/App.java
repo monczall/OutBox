@@ -30,7 +30,9 @@ public class App extends Application {
         //TU SCENY KURIERA MIEDZYODDZIALOWEGO
 
         //TU SCENY KIEROWNIKA
+        SceneManager.addScene("manager", "../resources/view/manager/manager.fxml");
 
+        //TU ADMINA
         SceneManager.addScene("admin", "../resources/view/admin/admin.fxml");
 
         primaryStage.setResizable(false);

@@ -2,61 +2,77 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.Manager">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <AnchorPane prefHeight="650.0" prefWidth="200.0" styleClass="mainBackground">
-         <children>
-            <VBox fx:id="paneRight" layoutX="72.0" layoutY="90.0" prefHeight="656.0" prefWidth="163.0" styleClass="sideBackground">
-               <children>
-                  <Pane prefHeight="76.0" prefWidth="163.0" />
-                  <Button id="managerHomeButton" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#actionHomeButton" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Home" wrapText="true" />
-                  <Button id="packageManagerButton" mnemonicParsing="false" onAction="#actionPackageButton" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Paczki" />
-                  <Button mnemonicParsing="false" onAction="#actionRaportButton" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Raporty" />
-                  <Button fx:id="testButton" mnemonicParsing="false" onAction="#actionCurierButton" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Kurierzy" />
-                  <Button id="btnSettings" mnemonicParsing="false" onAction="#actionSettingsButton" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Ustawienia" />
-                  <Button mnemonicParsing="false" onAction="#actionLogout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Wyloguj" />
-               </children>
-            </VBox>
-            <AnchorPane layoutY="90.0" prefHeight="656.0" prefWidth="72.0" styleClass="sideBackground">
-               <children>
-                  <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="icons" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
-                  <FontAwesomeIconView glyphName="HOME" layoutX="16.0" layoutY="117.0" onMouseClicked="#actionHomeButton" size="36" styleClass="icons" text="" />
-                  <FontAwesomeIconView glyphName="TRUCK" layoutX="14.0" layoutY="175.0" onMouseClicked="#actionPackageButton" size="36" styleClass="icons" />
-                  <FontAwesomeIconView glyphName="BOOK" layoutX="17.0" layoutY="295.0" onMouseClicked="#actionCurierButton" size="36" styleClass="icons" />
-                  <FontAwesomeIconView id="iconSettings" glyphName="COG" layoutX="17.0" layoutY="349.0" onMouseClicked="#actionSettingsButton" size="36" styleClass="icons" text="" />
-                  <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="18.0" layoutY="410.0" onMouseClicked="#actionLogout" size="36" styleClass="icons" />
-                  <FontAwesomeIconView glyphName="DROPBOX" layoutX="17.0" layoutY="233.0" onMouseClicked="#actionRaportButton" size="36" styleClass="icons" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="homePane" layoutX="241.0" layoutY="37.0" prefHeight="716.0" prefWidth="885.0" styleClass="mainBackground">
-               <children>
-                  <ImageView fitHeight="204.0" fitWidth="87.0" layoutX="771.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
-
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="mainBackground">
+            <children>
+                <AnchorPane layoutY="23.0" prefHeight="675.0" prefWidth="240.0" styleClass="sideBackground">
+                    <children>
+                        <FontAwesomeIconView glyphName="HOME" layoutX="23.0" layoutY="228.0" onMouseClicked="#openHome" size="38" styleClass="icons" text="" />
+                        <FontAwesomeIconView glyphName="USERS" layoutX="23.0" layoutY="287.0" onMouseClicked="#openCouriers" size="34" styleClass="icons" />
+                        <FontAwesomeIconView id="iconSettings" glyphName="COG" layoutX="26.0" layoutY="468.0" onMouseClicked="#openSettings" size="36" styleClass="icons" text="" />
+                        <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="26.0" layoutY="529.0" onMouseClicked="#logout" size="36" styleClass="icons" text="" wrappingWidth="33.42856979370117" />
+                  <FontAwesomeIconView glyphName="LINE_CHART" layoutX="20.0" layoutY="409.0" onMouseClicked="#openRaports" size="36" styleClass="icons" />
+                        <FontAwesomeIconView glyphName="CUBES" layoutX="20.0" layoutY="348.0" onMouseClicked="#openPackages" size="36" styleClass="icons" />
+                  <Button alignment="BOTTOM_LEFT" layoutX="70.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#openHome" prefHeight="50.0" prefWidth="170.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Home" wrapText="true" />
+                  <Button layoutX="70.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="50.0" prefWidth="170.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Kurierzy" />
+                  <Button layoutX="70.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="50.0" prefWidth="170.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Przesyłki" />
+                  <Button layoutX="70.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="50.0" prefWidth="170.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Raporty" />
+                  <Button id="btnSettings" layoutX="70.0" layoutY="430.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="50.0" prefWidth="170.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Ustawienia" />
+                  <Button layoutX="70.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="50.0" prefWidth="170.0" styleClass="sideButtons" stylesheets="@../../css/manager.css" text="Wyloguj" />
+                  <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="60.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/outbox_black.png" />
+                     </image>
                   </ImageView>
-                  <Label layoutX="381.0" layoutY="39.0" text="Home" textFill="WHITE">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                    </children>
+                </AnchorPane>
+            <AnchorPane fx:id="mainAnchorPane" layoutX="243.0" layoutY="26.0" prefHeight="669.0" prefWidth="853.0" styleClass="mainBackground" stylesheets="@../../css/manager.css">
+               <children>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="515.0" layoutY="341.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Wyloguj">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="SIGN_OUT" onMouseClicked="#logout" size="70" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="224.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="123.0" prefWidth="195.0" styleClass="homeBlock" text="Kurierzy">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="USERS" size="60" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="441.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="123.0" prefWidth="208.0" styleClass="homeBlock" text="Paczki">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="CUBES" size="60" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="224.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Raporty">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="LINE_CHART" size="65" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="369.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Ustawienia">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
+                  <Text layoutX="160.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="HOME" />
+                  <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="100.0" layoutY="70.0" size="48" />
                </children>
             </AnchorPane>
-         </children>
-      </AnchorPane>
-   </children>
+            </children>
+        </AnchorPane>
+    </children>
 </GridPane>

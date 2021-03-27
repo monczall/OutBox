@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import main.java.SceneManager;
 
@@ -19,4 +20,5 @@ public class Courier {
     public void openHome(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../resources/view/courierHome.fxml", mainAnchorPane);
     }
+    
 }
