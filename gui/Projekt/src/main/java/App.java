@@ -2,6 +2,7 @@ package main.java;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class App extends Application {
 
@@ -32,10 +33,9 @@ public class App extends Application {
 
         SceneManager.addScene("admin", "../resources/view/admin/admin.fxml");
 
+        primaryStage.setResizable(false);
+      //  primaryStage.initStyle(StageStyle.UNDECORATED);
 
         SceneManager.renderScene("client");
-
-        primaryStage.setResizable(false);
-
     }
 }

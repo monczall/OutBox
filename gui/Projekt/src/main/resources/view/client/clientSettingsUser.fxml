@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.ClientSettingsAppUser">
+<AnchorPane prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.client.ClientSettingsAppUser">
    <children>
       <Text layoutX="5.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="DANE" />
       <Line endX="594.0" endY="0.49554443359375" layoutX="95.0" layoutY="24.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />

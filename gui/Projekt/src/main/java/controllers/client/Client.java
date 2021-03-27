@@ -1,4 +1,4 @@
-package main.java.controllers;
+package main.java.controllers.client;
 
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.SceneManager;
+import main.java.controllers.animations.Animations;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,15 +54,13 @@ public class Client implements Initializable {
         e.printStackTrace();
     }
 
-    paneRight.setVisible(false);
-    TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5),paneRight);
-    translateTransition1.setByX(-200);
-    translateTransition1.play();
+    paneRight.setTranslateX(-200);
 
 
     hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
         if(hamburgerClicked == false) {
 
+            hamburger.setDisable(true);
             hamburgerClicked = true;
             paneRight.setVisible(true);
 
@@ -70,19 +69,16 @@ public class Client implements Initializable {
             fadeTransition.setToValue(1);
             fadeTransition.play();
 
-            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), paneRight);
-            translateTransition.setByX(+200);
-            translateTransition.play();
+            Animations.moveByX(paneRight,+200,0.5);
+            Animations.moveByX(welcomeMessage,+170,0.5);
+            Animations.moveByX(mainWindow,+70,0.5);
 
-            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.5), welcomeMessage);
-            translateTransition2.setByX(+170);
-            translateTransition2.play();
-
-            TranslateTransition translateTransition3 = new TranslateTransition(Duration.seconds(0.5), mainWindow);
-            translateTransition3.setByX(+70);
-            translateTransition3.play();
+            fadeTransition.setOnFinished(event1 -> {
+                hamburger.setDisable(false);
+            });
         }
         else {
+            hamburger.setDisable(true);
             hamburgerClicked = false;
 
             FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), paneRight);
@@ -90,24 +86,17 @@ public class Client implements Initializable {
             fadeTransition.setToValue(0);
             fadeTransition.play();
 
-            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), paneRight);
-            translateTransition.setByX(-200);
-            translateTransition.play();
-
-            TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.5), welcomeMessage);
-            translateTransition2.setByX(-170);
-            translateTransition2.play();
-
-            TranslateTransition translateTransition3 = new TranslateTransition(Duration.seconds(0.5), mainWindow);
-            translateTransition3.setByX(-70);
-            translateTransition3.play();
-
+            Animations.moveByX(paneRight,-200,0.5);
+            Animations.moveByX(welcomeMessage,-170,0.5);
+            Animations.moveByX(mainWindow,-70,0.5);
 
             fadeTransition.setOnFinished(event1 -> {
                 paneRight.setVisible(false);
+                hamburger.setDisable(false);
             });
         }
     });
+
     }
 
     public void packageButton(MouseEvent mouseEvent) {
