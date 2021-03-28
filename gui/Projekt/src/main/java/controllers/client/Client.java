@@ -128,8 +128,8 @@ public class Client implements Initializable {
     }
 
     @FXML
-    void viewTrackPackage(ActionEvent event) {
-
+    void viewTrackPackage(ActionEvent event) throws IOException {
+        SceneManager.loadScene("../../resources/view/client/clientTrackPackage.fxml", mainWindow);
     }
 
 }

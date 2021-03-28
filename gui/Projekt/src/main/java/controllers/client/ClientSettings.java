@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import main.java.SceneManager;
+import main.java.controllers.animations.Animations;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,30 +21,32 @@ public class ClientSettings implements Initializable {
     private ToggleButton userSettings;
 
     @FXML
-    private AnchorPane settingsAnchorPane;
+    private AnchorPane appSettingsPane;
+
+    @FXML
+    private AnchorPane userInformationPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        try {
-            SceneManager.loadScene("../../resources/view/client/clientSettingsApp.fxml", settingsAnchorPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
         ToggleGroup group = new ToggleGroup();
         appSettings.setToggleGroup(group);
         userSettings.setToggleGroup(group);
+
         appSettings.setSelected(true);
+        appSettings.setDisable(true);
+        appSettings.setOpacity(1);
+
+        userInformationPane.setTranslateY(-800);
     }
 
     @FXML
     void changeAppSettings(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../resources/view/client/clientSettingsApp.fxml", settingsAnchorPane);
+        Animations.changePane(userInformationPane,appSettingsPane,-800,0.5,appSettings,userSettings);
     }
 
     @FXML
     void changeUserSettings(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../resources/view/client/clientSettingsUser.fxml", settingsAnchorPane);
+        Animations.changePane(appSettingsPane,userInformationPane,+800,0.5,userSettings,appSettings);
     }
 }

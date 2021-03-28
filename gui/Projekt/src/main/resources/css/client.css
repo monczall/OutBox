@@ -1,9 +1,11 @@
+/*-------------BACKGROUND COLORS-------------*/
 .mainBackground{
     -fx-background-color: #121212;
 }
 .sideBackground{
     -fx-background-color: #ffa500;
 }
+/*-------------STYLING BUTTONS-------------*/
 .sideButtons{
     -fx-background-color: #ffa500;
     -fx-text-fill: black;
@@ -13,14 +15,15 @@
     -fx-alignment: BASELINE_LEFT;
     -fx-background-radius: 0;
 }
-.sideIcons{
-    -fx-background-color: #ffa500;
-    -fx-background-radius: 0;
-}
 .sideButtons:hover{
     -fx-background-color: #121212;
     -fx-text-fill: #ffa500;
     -fx-cursor: hand;
+}
+/*-------------STYLING ICONS-------------*/
+.sideIcons{
+    -fx-background-color: #ffa500;
+    -fx-background-radius: 0;
 }
 .icons:hover{
     -fx-cursor: hand;
@@ -141,10 +144,10 @@
     -fx-background-color: #ffa500;
 }
 
-.scroll-pane {
+.scroll-pane{
     -fx-background-color: transparent;
+    -fx-background: transparent;
 }
-
 .scroll-bar:horizontal, .scroll-bar:vertical{
     -fx-background-color:transparent;
 }
@@ -166,7 +169,9 @@
     -fx-background-color: #ffa500;
     -fx-background-radius: 5em;
 }
-
+.scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
 .btnBack{
     -fx-background-color: transparent;
     -fx-text-fill: #8f8f8f;
@@ -201,4 +206,37 @@
 
 .hamburger{
     -fx-cursor: hand;
+}
+/*-------------STYLING TABLEVIEW-------------*/
+
+/* TABLEVIEW CSS - NOT NEEDED FOR NOW
+.packageTable, .packageTable . column-header-background .filler, .packageTable .corner{
+    -fx-background-color: transparent;
+}
+.packageTable .column-header{
+    -fx-background-color: #ffa500;
+    -fx-font-size: 16px;
+    -fx-fill: black;
+    -fx-alignment: CENTER;
+}
+.packageTable .table-cell{
+    -fx-border-color: transparent;
+    -fx-alignment: CENTER;
+    -fx-padding: 15px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffa500;
+
+}
+.packageTable .table-row-cell:odd{
+    -fx-background-color: #8f8f8f;
+}
+.packageTable .table-row-cell:even{
+    -fx-background-color: #8f8f8f;
+}*/
+
+.packageItem{
+    -fx-background-color:  #262628;
+}
+.packageItem:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 5, 0, 0, 0);
 }
