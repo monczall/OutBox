@@ -38,6 +38,6 @@ public class App extends Application {
         primaryStage.setResizable(false);
       //  primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        SceneManager.renderScene("client");
+        SceneManager.renderScene("admin");
     }
 }
