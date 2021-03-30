@@ -35,27 +35,18 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="registerWelcomeLabel" layoutX="84.0" layoutY="260.0" styleClass="darkText" text="Witamy w OutBox">
+            <Label fx:id="registerWelcomeLabel" layoutX="84.0" layoutY="325.0" styleClass="darkText" text="Witamy w OutBox">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="registerRegisterToContinueLabel" layoutX="40.0" layoutY="290.0" maxHeight="100.0" maxWidth="250.0" minHeight="100.0" minWidth="250.0" prefHeight="100.0" prefWidth="250.0" styleClass="darkAltText" text="Aby móc w pełni korzystać z aplikacji wypełnij formularz rejestracji i utwórz konto" textAlignment="CENTER" textFill="#121212" textOverrun="CLIP" wrapText="true">
+            <Label fx:id="registerRegisterToContinueLabel" layoutX="40.0" layoutY="355.0" maxHeight="121.0" maxWidth="250.0" minHeight="100.0" minWidth="250.0" prefHeight="121.0" prefWidth="250.0" styleClass="darkAltText" text="Aby móc w pełni korzystać z aplikacji wypełnij formularz rejestracji i utwórz konto. Znaki diakrytyczne ani litery ze znakami diakrytycznymi nie są obsługiwane." textAlignment="CENTER" textFill="#121212" textOverrun="CLIP" wrapText="true">
                <font>
-                  <Font size="18.0" />
+                  <Font size="15.0" />
                </font>
             </Label>
             <Button fx:id="registerExitButtonButton" layoutX="14.0" layoutY="611.0" mnemonicParsing="false" onAction="#handleExit" styleClass="exitButton" text="Zamknij" />
             <Button fx:id="registerReturnButtonButton" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleReturn" styleClass="exitButton" text="Cofnij" />
-            <Label layoutX="10.0" layoutY="402.0" text="Wskazówka dotycząca silnego hasła">
-               <font>
-                  <Font name="System Bold" size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="15.0" layoutY="430.0" prefHeight="161.0" prefWidth="304.0" text="Utwórz hasło złożone z co najmniej 6 znaków. Może to być dowolna kombinacja liter, cyfr i symboli. Znaki diakrytyczne ani litery ze znakami diakrytycznymi nie są obsługiwane. &#13;&#13;Powinieneś unikać haseł, które: &#13;-są słabe, np. &quot;password123&quot;,&#13;-można łatwo powiązac z Tobą, np. &quot;Stefan10&quot;." wrapText="true">
-               <font>
-                  <Font size="14.0" />
-               </font></Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="loginRightPaneAnchorPane" maxHeight="650.0" maxWidth="770.0" minHeight="650.0" minWidth="770.0" prefHeight="650.0" prefWidth="770.0" styleClass="darkBackGround" GridPane.columnIndex="1">
@@ -114,30 +105,45 @@
             </Label>
             <TextField fx:id="registerVoivodeshipField" layoutX="482.0" layoutY="310.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" promptText="np. Podkarpackie" styleClass="textFields" />
             <Circle fx:id="registerVoivodeshipCircle" fill="ORANGE" layoutX="482.0" layoutY="328.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
-            <Label layoutX="88.0" layoutY="480.0" styleClass="lightText" text="Hasło">
+            <Label layoutX="87.0" layoutY="442.0" styleClass="lightText" text="Hasło">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <PasswordField fx:id="registerPasswordField" layoutX="65.0" layoutY="500.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnPassword" prefHeight="35.0" prefWidth="250.0" promptText="Wprowadź silne hasło" styleClass="textFields" />
-            <Circle fx:id="registerPasswordCircle" fill="ORANGE" layoutX="65.0" layoutY="518.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
-            <Label layoutX="505.0" layoutY="480.0" styleClass="lightText" text="Powtórz Hasło">
+            <PasswordField fx:id="registerPasswordField" layoutX="64.0" layoutY="462.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyReleased="#checkRequirements" onKeyTyped="#clearErrorsOnPassword" prefHeight="35.0" prefWidth="250.0" promptText="Wprowadź silne hasło" styleClass="textFields" />
+            <Circle fx:id="registerPasswordCircle" fill="ORANGE" layoutX="64.0" layoutY="480.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+            <Label layoutX="504.0" layoutY="442.0" styleClass="lightText" text="Powtórz Hasło">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <PasswordField fx:id="registerRepeatPasswordField" layoutX="482.0" layoutY="500.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnRepeatPassword" prefHeight="35.0" prefWidth="250.0" promptText="Powtórz wprowadzone hasło" styleClass="textFields" />
-            <Circle fx:id="registerRepeatPasswordCircle" fill="ORANGE" layoutX="482.0" layoutY="518.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
-            <Button fx:id="registerRegisterButtonButton" layoutX="261.0" layoutY="570.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="Zarejestruj" />
+            <PasswordField fx:id="registerRepeatPasswordField" layoutX="481.0" layoutY="462.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyReleased="#checkRequirements" onKeyTyped="#clearErrorsOnRepeatPassword" prefHeight="35.0" prefWidth="250.0" promptText="Powtórz wprowadzone hasło" styleClass="textFields" />
+            <Circle fx:id="registerRepeatPasswordCircle" fill="ORANGE" layoutX="481.0" layoutY="480.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+            <Button fx:id="registerRegisterButtonButton" layoutX="261.0" layoutY="601.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="Zarejestruj" />
             <FontAwesomeIconView glyphName="USER" layoutX="54.0" layoutY="179.0" size="32" />
             <FontAwesomeIconView glyphName="USER" layoutX="54.0" layoutY="258.0" size="32" />
             <FontAwesomeIconView glyphName="MOBILE_PHONE" layoutX="55.0" layoutY="342.0" size="48" text="" />
             <FontAwesomeIconView glyphName="ENVELOPE" layoutX="49.0" layoutY="416.0" size="32" />
-            <FontAwesomeIconView glyphName="LOCK" layoutX="55.0" layoutY="529.0" size="32" />
-            <FontAwesomeIconView glyphName="LOCK" layoutX="472.0" layoutY="529.0" size="32" />
+            <FontAwesomeIconView glyphName="LOCK" layoutX="54.0" layoutY="491.0" size="32" />
+            <FontAwesomeIconView glyphName="LOCK" layoutX="471.0" layoutY="491.0" size="32" />
             <FontAwesomeIconView glyphName="BUILDING" layoutX="468.0" layoutY="259.0" size="32" />
             <FontAwesomeIconView glyphName="INSTITUTION" layoutX="464.0" layoutY="338.0" size="32" />
             <FontAwesomeIconView glyphName="MAP_MARKER" layoutX="471.0" layoutY="179.0" size="32" />
+            <Label fx:id="registerFirstNameErrorExample" layoutX="88.0" layoutY="185.0" styleClass="yellowText" text="Przykłady: Jan, Bozena Anna" textFill="WHITE" visible="false" />
+            <Label fx:id="registerLastNameErrorExample" layoutX="88.0" layoutY="265.0" styleClass="yellowText" text="Przykłady: Kowalski, Sklodowska Curie" textFill="WHITE" visible="false" />
+            <Label fx:id="registerPhoneNumberErrorExample" layoutX="88.0" layoutY="345.0" styleClass="yellowText" text="Przykłady: +48 567 890 123, 543213753" textFill="WHITE" visible="false" />
+            <Label fx:id="registerEmailErrorExample" layoutX="88.0" layoutY="425.0" styleClass="yellowText" text="Przykład: jan.kowalski@gmail.com" textFill="WHITE" visible="false" />
+            <Label fx:id="registerStreetErrorExample" layoutX="501.0" layoutY="185.0" styleClass="yellowText" text="Przykład: Marii Sklodowskiej-Curie 1C/12" textFill="WHITE" visible="false" />
+            <Label fx:id="registerCityErrorExample" layoutX="501.0" layoutY="265.0" styleClass="yellowText" text="Przykłady: Rzeszow, Bielsko-Biala " textFill="WHITE" visible="false" />
+            <Label fx:id="registerVoivodeshipErrorExample" layoutX="501.0" layoutY="345.0" styleClass="yellowText" text="Przykłady: Slaskie, Warminsko-Mazurskie" textFill="WHITE" visible="false" />
+            <Label layoutX="88.0" layoutY="497.0" styleClass="yellowText" text="Wymagania dotyczące hasła:" />
+            <Label fx:id="registerSixCharsRequirement" layoutX="88.0" layoutY="513.0" styleClass="lightText" text=" -co najmniej 6 znaków" />
+            <Label fx:id="registerSmallLetterRequirement" layoutX="88.0" layoutY="528.0" styleClass="lightText" text=" -co najmniej jedną małą literę" />
+            <Label fx:id="registerBigLetterRequirement" layoutX="88.0" layoutY="543.0" styleClass="lightText" text=" -co najmniej jedną dużą literę" />
+            <Label fx:id="registerNumberRequirement" layoutX="88.0" layoutY="558.0" styleClass="lightText" text=" -co najmniej jedną cyfrę" />
+            <Label fx:id="registerSpecialCharRequirement" layoutX="88.0" layoutY="573.0" styleClass="lightText" text=" -co najmniej jeden znak specjalny" />
+            <Label layoutX="500.0" layoutY="499.0" styleClass="yellowText" text="Wymagania dotyczące hasła:" />
+            <Label fx:id="registerSamePasswordsRequirement" layoutX="500.0" layoutY="515.0" styleClass="lightText" text=" -hasła muszą się zgadzać" />
          </children>
       </AnchorPane>
    </children>

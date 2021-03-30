@@ -32,6 +32,12 @@
 .yellowText{
     -fx-text-fill: #FFA500;
 }
+.errorText{
+    -fx-text-fill: RED;
+}
+.successText{
+    -fx-text-fill: GREEN;
+}
 
 .loginButton{
     -fx-background-color: #FFA500;
