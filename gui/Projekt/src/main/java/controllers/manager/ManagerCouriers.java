@@ -1,4 +1,4 @@
-package main.java.controllers;
+package main.java.controllers.manager;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;

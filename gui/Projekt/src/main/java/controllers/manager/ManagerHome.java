@@ -1,8 +1,7 @@
-package main.java.controllers;
+package main.java.controllers.manager;
 
 import javafx.scene.input.MouseEvent;
 import main.java.SceneManager;
-import main.java.controllers.Manager.*;
 
 public class ManagerHome {
 
