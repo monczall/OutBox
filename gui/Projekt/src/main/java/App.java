@@ -15,7 +15,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         SceneManager.setStage(primaryStage);
 
-        SceneManager.addScene("login", "../resources/view/login.fxml");
+        SceneManager.addScene("login", "../resources/view/auth/login.fxml");
         SceneManager.addScene("register", "../resources/view/register.fxml");
 
         SceneManager.addScene("password_reset", "../resources/view/passwordReset.fxml");
@@ -24,11 +24,10 @@ public class App extends Application {
 
         SceneManager.addScene("client", "../resources/view/client/client.fxml");
 
-        SceneManager.addScene("courier", "../resources/view/courier.fxml");
-        SceneManager.addScene("courierHome", "../resources/view/courier.fxml");
+        SceneManager.addScene("courier", "../resources/view/courier/courier.fxml");
 
         //TU SCENY KURIERA MIEDZYODDZIALOWEGO
-
+        SceneManager.addScene("interbranchCourier", "../resources/view/interbranchCourier/interbranchCourier.fxml");
         //TU SCENY KIEROWNIKA
         SceneManager.addScene("manager", "../resources/view/manager/manager.fxml");
 
@@ -38,6 +37,6 @@ public class App extends Application {
         primaryStage.setResizable(false);
       //  primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        SceneManager.renderScene("admin");
+        SceneManager.renderScene("login");
     }
 }

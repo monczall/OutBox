@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/courier.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.courier.CourierSettings">
+<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/courier.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.interbranchCourier.InterbranchCourierSettings">
    <children>
       <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="USTAWIENIA" />
       <FontAwesomeIconView fill="ORANGE" glyphName="COG" layoutX="176.0" layoutY="81.0" size="40" />

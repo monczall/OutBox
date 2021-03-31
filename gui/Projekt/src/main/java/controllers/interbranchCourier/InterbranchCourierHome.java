@@ -1,4 +1,4 @@
-package main.java.controllers.courier;
+package main.java.controllers.interbranchCourier;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,7 +7,7 @@ import main.java.SceneManager;
 
 import java.io.IOException;
 
-public class CourierHome {
+public class InterbranchCourierHome {
 
     @FXML
     private AnchorPane mainWindow;

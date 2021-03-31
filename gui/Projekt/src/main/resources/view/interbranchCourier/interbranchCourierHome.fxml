@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainWindow" prefHeight="621.0" prefWidth="853.0" styleClass="mainBackground" stylesheets="@../../css/courier.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.courier.CourierHome">
+<AnchorPane fx:id="mainWindow" prefHeight="621.0" prefWidth="853.0" styleClass="mainBackground" stylesheets="@../../css/courier.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.interbranchCourier.InterbranchCourierHome">
    <children>
       <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="527.0" layoutY="393.0" mnemonicParsing="false" onAction="#logout" prefHeight="123.0" prefWidth="330.0" styleClass="homeBlock" text="Wyloguj">
          <graphic>

@@ -1,4 +1,4 @@
-package main.java.controllers.courier;
+package main.java.controllers.interbranchCourier;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class Courier implements Initializable {
+public class InterbranchCourier implements Initializable {
 
     @FXML
     private AnchorPane mainWindow;
@@ -81,23 +81,23 @@ public class Courier implements Initializable {
             }
         });
         try {
-            SceneManager.loadScene("../../resources/view/courier/courierHome.fxml", mainWindow);
+            SceneManager.loadScene("../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void openHome(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courier/courierHome.fxml", mainWindow);
+        SceneManager.loadScene("../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
     }
 
     public void openSecond(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courier/courierSecond.fxml", mainWindow);
+        SceneManager.loadScene("../../resources/view/interbranchCourier/interbranchCourierSecond.fxml", mainWindow);
     }
 
 
     public void openSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courier/courierSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../resources/view/interbranchCourier/interBranchCourierSettings.fxml", mainWindow);
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
