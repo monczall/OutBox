@@ -135,7 +135,7 @@ public class Admin implements Initializable {
         SceneManager.loadScene("../../resources/view/admin/adminSettings.fxml", mainWindow);
     }
 
-    public void go_logout(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/login.fxml", mainWindow);
+    public void go_logout(MouseEvent mouseEvent) {
+        SceneManager.renderScene("login");
     }
 }
