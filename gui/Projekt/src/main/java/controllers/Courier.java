@@ -18,7 +18,7 @@ public class Courier {
 
 
     public void openHome(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courierHome.fxml", mainAnchorPane);
+        SceneManager.loadScene("../../resources/view/interbranchCourierHome.fxml", mainAnchorPane);
     }
     
 }

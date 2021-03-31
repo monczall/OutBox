@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="873.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.ManagerHome">
+<AnchorPane prefHeight="650.0" prefWidth="873.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerHome">
    <children>
       <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="515.0" layoutY="341.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Wyloguj">
          <graphic>

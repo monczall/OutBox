@@ -104,7 +104,7 @@ public class Client implements Initializable {
 
     @FXML
     void logout(ActionEvent event) {
-        SceneManager.renderScene("../../resources/view/auth/login.fxml");
+        SceneManager.renderScene("login");
     }
 
     @FXML
