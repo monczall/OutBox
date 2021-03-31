@@ -93,7 +93,6 @@ public class ClientRegisterPackage implements Initializable {
     void fromTimeToRecipient(ActionEvent event) {
         Animations.changePane(deliveryTimePane,recipientDetailsPane,+800,0.7);
         Animations.moveByX(navCircle,-114,0.7);
-
     }
 
     @FXML

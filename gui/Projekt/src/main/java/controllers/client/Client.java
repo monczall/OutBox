@@ -104,12 +104,12 @@ public class Client implements Initializable {
 
     @FXML
     void logout(ActionEvent event) {
-
+        SceneManager.renderScene("../../resources/view/auth/login.fxml");
     }
 
     @FXML
-    void viewHistory(ActionEvent event) {
-
+    void viewHistory(ActionEvent event) throws IOException {
+        SceneManager.loadScene("../../resources/view/client/clientHistoryPackage.fxml", mainWindow);
     }
 
     @FXML

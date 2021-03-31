@@ -26,13 +26,8 @@ public class ClientHome implements Initializable {
     }
 
     @FXML
-    void viewHistory(ActionEvent event) {
-
-    }
-
-    @FXML
-    void viewHome(ActionEvent event, AnchorPane window) throws IOException {
-        SceneManager.loadScene("../../resources/view/client/clientHome.fxml", mainWindow);
+    void viewHistory(ActionEvent event) throws IOException {
+        SceneManager.loadScene("../../resources/view/client/clientHistoryPackage.fxml", mainWindow);
     }
 
     @FXML

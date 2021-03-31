@@ -17,7 +17,7 @@
             <Label fx:id="packageNumber" layoutX="7.0" layoutY="19.0" styleClass="optionGroup" text="PLACEHOLDER" />
             <Label fx:id="packageStatus" layoutX="7.0" layoutY="67.0" styleClass="optionGroup" text="PLACEHOLDER" />
             <Label fx:id="packageRecipient" layoutX="7.0" layoutY="114.0" styleClass="optionGroup" text="PLACEHOLDER" />
-            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="541.0" layoutY="99.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="136.0" styleClass="btnNext" text="WIĘCEJ">
+            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="541.0" layoutY="99.0" mnemonicParsing="false" onAction="#showMore" prefHeight="39.0" prefWidth="136.0" styleClass="btnNext" text="WIĘCEJ">
                <graphic>
                   <FontAwesomeIconView glyphName="LONG_ARROW_RIGHT" size="23" styleClass="iconNext" text="" />
                </graphic>

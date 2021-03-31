@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ClientTrackPackage implements Initializable {
+public class ClientHistoryPackage implements Initializable {
 
     @FXML
     private AnchorPane trackPackagePane;
@@ -66,21 +66,15 @@ public class ClientTrackPackage implements Initializable {
         List<PackageTest> ls = new ArrayList<>();
         PackageTest tes = new PackageTest();
 
-        tes.setPackageNumber("3232323232");
-        tes.setSender("FILIP");
-        tes.setStatus("ZAREJESTROWANA");
-        ls.add(tes);
-
-        tes = new PackageTest();
-        tes.setPackageNumber("121212121");
+        tes.setPackageNumber("8688686868");
         tes.setSender("ANDRZEJ");
-        tes.setStatus("W TRANSPORCIE");
+        tes.setStatus("ODEBRANA");
         ls.add(tes);
 
         tes = new PackageTest();
-        tes.setPackageNumber("5151515151");
-        tes.setSender("STEVE");
-        tes.setStatus("W ODDZIALE");
+        tes.setPackageNumber("6632626262");
+        tes.setSender("ANDRZEJ");
+        tes.setStatus("ODEBRANA");
         ls.add(tes);
 
         return ls;
