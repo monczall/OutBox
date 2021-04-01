@@ -9,17 +9,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.animations.Animations;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Client implements Initializable {
@@ -49,7 +54,7 @@ public class Client implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
 
     try {
-        SceneManager.loadScene("../../resources/view/client/clientHome.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -104,32 +109,45 @@ public class Client implements Initializable {
 
     @FXML
     void logout(ActionEvent event) {
-        SceneManager.renderScene("login");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout Alert");
+        alert.setHeaderText("Proces wylogowania");
+        alert.setContentText("Czy napewno chcesz się wylogować?");
+        alert.initStyle(StageStyle.UNDECORATED);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("../../../resources/css/client.css").toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.get() == ButtonType.OK)
+            SceneManager.renderScene("login");
     }
 
     @FXML
     void viewHistory(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../resources/view/client/clientHistoryPackage.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/client/clientHistoryPackage.fxml", mainWindow);
     }
 
     @FXML
     void viewHome(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../resources/view/client/clientHome.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);
     }
 
     @FXML
     void viewRegisterPackage(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../resources/view/client/clientRegisterPackage.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/client/clientRegisterPackage.fxml", mainWindow);
     }
 
     @FXML
     void viewSettings(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../resources/view/client/clientSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/client/clientSettings.fxml", mainWindow);
     }
 
     @FXML
     void viewTrackPackage(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../resources/view/client/clientTrackPackage.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/client/clientTrackPackage.fxml", mainWindow);
     }
 
 }

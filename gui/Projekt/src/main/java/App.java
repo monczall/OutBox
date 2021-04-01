@@ -35,7 +35,7 @@ public class App extends Application {
         SceneManager.addScene("admin", "../resources/view/admin/admin.fxml");
 
         primaryStage.setResizable(false);
-      //  primaryStage.initStyle(StageStyle.UNDECORATED);
+       //primaryStage.initStyle(StageStyle.UNDECORATED);
 
         SceneManager.renderScene("login");
     }

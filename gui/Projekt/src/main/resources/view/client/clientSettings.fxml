@@ -3,31 +3,36 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.ToggleSwitch?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/client.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.client.ClientSettings">
+<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.client.ClientSettings">
    <children>
-      <AnchorPane fx:id="appSettingsPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client.css">
+      <AnchorPane fx:id="appSettingsPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;">
          <children>
             <Text layoutX="6.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="JĘZYK" />
             <Text fill="#8f8f8f" layoutX="3.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Wybierz język" />
             <Line endX="594.0" layoutX="99.0" layoutY="118.0" startX="-96.0" stroke="#252525" strokeWidth="2.0" />
             <Text layoutX="6.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="MOTYW" />
             <Text fill="#8f8f8f" layoutX="6.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Tryb ciemny" />
-            <Slider layoutX="624.0" layoutY="119.0" prefHeight="56.0" prefWidth="47.0" />
             <Text fill="#8f8f8f" layoutX="6.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Główny kolor" />
-            <ComboBox fx:id="pickColor" layoutX="450.0" layoutY="176.0" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox" />
+            <ComboBox fx:id="pickColor" layoutX="450.0" layoutY="176.0" onAction="#changeColor" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox" />
             <ComboBox fx:id="pickLanguage" layoutX="450.0" layoutY="45.0" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox" />
             <Line endX="594.0" endY="0.49554443359375" layoutX="96.0" layoutY="24.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
+            <ToggleSwitch fx:id="darkMode" alignment="CENTER" layoutX="647.0" layoutY="136.0" prefHeight="18.0" prefWidth="40.0" selected="true" styleClass="toggleSwitch">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </ToggleSwitch>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="userInformationPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client.css" visible="false">
+      <AnchorPane fx:id="userInformationPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Text layoutX="5.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="DANE" />
             <Line endX="594.0" endY="0.49554443359375" layoutX="95.0" layoutY="24.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
@@ -36,7 +41,7 @@
             <Text fill="#8f8f8f" layoutX="2.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Miasto" />
             <Text fill="#8f8f8f" layoutX="2.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Województwo" />
             <TextField layoutX="449.0" layoutY="90.0" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox" />
-            <ComboBox fx:id="pickColor1" layoutX="449.0" layoutY="135.0" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox" />
+            <ComboBox layoutX="449.0" layoutY="135.0" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox" />
             <Text fill="#8f8f8f" layoutX="2.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Hasło" />
             <Text fill="#8f8f8f" layoutX="2.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Powtórz hasło" />
             <Text layoutX="6.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="PRYWATNOŚĆ" />
@@ -51,7 +56,7 @@
       </AnchorPane>
       <Pane layoutX="169.0" layoutY="-28.0" prefHeight="208.0" prefWidth="701.0" style="-fx-background-color: #121212;" />
       <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="USTAWIENIA" />
-      <FontAwesomeIconView fill="ORANGE" glyphName="COG" layoutX="176.0" layoutY="81.0" size="40" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="COG" layoutX="176.0" layoutY="81.0" size="40" styleClass="partIcon" />
       <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
       <ToggleButton fx:id="appSettings" layoutX="170.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeAppSettings" prefHeight="52.0" prefWidth="349.0" styleClass="settingsBlock" text="APLIKACJA" />
       <ToggleButton fx:id="userSettings" layoutX="518.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeUserSettings" prefHeight="52.0" prefWidth="348.0" styleClass="settingsBlock" text="DANE" />

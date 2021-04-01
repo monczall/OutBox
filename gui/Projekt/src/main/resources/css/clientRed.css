@@ -1,9 +1,9 @@
 /*-------------COLORS-------------*/
 *{
-    -fx-main-color: #FFA500;
+    -fx-main-color: #DC143C;
     -fx-dark-color: #121212;
     -fx-gray-color: #8f8f8f;
-    -fx-second-color: #000000;
+    -fx-second-color: #ffffff;
 }
 /*-------------BACKGROUNDS-------------*/
 .mainBackground{
@@ -299,11 +299,4 @@
 .toggleSwitch:selected .thumb{
     -fx-background-color: -fx-main-color;
     -fx-effect: dropshadow(three-pass-box, -fx-main-color, 10, 0, 0, 0);
-}
-/*-------------ALERT-------------*/
-.alert{
-    -fx-border-color: -fx-main-color;
-    -fx-background-color: -fx-dark-color;
-    -fx-font-size: 13px;
-    -fx-text-fill: -fx-main-color;
 }

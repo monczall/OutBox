@@ -1,12 +1,16 @@
 package main.java.controllers.client;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import main.java.SceneManager;
 import main.java.controllers.animations.Animations;
+import main.java.preferences.Preference;
+import org.controlsfx.control.ToggleSwitch;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +30,22 @@ public class ClientSettings implements Initializable {
     @FXML
     private AnchorPane userInformationPane;
 
+    @FXML
+    private ComboBox<String> pickColor;
+
+    @FXML
+    private ComboBox<String> pickLanguage;
+
+    @FXML
+    private ToggleSwitch darkMode;
+
+    //List of colors for combobox
+    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy","Czerwony");
+    //List of languages for combobox
+    private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
+
+    private Scene scene;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -38,6 +58,13 @@ public class ClientSettings implements Initializable {
         appSettings.setOpacity(1);
 
         userInformationPane.setTranslateY(-800);
+
+        pickColor.setItems(colors);
+        pickColor.setValue(colors.get(0));
+
+        pickLanguage.setItems(languages);
+        pickLanguage.setValue(languages.get(0));
+
     }
 
     @FXML
@@ -48,5 +75,15 @@ public class ClientSettings implements Initializable {
     @FXML
     void changeUserSettings(ActionEvent event) throws IOException {
         Animations.changePane(appSettingsPane,userInformationPane,+800,0.5,userSettings,appSettings);
+    }
+
+    @FXML
+    void changeColor(ActionEvent event) {
+        Preference pref = new Preference();
+        if (pickColor.getValue().equals("Pomarańczowy")) {
+            pref.addPreference("color","orange");
+        } else {
+            pref.addPreference("color","red");
+        }
     }
 }
