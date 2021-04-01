@@ -14,6 +14,7 @@ public class AdminHome  {
     private AnchorPane mainWindow;
 
     public void logout(ActionEvent actionEvent) {
+        SceneManager.renderScene("login");
     }
 
    

@@ -2,50 +2,51 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminAddArea">
+<AnchorPane fx:id="loginRightPaneAnchorPane" prefHeight="672.0" prefWidth="1033.0" styleClass="darkBackGround" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminAddArea">
     <children>
-        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="645.0" layoutY="453.0" mnemonicParsing="false" onAction="#logout" prefHeight="123.0" prefWidth="212.0" styleClass="homeBlock" text="Wyloguj">
-            <graphic>
-                <FontAwesomeIconView glyphName="POWER_OFF" size="70" styleClass="blockIcon" />
-            </graphic></Button>
-        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="527.0" layoutY="303.0" mnemonicParsing="false" onAction="#viewRegisterPackage" prefHeight="123.0" prefWidth="330.0" styleClass="homeBlock" text="Właściwości przesyłki">
-            <graphic>
-                <Pane prefHeight="71.0" prefWidth="200.0" styleClass="paneHome">
-                    <children>
-                        <FontAwesomeIconView glyphName="CUBE" layoutX="64.0" layoutY="58.0" size="70" styleClass="blockIcon" />
-                        <FontAwesomeIconView glyphName="COG" layoutX="101.0" layoutY="50.0" size="25" styleClass="blockIcon" />
-                    </children>
-                </Pane>
-            </graphic></Button>
-        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="176.0" layoutY="453.0" mnemonicParsing="false" onAction="#viewHistory" prefHeight="123.0" prefWidth="212.0" styleClass="homeBlock" text="Generuj raport">
-            <graphic>
-                <FontAwesomeIconView glyphName="BOOK" size="70" styleClass="blockIcon" />
-            </graphic></Button>
-        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="410.0" layoutY="453.0" mnemonicParsing="false" onAction="#viewSettings" prefHeight="123.0" prefWidth="212.0" styleClass="homeBlock" text="Ustawienia">
-            <graphic>
-                <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon" />
-            </graphic></Button>
-        <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="HOME" />
-        <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="176.0" layoutY="81.0" size="40" />
-        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="176.0" layoutY="303.0" mnemonicParsing="false" onAction="#viewTrackPackage" prefHeight="123.0" prefWidth="330.0" styleClass="homeBlock" text="Dodaj obszar">
-            <graphic>
-                <FontAwesomeIconView glyphName="PLUS" size="70" styleClass="blockIcon" />
-            </graphic></Button>
+        <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="DODAJ OBSZAR" />
+        <FontAwesomeIconView fill="ORANGE" glyphName="PLUS" layoutX="176.0" layoutY="81.0" size="40" />
         <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="176.0" layoutY="153.0" mnemonicParsing="false" onAction="#viewTrackPackage" prefHeight="123.0" prefWidth="330.0" styleClass="homeBlock" text="Edytuj pracowników">
-            <graphic>
-                <FontAwesomeIconView glyphName="USERS" size="70" styleClass="blockIcon" />
-            </graphic>
-        </Button>
-        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="527.0" layoutY="153.0" mnemonicParsing="false" onAction="#viewTrackPackage" prefHeight="123.0" prefWidth="330.0" styleClass="homeBlock" text="Dodaj kierownika">
-            <graphic>
-                <FontAwesomeIconView glyphName="USER_PLUS" size="70" styleClass="blockIcon" />
-            </graphic>
-        </Button>
+      <TextField fx:id="registerAreaName" layoutX="603.0" layoutY="357.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnArea" prefHeight="35.0" prefWidth="250.0" promptText="Nazwa" styleClass="textFields" />
+        <Label layoutX="238.0" layoutY="184.0" styleClass="lightText" text="Ulica i numer domu/mieszkania">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <TextField fx:id="registerStreetField" layoutX="215.0" layoutY="204.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnStreet" prefHeight="35.0" prefWidth="250.0" promptText="np. Mickiewicza 1C/13" styleClass="textFields" />
+        <Circle fx:id="registerStreetCircle" fill="ORANGE" layoutX="213.0" layoutY="222.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+        <Label layoutX="626.0" layoutY="181.0" styleClass="lightText" text="Miasto">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <TextField fx:id="registerCityField" layoutX="603.0" layoutY="201.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0" promptText="np. Rzeszów" styleClass="textFields" />
+        <Circle fx:id="registerCityCircle" fill="ORANGE" layoutX="603.0" layoutY="219.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+        <Label layoutX="236.0" layoutY="339.0" styleClass="lightText" text="Województwo">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <TextField fx:id="registerVoivodeshipField" layoutX="213.0" layoutY="359.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" promptText="np. Podkarpackie" styleClass="textFields" />
+        <Circle fx:id="registerVoivodeshipCircle" fill="ORANGE" layoutX="213.0" layoutY="377.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+        <Button fx:id="registerRegisterButtonButton" layoutX="392.0" layoutY="502.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="Dodaj obszar" />
+        <FontAwesomeIconView glyphName="BUILDING" layoutX="589.0" layoutY="230.0" size="32" />
+        <FontAwesomeIconView glyphName="INSTITUTION" layoutX="195.0" layoutY="387.0" size="32" />
+        <FontAwesomeIconView glyphName="MAP_MARKER" layoutX="204.0" layoutY="233.0" size="32" />
+        <Label layoutX="627.0" layoutY="337.0" styleClass="lightText" text="Nazwa obszaru">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Circle fx:id="registerAreaCircle" fill="ORANGE" layoutX="602.0" layoutY="372.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+        <FontAwesomeIconView glyphName="GLOBE" layoutX="588.0" layoutY="383.0" size="32" />
     </children>
 </AnchorPane>
