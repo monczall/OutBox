@@ -16,15 +16,15 @@ public class PackageItem{
     @FXML
     private Label packageRecipient;
 
+    //Method used for filling the labels in package preview
     public void setData(PackageTest tes){
         packageNumber.setText(tes.getPackageNumber());
         packageStatus.setText(tes.getStatus());
         packageRecipient.setText(tes.getSender());
     }
 
-    @FXML
-    public void showMore(ActionEvent event){
-//        ClientTrackPackage clientTrackPackage = new ClientTrackPackage();
-//        clientTrackPackage.test();
+    //Method used to get package number for query in db
+    public String getNumber(){
+        return packageNumber.getText();
     }
 }

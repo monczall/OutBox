@@ -7,6 +7,9 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.awt.event.ActionEvent;
+import java.beans.EventHandler;
+
 public class Animations {
 
     /* Function that moves two AnchorPanes by value on x-axis (if value is negative then it moves to the left, otherwise to the right)
@@ -80,7 +83,6 @@ public class Animations {
         });
     }
 
-
     /* Function that moves an item by value on x-axis (if value is negative then it moves to the left, otherwise to the right)
        Function takes node (e.g AnchorPane, Circle), value (number of pixels) and duration (seconds - how long animation is going to last) arguments */
     public static void moveByX(Node item, double value, double duration){
@@ -95,6 +97,21 @@ public class Animations {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), item);
         translateTransition.setByY(value);
         translateTransition.play();
+    }
+
+    /* Method that fade away an item
+       Method takes two arguments - node (e.g button), and duration of fading in seconds*/
+    public static void fadeAway(Node item, double duration){
+        item.setDisable(true);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration),item);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
+
+        fadeTransition.setOnFinished(event -> {
+            item.setVisible(false);
+            item.setDisable(false);
+        });
     }
 
 

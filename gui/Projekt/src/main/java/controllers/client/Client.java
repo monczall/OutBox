@@ -8,15 +8,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.Shadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.SceneManager;
@@ -33,19 +41,18 @@ public class Client implements Initializable {
     private VBox paneRight;
     @FXML
     private FontAwesomeIconView hamburger;
-    @FXML
-    private Button btnSettings;
-    @FXML
-    private FontAwesomeIconView iconSettings;
-
-    @FXML
-    private Button btnHome;
 
     @FXML
     private Pane welcomeMessage;
 
     @FXML
     private AnchorPane mainWindow;
+
+    @FXML
+    private AnchorPane window;
+
+    @FXML
+    private Pane alertPane;
 
     boolean hamburgerClicked = false;
 
@@ -59,6 +66,7 @@ public class Client implements Initializable {
         e.printStackTrace();
     }
 
+    alertPane.setTranslateY(-500);
     paneRight.setTranslateX(-200);
 
 
@@ -109,21 +117,25 @@ public class Client implements Initializable {
 
     @FXML
     void logout(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Logout Alert");
-        alert.setHeaderText("Proces wylogowania");
-        alert.setContentText("Czy napewno chcesz się wylogować?");
-        alert.initStyle(StageStyle.UNDECORATED);
-
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("../../../resources/css/client.css").toExternalForm());
-        dialogPane.getStyleClass().add("alert");
-
-        Optional<ButtonType> result = alert.showAndWait();
-
-        if(result.get() == ButtonType.OK)
-            SceneManager.renderScene("login");
+        Animations.moveByY(alertPane,+500,0.3);
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        gaussianBlur.setRadius(8);
+        window.setDisable(true);
+        window.setEffect(gaussianBlur);
     }
+
+    @FXML
+    void logoutNo(ActionEvent event) {
+        Animations.moveByY(alertPane,-500,0.3);
+        window.setEffect(null);
+        window.setDisable(false);
+    }
+
+    @FXML
+    void logoutYes(ActionEvent event) {
+        SceneManager.renderScene("login");
+    }
+
 
     @FXML
     void viewHistory(ActionEvent event) throws IOException {
