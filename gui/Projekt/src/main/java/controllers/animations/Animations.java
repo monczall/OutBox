@@ -1,14 +1,15 @@
 package main.java.controllers.animations;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-import java.awt.event.ActionEvent;
-import java.beans.EventHandler;
 
 public class Animations {
 
@@ -97,6 +98,28 @@ public class Animations {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), item);
         translateTransition.setByY(value);
         translateTransition.play();
+    }
+
+    /* Method moves an Node by given value, durationOfMove is a value in seconds that animations plays. After animation is finished there is pause (durationOfPause)
+       and after pause animation is played once again but with opposite Y-axis value. (........)*/
+    public static void alertAnim(Pane item, double value, double durationOfMove, double durationOfPause, Node causeOfAnim, AnchorPane parent){
+        causeOfAnim.setDisable(true);
+        causeOfAnim.setOpacity(1);
+        TranslateTransition translateStart = new TranslateTransition(Duration.seconds(durationOfMove), item);
+        translateStart.setByY(value);
+
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(durationOfPause));
+
+        TranslateTransition translateBack = new TranslateTransition(Duration.seconds(durationOfMove),item);
+        translateBack.setByY(-value);
+
+        SequentialTransition sequentialTransition = new SequentialTransition(translateStart,pauseTransition,translateBack);
+        sequentialTransition.play();
+
+        sequentialTransition.setOnFinished(event -> {
+            parent.getChildren().remove(item);
+            causeOfAnim.setDisable(false);
+        });
     }
 
     /* Method that fade away an item

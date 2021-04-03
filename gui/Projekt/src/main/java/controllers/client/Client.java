@@ -28,6 +28,7 @@ import javafx.stage.Screen;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import main.java.SceneManager;
+import main.java.controllers.animations.Alerts;
 import main.java.controllers.animations.Animations;
 
 import java.io.IOException;
@@ -54,11 +55,15 @@ public class Client implements Initializable {
     @FXML
     private Pane alertPane;
 
+    @FXML
+    private AnchorPane appWindow;
+
     boolean hamburgerClicked = false;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
+
 
     try {
         SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);

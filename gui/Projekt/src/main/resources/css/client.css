@@ -5,6 +5,7 @@
     -fx-gray-color: #8f8f8f;
     -fx-second-color: #000000;
     -fx-shadow: #000;
+    -fx-dark-transparent: #121212cc;
 }
 /*-------------BACKGROUNDS-------------*/
 .mainBackground{
@@ -307,7 +308,7 @@
 }
 /*-------------ALERT-------------*/
 .alert{
-    -fx-background-color: -fx-dark-color; /*#262628*/
+    -fx-background-color:  -fx-dark-transparent; /*#262628*/
     -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
     -fx-border-color: -fx-main-color;
     -fx-border-radius: 0;
