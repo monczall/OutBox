@@ -13,13 +13,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
 
 <AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/clientRed.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.client.ClientRegisterPackage">
    <children>
       <FontAwesomeIconView fill="ORANGE" glyphName="DROPBOX" layoutX="174.0" layoutY="83.0" size="40" styleClass="partIcon" />
       <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
       <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="REJESTRACJA PACZKI" />
-      <AnchorPane fx:id="packageSizePane" layoutX="170.0" layoutY="172.0" prefHeight="484.0" prefWidth="707.0">
+      <AnchorPane fx:id="packageSizePane" layoutX="170.0" layoutY="172.0" prefHeight="484.0" prefWidth="707.0" visible="false">
          <children>
             <Text layoutX="5.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Rozmiar paczki" />
             <Text layoutX="5.0" layoutY="24.6328125" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Wybierz rozmiar paczki" />
@@ -78,7 +79,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="recipientDetailsPane" layoutX="176.0" layoutY="158.0" prefHeight="495.0" prefWidth="692.0" visible="false">
+      <AnchorPane fx:id="recipientDetailsPane" layoutX="176.0" layoutY="158.0" prefHeight="495.0" prefWidth="692.0">
          <children>
             <Text layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Dane odbiorcy" />
             <Text layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Uzupełnij informacje o odbiorcy" />
@@ -89,13 +90,13 @@
             <Text layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Miasto" />
             <Text layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Województwo" />
             <Text layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Numer telefonu" />
-            <TextField layoutX="459.0" layoutY="69.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-            <TextField layoutX="459.0" layoutY="111.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-            <TextField layoutX="459.0" layoutY="151.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-            <TextField layoutX="459.0" layoutY="191.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-            <TextField layoutX="459.0" layoutY="231.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-            <TextField layoutX="459.0" layoutY="271.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-            <TextField layoutX="459.0" layoutY="311.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+            <CustomTextField fx:id="nameInput" layoutX="458.0" layoutY="69.0" prefHeight="33.0" prefWidth="233.0" styleClass="inputBox" />
+            <TextField fx:id="surnameInput" layoutX="459.0" layoutY="111.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+            <TextField fx:id="emailInput" layoutX="459.0" layoutY="151.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+            <TextField fx:id="streetInput" layoutX="459.0" layoutY="191.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+            <TextField fx:id="cityInput" layoutX="459.0" layoutY="231.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+            <TextField fx:id="provinceInput" layoutX="459.0" layoutY="271.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+            <TextField fx:id="numberInput" layoutX="459.0" layoutY="311.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
             <Button fx:id="btnNextTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="501.0" layoutY="391.1640625" mnemonicParsing="false" onAction="#fromRecipientToTime" prefHeight="40.0" prefWidth="193.0" styleClass="btnNext" text="DALEJ ">
                <graphic>
                   <FontAwesomeIconView glyphName="CHEVRON_RIGHT" size="23" styleClass="iconNext" text="" />

@@ -4,13 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import main.java.controllers.animations.Alerts;
-import main.java.controllers.animations.Animations;
+import javafx.stage.Stage;
+import main.java.features.Alerts;
+import main.java.features.Animations;
+import main.java.features.ErrorHandler;
+import org.controlsfx.control.textfield.CustomTextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,16 +57,32 @@ public class ClientRegisterPackage implements Initializable {
     @FXML
     private AnchorPane appWindow;
 
+    @FXML
+    private CustomTextField nameInput;
+
+    @FXML
+    private TextField surnameInput;
+
+    @FXML
+    private TextField emailInput;
+
+    @FXML
+    private TextField streetInput;
+
+    @FXML
+    private TextField cityInput;
+
+    @FXML
+    private TextField provinceInput;
+
+    @FXML
+    private TextField numberInput;
+
 
     private ToggleGroup packageGroup = new ToggleGroup();
 
-    @FXML
-    private Pane alertPane;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //alertPane.setTranslateY(-400);
 
         // Added three buttons to the group
         smallPackage.setToggleGroup(packageGroup);
@@ -77,6 +97,9 @@ public class ClientRegisterPackage implements Initializable {
         recipientDetailsPane.setTranslateX(+800);           // After panel is initialized three panes are moved 800 pixels to the right
         deliveryTimePane.setTranslateX(+800);               // for animation purposes
         registerSummaryPane.setTranslateX(+800);
+
+
+        ErrorHandler.checkIfLetters(nameInput, "[a-zA-Z]+", "Imie powinno zawierać tylko litery");
     }
 
 
@@ -90,10 +113,8 @@ public class ClientRegisterPackage implements Initializable {
             Animations.moveByX(navCircle, +114,0.7);
         }
         else{
-            //Animations.moveAndWaitByY(alertPane,400,0.3,3,btnNextRecipient);
-            Alerts.createAlert(appWindow,293,86,0,-600,btnNextRecipient,"WARNING","WYBIERZ ROZMIAR PACZKI");
+            Alerts.createAlert(appWindow, btnNextRecipient,"WARNING","WYBIERZ ROZMIAR PACZKI");
         }
-
     }
 
     @FXML

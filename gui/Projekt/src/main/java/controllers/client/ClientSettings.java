@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import main.java.controllers.animations.Animations;
+import main.java.features.Animations;
 import main.java.preferences.Preference;
 import org.controlsfx.control.ToggleSwitch;
 

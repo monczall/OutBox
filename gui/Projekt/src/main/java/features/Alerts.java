@@ -1,4 +1,4 @@
-package main.java.controllers.animations;
+package main.java.features;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.scene.control.Button;
@@ -8,18 +8,18 @@ import javafx.scene.layout.Pane;
 
 
 public class Alerts {
-    public static void createAlert(AnchorPane parent, int prefWidth, int prefHeight, int additionalX, int additionalY, Button button, String icon, String text){
+    public static void createAlert(AnchorPane parent, Button button, String iconName, String text){
 
         Pane pane = new Pane();
-        pane.setPrefWidth(prefWidth);
-        pane.setPrefHeight(prefHeight);
-        pane.setLayoutX( (parent.getPrefWidth() / 2) - (prefWidth/2) + additionalX);
-        pane.setLayoutY( (parent.getPrefHeight() / 2) - (prefHeight/2) + additionalY);
+        pane.setPrefWidth(293);
+        pane.setPrefHeight(86);
+        pane.setLayoutX( (parent.getPrefWidth() / 2) - (293/2));
+        pane.setLayoutY( (parent.getPrefHeight() / 2) - (86/2) - 600);
         pane.getStyleClass().add("alert");
 
         FontAwesomeIconView alertIcon = new FontAwesomeIconView();
         alertIcon.setSize("30");
-        alertIcon.setGlyphName(icon);
+        alertIcon.setGlyphName(iconName);
         alertIcon.setLayoutX(21);
         alertIcon.setLayoutY(54);
         alertIcon.getStyleClass().add("partIcon");

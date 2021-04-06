@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import main.java.controllers.animations.Animations;
+import main.java.features.Animations;
 
 import java.io.IOException;
 import java.net.URL;

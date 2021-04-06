@@ -1,4 +1,4 @@
-package main.java.controllers.animations;
+package main.java.features;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;

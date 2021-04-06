@@ -2,7 +2,6 @@ package main.java.controllers.admin;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.SceneManager;
-import main.java.controllers.animations.Animations;
+import main.java.features.Animations;
 
 import java.io.IOException;
 import java.net.URL;
