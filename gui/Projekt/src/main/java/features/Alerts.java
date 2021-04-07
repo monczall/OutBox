@@ -8,13 +8,16 @@ import javafx.scene.layout.Pane;
 
 
 public class Alerts {
+
+    /* Method is creating alert that lasts for four seconds (....)*/
     public static void createAlert(AnchorPane parent, Button button, String iconName, String text){
+
 
         Pane pane = new Pane();
         pane.setPrefWidth(293);
         pane.setPrefHeight(86);
-        pane.setLayoutX( (parent.getPrefWidth() / 2) - (293/2));
-        pane.setLayoutY( (parent.getPrefHeight() / 2) - (86/2) - 600);
+        pane.setLayoutX( (parent.getPrefWidth() / 2) - (pane.getPrefWidth()/2));
+        pane.setLayoutY( (parent.getPrefHeight() / 2) - (pane.getPrefHeight()/2) - 600);
         pane.getStyleClass().add("alert");
 
         FontAwesomeIconView alertIcon = new FontAwesomeIconView();
@@ -29,15 +32,13 @@ public class Alerts {
         alertText.setLayoutY(31);
         alertText.getStyleClass().add("alertText");
 
-//        System.out.println(pane.getLayoutX());
-//        System.out.println(pane.getLayoutY());
-
         pane.getChildren().add(alertText);
         pane.getChildren().add(alertIcon);
         parent.getChildren().add(pane);
 
         Animations.alertAnim(pane,400,0.3,4, button, parent);
     }
+    /* NOT YET IMPLEMENTED */
     public void createAlertWithOptions(){
     }
 }
