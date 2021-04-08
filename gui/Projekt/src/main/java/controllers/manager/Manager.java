@@ -2,9 +2,11 @@ package main.java.controllers.manager;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -35,6 +37,12 @@ public class Manager implements Initializable {
     private Pane welcomeMessage;
 
     @FXML
+    private AnchorPane window;
+
+    @FXML
+    private Pane alertPane;
+
+    @FXML
     private AnchorPane mainWindow;
 
     boolean hamburgerClicked = false;
@@ -46,35 +54,55 @@ public class Manager implements Initializable {
 
     public void openCouriers(MouseEvent mouseEvent) throws IOException {
         System.out.println("Manager Couriers");
-        SceneManager.loadScene("../../resources/view/manager/managerCouriers.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/manager/managerCouriers.fxml", mainWindow);
     }
 
     public void openPackages(MouseEvent mouseEvent) throws IOException {
         System.out.println("Manager Packages");
-        SceneManager.loadScene("../../resources/view/manager/managerPackages.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/manager/managerPackages.fxml", mainWindow);
     }
 
     public void openSettings(MouseEvent mouseEvent) throws IOException {
         System.out.println("Manager Settings");
-        SceneManager.loadScene("../../resources/view/manager/managerSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/manager/managerSettings.fxml", mainWindow);
     }
 
     public void openRaports(MouseEvent mouseEvent) throws IOException {
         System.out.println("Manager Raports");
-        SceneManager.loadScene("../../resources/view/manager/managerRaports.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/manager/managerRaports.fxml", mainWindow);
     }
-
+    /*
     public void logout(MouseEvent mouseEvent) {
         System.out.println("Manager Logout");
+        SceneManager.renderScene("login");
+    }*/
+
+    @FXML
+    public void logout(MouseEvent mouseEvent) {
+        Animations.moveByY(alertPane,+500,0.3);
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        gaussianBlur.setRadius(8);
+        window.setDisable(true);
+        window.setEffect(gaussianBlur);
+    }
+
+    @FXML
+    public void logoutNo(ActionEvent event) {
+        Animations.moveByY(alertPane,-500,0.3);
+        window.setEffect(null);
+        window.setDisable(false);
+    }
+
+    @FXML
+    public void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
         System.out.println("Start program");
-
         paneRight.setTranslateX(-200);
-
+        alertPane.setTranslateY(-500);
 
         hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
             if(hamburgerClicked == false) {
