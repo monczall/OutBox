@@ -3,6 +3,7 @@ package main.java.controllers.manager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import main.java.controllers.client.PackageItem;
@@ -16,4 +17,6 @@ import java.util.ResourceBundle;
 
 public class ManagerCouriersDelete {
 
+    public void findPackages(MouseEvent mouseEvent) {
+    }
 }

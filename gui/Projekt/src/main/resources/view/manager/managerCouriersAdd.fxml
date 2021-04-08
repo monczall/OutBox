@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerPackages">
+<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriersAdd">
    <children>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="DODAWANIE KURIERA" />
       <FontAwesomeIconView fill="ORANGE" glyphName="USER_PLUS" layoutX="142.0" layoutY="70.0" size="38" />

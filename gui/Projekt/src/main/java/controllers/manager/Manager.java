@@ -41,32 +41,32 @@ public class Manager implements Initializable {
     boolean hamburgerClicked = false;
 
     public void openHome(MouseEvent actionEvent) throws IOException {
-        System.out.println("HOME");
+        System.out.println("Manager HOME");
         SceneManager.renderScene("manager");
     }
 
     public void openCouriers(MouseEvent mouseEvent) throws IOException {
-        System.out.println("Couriers");
+        System.out.println("Manager Couriers");
         SceneManager.loadScene("../../resources/view/manager/managerCouriers.fxml", mainWindow);
     }
 
     public void openPackages(MouseEvent mouseEvent) throws IOException {
-        System.out.println("Packages");
+        System.out.println("Manager Packages");
         SceneManager.loadScene("../../resources/view/manager/managerPackages.fxml", mainWindow);
     }
 
     public void openSettings(MouseEvent mouseEvent) throws IOException {
-        System.out.println("Settings");
+        System.out.println("Manager Settings");
         SceneManager.loadScene("../../resources/view/manager/managerSettings.fxml", mainWindow);
     }
 
     public void openRaports(MouseEvent mouseEvent) throws IOException {
-        System.out.println("Raports");
+        System.out.println("Manager Raports");
         SceneManager.loadScene("../../resources/view/manager/managerRaports.fxml", mainWindow);
     }
 
     public void logout(MouseEvent mouseEvent) {
-        System.out.println("ogout");
+        System.out.println("Manager Logout");
         SceneManager.renderScene("login");
     }
 

@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerPackages">
+<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriersEdit">
    <children>
       <FontAwesomeIconView fill="ORANGE" glyphName="USER" layoutX="142.0" layoutY="70.0" size="38" />
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="EDYTOWANIE KURIERA" />
+      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="EDYTOWANIE DANYCH KURIERA" />
       <TextField layoutX="202.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Imie" styleClass="inputBox" />
       <TextField layoutX="381.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Nazwisko" styleClass="inputBox" />
       <TextField layoutX="556.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Pesel" styleClass="inputBox" />
