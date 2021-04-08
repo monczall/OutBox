@@ -16,27 +16,22 @@ public class App extends Application {
         SceneManager.setStage(primaryStage);
 
         SceneManager.addScene("login", "../resources/view/auth/login.fxml");
-        SceneManager.addScene("register", "../resources/view/register.fxml");
-
-        SceneManager.addScene("password_reset", "../resources/view/passwordReset.fxml");
-
-        SceneManager.addScene("passwordReset", "../resources/view/passwordReset.fxml");
+        SceneManager.addScene("register", "../resources/view/auth/register.fxml");
+        SceneManager.addScene("passwordReset", "../resources/view/auth/passwordReset.fxml");
 
         SceneManager.addScene("client", "../resources/view/client/client.fxml");
 
         SceneManager.addScene("courier", "../resources/view/courier/courier.fxml");
 
-        //TU SCENY KURIERA MIEDZYODDZIALOWEGO
         SceneManager.addScene("interbranchCourier", "../resources/view/interbranchCourier/interbranchCourier.fxml");
-        //TU SCENY KIEROWNIKA
+
         SceneManager.addScene("manager", "../resources/view/manager/manager.fxml");
 
-        //TU ADMINA
         SceneManager.addScene("admin", "../resources/view/admin/admin.fxml");
 
         primaryStage.setResizable(false);
-       //primaryStage.initStyle(StageStyle.UNDECORATED);
+      //primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        SceneManager.renderScene("client");
+        SceneManager.renderScene("login");
     }
 }
