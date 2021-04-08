@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="701.0" layoutY="70.0" mnemonicParsing="false" text="Zatwierdź">
+         <graphic>
+            <FontAwesomeIconView glyphName="CHECK" />
+         </graphic></Button>
+      <Label layoutX="43.0" layoutY="7.0" text="Numer paczki" />
+      <Label layoutX="367.0" layoutY="7.0" text="Adres email" />
+      <Label layoutX="43.0" layoutY="53.0" text="Uwagi" />
+      <Label layoutX="687.0" layoutY="7.0" text="Label" />
+      <ComboBox layoutX="537.0" layoutY="70.0" prefWidth="150.0" styleClass="inputBox" />
+   </children>
+</Pane>

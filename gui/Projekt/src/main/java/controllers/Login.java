@@ -191,7 +191,7 @@ public class Login{
     }
 
     public void handleCourier2(MouseEvent mouseEvent) {
-        SceneManager.renderScene("courier2");
+        SceneManager.renderScene("interbranchCourier");
         System.out.println("Zalogowano jako kurier miedzyoddzialowy!");
     }
 

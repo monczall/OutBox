@@ -1,11 +1,15 @@
-package main.java.controllers.animations;
+package main.java.features;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+
 
 public class Animations {
 
@@ -80,7 +84,6 @@ public class Animations {
         });
     }
 
-
     /* Function that moves an item by value on x-axis (if value is negative then it moves to the left, otherwise to the right)
        Function takes node (e.g AnchorPane, Circle), value (number of pixels) and duration (seconds - how long animation is going to last) arguments */
     public static void moveByX(Node item, double value, double duration){
@@ -95,6 +98,43 @@ public class Animations {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), item);
         translateTransition.setByY(value);
         translateTransition.play();
+    }
+
+    /* Method moves an Node by given value, durationOfMove is a value in seconds that animations plays. After animation is finished there is pause (durationOfPause)
+       and after pause animation is played once again but with opposite Y-axis value. (........)*/
+    public static void alertAnim(Pane item, double value, double durationOfMove, double durationOfPause, Node causeOfAnim, AnchorPane parent){
+        causeOfAnim.setDisable(true);
+        causeOfAnim.setOpacity(1);
+        TranslateTransition translateStart = new TranslateTransition(Duration.seconds(durationOfMove), item);
+        translateStart.setByY(value);
+
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(durationOfPause));
+
+        TranslateTransition translateBack = new TranslateTransition(Duration.seconds(durationOfMove),item);
+        translateBack.setByY(-value);
+
+        SequentialTransition sequentialTransition = new SequentialTransition(translateStart,pauseTransition,translateBack);
+        sequentialTransition.play();
+
+        sequentialTransition.setOnFinished(event -> {
+            parent.getChildren().remove(item);
+            causeOfAnim.setDisable(false);
+        });
+    }
+
+    /* Method that fade away an item
+       Method takes two arguments - node (e.g button), and duration of fading in seconds*/
+    public static void fadeAway(Node item, double duration){
+        item.setDisable(true);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration),item);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
+
+        fadeTransition.setOnFinished(event -> {
+            item.setVisible(false);
+            item.setDisable(false);
+        });
     }
 
 
