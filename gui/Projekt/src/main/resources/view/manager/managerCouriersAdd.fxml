@@ -11,13 +11,13 @@
    <children>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="DODAWANIE KURIERA" />
       <FontAwesomeIconView fill="ORANGE" glyphName="USER_PLUS" layoutX="142.0" layoutY="70.0" size="38" />
-      <Button alignment="BOTTOM_CENTER" layoutX="715.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#findPackages" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="Dodaj kuriera" />
-      <TextField layoutX="548.0" layoutY="163.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField layoutX="548.0" layoutY="213.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField layoutX="548.0" layoutY="263.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField layoutX="548.0" layoutY="313.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField layoutX="548.0" layoutY="363.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField layoutX="548.0" layoutY="413.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+      <Button alignment="BOTTOM_CENTER" layoutX="715.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="Dodaj kuriera" />
+      <TextField fx:id="name" layoutX="548.0" layoutY="163.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+      <TextField fx:id="surname" layoutX="548.0" layoutY="213.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+      <TextField fx:id="street" layoutX="548.0" layoutY="263.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+      <TextField fx:id="city" layoutX="548.0" layoutY="313.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+      <TextField fx:id="pesel" layoutX="548.0" layoutY="363.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+      <TextField fx:id="numberPhone" layoutX="548.0" layoutY="413.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
       <Label layoutX="254.0" layoutY="175.0" styleClass="textOption" text="Imie" />
       <Label layoutX="253.0" layoutY="221.0" styleClass="textOption" text="Nazwisko" />
       <Label layoutX="252.0" layoutY="271.0" styleClass="textOption" text="Ulica i numer mieszkania" />
