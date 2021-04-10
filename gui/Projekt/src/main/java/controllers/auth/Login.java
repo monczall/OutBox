@@ -7,14 +7,19 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.SceneManager;
+import main.java.features.Alerts;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Login{
+
+    @FXML
+    private AnchorPane loginRightPaneAnchorPane;
 
     @FXML
     private Button loginExitButtonButton;
@@ -87,12 +92,7 @@ public class Login{
                     loginPasswordCircleCircle.getStyleClass().clear();
                     loginPasswordCircleCircle.getStyleClass().add("circleError");
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Niepoprawne dane");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Podano niepoprawne dane! \nE-Mail i/lub hasło nie pasują! Wprowadź poprawne dane i spróbuj ponownie.");
-
-                    alert.showAndWait();
+                    Alerts.createAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik lub/i hasło jest błędne");
                 }
             }else{
                 //UserTextField
@@ -102,20 +102,10 @@ public class Login{
                 loginUserCircleCircle.getStyleClass().clear();
                 loginUserCircleCircle.getStyleClass().add("circleError");
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Niepoprawny email");
-                alert.setHeaderText(null);
-                alert.setContentText("Niepoprawny format danych! Podany E-Mail nie jest prawidłowy.");
-
-                alert.showAndWait();
+                Alerts.createAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Format adresu email jest błędny");
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Puste pola");
-            alert.setHeaderText(null);
-            alert.setContentText("Pozostawiono puste pola! Uzupełnij wymagane informacje.");
-
-            alert.showAndWait();
+            Alerts.createAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Uzupełnij dane");
         }
     }
 
