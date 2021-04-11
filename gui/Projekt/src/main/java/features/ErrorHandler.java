@@ -1,8 +1,6 @@
 package main.java.features;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import impl.org.controlsfx.skin.CustomTextFieldSkin;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;

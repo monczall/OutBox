@@ -30,7 +30,7 @@ public class SceneManager {
 
     public static void loadScene(String path, AnchorPane anchorPane) throws IOException {
 
-        // Preferences are being loaded from registry.
+        //Reading preferences about language and deciding in which language app should start
         if(pref.readPreference("language").equals("english"))
             bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
         else
@@ -50,6 +50,7 @@ public class SceneManager {
         try{
             path=view.get(name);
 
+            //Reading preferences about language and deciding in which language app should start
             if(pref.readPreference("language").equals("english"))
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
             else
@@ -58,13 +59,12 @@ public class SceneManager {
             Parent root = FXMLLoader.load(SceneManager.class.getResource(path),bundle);
             Scene scene = new Scene(root);
 
-            // Preferences are being loaded from registry.
-            if(pref.readPreference("color").equals("red")){
+            //Reading preferences about color and deciding in which main color theme app should start
+            if(pref.readPreference("color").equals("red"))
                 scene.getStylesheets().add(SceneManager.class.getResource("../resources/css/client/clientRed.css").toExternalForm());
-            }
-            else{
+            else
                 scene.getStylesheets().add(SceneManager.class.getResource("../resources/css/client/client.css").toExternalForm());
-            }
+
 
             stage.setScene(scene);
             stage.setTitle("OutBox");

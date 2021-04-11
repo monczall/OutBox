@@ -192,8 +192,10 @@ public class ClientRegisterPackage implements Initializable {
     @FXML
     void fromTimeToSummary(ActionEvent event) {
         if(!pickTimeOfDelivery.getSelectionModel().isEmpty()){
+
             Animations.changePane(deliveryTimePane,registerSummaryPane,-800,0.7);
             Animations.moveByX(navCircle,+114,0.7);
+
             sumType.setText(packageGroup.getSelectedToggle().getUserData().toString());
             sumName.setText(nameInput.getText());
             sumSurname.setText(surnameInput.getText());

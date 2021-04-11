@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.client.ClientHistoryPackage">
+<AnchorPane fx:id="mainPane" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.client.ClientHistoryPackage">
    <children>
       <AnchorPane fx:id="trackPackagePane" layoutX="160.0" layoutY="101.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;">
          <children>
@@ -23,9 +23,10 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="HISTORIA PRZESYŁEK" />
+      <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="HISTORIA" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="BOOK" layoutX="172.0" layoutY="81.0" size="40" styleClass="partIcon" />
       <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-      <AnchorPane fx:id="moreInformationPane" layoutX="160.0" layoutY="101.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;">
+      <AnchorPane fx:id="moreInformationPane" layoutX="160.0" layoutY="101.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <VBox layoutX="33.0" prefHeight="536.0" prefWidth="692.0">
                <children>
@@ -48,7 +49,7 @@
                         <Pane prefHeight="76.0" prefWidth="536.0">
                            <children>
                               <Text layoutX="6.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Podróż przesyłki od Nadawcy do Obiorcy zakończyła się. Dziękujemy!" wrappingWidth="450.0" />
-                              <Label layoutX="5.0" styleClass="optionGroup" text="Dostarczona." />
+                              <Label fx:id="test" layoutX="5.0" styleClass="optionGroup" text="Dostarczona." />
                            </children>
                         </Pane>
                      </children>
@@ -310,16 +311,10 @@
                </children>
             </VBox>
          </children></AnchorPane>
-      <Button fx:id="btnPlus" alignment="CENTER" contentDisplay="CENTER" layoutX="811.0" layoutY="51.0" mnemonicParsing="false" onAction="#showMore" prefHeight="39.0" prefWidth="48.0" styleClass="btnNext" textAlignment="CENTER">
-         <graphic>
-            <FontAwesomeIconView glyphName="PLUS" size="22" styleClass="iconNext" text="" />
-         </graphic>
-      </Button>
-      <Button fx:id="btnBack" layoutX="708.0" layoutY="51.0" mnemonicParsing="false" onAction="#backToTrackPackage" styleClass="btnBack" text="WRÓĆ">
+      <Button fx:id="btnBack" layoutX="761.0" layoutY="51.0" mnemonicParsing="false" onAction="#backToTrackPackage" styleClass="btnBack" text="WRÓĆ">
          <graphic>
             <FontAwesomeIconView fill="#8f8f8f" glyphName="LONG_ARROW_LEFT" size="23" styleClass="backIcon" text="" />
          </graphic>
       </Button>
-      <FontAwesomeIconView glyphName="BOOK" layoutX="175.0" layoutY="83.0" size="40" styleClass="partIcon" />
    </children>
 </AnchorPane>
