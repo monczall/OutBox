@@ -48,12 +48,12 @@
             <VBox fx:id="paneRight" layoutX="65.0" layoutY="-1.0" prefHeight="673.0" prefWidth="163.0" styleClass="sideBackground" visible="false">
                <children>
                   <Pane prefHeight="71.0" prefWidth="156.0" />
-                  <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onMouseClicked="#openHome" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Home" wrapText="true" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Kurierzy" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Przesyłki" />
-                  <Button mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Raporty" />
-                  <Button id="btnSettings" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Ustawienia" />
-                  <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Wyloguj" />
+                  <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onMouseClicked="#openHome" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Home" wrapText="true" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Kurierzy" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Przesyłki" />
+                  <Button mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Raporty" />
+                  <Button id="btnSettings" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Ustawienia" />
+                  <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Wyloguj" />
                   <Pane prefHeight="71.0" prefWidth="156.0" />
                </children>
             </VBox>

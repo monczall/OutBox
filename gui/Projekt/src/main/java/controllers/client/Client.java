@@ -71,7 +71,7 @@ public class Client implements Initializable {
             fadeTransition.play();
 
             Animations.moveByX(paneRight,+200,0.5);
-            Animations.moveByX(welcomeMessage,+170,0.5);
+            Animations.moveByX(welcomeMessage,+160,0.5);
             Animations.moveByX(mainWindow,+70,0.5);
 
             fadeTransition.setOnFinished(event1 -> {
@@ -88,7 +88,7 @@ public class Client implements Initializable {
             fadeTransition.play();
 
             Animations.moveByX(paneRight,-200,0.5);
-            Animations.moveByX(welcomeMessage,-170,0.5);
+            Animations.moveByX(welcomeMessage,-160,0.5);
             Animations.moveByX(mainWindow,-70,0.5);
 
             fadeTransition.setOnFinished(event1 -> {

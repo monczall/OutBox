@@ -9,20 +9,34 @@ import javafx.stage.Stage;
 import main.java.controllers.courier.Courier;
 import main.java.preferences.Preference;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Hashtable;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 public class SceneManager {
+
     private static Stage stage;
     private static Hashtable<String,String> view = new Hashtable<>();
 
+    private static Preference pref = new Preference();
+    private static ResourceBundle bundle;
 
-    public static void addScene(String name,String path)throws IOException {
+    public static void addScene(String name,String path) throws IOException {
         view.put(name,path);
     }
 
     public static void loadScene(String path, AnchorPane anchorPane) throws IOException {
-        Node newLoadedPane = FXMLLoader.load(Courier.class.getResource(path));
+
+        // Preferences are being loaded from registry.
+        if(pref.readPreference("language").equals("english"))
+            bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
+        else
+            bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
+
+        Node newLoadedPane = FXMLLoader.load(Courier.class.getResource(path),bundle);
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(newLoadedPane);
     }
@@ -30,22 +44,26 @@ public class SceneManager {
     public static void removeScene(String name){
         view.remove(name);
     }
+
     public static void renderScene(String name){
         String path="";
         try{
             path=view.get(name);
-            Parent root = FXMLLoader.load(SceneManager.class.getResource(path));
+
+            if(pref.readPreference("language").equals("english"))
+                bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
+            else
+                bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
+
+            Parent root = FXMLLoader.load(SceneManager.class.getResource(path),bundle);
             Scene scene = new Scene(root);
 
             // Preferences are being loaded from registry.
-            Preference pref = new Preference();
-            String color = pref.readPreference("color");
-
-            if(color.equals("red")){
-                scene.getStylesheets().add(SceneManager.class.getResource("../resources/css/clientRed.css").toExternalForm());
+            if(pref.readPreference("color").equals("red")){
+                scene.getStylesheets().add(SceneManager.class.getResource("../resources/css/client/clientRed.css").toExternalForm());
             }
             else{
-                scene.getStylesheets().add(SceneManager.class.getResource("../resources/css/client.css").toExternalForm());
+                scene.getStylesheets().add(SceneManager.class.getResource("../resources/css/client/client.css").toExternalForm());
             }
 
             stage.setScene(scene);

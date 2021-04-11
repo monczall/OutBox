@@ -140,11 +140,21 @@ public class ClientSettings implements Initializable {
     @FXML
     void changeColor(ActionEvent event) {
         Preference pref = new Preference();
-        if (pickColor.getValue().equals("Pomarańczowy")) {
+
+        if (pickColor.getValue().equals("Pomarańczowy"))
             pref.addPreference("color","orange");
-        } else {
+        else
             pref.addPreference("color","red");
-        }
+    }
+
+    @FXML
+    void changeLanguage(ActionEvent event) {
+        Preference pref = new Preference();
+
+        if(pickLanguage.getValue().equals("English"))
+            pref.addPreference("language","english");
+        else
+            pref.addPreference("language","polski");
     }
 
     @FXML

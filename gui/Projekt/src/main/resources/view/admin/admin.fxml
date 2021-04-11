@@ -31,14 +31,14 @@
             <VBox fx:id="paneRight" layoutX="65.0" layoutY="18.0" prefHeight="680.0" prefWidth="163.0" styleClass="sideBackground">
                <children>
                   <Pane prefHeight="71.0" prefWidth="156.0" />
-                  <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onMouseClicked="#go_home" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Home" wrapText="true" />
-                  <Button mnemonicParsing="false" onMouseClicked="#go_edit_employee" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Edytuj&#10;pracowników" />
-                  <Button mnemonicParsing="false" onMouseClicked="#go_add_manager" prefHeight="68.0" prefWidth="163.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Dodaj&#10;kierownika" wrapText="true" />
-                  <Button fx:id="testButton" mnemonicParsing="false" onMouseClicked="#go_add_area" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Dodaj obszar" />
-                  <Button id="btnSettings" mnemonicParsing="false" onMouseClicked="#go_pack_settings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Właściwości &#10;przesyłki" />
-                  <Button mnemonicParsing="false" onMouseClicked="#go_raport" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Generuj raport" />
-                  <Button layoutX="10.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#go_settings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Ustawienia" />
-                  <Button layoutX="10.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#go_logout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client.css" text="Wyloguj" />
+                  <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onMouseClicked="#go_home" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Home" wrapText="true" />
+                  <Button mnemonicParsing="false" onMouseClicked="#go_edit_employee" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Edytuj&#10;pracowników" />
+                  <Button mnemonicParsing="false" onMouseClicked="#go_add_manager" prefHeight="68.0" prefWidth="163.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Dodaj&#10;kierownika" wrapText="true" />
+                  <Button fx:id="testButton" mnemonicParsing="false" onMouseClicked="#go_add_area" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Dodaj obszar" />
+                  <Button id="btnSettings" mnemonicParsing="false" onMouseClicked="#go_pack_settings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Właściwości &#10;przesyłki" />
+                  <Button mnemonicParsing="false" onMouseClicked="#go_raport" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Generuj raport" />
+                  <Button layoutX="10.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#go_settings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Ustawienia" />
+                  <Button layoutX="10.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#go_logout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/client/client.css" text="Wyloguj" />
                   <Pane prefHeight="71.0" prefWidth="156.0" />
                </children>
             </VBox>
