@@ -1,9 +1,10 @@
 package main.java.controllers.manager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -14,13 +15,52 @@ public class ManagerPackages implements Initializable {
     @FXML
     private TableView<?> tableView;
 
+    @FXML
+    private TextField numerPackages;
+
+    @FXML
+    private TextField name;
+
+    @FXML
+    private TextField surname;
+
+    @FXML
+    private DatePicker datePosting;
+
+    @FXML
+    private ComboBox<String> status;
+
+    @FXML
+    private DatePicker dateReceipt;
+
+    @FXML
+    private TextField city;
+
+    @FXML
+    private ComboBox<String> typeDelivery;
+
+    private ObservableList<String> statusObservable = FXCollections.observableArrayList("Odebrana od klienta","W transporcie","Dostarczona do oddziału","Oderbana z oddziału","W transporcie do innego oddziału","Dostarczona do odbiorcy");
+    private ObservableList<String> deliveryObservable = FXCollections.observableArrayList("Mała","Średnia","Duża");
 
     public void findPackages(MouseEvent mouseEvent) {
-        System.out.println("managerPackages > findPackage");
+
+        if(numerPackages.getText().toString().equals("") &&
+                name.getText().toString().equals("") &&
+                surname.getText().toString().equals("") &&
+                city.getText().toString().equals("") &&
+                datePosting.getValue() == null &&
+                dateReceipt.getValue() == null &&
+                status.getValue() == null &&
+                typeDelivery.getValue() == null){
+            System.out.println("error");
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
         tableView.setPlaceholder(new Label("Brak danych"));
+
+        status.setItems(statusObservable);
+        typeDelivery.setItems(deliveryObservable);
     }
 }

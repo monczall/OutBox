@@ -10,11 +10,11 @@
    <children>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="RAPORTY" />
       <FontAwesomeIconView fill="ORANGE" glyphName="LINE_CHART" layoutX="142.0" layoutY="70.0" size="38" />
-      <Button alignment="BOTTOM_CENTER" layoutX="390.0" layoutY="448.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="Generuj niestandardowy raport" />
-      <DatePicker layoutX="282.0" layoutY="371.0" promptText="Data od" styleClass="inputData" />
-      <DatePicker layoutX="595.0" layoutY="371.0" promptText="Data do" styleClass="inputData" />
-      <Button alignment="CENTER" layoutX="202.0" layoutY="148.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z poprzedniego dnia" textAlignment="CENTER" wrapText="true" />
-      <Button alignment="CENTER" layoutX="442.0" layoutY="148.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego tygodnia" textAlignment="CENTER" wrapText="true" />
-      <Button alignment="CENTER" layoutX="682.0" layoutY="148.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego miesiąca" textAlignment="CENTER" wrapText="true" />
+      <Button alignment="BOTTOM_CENTER" layoutX="390.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#raportCustom" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="Generuj niestandardowy raport" />
+      <DatePicker fx:id="startData" layoutX="282.0" layoutY="371.0" promptText="Data od" styleClass="inputData" />
+      <DatePicker fx:id="endData" layoutX="595.0" layoutY="371.0" promptText="Data do" styleClass="inputData" />
+      <Button alignment="CENTER" layoutX="202.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastDay" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z poprzedniego dnia" textAlignment="CENTER" wrapText="true" />
+      <Button alignment="CENTER" layoutX="442.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastWeek" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego tygodnia" textAlignment="CENTER" wrapText="true" />
+      <Button alignment="CENTER" layoutX="682.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastMonth" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego miesiąca" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

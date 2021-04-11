@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../lib/fontawesomefx-8.9.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../lib/controlsfx-8.40.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../lib/javax.mail.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

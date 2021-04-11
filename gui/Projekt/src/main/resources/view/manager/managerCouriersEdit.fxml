@@ -14,10 +14,10 @@
    <children>
       <FontAwesomeIconView fill="ORANGE" glyphName="USER" layoutX="142.0" layoutY="70.0" size="38" />
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="EDYTOWANIE DANYCH KURIERA" />
-      <TextField layoutX="202.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Imie" styleClass="inputBox" />
-      <TextField layoutX="381.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Nazwisko" styleClass="inputBox" />
-      <TextField layoutX="556.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Pesel" styleClass="inputBox" />
-      <Button alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#findPackages" prefHeight="39.0" prefWidth="150.0" styleClass="homeBlock" text="Wyszukaj" />
+      <TextField fx:id="name" layoutX="202.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Imie" styleClass="inputBox" />
+      <TextField fx:id="surname" layoutX="381.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Nazwisko" styleClass="inputBox" />
+      <TextField fx:id="pesel" layoutX="556.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Pesel" styleClass="inputBox" />
+      <Button alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#findCourier" prefHeight="39.0" prefWidth="150.0" styleClass="homeBlock" text="Wyszukaj" />
       <AnchorPane layoutX="185.0" layoutY="162.0" prefHeight="478.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client.css">
          <children>
             <Label alignment="CENTER" prefHeight="99.0" prefWidth="730.0" styleClass="optionGroup" text="BRAK DANYCH DO WYŚWIETLENIA" />
