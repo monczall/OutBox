@@ -12,7 +12,6 @@ public class Alerts {
     /* Method is creating alert that lasts for four seconds (....)*/
     public static void createAlert(AnchorPane parent, Button button, String iconName, String text){
 
-
         Pane pane = new Pane();
         pane.setPrefWidth(293);
         pane.setPrefHeight(86);
@@ -36,7 +35,7 @@ public class Alerts {
         pane.getChildren().add(alertIcon);
         parent.getChildren().add(pane);
 
-        Animations.alertAnim(pane,400,0.3,4, button, parent);
+        Animations.alertAnim(pane,400,0.3,2, button, parent);
     }
     /* NOT YET IMPLEMENTED */
     public void createAlertWithOptions(){

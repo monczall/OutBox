@@ -122,17 +122,17 @@ public class Animations {
         });
     }
 
-    /* Method that fade away an item
+    /* Method that fade away an item (....................)
        Method takes two arguments - node (e.g button), and duration of fading in seconds*/
-    public static void fadeAway(Node item, double duration){
+    public static void fadeAway(Node item, double duration,int valueFrom, int valueTo, boolean visibility){
         item.setDisable(true);
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration),item);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
+        fadeTransition.setFromValue(valueFrom);
+        fadeTransition.setToValue(valueTo);
         fadeTransition.play();
 
         fadeTransition.setOnFinished(event -> {
-            item.setVisible(false);
+            item.setVisible(visibility);
             item.setDisable(false);
         });
     }

@@ -121,7 +121,7 @@ public class ClientTrackPackage implements Initializable {
 
     @FXML
     void backToTrackPackage(ActionEvent event) throws IOException {
-        Animations.fadeAway(btnBack,0.5);
+        Animations.fadeAway(btnBack,0.5,1,0,false);
         Animations.changePane(moreInformationPane,trackPackagePane,+850,0.5);
     }
 }

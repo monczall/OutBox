@@ -140,7 +140,9 @@
     -fx-background-color: -fx-main-color;
     -fx-font-weight: bold;
 }
-
+.inputBox .list-view .scroll-bar:vertical .thumb{
+    -fx-background-color: -fx-second-color;
+}
 .userIconSettings{
     -fx-fill: -fx-main-color;
 }

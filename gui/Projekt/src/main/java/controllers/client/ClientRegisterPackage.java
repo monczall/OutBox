@@ -154,7 +154,7 @@ public class ClientRegisterPackage implements Initializable {
 
         ErrorHandler.checkInputs(nameInput, "[a-zA-Z]+", "Imie powinno zawierać tylko litery");
         ErrorHandler.checkInputs(surnameInput, "[a-zA-Z]+", "Nazwisko powinno zawierać tylko litery");
-        ErrorHandler.checkInputs(emailInput,"^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", "Email powinien mieć poprawny format");
+        ErrorHandler.checkInputs(emailInput,"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", "Email powinien mieć poprawny format");
         ErrorHandler.checkInputs(streetInput, "[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}", "Ulica powinna miec poprawny format");
         ErrorHandler.checkInputs(cityInput, "[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}", "Miasto powinno zawierać tylko litery");
         ErrorHandler.checkInputs(provinceInput, "[A-Za-z]{7,40}\\s?\\-?\\s?[A-Za-z]{0,40}", "Województwo powinno zawierać tylko litery");
