@@ -3,18 +3,39 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerRaports">
+<AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerRaports">
    <children>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="RAPORTY" />
       <FontAwesomeIconView fill="ORANGE" glyphName="LINE_CHART" layoutX="142.0" layoutY="70.0" size="38" />
-      <Button alignment="BOTTOM_CENTER" layoutX="390.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#raportCustom" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="Generuj niestandardowy raport" />
-      <DatePicker fx:id="startData" layoutX="282.0" layoutY="371.0" promptText="Data od" styleClass="inputData" />
-      <DatePicker fx:id="endData" layoutX="595.0" layoutY="371.0" promptText="Data do" styleClass="inputData" />
-      <Button alignment="CENTER" layoutX="202.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastDay" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z poprzedniego dnia" textAlignment="CENTER" wrapText="true" />
-      <Button alignment="CENTER" layoutX="442.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastWeek" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego tygodnia" textAlignment="CENTER" wrapText="true" />
-      <Button alignment="CENTER" layoutX="682.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastMonth" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego miesiąca" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="createCustomRaportButton" alignment="BOTTOM_CENTER" layoutX="393.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#raportCustom" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="Generuj niestandardowy raport" />
+      <DatePicker fx:id="startData" layoutX="282.0" layoutY="372.0" promptText="Data od" styleClass="inputData" />
+      <DatePicker fx:id="endData" layoutX="590.0" layoutY="372.0" promptText="Data do" styleClass="inputData" />
+      <Button alignment="CENTER" layoutX="202.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastDay" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego dnia" textAlignment="CENTER" wrapText="true" />
+      <Button alignment="CENTER" layoutX="442.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastWeek" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatnich 7 dni" textAlignment="CENTER" wrapText="true" />
+      <Button alignment="CENTER" layoutX="682.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastMonth" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatnich 30 dni" textAlignment="CENTER" wrapText="true" />
+      <AnchorPane fx:id="infoConfirmRaport" layoutX="311.0" layoutY="216.0" prefHeight="180.0" prefWidth="444.0" styleClass="infoBackground" visible="false">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="470.0" styleClass="textLabel" text="Potwierdzenie raportu" />
+            <Label alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="37.0" prefHeight="25.0" prefWidth="184.0" styleClass="textOption" text="Data od" />
+            <Label alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="67.0" prefHeight="25.0" prefWidth="184.0" styleClass="textOption" text="Data do" />
+            <Label alignment="CENTER_RIGHT" layoutX="-2.0" layoutY="98.0" prefHeight="25.0" prefWidth="184.0" styleClass="textOption" text="Ilość dni" />
+            <Button layoutX="245.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#confirmRaport" prefHeight="33.0" prefWidth="102.0" styleClass="infoBoxButtons" text="Potwierdź" />
+            <Label fx:id="textDateStart" layoutX="268.0" layoutY="35.0" styleClass="textLabel" text="XX.XX.XXXX" />
+            <Label fx:id="textDateEnd" layoutX="268.0" layoutY="65.0" styleClass="textLabel" text="XX.XX.XXXX" />
+            <Label fx:id="textDateDays" layoutX="268.0" layoutY="96.0" styleClass="textLabel" text="XX dni" />
+            <Button layoutX="110.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#cancelRaport" prefHeight="33.0" prefWidth="91.0" styleClass="infoBoxButtons" text="Anuluj" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="oneDayRaport" layoutX="311.0" layoutY="216.0" prefHeight="180.0" prefWidth="444.0" styleClass="infoBackground" visible="false">
+         <children>
+            <Button layoutX="245.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#confirmOneDayRaport" prefHeight="33.0" prefWidth="102.0" styleClass="infoBoxButtons" text="Potwierdź" />
+            <Button layoutX="110.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#cancelOneDayRaport" prefHeight="33.0" prefWidth="91.0" styleClass="infoBoxButtons" text="Anuluj" />
+            <Label fx:id="textOneDate" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="39.0" layoutY="21.0" prefHeight="94.0" prefWidth="367.0" styleClass="textLabel" text="Potwierdzenie wygenerowania raportu z dnia XX.XX.XXXX" textAlignment="CENTER" wrapText="true" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

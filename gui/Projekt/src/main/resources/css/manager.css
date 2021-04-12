@@ -3,6 +3,11 @@
     -fx-background-color: #121212;
 }
 
+.infoBackground{  /*Background color AnchorPane*/
+    -fx-background-color: #121212;
+    -fx-border-color: #ffa500;
+}
+
 .textLabel{ /*section name*/
     -fx-font-size: 20px;
     -fx-text-fill: #ffa500;
@@ -24,6 +29,23 @@
     -fx-background-color: transparent;
     -fx-text-fill: #ffa500;
     -fx-border-width: 2.5px;
+    -fx-border-color: #ffa500;
+    -fx-fill: #ffa500;
+}
+
+.infoBoxButtons{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.infoBoxButtons:hover, .infoBoxButtons:hover > .blockIcon{
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffa500;
+    -fx-border-width: 2px;
     -fx-border-color: #ffa500;
     -fx-fill: #ffa500;
 }
@@ -159,6 +181,22 @@
     -fx-text-fill: #ffa500;
     -fx-cursor: hand;
 }
+
+.confirmButtons{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    /*-fx-text-alignment: right;*/
+    -fx-alignment: BASELINE_LEFT;
+    -fx-background-radius: 0;
+}
+.confirmButtons:hover{
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffa500;
+    -fx-cursor: hand;
+}
+
 .icons:hover{
     -fx-cursor: hand;
 }

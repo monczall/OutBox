@@ -6,11 +6,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import main.java.features.Alerts;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ManagerPackages implements Initializable {
+
+    @FXML
+    private AnchorPane appWindow;
+
+    @FXML
+    private Button findPackageButton;
 
     @FXML
     private TableView<?> tableView;
@@ -52,10 +60,23 @@ public class ManagerPackages implements Initializable {
                 dateReceipt.getValue() == null &&
                 status.getValue() == null &&
                 typeDelivery.getValue() == null){
-            System.out.println("error");
+            Alerts.createAlert(appWindow, findPackageButton,"WARNING","PODAJ JAKIŚ PARAMETR");
+        }
+        else{
+            System.out.println(SQLquery());
         }
     }
 
+    String SQLquery(){
+        String SQLqueryString = "SELECT * FROM PACKAGES WHERE ";
+
+        if(!numerPackages.getText().toString().equals("")){
+            SQLqueryString += "numberpackages="+numerPackages.getText().toString();
+            return SQLqueryString;
+        }
+
+        return SQLqueryString;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb){
         tableView.setPlaceholder(new Label("Brak danych"));

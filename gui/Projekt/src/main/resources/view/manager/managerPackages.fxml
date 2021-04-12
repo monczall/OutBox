@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerPackages">
+<AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerPackages">
    <children>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="PRZESYŁKI" />
       <FontAwesomeIconView fill="ORANGE" glyphName="CUBES" layoutX="142.0" layoutY="70.0" size="38" />
       <TextField fx:id="numerPackages" layoutX="136.0" layoutY="100.0" prefHeight="33.0" prefWidth="160.0" promptText="Numer przesyłki" styleClass="inputBox" />
       <TextField fx:id="name" layoutX="334.0" layoutY="100.0" prefHeight="33.0" prefWidth="130.0" promptText="Imie" styleClass="inputBox" />
-      <Button alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#findPackages" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="Szukaj" />
+      <Button fx:id="findPackageButton" alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#findPackages" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="Szukaj" />
       <TextField fx:id="surname" layoutX="334.0" layoutY="146.0" prefHeight="33.0" prefWidth="130.0" promptText="Nazwisko" styleClass="inputBox" />
       <TableView fx:id="tableView" layoutX="110.0" layoutY="245.0" prefHeight="398.0" prefWidth="813.0" styleClass="tableview">
         <columns>
