@@ -53,13 +53,26 @@
 /* All input CSS */
 .inputBox{
     -fx-text-fill: #ffa500;
-    -fx-font-size: 15px;
+    -fx-font-size: 17px;
     -fx-background-color: transparent; /*#202020*/
     -fx-mark-color: #ffa500;
     -fx-border-style: solid;
     -fx-border-width: 2px;
     -fx-border-color: #ffa500;
     -fx-border-width: 0 0 2 0;
+    -fx-cursor: text;
+}
+
+.inputBoxError{
+    -fx-text-fill: red;
+    -fx-font-size: 17px;
+    -fx-background-color: transparent; /*#202020*/
+    -fx-mark-color: #ffa500;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: red;
+    -fx-border-width: 0 0 2 0;
+    -fx-cursor: text;
 }
 
 /* All DatePicker CSS */
