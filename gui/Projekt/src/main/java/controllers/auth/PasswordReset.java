@@ -10,13 +10,18 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.SceneManager;
+import main.java.features.Alerts;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PasswordReset {
 
@@ -51,31 +56,103 @@ public class PasswordReset {
     private TextField passwordResetEmailField;
 
     @FXML
+    private Circle passwordResetEmailCircle;
+
+    @FXML
     private TextField passwordResetVerificationCodeField;
+
+    @FXML
+    private Circle passwordResetVerificationCodeCircle;
 
     @FXML
     private TextField passwordResetPasswordField;
 
     @FXML
-    private TextField passwordResetRepeatPasswordField;
+    private Circle passwordResetPasswordCircle;
+
+    @FXML
+    private TextField passwordResetConfirmPasswordField;
+
+    @FXML
+    private Circle passwordResetConfirmPasswordCircle;
+
+    @FXML
+    private Label passwordResetSendCodeLabel;
+
+    @FXML
+    private Button passwordResetSendCodeButton;
+
+    @FXML
+    private Label passwordResetVerifyCodeLabel;
+
+    @FXML
+    private Button passwordResetVerifyCodeButton;
 
     @FXML
     private Button passwordResetSetNewPasswordButton;
 
+
+    private String verificationCode = "";
+
+
+    public void handleSendVerificationCode(ActionEvent actionEvent) throws MessagingException {
+        handleSendEmail();
+    }
+
+    public void handleSendVerificationCodesOnEnterPressed(KeyEvent keyEvent) throws MessagingException {
+        if(keyEvent.getCode() == KeyCode.ENTER)
+        {
+            handleSendEmail();
+        }
+    }
+
     public void handleSendEmail() throws MessagingException {
-        String firstName = "Lukasz";
-        String verificationCode = "2137";
-        sendEmail(passwordResetEmailField.getText(),firstName,verificationCode);
+        if(isEmail(passwordResetEmailField.getText())){
+
+            //TUTAJ SPRAWDZENIE MAILA Z BAZA DANYCH
+
+            String firstName = "Lukasz";
+            //Generating verification code
+            Random rand = new Random();
+            int vCode1 = rand.nextInt(9);
+            int vCode2 = rand.nextInt(9);
+            int vCode3 = rand.nextInt(9);
+            int vCode4 = rand.nextInt(9);
+            verificationCode = "" + vCode1 + vCode2 + vCode3 + vCode4 + "";
+            sendEmail(passwordResetEmailField.getText(),firstName,verificationCode);
+
+            //Blocking email field and send code button
+            passwordResetEmailField.setDisable(true);
+            passwordResetEmailCircle.getStyleClass().clear();
+            passwordResetEmailCircle.getStyleClass().add("circleCorrect");
+
+            passwordResetSendCodeLabel.setVisible(false);
+
+            passwordResetSendCodeButton.setDisable(true);
+            passwordResetSendCodeButton.setVisible(false);
+
+            //Unblocking verification code field and verify button
+            passwordResetVerificationCodeField.setDisable(false);
+            passwordResetVerificationCodeCircle.getStyleClass().clear();
+            passwordResetVerificationCodeCircle.getStyleClass().add("circle");
+
+            passwordResetVerifyCodeLabel.setVisible(true);
+
+            passwordResetVerifyCodeButton.setDisable(false);
+        }else{
+            Alerts.createAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Wprowadzony mail jest błędny");
+        }
     }
 
-    public void handleVerifyCodeOnEnterPressed(KeyEvent keyEvent) {
-    }
+    private boolean isEmail(String email){
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(email);
 
-    public void handleVerify(ActionEvent actionEvent) {
-    }
-
-    public void passwordReset(){
-        System.out.println("Zresetowano");
+        if(mat.matches()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static void sendEmail(String recipient,String firstName, String verificationCode) throws MessagingException {
@@ -88,12 +165,12 @@ public class PasswordReset {
         properties.put("mail.smtp.port", "587");
 
         String outBoxEmailAccount = "outbox2137@gmail.com";
-        String outBoxEamilPassword = "zaq1@WSX";
+        String outBoxEmailPassword = "zaq1@WSX";
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(outBoxEmailAccount, outBoxEamilPassword);
+                return new PasswordAuthentication(outBoxEmailAccount, outBoxEmailPassword);
             }
         });
 
@@ -125,26 +202,44 @@ public class PasswordReset {
         return null;
     }
 
-    public void clearErrorsOnEmail(KeyEvent keyEvent) {
-    }
-
-    public void clearErrorsOnVerificationCode(KeyEvent keyEvent) {
-    }
-
-    public void clearErrorsOnPassword(KeyEvent keyEvent) {
-    }
-
-    public void clearErrorsOnRepeatPassword(KeyEvent keyEvent) {
-    }
-
-    public void handleSendVerificationCode(ActionEvent actionEvent) throws MessagingException {
-        handleSendEmail();
-    }
-
-    public void handleSendVerificationCodesOnEnterPressed(KeyEvent keyEvent) throws MessagingException {
+    public void handleVerifyCodeOnEnterPressed(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.ENTER)
         {
-        handleSendEmail();
+            verifyCode();
+        }
+    }
+
+    public void handleVerify(ActionEvent actionEvent) {
+        verifyCode();
+    }
+
+    public void verifyCode(){
+        if(passwordResetVerificationCodeField.getText().equals(verificationCode)){
+            Alerts.createAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"CHECK","Weryfikacja pomyślna");
+
+            //Block verification code field and verify button
+            passwordResetVerificationCodeField.setDisable(true);
+            passwordResetVerificationCodeCircle.getStyleClass().clear();
+            passwordResetVerificationCodeCircle.getStyleClass().add("circleCorrect");
+
+            passwordResetVerifyCodeLabel.setVisible(false);
+
+            passwordResetVerifyCodeButton.setDisable(true);
+            passwordResetVerifyCodeButton.setVisible(false);
+
+            //Unblock password fields and set password button
+            passwordResetPasswordField.setDisable(false);
+            passwordResetPasswordCircle.getStyleClass().clear();
+            passwordResetPasswordCircle.getStyleClass().add("circle");
+
+            passwordResetConfirmPasswordField.setDisable(false);
+            passwordResetConfirmPasswordCircle.getStyleClass().clear();
+            passwordResetConfirmPasswordCircle.getStyleClass().add("circle");
+
+            passwordResetSetNewPasswordButton.setDisable(false);
+
+        }else{
+            Alerts.createAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Wprowadzony kod jest błędny");
         }
     }
 
@@ -159,6 +254,85 @@ public class PasswordReset {
         }
     }
 
+    public void passwordReset(){
+        System.out.println("Zresetowano");
+        System.out.println("Nowe hasło:" + passwordResetPasswordField.getText());
+    }
+
+
+
+    public void errorOnEmail(){
+        //EmailField
+        passwordResetEmailField.getStyleClass().clear();
+        passwordResetEmailField.getStyleClass().add("textFieldsError");
+        //EmailCircle
+        passwordResetEmailCircle.getStyleClass().clear();
+        passwordResetEmailCircle.getStyleClass().add("circleError");
+    }
+
+    public void clearErrorsOnEmail(KeyEvent keyEvent) {
+        //EmailField
+        passwordResetEmailField.getStyleClass().clear();
+        passwordResetEmailField.getStyleClass().add("textFields");
+        //EmailCircle
+        passwordResetEmailCircle.getStyleClass().clear();
+        passwordResetEmailCircle.getStyleClass().add("circle");
+    }
+
+    public void errorOnVerificationCode(){
+        //VerificationCodeField
+        passwordResetVerificationCodeField.getStyleClass().clear();
+        passwordResetVerificationCodeField.getStyleClass().add("textFieldsError");
+        //VerificationCodeCircle
+        passwordResetVerificationCodeCircle.getStyleClass().clear();
+        passwordResetVerificationCodeCircle.getStyleClass().add("circleError");
+    }
+
+    public void clearErrorsOnVerificationCode(KeyEvent keyEvent) {
+        //VerificationCodeField
+        passwordResetVerificationCodeField.getStyleClass().clear();
+        passwordResetVerificationCodeField.getStyleClass().add("textFields");
+        //VerificationCodeCircle
+        passwordResetVerificationCodeCircle.getStyleClass().clear();
+        passwordResetVerificationCodeCircle.getStyleClass().add("circle");
+    }
+
+    public void errorOnPassword(){
+        //PasswordField
+        passwordResetPasswordField.getStyleClass().clear();
+        passwordResetPasswordField.getStyleClass().add("textFieldsError");
+        //PasswordCircle
+        passwordResetPasswordCircle.getStyleClass().clear();
+        passwordResetPasswordCircle.getStyleClass().add("circleError");
+    }
+
+    public void clearErrorsOnPassword(KeyEvent keyEvent) {
+        //PasswordField
+        passwordResetPasswordField.getStyleClass().clear();
+        passwordResetPasswordField.getStyleClass().add("textFields");
+        //PasswordCircle
+        passwordResetPasswordCircle.getStyleClass().clear();
+        passwordResetPasswordCircle.getStyleClass().add("circle");
+    }
+
+    public void errorOnConfirmPassword(){
+        //ConfirmPasswordField
+        passwordResetConfirmPasswordField.getStyleClass().clear();
+        passwordResetConfirmPasswordField.getStyleClass().add("textFieldsError");
+        //ConfirmPasswordCircle
+        passwordResetConfirmPasswordCircle.getStyleClass().clear();
+        passwordResetConfirmPasswordCircle.getStyleClass().add("circleError");
+    }
+
+    public void clearErrorsOnConfirmPassword(KeyEvent keyEvent) {
+        //ConfirmPasswordField
+        passwordResetConfirmPasswordField.getStyleClass().clear();
+        passwordResetConfirmPasswordField.getStyleClass().add("textFields");
+        //ConfirmPasswordCircle
+        passwordResetConfirmPasswordCircle.getStyleClass().clear();
+        passwordResetConfirmPasswordCircle.getStyleClass().add("circle");
+    }
+
     public void handleReturn(ActionEvent actionEvent) {
         SceneManager.renderScene("login");
     }
@@ -167,5 +341,4 @@ public class PasswordReset {
         Stage stage = (Stage) passwordResetReturnButtonButton.getScene().getWindow();
         stage.close();
     }
-
 }
