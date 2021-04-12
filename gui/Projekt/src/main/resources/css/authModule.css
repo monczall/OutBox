@@ -17,6 +17,12 @@
 .circleError{
     -fx-fill: RED;
 }
+.circleCorrect{
+    -fx-fill: GREEN;
+}
+.circleDisabled{
+    -fx-fill: #808080;
+}
 .darkText{
     -fx-text-fill: #000000;
 }

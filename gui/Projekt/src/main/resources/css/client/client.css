@@ -17,6 +17,9 @@
 .actualStatus{
     -fx-background-color: -fx-main-color;
 }
+.grayColor{
+    -fx-background-color: -fx-gray-color;
+}
 /*-------------STYLING BUTTONS-------------*/
 .sideButtons{
     -fx-background-color: -fx-main-color;
