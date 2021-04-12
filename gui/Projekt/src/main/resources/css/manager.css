@@ -126,7 +126,7 @@
 
 .date-picker-popup > * > .spinner > .button > .left-arrow, /* color arrow */
 .date-picker-popup > * > .spinner > .button > .right-arrow {
-    -fx-background-color: black;
+
 }
 
 .date-picker-popup > * > .spinner > .button:hover > .left-arrow, /*hover color arrow*/
@@ -144,22 +144,23 @@
 }
 
 .date-picker-popup > * > .date-cell { /*all date number */
-    -fx-background-color: #1E1E1E;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: black;
     -fx-background-insets: 1, 2;
     -fx-padding: 0;
     -fx-alignment: BASELINE_CENTER;
     -fx-opacity: 1.0;
     -fx-cursor: hand;
+    -fx-background-color: #ffa500;
 }
 
 .date-picker-popup > * > .date-cell:hover{
-    -fx-text-fill: white;
+    -fx-text-fill: #ffa500;
+    -fx-background-color: black;
 }
 
 .date-picker-popup > * > .week-number-cell { /* weeks color*/
-    -fx-text-fill: white;
-    -fx-background-color: #1E1E1E;
+    -fx-text-fill: black;
+    -fx-background-color: silver;
 }
 
 /*-------- MENU --------*/
@@ -210,10 +211,16 @@
     -fx-cursor: hand;
 }
 
+
 /*-------- TableView --------*/
+
 .tableview{
-    -fx-background-color: #1E1E1E;
-    -fx-border-color: black;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
 }
 
 .tableview .placeholder .label {
@@ -223,14 +230,6 @@
     -fx-text-fill: #ffa500;
 }
 
-.table-view{
-      /*-fx-background-color: transparent;*/
-}
-
-.table-view:focused{
-    /*-fx-background-color: transparent;*/
-}
-
 .table-view .column-header {
     -fx-border-color: black;
     -fx-background-color: #ffa500;
@@ -238,7 +237,7 @@
 }
 
 .table-view .column-header-background{
-    -fx-background-color: #ffa500;
+    -fx-background-color: black;
 }
 
 .table-view .column-header-background .label{
@@ -248,15 +247,33 @@
 }
 
 .table-view .table-column{
-      -fx-alignment:center;
+    -fx-alignment:center;
 }
 
+/*-------------TableColumn-----------------------*/
 .table-view .table-cell{
-      -fx-font-weight:bold;
-      -fx-font-size:15px;
-      /* -fx-text-fill:orange; */
+    -fx-text-fill: silver;
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
 }
 
+.table-row-cell:odd{
+    -fx-background-color: #1e1e1e;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even{
+    -fx-background-color: #292929;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:hover{
+    -fx-text-fill: red;
+    -fx-background-color: #393939;
+
+}
 /*-------------STYLING TOGGLE SWITCH-------------*/
 .toggleSwitch .thumb{
     -fx-background-color: #424242;
@@ -272,35 +289,6 @@
     -fx-background-color: -fx-main-color;
     -fx-effect: dropshadow(three-pass-box, -fx-main-color, 10, 0, 0, 0);
 }
-
-
-/*
-.table-row-cell{
-    -fx-background-color: red;
-    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
-    -fx-padding: 0.0em;
-}
-
-.table-row-cell:odd{
-    -fx-background-color: orange;
-    -fx-background-insets: 0.0, 0.0 0.0 1.0 0.0;
-    -fx-padding: 0.0em;
-}
-
-.table-row-cell:selected {
-       -fx-border-color:transparent firebrick transparent firebrick  ;
-       -fx-border-width:2.0;
-    -fx-background-color: orange;
-}
-
-.table-row-cell:hover {
-      -fx-background-color:orange;
-  }
-
-.table-row-cell:focused {
-      -fx-background-color:purple;
-}
-*/
 
 /*-------- Home --------*/
 
