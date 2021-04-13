@@ -1,11 +1,15 @@
 package main.java.controllers.manager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import main.java.features.Alerts;
 
 import java.net.URL;
@@ -13,11 +17,9 @@ import java.util.ResourceBundle;
 
 public class ManagerCouriersEdit implements Initializable {
 
-    @FXML
-    private AnchorPane appWindow;
 
     @FXML
-    private Button findCourierButton;
+    private AnchorPane appWindow;
 
     @FXML
     private TextField name;
@@ -28,6 +30,16 @@ public class ManagerCouriersEdit implements Initializable {
     @FXML
     private TextField pesel;
 
+    @FXML
+    private Button findCourierButton;
+
+    @FXML
+    private VBox packageLayout;
+
+    @FXML
+    private ComboBox<String> regionName;
+
+    private ObservableList<String> statusObservable = FXCollections.observableArrayList("Rzeszów centrum","Rzeszów Rejtana");
 
     public void findCourier(MouseEvent mouseEvent) {
 
@@ -55,6 +67,6 @@ public class ManagerCouriersEdit implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        regionName.setItems(statusObservable);
     }
 }

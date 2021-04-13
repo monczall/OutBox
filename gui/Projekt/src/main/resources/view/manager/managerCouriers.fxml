@@ -7,11 +7,11 @@
 
 <AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriers">
    <children>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="123.0" prefWidth="200.0" styleClass="homeBlock" text="%addCourier">
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%addCourier">
          <graphic>
             <FontAwesomeIconView glyphName="USER_PLUS" size="60" styleClass="blockIcon" />
          </graphic></Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="539.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#deleteCourier" prefHeight="123.0" prefWidth="200.0" styleClass="homeBlock" text="%removeCourier">
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="533.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#deleteCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%removeCourier">
          <graphic>
             <FontAwesomeIconView glyphName="USER_TIMES" size="60" styleClass="blockIcon" />
          </graphic></Button>

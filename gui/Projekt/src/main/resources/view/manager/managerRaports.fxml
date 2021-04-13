@@ -36,10 +36,10 @@
       </AnchorPane>
       <AnchorPane fx:id="oneDayRaport" prefHeight="672.0" prefWidth="1033.0" visible="false">
          <children>
-            <AnchorPane layoutX="280.0" layoutY="117.0" prefHeight="207.0" prefWidth="474.0" styleClass="infoBackground">
+            <AnchorPane layoutX="280.0" layoutY="117.0" prefHeight="179.0" prefWidth="478.0" styleClass="infoBackground">
                <children>
-                  <Button layoutX="311.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#confirmOneDayRaport" prefHeight="33.0" prefWidth="102.0" styleClass="infoBoxButtons" text="%confirmText" />
-                  <Button layoutX="70.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#cancelOneDayRaport" prefHeight="33.0" prefWidth="91.0" styleClass="infoBoxButtons" text="%cancelText" />
+                  <Button layoutX="309.0" layoutY="119.0" mnemonicParsing="false" onMouseClicked="#confirmOneDayRaport" prefHeight="33.0" prefWidth="102.0" styleClass="infoBoxButtons" text="%confirmText" />
+                  <Button layoutX="68.0" layoutY="119.0" mnemonicParsing="false" onMouseClicked="#cancelOneDayRaport" prefHeight="33.0" prefWidth="91.0" styleClass="infoBoxButtons" text="%cancelText" />
                   <Label fx:id="textOneDate" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="2.0" layoutY="25.0" prefHeight="94.0" prefWidth="474.0" styleClass="textLabel" text="Potwierdzenie wygenerowania raportu z dnia XX.XX.XXXX" textAlignment="CENTER" wrapText="true" />
                </children>
             </AnchorPane>

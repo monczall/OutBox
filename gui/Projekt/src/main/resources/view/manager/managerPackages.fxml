@@ -12,38 +12,38 @@
 
 <AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerPackages">
    <children>
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="PRZESYŁKI" />
+      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%shipmentTitle" />
       <FontAwesomeIconView fill="ORANGE" glyphName="CUBES" layoutX="142.0" layoutY="70.0" size="38" />
-      <TextField fx:id="numerPackages" layoutX="136.0" layoutY="100.0" prefHeight="33.0" prefWidth="160.0" promptText="Numer przesyłki" styleClass="inputBox" />
-      <TextField fx:id="name" layoutX="334.0" layoutY="100.0" prefHeight="33.0" prefWidth="130.0" promptText="Imie" styleClass="inputBox" />
-      <Button fx:id="findPackageButton" alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#findPackages" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="Szukaj" />
-      <TextField fx:id="surname" layoutX="334.0" layoutY="146.0" prefHeight="33.0" prefWidth="130.0" promptText="Nazwisko" styleClass="inputBox" />
+      <TextField fx:id="numerPackages" layoutX="136.0" layoutY="100.0" prefHeight="33.0" prefWidth="160.0" promptText="%trackingNumber" styleClass="inputBox" />
+      <TextField fx:id="name" layoutX="334.0" layoutY="100.0" prefHeight="33.0" prefWidth="130.0" promptText="%name" styleClass="inputBox" />
+      <Button fx:id="findPackageButton" alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#findPackages" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="%find" />
+      <TextField fx:id="surname" layoutX="334.0" layoutY="146.0" prefHeight="33.0" prefWidth="130.0" promptText="%surname" styleClass="inputBox" />
       <TableView fx:id="tableView" layoutX="110.0" layoutY="245.0" prefHeight="398.0" prefWidth="813.0" styleClass="tableview">
         <columns>
-          <TableColumn fx:id="tableNumber" prefWidth="105.0" text="Numer" />
+          <TableColumn fx:id="tableNumber" prefWidth="105.0" text="%numberPackage" />
             <TableColumn fx:id="tableStatus" prefWidth="105.0" text="Status" />
-            <TableColumn fx:id="tableType" prefWidth="105.0" text="Rodzaj" />
-          <TableColumn prefWidth="254.0" text="Nadawca">
+            <TableColumn fx:id="tableType" prefWidth="105.0" text="%packageType" />
+          <TableColumn prefWidth="254.0" text="%sender">
                <columns>
-                  <TableColumn fx:id="tableSenderName" prefWidth="75.0" text="Imie " />
-                  <TableColumn fx:id="tableSenderSurname" prefWidth="75.0" text="Nazwisko" />
-                  <TableColumn fx:id="tableSenderCity" minWidth="100.0" prefWidth="75.0" text="Miejscowość" />
-                  <TableColumn fx:id="tableSenderPhone" minWidth="100.0" prefWidth="75.0" text="Telefon" />
+                  <TableColumn fx:id="tableSenderName" prefWidth="75.0" text="%name" />
+                  <TableColumn fx:id="tableSenderSurname" prefWidth="75.0" text="%surname" />
+                  <TableColumn fx:id="tableSenderCity" minWidth="100.0" prefWidth="75.0" text="%city" />
+                  <TableColumn fx:id="tableSenderPhone" minWidth="100.0" prefWidth="75.0" text="%number" />
                </columns></TableColumn>
-            <TableColumn prefWidth="247.0" text="Odbiorca">
+            <TableColumn prefWidth="247.0" text="%recipient">
                <columns>
-                  <TableColumn fx:id="tableRecipientName" prefWidth="75.0" text="Imie " />
-                  <TableColumn fx:id="tableRecipientSurname" prefWidth="75.0" text="Nazwisko" />
-                  <TableColumn fx:id="tableRecipientCity" minWidth="100.0" prefWidth="75.0" text="Miejscowość" />
-                  <TableColumn fx:id="tableRecipientPhone" minWidth="100.0" prefWidth="75.0" text="Telefon" />
+                  <TableColumn fx:id="tableRecipientName" prefWidth="75.0" text="%name" />
+                  <TableColumn fx:id="tableRecipientSurname" prefWidth="75.0" text="%surname" />
+                  <TableColumn fx:id="tableRecipientCity" minWidth="100.0" prefWidth="75.0" text="%city" />
+                  <TableColumn fx:id="tableRecipientPhone" minWidth="100.0" prefWidth="75.0" text="%number" />
                </columns>
             </TableColumn>
         </columns>
       </TableView>
-      <DatePicker fx:id="datePosting" layoutX="136.0" layoutY="146.0" prefHeight="33.0" prefWidth="160.0" promptText="Data nadania" styleClass="inputData" />
+      <DatePicker fx:id="datePosting" layoutX="136.0" layoutY="146.0" prefHeight="33.0" prefWidth="160.0" promptText="%dateOfPosting" styleClass="inputData" />
       <ComboBox fx:id="status" layoutX="503.0" layoutY="100.0" prefHeight="33.0" prefWidth="160.0" promptText="Status" styleClass="inputBox" />
-      <DatePicker fx:id="dateReceipt" layoutX="136.0" layoutY="193.0" prefHeight="33.0" prefWidth="160.0" promptText="Data odbioru" styleClass="inputData" />
-      <TextField fx:id="city" layoutX="334.0" layoutY="193.0" prefHeight="33.0" prefWidth="130.0" promptText="Miejscowość" styleClass="inputBox" />
-      <ComboBox fx:id="typeDelivery" layoutX="503.0" layoutY="146.0" prefHeight="33.0" prefWidth="160.0" promptText="Rodzaj przesyłki" styleClass="inputBox" />
+      <DatePicker fx:id="dateReceipt" layoutX="136.0" layoutY="193.0" prefHeight="33.0" prefWidth="160.0" promptText="%dateOfReceipt" styleClass="inputData" />
+      <TextField fx:id="city" layoutX="334.0" layoutY="193.0" prefHeight="33.0" prefWidth="130.0" promptText="%city" styleClass="inputBox" />
+      <ComboBox fx:id="typeDelivery" layoutX="503.0" layoutY="146.0" prefHeight="33.0" prefWidth="160.0" promptText="%packageType" styleClass="inputBox" />
    </children>
 </AnchorPane>
