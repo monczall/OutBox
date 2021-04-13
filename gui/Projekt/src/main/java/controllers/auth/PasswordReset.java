@@ -91,6 +91,24 @@ public class PasswordReset {
     @FXML
     private Button passwordResetSetNewPasswordButton;
 
+    @FXML
+    private Label passwordResetSixCharsRequirement;
+
+    @FXML
+    private Label passwordResetSmallLetterRequirement;
+
+    @FXML
+    private Label passwordResetBigLetterRequirement;
+
+    @FXML
+    private Label passwordResetNumberRequirement;
+
+    @FXML
+    private Label passwordResetSpecialCharRequirement;
+
+    @FXML
+    private Label passwordResetSamePasswordsRequirement;
+
 
     private String verificationCode = "";
 
@@ -126,6 +144,9 @@ public class PasswordReset {
             passwordResetEmailCircle.getStyleClass().clear();
             passwordResetEmailCircle.getStyleClass().add("circleCorrect");
 
+            passwordResetEmailField.getStyleClass().clear();
+            passwordResetEmailField.getStyleClass().add("textFieldsCorrect");
+
             passwordResetSendCodeLabel.setVisible(false);
 
             passwordResetSendCodeButton.setDisable(true);
@@ -140,7 +161,8 @@ public class PasswordReset {
 
             passwordResetVerifyCodeButton.setDisable(false);
         }else{
-            Alerts.createAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Wprowadzony mail jest błędny");
+            errorOnEmail();
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Wprowadzony mail jest błędny", 293, 86, "alertFailure");
         }
     }
 
@@ -215,12 +237,15 @@ public class PasswordReset {
 
     public void verifyCode(){
         if(passwordResetVerificationCodeField.getText().equals(verificationCode)){
-            Alerts.createAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"CHECK","Weryfikacja pomyślna");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"CHECK","Weryfikacja pomyślna", 293, 86, "alertSuccess");
 
             //Block verification code field and verify button
             passwordResetVerificationCodeField.setDisable(true);
             passwordResetVerificationCodeCircle.getStyleClass().clear();
             passwordResetVerificationCodeCircle.getStyleClass().add("circleCorrect");
+
+            passwordResetVerificationCodeField.getStyleClass().clear();
+            passwordResetVerificationCodeField.getStyleClass().add("textFieldsCorrect");
 
             passwordResetVerifyCodeLabel.setVisible(false);
 
@@ -239,7 +264,8 @@ public class PasswordReset {
             passwordResetSetNewPasswordButton.setDisable(false);
 
         }else{
-            Alerts.createAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Wprowadzony kod jest błędny");
+            errorOnVerificationCode();
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Wprowadzony kod jest błędny", 293, 86, "alertFailure");
         }
     }
 
@@ -255,10 +281,114 @@ public class PasswordReset {
     }
 
     public void passwordReset(){
-        System.out.println("Zresetowano");
-        System.out.println("Nowe hasło:" + passwordResetPasswordField.getText());
+        if(isValid(passwordResetPasswordField.getText(), passwordResetConfirmPasswordField.getText())){
+            System.out.println("Zresetowano");
+            System.out.println("Nowe hasło:" + passwordResetPasswordField.getText());
+        }
+    }
+    private boolean isValid(String password1, String password2){
+        boolean passwordError = false, passwordNotTheSameError = false;
+        int error = 0;
+
+        Pattern patternPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$");
+
+        Matcher matchPassword = patternPassword.matcher(password1);
+
+        if(!matchPassword.matches()){
+            errorOnPassword();
+            passwordError = true;
+            errorOnConfirmPassword();
+            error++;
+        }else{
+            if(!password1.equals(password2)){
+                passwordNotTheSameError = true;
+                errorOnConfirmPassword();
+                error++;
+            }
+        }
+
+        if(error <= 0){
+            return true;
+        }else if(error == 1) {
+            if(passwordError){
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Podany format hasła jest błędny", 350, 86, "alertFailure");
+            }
+            if(passwordNotTheSameError){
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Hasła nie są takie same", 350, 86, "alertFailure");
+            }
+            return false;
+        }else{
+
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Popraw błędy na zaznaczonych polach", 350, 86, "alertFailure");
+            return false;
+        }
     }
 
+    private void passwordRequirements(){
+        Pattern sixChars = Pattern.compile(".{6,}");
+        Pattern smallLetter = Pattern.compile(".*[a-z]+.*");
+        Pattern bigLetter = Pattern.compile(".*[A-Z]+.*");
+        Pattern number = Pattern.compile(".*[0-9]+.*");
+        Pattern specialChar = Pattern.compile(".*[!@#$%^&*()_\\-+=]+.*");
+
+        Matcher matchSixChars = sixChars.matcher(passwordResetPasswordField.getText());
+        Matcher matchSmallLetter = smallLetter.matcher(passwordResetPasswordField.getText());
+        Matcher matchBigLetter = bigLetter.matcher(passwordResetPasswordField.getText());
+        Matcher matchNumber = number.matcher(passwordResetPasswordField.getText());
+        Matcher matchSpecialChar = specialChar.matcher(passwordResetPasswordField.getText());
+
+        if(matchSixChars.matches()){
+            passwordResetSixCharsRequirement.getStyleClass().clear();
+            passwordResetSixCharsRequirement.getStyleClass().add("successText");
+        }else{
+            passwordResetSixCharsRequirement.getStyleClass().clear();
+            passwordResetSixCharsRequirement.getStyleClass().add("errorText");
+        }
+
+        if(matchSmallLetter.matches()){
+            passwordResetSmallLetterRequirement.getStyleClass().clear();
+            passwordResetSmallLetterRequirement.getStyleClass().add("successText");
+        }else{
+            passwordResetSmallLetterRequirement.getStyleClass().clear();
+            passwordResetSmallLetterRequirement.getStyleClass().add("errorText");
+        }
+
+        if(matchBigLetter.matches()){
+            passwordResetBigLetterRequirement.getStyleClass().clear();
+            passwordResetBigLetterRequirement.getStyleClass().add("successText");
+        }else{
+            passwordResetBigLetterRequirement.getStyleClass().clear();
+            passwordResetBigLetterRequirement.getStyleClass().add("errorText");
+        }
+
+        if(matchNumber.matches()){
+            passwordResetNumberRequirement.getStyleClass().clear();
+            passwordResetNumberRequirement.getStyleClass().add("successText");
+        }else{
+            passwordResetNumberRequirement.getStyleClass().clear();
+            passwordResetNumberRequirement.getStyleClass().add("errorText");
+        }
+
+        if(matchSpecialChar.matches()){
+            passwordResetSpecialCharRequirement.getStyleClass().clear();
+            passwordResetSpecialCharRequirement.getStyleClass().add("successText");
+        }else{
+            passwordResetSpecialCharRequirement.getStyleClass().clear();
+            passwordResetSpecialCharRequirement.getStyleClass().add("errorText");
+        }
+
+        if(passwordResetConfirmPasswordField.getText().equals(passwordResetPasswordField.getText())){
+            passwordResetSamePasswordsRequirement.getStyleClass().clear();
+            passwordResetSamePasswordsRequirement.getStyleClass().add("successText");
+        }else{
+            passwordResetSamePasswordsRequirement.getStyleClass().clear();
+            passwordResetSamePasswordsRequirement.getStyleClass().add("errorText");
+        }
+    }
+
+    public void checkRequirements(KeyEvent keyEvent) {
+        passwordRequirements();
+    }
 
 
     public void errorOnEmail(){
