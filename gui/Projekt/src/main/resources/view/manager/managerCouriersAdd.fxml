@@ -10,23 +10,25 @@
 
 <AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriersAdd">
    <children>
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="DODAWANIE KURIERA" />
+      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%managerAddingCourier" />
       <FontAwesomeIconView fill="ORANGE" glyphName="USER_PLUS" layoutX="142.0" layoutY="70.0" size="38" />
-      <Button fx:id="addCourierButton" alignment="BOTTOM_CENTER" layoutX="715.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="Dodaj kuriera" />
-      <TextField fx:id="name" layoutX="547.0" layoutY="165.0" prefHeight="33.0" prefWidth="233.0" styleClass="inputBox">
+      <Button fx:id="addCourierButton" alignment="BOTTOM_CENTER" layoutX="735.0" layoutY="554.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="%managerAddCourier" />
+      <TextField fx:id="name" layoutX="547.0" layoutY="165.0" prefHeight="33.0" prefWidth="233.0" styleClass="inputBoxCourier">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TextField fx:id="surname" layoutX="547.0" layoutY="215.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="street" layoutX="547.0" layoutY="265.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="city" layoutX="547.0" layoutY="315.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="pesel" layoutX="547.0" layoutY="365.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="numberPhone" layoutX="547.0" layoutY="415.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <Label layoutX="254.0" layoutY="175.0" styleClass="textOption" text="Imie" />
-      <Label layoutX="253.0" layoutY="221.0" styleClass="textOption" text="Nazwisko" />
-      <Label layoutX="252.0" layoutY="271.0" styleClass="textOption" text="Ulica i numer mieszkania" />
-      <Label layoutX="252.0" layoutY="325.0" styleClass="textOption" text="Miejscowość" />
+      <TextField fx:id="surname" layoutX="547.0" layoutY="215.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <TextField fx:id="street" layoutX="547.0" layoutY="265.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <TextField fx:id="city" layoutX="547.0" layoutY="315.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <TextField fx:id="pesel" layoutX="547.0" layoutY="365.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <TextField fx:id="numberPhone" layoutX="547.0" layoutY="415.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <Label layoutX="254.0" layoutY="175.0" styleClass="textOption" text="%name" />
+      <Label layoutX="253.0" layoutY="221.0" styleClass="textOption" text="%surname" />
+      <Label layoutX="252.0" layoutY="271.0" styleClass="textOption" text="%streetAndNumber" />
+      <Label layoutX="252.0" layoutY="325.0" styleClass="textOption" text="%city" />
       <Label layoutX="254.0" layoutY="371.0" styleClass="textOption" text="Pesel" />
-      <Label layoutX="254.0" layoutY="421.0" styleClass="textOption" text="Numer telefonu" />
+      <Label layoutX="254.0" layoutY="421.0" styleClass="textOption" text="%number" />
+      <TextField fx:id="voivodeship" layoutX="547.0" layoutY="466.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <Label layoutX="254.0" layoutY="472.0" styleClass="textOption" text="%voivodeship" />
    </children>
 </AnchorPane>

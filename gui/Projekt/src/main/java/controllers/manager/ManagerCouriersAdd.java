@@ -28,7 +28,7 @@ public class ManagerCouriersAdd implements Initializable {
     private TextField pesel;
 
     @FXML
-    private TextField numberPhone;
+    private TextField numberPhone,voivodeship;
 
     @FXML
     private AnchorPane appWindow;
@@ -44,6 +44,7 @@ public class ManagerCouriersAdd implements Initializable {
                 street.getText().toString().equals("") ||
                 city.getText().toString().equals("") ||
                 pesel.getText().toString().equals("") ||
+                voivodeship.getText().toString().equals("") ||
                 numberPhone.getText().toString().equals("")){
             Alerts.createAlert(appWindow, addCourierButton,"WARNING","UZUPEŁNIJ WSZYSTKIE POLA");
         }
@@ -84,6 +85,17 @@ public class ManagerCouriersAdd implements Initializable {
                 System.out.println("Miasto niepoprawne");
                 errorValidation(city);
             }
+            if (street.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
+            {
+                status = true;
+                System.out.println("Ulica poprawna");
+                goodValidation(street);
+            }
+            else {
+                status = false;
+                System.out.println("Ulica niepoprawna");
+                errorValidation(street);
+            }
             if (pesel.getText().matches("[0-9]*") && pesel.getText().length() == 11)
             {
                 status = true;
@@ -108,7 +120,18 @@ public class ManagerCouriersAdd implements Initializable {
                 System.out.println("Telefon niepoprawny");
                 errorValidation(numberPhone);
             }
-
+            if (voivodeship.getText().matches("[a-zA-Z]+"))
+            {
+                status = true;
+                System.out.println("Województwo poprawne");
+                goodValidation(voivodeship);
+            }
+            else
+            {
+                status = false;
+                System.out.println("Województwo niepoprawne");
+                errorValidation(voivodeship);
+            }
             if (!status) {
                 Alerts.createAlert(appWindow, addCourierButton, "WARNING", "POPRAW POLA");
             }
@@ -117,12 +140,12 @@ public class ManagerCouriersAdd implements Initializable {
 
     void goodValidation(TextField name){
         name.getStyleClass().clear();
-        name.getStyleClass().add("inputBox");
+        name.getStyleClass().add("inputBoxCourier");
     }
 
     void errorValidation(TextField name){
         name.getStyleClass().clear();
-        name.getStyleClass().add("inputBoxError");
+        name.getStyleClass().add("inputBoxCourierError");
     }
 
     @Override
@@ -133,5 +156,6 @@ public class ManagerCouriersAdd implements Initializable {
         goodValidation(city);
         goodValidation(pesel);
         goodValidation(numberPhone);
+        goodValidation(voivodeship);
     }
 }

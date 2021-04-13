@@ -98,7 +98,7 @@ public class ManagerRaports implements Initializable {
 
                 textDateStart.setText(startDataValue.toString());
                 textDateEnd.setText(endDataValue.toString());
-                textDateDays.setText(daysBetween + " dni");
+                textDateDays.setText(daysBetween+" ");
 
                 infoConfirmRaport.setVisible(true);
             }
