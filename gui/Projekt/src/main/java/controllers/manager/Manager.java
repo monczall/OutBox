@@ -71,11 +71,6 @@ public class Manager implements Initializable {
         System.out.println("Manager Raports");
         SceneManager.loadScene("../../../resources/view/manager/managerRaports.fxml", mainWindow);
     }
-    /*
-    public void logout(MouseEvent mouseEvent) {
-        System.out.println("Manager Logout");
-        SceneManager.renderScene("login");
-    }*/
 
     @FXML
     public void logout(MouseEvent mouseEvent) {

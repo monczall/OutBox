@@ -1,5 +1,7 @@
 package main.java.controllers.manager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,6 +30,9 @@ public class ManagerCouriersAdd implements Initializable {
     private TextField pesel;
 
     @FXML
+    private TextField email;
+
+    @FXML
     private TextField numberPhone,voivodeship;
 
     @FXML
@@ -36,22 +41,37 @@ public class ManagerCouriersAdd implements Initializable {
     @FXML
     private Button addCourierButton;
 
+    @FXML
+    private ComboBox<String> regionName;
+
+    private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów centrum","Rzeszów Rejtana");
 
     public void addCourier(MouseEvent mouseEvent) {
-        boolean status = false;
+        boolean status = true;
         if(name.getText().toString().equals("") ||
                 surname.getText().toString().equals("") ||
                 street.getText().toString().equals("") ||
                 city.getText().toString().equals("") ||
                 pesel.getText().toString().equals("") ||
+                email.getText().toString().equals("") ||
                 voivodeship.getText().toString().equals("") ||
                 numberPhone.getText().toString().equals("")){
             Alerts.createAlert(appWindow, addCourierButton,"WARNING","UZUPEŁNIJ WSZYSTKIE POLA");
         }
         else {
+            if (email.getText().matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"))
+            {
+                System.out.println("mail poprawne");
+                goodValidation(email);
+            }
+            else
+            {
+                status = false;
+                System.out.println("mail niepoprawne");
+                errorValidation(email);
+            }
             if (name.getText().matches("[a-zA-Z]+"))
             {
-                status = true;
                 System.out.println("Imie poprawne");
                 goodValidation(name);
             }
@@ -63,7 +83,6 @@ public class ManagerCouriersAdd implements Initializable {
             }
             if (surname.getText().toString().matches("[a-zA-Z]+"))
             {
-                status = true;
                 System.out.println("Nazwisko poprawne");
                 goodValidation(surname);
             }
@@ -75,7 +94,6 @@ public class ManagerCouriersAdd implements Initializable {
             }
             if (city.getText().matches("[A-Za-z]+"))
             {
-                status = true;
                 System.out.println("Miasto poprawne");
                 goodValidation(city);
             }
@@ -87,7 +105,6 @@ public class ManagerCouriersAdd implements Initializable {
             }
             if (street.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
             {
-                status = true;
                 System.out.println("Ulica poprawna");
                 goodValidation(street);
             }
@@ -98,7 +115,6 @@ public class ManagerCouriersAdd implements Initializable {
             }
             if (pesel.getText().matches("[0-9]*") && pesel.getText().length() == 11)
             {
-                status = true;
                 System.out.println("Pesel poprawny");
                 goodValidation(pesel);
             }
@@ -110,7 +126,6 @@ public class ManagerCouriersAdd implements Initializable {
             }
             if (numberPhone.getText().matches("[0-9]*") && numberPhone.getText().length() == 9)
             {
-                status = true;
                 System.out.println("Telefon poprawny");
                 goodValidation(numberPhone);
             }
@@ -122,7 +137,6 @@ public class ManagerCouriersAdd implements Initializable {
             }
             if (voivodeship.getText().matches("[a-zA-Z]+"))
             {
-                status = true;
                 System.out.println("Województwo poprawne");
                 goodValidation(voivodeship);
             }
@@ -157,5 +171,10 @@ public class ManagerCouriersAdd implements Initializable {
         goodValidation(pesel);
         goodValidation(numberPhone);
         goodValidation(voivodeship);
+        goodValidation(email);
+
+
+        regionName.setItems(regions);
+        regionName.setValue(regions.get(0));
     }
 }
