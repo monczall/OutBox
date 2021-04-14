@@ -26,7 +26,7 @@
                <children>
                   <Pane prefHeight="71.0" prefWidth="156.0" />
                   <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#viewHome" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" text="Home" wrapText="true" />
-                  <Button mnemonicParsing="false" onAction="#viewTrackPackage" onMouseClicked="#packageButton" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%trackPackage" />
+                  <Button mnemonicParsing="false" onAction="#viewTrackPackage" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%trackPackage" />
                   <Button mnemonicParsing="false" onAction="#viewRegisterPackage" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%packageRegistration" />
                   <Button mnemonicParsing="false" onAction="#viewHistory" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%history" />
                   <Button id="btnSettings" mnemonicParsing="false" onAction="#viewSettings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%settings" />
@@ -80,17 +80,17 @@
       </AnchorPane>
       <Pane fx:id="alertPane" layoutX="430.0" layoutY="146.0" prefHeight="123.0" prefWidth="293.0" styleClass="alert">
          <children>
-            <Button layoutX="154.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="NIE">
+            <Button layoutX="154.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="%clientNo">
                <graphic>
                   <FontAwesomeIconView glyphName="CLOSE" size="23" styleClass="iconNext" />
                </graphic>
             </Button>
-            <Button layoutX="48.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="TAK">
+            <Button layoutX="48.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="%clientYes">
                <graphic>
                   <FontAwesomeIconView glyphName="CHECK" size="23" styleClass="backIcon" />
                </graphic>
             </Button>
-            <Label layoutX="33.0" layoutY="20.0" styleClass="alertText" text="Napewno chcesz się wylogować?" />
+            <Label alignment="TOP_LEFT" layoutY="20.0" prefHeight="25.0" prefWidth="293.0" styleClass="alertText" text="%logoutAlert" />
          </children>
       </Pane>
    </children>

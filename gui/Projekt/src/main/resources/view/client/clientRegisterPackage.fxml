@@ -28,7 +28,7 @@
                   <Pane prefHeight="307.0" prefWidth="206.0" styleClass="packageBlock">
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
-                        <Text layoutX="-8.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%small" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="232.9999879077077" />
+                        <Text layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%small" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="217.9999879077077" />
                         <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
                         <Text layoutX="54.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="8 x 38 x 64 cm" />
                         <Text layoutX="75.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" />
@@ -43,7 +43,7 @@
                   <Pane prefHeight="307.0" prefWidth="206.0" styleClass="packageBlock">
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
-                        <Text layoutX="-9.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%medium" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="226.53125" />
+                        <Text layoutX="-1.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%medium" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="218.53125" />
                         <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
                         <Text layoutX="54.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="19 x 38 x 64 cm" />
                         <Text layoutX="75.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" />
@@ -59,7 +59,7 @@
                   <Pane prefHeight="307.0" prefWidth="206.0" styleClass="packageBlock">
                      <children>
                         <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
-                        <Text layoutX="-1.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%big" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="225.34766310453415" />
+                        <Text layoutX="-1.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%big" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="218.34766310453415" />
                         <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
                         <Text layoutX="54.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="41 x 38 x 64cm" />
                         <Text layoutX="75.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" />

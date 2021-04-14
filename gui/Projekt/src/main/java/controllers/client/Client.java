@@ -100,9 +100,6 @@ public class Client implements Initializable {
 
     }
 
-    public void packageButton(MouseEvent mouseEvent) {
-    }
-
     @FXML
     void logout(ActionEvent event) {
         Animations.moveByY(alertPane,+500,0.3);

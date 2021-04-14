@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import main.java.features.Animations;
+import main.java.preferences.Preference;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,6 +44,9 @@ public class ClientTrackPackage implements Initializable {
     @FXML
     private VBox statusesVBox;
 
+    private static Preference pref = new Preference();
+    private static ResourceBundle bundle;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -53,7 +57,14 @@ public class ClientTrackPackage implements Initializable {
         List<PackageTest> list = new ArrayList<>(packageTest());
         for(int i=0; i<list.size(); i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
+
+            if(pref.readPreference("language").equals("english"))
+                bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
+            else
+                bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
+
             fxmlLoader.setLocation(getClass().getResource("../../../resources/view/client/packageItem.fxml"));
+            fxmlLoader.setResources(bundle);
 
             try {
                 Pane pane = fxmlLoader.load();

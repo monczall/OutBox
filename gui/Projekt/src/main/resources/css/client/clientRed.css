@@ -239,6 +239,7 @@
     -fx-background-radius: 0;
     -fx-border-color: -fx-gray-color;
     -fx-cursor: hand;
+    -fx-content-display: LEFT;
 }
 .btnBack:hover, .btnBack:hover > .backIcon{
     -fx-background-color: -fx-gray-color;
@@ -254,6 +255,7 @@
     -fx-font-weight: bold;
     -fx-background-radius: 0;
     -fx-cursor: hand;
+    -fx-content-display: LEFT;
 }
 
 .btnNext:hover, .btnNext:hover > .iconNext{
@@ -322,4 +324,5 @@
 .alertText{
     -fx-font-size: 16px;
     -fx-text-fill: -fx-main-color;
+    -fx-alignment: CENTER;
 }

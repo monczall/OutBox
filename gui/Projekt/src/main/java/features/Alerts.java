@@ -37,7 +37,38 @@ public class Alerts {
 
         Animations.alertAnim(pane,400,0.3,2, button, parent);
     }
+
     /* NOT YET IMPLEMENTED */
-    public void createAlertWithOptions(){
+    public void createAlertWithOptions(AnchorPane parent, String labelText, Button first, Button second){
+
+        Pane alertPane = new Pane();
+
+        alertPane.getStyleClass().add("alert");
+        alertPane.setPrefWidth(293);
+        alertPane.setPrefHeight(123);
+        alertPane.setLayoutX(430);
+        alertPane.setLayoutY(146-500);
+
+        Label alertLabel = new Label(labelText);
+        alertLabel.getStyleClass().add("alertText");
+        alertLabel.setLayoutY(20);
+        alertLabel.setPrefWidth(293);
+
+        first.setPrefWidth(99);
+        first.prefHeight(42);
+        first.setLayoutX(48);
+        first.setLayoutY(70);
+
+        first.setPrefWidth(99);
+        first.prefHeight(41);
+        first.setLayoutX(158);
+        first.setLayoutY(70);
+
+        alertPane.getChildren().addAll(alertLabel,first,second);
+        parent.getChildren().add(alertPane);
+
+        Animations.moveByY(alertPane,+500,0.3);
     }
+
+
 }

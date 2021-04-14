@@ -9,7 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import main.java.SceneManager;
 import main.java.features.Alerts;
 import main.java.features.Animations;
 import main.java.features.ErrorHandler;
@@ -72,6 +75,12 @@ public class ClientSettings implements Initializable {
     @FXML
     private Button saveInformation;
 
+    @FXML
+    private Pane alertPane;
+
+    @FXML
+    private AnchorPane window;
+
     //List of colors for combobox
     private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy","Czerwony");
     //List of languages for combobox
@@ -110,7 +119,7 @@ public class ClientSettings implements Initializable {
         //Setting text for inputs to test how it will work with database information
         settCity.setText("City");
         settEmail.setText("Email@gmail.com");
-        settNumber.setText("1234567890");
+        settNumber.setText("1234567890"); //373 128
         settStreet.setText("Street 33");
 
         inputs[0] = settStreet.getText();
@@ -119,6 +128,7 @@ public class ClientSettings implements Initializable {
         inputs[3] = settNumber.getText();
         inputs[4] = settEmail.getText();
 
+        alertPane.setTranslateY(-500);
 
         ErrorHandler.checkInputs(settCity,"[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}","Miasto powinno zawierać tylko litery");
         ErrorHandler.checkInputs(settEmail,"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", "Email powinien mieć poprawny format");
@@ -171,4 +181,21 @@ public class ClientSettings implements Initializable {
             Alerts.createAlert(settingsPane,saveInformation,"WARNING", "UZUPEŁNIJ LUB POPRAW POLA");
     }
 
+    public void deleteAccount(ActionEvent actionEvent) {
+        Animations.moveByY(alertPane,+500,0.3);
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        gaussianBlur.setRadius(8);
+        settingsPane.setDisable(true);
+        settingsPane.setEffect(gaussianBlur);
+    }
+
+    public void actionYes(ActionEvent actionEvent) {
+        SceneManager.renderScene("login");
+    }
+
+    public void actionNo(ActionEvent actionEvent) {
+        Animations.moveByY(alertPane,-500,0.3);
+        settingsPane.setDisable(false);
+        settingsPane.setEffect(null);
+    }
 }
