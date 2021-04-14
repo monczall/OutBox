@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -15,16 +16,17 @@
             <Font size="17.0" />
          </font>
       </ToggleSwitch>
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="USTAWIENIA" />
+      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%settingsTitle" />
       <FontAwesomeIconView fill="ORANGE" glyphName="COG" layoutX="142.0" layoutY="70.0" size="40" />
       <Line endX="570.0" layoutX="303.0" layoutY="149.0" startX="-100.0" stroke="#252525" strokeWidth="2.0" />
-      <Text layoutX="202.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="JĘZYK" />
-      <Text fill="#8f8f8f" layoutX="200.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Wybierz język" />
+      <Text layoutX="200.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%language" />
+      <Text fill="#8f8f8f" layoutX="202.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%pickLanguage" />
       <Line endX="570.0" layoutX="304.0" layoutY="277.0" startX="-100.0" stroke="#252525" strokeWidth="2.0" />
-      <Text layoutX="203.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="MOTYW" />
-      <Text fill="#8f8f8f" layoutX="204.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Tryb ciemny" />
-      <Text fill="#8f8f8f" layoutX="202.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Główny kolor" />
+      <Text layoutX="200.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%theme" />
+      <Text fill="#8f8f8f" layoutX="202.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%darkMode" />
+      <Text fill="#8f8f8f" layoutX="202.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%mainColor" />
       <ComboBox fx:id="comboColor" layoutX="682.0" layoutY="335.0" prefHeight="25.0" prefWidth="193.0" styleClass="inputBox" />
-      <ComboBox fx:id="comboLanguage" layoutX="682.0" layoutY="169.0" prefHeight="25.0" prefWidth="193.0" styleClass="inputBox" />
+      <ComboBox fx:id="comboLanguage" layoutX="682.0" layoutY="169.0" onAction="#changeLanguage" prefHeight="25.0" prefWidth="193.0" styleClass="inputBox" />
+      <Label alignment="CENTER" layoutX="11.0" layoutY="427.0" prefHeight="25.0" prefWidth="1009.0" styleClass="textOption" text="%managerSetSettings" textAlignment="CENTER" />
    </children>
 </AnchorPane>

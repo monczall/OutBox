@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriersAdd">
+<AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriersAdd">
    <children>
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="DODAWANIE KURIERA" />
+      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%managerAddingCourier" />
       <FontAwesomeIconView fill="ORANGE" glyphName="USER_PLUS" layoutX="142.0" layoutY="70.0" size="38" />
-      <Button alignment="BOTTOM_CENTER" layoutX="715.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="Dodaj kuriera" />
-      <TextField fx:id="name" layoutX="548.0" layoutY="163.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="surname" layoutX="548.0" layoutY="213.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="street" layoutX="548.0" layoutY="263.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="city" layoutX="548.0" layoutY="313.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="pesel" layoutX="548.0" layoutY="363.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <TextField fx:id="numberPhone" layoutX="548.0" layoutY="413.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
-      <Label layoutX="254.0" layoutY="175.0" styleClass="textOption" text="Imie" />
-      <Label layoutX="253.0" layoutY="221.0" styleClass="textOption" text="Nazwisko" />
-      <Label layoutX="252.0" layoutY="271.0" styleClass="textOption" text="Ulica i numer mieszkania" />
-      <Label layoutX="252.0" layoutY="325.0" styleClass="textOption" text="Miejscowość" />
-      <Label layoutX="254.0" layoutY="371.0" styleClass="textOption" text="Pesel" />
-      <Label layoutX="254.0" layoutY="421.0" styleClass="textOption" text="Numer telefonu" />
+      <Button fx:id="addCourierButton" alignment="BOTTOM_CENTER" layoutX="807.0" layoutY="590.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="39.0" prefWidth="174.0" styleClass="homeBlock" text="%managerAddCourier" />
+      <TextField fx:id="name" layoutX="548.0" layoutY="120.0" prefHeight="33.0" prefWidth="233.0" styleClass="inputBoxCourier">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></TextField>
+      <TextField fx:id="surname" layoutX="548.0" layoutY="170.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <TextField fx:id="street" layoutX="548.0" layoutY="220.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <TextField fx:id="city" layoutX="548.0" layoutY="270.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <TextField fx:id="pesel" layoutX="548.0" layoutY="320.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <TextField fx:id="numberPhone" layoutX="548.0" layoutY="370.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <Label layoutX="255.0" layoutY="130.0" styleClass="textOption" text="%name" />
+      <Label layoutX="254.0" layoutY="180.0" styleClass="textOption" text="%surname" />
+      <Label layoutX="253.0" layoutY="230.0" styleClass="textOption" text="%streetAndNumber" />
+      <Label layoutX="253.0" layoutY="280.0" styleClass="textOption" text="%city" />
+      <Label layoutX="255.0" layoutY="330.0" styleClass="textOption" text="Pesel" />
+      <Label layoutX="255.0" layoutY="380.0" styleClass="textOption" text="%number" />
+      <TextField fx:id="voivodeship" layoutX="548.0" layoutY="420.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <Label layoutX="255.0" layoutY="430.0" styleClass="textOption" text="%voivodeship" />
+      <Label layoutX="255.0" layoutY="530.0" styleClass="textOption" text="%region" />
+      <ComboBox fx:id="regionName" layoutX="547.0" layoutY="525.0" prefHeight="32.0" prefWidth="233.0" styleClass="inputBox" />
+      <TextField fx:id="email" layoutX="547.0" layoutY="470.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBoxCourier" />
+      <Label layoutX="255.0" layoutY="480.0" styleClass="textOption" text="%email" />
    </children>
 </AnchorPane>

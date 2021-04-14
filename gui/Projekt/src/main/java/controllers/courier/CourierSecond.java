@@ -21,7 +21,7 @@ public class CourierSecond implements Initializable {
     @FXML
     private TableView<Test> table;
     @FXML
-    private TableColumn<?, ?> id;
+    private TableColumn<?, ?> packageNumber;
 
     @FXML
     private TableColumn<?, ?> name;
@@ -36,6 +36,9 @@ public class CourierSecond implements Initializable {
     private TableColumn<?, ?> telephone;
 
     @FXML
+    private TableColumn<?, ?> state;
+
+    @FXML
     private TableColumn<?, ?> time;
 
     Pane pane;
@@ -44,11 +47,12 @@ public class CourierSecond implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
         TableRowExpanderColumn<Test> expanderRow = new TableRowExpanderColumn<Test>(this::createEditor);
 
-        id.setCellValueFactory(new PropertyValueFactory<>("number"));
+        packageNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         city.setCellValueFactory(new PropertyValueFactory<>("city"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
         telephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+        state.setCellValueFactory(new PropertyValueFactory<>("email"));
         time.setCellValueFactory(new PropertyValueFactory<>("date"));
         table.getColumns().add(expanderRow);
 

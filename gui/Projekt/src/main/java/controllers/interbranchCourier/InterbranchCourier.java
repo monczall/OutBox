@@ -79,23 +79,23 @@ public class InterbranchCourier implements Initializable {
             }
         });
         try {
-            SceneManager.loadScene("../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
+            SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void openHome(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
     }
 
     public void openSecond(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/interbranchCourier/interbranchCourierSecond.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierSecond.fxml", mainWindow);
     }
 
 
     public void openSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/interbranchCourier/interBranchCourierSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/interbranchCourier/interBranchCourierSettings.fxml", mainWindow);
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {

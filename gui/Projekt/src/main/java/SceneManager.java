@@ -56,11 +56,20 @@ public class SceneManager {
             Parent root = FXMLLoader.load(SceneManager.class.getResource(path),bundle);
             Scene scene = new Scene(root);
 
+
             //Reading preferences about color and deciding in which main color theme app should start
-            if(pref.readPreference("color").equals("red"))
-                scene.getStylesheets().add(SceneManager.class.getResource("../resources/css/client/clientRed.css").toExternalForm());
-            else
-                scene.getStylesheets().add(SceneManager.class.getResource("../resources/css/client/client.css").toExternalForm());
+            if(pref.readPreference("color").equals("red")) {
+                scene.getRoot().setStyle("-fx-main-color: #d82020;" +
+                        "-fx-second-color: #ffffff;");
+            }
+            else if(pref.readPreference("color").equals("orange")) {
+                scene.getRoot().setStyle("-fx-main-color: #ffa500;" +
+                        "-fx-second-color: #000000;");
+            }
+            else{
+                scene.getRoot().setStyle("-fx-main-color: #ffffff;" +
+                        "-fx-second-color: #000000;");
+            }
 
 
             stage.setScene(scene);
@@ -78,5 +87,9 @@ public class SceneManager {
 
     public static void setStage(Stage _stage){
         stage = _stage;
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }

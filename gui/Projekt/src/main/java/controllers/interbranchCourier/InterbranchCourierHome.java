@@ -14,12 +14,12 @@ public class InterbranchCourierHome {
 
 
     public void openSecond(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courier/courierSecond.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/courier/courierSecond.fxml", mainWindow);
     }
 
 
     public void openSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courier/courierSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/courier/courierSettings.fxml", mainWindow);
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {

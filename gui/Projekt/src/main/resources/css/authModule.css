@@ -17,6 +17,12 @@
 .circleError{
     -fx-fill: RED;
 }
+.circleCorrect{
+    -fx-fill: GREEN;
+}
+.circleDisabled{
+    -fx-fill: #808080;
+}
 .darkText{
     -fx-text-fill: #000000;
 }
@@ -36,7 +42,7 @@
     -fx-text-fill: RED;
 }
 .successText{
-    -fx-text-fill: GREEN;
+    -fx-text-fill: #38B000;
 }
 
 .loginButton{
@@ -133,6 +139,20 @@
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 9;
     -fx-border-color: #FFA500;
+    -fx-border-width: 3;
+    -fx-border-radius: 7;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 35;
+    -fx-pref-height: 35;
+    -fx-max-height: 35;
+    -fx-padding: 0 0 0 30;
+}
+.textFieldsCorrect{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 9;
+    -fx-border-color: #38B000;
     -fx-border-width: 3;
     -fx-border-radius: 7;
     -fx-min-width: 250;
