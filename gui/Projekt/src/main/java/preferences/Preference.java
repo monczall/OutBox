@@ -11,7 +11,7 @@ public class Preference {
     }
 
     //Function allows to read preference from Windows registry, it take one argument which is name of preference.
-    public String readPreference(String name){
+    public static String readPreference(String name){
         Preferences preferences = Preferences.userNodeForPackage(Preference.class);
         return preferences.get(name,"Name of preference couldn't be found");
     }

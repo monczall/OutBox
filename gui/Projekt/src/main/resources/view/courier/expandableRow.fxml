@@ -5,17 +5,22 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="701.0" layoutY="70.0" mnemonicParsing="false" text="Zatwierdź">
+      <Button layoutX="692.0" layoutY="70.0" mnemonicParsing="false" text="Zatwierdź">
          <graphic>
             <FontAwesomeIconView glyphName="CHECK" />
          </graphic></Button>
-      <Label layoutX="43.0" layoutY="7.0" text="Numer paczki" />
-      <Label layoutX="367.0" layoutY="7.0" text="Adres email" />
-      <Label layoutX="43.0" layoutY="53.0" text="Uwagi" />
-      <Label layoutX="687.0" layoutY="7.0" text="Label" />
-      <ComboBox layoutX="537.0" layoutY="70.0" prefWidth="150.0" styleClass="inputBox" />
+      <Label layoutX="163.0" layoutY="7.0" text="Nadawca" />
+      <Label layoutX="588.0" layoutY="7.0" text="Uwagi" />
+      <ComboBox layoutX="527.0" layoutY="70.0" prefWidth="150.0" styleClass="inputBox" />
+      <Text fill="WHITE" layoutX="28.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię:" />
+      <Text fill="WHITE" layoutX="28.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:" />
+      <Text fill="WHITE" layoutX="28.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miasto:" />
+      <Text fill="WHITE" layoutX="296.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko:" />
+      <Text fill="WHITE" layoutX="296.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon:" />
+      <Text fill="WHITE" layoutX="296.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ulica:" />
    </children>
 </Pane>

@@ -5,6 +5,7 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -14,6 +15,7 @@ import main.java.features.Animations;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 
@@ -31,13 +33,21 @@ public class Courier implements Initializable {
     @FXML
     private Pane welcomeMessage;
 
+    @FXML
+    private Pane alertPane;
+
+    @FXML
+    private AnchorPane window;
+
     boolean hamburgerClicked = false;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        paneRight.setTranslateX(-200);
+        SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: red;");
 
+        paneRight.setTranslateX(-200);
+        alertPane.setTranslateY(-500);
 
         hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
             if(hamburgerClicked == false) {
@@ -79,26 +89,43 @@ public class Courier implements Initializable {
             }
         });
         try {
-            SceneManager.loadScene("../../resources/view/courier/courierHome.fxml", mainWindow);
+            SceneManager.loadScene("../../../resources/view/courier/courierHome.fxml", mainWindow);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void openHome(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courier/courierHome.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/courier/courierHome.fxml", mainWindow);
     }
 
     public void openSecond(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courier/courierSecond.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/courier/courierSecond.fxml", mainWindow);
     }
 
 
     public void openSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/courier/courierSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/courier/courierSettings.fxml", mainWindow);
     }
 
-    public void logout(ActionEvent actionEvent) throws IOException {
+    @FXML
+    void logout(ActionEvent event) {
+        Animations.moveByY(alertPane,+500,0.3);
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        gaussianBlur.setRadius(8);
+        window.setDisable(true);
+        window.setEffect(gaussianBlur);
+    }
+
+    @FXML
+    void logoutNo(ActionEvent event) {
+        Animations.moveByY(alertPane,-500,0.3);
+        window.setEffect(null);
+        window.setDisable(false);
+    }
+
+    @FXML
+    void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
     }
 }
