@@ -68,12 +68,7 @@ public class Login{
                         System.out.println("Zalogowano jako admin!");
 
                     }else{
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Błąd logowania");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Podany użytkownik nie istnieje lub podano błędne dane.");
-
-                        alert.showAndWait();
+                        Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik lub/i hasło jest błędne", 375, 86, "alertFailure");
                     }
                     System.out.println(loginEmailTextField.getText());
                     System.out.println(loginPasswordPasswordField.getText());
@@ -92,7 +87,7 @@ public class Login{
                     loginPasswordCircleCircle.getStyleClass().clear();
                     loginPasswordCircleCircle.getStyleClass().add("circleError");
 
-                    Alerts.createAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik lub/i hasło jest błędne");
+                    Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik lub/i hasło jest błędne", 375, 86, "alertFailure");
                 }
             }else{
                 //UserTextField
@@ -102,10 +97,10 @@ public class Login{
                 loginUserCircleCircle.getStyleClass().clear();
                 loginUserCircleCircle.getStyleClass().add("circleError");
 
-                Alerts.createAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Format adresu email jest błędny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Format adresu email jest błędny", 310, 86, "alertFailure");
             }
         }else{
-            Alerts.createAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Uzupełnij dane");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Uzupełnij dane", 293, 86, "alertFailure");
         }
     }
 

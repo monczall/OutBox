@@ -29,10 +29,4 @@ public class ManagerCouriers {
         courierOptions.setVisible(true);
         SceneManager.loadScene("../../../resources/view/manager/managerCouriersEdit.fxml", courierOptions);
     }
-
-    public void mapCourier(MouseEvent mouseEvent) throws IOException {
-        System.out.println("ManagerCouriers > mapCourier");
-        courierOptions.setVisible(true);
-        SceneManager.loadScene("../../../resources/view/manager/managerCouriersTerrain.fxml", courierOptions);
-    }
 }

@@ -218,11 +218,11 @@ public class Register {
         if(!matchPassword.matches()){
             errorOnPassword();
             passwordError = true;
-            errorOnRepeatPassword();
+            errorOnConfirmPassword();
             error++;
         }else{
             if(!password.equals(password2)){
-                errorOnRepeatPassword();
+                errorOnConfirmPassword();
                 passwordNotTheSameError = true;
                 error++;
             }
@@ -233,44 +233,44 @@ public class Register {
         }else if(error == 1){
             if(firstNameError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format imienia jest błędny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format imienia jest błędny", 350, 86, "alertFailure");
             }
             if(lastNameError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format nazwiska jest błedny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format nazwiska jest błedny", 350, 86, "alertFailure");
             }
             if(phoneNumberError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format numeru telefonu jest błędny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format numeru telefonu jest błędny", 390, 86, "alertFailure");
             }
             if(emailError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format adresu email jest błędny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format adresu email jest błędny", 350, 86, "alertFailure");
             }
             if(streetError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format ulicy jest błędny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format ulicy jest błędny", 350, 86, "alertFailure");
             }
             if(cityError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format miasta jest błędny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format miasta jest błędny", 350, 86, "alertFailure");
             }
             if(voivodeshipError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format województwa jest błędny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format województwa jest błędny", 365, 86, "alertFailure");
             }
             if(passwordError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format hasła jest błędny");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format hasła jest błędny", 350, 86, "alertFailure");
             }
             if(passwordNotTheSameError){
 
-                Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Hasła nie są takie same");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Hasła nie są takie same", 350, 86, "alertFailure");
             }
             return false;
         }else{
 
-            Alerts.createAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Popraw błędy na zaznaczonych polach");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Popraw błędy na zaznaczonych polach", 350, 86, "alertFailure");
             return false;
         }
     }
@@ -467,7 +467,7 @@ public class Register {
         registerPasswordCircle.getStyleClass().add("circle");
     }
     //REPEAT PASSWORD
-    private void errorOnRepeatPassword(){
+    private void errorOnConfirmPassword(){
         //RepeatPasswordField
         registerRepeatPasswordField.getStyleClass().clear();
         registerRepeatPasswordField.getStyleClass().add("textFieldsError");

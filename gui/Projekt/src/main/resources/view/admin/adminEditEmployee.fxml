@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminEditEmployee">
+<AnchorPane fx:id="edit" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminEditEmployee">
     <children>
         <Text layoutX="223.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="EDYTUJ PRACOWNIKA" />
         <FontAwesomeIconView fill="ORANGE" glyphName="USERS" layoutX="176.0" layoutY="81.0" size="40" />
@@ -17,15 +17,16 @@
         <TableView layoutX="135.0" layoutY="200.0" prefHeight="351.0" prefWidth="763.0">
             <columns>
                 <TableColumn prefWidth="92.0" text="Imie" />
-                <TableColumn prefWidth="112.0" text="Nazwisko" />
-                <TableColumn prefWidth="86.0" text="Kod pocztowy" />
-                <TableColumn prefWidth="104.0" text="Miejscowość" />
-                <TableColumn minWidth="0.0" prefWidth="110.0" text="Telefon" />
-                <TableColumn prefWidth="148.0" text="Mail" />
+                <TableColumn prefWidth="115.0" text="Nazwisko" />
+                <TableColumn prefWidth="85.0" text="Kod pocztowy" />
+                <TableColumn prefWidth="112.0" text="Miejscowość" />
+                <TableColumn minWidth="0.0" prefWidth="155.0" text="Telefon" />
+                <TableColumn prefWidth="203.0" text="Mail" />
             </columns>
         </TableView>
         <TextField layoutX="505.0" layoutY="150.0" prefHeight="33.0" prefWidth="150.0" promptText="Nazwisko" styleClass="inputBox" />
         <TextField layoutX="665.0" layoutY="150.0" prefHeight="33.0" prefWidth="150.0" promptText="Pesel" styleClass="inputBox" />
         <TextField layoutX="185.0" layoutY="150.0" prefHeight="33.0" prefWidth="150.0" promptText="Dowolny paramter" styleClass="inputBox" />
+      <Text layoutX="480.0" layoutY="601.0" onMouseClicked="#showEdit" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="EDYTUJ" />
     </children>
 </AnchorPane>
