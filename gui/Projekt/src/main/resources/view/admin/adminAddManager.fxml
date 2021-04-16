@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="loginRightPaneAnchorPane" prefHeight="672.0" prefWidth="1033.0" styleClass="darkBackGround" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminAddManager">
+   <children>
+      <Text layoutX="225.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="DODAJ KIEROWNIKA" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="USER_PLUS" layoutX="176.0" layoutY="81.0" size="40" />
+      <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
+      <ChoiceBox fx:id="registerAreaChoiceBox" layoutX="612.0" layoutY="389.0" onMousePressed="#clearErrorOnArea" prefHeight="35.0" prefWidth="250.0" styleClass="choiceBox" />
+      <Label layoutX="221.0" layoutY="135.0" styleClass="lightText" text="Imię">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="registerFirstNameField" layoutX="196.0" layoutY="155.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnFirstName" prefHeight="35.0" prefWidth="250.0" promptText="np. Jan" styleClass="textFields" />
+      <Circle fx:id="registerFirstNameCircle" fill="ORANGE" layoutX="196.0" layoutY="173.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Label layoutX="221.0" layoutY="215.0" styleClass="lightText" text="Nazwisko">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="registerLastNameField" layoutX="196.0" layoutY="235.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnLastName" prefHeight="35.0" prefWidth="250.0" promptText="np. Kowalski" styleClass="textFields" />
+      <Circle fx:id="registerLastNameCircle" fill="ORANGE" layoutX="196.0" layoutY="253.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Label layoutX="221.0" layoutY="295.0" styleClass="lightText" text="Numer Telefonu">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="registerPhoneNumberField" layoutX="196.0" layoutY="315.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnPhoneNumber" prefHeight="35.0" prefWidth="250.0" promptText="np. 555333444" styleClass="textFields" />
+      <Circle fx:id="registerPhoneNumberCircle" fill="ORANGE" layoutX="196.0" layoutY="330.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Label layoutX="221.0" layoutY="375.0" styleClass="lightText" text="Adres e-Mail">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="registerEmailAddressField" layoutX="196.0" layoutY="395.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnEmailAddress" prefHeight="35.0" prefWidth="250.0" promptText="np. jan.kowalski@gmail.com" styleClass="textFields" />
+      <Circle fx:id="registerEmailAddressCircle" fill="ORANGE" layoutX="196.0" layoutY="410.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Label layoutX="636.0" layoutY="135.0" styleClass="lightText" text="Ulica i numer domu/mieszkania">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="registerStreetField" layoutX="613.0" layoutY="155.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnStreet" prefHeight="35.0" prefWidth="250.0" promptText="np. Mickiewicza 1C/13" styleClass="textFields" />
+      <Circle fx:id="registerStreetCircle" fill="ORANGE" layoutX="611.0" layoutY="173.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Label layoutX="636.0" layoutY="215.0" styleClass="lightText" text="Miasto">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="registerCityField" layoutX="613.0" layoutY="235.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0" promptText="np. Rzeszów" styleClass="textFields" />
+      <Circle fx:id="registerCityCircle" fill="ORANGE" layoutX="613.0" layoutY="253.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Label layoutX="636.0" layoutY="295.0" styleClass="lightText" text="Województwo">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="registerVoivodeshipField" layoutX="613.0" layoutY="315.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" promptText="np. Podkarpackie" styleClass="textFields" />
+      <Circle fx:id="registerVoivodeshipCircle" fill="ORANGE" layoutX="613.0" layoutY="333.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Label layoutX="219.0" layoutY="485.0" styleClass="lightText" text="Hasło">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="registerPasswordField" layoutX="196.0" layoutY="505.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnPassword" prefHeight="35.0" prefWidth="250.0" promptText="Wprowadź silne hasło" styleClass="textFields" />
+      <Circle fx:id="registerPasswordCircle" fill="ORANGE" layoutX="196.0" layoutY="523.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Label layoutX="636.0" layoutY="485.0" styleClass="lightText" text="Powtórz Hasło">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="registerRepeatPasswordField" layoutX="613.0" layoutY="505.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnRepeatPassword" prefHeight="35.0" prefWidth="250.0" promptText="Powtórz wprowadzone hasło" styleClass="textFields" />
+      <Circle fx:id="registerRepeatPasswordCircle" fill="ORANGE" layoutX="613.0" layoutY="523.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <Button fx:id="registerRegisterButtonButton" layoutX="392.0" layoutY="575.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="Dodaj kierownika" />
+      <FontAwesomeIconView glyphName="USER" layoutX="185.0" layoutY="184.0" size="32" />
+      <FontAwesomeIconView glyphName="USER" layoutX="185.0" layoutY="263.0" size="32" />
+      <FontAwesomeIconView glyphName="MOBILE_PHONE" layoutX="186.0" layoutY="347.0" size="48" text="" />
+      <FontAwesomeIconView glyphName="ENVELOPE" layoutX="180.0" layoutY="421.0" size="32" />
+      <FontAwesomeIconView glyphName="LOCK" layoutX="186.0" layoutY="534.0" size="32" />
+      <FontAwesomeIconView glyphName="LOCK" layoutX="603.0" layoutY="534.0" size="32" />
+      <FontAwesomeIconView glyphName="BUILDING" layoutX="599.0" layoutY="264.0" size="32" />
+      <FontAwesomeIconView glyphName="INSTITUTION" layoutX="595.0" layoutY="343.0" size="32" />
+      <FontAwesomeIconView glyphName="MAP_MARKER" layoutX="602.0" layoutY="184.0" size="32" />
+      <Label layoutX="638.0" layoutY="370.0" styleClass="lightText" text="Obszar">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Circle fx:id="registerAreaCircle" fill="ORANGE" layoutX="613.0" layoutY="405.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+      <FontAwesomeIconView glyphName="GLOBE" layoutX="599.0" layoutY="416.0" size="32" />
+   </children>
+</AnchorPane>

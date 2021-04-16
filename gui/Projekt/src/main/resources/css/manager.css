@@ -1,0 +1,399 @@
+/*-------- ALL SCENES --------*/
+.mainBackground{  /*Background color AnchorPane*/
+    -fx-background-color: #121212;
+}
+
+.infoBackground{  /*Background color AnchorPane*/
+    -fx-background-color: #121212;
+    -fx-border-color: #ffa500;
+}
+
+.textLabel{ /*section name*/
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffa500;
+    -fx-fill: #ffa500;
+    -fx-font-weight: bold;
+}
+
+/* All buttons CSS */
+.homeBlock{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.homeBlock:hover, .homeBlock:hover > .blockIcon{
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffa500;
+    -fx-border-width: 2.5px;
+    -fx-border-color: #ffa500;
+    -fx-fill: #ffa500;
+}
+
+.infoBoxButtons{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.infoBoxButtons:hover, .infoBoxButtons:hover > .blockIcon{
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffa500;
+    -fx-border-width: 2px;
+    -fx-border-color: #ffa500;
+    -fx-fill: #ffa500;
+}
+
+/* All input CSS */
+.inputBox{
+    -fx-text-fill: #ffa500;
+    -fx-font-size: 14px;
+    -fx-background-color: transparent; /*#202020*/
+    -fx-mark-color: #ffa500;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: #ffa500;
+    -fx-border-width: 0 0 2 0;
+    -fx-cursor: text;
+}
+
+/* All DatePicker CSS */
+.inputData{
+    -fx-text-fill: #ffa500;
+    -fx-font-size: 15px;
+    -fx-background-color: transparent; /*#202020*/
+    -fx-mark-color: #ffa500;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: #ffa500;
+    -fx-border-width: 0 0 2 0;
+}
+
+.inputData > .text-field {
+    -fx-background-color:transparent;
+    -fx-text-fill: #ffa500;
+}
+
+.inputData > .text-field:focused {
+    -fx-background-color:transparent;
+    -fx-text-fill: #ffa500;
+}
+
+.inputData > .arrow-button { /* background calendar icon*/
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.inputData > .arrow-button > .arrow { /*calendar icon*/
+    -fx-background-color: #ffa500;
+    -fx-font-size: 22px;
+}
+
+.date-picker-popup { /*border window with date calendar*/
+    -fx-background-color:#ffa500;
+}
+
+.date-picker-popup > .month-year-pane { /*background color tittle calendar*/
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup > * > .spinner { /*text color tittle calendar*/
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-cursor: hand;
+}
+
+.date-picker-popup > * > .spinner > .button { /* arrow background date color*/
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup > * > .spinner > .button:focused { /*focused(clicked) date arrow background color*/
+    -fx-color: transparent;
+    -fx-border-width: 0px;
+}
+
+.date-picker-popup > * > .spinner > .button:hover { /*arrow date background color */
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup > * > .spinner > .button > .left-arrow, /* color arrow */
+.date-picker-popup > * > .spinner > .button > .right-arrow {
+
+}
+
+.date-picker-popup > * > .spinner > .button:hover > .left-arrow, /*hover color arrow*/
+.date-picker-popup > * > .spinner > .button:hover > .right-arrow {
+    -fx-background-color: #2b2b2b;
+}
+
+.date-picker-popup > .calendar-grid { /*color days in week*/
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-padding: 0;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color:black;
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup > * > .date-cell { /*all date number */
+    -fx-text-fill: black;
+    -fx-background-insets: 1, 2;
+    -fx-padding: 0;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-opacity: 1.0;
+    -fx-cursor: hand;
+    -fx-background-color: #ffa500;
+}
+
+.date-picker-popup > * > .date-cell:hover{
+    -fx-text-fill: #ffa500;
+    -fx-background-color: black;
+}
+
+.date-picker-popup > * > .week-number-cell { /* weeks color*/
+    -fx-text-fill: black;
+    -fx-background-color: silver;
+}
+
+/*-------- MENU --------*/
+.sideBackground{
+    -fx-background-color: #ffa500;
+}
+
+.sideButtons{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    /*-fx-text-alignment: right;*/
+    -fx-alignment: BASELINE_LEFT;
+    -fx-background-radius: 0;
+}
+.sideButtons:hover{
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffa500;
+    -fx-cursor: hand;
+}
+
+.confirmButtons{
+    -fx-background-color: #ffa500;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    /*-fx-text-alignment: right;*/
+    -fx-alignment: BASELINE_LEFT;
+    -fx-background-radius: 0;
+}
+.confirmButtons:hover{
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffa500;
+    -fx-cursor: hand;
+}
+
+.icons:hover{
+    -fx-cursor: hand;
+}
+
+.sideIcons{
+    -fx-background-color: #ffa500;
+    -fx-background-radius: 0;
+}
+
+.hamburger{
+    -fx-cursor: hand;
+}
+
+
+/*-------- TableView --------*/
+
+.tableview{
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.tableview .placeholder .label {
+    -fx-text-fill: linen;
+    -fx-font-size: 1.666em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffa500;
+}
+
+.table-view .column-header {
+    -fx-border-color: black;
+    -fx-background-color: #ffa500;
+    -fx-border-width: 0.5px;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: black;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-font-weight:bold;
+    -fx-text-fill: black;
+}
+
+.table-view .table-column{
+    -fx-alignment:center;
+}
+
+/*-------------TableColumn-----------------------*/
+.table-view .table-cell{
+    -fx-text-fill: silver;
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #1e1e1e;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:even{
+    -fx-background-color: #292929;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell:hover{
+    -fx-text-fill: red;
+    -fx-background-color: #393939;
+
+}
+/*-------------STYLING TOGGLE SWITCH-------------*/
+.toggleSwitch .thumb{
+    -fx-background-color: #424242;
+}
+.toggleSwitch .thumb-area{
+    -fx-background-color: #212121;
+}
+.toggleSwitch:selected .thumb-area{
+    /*-fx-background-color: -fx-main-color;*/
+    /*-fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 10, 0, 0, 0);*/
+}
+.toggleSwitch:selected .thumb{
+    -fx-background-color: -fx-main-color;
+    -fx-effect: dropshadow(three-pass-box, -fx-main-color, 10, 0, 0, 0);
+}
+
+/*-------- Home --------*/
+
+
+/*-------- Couriers --------*/
+
+
+/*-------- Packages --------*/
+
+
+/*-------- Raports --------*/
+
+.inputBoxCourier{
+    -fx-text-fill: #ffa500;
+    -fx-font-size: 17px;
+    -fx-background-color: transparent; /*#202020*/
+    -fx-mark-color: #ffa500;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: #ffa500;
+    -fx-border-width: 0 0 2 0;
+    -fx-cursor: text;
+}
+
+.inputBoxCourierError{
+    -fx-text-fill: red;
+    -fx-font-size: 17px;
+    -fx-background-color: transparent; /*#202020*/
+    -fx-mark-color: #ffa500;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: red;
+    -fx-border-width: 0 0 2 0;
+    -fx-cursor: text;
+}
+
+/*-------- Settings --------*/
+.optionGroup{
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffa500;
+    -fx-fill: #ffa500;
+    -fx-font-weight: bold;
+}
+
+.textOption{
+    -fx-text-fill: #8f8f8f;
+    -fx-fill: #8f8f8f;
+    -fx-font-size: 16px;
+}
+
+/*------- Logout --------*/
+/*-------------ALERT-------------*/
+.alert{
+    -fx-background-color:  -fx-dark-transparent; /*#262628*/
+    -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
+    -fx-border-color: -fx-main-color;
+    -fx-border-radius: 0;
+}
+.alertText{
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-main-color;
+}
+
+/*-------------STYLING BUTTONS-------------*/
+.btnBack{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-gray-color;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-gray-color;
+    -fx-cursor: hand;
+    -fx-border-width: 2px;
+}
+.btnBack:hover, .btnBack:hover > .backIcon{
+    -fx-background-color: -fx-gray-color;
+    -fx-text-fill: -fx-dark-color;
+    -fx-fill: -fx-dark-color;
+}
+
+.btnNext{
+    -fx-background-color: -fx-main-color;
+    -fx-border-color: -fx-main-color;
+    -fx-text-fill: -fx-second-color;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+.btnNext:hover, .btnNext:hover > .iconNext{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-main-color;
+    -fx-border-width: 2.5px;
+    -fx-border-color: -fx-main-color;
+    -fx-fill: -fx-main-color;
+}
+
+
+
+
+
+
+
+
