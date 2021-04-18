@@ -2,7 +2,6 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -27,6 +26,5 @@
       <Text fill="#8f8f8f" layoutX="202.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%mainColor" />
       <ComboBox fx:id="comboColor" layoutX="682.0" layoutY="335.0" prefHeight="25.0" prefWidth="193.0" styleClass="inputBox" />
       <ComboBox fx:id="comboLanguage" layoutX="682.0" layoutY="169.0" onAction="#changeLanguage" prefHeight="25.0" prefWidth="193.0" styleClass="inputBox" />
-      <Label alignment="CENTER" layoutX="11.0" layoutY="427.0" prefHeight="25.0" prefWidth="1009.0" styleClass="textOption" text="%managerSetSettings" textAlignment="CENTER" />
    </children>
 </AnchorPane>

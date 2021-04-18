@@ -23,10 +23,13 @@ public class Manager implements Initializable {
 
     @FXML
     private VBox paneRight;
+
     @FXML
     private FontAwesomeIconView hamburger;
+
     @FXML
     private Button btnSettings;
+
     @FXML
     private FontAwesomeIconView iconSettings;
 

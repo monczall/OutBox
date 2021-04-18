@@ -34,20 +34,20 @@
                                     <Text layoutX="7.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%city" textAlignment="CENTER" wrappingWidth="185.5234375" />
                                     <Text layoutX="463.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%number" textAlignment="CENTER" wrappingWidth="139.65362548828125" />
                                     <FontAwesomeIconView fill="#8f8f8f" glyphName="USER" layoutX="647.0" layoutY="37.0" size="40" />
-                                    <TextField alignment="CENTER" layoutX="7.0" layoutY="22.0" prefHeight="33.0" prefWidth="97.0" styleClass="inputBox" text="Patryk" />
-                                    <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="543.0" layoutY="165.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="135.0" styleClass="btnNext" text="%managerSaveChanges" />
+                                    <TextField fx:id="nameInput" alignment="CENTER" layoutX="7.0" layoutY="22.0" prefHeight="33.0" prefWidth="97.0" styleClass="inputBox" text="Patryk" />
+                                    <Button fx:id="saveEditCourierButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="543.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#saveEditCourier" prefHeight="39.0" prefWidth="135.0" styleClass="btnNext" text="%managerSaveChanges" />
                                     <Text layoutX="341.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Pesel" />
-                                    <TextField alignment="CENTER" layoutX="139.0" layoutY="22.0" prefHeight="33.0" prefWidth="109.0" styleClass="inputBox" text="Paściak" />
+                                    <TextField fx:id="surnameInput" alignment="CENTER" layoutX="139.0" layoutY="22.0" prefHeight="33.0" prefWidth="109.0" styleClass="inputBox" text="Paściak" />
                                     <Text layoutX="135.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%surname" textAlignment="CENTER" wrappingWidth="112.51040649414062" />
-                                    <TextField alignment="CENTER" layoutX="291.0" layoutY="22.0" prefHeight="33.0" prefWidth="137.0" styleClass="inputBox" text="12568247921" />
-                                    <TextField alignment="CENTER" layoutX="7.0" layoutY="98.0" prefHeight="33.0" prefWidth="182.0" styleClass="inputBox" text="Rzeszów" />
-                                    <TextField alignment="CENTER" layoutX="219.0" layoutY="98.0" prefHeight="33.0" prefWidth="221.0" styleClass="inputBox" text="Rejtana 26" />
+                                    <TextField fx:id="peselInput" alignment="CENTER" layoutX="291.0" layoutY="22.0" prefHeight="33.0" prefWidth="137.0" styleClass="inputBox" text="12568247921" />
+                                    <TextField fx:id="cityInput" alignment="CENTER" layoutX="7.0" layoutY="98.0" prefHeight="33.0" prefWidth="182.0" styleClass="inputBox" text="Rzeszów" />
+                                    <TextField fx:id="streetInput" alignment="CENTER" layoutX="219.0" layoutY="98.0" prefHeight="33.0" prefWidth="221.0" styleClass="inputBox" text="Rejtana 26" />
                                     <Text layoutX="216.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%streetAndNumber" textAlignment="CENTER" wrappingWidth="225.0" />
-                                    <TextField alignment="CENTER" layoutX="465.0" layoutY="22.0" prefHeight="33.0" prefWidth="137.0" styleClass="inputBox" text="123 456 789" />
-                                    <TextField alignment="CENTER" layoutX="473.0" layoutY="98.0" prefHeight="33.0" prefWidth="174.0" styleClass="inputBox" text="Podkarpacie" />
+                                    <TextField fx:id="inputNumber" alignment="CENTER" layoutX="465.0" layoutY="22.0" prefHeight="33.0" prefWidth="137.0" styleClass="inputBox" text="123 456 789" />
+                                    <TextField fx:id="inputVoivodeship" alignment="CENTER" layoutX="473.0" layoutY="98.0" prefHeight="33.0" prefWidth="174.0" styleClass="inputBox" text="Podkarpacie" />
                                     <Text layoutX="446.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%voivodeship" textAlignment="CENTER" wrappingWidth="228.515625" />
                                     <Text layoutX="6.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%email" textAlignment="CENTER" wrappingWidth="187.1328125" />
-                                    <TextField alignment="CENTER" layoutX="8.0" layoutY="162.0" prefHeight="33.0" prefWidth="182.0" styleClass="inputBox" text="test@gmail.com" />
+                                    <TextField fx:id="inputEmail" alignment="CENTER" layoutX="8.0" layoutY="162.0" prefHeight="33.0" prefWidth="182.0" styleClass="inputBox" text="test@gmail.com" />
                                     <Text layoutX="242.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Region" textAlignment="CENTER" wrappingWidth="217.66668701171875" />
                                     <ComboBox fx:id="regionName" layoutX="243.0" layoutY="162.0" prefHeight="32.0" prefWidth="233.0" promptText="Przykładowy region" styleClass="inputBox" />
                                  </children>

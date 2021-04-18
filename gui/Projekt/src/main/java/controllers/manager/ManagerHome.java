@@ -18,7 +18,7 @@ public class ManagerHome {
         System.out.println("ManagerHome > Packages");
     }
 
-    public void openRaports(MouseEvent mouseEvent) {
+    public void openReports(MouseEvent mouseEvent) {
         System.out.println("ManagerHome > Raports");
     }
 
