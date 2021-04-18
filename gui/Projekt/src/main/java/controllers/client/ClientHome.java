@@ -3,12 +3,14 @@ package main.java.controllers.client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import main.java.SceneManager;
+import main.java.dao.UsersDAO;
+import main.java.entity.Users;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientHome implements Initializable {
@@ -18,7 +20,6 @@ public class ClientHome implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     @FXML

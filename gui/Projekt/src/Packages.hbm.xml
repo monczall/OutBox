@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="main.java.entity.Packages" table="packages" schema="outbox">
+        <id name="packageId" column="packageID"/>
+        <property name="typeId" column="typeID"/>
+        <property name="userId" column="userID"/>
+        <property name="userInfoId" column="user_infoID"/>
+        <property name="packageNumber" column="package_number"/>
+        <property name="timeOfPlannedDelivery" column="time_of_planned_delivery"/>
+        <property name="additionalComment" column="additional_comment"/>
+    </class>
+</hibernate-mapping>
