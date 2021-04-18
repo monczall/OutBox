@@ -16,7 +16,7 @@
          </font>
       </ToggleSwitch>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%settingsTitle" />
-      <FontAwesomeIconView fill="ORANGE" glyphName="COG" layoutX="142.0" layoutY="70.0" size="40" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="COG" layoutX="142.0" layoutY="70.0" size="40" styleClass="blockIconTitle" />
       <Line endX="570.0" layoutX="303.0" layoutY="149.0" startX="-100.0" stroke="#252525" strokeWidth="2.0" />
       <Text layoutX="200.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%language" />
       <Text fill="#8f8f8f" layoutX="202.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%pickLanguage" />

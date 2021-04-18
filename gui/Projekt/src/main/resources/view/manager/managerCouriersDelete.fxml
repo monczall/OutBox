@@ -12,20 +12,20 @@
 
 <AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriersDelete">
    <children>
-      <FontAwesomeIconView fill="ORANGE" glyphName="USER_TIMES" layoutX="142.0" layoutY="70.0" size="38" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="USER_TIMES" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%deleteCourierTitle" />
       <TextField fx:id="name" layoutX="202.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="%name" styleClass="inputBox" />
       <TextField fx:id="surname" layoutX="381.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="%surname" styleClass="inputBox" />
       <TextField fx:id="peselInput" layoutX="556.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="Pesel" styleClass="inputBox" />
       <Button fx:id="findCourierButton" alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#findCourier" prefHeight="39.0" prefWidth="150.0" styleClass="homeBlock" text="%find" />
-      <AnchorPane layoutX="185.0" layoutY="162.0" prefHeight="478.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client/client.css">
+      <AnchorPane layoutX="185.0" layoutY="162.0" prefHeight="478.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
          <children>
             <Label alignment="CENTER" prefHeight="99.0" prefWidth="730.0" styleClass="optionGroup" text="%noDataToDisplay" />
             <ScrollPane prefHeight="478.0" prefWidth="730.0" style="-fx-background-color: transparent;">
                <content>
                   <VBox fx:id="packageLayout" alignment="TOP_CENTER" focusTraversable="true" prefHeight="494.0" prefWidth="690.0" style="-fx-background-color: transparent;">
                      <children>
-                        <Pane prefHeight="209.0" prefWidth="690.0" styleClass="mainBackground" stylesheets="@../../css/client/client.css">
+                        <Pane prefHeight="209.0" prefWidth="690.0" styleClass="mainBackground" stylesheets="@../../css/manager.css">
                            <children>
                               <Pane layoutX="4.0" layoutY="8.0" prefHeight="197.0" prefWidth="692.0" styleClass="packageItem">
                                  <children>
