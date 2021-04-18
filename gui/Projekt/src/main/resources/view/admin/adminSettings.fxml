@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminSettings">
     <children>
-        <AnchorPane fx:id="appSettingsPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client/client.css">
+        <AnchorPane fx:id="appSettingsPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client.css">
             <children>
                 <Text layoutX="6.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="JĘZYK" />
                 <Text fill="#8f8f8f" layoutX="3.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Wybierz język" />
@@ -27,7 +27,7 @@
                 <Line endX="594.0" endY="0.49554443359375" layoutX="96.0" layoutY="24.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="userInformationPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client/client.css" visible="false">
+        <AnchorPane fx:id="userInformationPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" stylesheets="@../../css/client.css" visible="false">
             <children>
                 <Text layoutX="5.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="DANE" />
                 <Line endX="594.0" endY="0.49554443359375" layoutX="95.0" layoutY="24.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />

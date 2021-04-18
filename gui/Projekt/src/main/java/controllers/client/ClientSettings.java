@@ -82,13 +82,15 @@ public class ClientSettings implements Initializable {
     private AnchorPane window;
 
     //List of colors for combobox
-    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy","Czerwony");
+    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony", "Biały");
     //List of languages for combobox
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
     //List of provinces for combobox
     private ObservableList<String> provinces = FXCollections.observableArrayList( "Dolnośląskie",  "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Łódzkie",  "Małopolskie",  "Mazowieckie",  "Opolskie",  "Podkarpackie",  "Podlaskie",  "Pomorskie",  "Śląskie",  "Świętokrzyskie",  "Warmińsko-mazurskie",  "Wielkopolskie",  "Zachodniopomorskie");
 
     private String[] inputs = new String[5];
+
+    Preference pref = new Preference();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -104,13 +106,26 @@ public class ClientSettings implements Initializable {
 
         userInformationPane.setTranslateY(-800);
 
-        //Populating color combobox
-        pickColor.setItems(colors);
-        pickColor.setValue(colors.get(0));
-
         //Populating language combobox
         pickLanguage.setItems(languages);
-        pickLanguage.setValue(languages.get(0));
+        if(pref.readPreference("language").equals("english")){
+            pickLanguage.setValue(languages.get(1));
+        }
+        else{
+            pickLanguage.setValue(languages.get(0));
+        }
+
+        //Populating color combobox
+        pickColor.setItems(colors);
+        if(pref.readPreference("color").equals("orange")){
+            pickColor.setValue(colors.get(0));
+        }
+        else if(Preference.readPreference("color").equals("red")){
+            pickColor.setValue(colors.get(1));
+        }
+        else{
+            pickColor.setValue(colors.get(2));
+        }
 
         //Populating province combobox
         settProvince.setItems(provinces);
@@ -149,12 +164,22 @@ public class ClientSettings implements Initializable {
 
     @FXML
     void changeColor(ActionEvent event) {
-        Preference pref = new Preference();
 
-        if (pickColor.getValue().equals("Pomarańczowy"))
-            pref.addPreference("color","orange");
-        else
-            pref.addPreference("color","red");
+        if (pickColor.getValue().equals("Pomarańczowy")) {
+            pref.addPreference("color", "orange");
+            SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #ffa500;" +
+                    "-fx-second-color: #000000;");
+        }
+        else if (pickColor.getValue().equals("Czerwony")){
+            pref.addPreference("color", "red");
+            SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #d82020;" +
+                    "-fx-second-color: #ffffff;");
+        }
+        else{
+            pref.addPreference("color", "white");
+            SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #FFFFFF;" +
+                    "-fx-second-color: #000000;");
+        }
     }
 
     @FXML

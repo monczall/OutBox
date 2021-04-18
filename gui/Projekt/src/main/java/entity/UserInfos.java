@@ -1,22 +1,24 @@
 package main.java.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user_infos", schema = "outbox", catalog = "")
+@Table(name = "user_infos", schema = "outbox")
 public class UserInfos {
     private int userInfoId;
     private String name;
     private String surname;
-    private String eMail;
+    private String email;
     private String phoneNumber;
     private String streetAndNumber;
     private String city;
     private String voivodeship;
 
     @Id
-    @Column(name = "user_infoID")
+    @Column(name="user_infoID")
     public int getUserInfoId() {
         return userInfoId;
     }
@@ -46,13 +48,13 @@ public class UserInfos {
     }
 
     @Basic
-    @Column(name = "e-mail")
-    public String geteMail() {
-        return eMail;
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Basic
@@ -100,11 +102,11 @@ public class UserInfos {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserInfos userInfos = (UserInfos) o;
-        return userInfoId == userInfos.userInfoId && Objects.equals(name, userInfos.name) && Objects.equals(surname, userInfos.surname) && Objects.equals(eMail, userInfos.eMail) && Objects.equals(phoneNumber, userInfos.phoneNumber) && Objects.equals(streetAndNumber, userInfos.streetAndNumber) && Objects.equals(city, userInfos.city) && Objects.equals(voivodeship, userInfos.voivodeship);
+        return userInfoId == userInfos.userInfoId && Objects.equals(name, userInfos.name) && Objects.equals(surname, userInfos.surname) && Objects.equals(email, userInfos.email) && Objects.equals(phoneNumber, userInfos.phoneNumber) && Objects.equals(streetAndNumber, userInfos.streetAndNumber) && Objects.equals(city, userInfos.city) && Objects.equals(voivodeship, userInfos.voivodeship);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userInfoId, name, surname, eMail, phoneNumber, streetAndNumber, city, voivodeship);
+        return Objects.hash(userInfoId, name, surname, email, phoneNumber, streetAndNumber, city, voivodeship);
     }
 }
