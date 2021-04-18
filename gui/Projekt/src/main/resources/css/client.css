@@ -1,9 +1,7 @@
 /*-------------COLORS-------------*/
 *{
-    -fx-main-color: #d82020; /* #DC143C */
     -fx-dark-color: #121212;
     -fx-gray-color: #8f8f8f;
-    -fx-second-color: #ffffff;
     -fx-shadow: #000;
     -fx-dark-transparent: #121212cc;
     -fx-alert-success-color: #38b000;
@@ -48,7 +46,7 @@
 }
 .welcomeHello, .welcomeUser{
     -fx-font-size: 20px;
-    -fx-text-fill: white;
+    -fx-fill: white;
 }
 .welcomeUser{
     -fx-fill: -fx-main-color;
@@ -146,7 +144,7 @@
     -fx-font-weight: bold;
 }
 .inputBox .list-view .scroll-bar:vertical .thumb{
-    -fx-background-color: -fx-second-color;
+    -fx-background-color: -fx-dark-color;
 }
 
 .userIconSettings{
@@ -316,7 +314,7 @@
     -fx-background-color: -fx-main-color;
     -fx-effect: dropshadow(three-pass-box, -fx-main-color, 10, 0, 0, 0);
 }
-/*-------------STYLING ALERT-------------*/
+/*-------------ALERT-------------*/
 .alert{
     -fx-background-color:  -fx-dark-transparent; /*#262628*/
     -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
@@ -342,13 +340,13 @@
     -fx-text-fill: -fx-alert-success-color;
 }
 .alertFailure{
-    -fx-background-color: -fx-dark-transparent; /*#262628*/
+    -fx-background-color:  -fx-dark-transparent; /*#262628*/
     -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
     -fx-border-color: -fx-alert-failure-color;
     -fx-border-radius: 0;
 }
 .alertFailureIcon{
-    -fx-fill: -fx-alert-failure-color;
+    -fx-fill: -fx-alert-success-color;
 }
 .alertFailureText{
     -fx-font-size: 16px;

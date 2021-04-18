@@ -54,7 +54,7 @@
                               </Pane>
                            </children>
                         </Pane>
-                        <Pane prefHeight="164.0" prefWidth="690.0" styleClass="mainBackground" stylesheets="@../../css/client/client.css" />
+                        <Pane prefHeight="164.0" prefWidth="690.0" styleClass="mainBackground" stylesheets="@../../css/client.css" />
                      </children>
                   </VBox>
                </content>

@@ -30,9 +30,9 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
                         <Text layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%small" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="217.9999879077077" />
                         <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
-                        <Text layoutX="54.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="8 x 38 x 64 cm" />
-                        <Text layoutX="75.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" />
-                        <Text layoutX="70.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="11,99 zł" />
+                        <Text fx:id="smallSize" layoutX="1.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="8 x 38 x 64 cm" textAlignment="CENTER" wrappingWidth="216.0703125" />
+                        <Text fx:id="smallWeight" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" textAlignment="CENTER" wrappingWidth="217.330078125" />
+                        <Text fx:id="smallPrice" layoutX="70.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="11,99 zł" />
                         <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" styleClass="partIcon" />
                      </children>
                   </Pane>
@@ -45,9 +45,9 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
                         <Text layoutX="-1.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%medium" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="218.53125" />
                         <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
-                        <Text layoutX="54.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="19 x 38 x 64 cm" />
-                        <Text layoutX="75.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" />
-                        <Text layoutX="70.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="12,99 zł" />
+                        <Text fx:id="medSize" layoutX="1.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="19 x 38 x 64 cm" textAlignment="CENTER" wrappingWidth="214.97265625" />
+                        <Text fx:id="medWeight" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" textAlignment="CENTER" wrappingWidth="216.8574204146862" />
+                        <Text fx:id="medPrice" layoutX="70.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="12,99 zł" />
                         <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" styleClass="partIcon" />
                         <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="113.0" size="10" styleClass="partIcon" />
                      </children>
@@ -61,9 +61,9 @@
                         <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
                         <Text layoutX="-1.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%big" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="218.34766310453415" />
                         <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
-                        <Text layoutX="54.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="41 x 38 x 64cm" />
-                        <Text layoutX="75.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" />
-                        <Text layoutX="70.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="14,99zł" />
+                        <Text fx:id="bigSize" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="41 x 38 x 64cm" textAlignment="CENTER" wrappingWidth="217.662109375" />
+                        <Text fx:id="bigWeight" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="do 25 kg" textAlignment="CENTER" wrappingWidth="216.8574204146862" />
+                        <Text fx:id="bigPrice" layoutX="70.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="14,99zł" />
                         <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" styleClass="partIcon" />
                         <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="113.0" size="10" styleClass="partIcon" />
                         <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="104.0" size="10" styleClass="partIcon" />

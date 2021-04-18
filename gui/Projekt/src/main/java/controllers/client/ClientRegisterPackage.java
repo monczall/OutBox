@@ -8,13 +8,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import main.java.dao.HibernateUtil;
+import main.java.dao.PackageTypeDAO;
+import main.java.entity.PackageType;
+import main.java.entity.Packages;
+import main.java.entity.UserInfos;
 import main.java.features.Alerts;
 import main.java.features.Animations;
 import main.java.features.ErrorHandler;
 import org.controlsfx.control.textfield.CustomTextField;
+import org.hibernate.Session;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ClientRegisterPackage implements Initializable {
@@ -118,15 +129,57 @@ public class ClientRegisterPackage implements Initializable {
     @FXML
     private Button btnNextSummary;
 
+    @FXML
+    private Text smallSize;
+
+    @FXML
+    private Text smallWeight;
+
+    @FXML
+    private Text smallPrice;
+
+    @FXML
+    private Text medSize;
+
+    @FXML
+    private Text medWeight;
+
+    @FXML
+    private Text medPrice;
+
+    @FXML
+    private Text bigSize;
+
+    @FXML
+    private Text bigWeight;
+
+    @FXML
+    private Text bigPrice;
 
     private ToggleGroup packageGroup = new ToggleGroup();
 
+
+
     ArrayList<CustomTextField> list = new ArrayList<CustomTextField>();
 
-    ObservableList<String> timeOfDeliveryList = FXCollections.observableArrayList("10:30 - 15:30", "15:30 - 17:30", "17:30 - 21:00");
+    ObservableList<String> timeOfDeliveryList = FXCollections.observableArrayList("10:30 - 15:30", "15:30 - 17:30", "17:30 - 21:00", "Dowolny");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        List<PackageType> listOfTypeInfo = PackageTypeDAO.getTypeInfo();
+        smallSize.setText(listOfTypeInfo.get(0).getSize().replaceAll("x"," x ") + " cm");
+        medSize.setText(listOfTypeInfo.get(1).getSize().replaceAll("x"," x ") + " cm");
+        bigSize.setText(listOfTypeInfo.get(2).getSize().replaceAll("x"," x  ") + " cm");
+
+        smallWeight.setText(listOfTypeInfo.get(0).getWeight() + " kg");
+        medWeight.setText(listOfTypeInfo.get(1).getWeight() + " kg");
+        bigWeight.setText(listOfTypeInfo.get(2).getWeight() + " kg");
+
+        smallPrice.setText(listOfTypeInfo.get(0).getPrice() + " zł");
+        medPrice.setText(listOfTypeInfo.get(1).getPrice() + " zł");
+        bigPrice.setText(listOfTypeInfo.get(2).getPrice() + " zł");
+
 
         list.add(nameInput);
         list.add(surnameInput);
@@ -152,6 +205,7 @@ public class ClientRegisterPackage implements Initializable {
         deliveryTimePane.setTranslateX(+800);               // for animation purposes
         registerSummaryPane.setTranslateX(+800);
 
+        //Checking inputs
         ErrorHandler.checkInputs(nameInput, "[a-zA-Z]+", "Imie powinno zawierać tylko litery");
         ErrorHandler.checkInputs(surnameInput, "[a-zA-Z]+", "Nazwisko powinno zawierać tylko litery");
         ErrorHandler.checkInputs(emailInput,"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", "Email powinien mieć poprawny format");
@@ -206,6 +260,13 @@ public class ClientRegisterPackage implements Initializable {
             sumTime.setText(pickTimeOfDelivery.getValue().toString());
             sumEmail.setText(emailInput.getText());
             sumNumber.setText(numberInput.getText());
+
+            if(sumType.getText().equals("Mała"))
+                sumSize.setText(smallSize.getText());
+            else if(sumType.getText().equals("Średnia"))
+                sumSize.setText(medSize.getText());
+            else
+                sumSize.setText(bigSize.getText());
         }
         else
             Alerts.createAlert(appWindow, btnNextSummary,"WARNING","WYBIECZ CZAS PRZYJAZDU");
@@ -233,7 +294,44 @@ public class ClientRegisterPackage implements Initializable {
 
     @FXML
     void registerPackage(ActionEvent event) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+        LocalDateTime now = LocalDateTime.now();
+        Random rand = new Random();
+        String packageNumber = String.format("%06d", rand.nextInt(1000000)) + "/" + dateTimeFormatter.format(now);
+
         Alerts.createAlert(appWindow, btnNextSummary,"CHECK","POMYŚLNIE ZAREJESTROWANO");
         //Database insert query here
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        UserInfos userInfos = new UserInfos();
+        userInfos.setName(sumName.getText());
+        userInfos.setSurname(sumSurname.getText());
+        userInfos.setEmail(sumEmail.getText());
+        userInfos.setPhoneNumber(sumNumber.getText());
+        userInfos.setStreetAndNumber(sumStreet.getText());
+        userInfos.setCity(sumCity.getText());
+        userInfos.setVoivodeship(sumProvince.getText());
+
+        session.save(userInfos);
+
+        Packages packages = new Packages();
+        if(sumType.getText().equals("Mała"))
+            packages.setTypeId(1);
+        else if(sumType.getText().equals("Średnia"))
+            packages.setTypeId(2);
+        else
+            packages.setTypeId(3);;
+
+        packages.setUserId(6);
+        packages.setUserInfoId(userInfos.getUserInfoId());
+        packages.setPackageNumber(packageNumber);
+        packages.setTimeOfPlannedDelivery(sumTime.getText());
+        packages.setAdditionalComment(additionalComment.getText());
+
+        session.save(packages);
+        session.getTransaction().commit();
+        session.close();
     }
 }

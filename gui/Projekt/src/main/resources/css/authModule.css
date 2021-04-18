@@ -1,52 +1,64 @@
-.darkBackGround{
-    -fx-background-color:  #121212;
+/*-------------COLORS-------------*/
+*{
+    -fx-theme-color: -fx-main-color;
+    -fx-theme-secondary-color: -fx-second-color;
+    -fx-textFields-bg: #EEEEEE;
+    -fx-error: red;
+    -fx-success: #38B000;
+    -fx-dark-bg: #121212;
+    -fx-white: #FFFFFF;
+    -fx-black: #000000;
+    -fx-alter: #CCCCCC;
+    -fx-disabled: #808080;
 }
-.lightBackGround{
-    -fx-background-color:  #FFFFFF;
+/*-------------BACKGROUNDS-------------*/
+.primaryBackground{
+    -fx-background-color: -fx-dark-bg;
 }
-.yellowBackGround{
-    -fx-background-color:  #FFA500;
+.secondaryBackground{
+    -fx-background-color: -fx-theme-color;
 }
-/* #FFA532 darker yellow*/
+/*-------------FILLS-------------*/
 .fill{
-    -fx-fill: #FFA500;
+    -fx-fill: -fx-theme-color;
 }
-.circle{
-    -fx-fill: #FFA500;
+.fillDisabled{
+    -fx-fill: -fx-disabled;
 }
-.circleError{
-    -fx-fill: RED;
+.fillCorrect{
+    -fx-fill: -fx-success;
 }
-.circleCorrect{
-    -fx-fill: GREEN;
+.fillError{
+    -fx-fill: -fx-error;
 }
-.circleDisabled{
-    -fx-fill: #808080;
+.fillIcon{
+    -fx-fill: -fx-theme-secondary-color;
 }
-.darkText{
-    -fx-text-fill: #000000;
+/*-------------TEXT-------------*/
+.mainText{
+    -fx-text-fill: -fx-black;
 }
-.darkAltText{
-    -fx-text-fill: #121212;
+.mainInvertText{
+    -fx-text-fill: -fx-white;
 }
-.lightText{
-    -fx-text-fill: #FFFFFF;
+.altText{
+    -fx-text-fill: -fx-alter;
 }
-.lightAltText{
-    -fx-text-fill: #5F6368;
+.themeMainText{
+    -fx-text-fill: -fx-second-color;
 }
-.yellowText{
-    -fx-text-fill: #FFA500;
+.themeTouchOfColorText{
+    -fx-text-fill: -fx-theme-color;
 }
 .errorText{
-    -fx-text-fill: RED;
+    -fx-text-fill: -fx-error;
 }
 .successText{
-    -fx-text-fill: #38B000;
+    -fx-text-fill: -fx-success;
 }
-
+/*-------------BUTTONS-------------*/
 .loginButton{
-    -fx-background-color: #FFA500;
+    -fx-background-color: -fx-theme-color;
     -fx-background-radius: 3;
     -fx-min-width: 250;
     -fx-pref-width: 250;
@@ -60,7 +72,7 @@
 .loginButton:hover{
     -fx-background-color: #000000;
     -fx-background-radius: 3;
-    -fx-border-color: #FFA500;
+    -fx-border-color: -fx-theme-color;
     -fx-border-radius: 3;
     -fx-min-width: 250;
     -fx-pref-width: 250;
@@ -68,7 +80,7 @@
     -fx-min-height: 35;
     -fx-pref-height: 35;
     -fx-max-height: 35;
-    -fx-text-fill: #FFA500;
+    -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
 .loginButton:pressed{
@@ -76,9 +88,9 @@
     -fx-scale-x: 0.9;
 }
 .createAccountButton{
-    -fx-background-color: #FFA500;
+    -fx-background-color: -fx-theme-color;
     -fx-background-radius: 3;
-    -fx-border-color: #000000;
+    -fx-border-color: -fx-theme-secondary-color;
     -fx-border-radius: 3;
     -fx-min-width: 91;
     -fx-pref-width: 91;
@@ -86,11 +98,11 @@
     -fx-min-height: 27;
     -fx-pref-height: 27;
     -fx-max-height: 27;
-    -fx-text-fill: #000000;
+    -fx-text-fill: -fx-theme-secondary-color;
     -fx-alignment: center;
 }
 .createAccountButton:hover{
-    -fx-background-color: #000000;
+    -fx-background-color: -fx-theme-secondary-color;
     -fx-background-radius: 3;
     -fx-min-width: 91;
     -fx-pref-width: 91;
@@ -98,7 +110,7 @@
     -fx-min-height: 27;
     -fx-pref-height: 27;
     -fx-max-height: 27;
-    -fx-text-fill: #FFA500;
+    -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
 .createAccountButton:pressed{
@@ -106,7 +118,7 @@
     -fx-scale-x: 0.9;
 }
 .exitButton{
-    -fx-background-color: #000000;
+    -fx-background-color: -fx-theme-secondary-color;
     -fx-background-radius: 3;
     -fx-min-width: 60;
     -fx-pref-width: 60;
@@ -114,13 +126,13 @@
     -fx-min-height: 25;
     -fx-pref-height: 25;
     -fx-max-height: 25;
-    -fx-text-fill: #FFA500;
+    -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
 .exitButton:hover{
-    -fx-background-color: #FFA500;
+    -fx-background-color: -fx-theme-color;
     -fx-background-radius: 3;
-    -fx-border-color: #000000;
+    -fx-border-color: -fx-theme-secondary-color;
     -fx-border-radius: 3;
     -fx-min-width: 60;
     -fx-pref-width: 60;
@@ -128,17 +140,18 @@
     -fx-min-height: 25;
     -fx-pref-height: 25;
     -fx-max-height: 25;
-    -fx-text-fill: #000000;
+    -fx-text-fill: -fx-theme-secondary-color;
     -fx-alignment: center;
 }
 .exitButton:pressed{
     -fx-scale-y: 0.9;
     -fx-scale-x: 0.9;
 }
+/*-------------TEXT FIELDS-------------*/
 .textFields{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: -fx-textFields-bg;
     -fx-background-radius: 9;
-    -fx-border-color: #FFA500;
+    -fx-border-color: -fx-theme-color;
     -fx-border-width: 3;
     -fx-border-radius: 7;
     -fx-min-width: 250;
@@ -150,9 +163,9 @@
     -fx-padding: 0 0 0 30;
 }
 .textFieldsCorrect{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: -fx-textFields-bg;
     -fx-background-radius: 9;
-    -fx-border-color: #38B000;
+    -fx-border-color: -fx-success;
     -fx-border-width: 3;
     -fx-border-radius: 7;
     -fx-min-width: 250;
@@ -164,9 +177,9 @@
     -fx-padding: 0 0 0 30;
 }
 .textFieldsError{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #ffb5b5;
     -fx-background-radius: 9;
-    -fx-border-color: RED;
+    -fx-border-color: -fx-error;
     -fx-border-width: 3;
     -fx-border-radius: 7;
     -fx-min-width: 250;
