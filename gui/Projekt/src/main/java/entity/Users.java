@@ -1,27 +1,29 @@
 package main.java.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Users {
-    private int userId;
+    private int id;
     private int userInfoId;
-    private String password;
     private Integer areaId;
+    private String email;
+    private String password;
     private String role;
+    private Collection<Packages> packagesById;
+    private UserInfos userInfosByUserInfoId;
+    private Areas areasByAreaId;
 
     @Id
-    @Column(name = "userID")
-    public int getUserId() {
-        return userId;
+    @Column(name = "ID")
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -35,16 +37,6 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Basic
     @Column(name = "areaID")
     public Integer getAreaId() {
         return areaId;
@@ -52,6 +44,27 @@ public class Users {
 
     public void setAreaId(Integer areaId) {
         this.areaId = areaId;
+    }
+
+    @Basic
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Basic
@@ -64,16 +77,32 @@ public class Users {
         this.role = role;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
-        return userId == users.userId && userInfoId == users.userInfoId && Objects.equals(password, users.password) && Objects.equals(areaId, users.areaId) && Objects.equals(role, users.role);
+    @OneToMany(mappedBy = "usersByUserId")
+    public Collection<Packages> getPackagesById() {
+        return packagesById;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, userInfoId, password, areaId, role);
+    public void setPackagesById(Collection<Packages> packagesById) {
+        this.packagesById = packagesById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_infoID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    public UserInfos getUserInfosByUserInfoId() {
+        return userInfosByUserInfoId;
+    }
+
+    public void setUserInfosByUserInfoId(UserInfos userInfosByUserInfoId) {
+        this.userInfosByUserInfoId = userInfosByUserInfoId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "areaID", referencedColumnName = "ID", insertable = false, updatable = false)
+    public Areas getAreasByAreaId() {
+        return areasByAreaId;
+    }
+
+    public void setAreasByAreaId(Areas areasByAreaId) {
+        this.areasByAreaId = areasByAreaId;
     }
 }

@@ -1,25 +1,26 @@
 package main.java.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "package_history", schema = "outbox", catalog = "")
 public class PackageHistory {
-    private int historyId;
+    private int id;
     private int packageId;
     private String status;
-    private Date date;
+    private Timestamp date;
+    private Packages packagesByPackageId;
 
     @Id
-    @Column(name = "historyID")
-    public int getHistoryId() {
-        return historyId;
+    @Column(name = "ID")
+    public int getId() {
+        return id;
     }
 
-    public void setHistoryId(int historyId) {
-        this.historyId = historyId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -44,24 +45,22 @@ public class PackageHistory {
 
     @Basic
     @Column(name = "date")
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PackageHistory that = (PackageHistory) o;
-        return historyId == that.historyId && packageId == that.packageId && Objects.equals(status, that.status) && Objects.equals(date, that.date);
+
+    @ManyToOne
+    @JoinColumn(name = "packageID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    public Packages getPackagesByPackageId() {
+        return packagesByPackageId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(historyId, packageId, status, date);
+    public void setPackagesByPackageId(Packages packagesByPackageId) {
+        this.packagesByPackageId = packagesByPackageId;
     }
 }
