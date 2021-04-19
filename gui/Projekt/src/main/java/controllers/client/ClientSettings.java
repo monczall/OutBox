@@ -13,6 +13,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import main.java.SceneManager;
+import main.java.dao.UsersDAO;
 import main.java.features.Alerts;
 import main.java.features.Animations;
 import main.java.features.ErrorHandler;
@@ -61,9 +62,6 @@ public class ClientSettings implements Initializable {
     private CustomTextField settNumber;
 
     @FXML
-    private CustomTextField settEmail;
-
-    @FXML
     private CustomPasswordField settPassword;
 
     @FXML
@@ -80,6 +78,9 @@ public class ClientSettings implements Initializable {
 
     @FXML
     private AnchorPane window;
+
+    @FXML
+    private CustomTextField settOldPassword;
 
     //List of colors for combobox
     private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony", "Biały");
@@ -133,7 +134,6 @@ public class ClientSettings implements Initializable {
 
         //Setting text for inputs to test how it will work with database information
         settCity.setText("City");
-        settEmail.setText("Email@gmail.com");
         settNumber.setText("1234567890"); //373 128
         settStreet.setText("Street 33");
 
@@ -141,12 +141,10 @@ public class ClientSettings implements Initializable {
         inputs[1] = settCity.getText();
         inputs[2] = settProvince.getSelectionModel().getSelectedItem();
         inputs[3] = settNumber.getText();
-        inputs[4] = settEmail.getText();
 
         alertPane.setTranslateY(-500);
 
         ErrorHandler.checkInputs(settCity,"[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}","Miasto powinno zawierać tylko litery");
-        ErrorHandler.checkInputs(settEmail,"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", "Email powinien mieć poprawny format");
         ErrorHandler.checkInputs(settStreet, "[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}", "Ulica powinna miec format ULICA NUMER");
         ErrorHandler.checkPasswords(settPassword,settRepeatPassword, "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$", "Podane hasło ma niepoprawny format","Hasła powinny być takie same");
         ErrorHandler.checkInputs(settNumber, "\\+?[0-9]{0,2}\\s?[0-9]{3}\\s?[0-9]{3}\\s?[0-9]{3}", "Numer powinno zawierać tylko cyfry");
@@ -195,11 +193,15 @@ public class ClientSettings implements Initializable {
     @FXML
     void updateInformation(ActionEvent event) {
         if(!settStreet.getRight().isVisible() && !settCity.getRight().isVisible() && !settNumber.getRight().isVisible()
-                && !settEmail.getRight().isVisible() && !settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()) {
+                && !settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()) {
 
             if (!inputs[0].equals(settStreet.getText()) || !inputs[1].equals(settCity.getText()) || !inputs[2].equals(settProvince.getSelectionModel().getSelectedItem())
-                    || !inputs[3].equals(settNumber.getText()) || !inputs[4].equals(settEmail.getText()) || !settPassword.getText().isEmpty()) {
+                    || !inputs[3].equals(settNumber.getText()) || !settPassword.getText().isEmpty()) {
+
+                UsersDAO.updatePassword(1,settPassword.getText());
+
                 Alerts.createAlert(settingsPane, saveInformation, "CHECK", "POMYŚLNIE ZMIENIONO");
+
             }
         }
         else

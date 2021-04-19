@@ -11,10 +11,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.SceneManager;
+import main.java.dao.UsersDAO;
+import main.java.entity.Users;
 import main.java.features.Animations;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -44,6 +47,7 @@ public class Courier implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
+
         SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: red;");
 
         paneRight.setTranslateX(-200);

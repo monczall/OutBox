@@ -68,7 +68,7 @@ public class ClientTrackPackage implements Initializable {
 
             try {
                 Pane pane = fxmlLoader.load();
-                PackageItem packageItem = fxmlLoader.getController();       //Loading controler of packageItem.fxml
+                PackageItem packageItem = fxmlLoader.getController();       //Loading controller of packageItem.fxml
 
                 pane.setPadding(new Insets(70,0,100,70));       //Adjusting padding of pane
 

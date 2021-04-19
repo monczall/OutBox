@@ -63,10 +63,6 @@ public class Login implements Initializable{
     }
 
     public void login(){
-        List<Users> test = UsersDAO.showTable();
-        for(Users users: test){
-            System.out.println(users.getPassword());
-        }
         if(!isEmpty()){
             if(isEmail(loginEmailTextField.getText())){
                 if(false){

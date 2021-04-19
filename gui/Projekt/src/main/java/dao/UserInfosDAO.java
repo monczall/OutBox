@@ -27,7 +27,6 @@ public class UserInfosDAO {
 
         userInfo.setName(name);
         userInfo.setSurname(surname);
-        userInfo.setEmail(email);
         userInfo.setPhoneNumber(phone_number);
         userInfo.setStreetAndNumber(street_and_number);
         userInfo.setCity(city);
@@ -36,8 +35,9 @@ public class UserInfosDAO {
 
         Users user = new Users();
 
-        user.setUserInfoId(userInfo.getUserInfoId());
+        user.setUserInfoId(userInfo.getId());
         user.setPassword(password);
+        user.setEmail(email);
         user.setRole("Klient");
         session.save(user);
 

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import main.java.SceneManager;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.UserInfos;
+import main.java.entity.Users;
 import main.java.features.Alerts;
 
 import java.util.List;
@@ -133,12 +134,12 @@ public class Register {
         if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(), registerPhoneNumberField.getText(), registerEmailAddressField.getText(), registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText(), registerPasswordField.getText(), registerRepeatPasswordField.getText())){
             boolean emailExists = false;
 
-            List<UserInfos> listOfUsers = getUsers();
-            for(int i = 0; i < getUsers().size(); i++){
-                if(registerEmailAddressField.getText().equals(listOfUsers.get(i).getEmail())) {
-                    emailExists = true;
-                }
-            }
+//            List<Users> listOfUsers = getUsers();
+//            for(int i = 0; i < getUsers().size(); i++){
+//                if(registerEmailAddressField.getText().equals(listOfUsers.get(i).getEmail())) {
+//                    emailExists = true;
+//                }
+//            }
 
             if(!emailExists){
                 String firstName = registerFirstNameField.getText();

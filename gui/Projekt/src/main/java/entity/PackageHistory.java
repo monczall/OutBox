@@ -1,25 +1,25 @@
 package main.java.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.Objects;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "package_history", schema = "outbox", catalog = "")
+@Table(name = "package_history", schema = "outbox")
 public class PackageHistory {
-    private int historyId;
+    private int id;
     private int packageId;
     private String status;
-    private Date date;
+    private Timestamp timestamp;
+    private Packages packagesByPackageId;
 
     @Id
-    @Column(name = "historyID")
-    public int getHistoryId() {
-        return historyId;
+    @Column(name = "ID")
+    public int getId() {
+        return id;
     }
 
-    public void setHistoryId(int historyId) {
-        this.historyId = historyId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -44,24 +44,21 @@ public class PackageHistory {
 
     @Basic
     @Column(name = "date")
-    public Date getDate() {
-        return date;
+    public Timestamp getDate() {
+        return timestamp;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PackageHistory that = (PackageHistory) o;
-        return historyId == that.historyId && packageId == that.packageId && Objects.equals(status, that.status) && Objects.equals(date, that.date);
+    @ManyToOne
+    @JoinColumn(name = "packageID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    public Packages getPackagesByPackageId() {
+        return packagesByPackageId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(historyId, packageId, status, date);
+    public void setPackagesByPackageId(Packages packagesByPackageId) {
+        this.packagesByPackageId = packagesByPackageId;
     }
 }
