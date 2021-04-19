@@ -193,6 +193,7 @@ public class ClientRegisterPackage implements Initializable {
         list.add(numberInput);
 
         pickTimeOfDelivery.setItems(timeOfDeliveryList);
+        pickTimeOfDelivery.setValue(timeOfDeliveryList.get(3));
 
         // Added three buttons to the group
         smallPackage.setToggleGroup(packageGroup);
@@ -314,7 +315,6 @@ public class ClientRegisterPackage implements Initializable {
 
         userInfos.setName(sumName.getText());
         userInfos.setSurname(sumSurname.getText());
-        userInfos.setEmail(sumEmail.getText());
         userInfos.setPhoneNumber(sumNumber.getText());
         userInfos.setStreetAndNumber(sumStreet.getText());
         userInfos.setCity(sumCity.getText());
@@ -329,9 +329,10 @@ public class ClientRegisterPackage implements Initializable {
         else
             packages.setTypeId(3);;
 
-        packages.setUserId(6);      // Hardcoded for tests
-        packages.setUserInfoId(userInfos.getUserInfoId());
+        packages.setUserId(1);      // Hardcoded for tests
+        packages.setUserInfoId(userInfos.getId());
         packages.setPackageNumber(packageNumber);
+        packages.setEmail(sumEmail.getText());
         packages.setTimeOfPlannedDelivery(sumTime.getText());
         packages.setAdditionalComment(additionalComment.getText());
 
@@ -339,7 +340,7 @@ public class ClientRegisterPackage implements Initializable {
 
         dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        packageHistory.setPackageId(packages.getPackageId());
+        packageHistory.setPackageId(packages.getId());
         packageHistory.setStatus("Zarejestrowana");
         packageHistory.setDate(Timestamp.valueOf(dateTimeFormatter.format(now)));
 

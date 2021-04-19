@@ -1,27 +1,26 @@
 package main.java.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Areas {
-    private int areaId;
+    private int id;
     private String name;
     private String voivodeship;
     private String city;
     private String departmentStreetAndNumber;
+    private Collection<Users> usersById;
 
     @Id
-    @Column(name = "areaID")
-    public int getAreaId() {
-        return areaId;
+    @Column(name = "ID")
+    public int getId() {
+        return id;
     }
 
-    public void setAreaId(int areaId) {
-        this.areaId = areaId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -64,16 +63,12 @@ public class Areas {
         this.departmentStreetAndNumber = departmentStreetAndNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Areas areas = (Areas) o;
-        return areaId == areas.areaId && Objects.equals(name, areas.name) && Objects.equals(voivodeship, areas.voivodeship) && Objects.equals(city, areas.city) && Objects.equals(departmentStreetAndNumber, areas.departmentStreetAndNumber);
+    @OneToMany(mappedBy = "areasByAreaId")
+    public Collection<Users> getUsersById() {
+        return usersById;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(areaId, name, voivodeship, city, departmentStreetAndNumber);
+    public void setUsersById(Collection<Users> usersById) {
+        this.usersById = usersById;
     }
 }

@@ -41,7 +41,7 @@ public class Admin implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
 
         try {
-            SceneManager.loadScene("../../resources/view/admin/adminHome.fxml", mainWindow);
+            SceneManager.loadScene("../../../resources/view/admin/adminHome.fxml", mainWindow);
         } catch (IOException e) {
             e.printStackTrace();
         }

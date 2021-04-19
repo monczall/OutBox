@@ -142,7 +142,7 @@ public class PasswordReset {
             //Blocking email field and send code button
             passwordResetEmailField.setDisable(true);
             passwordResetEmailCircle.getStyleClass().clear();
-            passwordResetEmailCircle.getStyleClass().add("circleCorrect");
+            passwordResetEmailCircle.getStyleClass().add("fillCorrect");
 
             passwordResetEmailField.getStyleClass().clear();
             passwordResetEmailField.getStyleClass().add("textFieldsCorrect");
@@ -155,7 +155,7 @@ public class PasswordReset {
             //Unblocking verification code field and verify button
             passwordResetVerificationCodeField.setDisable(false);
             passwordResetVerificationCodeCircle.getStyleClass().clear();
-            passwordResetVerificationCodeCircle.getStyleClass().add("circle");
+            passwordResetVerificationCodeCircle.getStyleClass().add("fill");
 
             passwordResetVerifyCodeLabel.setVisible(true);
 
@@ -242,7 +242,7 @@ public class PasswordReset {
             //Block verification code field and verify button
             passwordResetVerificationCodeField.setDisable(true);
             passwordResetVerificationCodeCircle.getStyleClass().clear();
-            passwordResetVerificationCodeCircle.getStyleClass().add("circleCorrect");
+            passwordResetVerificationCodeCircle.getStyleClass().add("fillCorrect");
 
             passwordResetVerificationCodeField.getStyleClass().clear();
             passwordResetVerificationCodeField.getStyleClass().add("textFieldsCorrect");
@@ -255,11 +255,11 @@ public class PasswordReset {
             //Unblock password fields and set password button
             passwordResetPasswordField.setDisable(false);
             passwordResetPasswordCircle.getStyleClass().clear();
-            passwordResetPasswordCircle.getStyleClass().add("circle");
+            passwordResetPasswordCircle.getStyleClass().add("fill");
 
             passwordResetConfirmPasswordField.setDisable(false);
             passwordResetConfirmPasswordCircle.getStyleClass().clear();
-            passwordResetConfirmPasswordCircle.getStyleClass().add("circle");
+            passwordResetConfirmPasswordCircle.getStyleClass().add("fill");
 
             passwordResetSetNewPasswordButton.setDisable(false);
 
@@ -397,7 +397,7 @@ public class PasswordReset {
         passwordResetEmailField.getStyleClass().add("textFieldsError");
         //EmailCircle
         passwordResetEmailCircle.getStyleClass().clear();
-        passwordResetEmailCircle.getStyleClass().add("circleError");
+        passwordResetEmailCircle.getStyleClass().add("fillError");
     }
 
     public void clearErrorsOnEmail(KeyEvent keyEvent) {
@@ -406,7 +406,7 @@ public class PasswordReset {
         passwordResetEmailField.getStyleClass().add("textFields");
         //EmailCircle
         passwordResetEmailCircle.getStyleClass().clear();
-        passwordResetEmailCircle.getStyleClass().add("circle");
+        passwordResetEmailCircle.getStyleClass().add("fill");
     }
 
     public void errorOnVerificationCode(){
@@ -415,7 +415,7 @@ public class PasswordReset {
         passwordResetVerificationCodeField.getStyleClass().add("textFieldsError");
         //VerificationCodeCircle
         passwordResetVerificationCodeCircle.getStyleClass().clear();
-        passwordResetVerificationCodeCircle.getStyleClass().add("circleError");
+        passwordResetVerificationCodeCircle.getStyleClass().add("fillError");
     }
 
     public void clearErrorsOnVerificationCode(KeyEvent keyEvent) {
@@ -424,7 +424,7 @@ public class PasswordReset {
         passwordResetVerificationCodeField.getStyleClass().add("textFields");
         //VerificationCodeCircle
         passwordResetVerificationCodeCircle.getStyleClass().clear();
-        passwordResetVerificationCodeCircle.getStyleClass().add("circle");
+        passwordResetVerificationCodeCircle.getStyleClass().add("fill");
     }
 
     public void errorOnPassword(){
@@ -433,7 +433,7 @@ public class PasswordReset {
         passwordResetPasswordField.getStyleClass().add("textFieldsError");
         //PasswordCircle
         passwordResetPasswordCircle.getStyleClass().clear();
-        passwordResetPasswordCircle.getStyleClass().add("circleError");
+        passwordResetPasswordCircle.getStyleClass().add("fillError");
     }
 
     public void clearErrorsOnPassword(KeyEvent keyEvent) {
@@ -442,7 +442,7 @@ public class PasswordReset {
         passwordResetPasswordField.getStyleClass().add("textFields");
         //PasswordCircle
         passwordResetPasswordCircle.getStyleClass().clear();
-        passwordResetPasswordCircle.getStyleClass().add("circle");
+        passwordResetPasswordCircle.getStyleClass().add("fill");
     }
 
     public void errorOnConfirmPassword(){
@@ -451,7 +451,7 @@ public class PasswordReset {
         passwordResetConfirmPasswordField.getStyleClass().add("textFieldsError");
         //ConfirmPasswordCircle
         passwordResetConfirmPasswordCircle.getStyleClass().clear();
-        passwordResetConfirmPasswordCircle.getStyleClass().add("circleError");
+        passwordResetConfirmPasswordCircle.getStyleClass().add("fillError");
     }
 
     public void clearErrorsOnConfirmPassword(KeyEvent keyEvent) {
@@ -460,7 +460,7 @@ public class PasswordReset {
         passwordResetConfirmPasswordField.getStyleClass().add("textFields");
         //ConfirmPasswordCircle
         passwordResetConfirmPasswordCircle.getStyleClass().clear();
-        passwordResetConfirmPasswordCircle.getStyleClass().add("circle");
+        passwordResetConfirmPasswordCircle.getStyleClass().add("fill");
     }
 
     public void handleReturn(ActionEvent actionEvent) {

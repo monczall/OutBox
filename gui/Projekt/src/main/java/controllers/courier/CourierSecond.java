@@ -8,8 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import main.java.dao.PackagesDAO;
+import main.java.entity.Packages;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
 import java.io.IOException;
@@ -19,7 +23,7 @@ import java.util.ResourceBundle;
 public class CourierSecond implements Initializable {
 
     @FXML
-    private TableView<Test> table;
+    private TableView<Packages> table;
     @FXML
     private TableColumn<?, ?> packageNumber;
 
@@ -41,33 +45,46 @@ public class CourierSecond implements Initializable {
     @FXML
     private TableColumn<?, ?> time;
 
+    @FXML
+    private Text senderName;
+
+    @FXML
+    private Text senderMail;
+
+    @FXML
+    private Text senderCity;
+
+    @FXML
+    private Text senderSurname;
+
+    @FXML
+    private Text senderPhone;
+
+    @FXML
+    private Text senderAddress;
+
+    @FXML
+    private TextArea comments;
+
     Pane pane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        TableRowExpanderColumn<Test> expanderRow = new TableRowExpanderColumn<Test>(this::createEditor);
+        TableRowExpanderColumn<Packages> expanderRow = new TableRowExpanderColumn<Packages>(this::createEditor);
 
-        packageNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+        packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
+        time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
+        state.setCellValueFactory(new PropertyValueFactory<>("status"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         city.setCellValueFactory(new PropertyValueFactory<>("city"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
-        telephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
-        state.setCellValueFactory(new PropertyValueFactory<>("email"));
-        time.setCellValueFactory(new PropertyValueFactory<>("date"));
+        telephone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         table.getColumns().add(expanderRow);
 
-        ObservableList<Test> ov = FXCollections.observableArrayList();
-        Test item = null;
-        for(int i = 1; i < 10; i++)
-        {
-            item = new Test(i,"name" , "city", "address", "telephone", "date");
-            ov.add(item);
-        }
-        ov.add(item);
-        table.setItems(ov);
+        table.setItems(PackagesDAO.addTable());
     }
 
-    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<Test> arg){
+    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<Packages> arg){
         try{
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
         }catch(IOException e){

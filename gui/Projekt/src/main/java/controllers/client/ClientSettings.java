@@ -198,7 +198,7 @@ public class ClientSettings implements Initializable {
             if (!inputs[0].equals(settStreet.getText()) || !inputs[1].equals(settCity.getText()) || !inputs[2].equals(settProvince.getSelectionModel().getSelectedItem())
                     || !inputs[3].equals(settNumber.getText()) || !settPassword.getText().isEmpty()) {
 
-                UsersDAO.updatePassword(6,settPassword.getText());
+                UsersDAO.updatePassword(1,settPassword.getText());
 
                 Alerts.createAlert(settingsPane, saveInformation, "CHECK", "POMYŚLNIE ZMIENIONO");
 

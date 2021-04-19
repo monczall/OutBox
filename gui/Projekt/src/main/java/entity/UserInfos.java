@@ -3,28 +3,31 @@ package main.java.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "user_infos", schema = "outbox")
 public class UserInfos {
-    private int userInfoId;
+    private int id;
     private String name;
     private String surname;
-    private String email;
     private String phoneNumber;
     private String streetAndNumber;
     private String city;
     private String voivodeship;
+    private Collection<Packages> packagesById;
+    private Collection<Users> usersById;
 
     @Id
-    @Column(name="user_infoID")
-    public int getUserInfoId() {
-        return userInfoId;
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getId() {
+        return id;
     }
 
-    public void setUserInfoId(int userInfoId) {
-        this.userInfoId = userInfoId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -45,16 +48,6 @@ public class UserInfos {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    @Basic
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Basic
@@ -97,16 +90,21 @@ public class UserInfos {
         this.voivodeship = voivodeship;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserInfos userInfos = (UserInfos) o;
-        return userInfoId == userInfos.userInfoId && Objects.equals(name, userInfos.name) && Objects.equals(surname, userInfos.surname) && Objects.equals(email, userInfos.email) && Objects.equals(phoneNumber, userInfos.phoneNumber) && Objects.equals(streetAndNumber, userInfos.streetAndNumber) && Objects.equals(city, userInfos.city) && Objects.equals(voivodeship, userInfos.voivodeship);
+    @OneToMany(mappedBy = "userInfosByUserInfoId")
+    public Collection<Packages> getPackagesById() {
+        return packagesById;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userInfoId, name, surname, email, phoneNumber, streetAndNumber, city, voivodeship);
+    public void setPackagesById(Collection<Packages> packagesById) {
+        this.packagesById = packagesById;
+    }
+
+    @OneToMany(mappedBy = "userInfosByUserInfoId")
+    public Collection<Users> getUsersById() {
+        return usersById;
+    }
+
+    public void setUsersById(Collection<Users> usersById) {
+        this.usersById = usersById;
     }
 }

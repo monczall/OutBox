@@ -1,25 +1,27 @@
 package main.java.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "package_type", schema = "outbox", catalog = "")
 public class PackageType {
-    private int typeId;
+    private int id;
     private String sizeName;
     private String size;
     private String weight;
     private String price;
+    private Collection<Packages> packagesById;
 
     @Id
-    @Column(name = "typeID")
-    public int getTypeId() {
-        return typeId;
+    @Column(name = "ID")
+    public int getId() {
+        return id;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -62,16 +64,13 @@ public class PackageType {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PackageType that = (PackageType) o;
-        return typeId == that.typeId && Objects.equals(sizeName, that.sizeName) && Objects.equals(size, that.size) && Objects.equals(weight, that.weight) && Objects.equals(price, that.price);
+
+    @OneToMany(mappedBy = "packageTypeByTypeId")
+    public Collection<Packages> getPackagesById() {
+        return packagesById;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(typeId, sizeName, size, weight, price);
+    public void setPackagesById(Collection<Packages> packagesById) {
+        this.packagesById = packagesById;
     }
 }
