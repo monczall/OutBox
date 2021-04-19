@@ -10,10 +10,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.SceneManager;
+import main.java.dao.UserInfosDAO;
+import main.java.entity.UserInfos;
 import main.java.features.Alerts;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static main.java.dao.UserInfosDAO.getUsers;
 
 public class Register {
 
@@ -124,18 +129,39 @@ public class Register {
     private Label registerSamePasswordsRequirement;
 
     public void register(){
+        registerRegisterButtonButton.setDisable(true);
         if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(), registerPhoneNumberField.getText(), registerEmailAddressField.getText(), registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText(), registerPasswordField.getText(), registerRepeatPasswordField.getText())){
-            //REJESTRACJA POMYSLNA
-            System.out.println("Zarejestrowano");
-            System.out.println(registerFirstNameField.getText());
-            System.out.println(registerLastNameField.getText());
-            System.out.println(registerPhoneNumberField.getText());
-            System.out.println(registerEmailAddressField.getText());
-            System.out.println(registerStreetField.getText());
-            System.out.println(registerCityField.getText());
-            System.out.println(registerVoivodeshipField.getText());
-            System.out.println(registerPasswordField.getText());
-            System.out.println(registerRepeatPasswordField.getText());
+            boolean emailExists = false;
+
+            List<UserInfos> listOfUsers = getUsers();
+            for(int i = 0; i < getUsers().size(); i++){
+                if(registerEmailAddressField.getText().equals(listOfUsers.get(i).getEmail())) {
+                    emailExists = true;
+                }
+            }
+
+            if(!emailExists){
+                String firstName = registerFirstNameField.getText();
+                String lastName = registerLastNameField.getText();
+                String email = registerEmailAddressField.getText();
+                String phoneNumber = registerPhoneNumberField.getText();
+                String street = registerStreetField.getText();
+                String city = registerCityField.getText();
+                String voivodeship = registerVoivodeshipField.getText();
+                String password = registerPasswordField.getText();
+
+                UserInfosDAO.addUserInfo(firstName, lastName, email, phoneNumber, street, city, voivodeship, password);
+
+                //REJESTRACJA POMYSLNA
+                System.out.println("Zarejestrowano");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"CHECK","Zarejestrowano pomyślnie", 293, 86, "alertSuccess");
+                SceneManager.renderScene("login");
+            }else{
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany adres email jest już w użyciu", 350, 86, "alertFailure");
+                errorOnEmailAddress();
+                registerRegisterButtonButton.setDisable(false);
+            }
+            registerRegisterButtonButton.setDisable(false);
         }
     }
 
@@ -301,7 +327,7 @@ public class Register {
         registerFirstNameField.getStyleClass().add("textFieldsError");
         //FirstNameCircle
         registerFirstNameCircle.getStyleClass().clear();
-        registerFirstNameCircle.getStyleClass().add("circleError");
+        registerFirstNameCircle.getStyleClass().add("fillError");
 
         registerFirstNameErrorExample.setVisible(true);
     }
@@ -312,7 +338,7 @@ public class Register {
         registerFirstNameField.getStyleClass().add("textFields");
         //FirstNameCircle
         registerFirstNameCircle.getStyleClass().clear();
-        registerFirstNameCircle.getStyleClass().add("circle");
+        registerFirstNameCircle.getStyleClass().add("fill");
 
         registerFirstNameErrorExample.setVisible(false);
     }
@@ -323,7 +349,7 @@ public class Register {
         registerLastNameField.getStyleClass().add("textFieldsError");
         //LastNameCircle
         registerLastNameCircle.getStyleClass().clear();
-        registerLastNameCircle.getStyleClass().add("circleError");
+        registerLastNameCircle.getStyleClass().add("fillError");
 
         registerLastNameErrorExample.setVisible(true);
     }
@@ -334,7 +360,7 @@ public class Register {
         registerLastNameField.getStyleClass().add("textFields");
         //LastNameCircle
         registerLastNameCircle.getStyleClass().clear();
-        registerLastNameCircle.getStyleClass().add("circle");
+        registerLastNameCircle.getStyleClass().add("fill");
 
         registerLastNameErrorExample.setVisible(false);
     }
@@ -345,7 +371,7 @@ public class Register {
         registerPhoneNumberField.getStyleClass().add("textFieldsError");
         //PhoneNumberCircle
         registerPhoneNumberCircle.getStyleClass().clear();
-        registerPhoneNumberCircle.getStyleClass().add("circleError");
+        registerPhoneNumberCircle.getStyleClass().add("fillError");
 
         registerPhoneNumberErrorExample.setVisible(true);
     }
@@ -356,7 +382,7 @@ public class Register {
         registerPhoneNumberField.getStyleClass().add("textFields");
         //PhoneNumberCircle
         registerPhoneNumberCircle.getStyleClass().clear();
-        registerPhoneNumberCircle.getStyleClass().add("circle");
+        registerPhoneNumberCircle.getStyleClass().add("fill");
 
         registerPhoneNumberErrorExample.setVisible(false);
     }
@@ -367,7 +393,7 @@ public class Register {
         registerEmailAddressField.getStyleClass().add("textFieldsError");
         //EmailAddressCircle
         registerEmailAddressCircle.getStyleClass().clear();
-        registerEmailAddressCircle.getStyleClass().add("circleError");
+        registerEmailAddressCircle.getStyleClass().add("fillError");
 
         registerEmailErrorExample.setVisible(true);
     }
@@ -378,7 +404,7 @@ public class Register {
         registerEmailAddressField.getStyleClass().add("textFields");
         //EmailAddressFCircle
         registerEmailAddressCircle.getStyleClass().clear();
-        registerEmailAddressCircle.getStyleClass().add("circle");
+        registerEmailAddressCircle.getStyleClass().add("fill");
 
         registerEmailErrorExample.setVisible(false);
     }
@@ -389,7 +415,7 @@ public class Register {
         registerStreetField.getStyleClass().add("textFieldsError");
         //StreetCircle
         registerStreetCircle.getStyleClass().clear();
-        registerStreetCircle.getStyleClass().add("circleError");
+        registerStreetCircle.getStyleClass().add("fillError");
 
         registerStreetErrorExample.setVisible(true);
     }
@@ -400,7 +426,7 @@ public class Register {
         registerStreetField.getStyleClass().add("textFields");
         //StreetCircle
         registerStreetCircle.getStyleClass().clear();
-        registerStreetCircle.getStyleClass().add("circle");
+        registerStreetCircle.getStyleClass().add("fill");
 
         registerStreetErrorExample.setVisible(false);
     }
@@ -411,7 +437,7 @@ public class Register {
         registerCityField.getStyleClass().add("textFieldsError");
         //CityCircle
         registerCityCircle.getStyleClass().clear();
-        registerCityCircle.getStyleClass().add("circleError");
+        registerCityCircle.getStyleClass().add("fillError");
 
         registerCityErrorExample.setVisible(true);
     }
@@ -422,7 +448,7 @@ public class Register {
         registerCityField.getStyleClass().add("textFields");
         //CityCircle
         registerCityCircle.getStyleClass().clear();
-        registerCityCircle.getStyleClass().add("circle");
+        registerCityCircle.getStyleClass().add("fill");
 
         registerCityErrorExample.setVisible(false);
     }
@@ -433,7 +459,7 @@ public class Register {
         registerVoivodeshipField.getStyleClass().add("textFieldsError");
         //VoivodeshipCircle
         registerVoivodeshipCircle.getStyleClass().clear();
-        registerVoivodeshipCircle.getStyleClass().add("circleError");
+        registerVoivodeshipCircle.getStyleClass().add("fillError");
 
         registerVoivodeshipErrorExample.setVisible(true);
     }
@@ -444,7 +470,7 @@ public class Register {
         registerVoivodeshipField.getStyleClass().add("textFields");
         //VoivodeshipCircle
         registerVoivodeshipCircle.getStyleClass().clear();
-        registerVoivodeshipCircle.getStyleClass().add("circle");
+        registerVoivodeshipCircle.getStyleClass().add("fill");
 
         registerVoivodeshipErrorExample.setVisible(false);
     }
@@ -455,7 +481,7 @@ public class Register {
         registerPasswordField.getStyleClass().add("textFieldsError");
         //VoivodeshipCircle
         registerPasswordCircle.getStyleClass().clear();
-        registerPasswordCircle.getStyleClass().add("circleError");
+        registerPasswordCircle.getStyleClass().add("fillError");
     }
 
     public void clearErrorsOnPassword(KeyEvent keyEvent) {
@@ -464,7 +490,7 @@ public class Register {
         registerPasswordField.getStyleClass().add("textFields");
         //PasswordCircle
         registerPasswordCircle.getStyleClass().clear();
-        registerPasswordCircle.getStyleClass().add("circle");
+        registerPasswordCircle.getStyleClass().add("fill");
     }
     //REPEAT PASSWORD
     private void errorOnConfirmPassword(){
@@ -473,7 +499,7 @@ public class Register {
         registerRepeatPasswordField.getStyleClass().add("textFieldsError");
         //RepeatVoivodeshipCircle
         registerRepeatPasswordCircle.getStyleClass().clear();
-        registerRepeatPasswordCircle.getStyleClass().add("circleError");
+        registerRepeatPasswordCircle.getStyleClass().add("fillError");
     }
 
     public void clearErrorsOnRepeatPassword(KeyEvent keyEvent) {
@@ -482,7 +508,7 @@ public class Register {
         registerRepeatPasswordField.getStyleClass().add("textFields");
         //RepeatPasswordCircle
         registerRepeatPasswordCircle.getStyleClass().clear();
-        registerRepeatPasswordCircle.getStyleClass().add("circle");
+        registerRepeatPasswordCircle.getStyleClass().add("fill");
     }
 
     private void passwordRequirements(){

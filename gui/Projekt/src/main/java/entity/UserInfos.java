@@ -1,11 +1,13 @@
 package main.java.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user_infos", schema = "outbox", catalog = "")
+@Table(name = "user_infos", schema = "outbox")
 public class UserInfos {
     private int id;
     private String name;
@@ -22,7 +24,6 @@ public class UserInfos {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }

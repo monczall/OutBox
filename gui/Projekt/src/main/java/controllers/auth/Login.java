@@ -2,8 +2,9 @@ package main.java.controllers.auth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -11,12 +12,27 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.SceneManager;
+import main.java.dao.HibernateUtil;
+import main.java.dao.UserInfosDAO;
+import main.java.dao.UsersDAO;
+import main.java.entity.UserInfos;
+import main.java.entity.Users;
 import main.java.features.Alerts;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Login{
+import static main.java.dao.UserInfosDAO.getUsers;
+
+public class Login implements Initializable{
+
+    @FXML
+    private ImageView loginLogoImageView;
 
     @FXML
     private AnchorPane loginRightPaneAnchorPane;
@@ -42,7 +58,15 @@ public class Login{
     @FXML
     private Circle loginPasswordCircleCircle;
 
+    public void initialize(URL url, ResourceBundle rb){
+
+    }
+
     public void login(){
+        List<Users> test = UsersDAO.showTable();
+        for(Users users: test){
+            System.out.println(users.getPassword());
+        }
         if(!isEmpty()){
             if(isEmail(loginEmailTextField.getText())){
                 if(false){
@@ -78,14 +102,14 @@ public class Login{
                     loginEmailTextField.getStyleClass().add("textFieldsError");
                     //UserCircle
                     loginUserCircleCircle.getStyleClass().clear();
-                    loginUserCircleCircle.getStyleClass().add("circleError");
+                    loginUserCircleCircle.getStyleClass().add("fillError");
 
                     //PasswordTextField
                     loginPasswordPasswordField.getStyleClass().clear();
                     loginPasswordPasswordField.getStyleClass().add("textFieldsError");
                     //PasswordCircle
                     loginPasswordCircleCircle.getStyleClass().clear();
-                    loginPasswordCircleCircle.getStyleClass().add("circleError");
+                    loginPasswordCircleCircle.getStyleClass().add("fillError");
 
                     Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik lub/i hasło jest błędne", 375, 86, "alertFailure");
                 }
@@ -95,7 +119,7 @@ public class Login{
                 loginEmailTextField.getStyleClass().add("textFieldsError");
                 //UserCircle
                 loginUserCircleCircle.getStyleClass().clear();
-                loginUserCircleCircle.getStyleClass().add("circleError");
+                loginUserCircleCircle.getStyleClass().add("fillError");
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Format adresu email jest błędny", 310, 86, "alertFailure");
             }
@@ -112,7 +136,7 @@ public class Login{
             loginEmailTextField.getStyleClass().add("textFieldsError");
             //UserCircle
             loginUserCircleCircle.getStyleClass().clear();
-            loginUserCircleCircle.getStyleClass().add("circleError");
+            loginUserCircleCircle.getStyleClass().add("fillError");
             error++;
         }
         if(loginPasswordPasswordField.getText().isEmpty()){
@@ -121,7 +145,7 @@ public class Login{
             loginPasswordPasswordField.getStyleClass().add("textFieldsError");
             //PasswordCircle
             loginPasswordCircleCircle.getStyleClass().clear();
-            loginPasswordCircleCircle.getStyleClass().add("circleError");
+            loginPasswordCircleCircle.getStyleClass().add("fillError");
             error++;
         }
         if(error > 0){
@@ -196,7 +220,7 @@ public class Login{
         loginEmailTextField.getStyleClass().add("textFields");
         //UserCircle
         loginUserCircleCircle.getStyleClass().clear();
-        loginUserCircleCircle.getStyleClass().add("circle");
+        loginUserCircleCircle.getStyleClass().add("fill");
     }
 
     public void clearErrorsOnPassword(KeyEvent keyEvent) {
@@ -205,7 +229,7 @@ public class Login{
         loginPasswordPasswordField.getStyleClass().add("textFields");
         //PasswordCircle
         loginPasswordCircleCircle.getStyleClass().clear();
-        loginPasswordCircleCircle.getStyleClass().add("circle");
+        loginPasswordCircleCircle.getStyleClass().add("fill");
     }
 
 }
