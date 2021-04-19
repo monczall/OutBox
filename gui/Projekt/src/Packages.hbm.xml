@@ -5,7 +5,9 @@
 <hibernate-mapping>
 
     <class name="main.java.entity.Packages" table="packages" schema="outbox">
-        <id name="packageId" column="packageID"/>
+        <id name="packageId" column="packageID">
+            <generator class="identity" />
+        </id>
         <property name="typeId" column="typeID"/>
         <property name="userId" column="userID"/>
         <property name="userInfoId" column="user_infoID"/>

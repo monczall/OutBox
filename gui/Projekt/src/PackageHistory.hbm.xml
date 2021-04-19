@@ -5,7 +5,9 @@
 <hibernate-mapping>
 
     <class name="main.java.entity.PackageHistory" table="package_history" schema="outbox">
-        <id name="historyId" column="historyID"/>
+        <id name="historyId" column="historyID">
+            <generator class="identity" />
+        </id>
         <property name="packageId" column="packageID"/>
         <property name="status" column="status"/>
         <property name="date" column="date"/>

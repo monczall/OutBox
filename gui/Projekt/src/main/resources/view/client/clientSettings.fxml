@@ -48,12 +48,12 @@
                   <Text fill="#8f8f8f" layoutX="2.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%repeatPassword" />
                   <Text layoutX="6.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%privacy" />
                   <Line endX="594.0" endY="0.49554443359375" layoutX="96.0" layoutY="245.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-                  <Text fill="#8f8f8f" layoutX="2.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%email" />
+                  <Text fill="#8f8f8f" layoutX="2.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%clientOldPassword" />
                   <Text fill="#8f8f8f" layoutX="2.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%number" />
                   <CustomTextField fx:id="settStreet" layoutX="449.0" layoutY="45.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                   <CustomTextField fx:id="settCity" layoutX="449.0" layoutY="90.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                   <CustomTextField fx:id="settNumber" layoutX="449.0" layoutY="180.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
-                  <CustomTextField fx:id="settEmail" layoutX="449.0" layoutY="260.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
+                  <CustomTextField fx:id="settOldPassword" layoutX="449.0" layoutY="260.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                   <CustomPasswordField fx:id="settPassword" layoutX="448.0" layoutY="305.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                   <CustomPasswordField fx:id="settRepeatPassword" layoutX="449.0" layoutY="350.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                   <Button fx:id="saveInformation" layoutX="449.0" layoutY="401.0" mnemonicParsing="false" onAction="#updateInformation" prefHeight="33.0" prefWidth="242.0" styleClass="btnNext" text="%saveChanges" />

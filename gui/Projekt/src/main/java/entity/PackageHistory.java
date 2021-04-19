@@ -2,15 +2,16 @@ package main.java.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "package_history", schema = "outbox", catalog = "")
+@Table(name = "package_history", schema = "outbox")
 public class PackageHistory {
     private int historyId;
     private int packageId;
     private String status;
-    private Date date;
+    private Timestamp timestamp;
 
     @Id
     @Column(name = "historyID")
@@ -44,12 +45,12 @@ public class PackageHistory {
 
     @Basic
     @Column(name = "date")
-    public Date getDate() {
-        return date;
+    public Timestamp getDate() {
+        return timestamp;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Override
@@ -57,11 +58,11 @@ public class PackageHistory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PackageHistory that = (PackageHistory) o;
-        return historyId == that.historyId && packageId == that.packageId && Objects.equals(status, that.status) && Objects.equals(date, that.date);
+        return historyId == that.historyId && packageId == that.packageId && Objects.equals(status, that.status) && Objects.equals(timestamp, that.timestamp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(historyId, packageId, status, date);
+        return Objects.hash(historyId, packageId, status, timestamp);
     }
 }

@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import main.java.dao.HibernateUtil;
 import main.java.dao.PackageTypeDAO;
+import main.java.entity.PackageHistory;
 import main.java.entity.PackageType;
 import main.java.entity.Packages;
 import main.java.entity.UserInfos;
@@ -21,6 +22,8 @@ import org.controlsfx.control.textfield.CustomTextField;
 import org.hibernate.Session;
 
 import java.net.URL;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -305,7 +308,10 @@ public class ClientRegisterPackage implements Initializable {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
+        Packages packages = new Packages();
         UserInfos userInfos = new UserInfos();
+        PackageHistory packageHistory = new PackageHistory();
+
         userInfos.setName(sumName.getText());
         userInfos.setSurname(sumSurname.getText());
         userInfos.setEmail(sumEmail.getText());
@@ -316,7 +322,6 @@ public class ClientRegisterPackage implements Initializable {
 
         session.save(userInfos);
 
-        Packages packages = new Packages();
         if(sumType.getText().equals("Mała"))
             packages.setTypeId(1);
         else if(sumType.getText().equals("Średnia"))
@@ -324,13 +329,22 @@ public class ClientRegisterPackage implements Initializable {
         else
             packages.setTypeId(3);;
 
-        packages.setUserId(6);
+        packages.setUserId(6);      // Hardcoded for tests
         packages.setUserInfoId(userInfos.getUserInfoId());
         packages.setPackageNumber(packageNumber);
         packages.setTimeOfPlannedDelivery(sumTime.getText());
         packages.setAdditionalComment(additionalComment.getText());
 
         session.save(packages);
+
+        dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        packageHistory.setPackageId(packages.getPackageId());
+        packageHistory.setStatus("Zarejestrowana");
+        packageHistory.setDate(Timestamp.valueOf(dateTimeFormatter.format(now)));
+
+        session.save(packageHistory);
+
         session.getTransaction().commit();
         session.close();
     }

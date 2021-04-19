@@ -1115,7 +1115,7 @@
     </column>
     <column id="352" parent="338" name="date">
       <Position>4</Position>
-      <DataType>date|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="353" parent="338" name="FK_packageID">
