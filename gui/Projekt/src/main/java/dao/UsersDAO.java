@@ -15,23 +15,16 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class UsersDAO {
-    static public void addUser(int user_infoID, String password, int areaID, String role){
+
+    static public List<Users> getUsers(){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
 
-        Users user = new Users();
-        user.setUserInfoId(user_infoID);
-        user.setPassword(password);
-        user.setAreaId(areaID);
-        user.setRole(role);
+        Query query = session.createQuery("from Users");
 
-        session.save(user);
+        List<Users> listOfUsers = query.list();
 
-        transaction.commit();
-
-        session.close();
+        return listOfUsers;
     }
-
 
     static public String readPassword(int userId){
         Session session = HibernateUtil.getSessionFactory().openSession();
