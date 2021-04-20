@@ -9,7 +9,7 @@ import java.util.Objects;
 @SecondaryTables({
 
         @SecondaryTable(name = "user_infos", pkJoinColumns = {
-                @PrimaryKeyJoinColumn(name = "id")
+                @PrimaryKeyJoinColumn(name = "ID")
         }),
         @SecondaryTable(name = "package_history", pkJoinColumns = {
                 @PrimaryKeyJoinColumn(name = "packageId")
@@ -34,6 +34,9 @@ public class Packages {
     private PackageType packageTypeByTypeId;
     private Users usersByUserId;
     private UserInfos userInfosByUserInfoId;
+
+    public Packages() {
+    }
 
     @Id
     @Column(name = "ID")
@@ -159,7 +162,7 @@ public class Packages {
     }
     @Column(name = "name", table = "user_infos")
     public String getName() {
-        return name;
+        return getUserInfosByUserInfoId().getName();
     }
 
     public void setName(String name) {
@@ -167,7 +170,7 @@ public class Packages {
     }
     @Column(name = "surname", table = "user_infos")
     public String getSurname() {
-        return surname;
+        return getUserInfosByUserInfoId().getSurname();
     }
 
     public void setSurname(String surname) {
@@ -175,7 +178,7 @@ public class Packages {
     }
     @Column(name = "city", table = "user_infos")
     public String getCity() {
-        return city;
+        return getUserInfosByUserInfoId().getCity();
     }
 
     public void setCity(String city) {
@@ -183,7 +186,7 @@ public class Packages {
     }
     @Column(name = "street_and_number", table = "user_infos")
     public String getAddress() {
-        return address;
+        return getUserInfosByUserInfoId().getStreetAndNumber();
     }
 
     public void setAddress(String address) {
@@ -192,7 +195,7 @@ public class Packages {
 
     @Column(name = "phone_number", table = "user_infos")
     public String getPhone() {
-        return phone;
+        return getUserInfosByUserInfoId().getPhoneNumber();
     }
 
     public void setPhone(String phone) {
@@ -207,4 +210,6 @@ public class Packages {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
 }

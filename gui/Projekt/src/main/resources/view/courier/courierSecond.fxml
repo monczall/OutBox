@@ -17,12 +17,13 @@
       <TableView fx:id="table" layoutX="102.0" layoutY="151.0" prefHeight="467.0" prefWidth="857.0" stylesheets="@../../css/courier.css">
         <columns>
             <TableColumn fx:id="packageNumber" prefWidth="131.3333511352539" text="%packageNumber" />
-            <TableColumn fx:id="name" prefWidth="143.3333282470703" text="%nameAndSurname" />
-            <TableColumn fx:id="city" minWidth="0.0" prefWidth="74.0" text="%city" />
-            <TableColumn fx:id="address" minWidth="0.0" prefWidth="148.0" text="%address" />
-            <TableColumn fx:id="telephone" minWidth="0.0" text="%phone" />
-            <TableColumn fx:id="state" prefWidth="114.66668701171875" text="%packageStatus" />
-            <TableColumn fx:id="time" minWidth="0.0" prefWidth="105.33331298828125" text="%deliveryTime" />
+            <TableColumn fx:id="name" prefWidth="67.33329772949219" text="%name" />
+            <TableColumn fx:id="surname" prefWidth="100.0" text="%surname" />
+            <TableColumn fx:id="city" minWidth="0.0" prefWidth="85.33331298828125" text="%city" />
+            <TableColumn fx:id="address" minWidth="0.0" prefWidth="130.66671752929688" text="%address" />
+            <TableColumn fx:id="telephone" minWidth="0.0" prefWidth="68.0" text="%phone" />
+            <TableColumn fx:id="state" prefWidth="132.0" text="%packageStatus" />
+            <TableColumn fx:id="time" minWidth="0.0" prefWidth="88.66668701171875" text="%deliveryTime" />
         </columns>
       </TableView>
       <TextField layoutX="741.0" layoutY="110.0" styleClass="inputBox" />

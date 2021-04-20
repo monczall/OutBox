@@ -16,6 +16,7 @@ public class Users {
     private UserInfos userInfosByUserInfoId;
     private Areas areasByAreaId;
 
+
     @Id
     @Column(name = "ID")
     public int getId() {
@@ -105,4 +106,5 @@ public class Users {
     public void setAreasByAreaId(Areas areasByAreaId) {
         this.areasByAreaId = areasByAreaId;
     }
+
 }

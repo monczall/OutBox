@@ -31,6 +31,9 @@ public class CourierSecond implements Initializable {
     private TableColumn<?, ?> name;
 
     @FXML
+    private TableColumn<?, ?> surname;
+
+    @FXML
     private TableColumn<?, ?> city;
 
     @FXML
@@ -45,28 +48,25 @@ public class CourierSecond implements Initializable {
     @FXML
     private TableColumn<?, ?> time;
 
-    @FXML
-    private Text senderName;
-
-    @FXML
-    private Text senderMail;
-
-    @FXML
-    private Text senderCity;
-
-    @FXML
-    private Text senderSurname;
-
-    @FXML
-    private Text senderPhone;
-
-    @FXML
-    private Text senderAddress;
-
-    @FXML
-    private TextArea comments;
-
     Pane pane;
+    private static int id;
+    private static String comment;
+
+    public static int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static String getComment() {
+        return comment;
+    }
+
+    public static void setComment(String comment) {
+        CourierSecond.comment = comment;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -76,16 +76,19 @@ public class CourierSecond implements Initializable {
         time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
         state.setCellValueFactory(new PropertyValueFactory<>("status"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         city.setCellValueFactory(new PropertyValueFactory<>("city"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
         telephone.setCellValueFactory(new PropertyValueFactory<>("phone"));
         table.getColumns().add(expanderRow);
-
         table.setItems(PackagesDAO.addTable());
     }
 
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<Packages> arg){
         try{
+            table.getSelectionModel().select(arg.getTableRow().getIndex());
+            setId(table.getItems().get(arg.getTableRow().getIndex()).getUserId());
+            setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
         }catch(IOException e){
             e.printStackTrace();

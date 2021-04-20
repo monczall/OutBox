@@ -11,42 +11,31 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.SceneManager;
-import main.java.dao.UsersDAO;
-import main.java.entity.Users;
 import main.java.features.Animations;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 
 public class Courier implements Initializable {
 
+    boolean hamburgerClicked = false;
     @FXML
     private AnchorPane mainWindow;
-
     @FXML
     private VBox paneRight;
-
     @FXML
     private FontAwesomeIconView hamburger;
-
     @FXML
     private Pane welcomeMessage;
-
     @FXML
     private Pane alertPane;
-
     @FXML
     private AnchorPane window;
 
-    boolean hamburgerClicked = false;
-
-
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
 
         SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: red;");
 
@@ -54,7 +43,7 @@ public class Courier implements Initializable {
         alertPane.setTranslateY(-500);
 
         hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
-            if(hamburgerClicked == false) {
+            if (hamburgerClicked == false) {
 
                 hamburger.setDisable(true);
                 hamburgerClicked = true;
@@ -65,15 +54,14 @@ public class Courier implements Initializable {
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,+200,0.5);
-                Animations.moveByX(welcomeMessage,+170,0.5);
-                Animations.moveByX(mainWindow,+70,0.5);
+                Animations.moveByX(paneRight, +200, 0.5);
+                Animations.moveByX(welcomeMessage, +170, 0.5);
+                Animations.moveByX(mainWindow, +70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     hamburger.setDisable(false);
                 });
-            }
-            else {
+            } else {
                 hamburger.setDisable(true);
                 hamburgerClicked = false;
 
@@ -82,9 +70,9 @@ public class Courier implements Initializable {
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,-200,0.5);
-                Animations.moveByX(welcomeMessage,-170,0.5);
-                Animations.moveByX(mainWindow,-70,0.5);
+                Animations.moveByX(paneRight, -200, 0.5);
+                Animations.moveByX(welcomeMessage, -170, 0.5);
+                Animations.moveByX(mainWindow, -70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     paneRight.setVisible(false);
@@ -114,7 +102,7 @@ public class Courier implements Initializable {
 
     @FXML
     void logout(ActionEvent event) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         window.setDisable(true);
@@ -123,7 +111,7 @@ public class Courier implements Initializable {
 
     @FXML
     void logoutNo(ActionEvent event) {
-        Animations.moveByY(alertPane,-500,0.3);
+        Animations.moveByY(alertPane, -500, 0.3);
         window.setEffect(null);
         window.setDisable(false);
     }
