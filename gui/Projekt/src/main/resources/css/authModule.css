@@ -10,6 +10,9 @@
     -fx-black: #000000;
     -fx-alter: #CCCCCC;
     -fx-disabled: #808080;
+
+    -fx-shadow: #000;
+    -fx-dark-transparent: #121212cc;
 }
 /*-------------BACKGROUNDS-------------*/
 .primaryBackground{
@@ -177,7 +180,7 @@
     -fx-padding: 0 0 0 30;
 }
 .textFieldsError{
-    -fx-background-color: #ffb5b5;
+    -fx-background-color: #FFE0E0;
     -fx-background-radius: 9;
     -fx-border-color: -fx-error;
     -fx-border-width: 3;
@@ -189,4 +192,36 @@
     -fx-pref-height: 35;
     -fx-max-height: 35;
     -fx-padding: 0 0 0 30;
+}
+/*-------------ALERT-------------*/
+.alertText{
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-main-color;
+    -fx-alignment: CENTER;
+}
+.alertSuccess{
+    -fx-background-color:  -fx-dark-transparent; /*#262628*/
+    -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
+    -fx-border-color: -fx-success;
+    -fx-border-radius: 0;
+}
+.alertSuccessIcon{
+    -fx-fill: -fx-success;
+}
+.alertSuccessText{
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-success;
+}
+.alertFailure{
+    -fx-background-color:  -fx-dark-transparent; /*#262628*/
+    -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
+    -fx-border-color: -fx-error;
+    -fx-border-radius: 0;
+}
+.alertFailureIcon{
+    -fx-fill: -fx-error;
+}
+.alertFailureText{
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-error;
 }

@@ -1,14 +1,14 @@
 /*-------------COLORS-------------*/
 *{
-    -fx-main-color: #FFA500;
+    -fx-main-color: red;
     -fx-dark-color: #121212;
+    -fx-color-Text:white;
     -fx-gray-color: #8f8f8f;
-    -fx-second-color: #000000;
+    -fx-second-color: #000;
+    -fx-color-error:white;
     -fx-shadow: #000;
-    -fx-dark-transparent: #121212cc;
-    -fx-alert-success-color: #38b000;
-    -fx-alert-failure-color: #d82020;
-    -fx-color-Text:black;
+    -fx-dark-transparent: #121212;
+
 }
 
 /*-------- ALL SCENES --------*/
@@ -404,13 +404,13 @@
 }
 
 .inputBoxCourierError{
-    -fx-text-fill: red;
+    -fx-text-fill: -fx-color-error;
     -fx-font-size: 17px;
     -fx-background-color: transparent; /*#202020*/
     -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-color: red;
+    -fx-border-color: -fx-color-error;
     -fx-border-width: 0 0 2 0;
     -fx-cursor: text;
 }

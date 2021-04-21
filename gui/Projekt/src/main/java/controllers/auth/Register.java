@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static main.java.dao.UserInfosDAO.getUsers;
+import static main.java.dao.UserInfosDAO.getUserInfos;
+import static main.java.dao.UsersDAO.getUsers;
 
 public class Register {
 
@@ -133,15 +134,48 @@ public class Register {
         registerRegisterButtonButton.setDisable(true);
         if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(), registerPhoneNumberField.getText(), registerEmailAddressField.getText(), registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText(), registerPasswordField.getText(), registerRepeatPasswordField.getText())){
             boolean emailExists = false;
+            boolean phoneNumberExsists = false;
+            int isUserNew = 0;
 
-//            List<Users> listOfUsers = getUsers();
-//            for(int i = 0; i < getUsers().size(); i++){
-//                if(registerEmailAddressField.getText().equals(listOfUsers.get(i).getEmail())) {
-//                    emailExists = true;
+//      WORKING FOR NOW, BUT WHY SHOULD WE USE IT IF IT HAS WRONG APPROACH
+//
+//            List<UserInfos> listOfUserInfos = getUserInfos();
+//            for(int i = 0; i < listOfUserInfos.size(); i++){
+//                if(registerPhoneNumberField.getText().equals(listOfUserInfos.get(i).getPhoneNumber())){
+//                    phoneNumberExsists = true;
 //                }
 //            }
 
+            List<Users> listOfUsers = getUsers();
+            for(int i = 0; i < getUsers().size(); i++){
+                if(registerEmailAddressField.getText().equals(listOfUsers.get(i).getEmail())) {
+                    emailExists = true;
+                }
+                /*
+                CORRECT VERSION FOR FUTURE IF NEEDED
+                REMEMBER TO MAKE CHANGES IN DATABASE
+                */
+
+                //if(registerPhoneNumberField.getText().equals(listOfUsers.get(i).getPhoneNumber())){
+                //    phoneNumberExsists = true;
+                //}
+            }
+
+            if(!phoneNumberExsists){
+                isUserNew++;
+            }else{
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany numer telefonu jest już w użyciu", 350, 86, "alertFailure");
+                errorOnPhoneNumber();
+            }
+
             if(!emailExists){
+                isUserNew++;
+            }else{
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany adres email jest już w użyciu", 350, 86, "alertFailure");
+                errorOnEmailAddress();
+            }
+
+            if(isUserNew >= 2){
                 String firstName = registerFirstNameField.getText();
                 String lastName = registerLastNameField.getText();
                 String email = registerEmailAddressField.getText();
@@ -149,7 +183,7 @@ public class Register {
                 String street = registerStreetField.getText();
                 String city = registerCityField.getText();
                 String voivodeship = registerVoivodeshipField.getText();
-                String password = registerPasswordField.getText();
+                String password = Encryption.encrypt(registerPasswordField.getText());
 
                 UserInfosDAO.addUserInfo(firstName, lastName, email, phoneNumber, street, city, voivodeship, password);
 
@@ -157,13 +191,10 @@ public class Register {
                 System.out.println("Zarejestrowano");
                 Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"CHECK","Zarejestrowano pomyślnie", 293, 86, "alertSuccess");
                 SceneManager.renderScene("login");
-            }else{
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany adres email jest już w użyciu", 350, 86, "alertFailure");
-                errorOnEmailAddress();
-                registerRegisterButtonButton.setDisable(false);
             }
-            registerRegisterButtonButton.setDisable(false);
+
         }
+        registerRegisterButtonButton.setDisable(false);
     }
 
     private boolean isValid(String firstName, String lastName, String phoneNumber, String email, String street, String city, String voivodeship, String password, String password2){
@@ -492,6 +523,12 @@ public class Register {
         //PasswordCircle
         registerPasswordCircle.getStyleClass().clear();
         registerPasswordCircle.getStyleClass().add("fill");
+        //RepeatPasswordField
+        registerRepeatPasswordField.getStyleClass().clear();
+        registerRepeatPasswordField.getStyleClass().add("textFields");
+        //RepeatPasswordCircle
+        registerRepeatPasswordCircle.getStyleClass().clear();
+        registerRepeatPasswordCircle.getStyleClass().add("fill");
     }
     //REPEAT PASSWORD
     private void errorOnConfirmPassword(){
@@ -504,6 +541,12 @@ public class Register {
     }
 
     public void clearErrorsOnRepeatPassword(KeyEvent keyEvent) {
+        //PasswordField
+        registerPasswordField.getStyleClass().clear();
+        registerPasswordField.getStyleClass().add("textFields");
+        //PasswordCircle
+        registerPasswordCircle.getStyleClass().clear();
+        registerPasswordCircle.getStyleClass().add("fill");
         //RepeatPasswordField
         registerRepeatPasswordField.getStyleClass().clear();
         registerRepeatPasswordField.getStyleClass().add("textFields");

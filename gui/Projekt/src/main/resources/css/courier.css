@@ -257,33 +257,6 @@
     -fx-fill: -fx-main-color;
 }
 
-/*-------------STYLING TABLEVIEW-------------*/
-
-/* TABLEVIEW CSS - NOT NEEDED FOR NOW
-.packageTable, .packageTable . column-header-background .filler, .packageTable .corner{
-    -fx-background-color: transparent;
-}
-.packageTable .column-header{
-    -fx-background-color: -fx-main-color;
-    -fx-font-size: 16px;
-    -fx-fill: -fx-second-color;
-    -fx-alignment: CENTER;
-}
-.packageTable .table-cell{
-    -fx-border-color: transparent;
-    -fx-alignment: CENTER;
-    -fx-padding: 15px;
-    -fx-font-size: 14px;
-    -fx-text-fill: -fx-main-color;
-
-}
-.packageTable .table-row-cell:odd{
-    -fx-background-color: -fx-gray-color;
-}
-.packageTable .table-row-cell:even{
-    -fx-background-color: -fx-gray-color;
-}*/
-
 .packageItem{
     -fx-background-color:  #262628;
 }
@@ -379,4 +352,7 @@
 .button{
     -fx-base: -fx-main-color;
     -fx-font-weight: bold;
+}
+.text-area:selected{
+    -fx-border-color: -fx-main-color;
 }

@@ -25,6 +25,7 @@ public class CourierHome {
     }
 
     public void logout(ActionEvent actionEvent) throws IOException {
+
         SceneManager.renderScene("login");
     }
 }

@@ -12,22 +12,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.SceneManager;
-import main.java.dao.HibernateUtil;
-import main.java.dao.UserInfosDAO;
-import main.java.dao.UsersDAO;
-import main.java.entity.UserInfos;
 import main.java.entity.Users;
 import main.java.features.Alerts;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import sun.security.provider.MD5;
 
+import java.math.BigInteger;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static main.java.dao.UserInfosDAO.getUsers;
+import static main.java.dao.UsersDAO.getUsers;
 
 public class Login implements Initializable{
 
@@ -58,6 +56,9 @@ public class Login implements Initializable{
     @FXML
     private Circle loginPasswordCircleCircle;
 
+    public static int userID;
+    public static int userInfoID;
+
     public void initialize(URL url, ResourceBundle rb){
 
     }
@@ -65,50 +66,57 @@ public class Login implements Initializable{
     public void login(){
         if(!isEmpty()){
             if(isEmail(loginEmailTextField.getText())){
-                if(false){
-                    //LOGOWANIE "NA SZTYWNO"
-                    if(loginEmailTextField.getText().equals("client") && loginPasswordPasswordField.getText().equals("123123")){
-                        SceneManager.renderScene("client");
-                        System.out.println("Zalogowano jako uzytkownik!");
 
-                    }else if(loginEmailTextField.getText().equals("courier") && loginPasswordPasswordField.getText().equals("123123")){
-                        SceneManager.renderScene("courier");
-                        System.out.println("Zalogowano jako kurier!");
+                List<Users> listOfUsers = getUsers();
+                for(int i = 0; i < getUsers().size(); i++){
+                    if(loginEmailTextField.getText().equals(listOfUsers.get(i).getEmail()) && Encryption.encrypt(loginPasswordPasswordField.getText()).equals(listOfUsers.get(i).getPassword())){
 
-                    }else if(loginEmailTextField.getText().equals("courier2") && loginPasswordPasswordField.getText().equals("123123")){
-                        //SceneManager.renderScene("TU PODAC NAZWE SCENY KURIERA MIEDZYODDZIALOWEGO");
-                        System.out.println("Zalogowano jako kurier miedzyoddzialowy!");
+                        setUserID(listOfUsers.get(i).getId());
+                        setUserInfoID(listOfUsers.get(i).getUserInfoId());
 
-                    }else if(loginEmailTextField.getText().equals("kierownik") && loginPasswordPasswordField.getText().equals("123123")){
-                        //SceneManager.renderScene("TU PODAC NAZWE SCENY KIEROWNIKA");
-                        System.out.println("Zalogowano jako kierownik!");
+                        String role = listOfUsers.get(i).getRole();
+                        if(role.equals("Klient")){
+                            System.out.println("Zalogowano klient");
+                            SceneManager.renderScene("client");
 
-                    }else if(loginEmailTextField.getText().equals("admin") && loginPasswordPasswordField.getText().equals("123123")){
-                        SceneManager.renderScene("admin");
-                        System.out.println("Zalogowano jako admin!");
+                        }else if(role.equals("Kurier")){
+                            System.out.println("Zalogowano kurier");
+                            SceneManager.renderScene("courier");
 
-                    }else{
-                        Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik lub/i hasło jest błędne", 375, 86, "alertFailure");
+                        }else if(role.equals("Kurier Międzyoddziałowy")){
+                            System.out.println("Zalogowano kurier międzyoddziałowy");
+                            SceneManager.renderScene("interbranchCourier");
+
+                        }else if(role.equals("Menadżer")){
+                            System.out.println("Zalogowano menadżer");
+                            SceneManager.renderScene("manager");
+
+                        }else if(role.equals("Administrator")){
+                            System.out.println("Zalogowano administrator");
+                            SceneManager.renderScene("admin");
+
+                        }
+
                     }
-                    System.out.println(loginEmailTextField.getText());
-                    System.out.println(loginPasswordPasswordField.getText());
-                }else{
-                    //UserTextField
-                    loginEmailTextField.getStyleClass().clear();
-                    loginEmailTextField.getStyleClass().add("textFieldsError");
-                    //UserCircle
-                    loginUserCircleCircle.getStyleClass().clear();
-                    loginUserCircleCircle.getStyleClass().add("fillError");
-
-                    //PasswordTextField
-                    loginPasswordPasswordField.getStyleClass().clear();
-                    loginPasswordPasswordField.getStyleClass().add("textFieldsError");
-                    //PasswordCircle
-                    loginPasswordCircleCircle.getStyleClass().clear();
-                    loginPasswordCircleCircle.getStyleClass().add("fillError");
-
-                    Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik lub/i hasło jest błędne", 375, 86, "alertFailure");
                 }
+                System.out.println("Poszlo dalej");
+
+                //UserTextField
+                loginEmailTextField.getStyleClass().clear();
+                loginEmailTextField.getStyleClass().add("textFieldsError");
+                //UserCircle
+                loginUserCircleCircle.getStyleClass().clear();
+                loginUserCircleCircle.getStyleClass().add("fillError");
+
+                //PasswordTextField
+                loginPasswordPasswordField.getStyleClass().clear();
+                loginPasswordPasswordField.getStyleClass().add("textFieldsError");
+                //PasswordCircle
+                loginPasswordCircleCircle.getStyleClass().clear();
+                loginPasswordCircleCircle.getStyleClass().add("fillError");
+
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik nie istniej lub/i hasło jest błędne", 425, 86, "alertFailure");
+
             }else{
                 //UserTextField
                 loginEmailTextField.getStyleClass().clear();
@@ -217,9 +225,6 @@ public class Login implements Initializable{
         //UserCircle
         loginUserCircleCircle.getStyleClass().clear();
         loginUserCircleCircle.getStyleClass().add("fill");
-    }
-
-    public void clearErrorsOnPassword(KeyEvent keyEvent) {
         //PasswordTextField
         loginPasswordPasswordField.getStyleClass().clear();
         loginPasswordPasswordField.getStyleClass().add("textFields");
@@ -228,4 +233,34 @@ public class Login implements Initializable{
         loginPasswordCircleCircle.getStyleClass().add("fill");
     }
 
+    public void clearErrorsOnPassword(KeyEvent keyEvent) {
+        //UserTextField
+        loginEmailTextField.getStyleClass().clear();
+        loginEmailTextField.getStyleClass().add("textFields");
+        //UserCircle
+        loginUserCircleCircle.getStyleClass().clear();
+        loginUserCircleCircle.getStyleClass().add("fill");
+        //PasswordTextField
+        loginPasswordPasswordField.getStyleClass().clear();
+        loginPasswordPasswordField.getStyleClass().add("textFields");
+        //PasswordCircle
+        loginPasswordCircleCircle.getStyleClass().clear();
+        loginPasswordCircleCircle.getStyleClass().add("fill");
+    }
+
+    public static int getUserID() {
+        return userID;
+    }
+
+    public static void setUserID(int userID) {
+        Login.userID = userID;
+    }
+
+    public static int getUserInfoID() {
+        return userInfoID;
+    }
+
+    public static void setUserInfoID(int userInfoID) {
+        Login.userInfoID = userInfoID;
+    }
 }

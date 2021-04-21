@@ -20,7 +20,7 @@
             <FontAwesomeIconView glyphName="USER" size="70" styleClass="blockIcon" />
          </graphic></Button>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%couriersTitle" />
-      <FontAwesomeIconView fill="ORANGE" glyphName="USERS" layoutX="142.0" layoutY="70.0" size="38" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="USERS" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
       <AnchorPane fx:id="courierOptions" prefHeight="672.0" prefWidth="1033.0" visible="false" />
    </children>
 </AnchorPane>
