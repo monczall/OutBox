@@ -22,7 +22,6 @@ import org.controlsfx.control.textfield.CustomTextField;
 import org.hibernate.Session;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -321,6 +320,7 @@ public class ClientRegisterPackage implements Initializable {
         userInfos.setVoivodeship(sumProvince.getText());
 
         session.save(userInfos);
+
 
         if(sumType.getText().equals("Mała"))
             packages.setTypeId(1);
