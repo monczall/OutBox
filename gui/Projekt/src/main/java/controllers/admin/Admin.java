@@ -2,9 +2,11 @@ package main.java.controllers.admin;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -22,15 +24,15 @@ public class Admin implements Initializable {
     private VBox paneRight;
     @FXML
     private FontAwesomeIconView hamburger;
-    @FXML
-    private Button btnSettings;
-    @FXML
-    private FontAwesomeIconView iconSettings;
 
     @FXML
-    private Button btnHome;
-    @FXML
     private AnchorPane mainWindow;
+
+    @FXML
+    private AnchorPane window;
+
+    @FXML
+    private Pane alertPane;
 
     boolean hamburgerClicked = false;
 
@@ -48,7 +50,7 @@ public class Admin implements Initializable {
 
 
         paneRight.setTranslateX(-200);
-
+        alertPane.setTranslateY(-500);
 
         hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
             if(hamburgerClicked == false) {
@@ -91,50 +93,59 @@ public class Admin implements Initializable {
         });
     }
 
-    public void homeButton(MouseEvent mouseEvent) {
 
-    }
-
-    public void packageButton(MouseEvent mouseEvent) {
-    }
-
-    public void btnHome(MouseEvent mouseEvent) {
-    }
 
 
     @FXML
     private Pane hello;
 
     public void go_home(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/admin/adminHome.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/admin/adminHome.fxml", mainWindow);
 
     }
 
     public void go_edit_employee(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
     }
 
     public void go_add_manager(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/admin/adminAddManager.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
     }
 
     public void go_add_area(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/admin/adminAddArea.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/admin/adminAddArea.fxml", mainWindow);
     }
 
     public void go_pack_settings(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/admin/adminPackSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/admin/adminPackSettings.fxml", mainWindow);
     }
 
     public void go_raport(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/admin/adminRaport.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/admin/adminRaport.fxml", mainWindow);
     }
 
     public void go_settings(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/admin/adminSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/admin/adminSettings.fxml", mainWindow);
     }
 
-    public void go_logout(MouseEvent mouseEvent) {
+    @FXML
+    void go_logout(MouseEvent mouseEvent) {
+        Animations.moveByY(alertPane,+500,0.3);
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        gaussianBlur.setRadius(8);
+        window.setDisable(true);
+        window.setEffect(gaussianBlur);
+    }
+
+    @FXML
+    void logoutNo(ActionEvent event) {
+        Animations.moveByY(alertPane,-500,0.3);
+        window.setEffect(null);
+        window.setDisable(false);
+    }
+
+    @FXML
+    void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
     }
 }

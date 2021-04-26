@@ -31,7 +31,7 @@
                 <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon" />
             </graphic></Button>
         <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="HOME" />
-        <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="176.0" layoutY="81.0" size="40" />
+        <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="176.0" layoutY="81.0" size="40" styleClass="partIcon" />
         <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="176.0" layoutY="303.0" mnemonicParsing="false" onAction="#viewAddArea" prefHeight="123.0" prefWidth="330.0" styleClass="homeBlock" text="Dodaj obszar">
             <graphic>
                 <FontAwesomeIconView glyphName="PLUS" size="70" styleClass="blockIcon" />

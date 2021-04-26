@@ -17,6 +17,6 @@ public class AdminEditEmployee {
 
     public void showEdit(MouseEvent mouseEvent)throws IOException
         {
-            SceneManager.loadScene("../../resources/view/admin/adminEdit.fxml", edit);
+            SceneManager.loadScene("../../../resources/view/admin/adminEdit.fxml", edit);
         }
 }
