@@ -2,20 +2,26 @@ package main.java;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import main.java.preferences.Preference;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class App extends Application {
 
+    static boolean connectionError = false;
+    private static Preference pref = new Preference();
+    private static String name;
+
     public static void main(String[] args) throws FileNotFoundException {
+
+
+        //"main/resources/languages/lang_en.properties"
+
         Connection con = null;
         try {
             //Registering the Driver
@@ -33,11 +39,35 @@ public class App extends Application {
                 //Running the script
                 sr.runScript(reader);
             } catch (SQLException e) {
-                e.printStackTrace();
+               setConnectionError(true);
             }
         }
 
         launch(args);
+    }
+
+    public static String getLanguageProperties(String propertyName){
+
+        Properties prop = new Properties();
+
+        if(pref.readPreference("language").equals("english"))
+            name = "main/resources/languages/lang_en.properties";
+        else
+            name = "main/resources/languages/lang_pl.properties";
+
+        try (InputStream input = App.class.getClassLoader().getResourceAsStream(name)){
+
+            if(input == null){
+                System.out.println("Sorry, unable to find config.properties");
+            }
+
+            prop.load(input);
+
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        return prop.getProperty(propertyName);
     }
 
     @Override
@@ -62,5 +92,13 @@ public class App extends Application {
       //primaryStage.initStyle(StageStyle.UNDECORATED);
 
         SceneManager.renderScene("login");
+    }
+
+    public static boolean isConnectionError() {
+        return connectionError;
+    }
+
+    public static void setConnectionError(boolean connectionError) {
+        App.connectionError = connectionError;
     }
 }
