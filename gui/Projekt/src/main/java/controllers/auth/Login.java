@@ -11,15 +11,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.entity.Users;
 import main.java.features.Alerts;
-import sun.security.provider.MD5;
 
-import java.math.BigInteger;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -60,7 +57,9 @@ public class Login implements Initializable{
     public static int userInfoID;
 
     public void initialize(URL url, ResourceBundle rb){
-
+        if(App.isConnectionError()){
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING", App.getLanguageProperties("authDatabaseConnectionAlert"), 425, 86, "alertFailure");
+        }
     }
 
     public void login(){
@@ -99,7 +98,6 @@ public class Login implements Initializable{
 
                     }
                 }
-                System.out.println("Poszlo dalej");
 
                 //UserTextField
                 loginEmailTextField.getStyleClass().clear();
@@ -115,7 +113,7 @@ public class Login implements Initializable{
                 loginPasswordCircleCircle.getStyleClass().clear();
                 loginPasswordCircleCircle.getStyleClass().add("fillError");
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Podany użytkownik nie istniej lub/i hasło jest błędne", 425, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",App.getLanguageProperties("authNoUserFoundAlert"), 435, 86, "alertFailure");
 
             }else{
                 //UserTextField
@@ -125,10 +123,10 @@ public class Login implements Initializable{
                 loginUserCircleCircle.getStyleClass().clear();
                 loginUserCircleCircle.getStyleClass().add("fillError");
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Format adresu email jest błędny", 310, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86, "alertFailure");
             }
         }else{
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING","Uzupełnij dane", 293, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",App.getLanguageProperties("authFillFormAlert"), 293, 86, "alertFailure");
         }
     }
 

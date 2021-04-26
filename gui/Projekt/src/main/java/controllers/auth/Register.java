@@ -9,9 +9,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.dao.UserInfosDAO;
-import main.java.entity.UserInfos;
 import main.java.entity.Users;
 import main.java.features.Alerts;
 
@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static main.java.dao.UserInfosDAO.getUserInfos;
 import static main.java.dao.UsersDAO.getUsers;
 
 public class Register {
@@ -137,7 +136,7 @@ public class Register {
             boolean phoneNumberExsists = false;
             int isUserNew = 0;
 
-//      WORKING FOR NOW, BUT WHY SHOULD WE USE IT IF IT HAS WRONG APPROACH
+//      WORKING FOR NOW, BUT WHY SHOULD WE USE IT IF ITS WRONG
 //
 //            List<UserInfos> listOfUserInfos = getUserInfos();
 //            for(int i = 0; i < listOfUserInfos.size(); i++){
@@ -164,14 +163,14 @@ public class Register {
             if(!phoneNumberExsists){
                 isUserNew++;
             }else{
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany numer telefonu jest już w użyciu", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authPhoneNumberAlreadyInUseAlert"), 350, 86, "alertFailure");
                 errorOnPhoneNumber();
             }
 
             if(!emailExists){
                 isUserNew++;
             }else{
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany adres email jest już w użyciu", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING", App.getLanguageProperties("authEmailAddressAlreadyInUseAlert"), 350, 86, "alertFailure");
                 errorOnEmailAddress();
             }
 
@@ -189,7 +188,7 @@ public class Register {
 
                 //REJESTRACJA POMYSLNA
                 System.out.println("Zarejestrowano");
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"CHECK","Zarejestrowano pomyślnie", 293, 86, "alertSuccess");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"CHECK",App.getLanguageProperties("authRegisterSuccessfulAlert"), 293, 86, "alertSuccess");
                 SceneManager.renderScene("login");
             }
 
@@ -291,44 +290,44 @@ public class Register {
         }else if(error == 1){
             if(firstNameError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format imienia jest błędny", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongFirstNameFormatAlert"), 350, 86, "alertFailure");
             }
             if(lastNameError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format nazwiska jest błedny", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongLastNameFormatAlert"), 350, 86, "alertFailure");
             }
             if(phoneNumberError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format numeru telefonu jest błędny", 390, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongPhoneNumberFormatAlert"), 390, 86, "alertFailure");
             }
             if(emailError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format adresu email jest błędny", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86, "alertFailure");
             }
             if(streetError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format ulicy jest błędny", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongStreetFormatAlert"), 350, 86, "alertFailure");
             }
             if(cityError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format miasta jest błędny", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongCityFormatAlert"), 380, 86, "alertFailure");
             }
             if(voivodeshipError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format województwa jest błędny", 365, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongVoivodeshipFormatAlert"), 365, 86, "alertFailure");
             }
             if(passwordError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Podany format hasła jest błędny", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongPasswordFormatAlert"), 350, 86, "alertFailure");
             }
             if(passwordNotTheSameError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Hasła nie są takie same", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authPasswordsNotTheSameAlert"), 350, 86, "alertFailure");
             }
             return false;
         }else{
 
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING","Popraw błędy na zaznaczonych polach", 350, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authErrorsOnTextFieldsAlert"), 350, 86, "alertFailure");
             return false;
         }
     }
