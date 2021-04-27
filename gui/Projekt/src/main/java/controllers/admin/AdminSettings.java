@@ -31,12 +31,18 @@ public class AdminSettings implements Initializable {
     private ComboBox<String> pickColor;
 
     @FXML
+    private ComboBox<String> pickLanguage;
+
+
+    @FXML
     private AnchorPane userInformationPane;
 
     Preference pref = new Preference();
 
     //List of colors for combobox
     private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony", "Biały");
+    //List of languages for combobox
+    private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,6 +57,14 @@ public class AdminSettings implements Initializable {
         }
         else{
             pickColor.setValue(colors.get(2));
+        }
+
+        pickLanguage.setItems(languages);
+        if(pref.readPreference("language").equals("english")){
+            pickLanguage.setValue(languages.get(1));
+        }
+        else{
+            pickLanguage.setValue(languages.get(0));
         }
 
         ToggleGroup group = new ToggleGroup();
@@ -92,5 +106,15 @@ public class AdminSettings implements Initializable {
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #FFFFFF;" +
                     "-fx-second-color: #000000;");
         }
+    }
+
+    @FXML
+    void changeLanguage(ActionEvent event) {
+        Preference pref = new Preference();
+
+        if(pickLanguage.getValue().equals("English"))
+            pref.addPreference("language","english");
+        else
+            pref.addPreference("language","polski");
     }
 }

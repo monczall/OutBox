@@ -25,13 +25,13 @@
                   <Pane prefHeight="71.0" prefWidth="156.0" />
 
                   <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onMouseClicked="#go_home" prefHeight="70.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="Home" wrapText="true" />
-                  <Button mnemonicParsing="false" onMouseClicked="#go_edit_employee" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="Edytuj&#10;pracowników" />
-                  <Button mnemonicParsing="false" onMouseClicked="#go_add_manager" prefHeight="70.0" prefWidth="163.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="Dodaj&#10;kierownika" wrapText="true" />
-                  <Button fx:id="testButton" mnemonicParsing="false" onMouseClicked="#go_add_area" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="Dodaj obszar" />
-                  <Button id="btnSettings" mnemonicParsing="false" onMouseClicked="#go_pack_settings" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="Właściwości &#10;przesyłki" />
-                  <Button mnemonicParsing="false" onMouseClicked="#go_raport" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="Generuj raport" />
-                  <Button layoutX="10.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#go_settings" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="Ustawienia" />
-                  <Button layoutX="10.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#go_logout" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="Wyloguj" />
+                  <Button mnemonicParsing="false" onMouseClicked="#go_edit_employee" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="%adminEditEmployee" wrapText="true" />
+                  <Button mnemonicParsing="false" onMouseClicked="#go_add_manager" prefHeight="70.0" prefWidth="163.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="%adminAddManager" wrapText="true" />
+                  <Button fx:id="testButton" mnemonicParsing="false" onMouseClicked="#go_add_area" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="%adminAddArea" wrapText="true" />
+                  <Button id="btnSettings" mnemonicParsing="false" onMouseClicked="#go_pack_settings" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="%adminPackageProperties" wrapText="true" />
+                  <Button mnemonicParsing="false" onMouseClicked="#go_raport" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="%adminGenerateReport" wrapText="true" />
+                  <Button layoutX="10.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#go_settings" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="%adminSettings" wrapText="true" />
+                  <Button layoutX="10.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#go_logout" prefHeight="70.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/admin.css" text="%adminLogout" />
 
                   <Pane prefHeight="71.0" prefWidth="156.0" />
                </children>
@@ -52,7 +52,7 @@
             </AnchorPane>
             <Pane fx:id="hello" layoutX="92.0" layoutY="16.0" prefHeight="58.0" prefWidth="201.0">
                <children>
-                  <Text fill="WHITE" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="Witaj" />
+                  <Text fill="WHITE" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="%adminHello" />
                   <Text layoutX="50.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Administratorze" />
                   <Text fill="WHITE" layoutX="195.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="!" />
                </children>
@@ -62,17 +62,17 @@
             </AnchorPane>
       <Pane fx:id="alertPane" layoutX="401.0" layoutY="186.0" prefHeight="123.0" prefWidth="293.0" styleClass="alert">
          <children>
-            <Button layoutX="154.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="NIE">
+            <Button layoutX="154.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="%no">
                <graphic>
                   <FontAwesomeIconView glyphName="CLOSE" size="23" styleClass="iconNext" />
                </graphic>
             </Button>
-            <Button layoutX="48.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="TAK">
+            <Button layoutX="48.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="%yes">
                <graphic>
                   <FontAwesomeIconView fill="#ff2a2a" glyphName="CHECK" size="23" styleClass="backIcon" />
                </graphic>
             </Button>
-            <Label layoutX="33.0" layoutY="20.0" styleClass="alertText" text="Napewno chcesz się wylogować?" />
+            <Label layoutX="33.0" layoutY="20.0" styleClass="alertText" text="%adminLogoutAlert" />
          </children>
       </Pane>
    </children>
