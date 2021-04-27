@@ -26,7 +26,7 @@
             <TableColumn fx:id="time" minWidth="0.0" prefWidth="88.66668701171875" text="%deliveryTime" />
         </columns>
       </TableView>
-      <TextField layoutX="741.0" layoutY="110.0" styleClass="inputBox" />
+      <TextField fx:id="searchField" layoutX="741.0" layoutY="110.0" onKeyReleased="#search" styleClass="inputBox" />
       <Label layoutX="682.0" layoutY="116.0" text="%search" textFill="WHITE" />
      </children>
 </AnchorPane>

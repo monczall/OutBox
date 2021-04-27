@@ -26,7 +26,7 @@
       <Text fx:id="surname" fill="WHITE" layoutX="322.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
       <Text fx:id="address" fill="WHITE" layoutX="322.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
       <Text fx:id="phone" fill="WHITE" layoutX="67.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
-      <TextArea fx:id="comments" editable="false" layoutX="560.0" layoutY="35.0" prefHeight="59.0" prefWidth="262.0" wrapText="true" />
+      <TextArea fx:id="comments" editable="false" layoutX="560.0" layoutY="35.0" prefHeight="59.0" prefWidth="262.0" styleClass="inputArea" wrapText="true" />
       <Label layoutX="675.0" layoutY="7.0" text="Uwagi" />
    </children>
 </Pane>

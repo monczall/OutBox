@@ -183,16 +183,16 @@
 }
 
 .inputArea .content{
-    -fx-background-color: -fx-dark-color;
-    -fx-border-color: -fx-main-color;
+    -fx-border-width: 0;
 }
 
 .inputArea{
     -fx-border-color: -fx-main-color;
     -fx-text-fill: -fx-main-color;
-    -fx-font-size: 15px;
+    -fx-border-width: 0.1;
     -fx-background-radius: 0;
-    -fx-background-color: -fx-main-color;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: -fx-main-color;
 }
 /*-------------STYLING SCROLLPANE-------------*/
 .scroll-pane{
@@ -352,7 +352,4 @@
 .button{
     -fx-base: -fx-main-color;
     -fx-font-weight: bold;
-}
-.text-area:selected{
-    -fx-border-color: -fx-main-color;
 }
