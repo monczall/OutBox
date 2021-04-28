@@ -131,7 +131,10 @@ public class Register {
 
     public void register(){
         registerRegisterButtonButton.setDisable(true);
-        if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(), registerPhoneNumberField.getText(), registerEmailAddressField.getText(), registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText(), registerPasswordField.getText(), registerRepeatPasswordField.getText())){
+        if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(),
+                registerPhoneNumberField.getText(), registerEmailAddressField.getText(),
+                registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText(),
+                registerPasswordField.getText(), registerRepeatPasswordField.getText())){
             boolean emailExists = false;
             boolean phoneNumberExsists = false;
             int isUserNew = 0;
@@ -163,14 +166,18 @@ public class Register {
             if(!phoneNumberExsists){
                 isUserNew++;
             }else{
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authPhoneNumberAlreadyInUseAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authPhoneNumberAlreadyInUseAlert"), 350,
+                        86, "alertFailure");
                 errorOnPhoneNumber();
             }
 
             if(!emailExists){
                 isUserNew++;
             }else{
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING", App.getLanguageProperties("authEmailAddressAlreadyInUseAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authEmailAddressAlreadyInUseAlert"), 350,
+                        86, "alertFailure");
                 errorOnEmailAddress();
             }
 
@@ -188,7 +195,9 @@ public class Register {
 
                 //REJESTRACJA POMYSLNA
                 System.out.println("Zarejestrowano");
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"CHECK",App.getLanguageProperties("authRegisterSuccessfulAlert"), 293, 86, "alertSuccess");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"CHECK",
+                        App.getLanguageProperties("authRegisterSuccessfulAlert"), 293, 86,
+                        "alertSuccess");
                 SceneManager.renderScene("login");
             }
 
@@ -196,8 +205,11 @@ public class Register {
         registerRegisterButtonButton.setDisable(false);
     }
 
-    private boolean isValid(String firstName, String lastName, String phoneNumber, String email, String street, String city, String voivodeship, String password, String password2){
-        boolean firstNameError = false, lastNameError = false, phoneNumberError = false, emailError = false, streetError = false, cityError = false, voivodeshipError = false, passwordError = false, passwordNotTheSameError = false;
+    private boolean isValid(String firstName, String lastName, String phoneNumber, String email, String street,
+                            String city, String voivodeship, String password, String password2){
+        boolean firstNameError = false, lastNameError = false, phoneNumberError = false, emailError = false,
+                streetError = false, cityError = false, voivodeshipError = false, passwordError = false,
+                passwordNotTheSameError = false;
         int error = 0;
         Pattern pattern = Pattern.compile("[A-Za-z]{2,60}");
 
@@ -210,7 +222,8 @@ public class Register {
 
         Pattern patternEmail = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
 
-        Pattern patternStreet = Pattern.compile("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}");
+        Pattern patternStreet = Pattern.compile("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?" +
+                "[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}");
 
         Pattern patternCity = Pattern.compile("[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
 
@@ -290,44 +303,64 @@ public class Register {
         }else if(error == 1){
             if(firstNameError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongFirstNameFormatAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authWrongFirstNameFormatAlert"), 350, 86,
+                        "alertFailure");
             }
             if(lastNameError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongLastNameFormatAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authWrongLastNameFormatAlert"), 350, 86,
+                        "alertFailure");
             }
             if(phoneNumberError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongPhoneNumberFormatAlert"), 390, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authWrongPhoneNumberFormatAlert"), 390, 86,
+                        "alertFailure");
             }
             if(emailError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86,
+                        "alertFailure");
             }
             if(streetError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongStreetFormatAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authWrongStreetFormatAlert"), 350, 86,
+                        "alertFailure");
             }
             if(cityError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongCityFormatAlert"), 380, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authWrongCityFormatAlert"), 380, 86,
+                        "alertFailure");
             }
             if(voivodeshipError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongVoivodeshipFormatAlert"), 365, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authWrongVoivodeshipFormatAlert"), 365, 86,
+                        "alertFailure");
             }
             if(passwordError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authWrongPasswordFormatAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authWrongPasswordFormatAlert"), 350, 86,
+                        "alertFailure");
             }
             if(passwordNotTheSameError){
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authPasswordsNotTheSameAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                        App.getLanguageProperties("authPasswordsNotTheSameAlert"), 350, 86,
+                        "alertFailure");
             }
             return false;
         }else{
 
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",App.getLanguageProperties("authErrorsOnTextFieldsAlert"), 350, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, registerReturnButtonButton,"WARNING",
+                    App.getLanguageProperties("authErrorsOnTextFieldsAlert"), 350, 86,
+                    "alertFailure");
             return false;
         }
     }
