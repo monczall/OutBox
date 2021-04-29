@@ -5,6 +5,15 @@ public class PackageTest {
     private String packageNumber;
     private String status;
     private String sender;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getPackageNumber() {
         return packageNumber;

@@ -1,6 +1,7 @@
 package main.java.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -30,6 +31,8 @@ public class Packages {
     private String city;
     private String address;
     private String phone;
+    private String voivodeship;
+    private Timestamp timestamp;
     private Collection<PackageHistory> packageHistoriesById;
     private PackageType packageTypeByTypeId;
     private Users usersByUserId;
@@ -189,6 +192,15 @@ public class Packages {
         return getUserInfosByUserInfoId().getStreetAndNumber();
     }
 
+    @Column(name = "voivodeship", table = "user_infos")
+    public String getVoivodeship() {
+        return getUserInfosByUserInfoId().getVoivodeship();
+    }
+
+    public void setVoivodeship(String voivodeship) {
+        this.voivodeship = voivodeship;
+    }
+
     public void setAddress(String address) {
         this.address = address;
     }
@@ -211,5 +223,12 @@ public class Packages {
         this.status = status;
     }
 
+    @Column(name = "date", table = "package_history")
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
 
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
 }

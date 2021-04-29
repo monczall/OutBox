@@ -17,6 +17,8 @@ public class UserInfosDAO {
 
         List<UserInfos> listOfUsers = query.list();
 
+        session.close();
+
         return listOfUsers;
     }
 
@@ -27,6 +29,8 @@ public class UserInfosDAO {
         query.setParameter("id",id);
 
         List<UserInfos> userList = query.list();
+
+        session.close();
 
         return userList;
     }
