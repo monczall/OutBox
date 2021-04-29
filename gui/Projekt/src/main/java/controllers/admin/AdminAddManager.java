@@ -9,10 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.SceneManager;
+import main.java.features.Alerts;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -90,6 +92,9 @@ public class AdminAddManager implements Initializable {
     @FXML
     private ChoiceBox registerAreaChoiceBox;
 
+    @FXML
+    private AnchorPane RightPaneAnchorPane;
+
 
     public void register(){
         if(!isEmpty()){
@@ -101,41 +106,25 @@ public class AdminAddManager implements Initializable {
                     }else{
                         errorOnEmailAddress();
 
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Niepoprawny email");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Niepoprawny format danych! Podany E-Mail nie jest prawidłowy.");
-
-                        alert.showAndWait();
+                        Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING","Niepoprawny format danych! Podany mail nie jest prawidłowy.", 560, 86, "alertFailure");
                     }
                 }else{
                     errorOnPhoneNumber();
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Niepoprawny numer telefonu");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Niepoprawny format danych! Podany numer telefonu nie jest prawidłowy.");
-
-                    alert.showAndWait();
+                    Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING","Niepoprawny format danych! Podany numer nie jest prawidłowy.", 565, 86, "alertFailure");
                 }
             }else{
                 //SPRAWDZENIE BLEDOW
 
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Niepoprawne dane");
-                alert.setHeaderText(null);
-                alert.setContentText("Podano niepoprawne dane! \nPopraw zaznaczone błędy w formularzu rejestracji.");
 
-                alert.showAndWait();
+
+                Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING","Podano niepoprawne dane! Popraw zaznaczone błędy w formularzu rejestracji.", 670, 86, "alertFailure");
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Puste pola");
-            alert.setHeaderText(null);
-            alert.setContentText("Pozostawiono puste pola! Uzupełnij wymagane informacje.");
 
-            alert.showAndWait();
+
+            Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING","Pozostawiono puste pola! Uzupełnij wymagane informacje.", 525, 86, "alertFailure");
         }
     }
 

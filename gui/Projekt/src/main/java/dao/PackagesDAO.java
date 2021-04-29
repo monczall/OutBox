@@ -1,6 +1,5 @@
 package main.java.dao;
 
-import com.sun.xml.bind.v2.runtime.reflect.Lister;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.Packages;
@@ -11,6 +10,16 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class PackagesDAO {
+
+    static public List<Packages> getPackages(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from Packages");
+
+        List<Packages> listOfPackages = query.list();
+
+        return listOfPackages;
+    }
 
     static public ObservableList<Packages> addTable()
     {

@@ -96,11 +96,7 @@
     -fx-border-color: -fx-theme-secondary-color;
     -fx-border-radius: 3;
     -fx-min-width: 91;
-    -fx-pref-width: 91;
-    -fx-max-width: 91;
     -fx-min-height: 27;
-    -fx-pref-height: 27;
-    -fx-max-height: 27;
     -fx-text-fill: -fx-theme-secondary-color;
     -fx-alignment: center;
 }
@@ -108,11 +104,7 @@
     -fx-background-color: -fx-theme-secondary-color;
     -fx-background-radius: 3;
     -fx-min-width: 91;
-    -fx-pref-width: 91;
-    -fx-max-width: 91;
     -fx-min-height: 27;
-    -fx-pref-height: 27;
-    -fx-max-height: 27;
     -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }

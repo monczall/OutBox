@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.layout.AnchorPane?>
-
-<?import javafx.scene.text.Text?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
 <AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminRaport">
     <children>
-        <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="GENERUJ RAPORT" />
-        <FontAwesomeIconView fill="ORANGE" glyphName="BOOK" layoutX="176.0" layoutY="81.0" size="40" />
+        <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminGenerateReportUp" />
+        <FontAwesomeIconView fill="ORANGE" glyphName="BOOK" layoutX="176.0" layoutY="81.0" size="40" styleClass="partIcon" />
         <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-        <Button alignment="BOTTOM_CENTER" layoutX="348.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="Generuj niestandardowy raport" />
-        <DatePicker layoutX="240.0" layoutY="386.0" promptText="Data od" styleClass="inputData" />
-        <DatePicker layoutX="553.0" layoutY="386.0" promptText="Data do" styleClass="inputData" />
-        <Button alignment="CENTER" layoutX="160.0" layoutY="163.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z poprzedniego dnia" textAlignment="CENTER" wrapText="true" />
-        <Button alignment="CENTER" layoutX="400.0" layoutY="163.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego tygodnia" textAlignment="CENTER" wrapText="true" />
-        <Button alignment="CENTER" layoutX="640.0" layoutY="163.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="Generuj raport z ostatniego miesiąca" textAlignment="CENTER" wrapText="true" />
+        <Button alignment="BOTTOM_CENTER" layoutX="348.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="%adminGenerateCustomReport" />
+        <DatePicker layoutX="240.0" layoutY="386.0" promptText="%adminDateFrom" styleClass="inputData" />
+        <DatePicker layoutX="553.0" layoutY="386.0" promptText="%adminDateTo" styleClass="inputData" />
+        <Button alignment="CENTER" layoutX="160.0" layoutY="163.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="%adminGeneratePreviousDay" textAlignment="CENTER" wrapText="true" />
+        <Button alignment="CENTER" layoutX="400.0" layoutY="163.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="%adminGeneratePreviousWeek" textAlignment="CENTER" wrapText="true" />
+        <Button alignment="CENTER" layoutX="640.0" layoutY="163.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="%adminGeneratePreviousMonth" textAlignment="CENTER" wrapText="true" />
     </children>
 </AnchorPane>

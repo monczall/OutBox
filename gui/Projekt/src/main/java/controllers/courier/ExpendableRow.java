@@ -46,7 +46,5 @@ public class ExpendableRow implements Initializable {
         phone.setText(ui.getPhoneNumber());
         address.setText(ui.getStreetAndNumber());
         comments.setText(CourierSecond.getComment());
-
-        System.out.println(PackageHistoryDAO.getStatuses().size());
     }
 }

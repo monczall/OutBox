@@ -11,6 +11,16 @@ import java.util.List;
 
 public class PackageHistoryDAO {
 
+    static public List<PackageHistory> getPackageHistories(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from PackageHistory ");
+
+        List<PackageHistory> listOfPackageHistories = query.list();
+
+        return listOfPackageHistories;
+    }
+    
     static public List<PackageHistory> getStatuses()
     {
         Session session = HibernateUtil.getSessionFactory().openSession();

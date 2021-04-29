@@ -69,10 +69,15 @@ public class AdminEdit implements Initializable {
     @FXML
     private TextField editVoivodeshipField;
 
+    @FXML
+    private Circle editRoleCircle;
 
 
     @FXML
     private ChoiceBox editAreaChoiceBox;
+
+    @FXML
+    private ChoiceBox editRoleChoiceBox;
 
 
     public void edit(){
@@ -158,6 +163,12 @@ public class AdminEdit implements Initializable {
             errorOnArea();
             error++;
         }
+
+        if(editRoleChoiceBox.getSelectionModel().isEmpty()){
+            errorOnRole();
+            error++;
+        }
+
         if(error > 0){
             return true;
         }else{
@@ -396,17 +407,40 @@ public class AdminEdit implements Initializable {
         editAreaCircle.getStyleClass().add("circle");
     }
 
+    private void errorOnRole(){
+
+        editRoleChoiceBox.getStyleClass().clear();
+        editRoleChoiceBox.getStyleClass().add("textFieldsError");
+
+        editRoleCircle.getStyleClass().clear();
+        editRoleCircle.getStyleClass().add("circleError");
+    }
+
+    public void clearErrorOnRole(MouseEvent mouseEvent) {
+
+        editRoleChoiceBox.getStyleClass().clear();
+        editRoleChoiceBox.getStyleClass().add("textFields");
+
+        editRoleCircle.getStyleClass().clear();
+        editRoleCircle.getStyleClass().add("circle");
+    }
+
+
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         editAreaChoiceBox.setItems(FXCollections.observableArrayList(
                 "First", "Second", "Third"));
+
+        editRoleChoiceBox.setItems(FXCollections.observableArrayList(
+                "Kurier", "Kurier międzyobszarowy", "Kierownik"));
     }
 
 
     public void back(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../resources/view/admin/adminEditEmployee.fxml", edit);
+        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", edit);
     }
 
     public void deleteEmployee(MouseEvent mouseEvent) {

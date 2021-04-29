@@ -8,20 +8,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import main.java.App;
 import main.java.SceneManager;
+import main.java.dao.UsersDAO;
+import main.java.entity.Users;
 import main.java.features.Alerts;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static main.java.dao.UserInfosDAO.getUserInfoByID;
+import static main.java.dao.UsersDAO.getUsers;
 
 public class PasswordReset {
 
@@ -110,8 +116,9 @@ public class PasswordReset {
     private Label passwordResetSamePasswordsRequirement;
 
 
+    int userId;
+    int userInfoId;
     private String verificationCode = "";
-
 
     public void handleSendVerificationCode(ActionEvent actionEvent) throws MessagingException {
         handleSendEmail();
@@ -126,43 +133,62 @@ public class PasswordReset {
 
     public void handleSendEmail() throws MessagingException {
         if(isEmail(passwordResetEmailField.getText())){
+            boolean foundEmail = false;
 
-            //TUTAJ SPRAWDZENIE MAILA Z BAZA DANYCH
 
-            String firstName = "Lukasz";
-            //Generating verification code
-            Random rand = new Random();
-            int vCode1 = rand.nextInt(9);
-            int vCode2 = rand.nextInt(9);
-            int vCode3 = rand.nextInt(9);
-            int vCode4 = rand.nextInt(9);
-            verificationCode = "" + vCode1 + vCode2 + vCode3 + vCode4 + "";
-            sendEmail(passwordResetEmailField.getText(),firstName,verificationCode);
+            List<Users> listOfUsers = getUsers();
+            for(int i = 0; i < getUsers().size(); i++){
+                if(passwordResetEmailField.getText().equals(listOfUsers.get(i).getEmail())){
+                    foundEmail = true;
+                    userId = listOfUsers.get(i).getId();
+                    userInfoId = listOfUsers.get(i).getUserInfoId();
+                    break;
+                }
+            }
 
-            //Blocking email field and send code button
-            passwordResetEmailField.setDisable(true);
-            passwordResetEmailCircle.getStyleClass().clear();
-            passwordResetEmailCircle.getStyleClass().add("fillCorrect");
+            if(foundEmail){
+                //Generating verification code
+                Random rand = new Random();
+                int vCode1 = rand.nextInt(9);
+                int vCode2 = rand.nextInt(9);
+                int vCode3 = rand.nextInt(9);
+                int vCode4 = rand.nextInt(9);
+                verificationCode = "" + vCode1 + vCode2 + vCode3 + vCode4 + "";
+                sendEmail(passwordResetEmailField.getText(),getUserInfoByID(userInfoId).get(0).getName(),
+                        verificationCode);
 
-            passwordResetEmailField.getStyleClass().clear();
-            passwordResetEmailField.getStyleClass().add("textFieldsCorrect");
+                //Blocking email field and send code button
+                passwordResetEmailField.setDisable(true);
+                passwordResetEmailCircle.getStyleClass().clear();
+                passwordResetEmailCircle.getStyleClass().add("fillCorrect");
 
-            passwordResetSendCodeLabel.setVisible(false);
+                passwordResetEmailField.getStyleClass().clear();
+                passwordResetEmailField.getStyleClass().add("textFieldsCorrect");
 
-            passwordResetSendCodeButton.setDisable(true);
-            passwordResetSendCodeButton.setVisible(false);
+                passwordResetSendCodeLabel.setVisible(false);
 
-            //Unblocking verification code field and verify button
-            passwordResetVerificationCodeField.setDisable(false);
-            passwordResetVerificationCodeCircle.getStyleClass().clear();
-            passwordResetVerificationCodeCircle.getStyleClass().add("fill");
+                passwordResetSendCodeButton.setDisable(true);
+                passwordResetSendCodeButton.setVisible(false);
 
-            passwordResetVerifyCodeLabel.setVisible(true);
+                //Unblocking verification code field and verify button
+                passwordResetVerificationCodeField.setDisable(false);
+                passwordResetVerificationCodeCircle.getStyleClass().clear();
+                passwordResetVerificationCodeCircle.getStyleClass().add("fill");
 
-            passwordResetVerifyCodeButton.setDisable(false);
+                passwordResetVerifyCodeLabel.setVisible(true);
+
+                passwordResetVerifyCodeButton.setDisable(false);
+            }else{
+                errorOnEmail();
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",
+                        App.getLanguageProperties("authNoEmailUserFoundAlert"), 350, 86,
+                        "alertFailure");
+            }
         }else{
             errorOnEmail();
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Wprowadzony mail jest błędny", 293, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",
+                    App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86,
+                    "alertFailure");
         }
     }
 
@@ -202,21 +228,22 @@ public class PasswordReset {
         System.out.println("Message sent successfully");
     }
 
-    private static Message prepareMessage(Session session, String outBoxEmailAccount, String recipient, String firstName, String verificationCode) {
+    private static Message prepareMessage(Session session, String outBoxEmailAccount, String recipient,
+                                          String firstName, String verificationCode) {
         Message message = new MimeMessage(session);
         try {
             message.setFrom(new InternetAddress("OutBox_Support"));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject("Password Reset Request");
-            message.setText("Hello "+ firstName +",\n" +
-                    "we have received request to reset your password.\n" +
-                    "Here is your verification code to use in our application:\n" +
+            message.setSubject(App.getLanguageProperties("authResetPasswordMailSubject"));
+            message.setText(App.getLanguageProperties("authResetPasswordMailMessage1") + firstName +",\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage2") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage3") + "\n" +
                     "\n" + verificationCode + "\n\n" +
-                    "Please note that this code is valid until you close password reset page.\n" +
-                    "If you closed password reset page by accident you can start over.\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage4") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage5") + "\n" +
                     "\n" +
-                    "If you didn't request password reset, please ignore this e-mail.\n" +
-                    "Best regards,");
+                    App.getLanguageProperties("authResetPasswordMailMessage6") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage7"));
             return message;
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -237,7 +264,9 @@ public class PasswordReset {
 
     public void verifyCode(){
         if(passwordResetVerificationCodeField.getText().equals(verificationCode)){
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"CHECK","Weryfikacja pomyślna", 293, 86, "alertSuccess");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"CHECK",
+                    App.getLanguageProperties("authVerificationSuccessfulAlert"), 293, 86,
+                    "alertSuccess");
 
             //Block verification code field and verify button
             passwordResetVerificationCodeField.setDisable(true);
@@ -265,7 +294,9 @@ public class PasswordReset {
 
         }else{
             errorOnVerificationCode();
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Wprowadzony kod jest błędny", 293, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",
+                    App.getLanguageProperties("authVerificationCodeInvalidAlert"), 293, 86,
+                    "alertFailure");
         }
     }
 
@@ -282,8 +313,9 @@ public class PasswordReset {
 
     public void passwordReset(){
         if(isValid(passwordResetPasswordField.getText(), passwordResetConfirmPasswordField.getText())){
-            System.out.println("Zresetowano");
-            System.out.println("Nowe hasło:" + passwordResetPasswordField.getText());
+
+            UsersDAO.updatePassword(userId, Encryption.encrypt(passwordResetPasswordField.getText()));
+            System.out.println("Password Reset Successful");
         }
     }
     private boolean isValid(String password1, String password2){
@@ -311,15 +343,21 @@ public class PasswordReset {
             return true;
         }else if(error == 1) {
             if(passwordError){
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Podany format hasła jest błędny", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,
+                        "WARNING",App.getLanguageProperties("authWrongPasswordFormatAlert"),
+                        350, 86, "alertFailure");
             }
             if(passwordNotTheSameError){
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Hasła nie są takie same", 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,
+                        "WARNING",App.getLanguageProperties("authPasswordsNotTheSameAlert"),
+                        350, 86, "alertFailure");
             }
             return false;
         }else{
 
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING","Popraw błędy na zaznaczonych polach", 350, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,
+                    "WARNING",App.getLanguageProperties("authErrorsOnTextFieldsAlert"),
+                    350, 86, "alertFailure");
             return false;
         }
     }
