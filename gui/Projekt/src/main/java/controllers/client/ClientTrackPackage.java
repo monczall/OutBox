@@ -270,8 +270,8 @@ public class ClientTrackPackage implements Initializable {
         for(int i = 0; i < listOfPackages.size(); i++){
             PackageTest tes = new PackageTest();
             tes.setPackageNumber(listOfPackages.get(i).getPackageNumber());
-            tes.setSender(listOfPackages.get(i).getName());
-            tes.setStatus(listOfPackages.get(i).getStatus());
+//            tes.setSender(listOfPackages.get(i).getName());
+//            tes.setStatus(listOfPackages.get(i).getStatus());
             tes.setId(listOfPackages.get(i).getId());
             ls.add(tes);
         }
