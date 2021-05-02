@@ -35,6 +35,18 @@ public class UserInfosDAO {
         return userList;
     }
 
+    static public List<UserInfos> getUserInfoByNameAndSurname(String name ,String surname){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("FROM UserInfos WHERE name = :name AND surname = :surname");
+        query.setParameter("name",name).setParameter("surname", surname);
+        List<UserInfos> userList = query.list();
+
+        session.close();
+
+        return userList;
+    }
+
     static public void addUserInfo(String name, String surname, String email, String phone_number, String street_and_number, String city, String voivodeship, String password, String role){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -58,6 +70,22 @@ public class UserInfosDAO {
         session.save(user);
 
         session.getTransaction().commit();
+        session.close();
+    }
+
+    public static void deleteUser(int id)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        UserInfos userInfo = new UserInfos();
+        userInfo.setId(id);
+
+        session.delete(userInfo);
+
+        session.getTransaction().commit();
+        session.close();
+
         session.close();
     }
 }
