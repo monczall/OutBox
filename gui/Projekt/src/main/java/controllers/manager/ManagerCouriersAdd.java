@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import main.java.dao.UserInfosDAO;
 import main.java.features.Alerts;
 
 import java.net.URL;
@@ -44,7 +45,7 @@ public class ManagerCouriersAdd implements Initializable {
     @FXML
     private ComboBox<String> regionName;
 
-    private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów centrum","Rzeszów Rejtana");
+    private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów","Rzeszów Rejtana");
 
     public void addCourier(MouseEvent mouseEvent) {
         boolean status = true;
@@ -103,7 +104,8 @@ public class ManagerCouriersAdd implements Initializable {
                 System.out.println("Miasto niepoprawne");
                 errorValidation(city);
             }
-            if (street.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
+            if (street.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?" +
+                    "\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
             {
                 System.out.println("Ulica poprawna");
                 goodValidation(street);
@@ -148,6 +150,20 @@ public class ManagerCouriersAdd implements Initializable {
             }
             if (!status) {
                 Alerts.createAlert(appWindow, addCourierButton, "WARNING", "POPRAW POLA");
+            }
+            else{
+                String nameString = name.getText();
+                String emailString = email.getText();
+                String phoneString = numberPhone.getText();
+                String streetString = street.getText();
+                String surnameString = surname.getText();
+                String cityString = city.getText();
+                String voivodeshipString = voivodeship.getText();
+                String password ="test";
+                String role = "Kurier";
+
+                //System.out.println("name: " + nameString + "surname: " + surnameString + "email: " + emailString + "phone: " + phoneString + "street: " + streetString + "city: " + cityString + "wojewodztow: " + voivodeshipString + "password: " + password);
+                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role);
             }
         }
     }

@@ -53,7 +53,6 @@ public class UsersDAO {
         Query query=session.createQuery("from Users u where u.userInfoId = :id");
         query.setParameter("id",userId);
         List<Users> id = query.list();
-        List<Users> listOfTypeInfo = query.list();
 
         query=session.createQuery("from UserInfos u where u.id = :id");
         query.setParameter("id", id.get(0).getUserInfoId());

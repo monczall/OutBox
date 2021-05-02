@@ -6,7 +6,11 @@ import main.java.entity.*;
 import main.java.entity.PackageHistory_;
 import main.java.entity.Packages_;
 import main.java.entity.UserInfos_;
+import main.java.entity.Packages;
+import main.java.entity.UserInfos;
+
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
@@ -18,8 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PackagesDAO {
-    static public ObservableList<PackagesExtended> addTable() {
-        /*
+
+
+
+    static public List<Packages> getPackages(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from Packages");
+
+        List<Packages> listOfPackages = query.list();
+
+        return listOfPackages;
+    }
+
+    static public ObservableList<PackagesExtended> addTable()
+    {/*
+        ObservableList<Packages> packages = FXCollections.observableArrayList();
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
 
@@ -88,6 +107,18 @@ public class PackagesDAO {
             e.printStackTrace();
         }
         return packages;
+    }
+
+    static public List<Packages> readPackages(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("FROM Packages GROUP BY packageNumber");
+
+        List<Packages> packageList = query.list();
+
+        session.close();
+
+        return packageList;
     }
 
 }

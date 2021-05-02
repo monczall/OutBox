@@ -14,11 +14,25 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.sql.Timestamp;
+import org.hibernate.query.Query;
+
 
 import java.util.List;
 
 public class PackageHistoryDAO {
-    static public List<PackageHistory> getStatusesById(int id)
+
+
+    static public List<PackageHistory> getPackageHistories(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from PackageHistory ");
+
+        List<PackageHistory> listOfPackageHistories = query.list();
+
+        return listOfPackageHistories;
+    }
+    
+    static public List<PackageHistory> getStatuses()
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -45,5 +59,17 @@ public class PackageHistoryDAO {
 
         session.getTransaction().commit();
         session.close();
+    }
+
+    static public List<String> getStatusById(int packageId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query=session.createQuery("SELECT status from PackageHistory WHERE packageId = :packageId");
+
+        query.setParameter("packageId",packageId);
+
+        List<String> statuses = query.list();
+
+        return  statuses;
     }
 }

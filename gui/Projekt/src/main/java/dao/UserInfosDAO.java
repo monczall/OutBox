@@ -17,6 +17,8 @@ public class UserInfosDAO {
 
         List<UserInfos> listOfUsers = query.list();
 
+        session.close();
+
         return listOfUsers;
     }
 
@@ -28,10 +30,12 @@ public class UserInfosDAO {
 
         List<UserInfos> userList = query.list();
 
+        session.close();
+
         return userList;
     }
 
-    static public void addUserInfo(String name, String surname, String email, String phone_number, String street_and_number, String city, String voivodeship, String password){
+    static public void addUserInfo(String name, String surname, String email, String phone_number, String street_and_number, String city, String voivodeship, String password, String role){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -50,7 +54,7 @@ public class UserInfosDAO {
         user.setUserInfoId(userInfo.getId());
         user.setPassword(password);
         user.setEmail(email);
-        user.setRole("Klient");
+        user.setRole(role);
         session.save(user);
 
         session.getTransaction().commit();

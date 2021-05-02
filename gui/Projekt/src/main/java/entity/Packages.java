@@ -1,6 +1,7 @@
 package main.java.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
