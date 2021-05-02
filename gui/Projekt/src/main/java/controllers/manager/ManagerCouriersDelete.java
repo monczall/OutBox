@@ -61,6 +61,9 @@ public class ManagerCouriersDelete implements Initializable {
     @FXML
     private Label voivodeship;
 
+    @FXML
+    private Pane alertPane;
+
     List<UserInfos> dataUserInfos;
     List<Users> dataUser;
     int dataIndex = 0;
@@ -68,7 +71,7 @@ public class ManagerCouriersDelete implements Initializable {
     @FXML
     public void confirmDeleteCourierButton(javafx.event.ActionEvent actionEvent) {
         UserInfosDAO.deleteUser(dataUserInfos.get(dataIndex).getId());
-        Alerts.createAlert(appWindow, findCourierButton, "WARNING", "Usunięto");
+        alertPane.setVisible(true);
     }
 
 
@@ -110,13 +113,13 @@ public class ManagerCouriersDelete implements Initializable {
         System.out.println("DataIndex: " + dataIndex + " DataUserInfosSize: "+dataUserInfos.size() + " DataUserInfosGetId: "+dataUserInfos.get(dataIndex).getId());
         System.out.println("ZMIENIAM NA KOLEJNE ID INDEX("+dataIndex+") = " +dataUserInfos.get(dataIndex).getId());
         dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
-        System.out.println("DataUserSIZSE: " + dataUser.size() + " DataUserID: " + dataUser.get(dataIndex).getId());
+        System.out.println("DataUserSIZSE: " + dataUser.size() + " DataUserID: " + dataUser.get(0).getId());
 
         fullName.setText(dataUserInfos.get(dataIndex).getName() + " "+dataUserInfos.get(dataIndex).getSurname());
         cityAndStreet.setText(dataUserInfos.get(dataIndex).getCity() + " "+dataUserInfos.get(dataIndex).getStreetAndNumber());
         phoneNumber.setText(dataUserInfos.get(dataIndex).getPhoneNumber());
         voivodeship.setText(dataUserInfos.get(dataIndex).getVoivodeship());
-        email.setText(dataUser.get(dataIndex).getEmail());
+        email.setText(dataUser.get(0).getEmail());
     }
 
     @FXML
@@ -137,6 +140,18 @@ public class ManagerCouriersDelete implements Initializable {
             dataIndex=dataUserInfos.size()-1;
         }
         setDataLabel();
+    }
+
+    @FXML
+    void confirmButton(MouseEvent event) {
+        paneResults.setVisible(false);
+        name.setText("");
+        surname.setText("");
+        noDataText.setVisible(true);
+        button1.setVisible(false);
+        button2.setVisible(false);
+        alertPane.setVisible(false);
+        dataIndex = 0;
     }
 
     @Override
