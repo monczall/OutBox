@@ -309,17 +309,17 @@ public class ClientRegisterPackage implements Initializable {
         session.beginTransaction();
 
         Packages packages = new Packages();
-//        UserInfos userInfos = new UserInfos();
+        UserInfos userInfos = new UserInfos();
         PackageHistory packageHistory = new PackageHistory();
 
-//        userInfos.setName(sumName.getText());
-//        userInfos.setSurname(sumSurname.getText());
-//        userInfos.setPhoneNumber(sumNumber.getText());
-//        userInfos.setStreetAndNumber(sumStreet.getText());
-//        userInfos.setCity(sumCity.getText());
-//        userInfos.setVoivodeship(sumProvince.getText());
+        userInfos.setName(sumName.getText());
+        userInfos.setSurname(sumSurname.getText());
+        userInfos.setPhoneNumber(sumNumber.getText());
+        userInfos.setStreetAndNumber(sumStreet.getText());
+        userInfos.setCity(sumCity.getText());
+        userInfos.setVoivodeship(sumProvince.getText());
 
-//        session.save(userInfos);
+        session.save(userInfos);
 
 
         if(sumType.getText().equals("Mała"))
@@ -330,7 +330,7 @@ public class ClientRegisterPackage implements Initializable {
             packages.setTypeId(3);;
 
         packages.setUserId(1);      // Hardcoded for tests
-//        packages.setUserInfoId(userInfos.getId());
+        packages.setUserInfoId(userInfos.getId());
         packages.setPackageNumber(packageNumber);
         packages.setEmail(sumEmail.getText());
         packages.setTimeOfPlannedDelivery(sumTime.getText());
@@ -342,7 +342,7 @@ public class ClientRegisterPackage implements Initializable {
         dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         packageHistory.setPackageId(packages.getId());
-        //packageHistory.setStatus("Zarejestrowana");
+        packageHistory.setStatus("Zarejestrowana");
         packageHistory.setDate(Timestamp.valueOf(dateTimeFormatter.format(now)));
 
         session.save(packageHistory);
