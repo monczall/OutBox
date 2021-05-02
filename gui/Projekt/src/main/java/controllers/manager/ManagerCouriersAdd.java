@@ -28,9 +28,6 @@ public class ManagerCouriersAdd implements Initializable {
     private TextField city;
 
     @FXML
-    private TextField pesel;
-
-    @FXML
     private TextField email;
 
     @FXML
@@ -53,7 +50,7 @@ public class ManagerCouriersAdd implements Initializable {
                 surname.getText().toString().equals("") ||
                 street.getText().toString().equals("") ||
                 city.getText().toString().equals("") ||
-                pesel.getText().toString().equals("") ||
+                //pesel.getText().toString().equals("") ||
                 email.getText().toString().equals("") ||
                 voivodeship.getText().toString().equals("") ||
                 numberPhone.getText().toString().equals("")){
@@ -115,7 +112,7 @@ public class ManagerCouriersAdd implements Initializable {
                 System.out.println("Ulica niepoprawna");
                 errorValidation(street);
             }
-            if (pesel.getText().matches("[0-9]*") && pesel.getText().length() == 11)
+            /*if (pesel.getText().matches("[0-9]*") && pesel.getText().length() == 11)
             {
                 System.out.println("Pesel poprawny");
                 goodValidation(pesel);
@@ -125,7 +122,7 @@ public class ManagerCouriersAdd implements Initializable {
                 status = false;
                 System.out.println("Pesel niepoprawny");
                 errorValidation(pesel);
-            }
+            }*/
             if (numberPhone.getText().matches("[0-9]*") && numberPhone.getText().length() == 9)
             {
                 System.out.println("Telefon poprawny");
@@ -164,6 +161,7 @@ public class ManagerCouriersAdd implements Initializable {
 
                 //System.out.println("name: " + nameString + "surname: " + surnameString + "email: " + emailString + "phone: " + phoneString + "street: " + streetString + "city: " + cityString + "wojewodztow: " + voivodeshipString + "password: " + password);
                 UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role);
+
             }
         }
     }
@@ -184,7 +182,7 @@ public class ManagerCouriersAdd implements Initializable {
         goodValidation(surname);
         goodValidation(street);
         goodValidation(city);
-        goodValidation(pesel);
+        //goodValidation(pesel);
         goodValidation(numberPhone);
         goodValidation(voivodeship);
         goodValidation(email);
