@@ -56,12 +56,29 @@ public class ManagerPackages implements Initializable {
     @FXML
     private TableColumn<?, ?> tableRecipientName,tableRecipientSurname,tableRecipientCity,tableRecipientPhone;
 
-    Packages package1s = new Packages("00000001", "W transporcie", "Duża", "Patryk", "Kosiarz","Rzeszów","111222333","Filip","Carteloo","Nie Rzeszów","555444333");
+    Packages package1s = new Packages("00000001", "W transporcie", "Duża",
+            "Patryk", "Kosiarz","Rzeszów","111222333",
+            "Filip","Carteloo","Nie Rzeszów",
+            "555444333");
+
     final ObservableList<Packages> data = FXCollections.observableArrayList(
-            new Packages("00000001", "W transporcie", "Duża", "Patryk", "Kosiarz","Rzeszów","111222333","Filip","Carteloo","Nie Rzeszów","555444333"),
-            new Packages("00000002", "Dostarczona do odbiorcy", "Mała", "Adam", "Madam","Warszawa","123456123","Damian","Blade","Wrocław","444555111"),
-            new Packages("00000003", "Oderbana z oddziału", "Średnia", "Łukasz", "Monczall","Poznań","222999232","Adam","Madam","Warszawa","123456123"),
-            new Packages("00000004", "Odebrana od klienta", "Duża", "Damian", "Blade","Wrocław","444555111","Patryk","Kosiarz","Rzeszów","111222333")
+            new Packages("00000001", "W transporcie", "Duża", "Patryk",
+                    "Kosiarz","Rzeszów","111222333","Filip",
+                    "Carteloo","Nie Rzeszów","555444333"),
+
+            new Packages("00000002", "Dostarczona do odbiorcy", "Mała",
+                    "Adam", "Madam","Warszawa","123456123",
+                    "Damian","Blade","Wrocław",
+                    "444555111"),
+
+            new Packages("00000003", "Oderbana z oddziału", "Średnia",
+                    "Łukasz", "Monczall","Poznań","222999232",
+                    "Adam","Madam","Warszawa",
+                    "123456123"),
+
+            new Packages("00000004", "Odebrana od klienta", "Duża", "Damian",
+                    "Blade","Wrocław","444555111","Patryk",
+                    "Kosiarz","Rzeszów","111222333")
     );
     @FXML
     private ComboBox<String> typeDelivery;

@@ -1,47 +1,65 @@
 package main.java.controllers.courier;
 
+import com.sun.xml.bind.v2.runtime.reflect.Lister;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
-import main.java.entity.Packages;
+import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CourierSecond implements Initializable {
 
     private static int id;
     private static String comment;
+    private static int packageId;
+
+    public static int getPackageId() {
+        return packageId;
+    }
+
+    public static void setPackageId(int packageId) {
+        CourierSecond.packageId = packageId;
+    }
+
     Pane pane;
-    private final ObservableList<Packages> packages = PackagesDAO.addTable();
+    private final ObservableList<PackagesExtended> packages = PackagesDAO.addTable();
     @FXML
-    private TableView<Packages> table;
+    private TableView<PackagesExtended> table;
     @FXML
-    private TableColumn<?, ?> packageNumber;
+    private TableColumn<Packages, String> packageNumber;
     @FXML
-    private TableColumn<?, ?> name;
+    private TableColumn<UserInfos, String> name;
     @FXML
-    private TableColumn<?, ?> surname;
+    private TableColumn<UserInfos, String> surname;
     @FXML
-    private TableColumn<?, ?> city;
+    private TableColumn<UserInfos, String> city;
     @FXML
-    private TableColumn<?, ?> address;
+    private TableColumn<UserInfos, String> address;
     @FXML
-    private TableColumn<?, ?> telephone;
+    private TableColumn<UserInfos, String> telephone;
     @FXML
-    private TableColumn<?, ?> state;
+    private TableColumn<PackageHistory, String> state;
     @FXML
-    private TableColumn<?, ?> time;
+    private TableColumn<Packages, Timestamp> time;
     @FXML
     private TextField searchField;
 
@@ -63,7 +81,7 @@ public class CourierSecond implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TableRowExpanderColumn<Packages> expanderRow = new TableRowExpanderColumn<Packages>(this::createEditor);
+        TableRowExpanderColumn<PackagesExtended> expanderRow = new TableRowExpanderColumn<PackagesExtended>(this::createEditor);
 
         packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
@@ -71,8 +89,8 @@ public class CourierSecond implements Initializable {
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         city.setCellValueFactory(new PropertyValueFactory<>("city"));
-        address.setCellValueFactory(new PropertyValueFactory<>("address"));
-        telephone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        address.setCellValueFactory(new PropertyValueFactory<>("streetAndNumber"));
+        telephone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         table.getColumns().add(expanderRow);
         table.setItems(PackagesDAO.addTable());
         table.getSelectionModel().select(0);
@@ -81,25 +99,30 @@ public class CourierSecond implements Initializable {
     @FXML
     void search(KeyEvent event) {
         table.getItems().clear();
+        String searchedWord = searchField.getText().toLowerCase();
         for (int i = 0; i < packages.size(); i++) {
-            if (packages.get(i).getPackageNumber().contains(searchField.getText()) ||
-                    packages.get(i).getName().contains(searchField.getText()) ||
-                    packages.get(i).getSurname().contains(searchField.getText()) ||
-                    packages.get(i).getCity().contains(searchField.getText()) ||
-                    packages.get(i).getAddress().contains(searchField.getText()) ||
-                    packages.get(i).getPhone().contains(searchField.getText()) ||
-                    packages.get(i).getStatus().contains(searchField.getText()) ||
-                    packages.get(i).getTimeOfPlannedDelivery().contains(searchField.getText())) {
+            if (packages.get(i).getPackageNumber().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getName().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getSurname().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getCity().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getStreetAndNumber().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getPhoneNumber().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getStatus().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getTimeOfPlannedDelivery().toLowerCase().contains(searchedWord)) {
                 table.getItems().add(packages.get(i));
             }
         }
     }
 
-    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<Packages> arg) {
+    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesExtended> arg) {
         try {
             table.getSelectionModel().select(arg.getTableRow().getIndex());
-            setId(table.getItems().get(arg.getTableRow().getIndex()).getUserId());
-            setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
+//            setId(table.getItems().get(arg.getTableRow().getIndex()).getUserId());
+//            setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getId());
+//            setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
+            setId(1);
+            setPackageId(2);
+            setComment("test");
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
         } catch (IOException e) {
             e.printStackTrace();

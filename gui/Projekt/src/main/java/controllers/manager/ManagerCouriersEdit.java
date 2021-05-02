@@ -65,7 +65,7 @@ public class ManagerCouriersEdit implements Initializable {
     @FXML
     private ComboBox<String> regionName;
 
-    private ObservableList<String> statusObservable = FXCollections.observableArrayList("Rzeszów centrum","Rzeszów Rejtana");
+    private ObservableList<String> statusObservable = FXCollections.observableArrayList("Południe","Rejtana");
 
     public void findCourier(MouseEvent mouseEvent) {
 

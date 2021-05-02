@@ -21,7 +21,7 @@ public class PackageTypeDAO {
     static public List<PackageType> getTypeInfo(){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        Query query=session.createQuery("from PackageType");
+        Query query = session.createQuery("from PackageType");
 
         List<PackageType> listOfTypeInfo = query.list();
 
