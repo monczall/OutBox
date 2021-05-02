@@ -90,7 +90,7 @@ public class ManagerRaports implements Initializable {
                 oneDayRaport.setVisible(true);
             }
             else if(daysBetween < 0 || daysFuture > 0){
-                Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING","BŁĘDNY PRZEDZIAŁ CZASU");
+               Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING","BŁĘDNY PRZEDZIAŁ CZASU");
             }
             else{
                 System.out.println("Od: " + startDataValue + "\nDo: " + endDataValue);
@@ -120,7 +120,8 @@ public class ManagerRaports implements Initializable {
         LocalDate today = LocalDate.now();
         LocalDate lastMonth = today.minusDays(30);
         System.out.println("raportLastMonth: " + lastMonth);
-        textOneDate.setText("Potwierdzenie wygenerowania raportu z ostatniego miesiąca, od dnia: " + lastMonth.toString());
+        textOneDate.setText("Potwierdzenie wygenerowania raportu z ostatniego miesiąca, od dnia: " +
+                lastMonth.toString());
         oneDayRaport.setVisible(true);
     }
 
@@ -129,7 +130,8 @@ public class ManagerRaports implements Initializable {
         LocalDate today = LocalDate.now();
         LocalDate lastWeek = today.minusDays(7);
         System.out.println("raportLastWeek: " + lastWeek);
-        textOneDate.setText("Potwierdzenie wygenerowania raportu z ostatniego tygodnia, od dnia: " + lastWeek.toString());
+        textOneDate.setText("Potwierdzenie wygenerowania raportu z ostatniego tygodnia, od dnia: " +
+                lastWeek.toString());
         oneDayRaport.setVisible(true);
     }
 

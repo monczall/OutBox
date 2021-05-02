@@ -14,7 +14,10 @@ public class Packages {
     private String tableRecipientCity;
     private String tableRecipientPhone;
 
-    public Packages(String tableNumber, String tableStatus, String tableType, String tableSenderName, String tableSenderSurname, String tableSenderCity, String tableSenderPhone, String tableRecipientName, String tableRecipientSurname, String tableRecipientCity, String tableRecipientPhone) {
+    public Packages(String tableNumber, String tableStatus, String tableType, String tableSenderName,
+                    String tableSenderSurname, String tableSenderCity, String tableSenderPhone,
+                    String tableRecipientName, String tableRecipientSurname, String tableRecipientCity,
+                    String tableRecipientPhone) {
         this.tableNumber = tableNumber;
         this.tableStatus = tableStatus;
         this.tableType = tableType;

@@ -190,8 +190,9 @@ public class Register {
                 String city = registerCityField.getText();
                 String voivodeship = registerVoivodeshipField.getText();
                 String password = Encryption.encrypt(registerPasswordField.getText());
+                String role = "Klient";
 
-                UserInfosDAO.addUserInfo(firstName, lastName, email, phoneNumber, street, city, voivodeship, password);
+                UserInfosDAO.addUserInfo(firstName, lastName, email, phoneNumber, street, city, voivodeship, password, role);
 
                 //REJESTRACJA POMYSLNA
                 System.out.println("Zarejestrowano");
