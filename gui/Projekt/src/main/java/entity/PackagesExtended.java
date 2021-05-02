@@ -2,6 +2,8 @@ package main.java.entity;
 
 public class PackagesExtended {
 
+    private int userInfosId;
+    private int packagesId;
     private String packageNumber;
     private String timeOfPlannedDelivery;
     private String name;
@@ -10,9 +12,13 @@ public class PackagesExtended {
     private String streetAndNumber;
     private String city;
     private String status;
+    private String additionalComment;
 
-    public PackagesExtended(String packageNumber, String timeOfPlannedDelivery, String name, String surname,
-                            String phoneNumber, String streetAndNumber, String city, String status) {
+    public PackagesExtended(int userInfosId, int packagesId, String packageNumber, String timeOfPlannedDelivery,
+                            String name, String surname, String phoneNumber, String streetAndNumber, String city,
+                            String status, String additionalComment) {
+        this.userInfosId = userInfosId;
+        this.packagesId = packagesId;
         this.packageNumber = packageNumber;
         this.timeOfPlannedDelivery = timeOfPlannedDelivery;
         this.name = name;
@@ -21,6 +27,15 @@ public class PackagesExtended {
         this.streetAndNumber = streetAndNumber;
         this.city = city;
         this.status = status;
+        this.additionalComment = additionalComment;
+    }
+
+    public int getUserInfosId() {
+        return userInfosId;
+    }
+
+    public int getPackagesId() {
+        return packagesId;
     }
 
     public String getPackageNumber() {
@@ -53,5 +68,9 @@ public class PackagesExtended {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getAdditionalComment() {
+        return additionalComment;
     }
 }

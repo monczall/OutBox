@@ -62,6 +62,7 @@ public class ExpendableRow implements Initializable {
         //System.out.println(PackageStatus.values().toString());
         //System.out.println(FXCollections.observableArrayList(PackageHistoryDAO.getStatuses()));
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
+        ol.remove(0);
         changeStatus.setItems(ol);
     }
 
@@ -69,6 +70,7 @@ public class ExpendableRow implements Initializable {
     void updateStatus(ActionEvent event) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), changeStatus.getValue().toString(),Timestamp.valueOf(dateTimeFormatter.format(now)));
+        PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), changeStatus.getValue().toString(),
+                Timestamp.valueOf(dateTimeFormatter.format(now)));
     }
 }

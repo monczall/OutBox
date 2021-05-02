@@ -117,12 +117,9 @@ public class CourierSecond implements Initializable {
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesExtended> arg) {
         try {
             table.getSelectionModel().select(arg.getTableRow().getIndex());
-//            setId(table.getItems().get(arg.getTableRow().getIndex()).getUserId());
-//            setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getId());
-//            setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
-            setId(1);
-            setPackageId(2);
-            setComment("test");
+            setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());
+            setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
+            setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
         } catch (IOException e) {
             e.printStackTrace();

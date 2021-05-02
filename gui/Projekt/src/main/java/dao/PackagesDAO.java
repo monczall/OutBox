@@ -92,16 +92,18 @@ public class PackagesDAO {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/outbox","root","");
             Statement statement = connection.createStatement();
-            String sql = "select p.package_number, ui.name, ui.surname, ui.city, ui.street_and_number,ui.phone_number, ph.status," +
+            String sql = "select p.id, p.user_infoID, p.additional_comment, p.package_number, ui.name, ui.surname, ui.city, ui.street_and_number,ui.phone_number, ph.status," +
                     " p.time_of_planned_delivery from packages p, package_history ph, user_infos ui where p.id = ph.packageID and" +
                     " p.user_infoID = ui.ID and ph.status = (select ph.status from package_history ph where ph.id = (select max(ph.id)" +
-                    " from package_history ph where ph.packageID = p.ID))";
+                    " from package_history ph where ph.packageID = p.ID)) group by p.package_number";
             ResultSet rs = statement.executeQuery(sql);
 
             while(rs.next()){
-                packages.add(new PackagesExtended(rs.getString("package_number"),rs.getString("time_of_planned_delivery"),
+                packages.add(new PackagesExtended(rs.getInt("id"),rs.getInt("id"),
+                        rs.getString("package_number"),rs.getString("time_of_planned_delivery"),
                         rs.getString("name"),rs.getString("surname"),rs.getString("phone_number"),
-                        rs.getString("street_and_number"),rs.getString("city"),rs.getString("status")));
+                        rs.getString("street_and_number"),rs.getString("city"),rs.getString("status"),
+                        rs.getString("additional_comment")));
             }
         }catch(Exception e){
             e.printStackTrace();
