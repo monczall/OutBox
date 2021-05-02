@@ -26,6 +26,17 @@ public class UsersDAO {
         return listOfUsers;
     }
 
+    static public List<Users> getUsersId(int id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("FROM Users WHERE userInfoId = :id");
+        query.setParameter("id",id);
+
+        List<Users> listOfUsers = query.list();
+
+        return listOfUsers;
+    }
+
     static public String readPassword(int userId){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query=session.createQuery("SELECT password from Users WHERE id = :id");
