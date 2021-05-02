@@ -341,7 +341,7 @@ public class ClientRegisterPackage implements Initializable {
         dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         packageHistory.setPackageId(packages.getId());
-        packageHistory.setStatus("Zarejestrowana");
+        //packageHistory.setStatus("Zarejestrowana");
         packageHistory.setDate(Timestamp.valueOf(dateTimeFormatter.format(now)));
 
         session.save(packageHistory);

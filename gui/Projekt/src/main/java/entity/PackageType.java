@@ -15,7 +15,7 @@ public class PackageType {
     private Collection<Packages> packagesById;
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     public int getId() {
         return id;
     }
@@ -25,7 +25,7 @@ public class PackageType {
     }
 
     @Basic
-    @Column(name = "size_name")
+    @Column(name = "size_name", nullable = false, length = 16)
     public String getSizeName() {
         return sizeName;
     }
@@ -35,7 +35,7 @@ public class PackageType {
     }
 
     @Basic
-    @Column(name = "size")
+    @Column(name = "size", nullable = false, length = 16)
     public String getSize() {
         return size;
     }
@@ -45,7 +45,7 @@ public class PackageType {
     }
 
     @Basic
-    @Column(name = "weight")
+    @Column(name = "weight", nullable = false, length = 16)
     public String getWeight() {
         return weight;
     }
@@ -55,7 +55,7 @@ public class PackageType {
     }
 
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false, length = 16)
     public String getPrice() {
         return price;
     }
@@ -64,6 +64,18 @@ public class PackageType {
         this.price = price;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PackageType that = (PackageType) o;
+        return id == that.id && Objects.equals(sizeName, that.sizeName) && Objects.equals(size, that.size) && Objects.equals(weight, that.weight) && Objects.equals(price, that.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, sizeName, size, weight, price);
+    }
 
     @OneToMany(mappedBy = "packageTypeByTypeId")
     public Collection<Packages> getPackagesById() {

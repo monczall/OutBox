@@ -16,9 +16,8 @@ public class Users {
     private UserInfos userInfosByUserInfoId;
     private Areas areasByAreaId;
 
-
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     public int getId() {
         return id;
     }
@@ -28,7 +27,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "user_infoID")
+    @Column(name = "user_infoID", nullable = false)
     public int getUserInfoId() {
         return userInfoId;
     }
@@ -38,7 +37,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "areaID")
+    @Column(name = "areaID", nullable = true)
     public Integer getAreaId() {
         return areaId;
     }
@@ -48,7 +47,7 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 128)
     public String getEmail() {
         return email;
     }
@@ -57,9 +56,8 @@ public class Users {
         this.email = email;
     }
 
-
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 256)
     public String getPassword() {
         return password;
     }
@@ -69,13 +67,26 @@ public class Users {
     }
 
     @Basic
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return id == users.id && userInfoId == users.userInfoId && Objects.equals(areaId, users.areaId) && Objects.equals(email, users.email) && Objects.equals(password, users.password) && Objects.equals(role, users.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userInfoId, areaId, email, password, role);
     }
 
     @OneToMany(mappedBy = "usersByUserId")
@@ -106,5 +117,4 @@ public class Users {
     public void setAreasByAreaId(Areas areasByAreaId) {
         this.areasByAreaId = areasByAreaId;
     }
-
 }

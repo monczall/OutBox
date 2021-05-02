@@ -10,12 +10,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.courier.ExpendableRow">
    <children>
-      <Button layoutX="455.0" layoutY="76.0" mnemonicParsing="false" text="Zatwierdź">
+      <Button layoutX="455.0" layoutY="76.0" mnemonicParsing="false" onAction="#updateStatus" text="Zatwierdź">
          <graphic>
             <FontAwesomeIconView glyphName="CHECK" />
          </graphic></Button>
       <Label layoutX="163.0" layoutY="7.0" text="Nadawca" />
-      <ComboBox layoutX="289.0" layoutY="75.0" prefWidth="150.0" styleClass="inputBox" />
+      <ComboBox fx:id="changeStatus" layoutX="289.0" layoutY="75.0" prefWidth="150.0" styleClass="inputBox" />
       <Text fill="WHITE" layoutX="33.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię:" />
       <Text fill="WHITE" layoutX="20.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miasto:" />
       <Text fill="WHITE" layoutX="256.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko:" />

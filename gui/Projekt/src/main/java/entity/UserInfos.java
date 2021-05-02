@@ -1,13 +1,11 @@
 package main.java.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user_infos", schema = "outbox")
+@Table(name = "user_infos", schema = "outbox", catalog = "")
 public class UserInfos {
     private int id;
     private String name;
@@ -20,8 +18,7 @@ public class UserInfos {
     private Collection<Users> usersById;
 
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false)
     public int getId() {
         return id;
     }
@@ -31,7 +28,7 @@ public class UserInfos {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 128)
     public String getName() {
         return name;
     }
@@ -41,7 +38,7 @@ public class UserInfos {
     }
 
     @Basic
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false, length = 128)
     public String getSurname() {
         return surname;
     }
@@ -51,7 +48,7 @@ public class UserInfos {
     }
 
     @Basic
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false, length = 32)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -61,7 +58,7 @@ public class UserInfos {
     }
 
     @Basic
-    @Column(name = "street_and_number")
+    @Column(name = "street_and_number", nullable = false, length = 256)
     public String getStreetAndNumber() {
         return streetAndNumber;
     }
@@ -71,7 +68,7 @@ public class UserInfos {
     }
 
     @Basic
-    @Column(name = "city")
+    @Column(name = "city", nullable = false, length = 128)
     public String getCity() {
         return city;
     }
@@ -81,13 +78,26 @@ public class UserInfos {
     }
 
     @Basic
-    @Column(name = "voivodeship")
+    @Column(name = "voivodeship", nullable = false, length = 128)
     public String getVoivodeship() {
         return voivodeship;
     }
 
     public void setVoivodeship(String voivodeship) {
         this.voivodeship = voivodeship;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserInfos userInfos = (UserInfos) o;
+        return id == userInfos.id && Objects.equals(name, userInfos.name) && Objects.equals(surname, userInfos.surname) && Objects.equals(phoneNumber, userInfos.phoneNumber) && Objects.equals(streetAndNumber, userInfos.streetAndNumber) && Objects.equals(city, userInfos.city) && Objects.equals(voivodeship, userInfos.voivodeship);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, phoneNumber, streetAndNumber, city, voivodeship);
     }
 
     @OneToMany(mappedBy = "userInfosByUserInfoId")

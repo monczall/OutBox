@@ -9,8 +9,12 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import main.java.SceneManager;
+import main.java.controllers.auth.Login;
+import main.java.dao.UserInfosDAO;
+import main.java.entity.UserInfos;
 import main.java.features.Animations;
 
 import java.io.IOException;
@@ -34,9 +38,15 @@ public class Courier implements Initializable {
     @FXML
     private AnchorPane window;
 
+    @FXML
+    private Text loggedUser;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        /* name and surname after login
+        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+        loggedUser.setText(ui.getName() + " " + ui.getSurname());
+         */
         SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: red;");
 
         paneRight.setTranslateX(-200);
