@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import main.java.controllers.auth.Encryption;
 import main.java.dao.UserInfosDAO;
 import main.java.features.Alerts;
 
@@ -160,7 +161,7 @@ public class ManagerCouriersAdd implements Initializable {
                 String surnameString = surname.getText();
                 String cityString = city.getText();
                 String voivodeshipString = voivodeship.getText();
-                String password ="test";
+                String password = Encryption.encrypt("test");
                 String role = "Kurier";
 
                 //System.out.println("name: " + nameString + "surname: " + surnameString + "email: " + emailString + "phone: " + phoneString + "street: " + streetString + "city: " + cityString + "wojewodztow: " + voivodeshipString + "password: " + password);

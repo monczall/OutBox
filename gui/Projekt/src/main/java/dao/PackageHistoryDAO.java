@@ -72,4 +72,15 @@ public class PackageHistoryDAO {
 
         return  statuses;
     }
+
+    static public List<PackageHistory> getHistoryForManager(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query=session.createQuery("from PackageHistory");
+
+        List<PackageHistory> packageHistory = query.list();
+
+        return packageHistory;
+
+    }
 }

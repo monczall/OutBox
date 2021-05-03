@@ -27,4 +27,16 @@ public class PackageTypeDAO {
 
         return listOfTypeInfo;
     }
+
+    static public List<String> getTypeById(int typeId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query=session.createQuery("SELECT sizeName from PackageType WHERE id = :typeId");
+
+        query.setParameter("typeId",typeId);
+
+        List<String> type = query.list();
+
+        return type;
+    }
 }
