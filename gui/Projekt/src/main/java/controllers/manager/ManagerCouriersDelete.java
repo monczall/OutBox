@@ -13,6 +13,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import main.java.controllers.client.PackageItem;
 import main.java.controllers.client.PackageTest;
+import main.java.dao.UserInfosDAO;
+import main.java.dao.UsersDAO;
+import main.java.entity.UserInfos;
+import main.java.entity.Users;
 import main.java.features.Alerts;
 
 import java.awt.event.ActionEvent;
@@ -34,16 +38,16 @@ public class ManagerCouriersDelete implements Initializable {
     private TextField surname;
 
     @FXML
-    private TextField peselInput;
+    private Button findCourierButton,button1,button2;
 
     @FXML
-    private Button findCourierButton;
-
-    @FXML
-    private VBox packageLayout;
+    private Pane paneResults;
 
     @FXML
     private Label fullName;
+
+    @FXML
+    private Label noDataText;
 
     @FXML
     private Label cityAndStreet;
@@ -58,44 +62,103 @@ public class ManagerCouriersDelete implements Initializable {
     private Label voivodeship;
 
     @FXML
-    private Label region;
+    private Pane alertPane;
 
-    @FXML
-    private Label peselCourier;
+    List<UserInfos> dataUserInfos;
+    List<Users> dataUser;
+    int dataIndex = 0;
 
     @FXML
     public void confirmDeleteCourierButton(javafx.event.ActionEvent actionEvent) {
-
+        UserInfosDAO.deleteUser(dataUserInfos.get(dataIndex).getId());
+        alertPane.setVisible(true);
     }
 
 
     public void findCourier(MouseEvent mouseEvent) {
 
         if(name.getText().toString().equals("") &&
-                surname.getText().toString().equals("") &&
-                peselInput.getText().toString().equals("")){
+                surname.getText().toString().equals("")){
             Alerts.createAlert(appWindow, findCourierButton, "WARNING", "PODAJ JAKIŚ PARAMETR");
         }
         else
         {
-            if(peselInput.getText().toString().equals("")){
-                System.out.println("Pesel pusty");
-            }
-            else if (peselInput.getText().matches("[0-9]*") && peselInput.getText().length() == 11)
+            dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
+
+            if(dataUserInfos.size() > 1)
             {
-                System.out.println("Pesel poprawny");
+                setDataLabel();
+                paneResults.setVisible(true);
+                button1.setVisible(true);
+                button2.setVisible(true);
+                noDataText.setVisible(false);
             }
-            else
+            else if(dataUserInfos.size() == 1)
             {
-                System.out.println("Pesel niepoprawny");
-                Alerts.createAlert(appWindow, findCourierButton, "WARNING", "POPRAW DANE");
+                setDataLabel();
+                button1.setVisible(false);
+                button2.setVisible(false);
+                paneResults.setVisible(true);
+                noDataText.setVisible(false);
+            }
+            else{
+                System.out.println("NIE");
+                paneResults.setVisible(false);
+                noDataText.setVisible(true);
             }
         }
     }
 
+    public void setDataLabel(){
+        System.out.println("DataIndex: " + dataIndex + " DataUserInfosSize: "+dataUserInfos.size() + " DataUserInfosGetId: "+dataUserInfos.get(dataIndex).getId());
+        System.out.println("ZMIENIAM NA KOLEJNE ID INDEX("+dataIndex+") = " +dataUserInfos.get(dataIndex).getId());
+        dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
+        System.out.println("DataUserSIZSE: " + dataUser.size() + " DataUserID: " + dataUser.get(0).getId());
+
+        fullName.setText(dataUserInfos.get(dataIndex).getName() + " "+dataUserInfos.get(dataIndex).getSurname());
+        cityAndStreet.setText(dataUserInfos.get(dataIndex).getCity() + " "+dataUserInfos.get(dataIndex).getStreetAndNumber());
+        phoneNumber.setText(dataUserInfos.get(dataIndex).getPhoneNumber());
+        voivodeship.setText(dataUserInfos.get(dataIndex).getVoivodeship());
+        email.setText(dataUser.get(0).getEmail());
+    }
+
+    @FXML
+    void buttonBack(MouseEvent event) {
+        dataIndex--;
+
+        if(dataIndex<0){
+            dataIndex=0;
+        }
+        setDataLabel();
+    }
+
+    @FXML
+    void buttonNext(MouseEvent event) {
+        dataIndex++;
+
+        if(dataIndex>dataUserInfos.size()-1){
+            dataIndex=dataUserInfos.size()-1;
+        }
+        setDataLabel();
+    }
+
+    @FXML
+    void confirmButton(MouseEvent event) {
+        paneResults.setVisible(false);
+        name.setText("");
+        surname.setText("");
+        noDataText.setVisible(true);
+        button1.setVisible(false);
+        button2.setVisible(false);
+        alertPane.setVisible(false);
+        dataIndex = 0;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        button1.setVisible(false);
+        button2.setVisible(false);
+        paneResults.setVisible(false);
     }
 
 }

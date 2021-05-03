@@ -14,7 +14,7 @@ public class Areas {
     private Collection<Users> usersById;
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     public int getId() {
         return id;
     }
@@ -24,7 +24,7 @@ public class Areas {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 128)
     public String getName() {
         return name;
     }
@@ -34,7 +34,7 @@ public class Areas {
     }
 
     @Basic
-    @Column(name = "voivodeship")
+    @Column(name = "voivodeship", nullable = false, length = 128)
     public String getVoivodeship() {
         return voivodeship;
     }
@@ -44,7 +44,7 @@ public class Areas {
     }
 
     @Basic
-    @Column(name = "city")
+    @Column(name = "city", nullable = false, length = 128)
     public String getCity() {
         return city;
     }
@@ -54,13 +54,26 @@ public class Areas {
     }
 
     @Basic
-    @Column(name = "department_street_and_number")
+    @Column(name = "department_street_and_number", nullable = false, length = 256)
     public String getDepartmentStreetAndNumber() {
         return departmentStreetAndNumber;
     }
 
     public void setDepartmentStreetAndNumber(String departmentStreetAndNumber) {
         this.departmentStreetAndNumber = departmentStreetAndNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Areas areas = (Areas) o;
+        return id == areas.id && Objects.equals(name, areas.name) && Objects.equals(voivodeship, areas.voivodeship) && Objects.equals(city, areas.city) && Objects.equals(departmentStreetAndNumber, areas.departmentStreetAndNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, voivodeship, city, departmentStreetAndNumber);
     }
 
     @OneToMany(mappedBy = "areasByAreaId")

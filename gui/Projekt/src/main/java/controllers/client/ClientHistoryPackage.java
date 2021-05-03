@@ -107,7 +107,7 @@ public class ClientHistoryPackage implements Initializable {
                         createStep(2);
                         createStatus("28 Mar 2021 23:00", "W doręczeniu");
                         createStep(4);
-                        createCurrentStatus("28 Mar 2021 23:00", "Dostarczona - " + packageItem.getNumber(),"Podróż przesyłki od Nadawcy do Obiorcy zakończyła się. Dziękujemy!");
+                        createCurrentStatus("28 Mar 2021 23:00", "Dostarczona - " + packageItem.getId(),"Podróż przesyłki od Nadawcy do Obiorcy zakończyła się. Dziękujemy!");
                     }
                 });
                 pane.getChildren().add(1,showMore);

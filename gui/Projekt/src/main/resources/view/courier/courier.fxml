@@ -54,8 +54,7 @@
                 <Pane fx:id="welcomeMessage" layoutX="72.0" layoutY="25.0" prefHeight="41.0" prefWidth="200.0">
                     <children>
                         <Text fill="WHITE" layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="%welcome" />
-                        <Text layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
-                        <Text fill="WHITE" layoutX="185.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="!" />
+                        <Text fx:id="loggedUser" layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
                     </children>
                 </Pane>
                 <ImageView fitHeight="71.0" fitWidth="87.0" layoutX="1026.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true">

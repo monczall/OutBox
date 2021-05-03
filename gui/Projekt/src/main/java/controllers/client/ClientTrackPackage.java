@@ -15,6 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import main.java.dao.PackageHistoryDAO;
+import main.java.dao.PackagesDAO;
+import main.java.entity.Packages;
 import main.java.features.Animations;
 import main.java.preferences.Preference;
 
@@ -96,18 +99,36 @@ public class ClientTrackPackage implements Initializable {
                         btnBack.setVisible(true);
                         btnBack.setOpacity(1);
 
+                        List<String> statuses = PackageHistoryDAO.getStatusById(packageItem.getId());
+
                         //Testing dynamically created statuses from list that's gonna be filled with db rows
-                        createStatus("28 Mar 2021 23:00", "Przesyłka zarejestrowana");
-                        createStep(2);
-                        createStatus("28 Mar 2021 23:00", "Odebrana od klienta");
-                        createStep(2);
-                        createStatus("28 Mar 2021 23:00", "Przyjęta w oddziale");
-                        createStep(2);
-                        createStatus("28 Mar 2021 23:00", "W transporcie");
-                        createStep(2);
-                        createStatus("28 Mar 2021 23:00", "W doręczeniu");
-                        createStep(4);
-                        createCurrentStatus("28 Mar 2021 23:00", "Dostarczona - " + packageItem.getNumber(),"Podróż przesyłki od Nadawcy do Obiorcy zakończyła się. Dziękujemy!");
+                        for(int i = 0; i < statuses.size(); i++){
+                            if(i == statuses.size()-1){
+                                if(i != 0)
+                                    createStep(4);
+
+                                createCurrentStatus("28 Mar 2021 23:00",statuses.get(i),"Jakis opis");
+                            }
+                            else{
+                                if(i != 0)
+                                    createStep(2);
+
+                                createStatus("28 Mar 2021 23:00",statuses.get(i));
+                            }
+                        }
+
+
+//                        createStatus("28 Mar 2021 23:00", "Przesyłka zarejestrowana");
+//                        createStep(2);
+//                        createStatus("28 Mar 2021 23:00", "Odebrana od klienta");
+//                        createStep(2);
+//                        createStatus("28 Mar 2021 23:00", "Przyjęta w oddziale");
+//                        createStep(2);
+//                        createStatus("28 Mar 2021 23:00", "W transporcie");
+//                        createStep(2);
+//                        createStatus("28 Mar 2021 23:00", "W doręczeniu");
+//                        createStep(4);
+//                        createCurrentStatus("28 Mar 2021 23:00", "Dostarczona - " + packageItem.getId(),"Podróż przesyłki od Nadawcy do Obiorcy zakończyła się. Dziękujemy!");
                     }
                 });
                 pane.getChildren().add(1,showMore);
@@ -241,25 +262,21 @@ public class ClientTrackPackage implements Initializable {
 
     //Filing list with example data
     private List<PackageTest> packageTest(){
+
+        List<Packages> listOfPackages = PackagesDAO.readPackages();
+
         List<PackageTest> ls = new ArrayList<>();
-        PackageTest tes = new PackageTest();
 
-        tes.setPackageNumber("3232323232");
-        tes.setSender("FILIP");
-        tes.setStatus("ZAREJESTROWANA");
-        ls.add(tes);
+        for(int i = 0; i < listOfPackages.size(); i++){
+            PackageTest tes = new PackageTest();
+            tes.setPackageNumber(listOfPackages.get(i).getPackageNumber());
+//            tes.setSender(listOfPackages.get(i).getName());
+//            tes.setStatus(listOfPackages.get(i).getStatus());
+            tes.setId(listOfPackages.get(i).getId());
+            ls.add(tes);
+        }
 
-        tes = new PackageTest();
-        tes.setPackageNumber("121212121");
-        tes.setSender("ANDRZEJ");
-        tes.setStatus("W TRANSPORCIE");
-        ls.add(tes);
 
-        tes = new PackageTest();
-        tes.setPackageNumber("5151515151");
-        tes.setSender("STEVE");
-        tes.setStatus("W ODDZIALE");
-        ls.add(tes);
 
         return ls;
     }

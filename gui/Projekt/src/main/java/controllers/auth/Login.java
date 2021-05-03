@@ -58,7 +58,9 @@ public class Login implements Initializable{
 
     public void initialize(URL url, ResourceBundle rb){
         if(App.isConnectionError()){
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING", App.getLanguageProperties("authDatabaseConnectionAlert"), 425, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",
+                    App.getLanguageProperties("authDatabaseConnectionAlert"), 425, 86,
+                    "alertFailure");
         }
     }
 
@@ -68,7 +70,9 @@ public class Login implements Initializable{
 
                 List<Users> listOfUsers = getUsers();
                 for(int i = 0; i < getUsers().size(); i++){
-                    if(loginEmailTextField.getText().equals(listOfUsers.get(i).getEmail()) && Encryption.encrypt(loginPasswordPasswordField.getText()).equals(listOfUsers.get(i).getPassword())){
+                    if(loginEmailTextField.getText().equals(listOfUsers.get(i).getEmail())
+                            && Encryption.encrypt(loginPasswordPasswordField.getText()).equals
+                            (listOfUsers.get(i).getPassword())){
 
                         setUserID(listOfUsers.get(i).getId());
                         setUserInfoID(listOfUsers.get(i).getUserInfoId());
@@ -113,7 +117,9 @@ public class Login implements Initializable{
                 loginPasswordCircleCircle.getStyleClass().clear();
                 loginPasswordCircleCircle.getStyleClass().add("fillError");
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",App.getLanguageProperties("authNoUserFoundAlert"), 435, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",
+                        App.getLanguageProperties("authNoUserFoundAlert"), 435, 86,
+                        "alertFailure");
 
             }else{
                 //UserTextField
@@ -123,10 +129,14 @@ public class Login implements Initializable{
                 loginUserCircleCircle.getStyleClass().clear();
                 loginUserCircleCircle.getStyleClass().add("fillError");
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",
+                        App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86,
+                        "alertFailure");
             }
         }else{
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",App.getLanguageProperties("authFillFormAlert"), 293, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",
+                    App.getLanguageProperties("authFillFormAlert"), 293, 86,
+                    "alertFailure");
         }
     }
 

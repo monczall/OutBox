@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
@@ -16,6 +17,7 @@
             <Label fx:id="packageNumber" layoutX="7.0" layoutY="19.0" styleClass="optionGroup" text="PLACEHOLDER" />
             <Label fx:id="packageStatus" layoutX="7.0" layoutY="67.0" styleClass="optionGroup" text="PLACEHOLDER" />
             <Label fx:id="packageRecipient" layoutX="7.0" layoutY="114.0" styleClass="optionGroup" text="PLACEHOLDER" />
+            <TextField fx:id="itemId" layoutX="246.0" layoutY="58.0" styleClass="inputBox" visible="false" />
          </children>
       </Pane>
    </children>

@@ -154,7 +154,8 @@ public class PasswordReset {
                 int vCode3 = rand.nextInt(9);
                 int vCode4 = rand.nextInt(9);
                 verificationCode = "" + vCode1 + vCode2 + vCode3 + vCode4 + "";
-                sendEmail(passwordResetEmailField.getText(),getUserInfoByID(userInfoId).get(0).getName(),verificationCode);
+                sendEmail(passwordResetEmailField.getText(),getUserInfoByID(userInfoId).get(0).getName(),
+                        verificationCode);
 
                 //Blocking email field and send code button
                 passwordResetEmailField.setDisable(true);
@@ -179,11 +180,15 @@ public class PasswordReset {
                 passwordResetVerifyCodeButton.setDisable(false);
             }else{
                 errorOnEmail();
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",App.getLanguageProperties("authNoEmailUserFoundAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",
+                        App.getLanguageProperties("authNoEmailUserFoundAlert"), 350, 86,
+                        "alertFailure");
             }
         }else{
             errorOnEmail();
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING", App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",
+                    App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86,
+                    "alertFailure");
         }
     }
 
@@ -223,7 +228,8 @@ public class PasswordReset {
         System.out.println("Message sent successfully");
     }
 
-    private static Message prepareMessage(Session session, String outBoxEmailAccount, String recipient, String firstName, String verificationCode) {
+    private static Message prepareMessage(Session session, String outBoxEmailAccount, String recipient,
+                                          String firstName, String verificationCode) {
         Message message = new MimeMessage(session);
         try {
             message.setFrom(new InternetAddress("OutBox_Support"));
@@ -258,7 +264,9 @@ public class PasswordReset {
 
     public void verifyCode(){
         if(passwordResetVerificationCodeField.getText().equals(verificationCode)){
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"CHECK",App.getLanguageProperties("authVerificationSuccessfulAlert"), 293, 86, "alertSuccess");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"CHECK",
+                    App.getLanguageProperties("authVerificationSuccessfulAlert"), 293, 86,
+                    "alertSuccess");
 
             //Block verification code field and verify button
             passwordResetVerificationCodeField.setDisable(true);
@@ -286,7 +294,9 @@ public class PasswordReset {
 
         }else{
             errorOnVerificationCode();
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",App.getLanguageProperties("authVerificationCodeInvalidAlert"), 293, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",
+                    App.getLanguageProperties("authVerificationCodeInvalidAlert"), 293, 86,
+                    "alertFailure");
         }
     }
 
@@ -333,15 +343,21 @@ public class PasswordReset {
             return true;
         }else if(error == 1) {
             if(passwordError){
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",App.getLanguageProperties("authWrongPasswordFormatAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,
+                        "WARNING",App.getLanguageProperties("authWrongPasswordFormatAlert"),
+                        350, 86, "alertFailure");
             }
             if(passwordNotTheSameError){
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",App.getLanguageProperties("authPasswordsNotTheSameAlert"), 350, 86, "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,
+                        "WARNING",App.getLanguageProperties("authPasswordsNotTheSameAlert"),
+                        350, 86, "alertFailure");
             }
             return false;
         }else{
 
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,"WARNING",App.getLanguageProperties("authErrorsOnTextFieldsAlert"), 350, 86, "alertFailure");
+            Alerts.createCustomAlert(loginRightPaneAnchorPane, passwordResetSetNewPasswordButton,
+                    "WARNING",App.getLanguageProperties("authErrorsOnTextFieldsAlert"),
+                    350, 86, "alertFailure");
             return false;
         }
     }

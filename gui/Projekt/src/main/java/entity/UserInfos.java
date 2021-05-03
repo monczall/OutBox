@@ -1,10 +1,7 @@
 package main.java.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "user_infos", schema = "outbox")
@@ -20,7 +17,7 @@ public class UserInfos {
     private Collection<Users> usersById;
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;

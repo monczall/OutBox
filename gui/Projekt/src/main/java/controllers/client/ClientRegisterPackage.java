@@ -336,6 +336,7 @@ public class ClientRegisterPackage implements Initializable {
         packages.setTimeOfPlannedDelivery(sumTime.getText());
         packages.setAdditionalComment(additionalComment.getText());
 
+
         session.save(packages);
 
         dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

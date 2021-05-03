@@ -7,6 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import main.java.controllers.auth.Encryption;
+import main.java.dao.UserInfosDAO;
 import main.java.features.Alerts;
 
 import java.net.URL;
@@ -27,9 +30,6 @@ public class ManagerCouriersAdd implements Initializable {
     private TextField city;
 
     @FXML
-    private TextField pesel;
-
-    @FXML
     private TextField email;
 
     @FXML
@@ -42,9 +42,12 @@ public class ManagerCouriersAdd implements Initializable {
     private Button addCourierButton;
 
     @FXML
+    private Pane alertPane;
+
+    @FXML
     private ComboBox<String> regionName;
 
-    private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów centrum","Rzeszów Rejtana");
+    private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów","Rzeszów Rejtana");
 
     public void addCourier(MouseEvent mouseEvent) {
         boolean status = true;
@@ -52,7 +55,7 @@ public class ManagerCouriersAdd implements Initializable {
                 surname.getText().toString().equals("") ||
                 street.getText().toString().equals("") ||
                 city.getText().toString().equals("") ||
-                pesel.getText().toString().equals("") ||
+                //pesel.getText().toString().equals("") ||
                 email.getText().toString().equals("") ||
                 voivodeship.getText().toString().equals("") ||
                 numberPhone.getText().toString().equals("")){
@@ -103,7 +106,8 @@ public class ManagerCouriersAdd implements Initializable {
                 System.out.println("Miasto niepoprawne");
                 errorValidation(city);
             }
-            if (street.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
+            if (street.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?" +
+                    "\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
             {
                 System.out.println("Ulica poprawna");
                 goodValidation(street);
@@ -113,7 +117,7 @@ public class ManagerCouriersAdd implements Initializable {
                 System.out.println("Ulica niepoprawna");
                 errorValidation(street);
             }
-            if (pesel.getText().matches("[0-9]*") && pesel.getText().length() == 11)
+            /*if (pesel.getText().matches("[0-9]*") && pesel.getText().length() == 11)
             {
                 System.out.println("Pesel poprawny");
                 goodValidation(pesel);
@@ -123,7 +127,7 @@ public class ManagerCouriersAdd implements Initializable {
                 status = false;
                 System.out.println("Pesel niepoprawny");
                 errorValidation(pesel);
-            }
+            }*/
             if (numberPhone.getText().matches("[0-9]*") && numberPhone.getText().length() == 9)
             {
                 System.out.println("Telefon poprawny");
@@ -149,6 +153,24 @@ public class ManagerCouriersAdd implements Initializable {
             if (!status) {
                 Alerts.createAlert(appWindow, addCourierButton, "WARNING", "POPRAW POLA");
             }
+            else{
+                String nameString = name.getText();
+                String emailString = email.getText();
+                String phoneString = numberPhone.getText();
+                String streetString = street.getText();
+                String surnameString = surname.getText();
+                String cityString = city.getText();
+                String voivodeshipString = voivodeship.getText();
+                String password = Encryption.encrypt("test");
+                String role = "Kurier";
+
+                //System.out.println("name: " + nameString + "surname: " + surnameString + "email: " + emailString + "phone: " + phoneString + "street: " + streetString + "city: " + cityString + "wojewodztow: " + voivodeshipString + "password: " + password);
+
+
+
+                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role);
+                alertPane.setVisible(true);
+            }
         }
     }
 
@@ -162,13 +184,25 @@ public class ManagerCouriersAdd implements Initializable {
         name.getStyleClass().add("inputBoxCourierError");
     }
 
+    @FXML
+    void confirmButton(MouseEvent event) {
+        name.setText("");
+        surname.setText("");
+        street.setText("");
+        city.setText("");
+        email.setText("");
+        voivodeship.setText("");
+        numberPhone.setText("");
+        alertPane.setVisible(false);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         goodValidation(name);
         goodValidation(surname);
         goodValidation(street);
         goodValidation(city);
-        goodValidation(pesel);
+        //goodValidation(pesel);
         goodValidation(numberPhone);
         goodValidation(voivodeship);
         goodValidation(email);

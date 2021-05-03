@@ -5,23 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import main.java.SceneManager;
-import main.java.dao.HibernateUtil;
-import main.java.entity.UserInfos;
-import org.hibernate.Session;
+import main.java.dao.PackageHistoryDAO;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+
 
 public class ClientHome implements Initializable {
 
@@ -30,7 +19,6 @@ public class ClientHome implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     @FXML

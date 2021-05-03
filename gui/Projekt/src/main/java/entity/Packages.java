@@ -1,20 +1,11 @@
 package main.java.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "packages")
-@SecondaryTables({
-
-        @SecondaryTable(name = "user_infos", pkJoinColumns = {
-                @PrimaryKeyJoinColumn(name = "ID")
-        }),
-        @SecondaryTable(name = "package_history", pkJoinColumns = {
-                @PrimaryKeyJoinColumn(name = "packageId")
-        })
-})
 public class Packages {
     private int id;
     private int typeId;
@@ -23,23 +14,14 @@ public class Packages {
     private String email;
     private String packageNumber;
     private String timeOfPlannedDelivery;
-    private String status;
     private String additionalComment;
-    private String name;
-    private String surname;
-    private String city;
-    private String address;
-    private String phone;
     private Collection<PackageHistory> packageHistoriesById;
     private PackageType packageTypeByTypeId;
     private Users usersByUserId;
     private UserInfos userInfosByUserInfoId;
 
-    public Packages() {
-    }
-
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
@@ -50,7 +32,7 @@ public class Packages {
     }
 
     @Basic
-    @Column(name = "typeID")
+    @Column(name = "typeID", nullable = false)
     public int getTypeId() {
         return typeId;
     }
@@ -60,7 +42,7 @@ public class Packages {
     }
 
     @Basic
-    @Column(name = "userID")
+    @Column(name = "userID", nullable = false)
     public int getUserId() {
         return userId;
     }
@@ -70,7 +52,7 @@ public class Packages {
     }
 
     @Basic
-    @Column(name = "user_infoID")
+    @Column(name = "user_infoID", nullable = false)
     public int getUserInfoId() {
         return userInfoId;
     }
@@ -80,7 +62,7 @@ public class Packages {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 128)
     public String getEmail() {
         return email;
     }
@@ -89,10 +71,8 @@ public class Packages {
         this.email = email;
     }
 
-
-
     @Basic
-    @Column(name = "package_number")
+    @Column(name = "package_number", nullable = false, length = 64)
     public String getPackageNumber() {
         return packageNumber;
     }
@@ -102,7 +82,7 @@ public class Packages {
     }
 
     @Basic
-    @Column(name = "time_of_planned_delivery")
+    @Column(name = "time_of_planned_delivery", nullable = false, length = 64)
     public String getTimeOfPlannedDelivery() {
         return timeOfPlannedDelivery;
     }
@@ -112,7 +92,7 @@ public class Packages {
     }
 
     @Basic
-    @Column(name = "additional_comment")
+    @Column(name = "additional_comment", nullable = true, length = 512)
     public String getAdditionalComment() {
         return additionalComment;
     }
@@ -121,6 +101,18 @@ public class Packages {
         this.additionalComment = additionalComment;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Packages packages = (Packages) o;
+        return id == packages.id && typeId == packages.typeId && userId == packages.userId && userInfoId == packages.userInfoId && Objects.equals(email, packages.email) && Objects.equals(packageNumber, packages.packageNumber) && Objects.equals(timeOfPlannedDelivery, packages.timeOfPlannedDelivery) && Objects.equals(additionalComment, packages.additionalComment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, typeId, userId, userInfoId, email, packageNumber, timeOfPlannedDelivery, additionalComment);
+    }
 
     @OneToMany(mappedBy = "packagesByPackageId")
     public Collection<PackageHistory> getPackageHistoriesById() {
@@ -160,56 +152,4 @@ public class Packages {
     public void setUserInfosByUserInfoId(UserInfos userInfosByUserInfoId) {
         this.userInfosByUserInfoId = userInfosByUserInfoId;
     }
-    @Column(name = "name", table = "user_infos")
-    public String getName() {
-        return getUserInfosByUserInfoId().getName();
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    @Column(name = "surname", table = "user_infos")
-    public String getSurname() {
-        return getUserInfosByUserInfoId().getSurname();
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    @Column(name = "city", table = "user_infos")
-    public String getCity() {
-        return getUserInfosByUserInfoId().getCity();
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-    @Column(name = "street_and_number", table = "user_infos")
-    public String getAddress() {
-        return getUserInfosByUserInfoId().getStreetAndNumber();
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Column(name = "phone_number", table = "user_infos")
-    public String getPhone() {
-        return getUserInfosByUserInfoId().getPhoneNumber();
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    @Column(name = "status", table = "package_history")
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-
 }
