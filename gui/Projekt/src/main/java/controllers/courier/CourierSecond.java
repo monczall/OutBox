@@ -31,6 +31,7 @@ public class CourierSecond implements Initializable {
     private static int id;
     private static String comment;
     private static int packageId;
+    private static String status;
 
     public static int getPackageId() {
         return packageId;

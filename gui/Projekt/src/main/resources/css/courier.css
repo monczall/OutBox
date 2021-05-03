@@ -109,7 +109,7 @@
     -fx-background-color: transparent;
     -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
-    -fx-border-width: 2px;
+    -fx-border-width: 1px;
     -fx-border-color: -fx-main-color;
     -fx-border-width: 0 0 2 0;
     -fx-fill: -fx-main-color;
@@ -316,6 +316,7 @@
 .table-row-cell:odd:filled:selected {
     -fx-background-color: derive(#111, 0%);
     -fx-border-color: -fx-main-color;
+
 }
 
 .table-row-cell:even:filled:selected {

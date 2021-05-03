@@ -15,7 +15,7 @@
             <FontAwesomeIconView glyphName="CHECK" />
          </graphic></Button>
       <Label layoutX="163.0" layoutY="7.0" text="Nadawca" />
-      <ComboBox fx:id="changeStatus" layoutX="289.0" layoutY="75.0" prefWidth="150.0" styleClass="inputBox" />
+      <ComboBox fx:id="changeStatus" layoutX="204.0" layoutY="75.0" prefHeight="25.0" prefWidth="235.0" styleClass="inputBox" />
       <Text fill="WHITE" layoutX="33.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię:" />
       <Text fill="WHITE" layoutX="20.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miasto:" />
       <Text fill="WHITE" layoutX="256.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko:" />

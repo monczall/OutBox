@@ -64,6 +64,8 @@ public class ExpendableRow implements Initializable {
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
         ol.remove(0);
         changeStatus.setItems(ol);
+        changeStatus.getSelectionModel().select(5);
+
     }
 
     @FXML

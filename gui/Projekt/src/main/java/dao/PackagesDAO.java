@@ -36,7 +36,8 @@ public class PackagesDAO {
     }
 
     static public ObservableList<PackagesExtended> addTable()
-    {/*
+    {
+        /*
         ObservableList<Packages> packages = FXCollections.observableArrayList();
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -88,26 +89,18 @@ public class PackagesDAO {
         session.close();
         */
         ObservableList<PackagesExtended> packages = FXCollections.observableArrayList();
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/outbox","root","");
-            Statement statement = connection.createStatement();
-            String sql = "select p.id, p.user_infoID, p.additional_comment, p.package_number, ui.name, ui.surname, ui.city, ui.street_and_number,ui.phone_number, ph.status," +
-                    " p.time_of_planned_delivery from packages p, package_history ph, user_infos ui where p.id = ph.packageID and" +
-                    " p.user_infoID = ui.ID and ph.status = (select ph.status from package_history ph where ph.id = (select max(ph.id)" +
-                    " from package_history ph where ph.packageID = p.ID)) group by p.package_number";
-            ResultSet rs = statement.executeQuery(sql);
-
-            while(rs.next()){
-                packages.add(new PackagesExtended(rs.getInt("id"),rs.getInt("id"),
-                        rs.getString("package_number"),rs.getString("time_of_planned_delivery"),
-                        rs.getString("name"),rs.getString("surname"),rs.getString("phone_number"),
-                        rs.getString("street_and_number"),rs.getString("city"),rs.getString("status"),
-                        rs.getString("additional_comment")));
-            }
-        }catch(Exception e){
-            e.printStackTrace();
+        String hql = "SELECT NEW main.java.entity.PackagesExtended(P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery," +
+                " UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId AND P.userInfoId = UI.id and " +
+                "PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM PH WHERE PH.packageId = P.id )) " +
+                "GROUP BY P.packageNumber";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<PackagesExtended> results = query.list();
+        for (PackagesExtended ent : results) {
+            packages.add(ent);
         }
+        session.close();
         return packages;
     }
 
