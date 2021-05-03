@@ -8,12 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import main.java.SceneManager;
-import main.java.preferences.Preference;
+import main.java.features.Preference;
 
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
 
 public class CourierSettings implements Initializable {
 

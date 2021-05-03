@@ -17,12 +17,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
-import main.java.entity.Packages;
+import main.java.entity.PackageHistory;
+import main.java.entity.PackagesExtended;
 import main.java.features.Animations;
-import main.java.preferences.Preference;
+import main.java.features.Preference;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -57,7 +59,7 @@ public class ClientTrackPackage implements Initializable {
         btnBack.setVisible(false);
 
         //Testing how ClientTrackPackage view will look like with example data
-        List<PackageTest> list = new ArrayList<>(packageTest());
+        List<PopulatePackageItem> list = new ArrayList<>(packageTest());
         for(int i=0; i<list.size(); i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -99,36 +101,24 @@ public class ClientTrackPackage implements Initializable {
                         btnBack.setVisible(true);
                         btnBack.setOpacity(1);
 
-                        List<String> statuses = PackageHistoryDAO.getStatusById(packageItem.getId());
+                        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(packageItem.getId());
 
                         //Testing dynamically created statuses from list that's gonna be filled with db rows
                         for(int i = 0; i < statuses.size(); i++){
                             if(i == statuses.size()-1){
+
                                 if(i != 0)
                                     createStep(4);
-
-                                createCurrentStatus("28 Mar 2021 23:00",statuses.get(i),"Jakis opis");
+                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
+                                createCurrentStatus(date,statuses.get(i).getStatus(),"Jakis opis");
                             }
                             else{
                                 if(i != 0)
                                     createStep(2);
-
-                                createStatus("28 Mar 2021 23:00",statuses.get(i));
+                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
+                                createStatus(date,statuses.get(i).getStatus());
                             }
                         }
-
-
-//                        createStatus("28 Mar 2021 23:00", "Przesyłka zarejestrowana");
-//                        createStep(2);
-//                        createStatus("28 Mar 2021 23:00", "Odebrana od klienta");
-//                        createStep(2);
-//                        createStatus("28 Mar 2021 23:00", "Przyjęta w oddziale");
-//                        createStep(2);
-//                        createStatus("28 Mar 2021 23:00", "W transporcie");
-//                        createStep(2);
-//                        createStatus("28 Mar 2021 23:00", "W doręczeniu");
-//                        createStep(4);
-//                        createCurrentStatus("28 Mar 2021 23:00", "Dostarczona - " + packageItem.getId(),"Podróż przesyłki od Nadawcy do Obiorcy zakończyła się. Dziękujemy!");
                     }
                 });
                 pane.getChildren().add(1,showMore);
@@ -261,24 +251,22 @@ public class ClientTrackPackage implements Initializable {
     }
 
     //Filing list with example data
-    private List<PackageTest> packageTest(){
+    private List<PopulatePackageItem> packageTest(){
 
-        List<Packages> listOfPackages = PackagesDAO.readPackages();
+        List<PackagesExtended> listOfPackages = PackagesDAO.addTable();
 
-        List<PackageTest> ls = new ArrayList<>();
+        List<PopulatePackageItem> packageItems = new ArrayList<>();
 
         for(int i = 0; i < listOfPackages.size(); i++){
-            PackageTest tes = new PackageTest();
-            tes.setPackageNumber(listOfPackages.get(i).getPackageNumber());
-//            tes.setSender(listOfPackages.get(i).getName());
-//            tes.setStatus(listOfPackages.get(i).getStatus());
-            tes.setId(listOfPackages.get(i).getId());
-            ls.add(tes);
+            PopulatePackageItem populatePackageItem = new PopulatePackageItem();
+            populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
+            populatePackageItem.setSender(listOfPackages.get(i).getName());
+            populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
+            populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
+            packageItems.add(populatePackageItem);
         }
 
-
-
-        return ls;
+        return packageItems;
     }
 
     @FXML

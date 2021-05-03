@@ -1,4 +1,4 @@
-package main.java.preferences;
+package main.java.features;
 
 import java.util.prefs.Preferences;
 

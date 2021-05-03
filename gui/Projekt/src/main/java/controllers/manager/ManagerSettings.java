@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import main.java.preferences.Preference;
+import main.java.features.Preference;
 
 import java.net.URL;
 import java.util.ResourceBundle;

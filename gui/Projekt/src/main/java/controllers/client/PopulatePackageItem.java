@@ -1,6 +1,6 @@
 package main.java.controllers.client;
 
-public class PackageTest {
+public class PopulatePackageItem {
 
     private String packageNumber;
     private String status;

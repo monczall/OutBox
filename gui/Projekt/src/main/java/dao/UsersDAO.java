@@ -1,15 +1,8 @@
 package main.java.dao;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import main.java.entity.PackageType;
-import main.java.entity.Packages;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import java.util.List;

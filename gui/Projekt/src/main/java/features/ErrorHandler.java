@@ -90,6 +90,13 @@ public class ErrorHandler {
         }
     }
 
+    public static boolean checkOldPassword(String oldPassword, String correctPassword){
+
+
+
+        return true;
+    }
+
 
 
 

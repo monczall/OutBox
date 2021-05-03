@@ -1,29 +1,31 @@
 package main.java.controllers.client;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import main.java.SceneManager;
+import main.java.controllers.auth.Encryption;
+import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
+import main.java.entity.UserInfos;
+import main.java.entity.Users;
 import main.java.features.Alerts;
 import main.java.features.Animations;
 import main.java.features.ErrorHandler;
-import main.java.preferences.Preference;
+import main.java.features.Preference;
 import org.controlsfx.control.ToggleSwitch;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientSettings implements Initializable {
@@ -62,6 +64,9 @@ public class ClientSettings implements Initializable {
     private CustomTextField settNumber;
 
     @FXML
+    private CustomPasswordField settOldPassword;
+
+    @FXML
     private CustomPasswordField settPassword;
 
     @FXML
@@ -79,15 +84,17 @@ public class ClientSettings implements Initializable {
     @FXML
     private AnchorPane window;
 
-    @FXML
-    private CustomTextField settOldPassword;
 
     //List of colors for combobox
-    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony", "Biały");
+    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony",
+            "Biały");
     //List of languages for combobox
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
     //List of provinces for combobox
-    private ObservableList<String> provinces = FXCollections.observableArrayList( "Dolnośląskie",  "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Łódzkie",  "Małopolskie",  "Mazowieckie",  "Opolskie",  "Podkarpackie",  "Podlaskie",  "Pomorskie",  "Śląskie",  "Świętokrzyskie",  "Warmińsko-mazurskie",  "Wielkopolskie",  "Zachodniopomorskie");
+    private ObservableList<String> provinces = FXCollections.observableArrayList( "Dolnośląskie",
+            "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Łódzkie",  "Małopolskie",  "Mazowieckie",
+            "Opolskie",  "Podkarpackie",  "Podlaskie",  "Pomorskie",  "Śląskie",  "Świętokrzyskie",
+            "Warmińsko-mazurskie",  "Wielkopolskie",  "Zachodniopomorskie");
 
     private String[] inputs = new String[5];
 
@@ -128,14 +135,16 @@ public class ClientSettings implements Initializable {
             pickColor.setValue(colors.get(2));
         }
 
+        List<UserInfos> listOfUserInfo = UsersDAO.readUserInfoById(1);
+
         //Populating province combobox
         settProvince.setItems(provinces);
-        settProvince.setValue(provinces.get(0));
+        settProvince.setValue(listOfUserInfo.get(0).getVoivodeship());
 
         //Setting text for inputs to test how it will work with database information
-        settCity.setText("City");
-        settNumber.setText("1234567890"); //373 128
-        settStreet.setText("Street 33");
+        settCity.setText(listOfUserInfo.get(0).getCity());
+        settNumber.setText(listOfUserInfo.get(0).getPhoneNumber()); //373 128
+        settStreet.setText(listOfUserInfo.get(0).getStreetAndNumber());
 
         inputs[0] = settStreet.getText();
         inputs[1] = settCity.getText();
@@ -144,10 +153,22 @@ public class ClientSettings implements Initializable {
 
         alertPane.setTranslateY(-500);
 
-        ErrorHandler.checkInputs(settCity,"[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}","Miasto powinno zawierać tylko litery");
-        ErrorHandler.checkInputs(settStreet, "[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}", "Ulica powinna miec format ULICA NUMER");
-        ErrorHandler.checkPasswords(settPassword,settRepeatPassword, "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$", "Podane hasło ma niepoprawny format","Hasła powinny być takie same");
-        ErrorHandler.checkInputs(settNumber, "\\+?[0-9]{0,2}\\s?[0-9]{3}\\s?[0-9]{3}\\s?[0-9]{3}", "Numer powinno zawierać tylko cyfry");
+        ErrorHandler.checkInputs(settCity,"[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}",
+                "Miasto powinno zawierać tylko litery");
+
+        ErrorHandler.checkInputs(settStreet,
+                "[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s" +
+                        "[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}",
+                "Ulica powinna miec format ULICA NUMER");
+
+        ErrorHandler.checkPasswords(settPassword,settRepeatPassword,
+                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$",
+                "Podane hasło ma niepoprawny format",
+                "Hasła powinny być takie same");
+
+        ErrorHandler.checkInputs(settNumber, "\\+?[0-9]{0,2}\\s?[0-9]{3}\\s?[0-9]{3}\\s?[0-9]{3}",
+                "Numer powinno zawierać tylko cyfry");
+
     }
 
     @FXML
@@ -195,10 +216,13 @@ public class ClientSettings implements Initializable {
         if(!settStreet.getRight().isVisible() && !settCity.getRight().isVisible() && !settNumber.getRight().isVisible()
                 && !settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()) {
 
-            if (!inputs[0].equals(settStreet.getText()) || !inputs[1].equals(settCity.getText()) || !inputs[2].equals(settProvince.getSelectionModel().getSelectedItem())
+            if (!inputs[0].equals(settStreet.getText()) || !inputs[1].equals(settCity.getText())
+                    || !inputs[2].equals(settProvince.getSelectionModel().getSelectedItem())
                     || !inputs[3].equals(settNumber.getText()) || !settPassword.getText().isEmpty()) {
 
-                UsersDAO.updatePassword(1,settPassword.getText());
+                UserInfosDAO.updateUserSettings(settPassword.getText(),
+                        settProvince.getSelectionModel().getSelectedItem(),settCity.getText(),
+                        settNumber.getText(),settStreet.getText(),1);
 
                 Alerts.createAlert(settingsPane, saveInformation, "CHECK", "POMYŚLNIE ZMIENIONO");
 

@@ -2,7 +2,7 @@ package main.java;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import main.java.preferences.Preference;
+import main.java.features.Preference;
 
 import java.io.*;
 import java.util.Properties;
