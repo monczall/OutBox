@@ -22,49 +22,49 @@
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editFirstNameField" layoutX="196.0" layoutY="155.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnFirstName" prefHeight="35.0" prefWidth="250.0" styleClass="textFields" />
+        <TextField fx:id="editFirstNameField" layoutX="196.0" layoutY="155.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnFirstName" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgName" styleClass="textFields" />
         <Circle fx:id="editFirstNameCircle" fill="ORANGE" layoutX="196.0" layoutY="173.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="221.0" layoutY="215.0" styleClass="lightText" text="%adminSurname">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editLastNameField" layoutX="196.0" layoutY="235.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnLastName" prefHeight="35.0" prefWidth="250.0" styleClass="textFields" />
+        <TextField fx:id="editLastNameField" layoutX="196.0" layoutY="235.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnLastName" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgSurname" styleClass="textFields" />
         <Circle fx:id="editLastNameCircle" fill="ORANGE" layoutX="196.0" layoutY="253.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="221.0" layoutY="295.0" styleClass="lightText" text="%adminPhoneNumber">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editPhoneNumberField" layoutX="196.0" layoutY="315.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnPhoneNumber" prefHeight="35.0" prefWidth="250.0" styleClass="textFields" />
+        <TextField fx:id="editPhoneNumberField" layoutX="196.0" layoutY="315.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnPhoneNumber" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgNumber" styleClass="textFields" />
         <Circle fx:id="editPhoneNumberCircle" fill="ORANGE" layoutX="196.0" layoutY="330.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="221.0" layoutY="375.0" styleClass="lightText" text="%adminEmail">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editEmailAddressField" layoutX="196.0" layoutY="395.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnEmailAddress" prefHeight="35.0" prefWidth="250.0" styleClass="textFields" />
+        <TextField fx:id="editEmailAddressField" layoutX="196.0" layoutY="395.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnEmailAddress" prefHeight="35.0" prefWidth="250.0"  promptText="%adminEgMail" styleClass="textFields" />
         <Circle fx:id="editEmailAddressCircle" fill="ORANGE" layoutX="196.0" layoutY="410.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="636.0" layoutY="135.0" styleClass="lightText" text="%adminStreet">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editStreetField" layoutX="613.0" layoutY="155.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnStreet" prefHeight="35.0" prefWidth="250.0" styleClass="textFields" />
+        <TextField fx:id="editStreetField" layoutX="613.0" layoutY="155.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnStreet" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgStreet" styleClass="textFields" />
         <Circle fx:id="editStreetCircle" fill="ORANGE" layoutX="611.0" layoutY="173.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="636.0" layoutY="215.0" styleClass="lightText" text="%adminCity">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editCityField" layoutX="613.0" layoutY="235.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0" styleClass="textFields" />
+        <TextField fx:id="editCityField" layoutX="613.0" layoutY="235.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0"  promptText="%adminEgCity" styleClass="textFields" />
         <Circle fx:id="editCityCircle" fill="ORANGE" layoutX="613.0" layoutY="253.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="636.0" layoutY="295.0" styleClass="lightText" text="%adminVoivodeship">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editVoivodeshipField" layoutX="613.0" layoutY="315.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" styleClass="textFields" />
+        <TextField fx:id="editVoivodeshipField" layoutX="613.0" layoutY="315.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgVoivodeship" styleClass="textFields" />
         <Circle fx:id="editVoivodeshipCircle" fill="ORANGE" layoutX="613.0" layoutY="333.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Button fx:id="editEditButtonButton" layoutX="564.0" layoutY="575.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleedit" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="%adminEditEmployee" />
         <FontAwesomeIconView glyphName="USER" layoutX="185.0" layoutY="184.0" size="32" />
