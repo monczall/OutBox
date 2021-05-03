@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import main.java.controllers.auth.Encryption;
 import main.java.dao.UserInfosDAO;
 import main.java.features.Alerts;
 
@@ -38,6 +40,9 @@ public class ManagerCouriersAdd implements Initializable {
 
     @FXML
     private Button addCourierButton;
+
+    @FXML
+    private Pane alertPane;
 
     @FXML
     private ComboBox<String> regionName;
@@ -156,12 +161,15 @@ public class ManagerCouriersAdd implements Initializable {
                 String surnameString = surname.getText();
                 String cityString = city.getText();
                 String voivodeshipString = voivodeship.getText();
-                String password ="test";
+                String password = Encryption.encrypt("test");
                 String role = "Kurier";
 
                 //System.out.println("name: " + nameString + "surname: " + surnameString + "email: " + emailString + "phone: " + phoneString + "street: " + streetString + "city: " + cityString + "wojewodztow: " + voivodeshipString + "password: " + password);
-                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role);
 
+
+
+                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role);
+                alertPane.setVisible(true);
             }
         }
     }
@@ -174,6 +182,18 @@ public class ManagerCouriersAdd implements Initializable {
     void errorValidation(TextField name){
         name.getStyleClass().clear();
         name.getStyleClass().add("inputBoxCourierError");
+    }
+
+    @FXML
+    void confirmButton(MouseEvent event) {
+        name.setText("");
+        surname.setText("");
+        street.setText("");
+        city.setText("");
+        email.setText("");
+        voivodeship.setText("");
+        numberPhone.setText("");
+        alertPane.setVisible(false);
     }
 
     @Override

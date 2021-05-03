@@ -6,13 +6,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import main.java.dao.UserInfosDAO;
+import main.java.dao.UsersDAO;
+import main.java.entity.UserInfos;
+import main.java.entity.Users;
 import main.java.features.Alerts;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ManagerCouriersEdit implements Initializable {
@@ -21,31 +28,34 @@ public class ManagerCouriersEdit implements Initializable {
     private AnchorPane appWindow;
 
     @FXML
+    private Pane alertPane;
+
+    @FXML
+    private Label labelAlertPane;
+
+    @FXML
     private TextField name;
 
     @FXML
     private TextField surname;
 
     @FXML
-    private TextField pesel;
-
-    @FXML
     private Button findCourierButton;
 
     @FXML
-    private Button saveEditCourierButton;
+    private Label notDataLabel;
 
     @FXML
-    private VBox packageLayout;
+    private Pane dataPane,paneResults;
 
     @FXML
     private TextField nameInput;
 
     @FXML
-    private TextField surnameInput;
+    private Button saveEditCourierButton;
 
     @FXML
-    private TextField peselInput;
+    private TextField surnameInput;
 
     @FXML
     private TextField cityInput;
@@ -63,30 +73,43 @@ public class ManagerCouriersEdit implements Initializable {
     private TextField inputEmail;
 
     @FXML
-    private ComboBox<String> regionName;
+    private Button button1;
 
-    private ObservableList<String> statusObservable = FXCollections.observableArrayList("Południe","Rejtana");
+    @FXML
+    private Button button2;
+
+    List<UserInfos> dataUserInfos;
+    List<Users> dataUser;
+    int dataIndex = 0;
 
     public void findCourier(MouseEvent mouseEvent) {
 
         if(name.getText().toString().equals("") &&
-                surname.getText().toString().equals("") &&
-                pesel.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, findCourierButton, "WARNING", "PODAJ JAKIŚ PARAMETR");
-        }
-        else
-        {
-            if(pesel.getText().toString().equals("")){
-                System.out.println("Pesel pusty");
-            }
-            else if (pesel.getText().matches("[0-9]*") && pesel.getText().length() == 11)
+                surname.getText().toString().equals("")){
+            Alerts.createAlert(appWindow, findCourierButton, "WARNING", "Podaj imie i nazwisko!");
+        }else{
+            dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
+
+            if(dataUserInfos.size() > 1)
             {
-                System.out.println("Pesel poprawny");
+                setDataEdit();
+                dataPane.setVisible(true);
+                button1.setVisible(true);
+                button2.setVisible(true);
+                notDataLabel.setVisible(false);
             }
-            else
+            else if(dataUserInfos.size() == 1)
             {
-                System.out.println("Pesel niepoprawny");
-                Alerts.createAlert(appWindow, findCourierButton, "WARNING", "POPRAW DANE");
+                setDataEdit();
+                button1.setVisible(false);
+                button2.setVisible(false);
+                dataPane.setVisible(true);
+                notDataLabel.setVisible(false);
+            }
+            else{
+                System.out.println("NIE");
+                dataPane.setVisible(false);
+                notDataLabel.setVisible(true);
             }
         }
     }
@@ -98,7 +121,6 @@ public class ManagerCouriersEdit implements Initializable {
                 surnameInput.getText().toString().equals("") ||
                 streetInput.getText().toString().equals("") ||
                 cityInput.getText().toString().equals("") ||
-                peselInput.getText().toString().equals("") ||
                 inputEmail.getText().toString().equals("") ||
                 inputVoivodeship.getText().toString().equals("") ||
                 inputNumber.getText().toString().equals("")){
@@ -149,15 +171,6 @@ public class ManagerCouriersEdit implements Initializable {
                 status = false;
                 System.out.println("Ulica niepoprawna");
             }
-            if (peselInput.getText().matches("[0-9]*") && peselInput.getText().length() == 11)
-            {
-                System.out.println("Pesel poprawny");
-            }
-            else
-            {
-                status = false;
-                System.out.println("Pesel niepoprawny");
-            }
             if (inputNumber.getText().matches("[0-9]*") && inputNumber.getText().length() == 9)
             {
                 System.out.println("Telefon poprawny");
@@ -178,12 +191,71 @@ public class ManagerCouriersEdit implements Initializable {
             }
             if (!status) {
                 Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING", "POPRAW POLA");
+            }else{
+
+                UserInfosDAO.updateUser(dataUserInfos.get(dataIndex).getId(), dataUser.get(0).getId(),
+                        nameInput.getText(), surnameInput.getText(), inputNumber.getText(), cityInput.getText(),
+                        streetInput.getText(), inputVoivodeship.getText(), inputEmail.getText(),
+                        dataUser.get(0).getPassword(), "Kurier", dataUser.get(0).getAreaId(),
+                        dataUser.get(0).getUserInfoId());
+
+                alertPane.setVisible(true);
             }
         }
     }
 
+    public void setDataEdit(){
+        System.out.println("DataIndex: " + dataIndex + " DataUserInfosSize: "+dataUserInfos.size() + " DataUserInfosGetId: "+dataUserInfos.get(dataIndex).getId());
+        System.out.println("ZMIENIAM NA KOLEJNE ID INDEX("+dataIndex+") = " +dataUserInfos.get(dataIndex).getId());
+        dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
+        System.out.println("DataUserSIZSE: " + dataUser.size() + " DataUserID: " + dataUser.get(0).getId());
+
+        nameInput.setText(dataUserInfos.get(dataIndex).getName());
+        surnameInput.setText(dataUserInfos.get(dataIndex).getSurname());
+        inputNumber.setText(dataUserInfos.get(dataIndex).getPhoneNumber());
+        cityInput.setText(dataUserInfos.get(dataIndex).getCity());
+        streetInput.setText(dataUserInfos.get(dataIndex).getStreetAndNumber());
+        inputVoivodeship.setText(dataUserInfos.get(dataIndex).getVoivodeship());
+        inputEmail.setText(dataUser.get(0).getEmail());
+    }
+
+    @FXML
+    void buttonBack(MouseEvent event) {
+        dataIndex--;
+
+        if(dataIndex<0){
+            dataIndex=0;
+        }
+        setDataEdit();
+    }
+
+    @FXML
+    void buttonNext(MouseEvent event) {
+        dataIndex++;
+
+        if(dataIndex>dataUserInfos.size()-1){
+            dataIndex=dataUserInfos.size()-1;
+        }
+        setDataEdit();
+    }
+
+    @FXML
+    void confirmButton(MouseEvent event) {
+        dataPane.setVisible(false);
+        name.setText("");
+        surname.setText("");
+        notDataLabel.setVisible(true);
+        button1.setVisible(false);
+        button2.setVisible(false);
+        alertPane.setVisible(false);
+        notDataLabel.setVisible(true);
+        dataIndex = 0;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        regionName.setItems(statusObservable);
+        dataPane.setVisible(false);
+        button1.setVisible(false);
+        button2.setVisible(false);
     }
 }

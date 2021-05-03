@@ -1,3 +1,16 @@
+/*-------------COLORS-------------*/
+*{
+    -fx-main-color: #ffa500;
+    -fx-dark-color: #121212;
+    -fx-color-Text:white;
+    -fx-gray-color: #8f8f8f;
+    -fx-second-color: #000;
+    -fx-color-error:white;
+    -fx-shadow: #000;
+    -fx-dark-transparent: #121212;
+
+}
+
 /*-------- ALL SCENES --------*/
 .mainBackground{  /*Background color AnchorPane*/
     -fx-background-color: #121212;
@@ -31,6 +44,7 @@
     -fx-border-width: 2.5px;
     -fx-border-color: #ffa500;
     -fx-fill: #ffa500;
+    -fx-cursor: hand;
 }
 
 .infoBoxButtons{
@@ -48,6 +62,7 @@
     -fx-border-width: 2px;
     -fx-border-color: #ffa500;
     -fx-fill: #ffa500;
+    -fx-cursor: hand;
 }
 
 /* All input CSS */
@@ -355,6 +370,16 @@
     -fx-text-fill: -fx-main-color;
 }
 
+.customAlert{
+    -fx-background-color: -fx-dark-color; /*#262628*/
+    -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
+    -fx-border-color: -fx-main-color;
+    -fx-border-radius: 0;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-main-color;
+}
+
 /*-------------STYLING BUTTONS-------------*/
 .btnBack{
     -fx-background-color: transparent;
@@ -377,6 +402,7 @@
     -fx-border-color: -fx-main-color;
     -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
+    -fx-border-width: 2.5px;
     -fx-font-weight: bold;
     -fx-background-radius: 0;
     -fx-cursor: hand;

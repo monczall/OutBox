@@ -115,5 +115,16 @@ public class PackagesDAO {
 
         return packageList;
     }
+    static public List<Packages> readPackagesForManager(String sql){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery(sql);
+
+        List<Packages> packageList = query.list();
+
+        session.close();
+
+        return packageList;
+    }
 
 }

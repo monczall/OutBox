@@ -15,27 +15,27 @@
         <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminAreaAdd" />
         <FontAwesomeIconView fill="ORANGE" glyphName="PLUS" layoutX="176.0" layoutY="81.0" size="40" styleClass="partIcon" />
         <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-      <TextField fx:id="registerAreaName" layoutX="603.0" layoutY="357.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnArea" prefHeight="35.0" prefWidth="250.0" promptText="Nazwa" styleClass="textFields" />
+      <TextField fx:id="registerAreaName" layoutX="603.0" layoutY="357.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnArea" prefHeight="35.0" prefWidth="250.0" promptText="%adminAreaName2" styleClass="textFields" />
         <Label layoutX="238.0" layoutY="184.0" styleClass="lightText" text="%adminStreet">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="registerStreetField" layoutX="215.0" layoutY="204.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnStreet" prefHeight="35.0" prefWidth="250.0" promptText="np. Mickiewicza 1C/13" styleClass="textFields" />
+        <TextField fx:id="registerStreetField" layoutX="215.0" layoutY="204.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnStreet" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgStreet" styleClass="textFields" />
         <Circle fx:id="registerStreetCircle" fill="ORANGE" layoutX="213.0" layoutY="222.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="626.0" layoutY="181.0" styleClass="lightText" text="%adminCity">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="registerCityField" layoutX="603.0" layoutY="201.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0" promptText="np. Rzeszów" styleClass="textFields" />
+        <TextField fx:id="registerCityField" layoutX="603.0" layoutY="201.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgCity" styleClass="textFields" />
         <Circle fx:id="registerCityCircle" fill="ORANGE" layoutX="603.0" layoutY="219.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="236.0" layoutY="339.0" styleClass="lightText" text="%adminVoivodeship">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="registerVoivodeshipField" layoutX="213.0" layoutY="359.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" promptText="np. Podkarpackie" styleClass="textFields" />
+        <TextField fx:id="registerVoivodeshipField" layoutX="213.0" layoutY="359.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgVoivodeship" styleClass="textFields" />
         <Circle fx:id="registerVoivodeshipCircle" fill="ORANGE" layoutX="213.0" layoutY="377.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Button fx:id="registerRegisterButtonButton" layoutX="392.0" layoutY="502.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="%adminAddArea" />
         <FontAwesomeIconView glyphName="BUILDING" layoutX="589.0" layoutY="230.0" size="32" />
