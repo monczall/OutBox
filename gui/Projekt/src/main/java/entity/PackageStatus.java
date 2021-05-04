@@ -2,15 +2,15 @@ package main.java.entity;
 
 public enum PackageStatus {
     REGISTERED("Zarejestrowana"),
-    RECIVED("Odebrana od klienta"),
-    TRANSPORTING("W transporcie"),
-    TO_DELIVERY("Przekazana do doręczenia"),
+    RECIVED("Odebrana Od Klienta"),
+    TRANSPORTING("W Transporcie"),
+    TO_DELIVERY("Przekazana Do Doręczenia"),
     DELIVERED("Dostarczona"),
-    ABSENCE_OF_THE_RECIPENT("Nieobecność odbiorcy"),
-    SECOND_TRY_TO_DELIVERY("Ponowna próba doręczenia"),
-    WAITING_IN_BRANCH("Do odebrania w oddziale"),
-    RETURN_TO_THE_SENDER("Zwrot do nadawcy"),
-    RETURNED_TO_THE_SENDER("Zwrócona do nadawcy");
+    ABSENCE_OF_THE_RECIPENT("Nieobecność Odbiorcy"),
+    SECOND_TRY_TO_DELIVERY("Ponowna Próba Doręczenia"),
+    WAITING_IN_BRANCH("Do Odebrania W Oddziale"),
+    RETURN_TO_THE_SENDER("Zwrot Do Nadawcy"),
+    RETURNED_TO_THE_SENDER("Zwrócona Do Nadawcy");
 
     private String displayName;
 

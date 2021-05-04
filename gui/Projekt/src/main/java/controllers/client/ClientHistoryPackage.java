@@ -18,7 +18,7 @@ import javafx.scene.text.Text;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.PackageHistory;
-import main.java.entity.PackagesExtended;
+import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
 import main.java.features.Preference;
 
@@ -253,7 +253,7 @@ public class ClientHistoryPackage implements Initializable {
     //Filing list with example data
     private List<PopulatePackageItem> packageTest(){
 
-        List<PackagesExtended> listOfPackages = PackagesDAO.addTableHistory();
+        List<PackagesDTO> listOfPackages = PackagesDAO.addTableHistory();
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 

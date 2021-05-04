@@ -1,6 +1,7 @@
 package main.java.controllers.admin;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,10 +14,15 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.App;
 import main.java.SceneManager;
+import main.java.dao.AreasDAO;
+import main.java.dao.UsersDAO;
+import main.java.entity.Users;
+import main.java.entity.UsersDTO;
 import main.java.features.Alerts;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -437,11 +443,42 @@ public class AdminEdit implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        editAreaChoiceBox.setItems(FXCollections.observableArrayList(
-                "First", "Second", "Third"));
+        editAreaChoiceBox.setItems(AreasDAO.getAreasName());
 
         editRoleChoiceBox.setItems(FXCollections.observableArrayList(
-                "Kurier", "Kurier międzyobszarowy", "Kierownik"));
+                "Kurier", "Kurier międzyoddziałowy", "Menadżer"));
+
+
+        List<Users> userList = UsersDAO.getUsersById(AdminEditEmployee.getUserID());
+
+
+        for (int i = 0; i < editRoleChoiceBox.getItems().size(); i++) {
+
+                if (editRoleChoiceBox.getItems().get(i).equals(userList.get(0).getRole())) {
+                    editRoleChoiceBox.getSelectionModel().select(i);
+                    break;
+                }
+
+        }
+
+        for (int i = 0; i < editAreaChoiceBox.getItems().size(); i++) {
+
+            if (editAreaChoiceBox.getItems().get(i).equals(userList.get(0).getAreasByAreaId().getName())) {
+                editAreaChoiceBox.getSelectionModel().select(i);
+                break;
+            }
+
+        }
+
+        editFirstNameField.setText(userList.get(0).getUserInfosByUserInfoId().getName());
+        editLastNameField.setText(userList.get(0).getUserInfosByUserInfoId().getSurname());
+
+        editPhoneNumberField.setText(userList.get(0).getUserInfosByUserInfoId().getPhoneNumber());
+        editEmailAddressField.setText(userList.get(0).getEmail());
+        editStreetField.setText(userList.get(0).getUserInfosByUserInfoId().getStreetAndNumber());
+
+        editCityField.setText(userList.get(0).getUserInfosByUserInfoId().getCity());
+        editVoivodeshipField.setText(userList.get(0).getUserInfosByUserInfoId().getVoivodeship());
     }
 
 

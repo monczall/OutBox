@@ -42,10 +42,10 @@ public class ManagerPackages implements Initializable {
     }
 
     Pane pane;
-    private final ObservableList<PackagesExtended> packages = PackagesDAO.addTable();
+    private final ObservableList<PackagesDTO> packages = PackagesDAO.addTable();
 
     @FXML
-    private TableView<PackagesExtended> table;
+    private TableView<PackagesDTO> table;
     @FXML
     private TableColumn<Packages, String> packageNumber;
     @FXML
@@ -94,7 +94,7 @@ public class ManagerPackages implements Initializable {
         table.getItems().clear();
         table.setItems(PackagesDAO.addTable());
     }
-    TableRowExpanderColumn<PackagesExtended> expanderRow = new TableRowExpanderColumn<PackagesExtended>(this::createEditor);
+    TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -131,7 +131,7 @@ public class ManagerPackages implements Initializable {
         }
     }
 
-    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesExtended> arg) {
+    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
             table.getSelectionModel().select(arg.getTableRow().getIndex());
             setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());

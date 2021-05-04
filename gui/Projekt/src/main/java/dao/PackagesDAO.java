@@ -35,36 +35,38 @@ public class PackagesDAO {
         return listOfPackages;
     }
 
-    static public ObservableList<PackagesExtended> addTable()
+    static public ObservableList<PackagesDTO> addTable()
     {
-        ObservableList<PackagesExtended> packages = FXCollections.observableArrayList();
-        String hql = "SELECT NEW main.java.entity.PackagesExtended(P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery," +
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(P.userId, P.id, P.packageNumber, P" +
+                ".timeOfPlannedDelivery," +
                 " UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId AND P.userInfoId = UI.id and " +
                 "PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM PH WHERE PH.packageId = P.id )) AND NOT PH.status = 'Dostarczona' " + // ZMIANANANANANANAN @@#@#@#@#@#
                 "GROUP BY P.packageNumber";
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
-        List<PackagesExtended> results = query.list();
-        for (PackagesExtended ent : results) {
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
             packages.add(ent);
         }
         session.close();
         return packages;
     }
 
-    static public ObservableList<PackagesExtended> addTableHistory()
+    static public ObservableList<PackagesDTO> addTableHistory()
     {
-        ObservableList<PackagesExtended> packages = FXCollections.observableArrayList();
-        String hql = "SELECT NEW main.java.entity.PackagesExtended(P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery," +
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(P.userId, P.id, P.packageNumber, P" +
+                ".timeOfPlannedDelivery," +
                 " UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId AND P.userInfoId = UI.id AND " +
                 "PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM PH WHERE PH.packageId = P.id )) AND PH.status = 'Dostarczona'" +
                 "GROUP BY P.packageNumber";
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
-        List<PackagesExtended> results = query.list();
-        for (PackagesExtended ent : results) {
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
             packages.add(ent);
         }
         session.close();

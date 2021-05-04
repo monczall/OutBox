@@ -1,5 +1,7 @@
 package main.java.dao;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import main.java.controllers.auth.Encryption;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
@@ -76,6 +78,34 @@ public class UsersDAO {
             return false;
 
         return true;
+    }
+
+    static public ObservableList<Users> getUserEdit(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("FROM Users U WHERE NOT U.role = 'Klient' AND NOT U.role = 'Administrator' ");
+
+        List<Users> userList = query.list();
+
+        ObservableList<Users> user = FXCollections.observableArrayList();
+        for (Users ent : userList) {
+            user.add(ent);
+        }
+
+        session.close();
+
+        return user;
+    }
+
+    static public List<Users> getUsersById(int id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("FROM Users WHERE id = :id");
+        query.setParameter("id",id);
+
+        List<Users> listOfUsers = query.list();
+
+        return listOfUsers;
     }
 
 }
