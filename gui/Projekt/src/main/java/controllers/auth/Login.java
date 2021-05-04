@@ -1,10 +1,13 @@
 package main.java.controllers.auth;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -28,13 +31,25 @@ import static main.java.dao.UsersDAO.getUsers;
 public class Login implements Initializable {
 
     @FXML
+    private MenuButton loginSettingsMenuButton;
+
+    @FXML
+    private MenuItem loginPolishLanguageMenuItem;
+
+    @FXML
+    private MenuItem loginEnglishLanguageMenuItem;
+
+    @FXML
+    private MenuItem loginOrangeColorMenuItem;
+
+    @FXML
+    private MenuItem loginRedColorMenuItem;
+
+    @FXML
+    private MenuItem loginWhiteColorMenuItem;
+
+    @FXML
     private ImageView loginLogoImageView;
-
-    @FXML
-    private ImageView loginPolishImageView;
-
-    @FXML
-    private ImageView loginEnglishImageView;
 
     @FXML
     private AnchorPane loginRightPaneAnchorPane;
@@ -65,12 +80,62 @@ public class Login implements Initializable {
     private static Preference pref = new Preference();
 
     public void initialize(URL url, ResourceBundle rb) {
+        ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
+        outboxBlack.setFitHeight(200);
+        outboxBlack.setFitWidth(150);
+        ImageView outboxWhite = new ImageView("main/resources/images/outbox_white.png");
+        outboxWhite.setFitHeight(200);
+        outboxWhite.setFitWidth(150);
+
+        ImageView plFlag = new ImageView("main/resources/images/settings_lang_pl.png");
+        plFlag.setFitHeight(15);
+        plFlag.setFitWidth(30);
+        ImageView engFlag = new ImageView("main/resources/images/settings_lang_en.png");
+        engFlag.setFitHeight(15);
+        engFlag.setFitWidth(30);
+        ImageView colorOrange = new ImageView("main/resources/images/settings_color_orange.png");
+        colorOrange.setFitHeight(15);
+        colorOrange.setFitWidth(30);
+        ImageView colorRed = new ImageView("main/resources/images/settings_color_red.png");
+        colorRed.setFitHeight(15);
+        colorRed.setFitWidth(30);
+        ImageView colorWhite = new ImageView("main/resources/images/settings_color_white.png");
+        colorWhite.setFitHeight(15);
+        colorWhite.setFitWidth(30);
+
+
+        loginPolishLanguageMenuItem.setGraphic(plFlag);
+        loginEnglishLanguageMenuItem.setGraphic(engFlag);
+        loginRedColorMenuItem.setGraphic(colorRed);
+        loginOrangeColorMenuItem.setGraphic(colorOrange);
+        loginWhiteColorMenuItem.setGraphic(colorWhite);
+
         if(pref.readPreference("language").equals("english")) {
-            loginPolishImageView.setDisable(false);
-            loginEnglishImageView.setDisable(true);
+            loginPolishLanguageMenuItem.setDisable(false);
+            loginEnglishLanguageMenuItem.setDisable(true);
+
         }else {
-            loginPolishImageView.setDisable(true);
-            loginEnglishImageView.setDisable(false);
+            loginPolishLanguageMenuItem.setDisable(true);
+            loginEnglishLanguageMenuItem.setDisable(false);
+        }
+
+        if(pref.readPreference("color").equals("red")) {
+            loginRedColorMenuItem.setDisable(true);
+            loginOrangeColorMenuItem.setDisable(false);
+            loginWhiteColorMenuItem.setDisable(false);
+            loginLogoImageView.setImage(outboxWhite.getImage());
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            loginRedColorMenuItem.setDisable(false);
+            loginOrangeColorMenuItem.setDisable(true);
+            loginWhiteColorMenuItem.setDisable(false);
+            loginLogoImageView.setImage(outboxBlack.getImage());
+        }
+        else{
+            loginRedColorMenuItem.setDisable(false);
+            loginOrangeColorMenuItem.setDisable(false);
+            loginWhiteColorMenuItem.setDisable(true);
+            loginLogoImageView.setImage(outboxBlack.getImage());
         }
 
         if (App.isConnectionError()) {
@@ -289,13 +354,28 @@ public class Login implements Initializable {
         Login.userInfoID = userInfoID;
     }
 
-    public void setPolishLanguage(MouseEvent mouseEvent) {
+    public void setPolishLanguage(ActionEvent actionEvent) {
         pref.addPreference("language","polish");
         SceneManager.renderScene("login");
     }
 
-    public void setEnglishLanguage(MouseEvent mouseEvent) {
+    public void setEnglishLanguage(ActionEvent actionEvent) {
         pref.addPreference("language","english");
+        SceneManager.renderScene("login");
+    }
+
+    public void setOrangeColor(ActionEvent actionEvent) {
+        pref.addPreference("color","orange");
+        SceneManager.renderScene("login");
+    }
+
+    public void setRedColor(ActionEvent actionEvent) {
+        pref.addPreference("color","red");
+        SceneManager.renderScene("login");
+    }
+
+    public void setWhiteColor(ActionEvent actionEvent) {
+        pref.addPreference("color","white");
         SceneManager.renderScene("login");
     }
 }
