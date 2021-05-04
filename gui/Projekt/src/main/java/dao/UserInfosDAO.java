@@ -1,5 +1,6 @@
 package main.java.dao;
 
+import main.java.controllers.auth.Encryption;
 import main.java.entity.PackageHistory;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
@@ -91,7 +92,7 @@ public class UserInfosDAO {
         session.close();
     }
 
-    static public void updateUser(int userInfoId, int userId, String name, String surname, String nubmer,
+    static public void updateUser(int userInfoId, int userId, String name, String surname, String number,
                                   String city, String street, String voivodeship, String email, String password,
                                   String role, int areaId, int userInfosID){
 
@@ -103,7 +104,7 @@ public class UserInfosDAO {
         userInfos.setId(userInfoId);
         userInfos.setName(name);
         userInfos.setSurname(surname);
-        userInfos.setPhoneNumber(nubmer);
+        userInfos.setPhoneNumber(number);
         userInfos.setCity(city);
         userInfos.setStreetAndNumber(street);
         userInfos.setVoivodeship(voivodeship);
@@ -128,5 +129,27 @@ public class UserInfosDAO {
         session2.getTransaction().commit();
 
         session2.close();
+    }
+
+    static public void updateUserSettings(String password,String voivodeship, String city,
+                                          String number, String street, int userId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Users users = session.get(Users.class, userId);
+
+        if(!password.isEmpty()) {
+            users.setPassword(Encryption.encrypt(password));
+        }
+
+        users.getUserInfosByUserInfoId().setVoivodeship(voivodeship);
+        users.getUserInfosByUserInfoId().setCity(city);
+        users.getUserInfosByUserInfoId().setPhoneNumber(number);
+        users.getUserInfosByUserInfoId().setStreetAndNumber(street);
+
+        session.update(users);
+        session.getTransaction().commit();
+
+        session.close();
     }
 }

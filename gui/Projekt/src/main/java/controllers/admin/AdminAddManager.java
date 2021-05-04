@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.features.Alerts;
 
@@ -98,7 +99,8 @@ public class AdminAddManager implements Initializable {
 
     public void register(){
         if(!isEmpty()){
-            if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(), registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText())){
+            if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(), registerStreetField.getText(),
+                    registerCityField.getText(), registerVoivodeshipField.getText())){
                 if(isPhoneNumber(registerPhoneNumberField.getText())){
                     if(isEmail(registerEmailAddressField.getText())){
                         //POMYSLNIE DODANE
@@ -106,12 +108,14 @@ public class AdminAddManager implements Initializable {
                     }else{
                         errorOnEmailAddress();
 
-                        Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING","Niepoprawny format danych! Podany mail nie jest prawidłowy.", 560, 86, "alertFailure");
+                        Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING",
+                                App.getLanguageProperties("adminInvalidEmail"), 560, 86, "alertFailure");
                     }
                 }else{
                     errorOnPhoneNumber();
 
-                    Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING","Niepoprawny format danych! Podany numer nie jest prawidłowy.", 565, 86, "alertFailure");
+                    Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING",
+                            App.getLanguageProperties("adminInvalidNumber"), 565, 86, "alertFailure");
                 }
             }else{
                 //SPRAWDZENIE BLEDOW
@@ -119,12 +123,14 @@ public class AdminAddManager implements Initializable {
 
 
 
-                Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING","Podano niepoprawne dane! Popraw zaznaczone błędy w formularzu rejestracji.", 670, 86, "alertFailure");
+                Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING",
+                        App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
             }
         }else{
 
 
-            Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING","Pozostawiono puste pola! Uzupełnij wymagane informacje.", 525, 86, "alertFailure");
+            Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING",
+                    App.getLanguageProperties("adminBlankFields"), 525, 86, "alertFailure");
         }
     }
 
@@ -182,7 +188,8 @@ public class AdminAddManager implements Initializable {
         Pattern pattern = Pattern.compile("[A-Za-z]{2,60}");
         Pattern patternFirstName = Pattern.compile("[A-Za-z]{2,30}\\s?[A-Za-z]{2,30}");
         Pattern patternLastName = Pattern.compile("[A-Za-z]{2,30}\\s?\\-\\s?[A-Za-z]{2,30}");
-        Pattern patternStreet = Pattern.compile("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}");
+        Pattern patternStreet = Pattern.compile("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]" +
+                "{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}");
         Pattern patternCity = Pattern.compile("[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
         Pattern patternVoivodeship = Pattern.compile("[A-Za-z]{7,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
 

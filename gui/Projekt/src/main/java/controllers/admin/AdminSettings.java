@@ -11,7 +11,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import main.java.SceneManager;
 import main.java.features.Animations;
-import main.java.preferences.Preference;
+import main.java.features.Preference;
 
 import java.io.IOException;
 import java.net.URL;
