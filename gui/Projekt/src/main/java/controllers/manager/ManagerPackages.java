@@ -1,243 +1,167 @@
 package main.java.controllers.manager;
 
-import javafx.collections.FXCollections;
+import com.sun.xml.bind.v2.runtime.reflect.Lister;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import main.java.dao.*;
-import main.java.entity.PackageHistory;
-import main.java.entity.PackageType;
-import main.java.entity.UserInfos;
-import main.java.entity.Users;
-import main.java.features.Alerts;
+import javafx.scene.layout.Pane;
+import main.java.dao.PackageHistoryDAO;
+import main.java.dao.PackagesDAO;
+import main.java.entity.*;
+import org.controlsfx.control.table.TableRowExpanderColumn;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ManagerPackages implements Initializable {
 
-    @FXML
-    private AnchorPane appWindow;
+    private static int id;
+    private static String comment;
+    private static int packageId;
+    private static String status;
 
-    @FXML
-    private Button findPackageButton;
-
-    @FXML
-    private TextField numerPackages;
-
-    @FXML
-    private TextField name;
-
-    @FXML
-    private TextField surname;
-
-    @FXML
-    private DatePicker datePosting;
-
-    @FXML
-    private ComboBox<String> status;
-
-    @FXML
-    private DatePicker dateReceipt;
-
-    @FXML
-    private TextField city;
-
-    @FXML
-    private TableView<PackagesManager> tableView;
-
-    @FXML
-    private TableColumn<?, ?> tableNumber,tableStatus,tableType;
-
-    @FXML
-    private TableColumn<?, ?> tableSenderName,tableSenderSurname,tableSenderCity,tableSenderPhone;
-
-    @FXML
-    private TableColumn<?, ?> tableRecipientName,tableRecipientSurname,tableRecipientCity,tableRecipientPhone;
-
-    @FXML
-    private ComboBox<String> typeDelivery;
-
-    List<PackageType> packageTypes;
-    List<main.java.entity.Packages> packages;
-    List<PackageHistory> packageHistory;
-    List<UserInfos> recipient;
-    List<UserInfos> sender;
-    List<Users> users;
-
-    ObservableList<PackagesManager> getDataPackages() {
-        ObservableList<PackagesManager> packages = FXCollections.observableArrayList();/*
-            packages.add(new PackagesManager("00000001", "W transporcie", "Duża", "Patryk",
-                    "Kosiarz","Rzeszów","111222333","Filip",
-                    "Carteloo","Nie Rzeszów","555444333"));
-
-            packages.add(new PackagesManager("00000002", "Dostarczona do odbiorcy", "Mała",
-                    "Adam", "Madam","Warszawa","123456123",
-                    "Damian","Blade","Wrocław",
-                    "444555111"));
-
-            packages.add(new PackagesManager("00000003", "Oderbana z oddziału", "Średnia",
-                    "Łukasz", "Monczall","Poznań","222999232",
-                    "Adam","Madam","Warszawa",
-                    "123456123"));
-
-            packages.add(new PackagesManager("00000004", "Odebrana od klienta", "Duża", "Damian",
-                    "Blade","Wrocław","444555111","Patryk",
-                    "Kosiarz","Rzeszów","111222333"));*/
-            return packages;
+    public static int getPackageId() {
+        return packageId;
     }
 
-    public void pomocna(){
-
-        packages = PackagesDAO.readPackages();
-
-
-        System.out.println("===================TYPY PACZEK====================");
-        packageTypes = PackageTypeDAO.getTypeInfo();
-        for(int i=0; i<packageTypes.size(); i++){
-            System.out.println("Typ paczki (id:"+packageTypes.get(i).getId()+"): "+packageTypes.get(i).getSizeName());
-        }
-
-        System.out.println("===================INFO PACZKI====================");
-
-        for(int i=0; i<packages.size(); i++){
-            System.out.println("Numer paczki (id:"+packages.get(i).getId()+"): "+packages.get(i).getPackageNumber() + "IDodbiorcy("+ packages.get(i).getUserInfoId()+")");
-        }
-
-        System.out.println("===================STATUS PACZKI====================");
-        packageHistory = PackageHistoryDAO.getHistoryForManager();
-
-        for(int i=0; i<packageHistory.size(); i++){
-            System.out.println("Status (id:"+packageHistory.get(i).getId()+"): "+packageHistory.get(i).getStatus());
-        }
-
-        System.out.println("===================NADAWCA====================");
-        for(int i=0; i<packages.size(); i++){
-            users = UsersDAO.getUsersId(packages.get(i).getUserId());
-            sender = UserInfosDAO.getUserInfoByID(users.get(0).getUserInfoId());
-
-            System.out.println("userinfoID: " + sender.get(0).getName() +" "+sender.get(0).getSurname()+" "+sender.get(0).getCity()+" "+sender.get(0).getPhoneNumber());
-        }
-
-        System.out.println("===================ODBIORCA====================");
-        for(int i=0; i<packages.size(); i++){
-            recipient = UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId());
-            System.out.println("ODBIORCA("+recipient.get(0).getId()+"): "+recipient.get(0).getName() + " " +recipient.get(0).getSurname()+ " " +recipient.get(0).getCity()+ " " +recipient.get(0).getPhoneNumber());
-        }
-
-        for(int i=0; i<packages.size(); i++){
-            PackagesManager pack = new PackagesManager();
-
-            System.out.println(packages.get(i).getPackageNumber());
-            pack.setTableNumber(packages.get(i).getPackageNumber());
-            pack.setTableStatus(PackageHistoryDAO.getStatusById(packages.get(i).getId()).get(0));
-            pack.setTableType(PackageTypeDAO.getTypeById(packages.get(i).getTypeId()).get(0));
-
-           // users = UsersDAO.getUsersId(packages.get(i).getUserId());
-            pack.setTableSenderName(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getName());
-            pack.setTableSenderSurname(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getSurname());
-            pack.setTableSenderCity(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getCity());
-            pack.setTableSenderPhone(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getPhoneNumber());
-
-            pack.setTableRecipientName(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getName());
-            pack.setTableRecipientSurname(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getSurname());
-            pack.setTableRecipientCity(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getCity());
-            pack.setTableRecipientPhone(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getPhoneNumber());
-
-            tableView.getItems().add(pack);
-        }
+    public static void setPackageId(int packageId) {
+        ManagerPackages.packageId = packageId;
     }
 
-    private ObservableList<String> statusObservable = FXCollections.observableArrayList("Odebrana od klienta","W transporcie","Dostarczona do oddziału","Oderbana z oddziału","W transporcie do innego oddziału","Dostarczona do odbiorcy");
-    private ObservableList<String> deliveryObservable = FXCollections.observableArrayList("Mała","Średnia","Duża");
+    Pane pane;
+    private final ObservableList<PackagesExtended> packages = PackagesDAO.addTable();
 
-    public void findPackages(MouseEvent mouseEvent) {
+    @FXML
+    private TableView<PackagesExtended> table;
+    @FXML
+    private TableColumn<Packages, String> packageNumber;
+    @FXML
+    private TableColumn<UserInfos, String> name;
+    @FXML
+    private TableColumn<UserInfos, String> surname;
+    @FXML
+    private TableColumn<UserInfos, String> city;
+    @FXML
+    private TableColumn<UserInfos, String> address;
+    @FXML
+    private TableColumn<UserInfos, String> telephone;
+    @FXML
+    private TableColumn<PackageHistory, String> state;
+    @FXML
+    private TableColumn<Packages, Timestamp> time;
+    @FXML
+    private TextField searchField;
 
-        if(numerPackages.getText().toString().equals("") &&
-                name.getText().toString().equals("") &&
-                surname.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, findPackageButton,"WARNING","PODAJ JAKIŚ PARAMETR");
-        }
-        else{
-            String sqlQuery ="FROM Packages WHERE package_number="+numerPackages.getText();
-            /*
-            if(!numerPackages.getText().toString().equals("")){
-                sqlQuery+="packages AND ";
-            }
-            if(!name.getText().toString().equals("")){
-                sqlQuery+="name AND ";
-            }
-            if(!surname.getText().toString().equals("")){
-                sqlQuery+="surname";
-            }
-            */
-            System.out.println("SZUKAM");
-            packages = PackagesDAO.readPackagesForManager(sqlQuery);
-            findPackages();
-        }
+    public static int getId() {
+        return id;
     }
 
-    public void findPackages(){
-        System.out.println("ZNALAZłEM "+packages.size());
-
-        for(int i=0; i<packages.size(); i++){
-            PackagesManager pack = new PackagesManager();
-
-            System.out.println(packages.get(i).getPackageNumber());
-            pack.setTableNumber(packages.get(i).getPackageNumber());
-            pack.setTableStatus(PackageHistoryDAO.getStatusById(packages.get(i).getId()).get(0));
-            pack.setTableType(PackageTypeDAO.getTypeById(packages.get(i).getTypeId()).get(0));
-
-            // users = UsersDAO.getUsersId(packages.get(i).getUserId());
-            pack.setTableSenderName(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getName());
-            pack.setTableSenderSurname(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getSurname());
-            pack.setTableSenderCity(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getCity());
-            pack.setTableSenderPhone(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getPhoneNumber());
-
-            pack.setTableRecipientName(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getName());
-            pack.setTableRecipientSurname(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getSurname());
-            pack.setTableRecipientCity(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getCity());
-            pack.setTableRecipientPhone(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getPhoneNumber());
-
-            tableView.getItems().add(pack);
-        }
+    public void setId(int id) {
+        ManagerPackages.id = id;
     }
 
-    public void setTablePackages()
+    public static String getComment() {
+        return comment;
+    }
+
+    public static void setComment(String comment) {
+        ManagerPackages.comment = comment;
+    }
+
+    public static String getStatus() {
+        return status;
+    }
+
+    public static void setStatus(String status) {
+        ManagerPackages.status = status;
+    }
+
+    public void updateTable()
     {
-
-        tableNumber.setCellValueFactory(new PropertyValueFactory<>("tableNumber"));
-        tableStatus.setCellValueFactory(new PropertyValueFactory<>("tableStatus"));
-        tableType.setCellValueFactory(new PropertyValueFactory<>("tableType"));
-        tableSenderName.setCellValueFactory(new PropertyValueFactory<>("tableSenderName"));
-        tableSenderSurname.setCellValueFactory(new PropertyValueFactory<>("tableSenderSurname"));
-        tableSenderCity.setCellValueFactory(new PropertyValueFactory<>("tableSenderCity"));
-        tableSenderPhone.setCellValueFactory(new PropertyValueFactory<>("tableSenderPhone"));
-        tableRecipientName.setCellValueFactory(new PropertyValueFactory<>("tableRecipientName"));
-        tableRecipientSurname.setCellValueFactory(new PropertyValueFactory<>("tableRecipientSurname"));
-        tableRecipientCity.setCellValueFactory(new PropertyValueFactory<>("tableRecipientCity"));
-        tableRecipientPhone.setCellValueFactory(new PropertyValueFactory<>("tableRecipientPhone"));
-        tableView.setItems(getDataPackages());
+        table.getItems().clear();
+        table.setItems(PackagesDAO.addTable());
     }
-
+    TableRowExpanderColumn<PackagesExtended> expanderRow = new TableRowExpanderColumn<PackagesExtended>(this::createEditor);
 
     @Override
-    public void initialize(URL url, ResourceBundle rb){
-        tableView.setPlaceholder(new Label("Brak danych"));
+    public void initialize(URL url, ResourceBundle rb) {
+        table.setPlaceholder(new Label("Brak danych"));
 
-        status.setItems(statusObservable);
-        typeDelivery.setItems(deliveryObservable);
+        packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
+        time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
+        state.setCellValueFactory(new PropertyValueFactory<>("status"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        city.setCellValueFactory(new PropertyValueFactory<>("city"));
+        address.setCellValueFactory(new PropertyValueFactory<>("streetAndNumber"));
+        telephone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        table.getColumns().add(expanderRow);
+        updateTable();
+        table.getSelectionModel().select(0);
+    }
 
-        tableView.setEditable(true);
+    @FXML
+    void search(KeyEvent event) {
+        table.getItems().clear();
+        String searchedWord = searchField.getText().toLowerCase();
+        for (int i = 0; i < packages.size(); i++) {
+            if (packages.get(i).getPackageNumber().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getName().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getSurname().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getCity().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getStreetAndNumber().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getPhoneNumber().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getStatus().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getTimeOfPlannedDelivery().toLowerCase().contains(searchedWord)) {
+                table.getItems().add(packages.get(i));
+            }
+        }
+    }
 
-        setTablePackages();
+    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesExtended> arg) {
+        try {
+            table.getSelectionModel().select(arg.getTableRow().getIndex());
+            setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());
+            setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
+            setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
+            setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
+            pane = FXMLLoader.load(getClass().getResource("../../../resources/view/manager/expandableRow.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        arg.isExpanded();
 
-        pomocna();
+        for (int i = 0; i < table.getItems().size(); i++)
+        {
+            if(expanderRow.getExpandedProperty(table.getItems().get(i)).getValue() &&
+                    arg.getTableRow().getIndex() != i)
+            {
+                expanderRow.toggleExpanded(i);
+            }
+        }
 
+//        for (PackagesExtended ent : table.getItems()
+//             ) {
+//            if(expanderRow.getExpandedProperty(ent).getValue() == true){
+//                expanderRow.toggleExpanded(i);
+//            }
+//            i++;
+//        }
+
+
+        return pane;
     }
 }
