@@ -51,6 +51,7 @@ public class PackagesDAO {
             packages.add(ent);
         }
         session.close();
+
         return packages;
     }
 

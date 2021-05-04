@@ -1,29 +1,26 @@
 package main.java.controllers.manager;
 
-import com.sun.xml.bind.v2.runtime.reflect.Lister;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Tuple;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ManagerPackages implements Initializable {
@@ -42,6 +39,7 @@ public class ManagerPackages implements Initializable {
     }
 
     Pane pane;
+
     private final ObservableList<PackagesDTO> packages = PackagesDAO.addTable();
 
     @FXML
@@ -111,6 +109,7 @@ public class ManagerPackages implements Initializable {
         table.getColumns().add(expanderRow);
         updateTable();
         table.getSelectionModel().select(0);
+        System.out.println(PackagesDAO.addTable().get(0).getStatus());
     }
 
     @FXML

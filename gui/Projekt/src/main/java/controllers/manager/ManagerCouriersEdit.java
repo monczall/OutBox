@@ -89,28 +89,7 @@ public class ManagerCouriersEdit implements Initializable {
             Alerts.createAlert(appWindow, findCourierButton, "WARNING", "Podaj imie i nazwisko!");
         }else{
             dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
-
-            if(dataUserInfos.size() > 1)
-            {
-                setDataEdit();
-                dataPane.setVisible(true);
-                button1.setVisible(true);
-                button2.setVisible(true);
-                notDataLabel.setVisible(false);
-            }
-            else if(dataUserInfos.size() == 1)
-            {
-                setDataEdit();
-                button1.setVisible(false);
-                button2.setVisible(false);
-                dataPane.setVisible(true);
-                notDataLabel.setVisible(false);
-            }
-            else{
-                System.out.println("NIE");
-                dataPane.setVisible(false);
-                notDataLabel.setVisible(true);
-            }
+            setDataEdit();
         }
     }
 
@@ -163,7 +142,8 @@ public class ManagerCouriersEdit implements Initializable {
                 status = false;
                 System.out.println("Miasto niepoprawne");
             }
-            if (streetInput.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
+            if (streetInput.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\" +
+                    "s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
             {
                 System.out.println("Ulica poprawna");
             }
@@ -192,7 +172,8 @@ public class ManagerCouriersEdit implements Initializable {
             if (!status) {
                 Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING", "POPRAW POLA");
             }else{
-                System.out.println(dataUser.get(0).getPassword()+" "+dataUser.get(0).getAreaId()+" "+dataUser.get(0).getUserInfoId());
+                System.out.println(dataUser.get(0).getPassword()+" " +
+                        ""+dataUser.get(0).getAreaId()+" "+dataUser.get(0).getUserInfoId());
                 UserInfosDAO.updateUser(dataUserInfos.get(dataIndex).getId(), dataUser.get(0).getId(),
                         nameInput.getText(), surnameInput.getText(), inputNumber.getText(), cityInput.getText(),
                         streetInput.getText(), inputVoivodeship.getText(), inputEmail.getText(),
@@ -208,7 +189,8 @@ public class ManagerCouriersEdit implements Initializable {
     }
 
     public void setDataEdit(){
-        System.out.println("DataIndex: " + dataIndex + " DataUserInfosSize: "+dataUserInfos.size() + " DataUserInfosGetId: "+dataUserInfos.get(dataIndex).getId());
+        System.out.println("DataIndex: " + dataIndex + " DataUserInfosSize: "+dataUserInfos.size() +
+                " DataUserInfosGetId: "+dataUserInfos.get(dataIndex).getId());
         System.out.println("ZMIENIAM NA KOLEJNE ID INDEX("+dataIndex+") = " +dataUserInfos.get(dataIndex).getId());
         dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
         System.out.println("DataUserSIZSE: " + dataUser.size() + " DataUserID: " + dataUser.get(0).getId());
@@ -220,6 +202,27 @@ public class ManagerCouriersEdit implements Initializable {
         streetInput.setText(dataUserInfos.get(dataIndex).getStreetAndNumber());
         inputVoivodeship.setText(dataUserInfos.get(dataIndex).getVoivodeship());
         inputEmail.setText(dataUser.get(0).getEmail());
+        String role = dataUser.get(0).getRole();
+
+        if(dataUserInfos.size() > 1 && (role.equals("Kurier")))
+        {
+            dataPane.setVisible(true);
+            button1.setVisible(true);
+            button2.setVisible(true);
+            notDataLabel.setVisible(false);
+        }
+        else if(dataUserInfos.size() == 1 && (role.equals("Kurier")))
+        {
+            button1.setVisible(false);
+            button2.setVisible(false);
+            dataPane.setVisible(true);
+            notDataLabel.setVisible(false);
+        }
+        else{
+            System.out.println("NIE");
+            dataPane.setVisible(false);
+            notDataLabel.setVisible(true);
+        }
     }
 
     @FXML
