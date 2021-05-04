@@ -88,8 +88,6 @@ public class UserInfosDAO {
 
         session.getTransaction().commit();
         session.close();
-
-        session.close();
     }
 
     static public void updateUser(int userInfoId, int userId, String name, String surname, String number,
@@ -152,4 +150,5 @@ public class UserInfosDAO {
 
         session.close();
     }
+
 }

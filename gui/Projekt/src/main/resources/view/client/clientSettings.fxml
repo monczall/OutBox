@@ -85,7 +85,7 @@
                </graphic>
             </Button>
             <Label alignment="TOP_LEFT" layoutY="20.0" prefHeight="25.0" prefWidth="293.0" styleClass="alertText" text="%clientDeleteAccount" />
-            <CustomPasswordField layoutX="61.0" layoutY="53.0" promptText="%clientPassword" styleClass="inputBox" />
+            <CustomPasswordField fx:id="deletePassword" layoutX="61.0" layoutY="53.0" promptText="%clientPassword" styleClass="inputBox" />
          </children>
       </Pane>
    </children>

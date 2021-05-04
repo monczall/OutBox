@@ -56,5 +56,6 @@ public class PackageTypeDAO {
         session.update(packageType);
 
         session.getTransaction().commit();
+        session.close();
 	}
 }

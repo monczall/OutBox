@@ -84,6 +84,10 @@ public class ClientSettings implements Initializable {
     @FXML
     private AnchorPane window;
 
+    @FXML
+    private CustomPasswordField deletePassword;
+
+
 
     //List of colors for combobox
     private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony",
@@ -220,6 +224,8 @@ public class ClientSettings implements Initializable {
                     || !inputs[2].equals(settProvince.getSelectionModel().getSelectedItem())
                     || !inputs[3].equals(settNumber.getText()) || !settPassword.getText().isEmpty()) {
 
+
+
                 UserInfosDAO.updateUserSettings(settPassword.getText(),
                         settProvince.getSelectionModel().getSelectedItem(),settCity.getText(),
                         settNumber.getText(),settStreet.getText(),1);
@@ -241,7 +247,11 @@ public class ClientSettings implements Initializable {
     }
 
     public void actionYes(ActionEvent actionEvent) {
-        SceneManager.renderScene("login");
+        if(UsersDAO.deleteAccount(deletePassword.getText(),1)){
+            UserInfosDAO.deleteUser(1);
+            SceneManager.renderScene("login");
+        }
+//        else
     }
 
     public void actionNo(ActionEvent actionEvent) {

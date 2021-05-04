@@ -1,5 +1,6 @@
 package main.java.dao;
 
+import main.java.controllers.auth.Encryption;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
 import org.hibernate.Session;
@@ -30,14 +31,6 @@ public class UsersDAO {
         return listOfUsers;
     }
 
-    static public String readPassword(int userId){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query=session.createQuery("SELECT password from Users WHERE id = :id");
-        query.setParameter("id",userId);
-
-        return String.valueOf(query.list().get(0));
-    }
-
     static public void updatePassword(int userId, String newPassword){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -63,6 +56,26 @@ public class UsersDAO {
         List<UserInfos> user = query.list();
 
         return user;
+    }
+
+    static public boolean deleteAccount(String password, int id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query=session.createQuery("SELECT password from Users WHERE password = :password AND id = :id");
+        query.setParameter("password", Encryption.encrypt(password));
+        query.setParameter("id", id);
+
+        Query query1 = session.createQuery("SELECT PH.status FROM PackageHistory PH, Users U, Packages P " +
+                "WHERE U.id = :id AND PH.packageId = P.id AND U.id = P.userId AND PH.status = " +
+                "(SELECT PH.status FROM PackageHistory PH WHERE PH.id = (SELECT MAX(PH.id) " +
+                "FROM PackageHistory PH WHERE PH.packageId = P.id )) AND " +
+                "NOT PH.status = 'Dostarczona' AND NOT PH.status = 'Zwrócona Do Nadawcy' GROUP BY PH.packageId");
+
+        query1.setParameter("id", id);
+
+        if(query.list().size() == 0 || query1.list().size() != 0)
+            return false;
+
+        return true;
     }
 
 }
