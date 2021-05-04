@@ -72,6 +72,7 @@ public class PackageType {
         return id == that.id && Objects.equals(sizeName, that.sizeName) && Objects.equals(size, that.size) && Objects.equals(weight, that.weight) && Objects.equals(price, that.price);
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(id, sizeName, size, weight, price);

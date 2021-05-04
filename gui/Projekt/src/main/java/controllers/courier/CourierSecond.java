@@ -1,29 +1,22 @@
 package main.java.controllers.courier;
 
-import com.sun.xml.bind.v2.runtime.reflect.Lister;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Tuple;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CourierSecond implements Initializable {
@@ -42,9 +35,10 @@ public class CourierSecond implements Initializable {
     }
 
     Pane pane;
-    private final ObservableList<PackagesExtended> packages = PackagesDAO.addTable();
+    private final ObservableList<PackagesDTO> packages = PackagesDAO.addTable();
+
     @FXML
-    private TableView<PackagesExtended> table;
+    private TableView<PackagesDTO> table;
     @FXML
     private TableColumn<Packages, String> packageNumber;
     @FXML
@@ -80,9 +74,24 @@ public class CourierSecond implements Initializable {
         CourierSecond.comment = comment;
     }
 
+    public static String getStatus() {
+        return status;
+    }
+
+    public static void setStatus(String status) {
+        CourierSecond.status = status;
+    }
+
+    public void updateTable()
+    {
+        table.getItems().clear();
+        table.setItems(PackagesDAO.addTable());
+    }
+    TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TableRowExpanderColumn<PackagesExtended> expanderRow = new TableRowExpanderColumn<PackagesExtended>(this::createEditor);
+
 
         packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
@@ -93,9 +102,11 @@ public class CourierSecond implements Initializable {
         address.setCellValueFactory(new PropertyValueFactory<>("streetAndNumber"));
         telephone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         table.getColumns().add(expanderRow);
-        table.setItems(PackagesDAO.addTable());
+        updateTable();
         table.getSelectionModel().select(0);
+
     }
+
 
     @FXML
     void search(KeyEvent event) {
@@ -115,16 +126,37 @@ public class CourierSecond implements Initializable {
         }
     }
 
-    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesExtended> arg) {
+    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
             table.getSelectionModel().select(arg.getTableRow().getIndex());
             setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());
             setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
             setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
+            setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        arg.isExpanded();
+
+        for (int i = 0; i < table.getItems().size(); i++)
+        {
+            if(expanderRow.getExpandedProperty(table.getItems().get(i)).getValue() &&
+            arg.getTableRow().getIndex() != i)
+            {
+                expanderRow.toggleExpanded(i);
+            }
+        }
+
+//        for (PackagesExtended ent : table.getItems()
+//             ) {
+//            if(expanderRow.getExpandedProperty(ent).getValue() == true){
+//                expanderRow.toggleExpanded(i);
+//            }
+//            i++;
+//        }
+
+
         return pane;
     }
 }

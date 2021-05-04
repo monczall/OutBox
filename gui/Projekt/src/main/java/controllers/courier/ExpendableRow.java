@@ -4,10 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import main.java.SceneManager;
+import main.java.controllers.client.PackageItem;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.dao.UserInfosDAO;
@@ -15,13 +19,17 @@ import main.java.dao.UsersDAO;
 import main.java.entity.PackageStatus;
 import main.java.entity.UserInfos;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.stream.IntStream;
 
 public class ExpendableRow implements Initializable {
+
+    String status = CourierSecond.getStatus();
 
     @FXML
     private Text name;
@@ -58,21 +66,23 @@ public class ExpendableRow implements Initializable {
         address.setText(ui.getStreetAndNumber());
         comments.setText(CourierSecond.getComment());
 
-        //changeStatus.getItems().add(PackageStatus.values()));
-        //System.out.println(PackageStatus.values().toString());
-        //System.out.println(FXCollections.observableArrayList(PackageHistoryDAO.getStatuses()));
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
         ol.remove(0);
         changeStatus.setItems(ol);
-        changeStatus.getSelectionModel().select(5);
 
+        IntStream.range(0, ol.size()).filter(i -> ol.get(i).toString().contains(status)).findFirst().
+                ifPresent(i -> changeStatus.getSelectionModel().select(i));
     }
 
     @FXML
-    void updateStatus(ActionEvent event) {
+    void updateStatus(ActionEvent event) throws IOException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), changeStatus.getValue().toString(),
-                Timestamp.valueOf(dateTimeFormatter.format(now)));
+        if(changeStatus.getSelectionModel().getSelectedIndex() != -1){
+            if (!changeStatus.getValue().toString().equals(status)){
+                PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), changeStatus.getValue().toString(),
+                        Timestamp.valueOf(dateTimeFormatter.format(now)));
+            }
+        }
     }
 }
