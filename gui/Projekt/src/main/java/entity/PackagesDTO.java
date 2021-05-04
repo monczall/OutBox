@@ -1,6 +1,6 @@
 package main.java.entity;
 
-public class PackagesExtended {
+public class PackagesDTO {
 
     private int userInfosId;
     private int packagesId;
@@ -14,9 +14,9 @@ public class PackagesExtended {
     private String status;
     private String additionalComment;
 
-    public PackagesExtended(int userInfosId, int packagesId, String packageNumber, String timeOfPlannedDelivery,
-                            String name, String surname, String phoneNumber, String streetAndNumber, String city,
-                            String status, String additionalComment) {
+    public PackagesDTO(int userInfosId, int packagesId, String packageNumber, String timeOfPlannedDelivery,
+                       String name, String surname, String phoneNumber, String streetAndNumber, String city,
+                       String status, String additionalComment) {
         this.userInfosId = userInfosId;
         this.packagesId = packagesId;
         this.packageNumber = packageNumber;

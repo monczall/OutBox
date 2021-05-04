@@ -1,6 +1,7 @@
 package main.java.entity;
 
 public class UsersDTO {
+
     private int userID;
     private String name;
     private String surname;

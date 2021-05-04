@@ -1,13 +1,11 @@
 package main.java.controllers.courier;
 
-import com.sun.xml.bind.v2.runtime.reflect.Lister;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -15,18 +13,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Tuple;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CourierSecond implements Initializable {
@@ -45,10 +38,11 @@ public class CourierSecond implements Initializable {
     }
 
     Pane pane;
-    private final ObservableList<PackagesExtended> packages = PackagesDAO.addTable();
+
+    private final ObservableList<PackagesDTO> packages = PackagesDAO.addTable();
 
     @FXML
-    private TableView<PackagesExtended> table;
+    private TableView<PackagesDTO> table;
     @FXML
     private TableColumn<Packages, String> packageNumber;
     @FXML
@@ -97,7 +91,7 @@ public class CourierSecond implements Initializable {
         table.getItems().clear();
         table.setItems(PackagesDAO.addTable());
     }
-    TableRowExpanderColumn<PackagesExtended> expanderRow = new TableRowExpanderColumn<PackagesExtended>(this::createEditor);
+    TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -114,7 +108,9 @@ public class CourierSecond implements Initializable {
         table.getColumns().add(expanderRow);
         updateTable();
         table.getSelectionModel().select(0);
+
     }
+
 
     @FXML
     void search(KeyEvent event) {
@@ -134,7 +130,7 @@ public class CourierSecond implements Initializable {
         }
     }
 
-    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesExtended> arg) {
+    private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
             table.getSelectionModel().select(arg.getTableRow().getIndex());
             setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());

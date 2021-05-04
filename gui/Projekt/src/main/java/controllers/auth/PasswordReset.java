@@ -184,14 +184,14 @@ public class PasswordReset {
             } else {
                 errorOnEmail();
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetSetNewPasswordButton, "WARNING",
+                        passwordResetExitButtonButton, "WARNING",
                         App.getLanguageProperties("authNoEmailUserFoundAlert"),
                         350, 86, "alertFailure");
             }
         } else {
             errorOnEmail();
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetSetNewPasswordButton, "WARNING",
+                    passwordResetExitButtonButton, "WARNING",
                     App.getLanguageProperties("authWrongEmailFormatAlert"),
                     350, 86, "alertFailure");
         }
@@ -282,7 +282,7 @@ public class PasswordReset {
     public void verifyCode() {
         if (passwordResetVerificationCodeField.getText().equals(verificationCode)) {
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetSetNewPasswordButton, "CHECK",
+                    passwordResetExitButtonButton, "CHECK",
                     App.getLanguageProperties(
                             "authVerificationSuccessfulAlert"),
                     293, 86, "alertSuccess");
@@ -314,7 +314,7 @@ public class PasswordReset {
         } else {
             errorOnVerificationCode();
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetSetNewPasswordButton, "WARNING",
+                    passwordResetExitButtonButton, "WARNING",
                     App.getLanguageProperties(
                             "authVerificationCodeInvalidAlert"),
                     293, 86, "alertFailure");
@@ -370,14 +370,14 @@ public class PasswordReset {
         } else if (error == 1) {
             if (passwordError) {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetSetNewPasswordButton, "WARNING",
+                        passwordResetExitButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongPasswordFormatAlert"),
                         350, 86, "alertFailure");
             }
             if (passwordNotTheSameError) {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetSetNewPasswordButton, "WARNING",
+                        passwordResetExitButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authPasswordsNotTheSameAlert"),
                         350, 86, "alertFailure");
@@ -386,7 +386,7 @@ public class PasswordReset {
         } else {
 
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetSetNewPasswordButton, "WARNING",
+                    passwordResetExitButtonButton, "WARNING",
                     App.getLanguageProperties(
                             "authErrorsOnTextFieldsAlert"),
                     350, 86, "alertFailure");

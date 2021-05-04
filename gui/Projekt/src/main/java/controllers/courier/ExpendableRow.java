@@ -4,15 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
-import main.java.SceneManager;
 import main.java.dao.PackageHistoryDAO;
-import main.java.dao.PackagesDAO;
-import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.PackageStatus;
 import main.java.entity.UserInfos;
@@ -73,11 +69,11 @@ public class ExpendableRow implements Initializable {
     }
 
     @FXML
-    void updateStatus(ActionEvent event) {
+    void updateStatus(ActionEvent event) throws IOException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        if(changeStatus.getSelectionModel().getSelectedIndex() != -1){
-            if (!changeStatus.getValue().toString().equals(status)){
+        if (changeStatus.getSelectionModel().getSelectedIndex() != -1) {
+            if (!changeStatus.getValue().toString().equals(status)) {
                 PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), changeStatus.getValue().toString(),
                         Timestamp.valueOf(dateTimeFormatter.format(now)));
             }
