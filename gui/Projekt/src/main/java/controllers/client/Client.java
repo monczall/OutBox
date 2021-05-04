@@ -57,8 +57,8 @@ public class Client implements Initializable {
     alertPane.setTranslateY(-500);
     paneRight.setTranslateX(-200);
 
-
-    hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
+    // If hamburger button is clicked then menu slides in and transition last for 0.5s
+    hamburger.setOnMouseClicked(event -> {
         if(hamburgerClicked == false) {
 
             hamburger.setDisable(true);

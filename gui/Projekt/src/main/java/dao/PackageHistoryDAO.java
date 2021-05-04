@@ -63,12 +63,22 @@ public class PackageHistoryDAO {
 
     static public List<String> getStatusById(int packageId){
         Session session = HibernateUtil.getSessionFactory().openSession();
-
         Query query=session.createQuery("SELECT status from PackageHistory WHERE packageId = :packageId");
 
         query.setParameter("packageId",packageId);
 
         List<String> statuses = query.list();
+
+        return  statuses;
+    }
+
+    static public List<PackageHistory> getDateAndStatusById(int packageId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query=session.createQuery("from PackageHistory WHERE packageId = :packageId ORDER BY date ASC");
+
+        query.setParameter("packageId",packageId);
+
+        List<PackageHistory> statuses = query.list();
 
         return  statuses;
     }

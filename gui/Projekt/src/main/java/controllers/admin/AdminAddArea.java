@@ -9,6 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.SceneManager;
+import main.java.dao.AreasDAO;
+import main.java.dao.PackageTypeDAO;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,9 +48,12 @@ public class AdminAddArea {
 
     public void register(){
         if(!isEmpty()){
+
             if(isValid(registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText(), registerAreaName.getText())){
                 //POMYSLNE DODANIE OBSZARU
+                AreasDAO.insertAreas(registerAreaName.getText(), registerVoivodeshipField.getText(), registerCityField.getText(), registerStreetField.getText());
                 System.out.println("Dodano obszar");
+
             }else{
                 //SPRAWDZENIE BLEDOW
 

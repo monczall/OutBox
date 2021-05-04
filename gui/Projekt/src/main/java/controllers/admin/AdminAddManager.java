@@ -15,6 +15,9 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.App;
 import main.java.SceneManager;
+import main.java.controllers.auth.Encryption;
+import main.java.dao.AreasDAO;
+import main.java.dao.UserInfosDAO;
 import main.java.features.Alerts;
 
 import java.net.URL;
@@ -104,6 +107,7 @@ public class AdminAddManager implements Initializable {
                 if(isPhoneNumber(registerPhoneNumberField.getText())){
                     if(isEmail(registerEmailAddressField.getText())){
                         //POMYSLNIE DODANE
+                        UserInfosDAO.addUserInfo(registerFirstNameField.getText(), registerLastNameField.getText(), registerEmailAddressField.getText(), registerPhoneNumberField.getText(), registerStreetField.getText(), registerCityField.getText(),  registerVoivodeshipField.getText(), Encryption.encrypt(registerPasswordField.getText()), "Menadżer" );
                         System.out.println("Dodano kierownika");
                     }else{
                         errorOnEmailAddress();
@@ -461,8 +465,7 @@ public class AdminAddManager implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        registerAreaChoiceBox.setItems(FXCollections.observableArrayList(
-                "First", "Second", "Third"));
+        registerAreaChoiceBox.setItems(AreasDAO.getAreasName());
     }
 
 

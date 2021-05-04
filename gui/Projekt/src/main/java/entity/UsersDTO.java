@@ -1,6 +1,8 @@
 package main.java.entity;
 
 public class UsersDTO {
+
+    private int userID;
     private String name;
     private String surname;
     private String phoneNumber;
@@ -11,6 +13,15 @@ public class UsersDTO {
     private String areaName;
 
     public UsersDTO(String name, String surname, String phoneNumber, String city, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.email = email;
+    }
+
+    public UsersDTO(int userID, String name, String surname, String phoneNumber, String city, String email) {
+        this.userID = userID;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
@@ -48,5 +59,9 @@ public class UsersDTO {
 
     public String getAreaName() {
         return areaName;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 }

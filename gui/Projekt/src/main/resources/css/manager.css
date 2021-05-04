@@ -28,6 +28,13 @@
     -fx-font-weight: bold;
 }
 
+.textLabelSmall{
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffa500;
+    -fx-fill: #ffa500;
+    -fx-font-weight: bold;
+}
+
 /* All buttons CSS */
 .homeBlock{
     -fx-background-color: #ffa500;
@@ -63,6 +70,10 @@
     -fx-border-color: #ffa500;
     -fx-fill: #ffa500;
     -fx-cursor: hand;
+}
+
+.table-column {
+    -fx-alignment: TOP-CENTER;
 }
 
 /* All input CSS */
@@ -227,16 +238,9 @@
     -fx-cursor: hand;
 }
 
-
-/*-------- TableView --------*/
-
-.tableview{
-    -fx-border-color: transparent;
+.table-view{
     -fx-background-color: transparent;
-}
-
-.table-view .column-header-background .filler {
-    -fx-background-color: transparent;
+    -fx-selection-bar-non-focused: derive(#111, 00%);
 }
 
 .tableview .placeholder .label {
@@ -246,28 +250,19 @@
     -fx-text-fill: #ffa500;
 }
 
-.table-view .column-header {
-    -fx-border-color: black;
-    -fx-background-color: #ffa500;
-    -fx-border-width: 0.5px;
-}
-
-.table-view .column-header-background{
-    -fx-background-color: black;
-}
-
-.table-view .column-header-background .label{
+.table-view .column-header .label{
     -fx-background-color: transparent;
-    -fx-font-weight:bold;
-    -fx-text-fill: black;
 }
 
-.table-view .table-column{
-    -fx-alignment:center;
-}
-
-/*-------------TableColumn-----------------------*/
 .table-view .table-cell{
+    -fx-text-fill: #c0c0c0;
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.expandableRow{
     -fx-text-fill: silver;
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
@@ -275,20 +270,70 @@
     -fx-font-size: 14px;
 }
 
-.table-row-cell:odd{
-    -fx-background-color: #1e1e1e;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em;
+.tableview .placeholder .label {
+    -fx-text-fill: linen;
+    -fx-font-size: 1.666em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffa500;
 }
-.table-row-cell:even{
-    -fx-background-color: #292929;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em;
-}
-.table-row-cell:hover{
-    -fx-text-fill: red;
-    -fx-background-color: #393939;
 
+.table-row-cell:even{
+    -fx-table-cell-border-color: transparent;
+    -fx-control-inner-background: derive(#111, 23%);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:odd{
+    -fx-table-cell-border-color: transparent;
+    -fx-control-inner-background: derive(#111, 0%);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:odd:filled:selected {
+    -fx-background-color: derive(#111, 0%);
+    -fx-border-color: -fx-main-color;
+}
+
+.table-row-cell:even:filled:selected {
+    -fx-background-color: derive(#111, 23%);
+    -fx-border-color: -fx-main-color;
+}
+
+.table-row-cell:hover {
+    /* Tutaj bedzie hover na tabeli */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #171717;
+    -fx-background-color: -fx-main-color;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: -fx-main-color;
+}
+
+.table-view .table-row-cell:odd, .table-view .table-row-cell:even{
+    -fx-alignment: center;
+}
+.label{
+    -fx-text-fill: -fx-main-color;
+    -fx-font-weight: bold;
+}
+.table-column {
+    -fx-alignment: TOP-CENTER;
+}
+.button{
+    -fx-base: -fx-main-color;
+    -fx-font-weight: bold;
 }
 /*-------------STYLING TOGGLE SWITCH-------------*/
 .toggleSwitch .thumb{
@@ -305,15 +350,6 @@
     -fx-background-color: -fx-main-color;
     -fx-effect: dropshadow(three-pass-box, -fx-main-color, 10, 0, 0, 0);
 }
-
-/*-------- Home --------*/
-
-
-/*-------- Couriers --------*/
-
-
-/*-------- Packages --------*/
-
 
 /*-------- Raports --------*/
 

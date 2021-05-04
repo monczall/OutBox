@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import main.java.controllers.courier.Courier;
-import main.java.preferences.Preference;
+import main.java.features.Preference;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.ResourceBundle;
