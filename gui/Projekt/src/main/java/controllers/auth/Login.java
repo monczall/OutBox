@@ -15,6 +15,7 @@ import main.java.App;
 import main.java.SceneManager;
 import main.java.entity.Users;
 import main.java.features.Alerts;
+import main.java.features.Preference;
 
 import java.net.URL;
 import java.util.List;
@@ -28,6 +29,12 @@ public class Login implements Initializable {
 
     @FXML
     private ImageView loginLogoImageView;
+
+    @FXML
+    private ImageView loginPolishImageView;
+
+    @FXML
+    private ImageView loginEnglishImageView;
 
     @FXML
     private AnchorPane loginRightPaneAnchorPane;
@@ -55,8 +62,17 @@ public class Login implements Initializable {
 
     public static int userID;
     public static int userInfoID;
+    private static Preference pref = new Preference();
 
     public void initialize(URL url, ResourceBundle rb) {
+        if(pref.readPreference("language").equals("english")) {
+            loginPolishImageView.setDisable(false);
+            loginEnglishImageView.setDisable(true);
+        }else {
+            loginPolishImageView.setDisable(true);
+            loginEnglishImageView.setDisable(false);
+        }
+
         if (App.isConnectionError()) {
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
                     loginCreateAccountButton, "WARNING",
@@ -271,5 +287,15 @@ public class Login implements Initializable {
 
     public static void setUserInfoID(int userInfoID) {
         Login.userInfoID = userInfoID;
+    }
+
+    public void setPolishLanguage(MouseEvent mouseEvent) {
+        pref.addPreference("language","polish");
+        SceneManager.renderScene("login");
+    }
+
+    public void setEnglishLanguage(MouseEvent mouseEvent) {
+        pref.addPreference("language","english");
+        SceneManager.renderScene("login");
     }
 }

@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
@@ -87,6 +88,24 @@
                         layoutX="14.0" layoutY="611.0" mnemonicParsing="false"
                         onAction="#handleExit" styleClass="exitButton"
                         text="%authExit"/>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE"
+                           height="70.0" layoutX="255.0" layoutY="572.0"
+                           stroke="BLACK" strokeType="INSIDE"
+                           styleClass="primaryBackgroundFill" width="70.0"/>
+                <ImageView fx:id="loginPolishImageView" disable="true"
+                           fitHeight="25.0" fitWidth="50.0" layoutX="265.0"
+                           layoutY="579.0" onMouseClicked="#setPolishLanguage">
+                    <image>
+                        <Image url="@../../images/pl.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fx:id="loginEnglishImageView" disable="true"
+                           fitHeight="25.0" fitWidth="50.0" layoutX="265.0"
+                           layoutY="611.0" onMouseClicked="#setEnglishLanguage">
+                    <image>
+                        <Image url="@../../images/en.png"/>
+                    </image>
+                </ImageView>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="loginRightPaneAnchorPane" maxHeight="650.0"

@@ -21,6 +21,9 @@
 .secondaryBackground{
     -fx-background-color: -fx-theme-color;
 }
+.primaryBackgroundFill{
+    -fx-fill: -fx-dark-bg;
+}
 /*-------------FILLS-------------*/
 .fill{
     -fx-fill: -fx-theme-color;
