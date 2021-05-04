@@ -11,7 +11,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import main.java.App;
 import main.java.SceneManager;
+import main.java.features.Alerts;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,6 +81,12 @@ public class AdminEdit implements Initializable {
     @FXML
     private ChoiceBox editRoleChoiceBox;
 
+    @FXML
+    private AnchorPane RightPaneAnchorPane;
+
+    @FXML
+    private Button editEditButtonButton;
+
 
     public void edit(){
         if(!isEmpty()){
@@ -91,12 +99,8 @@ public class AdminEdit implements Initializable {
                     }else{
                         errorOnEmailAddress();
 
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Niepoprawny email");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Niepoprawny format danych! Podany E-Mail nie jest prawidłowy.");
-
-                        alert.showAndWait();
+                        Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"WARNING",
+                                App.getLanguageProperties("adminInvalidEmail"), 560, 86, "alertFailure");
                     }
                 }else{
                     errorOnPhoneNumber();
@@ -442,7 +446,7 @@ public class AdminEdit implements Initializable {
 
 
     public void back(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", edit);
+        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", RightPaneAnchorPane);
     }
 
     public void deleteEmployee(MouseEvent mouseEvent) {

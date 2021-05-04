@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="edit" prefHeight="672.0" prefWidth="1033.0" styleClass="darkBackGround" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminEdit">
+<AnchorPane fx:id="RightPaneAnchorPane" prefHeight="672.0" prefWidth="1033.0" styleClass="darkBackGround" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminEdit">
     <children>
         <Text layoutX="225.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminEditEmployeeUp" />
         <FontAwesomeIconView fill="ORANGE" glyphName="USERS" layoutX="176.0" layoutY="81.0" size="40" styleClass="partIcon" />
@@ -43,7 +43,7 @@
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editEmailAddressField" layoutX="196.0" layoutY="395.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnEmailAddress" prefHeight="35.0" prefWidth="250.0"  promptText="%adminEgMail" styleClass="textFields" />
+        <TextField fx:id="editEmailAddressField" layoutX="196.0" layoutY="395.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnEmailAddress" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgMail" styleClass="textFields" />
         <Circle fx:id="editEmailAddressCircle" fill="ORANGE" layoutX="196.0" layoutY="410.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="636.0" layoutY="135.0" styleClass="lightText" text="%adminStreet">
             <font>
@@ -57,7 +57,7 @@
                 <Font size="16.0" />
             </font>
         </Label>
-        <TextField fx:id="editCityField" layoutX="613.0" layoutY="235.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0"  promptText="%adminEgCity" styleClass="textFields" />
+        <TextField fx:id="editCityField" layoutX="613.0" layoutY="235.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleeditOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgCity" styleClass="textFields" />
         <Circle fx:id="editCityCircle" fill="ORANGE" layoutX="613.0" layoutY="253.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
         <Label layoutX="636.0" layoutY="295.0" styleClass="lightText" text="%adminVoivodeship">
             <font>
