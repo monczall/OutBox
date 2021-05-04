@@ -2,6 +2,8 @@ package main.java.controllers.courier;
 
 import com.sun.xml.bind.v2.runtime.reflect.Lister;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
@@ -31,6 +34,7 @@ public class CourierSecond implements Initializable {
     private static int id;
     private static String comment;
     private static int packageId;
+    private static String status;
 
     public static int getPackageId() {
         return packageId;
@@ -42,6 +46,7 @@ public class CourierSecond implements Initializable {
 
     Pane pane;
     private final ObservableList<PackagesExtended> packages = PackagesDAO.addTable();
+
     @FXML
     private TableView<PackagesExtended> table;
     @FXML
@@ -79,9 +84,24 @@ public class CourierSecond implements Initializable {
         CourierSecond.comment = comment;
     }
 
+    public static String getStatus() {
+        return status;
+    }
+
+    public static void setStatus(String status) {
+        CourierSecond.status = status;
+    }
+
+    public void updateTable()
+    {
+        table.getItems().clear();
+        table.setItems(PackagesDAO.addTable());
+    }
+    TableRowExpanderColumn<PackagesExtended> expanderRow = new TableRowExpanderColumn<PackagesExtended>(this::createEditor);
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TableRowExpanderColumn<PackagesExtended> expanderRow = new TableRowExpanderColumn<PackagesExtended>(this::createEditor);
+
 
         packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
@@ -92,7 +112,7 @@ public class CourierSecond implements Initializable {
         address.setCellValueFactory(new PropertyValueFactory<>("streetAndNumber"));
         telephone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         table.getColumns().add(expanderRow);
-        table.setItems(PackagesDAO.addTable());
+        updateTable();
         table.getSelectionModel().select(0);
     }
 
@@ -120,10 +140,31 @@ public class CourierSecond implements Initializable {
             setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());
             setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
             setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
+            setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        arg.isExpanded();
+
+        for (int i = 0; i < table.getItems().size(); i++)
+        {
+            if(expanderRow.getExpandedProperty(table.getItems().get(i)).getValue() &&
+            arg.getTableRow().getIndex() != i)
+            {
+                expanderRow.toggleExpanded(i);
+            }
+        }
+
+//        for (PackagesExtended ent : table.getItems()
+//             ) {
+//            if(expanderRow.getExpandedProperty(ent).getValue() == true){
+//                expanderRow.toggleExpanded(i);
+//            }
+//            i++;
+//        }
+
+
         return pane;
     }
 }

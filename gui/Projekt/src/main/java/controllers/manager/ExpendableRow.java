@@ -1,4 +1,4 @@
-package main.java.controllers.courier;
+package main.java.controllers.manager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +27,7 @@ import java.util.stream.IntStream;
 
 public class ExpendableRow implements Initializable {
 
-    String status = CourierSecond.getStatus();
+    String status = ManagerPackages.getStatus();
 
     @FXML
     private Text name;
@@ -56,13 +56,13 @@ public class ExpendableRow implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UserInfos ui = new UserInfos();
-        ui = UsersDAO.readUserInfoById(CourierSecond.getId()).get(0);
+        ui = UsersDAO.readUserInfoById(ManagerPackages.getId()).get(0);
         city.setText(ui.getCity());
         name.setText(ui.getName());
         surname.setText(ui.getSurname());
         phone.setText(ui.getPhoneNumber());
         address.setText(ui.getStreetAndNumber());
-        comments.setText(CourierSecond.getComment());
+        comments.setText(ManagerPackages.getComment());
 
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
         ol.remove(0);
@@ -78,7 +78,7 @@ public class ExpendableRow implements Initializable {
         LocalDateTime now = LocalDateTime.now();
         if(changeStatus.getSelectionModel().getSelectedIndex() != -1){
             if (!changeStatus.getValue().toString().equals(status)){
-                PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), changeStatus.getValue().toString(),
+                PackageHistoryDAO.updateStatus(ManagerPackages.getPackageId(), changeStatus.getValue().toString(),
                         Timestamp.valueOf(dateTimeFormatter.format(now)));
             }
         }

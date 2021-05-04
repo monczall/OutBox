@@ -192,11 +192,14 @@ public class ManagerCouriersEdit implements Initializable {
             if (!status) {
                 Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING", "POPRAW POLA");
             }else{
-
+                System.out.println(dataUser.get(0).getPassword()+" "+dataUser.get(0).getAreaId()+" "+dataUser.get(0).getUserInfoId());
                 UserInfosDAO.updateUser(dataUserInfos.get(dataIndex).getId(), dataUser.get(0).getId(),
                         nameInput.getText(), surnameInput.getText(), inputNumber.getText(), cityInput.getText(),
                         streetInput.getText(), inputVoivodeship.getText(), inputEmail.getText(),
-                        dataUser.get(0).getPassword(), "Kurier", dataUser.get(0).getAreaId(),
+                        dataUser.get(0).getPassword(),
+                        "Kurier",
+                        //dataUser.get(0).getAreaId(),
+                        1,
                         dataUser.get(0).getUserInfoId());
 
                 alertPane.setVisible(true);

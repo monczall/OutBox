@@ -15,11 +15,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import main.java.dao.PackageHistoryDAO;
+import main.java.dao.PackagesDAO;
+import main.java.entity.PackageHistory;
+import main.java.entity.PackagesExtended;
 import main.java.features.Animations;
-import main.java.preferences.Preference;
+import main.java.features.Preference;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -54,7 +59,7 @@ public class ClientHistoryPackage implements Initializable {
         btnBack.setVisible(false);
 
         //Testing how ClientTrackPackage view will look like with example data
-        List<PackageTest> list = new ArrayList<>(packageTest());
+        List<PopulatePackageItem> list = new ArrayList<>(packageTest());
         for(int i=0; i<list.size(); i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -68,7 +73,7 @@ public class ClientHistoryPackage implements Initializable {
 
             try {
                 Pane pane = fxmlLoader.load();
-                PackageItem packageItem = fxmlLoader.getController();       //Loading controler of packageItem.fxml
+                PackageItem packageItem = fxmlLoader.getController();       //Loading controller of packageItem.fxml
 
                 pane.setPadding(new Insets(70,0,100,70));       //Adjusting padding of pane
 
@@ -96,18 +101,24 @@ public class ClientHistoryPackage implements Initializable {
                         btnBack.setVisible(true);
                         btnBack.setOpacity(1);
 
+                        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(packageItem.getId());
+
                         //Testing dynamically created statuses from list that's gonna be filled with db rows
-                        createStatus("28 Mar 2021 23:00", "Przesyłka zarejestrowana");
-                        createStep(2);
-                        createStatus("28 Mar 2021 23:00", "Odebrana od klienta");
-                        createStep(2);
-                        createStatus("28 Mar 2021 23:00", "Przyjęta w oddziale");
-                        createStep(2);
-                        createStatus("28 Mar 2021 23:00", "W transporcie");
-                        createStep(2);
-                        createStatus("28 Mar 2021 23:00", "W doręczeniu");
-                        createStep(4);
-                        createCurrentStatus("28 Mar 2021 23:00", "Dostarczona - " + packageItem.getId(),"Podróż przesyłki od Nadawcy do Obiorcy zakończyła się. Dziękujemy!");
+                        for(int i = 0; i < statuses.size(); i++){
+                            if(i == statuses.size()-1){
+
+                                if(i != 0)
+                                    createStep(4);
+                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
+                                createCurrentStatus(date,statuses.get(i).getStatus(),"Jakis opis");
+                            }
+                            else{
+                                if(i != 0)
+                                    createStep(2);
+                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
+                                createStatus(date,statuses.get(i).getStatus());
+                            }
+                        }
                     }
                 });
                 pane.getChildren().add(1,showMore);
@@ -240,16 +251,22 @@ public class ClientHistoryPackage implements Initializable {
     }
 
     //Filing list with example data
-    private List<PackageTest> packageTest(){
-        List<PackageTest> ls = new ArrayList<>();
-        PackageTest tes = new PackageTest();
+    private List<PopulatePackageItem> packageTest(){
 
-        tes.setPackageNumber("77777777");
-        tes.setSender("SAMPLE");
-        tes.setStatus("DOSTARCZONA");
-        ls.add(tes);
+        List<PackagesExtended> listOfPackages = PackagesDAO.addTableHistory();
 
-        return ls;
+        List<PopulatePackageItem> packageItems = new ArrayList<>();
+
+        for(int i = 0; i < listOfPackages.size(); i++){
+            PopulatePackageItem populatePackageItem = new PopulatePackageItem();
+            populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
+            populatePackageItem.setSender(listOfPackages.get(i).getName());
+            populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
+            populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
+            packageItems.add(populatePackageItem);
+        }
+
+        return packageItems;
     }
 
     @FXML

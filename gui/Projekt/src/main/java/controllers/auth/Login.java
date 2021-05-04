@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 
 import static main.java.dao.UsersDAO.getUsers;
 
-public class Login implements Initializable{
+public class Login implements Initializable {
 
     @FXML
     private ImageView loginLogoImageView;
@@ -56,46 +56,42 @@ public class Login implements Initializable{
     public static int userID;
     public static int userInfoID;
 
-    public void initialize(URL url, ResourceBundle rb){
-        if(App.isConnectionError()){
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",
-                    App.getLanguageProperties("authDatabaseConnectionAlert"), 425, 86,
-                    "alertFailure");
+    public void initialize(URL url, ResourceBundle rb) {
+        if (App.isConnectionError()) {
+            Alerts.createCustomAlert(loginRightPaneAnchorPane,
+                    loginCreateAccountButton, "WARNING",
+                    App.getLanguageProperties("authDatabaseConnectionAlert"),
+                    425, 86, "alertFailure");
         }
     }
 
-    public void login(){
-        if(!isEmpty()){
-            if(isEmail(loginEmailTextField.getText())){
+    public void login() {
+        if (!isEmpty()) {
+            if (isEmail(loginEmailTextField.getText())) {
 
                 List<Users> listOfUsers = getUsers();
-                for(int i = 0; i < getUsers().size(); i++){
-                    if(loginEmailTextField.getText().equals(listOfUsers.get(i).getEmail())
+                for (int i = 0; i < getUsers().size(); i++) {
+                    if (loginEmailTextField.getText().equals(listOfUsers.get(i).getEmail())
                             && Encryption.encrypt(loginPasswordPasswordField.getText()).equals
-                            (listOfUsers.get(i).getPassword())){
+                            (listOfUsers.get(i).getPassword())) {
 
                         setUserID(listOfUsers.get(i).getId());
                         setUserInfoID(listOfUsers.get(i).getUserInfoId());
 
                         String role = listOfUsers.get(i).getRole();
-                        if(role.equals("Klient")){
-                            System.out.println("Zalogowano klient");
+                        if (role.equals("Klient")) {
                             SceneManager.renderScene("client");
 
-                        }else if(role.equals("Kurier")){
-                            System.out.println("Zalogowano kurier");
+                        } else if (role.equals("Kurier")) {
                             SceneManager.renderScene("courier");
 
-                        }else if(role.equals("Kurier Międzyoddziałowy")){
-                            System.out.println("Zalogowano kurier międzyoddziałowy");
+                        } else if (role.equals("Kurier Międzyoddziałowy")) {
                             SceneManager.renderScene("interbranchCourier");
 
-                        }else if(role.equals("Menadżer")){
-                            System.out.println("Zalogowano menadżer");
+                        } else if (role.equals("Menadżer")) {
                             SceneManager.renderScene("manager");
 
-                        }else if(role.equals("Administrator")){
-                            System.out.println("Zalogowano administrator");
+                        } else if (role.equals("Administrator")) {
                             SceneManager.renderScene("admin");
 
                         }
@@ -117,11 +113,12 @@ public class Login implements Initializable{
                 loginPasswordCircleCircle.getStyleClass().clear();
                 loginPasswordCircleCircle.getStyleClass().add("fillError");
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",
-                        App.getLanguageProperties("authNoUserFoundAlert"), 435, 86,
-                        "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane,
+                        loginCreateAccountButton, "WARNING",
+                        App.getLanguageProperties("authNoUserFoundAlert"),
+                        435, 86, "alertFailure");
 
-            }else{
+            } else {
                 //UserTextField
                 loginEmailTextField.getStyleClass().clear();
                 loginEmailTextField.getStyleClass().add("textFieldsError");
@@ -129,20 +126,23 @@ public class Login implements Initializable{
                 loginUserCircleCircle.getStyleClass().clear();
                 loginUserCircleCircle.getStyleClass().add("fillError");
 
-                Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",
-                        App.getLanguageProperties("authWrongEmailFormatAlert"), 350, 86,
-                        "alertFailure");
+                Alerts.createCustomAlert(loginRightPaneAnchorPane,
+                        loginCreateAccountButton, "WARNING",
+                        App.getLanguageProperties("authWrongEmailFormatAlert"),
+                        350, 86, "alertFailure");
             }
-        }else{
-            Alerts.createCustomAlert(loginRightPaneAnchorPane, loginCreateAccountButton,"WARNING",
-                    App.getLanguageProperties("authFillFormAlert"), 293, 86,
+        } else {
+            Alerts.createCustomAlert(loginRightPaneAnchorPane,
+                    loginCreateAccountButton, "WARNING",
+                    App.getLanguageProperties("authFillFormAlert"),
+                    293, 86,
                     "alertFailure");
         }
     }
 
-    private boolean isEmpty(){
+    private boolean isEmpty() {
         int error = 0;
-        if(loginEmailTextField.getText().isEmpty()){
+        if (loginEmailTextField.getText().isEmpty()) {
             //UserTextField
             loginEmailTextField.getStyleClass().clear();
             loginEmailTextField.getStyleClass().add("textFieldsError");
@@ -151,7 +151,7 @@ public class Login implements Initializable{
             loginUserCircleCircle.getStyleClass().add("fillError");
             error++;
         }
-        if(loginPasswordPasswordField.getText().isEmpty()){
+        if (loginPasswordPasswordField.getText().isEmpty()) {
             //PasswordTextField
             loginPasswordPasswordField.getStyleClass().clear();
             loginPasswordPasswordField.getStyleClass().add("textFieldsError");
@@ -160,19 +160,21 @@ public class Login implements Initializable{
             loginPasswordCircleCircle.getStyleClass().add("fillError");
             error++;
         }
-        if(error > 0){
+        if (error > 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    private boolean isEmail(String email){
-        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+
+    private boolean isEmail(String email) {
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+" +
+                "@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(email);
 
-        if(mat.matches()){
+        if (mat.matches()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -182,8 +184,7 @@ public class Login implements Initializable{
     }
 
     public void handleLoginOnEnterPressed(KeyEvent keyEvent) {
-        if(keyEvent.getCode() == KeyCode.ENTER)
-        {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
             login();
         }
     }
