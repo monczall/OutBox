@@ -1,11 +1,4 @@
 lib.xml
 out/
-<<<<<<< HEAD
 gui/Projekt/.idea/dataSources/
-=======
-<<<<<<< HEAD
-gui/Projekt/.idea/dataSources/
-=======
-gui/Projekt/.idea/dataSources/
->>>>>>> b8769446c000a586ec64c6daa94e13ac683ce192
->>>>>>> 8f0381e5cb9803e062f13035c327ad1320a76ca0
+.idea/
