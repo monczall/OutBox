@@ -20,7 +20,11 @@ import main.java.dao.AreasDAO;
 import main.java.dao.UserInfosDAO;
 import main.java.features.Alerts;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -99,6 +103,8 @@ public class AdminAddManager implements Initializable {
     @FXML
     private AnchorPane RightPaneAnchorPane;
 
+    String email;
+    String name;
 
     public void register(){
         if(!isEmpty()){
@@ -107,7 +113,20 @@ public class AdminAddManager implements Initializable {
                 if(isPhoneNumber(registerPhoneNumberField.getText())){
                     if(isEmail(registerEmailAddressField.getText())){
                         //POMYSLNIE DODANE
-                        UserInfosDAO.addUserInfo(registerFirstNameField.getText(), registerLastNameField.getText(), registerEmailAddressField.getText(), registerPhoneNumberField.getText(), registerStreetField.getText(), registerCityField.getText(),  registerVoivodeshipField.getText(), Encryption.encrypt(registerPasswordField.getText()), "Menadżer" );
+
+                        String password = "tako";
+                        email = registerEmailAddressField.getText();
+                        name = registerFirstNameField.getText();
+                        try {
+                            sendEmail(email,name,password);
+                        } catch (MessagingException e) {
+                            e.printStackTrace();
+                        }
+                        UserInfosDAO.addUserInfo(registerFirstNameField.getText(), registerLastNameField.getText(),
+                                registerEmailAddressField.getText(), registerPhoneNumberField.getText(), registerStreetField.getText(),
+                                registerCityField.getText(),  registerVoivodeshipField.getText(),
+                                Encryption.encrypt(password), "Menadżer",
+                                AreasDAO.getAreasIdByName(registerAreaChoiceBox.getSelectionModel().getSelectedItem().toString()) );
                         System.out.println("Dodano kierownika");
                     }else{
                         errorOnEmailAddress();
@@ -168,14 +187,7 @@ public class AdminAddManager implements Initializable {
             errorOnVoivodeship();
             error++;
         }
-        if(registerPasswordField.getText().isEmpty()){
-            errorOnPassword();
-            error++;
-        }
-        if(registerRepeatPasswordField.getText().isEmpty()){
-            errorOnRepeatPassword();
-            error++;
-        }
+
         if(registerAreaChoiceBox.getSelectionModel().isEmpty()){
             errorOnArea();
             error++;
@@ -445,8 +457,8 @@ public class AdminAddManager implements Initializable {
     //AREA
     private void errorOnArea(){
 
-        registerAreaChoiceBox.getStyleClass().clear();
-        registerAreaChoiceBox.getStyleClass().add("textFieldsError");
+      //  registerAreaChoiceBox.getStyleClass().clear();
+      //  registerAreaChoiceBox.getStyleClass().add("textFieldsError");
 
         registerAreaCircle.getStyleClass().clear();
         registerAreaCircle.getStyleClass().add("circleError");
@@ -454,8 +466,8 @@ public class AdminAddManager implements Initializable {
 
     public void clearErrorOnArea(MouseEvent mouseEvent) {
 
-        registerAreaChoiceBox.getStyleClass().clear();
-        registerAreaChoiceBox.getStyleClass().add("textFields");
+       // registerAreaChoiceBox.getStyleClass().clear();
+      //  registerAreaChoiceBox.getStyleClass().add("textFields");
 
         registerAreaCircle.getStyleClass().clear();
         registerAreaCircle.getStyleClass().add("circle");
@@ -468,6 +480,56 @@ public class AdminAddManager implements Initializable {
         registerAreaChoiceBox.setItems(AreasDAO.getAreasName());
     }
 
+    public static void sendEmail(String recipient,
+                                 String firstName,
+                                 String password
+    ) throws MessagingException {
+        System.out.println("Starting process of sending email");
+        Properties properties = new Properties();
 
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        String outBoxEmailAccount = "outbox2137@gmail.com";
+        String outBoxEmailPassword = "zaq1@WSX";
+
+        Session session = Session.getInstance(properties,
+                new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(outBoxEmailAccount,
+                                outBoxEmailPassword);
+                    }
+                });
+
+        Message message = prepareMessage(session,
+                outBoxEmailAccount,
+                recipient,
+                firstName,
+                password);
+
+        Transport.send(message);
+        System.out.println("Message sent successfully");
+    }
+
+    private static Message prepareMessage(Session session,
+                                          String outBoxEmailAccount,
+                                          String recipient,
+                                          String firstName,
+                                          String password) {
+        Message message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress("OutBox_Support"));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            message.setSubject("New Password");
+            message.setText("Your new password is: " + password);
+            return message;
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

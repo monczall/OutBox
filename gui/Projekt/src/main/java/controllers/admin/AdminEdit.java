@@ -412,8 +412,8 @@ public class AdminEdit implements Initializable {
 
     public void clearErrorOnArea(MouseEvent mouseEvent) {
 
-        editAreaChoiceBox.getStyleClass().clear();
-        editAreaChoiceBox.getStyleClass().add("textFields");
+       // editAreaChoiceBox.getStyleClass().clear();
+       // editAreaChoiceBox.getStyleClass().add("textFields");
 
         editAreaCircle.getStyleClass().clear();
         editAreaCircle.getStyleClass().add("circle");
@@ -430,8 +430,8 @@ public class AdminEdit implements Initializable {
 
     public void clearErrorOnRole(MouseEvent mouseEvent) {
 
-        editRoleChoiceBox.getStyleClass().clear();
-        editRoleChoiceBox.getStyleClass().add("textFields");
+       // editRoleChoiceBox.getStyleClass().clear();
+      //  editRoleChoiceBox.getStyleClass().add("textFields");
 
         editRoleCircle.getStyleClass().clear();
         editRoleCircle.getStyleClass().add("circle");

@@ -168,7 +168,7 @@ public class ManagerCouriersAdd implements Initializable {
 
 
 
-                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role);
+                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role, null);
                 alertPane.setVisible(true);
             }
         }

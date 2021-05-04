@@ -50,7 +50,7 @@ public class UserInfosDAO {
         return userList;
     }
 
-    static public void addUserInfo(String name, String surname, String email, String phone_number, String street_and_number, String city, String voivodeship, String password, String role){
+    static public void addUserInfo(String name, String surname, String email, String phone_number, String street_and_number, String city, String voivodeship, String password, String role, Integer areaId){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -67,6 +67,7 @@ public class UserInfosDAO {
         Users user = new Users();
 
         user.setUserInfoId(userInfo.getId());
+        user.setAreaId(areaId);
         user.setPassword(password);
         user.setEmail(email);
         user.setRole(role);
