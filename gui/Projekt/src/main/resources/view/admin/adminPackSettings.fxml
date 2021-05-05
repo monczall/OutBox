@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminPackSettings">
+<AnchorPane fx:id="RightPaneAnchorPane" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/admin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.admin.AdminPackSettings">
     <children>
         <FontAwesomeIconView fill="ORANGE" glyphName="CUBE" layoutX="174.0" layoutY="83.0" size="40" styleClass="partIcon" />
         <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
@@ -24,9 +24,9 @@
                                 <Text layoutX="85.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminSmall" />
                                 <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
                                 <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" />
-                        <TextField fx:id="smallSize" layoutX="23.0" layoutY="159.0" minWidth="142.0" prefWidth="142.0" styleClass="textFieldsSettingsPackege" />
-                        <TextField fx:id="smallWeight" layoutX="63.0" layoutY="208.0" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
-                        <TextField fx:id="smallPrice" layoutX="23.0" layoutY="257.0" styleClass="textFieldsSettingsPackege" />
+                        <TextField fx:id="smallSize" layoutX="56.0" layoutY="159.0" minWidth="142.0" prefWidth="142.0" styleClass="textFieldsSettingsPackege" />
+                        <TextField fx:id="smallWeight" layoutX="56.0" layoutY="208.0" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
+                        <TextField fx:id="smallPrice" layoutX="56.0" layoutY="257.0" styleClass="textFieldsSettingsPackege" />
                         <Text layoutX="170.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="cm" />
                         <Text layoutX="172.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="kg" />
                         <Text layoutX="175.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="zł" />
@@ -43,9 +43,9 @@
                                 <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
                                 <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" />
                                 <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="113.0" size="10" />
-                        <TextField fx:id="medSize" layoutX="24.0" layoutY="158.0" styleClass="textFieldsSettingsPackege" />
-                        <TextField fx:id="medWeight" layoutX="64.0" layoutY="205.0" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
-                        <TextField fx:id="medPrice" layoutX="23.0" layoutY="256.0" styleClass="textFieldsSettingsPackege" />
+                        <TextField fx:id="medSize" layoutX="59.0" layoutY="159.0" styleClass="textFieldsSettingsPackege" />
+                        <TextField fx:id="medWeight" layoutX="58.0" layoutY="206.0" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
+                        <TextField fx:id="medPrice" layoutX="58.0" layoutY="251.0" styleClass="textFieldsSettingsPackege" />
                         <Text layoutX="171.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="cm" />
                         <Text layoutX="173.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="kg" />
                         <Text layoutX="176.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="zł" />
@@ -63,9 +63,9 @@
                                 <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" />
                                 <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="113.0" size="10" />
                                 <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="104.0" size="10" />
-                        <TextField fx:id="bigSize" layoutX="23.0" layoutY="157.0" styleClass="textFieldsSettingsPackege" />
-                        <TextField fx:id="bigWeight" layoutX="63.0" layoutY="205.0" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
-                        <TextField fx:id="bigPrice" layoutX="22.0" layoutY="255.0" styleClass="textFieldsSettingsPackege" />
+                        <TextField fx:id="bigSize" layoutX="58.0" layoutY="159.0" styleClass="textFieldsSettingsPackege" />
+                        <TextField fx:id="bigWeight" layoutX="58.0" layoutY="205.0" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
+                        <TextField fx:id="bigPrice" layoutX="58.0" layoutY="254.0" styleClass="textFieldsSettingsPackege" />
                         <Text layoutX="170.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="cm" />
                         <Text layoutX="172.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="kg" />
                         <Text layoutX="175.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="zł" />

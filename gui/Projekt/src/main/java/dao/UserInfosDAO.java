@@ -152,4 +152,29 @@ public class UserInfosDAO {
         session.close();
     }
 
+    static public void editUser(int userId, String name, String surname, String email,String number,String street,
+                                String city, String voivodeship, String role, int areaId
+                                            ) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Users users = session.get(Users.class, userId);
+
+        users.getUserInfosByUserInfoId().setName(name);
+        users.getUserInfosByUserInfoId().setSurname(surname);
+        users.getUserInfosByUserInfoId().setVoivodeship(voivodeship);
+        users.getUserInfosByUserInfoId().setCity(city);
+        users.getUserInfosByUserInfoId().setPhoneNumber(number);
+        users.getUserInfosByUserInfoId().setStreetAndNumber(street);
+
+        users.setEmail(email);
+        users.setRole(role);
+        users.setAreaId(areaId);
+
+        session.update(users);
+        session.getTransaction().commit();
+
+        session.close();
+    }
+
 }

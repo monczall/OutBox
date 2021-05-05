@@ -14,7 +14,9 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.App;
 import main.java.SceneManager;
+import main.java.controllers.auth.Encryption;
 import main.java.dao.AreasDAO;
+import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.Users;
 import main.java.entity.UsersDTO;
@@ -26,6 +28,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static main.java.dao.UsersDAO.getUsers;
 
 public class AdminEdit implements Initializable {
 
@@ -93,6 +97,9 @@ public class AdminEdit implements Initializable {
     @FXML
     private Button editEditButtonButton;
 
+    @FXML
+    private Button deleteButton;
+
 
     public void edit(){
         if(!isEmpty()){
@@ -100,8 +107,27 @@ public class AdminEdit implements Initializable {
                     editVoivodeshipField.getText())){
                 if(isPhoneNumber(editPhoneNumberField.getText())){
                     if(isEmail(editEmailAddressField.getText())){
+                        if(!ifExist(editEmailAddressField.getText())) {
                         //POMYSLNIE DODANE
                         System.out.println("Edytowano pracownika");
+                        //POMYSLNIE DODANE
+                        UserInfosDAO.editUser(AdminEditEmployee.getUserID(), editFirstNameField.getText(), editLastNameField.getText(),
+                                editEmailAddressField.getText(), editPhoneNumberField.getText(), editStreetField.getText(),
+                                editCityField.getText(),  editVoivodeshipField.getText(),
+                                editRoleChoiceBox.getSelectionModel().getSelectedItem().toString(),
+                                AreasDAO.getAreasIdByName(editAreaChoiceBox.getSelectionModel().getSelectedItem().toString()) );
+
+                        Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"CHECK",
+                                App.getLanguageProperties("adminSuccessEdit"), 360, 86, "alertSuccess");
+                        }else{
+                            errorOnEmailAddress();
+
+                            Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"WARNING",
+                                    App.getLanguageProperties("adminEmailExist"), 310, 86, "alertFailure");
+                        }
+
+
+
                     }else{
                         errorOnEmailAddress();
 
@@ -111,31 +137,19 @@ public class AdminEdit implements Initializable {
                 }else{
                     errorOnPhoneNumber();
 
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Niepoprawny numer telefonu");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Niepoprawny format danych! Podany numer telefonu nie jest prawidłowy.");
-
-                    alert.showAndWait();
+                    Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"WARNING",
+                            App.getLanguageProperties("adminInvalidNumber"), 565, 86, "alertFailure");
                 }
             }else{
                 //SPRAWDZENIE BLEDOW
 
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Niepoprawne dane");
-                alert.setHeaderText(null);
-                alert.setContentText("Podano niepoprawne dane! \nPopraw zaznaczone błędy w formularzu rejestracji.");
-
-                alert.showAndWait();
+                Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"WARNING",
+                        App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Puste pola");
-            alert.setHeaderText(null);
-            alert.setContentText("Pozostawiono puste pola! Uzupełnij wymagane informacje.");
-
-            alert.showAndWait();
+            Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"WARNING",
+                    App.getLanguageProperties("adminBlankFields"), 525, 86, "alertFailure");
         }
     }
 
@@ -258,6 +272,20 @@ public class AdminEdit implements Initializable {
         }else{
             return false;
         }
+    }
+
+    private boolean ifExist(String email){
+        List<Users> listOfUsers = getUsers();
+        for (int i = 0; i < getUsers().size(); i++) {
+            if (email.equals(
+                    listOfUsers.get(i).getEmail())) {
+
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     public void handleedit(MouseEvent mouseEvent) {
@@ -486,6 +514,10 @@ public class AdminEdit implements Initializable {
         SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", RightPaneAnchorPane);
     }
 
-    public void deleteEmployee(MouseEvent mouseEvent) {
+    public void deleteEmployee(MouseEvent mouseEvent) throws IOException {
+        UserInfosDAO.deleteUser(AdminEditEmployee.getUserInfoID());
+        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", RightPaneAnchorPane);
+        Alerts.createCustomAlert(RightPaneAnchorPane, deleteButton,"CHECK",
+                App.getLanguageProperties("adminSuccessDelete"), 360, 86, "alertSuccess");
     }
 }

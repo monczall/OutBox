@@ -11,6 +11,7 @@ public class UsersDTO {
     private String voivodeship;
     private String email;
     private String areaName;
+    private int userInfoID;
 
     public UsersDTO(String name, String surname, String phoneNumber, String city, String email) {
         this.name = name;
@@ -20,13 +21,14 @@ public class UsersDTO {
         this.email = email;
     }
 
-    public UsersDTO(int userID, String name, String surname, String phoneNumber, String city, String email) {
+    public UsersDTO(int userID, String name, String surname, String phoneNumber, String city, String email, int userInfoID) {
         this.userID = userID;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.city = city;
         this.email = email;
+        this.userInfoID = userInfoID;
     }
 
     public String getName() {
@@ -63,5 +65,9 @@ public class UsersDTO {
 
     public int getUserID() {
         return userID;
+    }
+
+    public int getUserInfoID() {
+        return userInfoID;
     }
 }

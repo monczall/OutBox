@@ -18,16 +18,21 @@ import main.java.SceneManager;
 import main.java.controllers.auth.Encryption;
 import main.java.dao.AreasDAO;
 import main.java.dao.UserInfosDAO;
+import main.java.entity.Users;
 import main.java.features.Alerts;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static main.java.dao.UsersDAO.getUsers;
 
 public class AdminAddManager implements Initializable {
 
@@ -85,17 +90,7 @@ public class AdminAddManager implements Initializable {
     @FXML
     private TextField registerVoivodeshipField;
 
-    @FXML
-    private Circle registerPasswordCircle;
 
-    @FXML
-    private PasswordField registerPasswordField;
-
-    @FXML
-    private Circle registerRepeatPasswordCircle;
-
-    @FXML
-    private PasswordField registerRepeatPasswordField;
 
     @FXML
     private ChoiceBox registerAreaChoiceBox;
@@ -112,22 +107,36 @@ public class AdminAddManager implements Initializable {
                     registerCityField.getText(), registerVoivodeshipField.getText())){
                 if(isPhoneNumber(registerPhoneNumberField.getText())){
                     if(isEmail(registerEmailAddressField.getText())){
-                        //POMYSLNIE DODANE
+                        if(!ifExist(registerEmailAddressField.getText())) {
+                            String password = new Random().ints(10, 33, 122).collect(StringBuilder::new,
+                                    StringBuilder::appendCodePoint, StringBuilder::append)
+                                    .toString();
+                            email = registerEmailAddressField.getText();
+                            name = registerFirstNameField.getText();
+                            try {
+                                sendEmail(email,name,password);
+                            } catch (MessagingException e) {
+                                e.printStackTrace();
+                            }
+                            //POMYSLNIE DODANE
+                            UserInfosDAO.addUserInfo(registerFirstNameField.getText(), registerLastNameField.getText(),
+                                    registerEmailAddressField.getText(), registerPhoneNumberField.getText(), registerStreetField.getText(),
+                                    registerCityField.getText(),  registerVoivodeshipField.getText(),
+                                    Encryption.encrypt(password), "Menadżer",
+                                    AreasDAO.getAreasIdByName(registerAreaChoiceBox.getSelectionModel().getSelectedItem().toString()) );
+                            System.out.println("Dodano kierownika");
+                            Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"CHECK",
+                                    App.getLanguageProperties("adminSuccessUserAdd"), 370, 86, "alertSuccess");
+                            clearData();
+                        }else{
+                            errorOnEmailAddress();
 
-                        String password = "tako";
-                        email = registerEmailAddressField.getText();
-                        name = registerFirstNameField.getText();
-                        try {
-                            sendEmail(email,name,password);
-                        } catch (MessagingException e) {
-                            e.printStackTrace();
+                            Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING",
+                                    App.getLanguageProperties("adminEmailExist"), 310, 86, "alertFailure");
                         }
-                        UserInfosDAO.addUserInfo(registerFirstNameField.getText(), registerLastNameField.getText(),
-                                registerEmailAddressField.getText(), registerPhoneNumberField.getText(), registerStreetField.getText(),
-                                registerCityField.getText(),  registerVoivodeshipField.getText(),
-                                Encryption.encrypt(password), "Menadżer",
-                                AreasDAO.getAreasIdByName(registerAreaChoiceBox.getSelectionModel().getSelectedItem().toString()) );
-                        System.out.println("Dodano kierownika");
+
+
+
                     }else{
                         errorOnEmailAddress();
 
@@ -271,6 +280,34 @@ public class AdminAddManager implements Initializable {
             return false;
         }
     }
+
+    private boolean ifExist(String email){
+        List<Users> listOfUsers = getUsers();
+        for (int i = 0; i < getUsers().size(); i++) {
+            if (email.equals(
+                    listOfUsers.get(i).getEmail())) {
+
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    private void clearData() {
+        registerFirstNameField.setText(" ");
+        registerLastNameField.setText(" ");
+        registerPhoneNumberField.setText(" ");
+        registerEmailAddressField.setText(" ");
+        registerStreetField.setText(" ");
+        registerCityField.setText(" ");
+        registerVoivodeshipField.setText(" ");
+        registerAreaChoiceBox.getSelectionModel().clearSelection();
+
+
+    }
+
 
     public void handleRegister(MouseEvent mouseEvent) {
         register();
@@ -417,42 +454,7 @@ public class AdminAddManager implements Initializable {
         registerVoivodeshipCircle.getStyleClass().clear();
         registerVoivodeshipCircle.getStyleClass().add("circle");
     }
-    //PASSWORD
-    private void errorOnPassword(){
-        //PasswordField
-        registerPasswordField.getStyleClass().clear();
-        registerPasswordField.getStyleClass().add("textFieldsError");
-        //VoivodeshipCircle
-        registerPasswordCircle.getStyleClass().clear();
-        registerPasswordCircle.getStyleClass().add("circleError");
-    }
 
-    public void clearErrorsOnPassword(KeyEvent keyEvent) {
-        //PasswordField
-        registerPasswordField.getStyleClass().clear();
-        registerPasswordField.getStyleClass().add("textFields");
-        //PasswordCircle
-        registerPasswordCircle.getStyleClass().clear();
-        registerPasswordCircle.getStyleClass().add("circle");
-    }
-    //REPEAT PASSWORD
-    private void errorOnRepeatPassword(){
-        //RepeatPasswordField
-        registerRepeatPasswordField.getStyleClass().clear();
-        registerRepeatPasswordField.getStyleClass().add("textFieldsError");
-        //RepeatVoivodeshipCircle
-        registerRepeatPasswordCircle.getStyleClass().clear();
-        registerRepeatPasswordCircle.getStyleClass().add("circleError");
-    }
-
-    public void clearErrorsOnRepeatPassword(KeyEvent keyEvent) {
-        //RepeatPasswordField
-        registerRepeatPasswordField.getStyleClass().clear();
-        registerRepeatPasswordField.getStyleClass().add("textFields");
-        //RepeatPasswordCircle
-        registerRepeatPasswordCircle.getStyleClass().clear();
-        registerRepeatPasswordCircle.getStyleClass().add("circle");
-    }
 
     //AREA
     private void errorOnArea(){

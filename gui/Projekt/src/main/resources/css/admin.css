@@ -430,13 +430,14 @@
     -fx-border-color: -fx-main-color;
     -fx-border-width: 3;
     -fx-border-radius: 7;
-    -fx-min-width: 140;
-    -fx-pref-width: 140;
-    -fx-max-width: 140;
+    -fx-min-width: 100;
+    -fx-pref-width: 100;
+    -fx-max-width: 100;
     -fx-min-height: 35;
     -fx-pref-height: 35;
     -fx-max-height: 35;
-    -fx-padding: 0 0 0 5;
+    -fx-alignment: center;
+
 }
 
 .textFieldsSettingsWeight{
@@ -451,7 +452,7 @@
     -fx-min-height: 35;
     -fx-pref-height: 35;
     -fx-max-height: 35;
-    -fx-padding: 0 0 0 5;
+    -fx-alignment: center;
 }
 
 
