@@ -87,28 +87,13 @@ public class Login implements Initializable {
         outboxWhite.setFitHeight(200);
         outboxWhite.setFitWidth(150);
 
-        ImageView plFlag = new ImageView("main/resources/images/settings_lang_pl.png");
-        plFlag.setFitHeight(15);
-        plFlag.setFitWidth(30);
-        ImageView engFlag = new ImageView("main/resources/images/settings_lang_en.png");
-        engFlag.setFitHeight(15);
-        engFlag.setFitWidth(30);
-        ImageView colorOrange = new ImageView("main/resources/images/settings_color_orange.png");
-        colorOrange.setFitHeight(15);
-        colorOrange.setFitWidth(30);
-        ImageView colorRed = new ImageView("main/resources/images/settings_color_red.png");
-        colorRed.setFitHeight(15);
-        colorRed.setFitWidth(30);
-        ImageView colorWhite = new ImageView("main/resources/images/settings_color_white.png");
-        colorWhite.setFitHeight(15);
-        colorWhite.setFitWidth(30);
+        ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
+        cogsBlack.setFitHeight(30);
+        cogsBlack.setFitWidth(30);
+        ImageView cogsWhite = new ImageView("main/resources/images/settings_cogs_white.png");
+        cogsWhite.setFitHeight(30);
+        cogsWhite.setFitWidth(30);
 
-
-        loginPolishLanguageMenuItem.setGraphic(plFlag);
-        loginEnglishLanguageMenuItem.setGraphic(engFlag);
-        loginRedColorMenuItem.setGraphic(colorRed);
-        loginOrangeColorMenuItem.setGraphic(colorOrange);
-        loginWhiteColorMenuItem.setGraphic(colorWhite);
 
         if(pref.readPreference("language").equals("english")) {
             loginPolishLanguageMenuItem.setDisable(false);
@@ -124,18 +109,21 @@ public class Login implements Initializable {
             loginOrangeColorMenuItem.setDisable(false);
             loginWhiteColorMenuItem.setDisable(false);
             loginLogoImageView.setImage(outboxWhite.getImage());
+            loginSettingsMenuButton.setGraphic(cogsBlack);
         }
         else if(pref.readPreference("color").equals("orange")) {
             loginRedColorMenuItem.setDisable(false);
             loginOrangeColorMenuItem.setDisable(true);
             loginWhiteColorMenuItem.setDisable(false);
             loginLogoImageView.setImage(outboxBlack.getImage());
+            loginSettingsMenuButton.setGraphic(cogsWhite);
         }
         else{
             loginRedColorMenuItem.setDisable(false);
             loginOrangeColorMenuItem.setDisable(false);
             loginWhiteColorMenuItem.setDisable(true);
             loginLogoImageView.setImage(outboxBlack.getImage());
+            loginSettingsMenuButton.setGraphic(cogsWhite);
         }
 
         if (App.isConnectionError()) {
@@ -377,5 +365,43 @@ public class Login implements Initializable {
     public void setWhiteColor(ActionEvent actionEvent) {
         pref.addPreference("color","white");
         SceneManager.renderScene("login");
+    }
+
+    public void handleMouseEnterMenuSettingsButton(MouseEvent mouseEvent) {
+        ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
+        cogsBlack.setFitHeight(30);
+        cogsBlack.setFitWidth(30);
+        ImageView cogsWhite = new ImageView("main/resources/images/settings_cogs_white.png");
+        cogsWhite.setFitHeight(30);
+        cogsWhite.setFitWidth(30);
+
+        if(pref.readPreference("color").equals("red")) {
+            loginSettingsMenuButton.setGraphic(cogsWhite);
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            loginSettingsMenuButton.setGraphic(cogsBlack);
+        }
+        else{
+            loginSettingsMenuButton.setGraphic(cogsBlack);
+        }
+    }
+
+    public void handleMouseExitMenuSettingsButton(MouseEvent mouseEvent) {
+        ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
+        cogsBlack.setFitHeight(30);
+        cogsBlack.setFitWidth(30);
+        ImageView cogsWhite = new ImageView("main/resources/images/settings_cogs_white.png");
+        cogsWhite.setFitHeight(30);
+        cogsWhite.setFitWidth(30);
+
+        if(pref.readPreference("color").equals("red")) {
+            loginSettingsMenuButton.setGraphic(cogsBlack);
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            loginSettingsMenuButton.setGraphic(cogsWhite);
+        }
+        else{
+            loginSettingsMenuButton.setGraphic(cogsWhite);
+        }
     }
 }
