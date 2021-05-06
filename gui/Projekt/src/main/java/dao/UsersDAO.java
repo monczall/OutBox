@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import main.java.controllers.auth.Encryption;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
+import main.java.entity.UsersDTO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -80,7 +81,7 @@ public class UsersDAO {
         return true;
     }
 
-    static public ObservableList<Users> getUserEdit(){
+    static public ObservableList<UsersDTO> getUserEdit(){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery("FROM Users U WHERE NOT U.role = 'Klient' AND NOT U.role = 'Administrator' ");
@@ -91,10 +92,18 @@ public class UsersDAO {
         for (Users ent : userList) {
             user.add(ent);
         }
+        ObservableList<UsersDTO> usersDTOS = FXCollections.observableArrayList();
+        for (int i = 0; i < user.size(); i++) {
+            usersDTOS.add(new UsersDTO(user.get(i).getId(), user.get(i).getUserInfosByUserInfoId().getName(),
+                    user.get(i).getUserInfosByUserInfoId().getSurname(),
+                    user.get(i).getUserInfosByUserInfoId().getPhoneNumber(),
+                    user.get(i).getUserInfosByUserInfoId().getCity(),
+                    user.get(i).getEmail()));
+        }
 
         session.close();
 
-        return user;
+        return usersDTOS;
     }
 
     static public List<Users> getUsersById(int id){

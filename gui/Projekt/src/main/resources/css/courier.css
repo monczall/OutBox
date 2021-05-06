@@ -294,11 +294,15 @@
 .table-row-cell:even{
     -fx-table-cell-border-color: transparent;
     -fx-control-inner-background: derive(#111, 23%);
+    -fx-background-color: -fx-main-color, derive(#111, 23%);
+    -fx-background-insets: 0, 0;
 }
 
 .table-row-cell:odd{
     -fx-table-cell-border-color: transparent;
     -fx-control-inner-background: derive(#111, 0%);
+    -fx-background-color: -fx-main-color, derive(#111, 0%);
+    -fx-background-insets: 0, 0;
 }
 
 .table-row-cell:empty {
@@ -317,7 +321,7 @@
 }
 
 .table-row-cell:hover {
-    /* Tutaj bedzie hover na tabeli */
+
 }
 
 .table-view .column-header .label {

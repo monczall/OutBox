@@ -59,25 +59,14 @@ public class AdminEditEmployee implements Initializable {
             SceneManager.loadScene("../../../resources/view/admin/adminEdit.fxml", edit);
         }
 
-    private final ObservableList<UsersDTO> userList = FXCollections.observableArrayList();
-
-    private ObservableList<UsersDTO> searchList;
+    private final ObservableList<UsersDTO> searchList = UsersDAO.getUserEdit();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        ObservableList<Users> usersList = UsersDAO.getUserEdit();
+        ObservableList<UsersDTO> usersList = UsersDAO.getUserEdit();
 
 
-
-
-        for (int i = 0; i < usersList.size(); i++) {
-            userList.add(new UsersDTO(usersList.get(i).getId(), usersList.get(i).getUserInfosByUserInfoId().getName(), usersList.get(i).getUserInfosByUserInfoId().getSurname(),
-                    usersList.get(i).getUserInfosByUserInfoId().getPhoneNumber(), usersList.get(i).getUserInfosByUserInfoId().getCity(),
-                    usersList.get(i).getEmail()));
-        }
-
-        searchList = userList;
 
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
@@ -85,7 +74,7 @@ public class AdminEditEmployee implements Initializable {
         mail.setCellValueFactory(new PropertyValueFactory<>("email"));
         phone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-        table.setItems(userList);
+        table.setItems(usersList);
 
 
         table.getSelectionModel().select(0);
@@ -106,7 +95,5 @@ public class AdminEditEmployee implements Initializable {
 
             }
         }
-        System.out.println(searchedWord);
-        System.out.println(searchList.size());
     }
 }

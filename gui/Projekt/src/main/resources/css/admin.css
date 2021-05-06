@@ -244,20 +244,7 @@
     -fx-padding: 0 0 0 30;
 }
 
-.choiceBox{
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 9;
-    -fx-border-color: -fx-main-color;
-    -fx-border-width: 3;
-    -fx-border-radius: 7;
-    -fx-min-width: 250;
-    -fx-pref-width: 250;
-    -fx-max-width: 250;
-    -fx-min-height: 35;
-    -fx-pref-height: 35;
-    -fx-max-height: 35;
-    -fx-padding: 0 0 0 30;
-}
+
 
 /*-------------MENU - RAPORT-------------*/
 
@@ -582,4 +569,24 @@
 }
 .backIcon{
     -fx-fill: -fx-gray-color;
+}
+
+.choiceBox{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 9;
+    -fx-border-color: -fx-main-color;
+    -fx-text-fill: red;
+    -fx-border-width: 3;
+    -fx-border-radius: 7;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 35;
+    -fx-pref-height: 35;
+    -fx-max-height: 35;
+    -fx-padding: 0 0 0 30;
+}
+.choiceBox .label{
+    -fx-text-fill: red;
+    -fx-fill: red;
 }

@@ -17,7 +17,6 @@ public class CourierSettings implements Initializable {
 
     @FXML
     private ComboBox<String> pickLanguage;
-
     @FXML
     private ComboBox<String> pickColor;
     @FXML

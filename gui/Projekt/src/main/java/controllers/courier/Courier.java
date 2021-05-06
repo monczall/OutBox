@@ -44,10 +44,8 @@ public class Courier implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-//        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
-//        loggedUser.setText(ui.getName() + " " + ui.getSurname());
-
-        SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: red;");
+        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+        loggedUser.setText(ui.getName() + " " + ui.getSurname());
 
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
