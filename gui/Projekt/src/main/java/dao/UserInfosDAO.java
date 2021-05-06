@@ -50,7 +50,7 @@ public class UserInfosDAO {
         return userList;
     }
 
-    static public void addUserInfo(String name, String surname, String email, String phone_number, String street_and_number, String city, String voivodeship, String password, String role){
+    static public void addUserInfo(String name, String surname, String email, String phone_number, String street_and_number, String city, String voivodeship, String password, String role, Integer areaId){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -67,6 +67,7 @@ public class UserInfosDAO {
         Users user = new Users();
 
         user.setUserInfoId(userInfo.getId());
+        user.setAreaId(areaId);
         user.setPassword(password);
         user.setEmail(email);
         user.setRole(role);
@@ -144,6 +145,31 @@ public class UserInfosDAO {
         users.getUserInfosByUserInfoId().setCity(city);
         users.getUserInfosByUserInfoId().setPhoneNumber(number);
         users.getUserInfosByUserInfoId().setStreetAndNumber(street);
+
+        session.update(users);
+        session.getTransaction().commit();
+
+        session.close();
+    }
+
+    static public void editUser(int userId, String name, String surname, String email,String number,String street,
+                                String city, String voivodeship, String role, int areaId
+                                            ) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Users users = session.get(Users.class, userId);
+
+        users.getUserInfosByUserInfoId().setName(name);
+        users.getUserInfosByUserInfoId().setSurname(surname);
+        users.getUserInfosByUserInfoId().setVoivodeship(voivodeship);
+        users.getUserInfosByUserInfoId().setCity(city);
+        users.getUserInfosByUserInfoId().setPhoneNumber(number);
+        users.getUserInfosByUserInfoId().setStreetAndNumber(street);
+
+        users.setEmail(email);
+        users.setRole(role);
+        users.setAreaId(areaId);
 
         session.update(users);
         session.getTransaction().commit();

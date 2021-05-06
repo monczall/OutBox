@@ -3,10 +3,14 @@ package main.java.controllers.admin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import main.java.App;
 import main.java.dao.PackageTypeDAO;
 import main.java.entity.PackageType;
+import main.java.features.Alerts;
 
 import java.net.URL;
 import java.util.List;
@@ -34,6 +38,10 @@ public class AdminPackSettings implements Initializable {
     private TextField medPrice;
     @FXML
     private TextField bigPrice;
+    @FXML
+    private Button btnSaveChanges;
+    @FXML
+    private AnchorPane RightPaneAnchorPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,19 +64,31 @@ public class AdminPackSettings implements Initializable {
     @FXML
     public void saveChanges(ActionEvent actionEvent) {
 
-        if(!isEmpty()){
+        if(!isEmpty()) {
+            if (isValid(smallSize.getText(), smallWeight.getText(), smallPrice.getText())
+            && isValid(medSize.getText(), medWeight.getText(), medPrice.getText())
+                    && isValid(bigSize.getText(), bigWeight.getText(), bigPrice.getText())) {
 
-                PackageTypeDAO.updatePackageType(1,smallSize.getText(), smallWeight.getText(), smallPrice.getText());
+                PackageTypeDAO.updatePackageType(1, smallSize.getText(), smallWeight.getText(), smallPrice.getText());
 
-                PackageTypeDAO.updatePackageType(2,medSize.getText(), medWeight.getText(), medPrice.getText());
+                PackageTypeDAO.updatePackageType(2, medSize.getText(), medWeight.getText(), medPrice.getText());
 
-                PackageTypeDAO.updatePackageType(3,bigSize.getText(), bigWeight.getText(), bigPrice.getText());
+                PackageTypeDAO.updatePackageType(3, bigSize.getText(), bigWeight.getText(), bigPrice.getText());
 
+                Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges,"CHECK",
+                        App.getLanguageProperties("adminSuccessPackEdit"), 320, 86, "alertSuccess");
+
+            }else{
+                //SPRAWDZENIE BLEDOW
+
+
+                Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges,"WARNING",
+                        App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
+            }
+        }else{
+            Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges,"WARNING",
+                    App.getLanguageProperties("adminBlankFields"), 525, 86, "alertFailure");
         }
-
-
-
-
     }
 
     private boolean isEmpty() {
@@ -77,11 +97,35 @@ public class AdminPackSettings implements Initializable {
             errorOnSmallSize();
             error++;
         }
-        if (smallSize.getText().isEmpty()) {
+        if (smallWeight.getText().isEmpty()) {
             errorOnSmallSize();
             error++;
         }
-        if (smallSize.getText().isEmpty()) {
+        if (smallPrice.getText().isEmpty()) {
+            errorOnSmallSize();
+            error++;
+        }
+        if (medSize.getText().isEmpty()) {
+            errorOnSmallSize();
+            error++;
+        }
+        if (medWeight.getText().isEmpty()) {
+            errorOnSmallSize();
+            error++;
+        }
+        if (medPrice.getText().isEmpty()) {
+            errorOnSmallSize();
+            error++;
+        }
+        if (bigSize.getText().isEmpty()) {
+            errorOnSmallSize();
+            error++;
+        }
+        if (bigWeight.getText().isEmpty()) {
+            errorOnSmallSize();
+            error++;
+        }
+        if (bigPrice.getText().isEmpty()) {
             errorOnSmallSize();
             error++;
         }
@@ -98,8 +142,8 @@ public class AdminPackSettings implements Initializable {
     private boolean isValid(String size, String weight, String price) {
         int error = 0;
         Pattern patternSize = Pattern.compile("[0-9]{1,3}[x][0-9]{1,3}[x][0-9]{1,3}");
-        Pattern patternWeight = Pattern.compile("0-9]{1,3}");
-        Pattern patternPrice = Pattern.compile("0-9]{1,3}");
+        Pattern patternWeight = Pattern.compile("[0-9]{1,3}");
+        Pattern patternPrice = Pattern.compile("[0-9]{1,3}\\,[0-9]{1,2}");
 
         Matcher matchSize = patternSize.matcher(size);
         Matcher matchWeight = patternWeight.matcher(weight);

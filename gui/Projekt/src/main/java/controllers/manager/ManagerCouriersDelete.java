@@ -77,27 +77,7 @@ public class ManagerCouriersDelete implements Initializable {
         {
             dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
 
-            if(dataUserInfos.size() > 1)
-            {
-                setDataLabel();
-                paneResults.setVisible(true);
-                button1.setVisible(true);
-                button2.setVisible(true);
-                noDataText.setVisible(false);
-            }
-            else if(dataUserInfos.size() == 1)
-            {
-                setDataLabel();
-                button1.setVisible(false);
-                button2.setVisible(false);
-                paneResults.setVisible(true);
-                noDataText.setVisible(false);
-            }
-            else{
-                System.out.println("NIE");
-                paneResults.setVisible(false);
-                noDataText.setVisible(true);
-            }
+            setDataLabel();
         }
     }
 
@@ -106,12 +86,34 @@ public class ManagerCouriersDelete implements Initializable {
         System.out.println("ZMIENIAM NA KOLEJNE ID INDEX("+dataIndex+") = " +dataUserInfos.get(dataIndex).getId());
         dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
         System.out.println("DataUserSIZSE: " + dataUser.size() + " DataUserID: " + dataUser.get(0).getId());
-
+        System.out.println(dataUser.get(0).getRole());
         fullName.setText(dataUserInfos.get(dataIndex).getName() + " "+dataUserInfos.get(dataIndex).getSurname());
         cityAndStreet.setText(dataUserInfos.get(dataIndex).getCity() + " "+dataUserInfos.get(dataIndex).getStreetAndNumber());
         phoneNumber.setText(dataUserInfos.get(dataIndex).getPhoneNumber());
         voivodeship.setText(dataUserInfos.get(dataIndex).getVoivodeship());
         email.setText(dataUser.get(0).getEmail());
+        String role = dataUser.get(0).getRole();
+        if(dataUserInfos.size() > 1 && (role.equals("Kurier")))
+        {
+            System.out.println("DWA");
+            paneResults.setVisible(true);
+            button1.setVisible(true);
+            button2.setVisible(true);
+            noDataText.setVisible(false);
+        }
+        else if(dataUserInfos.size() == 1 && (role.equals("Kurier")))
+        {
+            System.out.println("JEDEN");
+            button1.setVisible(false);
+            button2.setVisible(false);
+            paneResults.setVisible(true);
+            noDataText.setVisible(false);
+        }
+        else{
+            System.out.println("NIE");
+            paneResults.setVisible(false);
+            noDataText.setVisible(true);
+        }
     }
 
     @FXML

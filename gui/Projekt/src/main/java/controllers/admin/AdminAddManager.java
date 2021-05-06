@@ -18,12 +18,21 @@ import main.java.SceneManager;
 import main.java.controllers.auth.Encryption;
 import main.java.dao.AreasDAO;
 import main.java.dao.UserInfosDAO;
+import main.java.entity.Users;
 import main.java.features.Alerts;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.net.URL;
+import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static main.java.dao.UsersDAO.getUsers;
 
 public class AdminAddManager implements Initializable {
 
@@ -81,17 +90,7 @@ public class AdminAddManager implements Initializable {
     @FXML
     private TextField registerVoivodeshipField;
 
-    @FXML
-    private Circle registerPasswordCircle;
 
-    @FXML
-    private PasswordField registerPasswordField;
-
-    @FXML
-    private Circle registerRepeatPasswordCircle;
-
-    @FXML
-    private PasswordField registerRepeatPasswordField;
 
     @FXML
     private ChoiceBox registerAreaChoiceBox;
@@ -99,6 +98,8 @@ public class AdminAddManager implements Initializable {
     @FXML
     private AnchorPane RightPaneAnchorPane;
 
+    String email;
+    String name;
 
     public void register(){
         if(!isEmpty()){
@@ -106,9 +107,36 @@ public class AdminAddManager implements Initializable {
                     registerCityField.getText(), registerVoivodeshipField.getText())){
                 if(isPhoneNumber(registerPhoneNumberField.getText())){
                     if(isEmail(registerEmailAddressField.getText())){
-                        //POMYSLNIE DODANE
-                        UserInfosDAO.addUserInfo(registerFirstNameField.getText(), registerLastNameField.getText(), registerEmailAddressField.getText(), registerPhoneNumberField.getText(), registerStreetField.getText(), registerCityField.getText(),  registerVoivodeshipField.getText(), Encryption.encrypt(registerPasswordField.getText()), "Menadżer" );
-                        System.out.println("Dodano kierownika");
+                        if(!ifExist(registerEmailAddressField.getText())) {
+                            String password = new Random().ints(10, 33, 122).collect(StringBuilder::new,
+                                    StringBuilder::appendCodePoint, StringBuilder::append)
+                                    .toString();
+                            email = registerEmailAddressField.getText();
+                            name = registerFirstNameField.getText();
+                            try {
+                                sendEmail(email,name,password);
+                            } catch (MessagingException e) {
+                                e.printStackTrace();
+                            }
+                            //POMYSLNIE DODANE
+                            UserInfosDAO.addUserInfo(registerFirstNameField.getText(), registerLastNameField.getText(),
+                                    registerEmailAddressField.getText(), registerPhoneNumberField.getText(), registerStreetField.getText(),
+                                    registerCityField.getText(),  registerVoivodeshipField.getText(),
+                                    Encryption.encrypt(password), "Menadżer",
+                                    AreasDAO.getAreasIdByName(registerAreaChoiceBox.getSelectionModel().getSelectedItem().toString()) );
+                            System.out.println("Dodano kierownika");
+                            Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"CHECK",
+                                    App.getLanguageProperties("adminSuccessUserAdd"), 370, 86, "alertSuccess");
+                            clearData();
+                        }else{
+                            errorOnEmailAddress();
+
+                            Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"WARNING",
+                                    App.getLanguageProperties("adminEmailExist"), 310, 86, "alertFailure");
+                        }
+
+
+
                     }else{
                         errorOnEmailAddress();
 
@@ -168,14 +196,7 @@ public class AdminAddManager implements Initializable {
             errorOnVoivodeship();
             error++;
         }
-        if(registerPasswordField.getText().isEmpty()){
-            errorOnPassword();
-            error++;
-        }
-        if(registerRepeatPasswordField.getText().isEmpty()){
-            errorOnRepeatPassword();
-            error++;
-        }
+
         if(registerAreaChoiceBox.getSelectionModel().isEmpty()){
             errorOnArea();
             error++;
@@ -259,6 +280,34 @@ public class AdminAddManager implements Initializable {
             return false;
         }
     }
+
+    private boolean ifExist(String email){
+        List<Users> listOfUsers = getUsers();
+        for (int i = 0; i < getUsers().size(); i++) {
+            if (email.equals(
+                    listOfUsers.get(i).getEmail())) {
+
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+    private void clearData() {
+        registerFirstNameField.setText(" ");
+        registerLastNameField.setText(" ");
+        registerPhoneNumberField.setText(" ");
+        registerEmailAddressField.setText(" ");
+        registerStreetField.setText(" ");
+        registerCityField.setText(" ");
+        registerVoivodeshipField.setText(" ");
+        registerAreaChoiceBox.getSelectionModel().clearSelection();
+
+
+    }
+
 
     public void handleRegister(MouseEvent mouseEvent) {
         register();
@@ -405,48 +454,13 @@ public class AdminAddManager implements Initializable {
         registerVoivodeshipCircle.getStyleClass().clear();
         registerVoivodeshipCircle.getStyleClass().add("circle");
     }
-    //PASSWORD
-    private void errorOnPassword(){
-        //PasswordField
-        registerPasswordField.getStyleClass().clear();
-        registerPasswordField.getStyleClass().add("textFieldsError");
-        //VoivodeshipCircle
-        registerPasswordCircle.getStyleClass().clear();
-        registerPasswordCircle.getStyleClass().add("circleError");
-    }
 
-    public void clearErrorsOnPassword(KeyEvent keyEvent) {
-        //PasswordField
-        registerPasswordField.getStyleClass().clear();
-        registerPasswordField.getStyleClass().add("textFields");
-        //PasswordCircle
-        registerPasswordCircle.getStyleClass().clear();
-        registerPasswordCircle.getStyleClass().add("circle");
-    }
-    //REPEAT PASSWORD
-    private void errorOnRepeatPassword(){
-        //RepeatPasswordField
-        registerRepeatPasswordField.getStyleClass().clear();
-        registerRepeatPasswordField.getStyleClass().add("textFieldsError");
-        //RepeatVoivodeshipCircle
-        registerRepeatPasswordCircle.getStyleClass().clear();
-        registerRepeatPasswordCircle.getStyleClass().add("circleError");
-    }
-
-    public void clearErrorsOnRepeatPassword(KeyEvent keyEvent) {
-        //RepeatPasswordField
-        registerRepeatPasswordField.getStyleClass().clear();
-        registerRepeatPasswordField.getStyleClass().add("textFields");
-        //RepeatPasswordCircle
-        registerRepeatPasswordCircle.getStyleClass().clear();
-        registerRepeatPasswordCircle.getStyleClass().add("circle");
-    }
 
     //AREA
     private void errorOnArea(){
 
-        registerAreaChoiceBox.getStyleClass().clear();
-        registerAreaChoiceBox.getStyleClass().add("textFieldsError");
+      //  registerAreaChoiceBox.getStyleClass().clear();
+      //  registerAreaChoiceBox.getStyleClass().add("textFieldsError");
 
         registerAreaCircle.getStyleClass().clear();
         registerAreaCircle.getStyleClass().add("circleError");
@@ -454,8 +468,8 @@ public class AdminAddManager implements Initializable {
 
     public void clearErrorOnArea(MouseEvent mouseEvent) {
 
-        registerAreaChoiceBox.getStyleClass().clear();
-        registerAreaChoiceBox.getStyleClass().add("textFields");
+       // registerAreaChoiceBox.getStyleClass().clear();
+      //  registerAreaChoiceBox.getStyleClass().add("textFields");
 
         registerAreaCircle.getStyleClass().clear();
         registerAreaCircle.getStyleClass().add("circle");
@@ -468,6 +482,56 @@ public class AdminAddManager implements Initializable {
         registerAreaChoiceBox.setItems(AreasDAO.getAreasName());
     }
 
+    public static void sendEmail(String recipient,
+                                 String firstName,
+                                 String password
+    ) throws MessagingException {
+        System.out.println("Starting process of sending email");
+        Properties properties = new Properties();
 
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        String outBoxEmailAccount = "outbox2137@gmail.com";
+        String outBoxEmailPassword = "zaq1@WSX";
+
+        Session session = Session.getInstance(properties,
+                new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(outBoxEmailAccount,
+                                outBoxEmailPassword);
+                    }
+                });
+
+        Message message = prepareMessage(session,
+                outBoxEmailAccount,
+                recipient,
+                firstName,
+                password);
+
+        Transport.send(message);
+        System.out.println("Message sent successfully");
+    }
+
+    private static Message prepareMessage(Session session,
+                                          String outBoxEmailAccount,
+                                          String recipient,
+                                          String firstName,
+                                          String password) {
+        Message message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress("OutBox_Support"));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            message.setSubject("New Password");
+            message.setText("Your new password is: " + password);
+            return message;
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

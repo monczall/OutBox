@@ -98,7 +98,7 @@ public class UsersDAO {
                     user.get(i).getUserInfosByUserInfoId().getSurname(),
                     user.get(i).getUserInfosByUserInfoId().getPhoneNumber(),
                     user.get(i).getUserInfosByUserInfoId().getCity(),
-                    user.get(i).getEmail()));
+                    user.get(i).getEmail(), user.get(i).getUserInfoId()));
         }
 
         session.close();

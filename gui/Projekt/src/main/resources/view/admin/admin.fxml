@@ -43,8 +43,8 @@
                   <FontAwesomeIconView glyphName="USERS" layoutX="14.0" layoutY="189.0" onMouseClicked="#go_edit_employee" size="36" styleClass="icons" />
                   <FontAwesomeIconView glyphName="BOOK" layoutX="17.0" layoutY="469.0" onMouseClicked="#go_raport" size="36" styleClass="icons" />
                   <FontAwesomeIconView id="iconSettings" glyphName="COG" layoutX="18.0" layoutY="539.0" onMouseClicked="#go_settings" size="36" styleClass="icons" text="" />
-                  <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="20.0" layoutY="609.0" onMouseClicked="#go_logout" size="36" styleClass="icons" />
-                  <FontAwesomeIconView glyphName="USER_PLUS" layoutX="12.0" layoutY="258.0" onMouseClicked="#go_add_manager" size="36" styleClass="icons" />
+                  <FontAwesomeIconView glyphName="POWER_OFF" layoutX="20.0" layoutY="609.0" onMouseClicked="#go_logout" size="36" styleClass="icons" />
+                  <FontAwesomeIconView glyphName="USER_PLUS" layoutX="15.0" layoutY="258.0" onMouseClicked="#go_add_manager" size="36" styleClass="icons" />
                   <FontAwesomeIconView glyphName="PLUS" layoutX="19.0" layoutY="330.0" onMouseClicked="#go_add_area" size="36" styleClass="icons" text="" />
                   <FontAwesomeIconView glyphName="CUBE" layoutX="17.0" layoutY="399.0" onMouseClicked="#go_pack_settings" size="36" styleClass="icons" />
                   <FontAwesomeIconView glyphName="COG" layoutX="35.0" layoutY="395.0" size="15" styleClass="icons" text="" />
