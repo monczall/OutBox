@@ -87,6 +87,8 @@ public class UnitTests {
         List<Users> listOfUsers = query.list();
 
         Assertions.assertNotNull(listOfUsers);
+
+        //Assertions.assertTrue(listOfUsers.size() > 0);
         //Assertions.assertEquals(4,listOfUsers.size());
     }
 

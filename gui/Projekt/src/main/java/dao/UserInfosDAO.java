@@ -1,6 +1,7 @@
 package main.java.dao;
 
 import main.java.controllers.auth.Encryption;
+import main.java.controllers.client.ClientSettings;
 import main.java.entity.PackageHistory;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
@@ -129,21 +130,32 @@ public class UserInfosDAO {
         session2.close();
     }
 
-    static public void updateUserSettings(String password,String voivodeship, String city,
+    static public void updateUserSettings(String voivodeship, String city,
                                           String number, String street, int userId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
         Users users = session.get(Users.class, userId);
 
-        if(!password.isEmpty()) {
-            users.setPassword(Encryption.encrypt(password));
-        }
 
         users.getUserInfosByUserInfoId().setVoivodeship(voivodeship);
         users.getUserInfosByUserInfoId().setCity(city);
         users.getUserInfosByUserInfoId().setPhoneNumber(number);
         users.getUserInfosByUserInfoId().setStreetAndNumber(street);
+
+        session.update(users);
+        session.getTransaction().commit();
+
+        session.close();
+    }
+
+    static public void updateUserPasswords(String password, int userId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Users users = session.get(Users.class, userId);
+
+        users.setPassword(Encryption.encrypt(password));
 
         session.update(users);
         session.getTransaction().commit();

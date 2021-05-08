@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import main.java.SceneManager;
+import main.java.controllers.auth.Login;
 import main.java.dao.HibernateUtil;
 import main.java.dao.PackageTypeDAO;
 import main.java.entity.PackageHistory;
@@ -158,6 +160,9 @@ public class ClientRegisterPackage implements Initializable {
     @FXML
     private Text bigPrice;
 
+    @FXML
+    private Button btnRegister;
+
     private ToggleGroup packageGroup = new ToggleGroup();
 
 
@@ -209,13 +214,28 @@ public class ClientRegisterPackage implements Initializable {
         registerSummaryPane.setTranslateX(+800);
 
         //Checking inputs
-        ErrorHandler.checkInputs(nameInput, "[a-zA-Z]+", "Imie powinno zawierać tylko litery");
-        ErrorHandler.checkInputs(surnameInput, "[a-zA-Z]+", "Nazwisko powinno zawierać tylko litery");
-        ErrorHandler.checkInputs(emailInput,"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", "Email powinien mieć poprawny format");
-        ErrorHandler.checkInputs(streetInput, "[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}", "Ulica powinna miec poprawny format");
-        ErrorHandler.checkInputs(cityInput, "[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}", "Miasto powinno zawierać tylko litery");
-        ErrorHandler.checkInputs(provinceInput, "[A-Za-z]{7,40}\\s?\\-?\\s?[A-Za-z]{0,40}", "Województwo powinno zawierać tylko litery");
-        ErrorHandler.checkInputs(numberInput, "\\+?[0-9]{0,2}\\s?[0-9]{3}\\s?[0-9]{3}\\s?[0-9]{3}", "Imie powinno zawierać tylko cyfry");
+        ErrorHandler.checkInputs(nameInput, "[a-zA-Z]+",
+                "Imie powinno zawierać tylko litery");
+
+        ErrorHandler.checkInputs(surnameInput, "[a-zA-Z]+",
+                "Nazwisko powinno zawierać tylko litery");
+
+        ErrorHandler.checkInputs(emailInput,"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
+                "Email powinien mieć poprawny format");
+
+        ErrorHandler.checkInputs(streetInput,
+                "[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?" +
+                        "\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}",
+                "Ulica powinna miec poprawny format");
+
+        ErrorHandler.checkInputs(cityInput, "[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}",
+                "Miasto powinno zawierać tylko litery");
+
+        ErrorHandler.checkInputs(provinceInput, "[A-Za-z]{7,40}\\s?\\-?\\s?[A-Za-z]{0,40}",
+                "Województwo powinno zawierać tylko litery");
+
+        ErrorHandler.checkInputs(numberInput, "\\+?[0-9]{0,2}\\s?[0-9]{3}\\s?[0-9]{3}\\s?[0-9]{3}",
+                "Imie powinno zawierać tylko cyfry");
     }
 
 
@@ -297,6 +317,8 @@ public class ClientRegisterPackage implements Initializable {
 
     @FXML
     void registerPackage(ActionEvent event) {
+        btnRegister.setDisable(true);
+
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime now = LocalDateTime.now();
         Random rand = new Random();
@@ -329,7 +351,9 @@ public class ClientRegisterPackage implements Initializable {
         else
             packages.setTypeId(3);;
 
-        packages.setUserId(1);      // Hardcoded for tests
+
+
+        packages.setUserId(Login.getUserID());      // Hardcoded for tests
         packages.setUserInfoId(userInfos.getId());
         packages.setPackageNumber(packageNumber);
         packages.setEmail(sumEmail.getText());

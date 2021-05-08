@@ -170,7 +170,7 @@
                         <Text layoutX="1.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%timeOfDelivery" />
                         <TextField fx:id="sumTime" editable="false" layoutX="460.0" layoutY="481.0" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
                         <Text layoutX="1.0" layoutY="546.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%addNotes" />
-                        <Button layoutX="-1.0" layoutY="742.0" mnemonicParsing="false" onAction="#registerPackage" prefHeight="48.0" prefWidth="700.0" styleClass="homeBlock" text="%registerPackage" />
+                        <Button fx:id="btnRegister" layoutX="-1.0" layoutY="742.0" mnemonicParsing="false" onAction="#registerPackage" prefHeight="48.0" prefWidth="700.0" styleClass="homeBlock" text="%registerPackage" />
                      </children>
                   </AnchorPane>
               </content>
