@@ -1,10 +1,13 @@
 package main.java.controllers.auth;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -28,13 +31,25 @@ import static main.java.dao.UsersDAO.getUsers;
 public class Login implements Initializable {
 
     @FXML
+    private MenuButton loginSettingsMenuButton;
+
+    @FXML
+    private MenuItem loginPolishLanguageMenuItem;
+
+    @FXML
+    private MenuItem loginEnglishLanguageMenuItem;
+
+    @FXML
+    private MenuItem loginOrangeColorMenuItem;
+
+    @FXML
+    private MenuItem loginRedColorMenuItem;
+
+    @FXML
+    private MenuItem loginWhiteColorMenuItem;
+
+    @FXML
     private ImageView loginLogoImageView;
-
-    @FXML
-    private ImageView loginPolishImageView;
-
-    @FXML
-    private ImageView loginEnglishImageView;
 
     @FXML
     private AnchorPane loginRightPaneAnchorPane;
@@ -65,12 +80,50 @@ public class Login implements Initializable {
     private static Preference pref = new Preference();
 
     public void initialize(URL url, ResourceBundle rb) {
+        ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
+        outboxBlack.setFitHeight(200);
+        outboxBlack.setFitWidth(150);
+        ImageView outboxWhite = new ImageView("main/resources/images/outbox_white.png");
+        outboxWhite.setFitHeight(200);
+        outboxWhite.setFitWidth(150);
+
+        ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
+        cogsBlack.setFitHeight(30);
+        cogsBlack.setFitWidth(30);
+        ImageView cogsWhite = new ImageView("main/resources/images/settings_cogs_white.png");
+        cogsWhite.setFitHeight(30);
+        cogsWhite.setFitWidth(30);
+
+
         if(pref.readPreference("language").equals("english")) {
-            loginPolishImageView.setDisable(false);
-            loginEnglishImageView.setDisable(true);
+            loginPolishLanguageMenuItem.setDisable(false);
+            loginEnglishLanguageMenuItem.setDisable(true);
+
         }else {
-            loginPolishImageView.setDisable(true);
-            loginEnglishImageView.setDisable(false);
+            loginPolishLanguageMenuItem.setDisable(true);
+            loginEnglishLanguageMenuItem.setDisable(false);
+        }
+
+        if(pref.readPreference("color").equals("red")) {
+            loginRedColorMenuItem.setDisable(true);
+            loginOrangeColorMenuItem.setDisable(false);
+            loginWhiteColorMenuItem.setDisable(false);
+            loginLogoImageView.setImage(outboxWhite.getImage());
+            loginSettingsMenuButton.setGraphic(cogsBlack);
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            loginRedColorMenuItem.setDisable(false);
+            loginOrangeColorMenuItem.setDisable(true);
+            loginWhiteColorMenuItem.setDisable(false);
+            loginLogoImageView.setImage(outboxBlack.getImage());
+            loginSettingsMenuButton.setGraphic(cogsWhite);
+        }
+        else{
+            loginRedColorMenuItem.setDisable(false);
+            loginOrangeColorMenuItem.setDisable(false);
+            loginWhiteColorMenuItem.setDisable(true);
+            loginLogoImageView.setImage(outboxBlack.getImage());
+            loginSettingsMenuButton.setGraphic(cogsWhite);
         }
 
         if (App.isConnectionError()) {
@@ -289,13 +342,66 @@ public class Login implements Initializable {
         Login.userInfoID = userInfoID;
     }
 
-    public void setPolishLanguage(MouseEvent mouseEvent) {
+    public void setPolishLanguage(ActionEvent actionEvent) {
         pref.addPreference("language","polish");
         SceneManager.renderScene("login");
     }
 
-    public void setEnglishLanguage(MouseEvent mouseEvent) {
+    public void setEnglishLanguage(ActionEvent actionEvent) {
         pref.addPreference("language","english");
         SceneManager.renderScene("login");
+    }
+
+    public void setOrangeColor(ActionEvent actionEvent) {
+        pref.addPreference("color","orange");
+        SceneManager.renderScene("login");
+    }
+
+    public void setRedColor(ActionEvent actionEvent) {
+        pref.addPreference("color","red");
+        SceneManager.renderScene("login");
+    }
+
+    public void setWhiteColor(ActionEvent actionEvent) {
+        pref.addPreference("color","white");
+        SceneManager.renderScene("login");
+    }
+
+    public void handleMouseEnterMenuSettingsButton(MouseEvent mouseEvent) {
+        ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
+        cogsBlack.setFitHeight(30);
+        cogsBlack.setFitWidth(30);
+        ImageView cogsWhite = new ImageView("main/resources/images/settings_cogs_white.png");
+        cogsWhite.setFitHeight(30);
+        cogsWhite.setFitWidth(30);
+
+        if(pref.readPreference("color").equals("red")) {
+            loginSettingsMenuButton.setGraphic(cogsWhite);
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            loginSettingsMenuButton.setGraphic(cogsBlack);
+        }
+        else{
+            loginSettingsMenuButton.setGraphic(cogsBlack);
+        }
+    }
+
+    public void handleMouseExitMenuSettingsButton(MouseEvent mouseEvent) {
+        ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
+        cogsBlack.setFitHeight(30);
+        cogsBlack.setFitWidth(30);
+        ImageView cogsWhite = new ImageView("main/resources/images/settings_cogs_white.png");
+        cogsWhite.setFitHeight(30);
+        cogsWhite.setFitWidth(30);
+
+        if(pref.readPreference("color").equals("red")) {
+            loginSettingsMenuButton.setGraphic(cogsBlack);
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            loginSettingsMenuButton.setGraphic(cogsWhite);
+        }
+        else{
+            loginSettingsMenuButton.setGraphic(cogsWhite);
+        }
     }
 }

@@ -7,6 +7,7 @@ import main.java.entity.PackageType;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public class AreasDAO {
@@ -48,5 +49,17 @@ public class AreasDAO {
             areas.add(ent);
         }
         return areas;
+    }
+
+    static public int getAreasIdByName(String name){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("select id from Areas WHERE name =:name");
+        query.setParameter("name", name);
+
+        List<Integer> listOfId = query.list();
+
+        return listOfId.get(0);
+
     }
 }

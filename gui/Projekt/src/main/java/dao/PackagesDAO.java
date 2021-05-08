@@ -39,11 +39,10 @@ public class PackagesDAO {
     {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
         String hql = "SELECT NEW main.java.entity.PackagesDTO(P.userId, P.id, P.packageNumber, P" +
-                ".timeOfPlannedDelivery," +
-                " UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment) " +
-                "FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId AND P.userInfoId = UI.id and " +
-                "PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM PH WHERE PH.packageId = P.id )) AND NOT PH.status = 'Dostarczona' " + // ZMIANANANANANANAN @@#@#@#@#@#
-                "GROUP BY P.packageNumber";
+                ".timeOfPlannedDelivery, UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status," +
+                " P.additionalComment) FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId " +
+                "AND P.userInfoId = UI.id and PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM" +
+                " PH WHERE PH.packageId = P.id )) AND NOT PH.status = 'Dostarczona' GROUP BY P.packageNumber";
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         List<PackagesDTO> results = query.list();
@@ -51,6 +50,7 @@ public class PackagesDAO {
             packages.add(ent);
         }
         session.close();
+
         return packages;
     }
 

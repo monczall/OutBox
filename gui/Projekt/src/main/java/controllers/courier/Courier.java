@@ -47,8 +47,6 @@ public class Courier implements Initializable {
 //        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
 //        loggedUser.setText(ui.getName() + " " + ui.getSurname());
 
-        SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: red;");
-
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
 

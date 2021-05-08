@@ -164,11 +164,15 @@ public class ManagerCouriersAdd implements Initializable {
                 String password = Encryption.encrypt("test");
                 String role = "Kurier";
 
-                //System.out.println("name: " + nameString + "surname: " + surnameString + "email: " + emailString + "phone: " + phoneString + "street: " + streetString + "city: " + cityString + "wojewodztow: " + voivodeshipString + "password: " + password);
+                //System.out.println("name: " + nameString + "surname: " + surnameString + "email: " + emailString +
+                // "phone: " + phoneString + "street: " + streetString + "city: " + cityString + "wojewodztow: " +
+                // voivodeshipString + "password: " + password);
 
 
 
-                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role);
+
+                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString, voivodeshipString, password, role, null);
+
                 alertPane.setVisible(true);
             }
         }

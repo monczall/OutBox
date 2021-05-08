@@ -6,11 +6,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.dao.AreasDAO;
 import main.java.dao.PackageTypeDAO;
+import main.java.features.Alerts;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,8 +46,11 @@ public class AdminAddArea {
     @FXML
     private TextField registerAreaName;
 
+    @FXML
+    private Button addAreaButton;
 
-
+    @FXML
+    private AnchorPane RightPaneAnchorPane;
 
     public void register(){
         if(!isEmpty()){
@@ -53,25 +59,19 @@ public class AdminAddArea {
                 //POMYSLNE DODANIE OBSZARU
                 AreasDAO.insertAreas(registerAreaName.getText(), registerVoivodeshipField.getText(), registerCityField.getText(), registerStreetField.getText());
                 System.out.println("Dodano obszar");
-
+                Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton,"CHECK",
+                        App.getLanguageProperties("adminSuccessAreaAdd"), 320, 86, "alertSuccess");
+                clearData();
             }else{
                 //SPRAWDZENIE BLEDOW
 
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Niepoprawne dane");
-                alert.setHeaderText(null);
-                alert.setContentText("Podano niepoprawne dane! \nPopraw zaznaczone błędy w formularzu rejestracji.");
-
-                alert.showAndWait();
+                Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton,"WARNING",
+                        App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Puste pola");
-            alert.setHeaderText(null);
-            alert.setContentText("Pozostawiono puste pola! Uzupełnij wymagane informacje.");
-
-            alert.showAndWait();
+            Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton,"WARNING",
+                    App.getLanguageProperties("adminBlankFields"), 525, 86, "alertFailure");
         }
     }
 
@@ -147,7 +147,14 @@ public class AdminAddArea {
     }
 
 
+    private void clearData() {
+        registerStreetField.setText(" ");
+        registerCityField.setText(" ");
+        registerVoivodeshipField.setText(" ");
+        registerAreaName.setText(" ");
 
+
+    }
 
 
     public void handleRegister(MouseEvent mouseEvent) {

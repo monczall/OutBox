@@ -1,54 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.*?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity"
-      maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="111.0" prefWidth="832.0"
-      xmlns="http://javafx.com/javafx/15.0.1"
-      fx:controller="main.java.controllers.courier.ExpendableRow">
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.courier.ExpendableRow">
     <children>
-        <Button layoutX="455.0" layoutY="76.0" mnemonicParsing="false"
-                onAction="#updateStatus" text="Zatwierdź">
-            <graphic>
-                <FontAwesomeIconView glyphName="CHECK"
-                                     styleClass="iconsAwesome"/>
-            </graphic>
-        </Button>
-        <Label layoutX="163.0" layoutY="7.0" text="Nadawca"/>
-        <ComboBox fx:id="changeStatus" layoutX="204.0" layoutY="75.0"
-                  prefHeight="25.0" prefWidth="235.0"
-                  styleClass="inputBox"/>
-        <Text fill="WHITE" layoutX="33.0" layoutY="45.0" strokeType="OUTSIDE"
-              strokeWidth="0.0" text="Imię:"/>
-        <Text fill="WHITE" layoutX="20.0" layoutY="68.0" strokeType="OUTSIDE"
-              strokeWidth="0.0" text="Miasto:"/>
-        <Text fill="WHITE" layoutX="256.0" layoutY="45.0" strokeType="OUTSIDE"
-              strokeWidth="0.0" text="Nazwisko:"/>
-        <Text fill="WHITE" layoutX="17.0" layoutY="91.0" strokeType="OUTSIDE"
-              strokeWidth="0.0" text="Telefon:"/>
-        <Text fill="WHITE" layoutX="280.0" layoutY="68.0" strokeType="OUTSIDE"
-              strokeWidth="0.0" text="Ulica:"/>
-        <Text fx:id="name" fill="WHITE" layoutX="67.0" layoutY="45.0"
-              strokeType="OUTSIDE" strokeWidth="0.0" text=""
-              wrappingWidth="174.80339813232422"/>
-        <Text fx:id="city" fill="WHITE" layoutX="67.0" layoutY="68.0"
-              strokeType="OUTSIDE" strokeWidth="0.0" text=""
-              wrappingWidth="174.80339813232422"/>
-        <Text fx:id="surname" fill="WHITE" layoutX="322.0" layoutY="45.0"
-              strokeType="OUTSIDE" strokeWidth="0.0" text=""
-              wrappingWidth="156.80339813232422"/>
-        <Text fx:id="address" fill="WHITE" layoutX="322.0" layoutY="68.0"
-              strokeType="OUTSIDE" strokeWidth="0.0" text=""
-              wrappingWidth="156.80339813232422"/>
-        <Text fx:id="phone" fill="WHITE" layoutX="67.0" layoutY="91.0"
-              strokeType="OUTSIDE" strokeWidth="0.0" text=""
-              wrappingWidth="156.80339813232422"/>
-        <TextArea fx:id="comments" editable="false" layoutX="560.0"
-                  layoutY="35.0" prefHeight="59.0" prefWidth="262.0"
-                  styleClass="inputArea" wrapText="true"/>
-        <Label layoutX="675.0" layoutY="7.0" text="Uwagi"/>
+        <Label layoutX="163.0" layoutY="7.0" text="Nadawca" />
+        <ComboBox fx:id="changeStatus" layoutX="204.0" layoutY="75.0" onAction="#setStatus" prefHeight="25.0" prefWidth="235.0" styleClass="inputBox" />
+        <Text fill="WHITE" layoutX="33.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię:" />
+        <Text fill="WHITE" layoutX="20.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miasto:" />
+        <Text fill="WHITE" layoutX="256.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko:" />
+        <Text fill="WHITE" layoutX="17.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon:" />
+        <Text fill="WHITE" layoutX="280.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ulica:" />
+        <Text fx:id="name" fill="WHITE" layoutX="67.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="174.80339813232422" />
+        <Text fx:id="city" fill="WHITE" layoutX="67.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="174.80339813232422" />
+        <Text fx:id="surname" fill="WHITE" layoutX="322.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
+        <Text fx:id="address" fill="WHITE" layoutX="322.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
+        <Text fx:id="phone" fill="WHITE" layoutX="67.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
+        <TextArea fx:id="comments" editable="false" layoutX="560.0" layoutY="35.0" prefHeight="59.0" prefWidth="262.0" styleClass="inputArea" wrapText="true" />
+        <Label layoutX="675.0" layoutY="7.0" text="Uwagi" />
     </children>
 </Pane>

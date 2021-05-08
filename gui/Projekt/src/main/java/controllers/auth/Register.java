@@ -212,7 +212,8 @@ public class Register {
                         city,
                         voivodeship,
                         password,
-                        role);
+                        role,
+                        null);
 
                 //REJESTRACJA POMYSLNA
                 System.out.println("Zarejestrowano");

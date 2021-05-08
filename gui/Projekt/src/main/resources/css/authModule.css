@@ -145,6 +145,53 @@
     -fx-scale-y: 0.9;
     -fx-scale-x: 0.9;
 }
+.menuButton{
+    -fx-background-color: -fx-theme-secondary-color;
+    -fx-background-radius: 3;
+}
+.menuButton .label{
+    -fx-text-fill: -fx-white;
+}
+.menu-button > .arrow-button, .menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+.menuButton:hover {
+    -fx-background-color: -fx-theme-color;
+    -fx-background-radius: 3;
+    -fx-border-color: -fx-theme-secondary-color;
+    -fx-border-radius: 3;
+}
+.menuItemButton{
+    -fx-background-color: -fx-dark-bg;
+    -fx-background-radius: 3;
+    -fx-text-fill: -fx-theme-color;
+    -fx-alignment: center;
+}
+.menuItemButton .label{
+    -fx-text-fill: -fx-white;
+}
+.menuItemButton:disabled{
+    -fx-opacity: 0.9;
+}
+.menuItemButton:hover{
+    -fx-background-color: -fx-dark-bg;
+    -fx-background-radius: 3;
+    -fx-border-color: -fx-theme-secondary-color;
+    -fx-border-radius: 3;
+    -fx-text-fill: -fx-theme-color;
+    -fx-alignment: center;
+}
+.menuItemButton:hover .label{
+    -fx-text-fill: -fx-theme-color;
+}
+.context-menu {
+    -fx-background-color: -fx-theme-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-border-color: -fx-dark-bg;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
 /*-------------TEXT FIELDS-------------*/
 .textFields{
     -fx-background-color: -fx-textFields-bg;

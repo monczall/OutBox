@@ -90,6 +90,6 @@
       <Circle fx:id="editRoleCircle" fill="ORANGE" layoutX="403.0" layoutY="489.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
       <FontAwesomeIconView glyphName="USER" layoutX="389.0" layoutY="500.0" size="32" />
       <Text layoutX="762.0" layoutY="74.0" onMouseClicked="#back" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminBack" />
-      <Button fx:id="editEditButtonButton1" layoutX="237.0" layoutY="575.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#deleteEmployee" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="%adminDeleteEmployee" />
+      <Button fx:id="deleteButton" layoutX="237.0" layoutY="575.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#deleteEmployee" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="%adminDeleteEmployee" />
     </children>
 </AnchorPane>

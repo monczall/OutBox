@@ -24,6 +24,7 @@ import java.util.stream.IntStream;
 public class ExpendableRow implements Initializable {
 
     String status = CourierSecond.getStatus();
+    private static String statusReturned;
 
     @FXML
     private Text name;
@@ -49,6 +50,14 @@ public class ExpendableRow implements Initializable {
     @FXML
     private ComboBox<PackageStatus> changeStatus;
 
+    public static String getStatusReturned() {
+        return statusReturned;
+    }
+
+    public static void setStatusReturned(String statusReturned) {
+        ExpendableRow.statusReturned = statusReturned;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UserInfos ui = new UserInfos();
@@ -69,14 +78,7 @@ public class ExpendableRow implements Initializable {
     }
 
     @FXML
-    void updateStatus(ActionEvent event) throws IOException {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        if (changeStatus.getSelectionModel().getSelectedIndex() != -1) {
-            if (!changeStatus.getValue().toString().equals(status)) {
-                PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), changeStatus.getValue().toString(),
-                        Timestamp.valueOf(dateTimeFormatter.format(now)));
-            }
-        }
+    void setStatus(ActionEvent event) {
+        setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().toString());
     }
 }

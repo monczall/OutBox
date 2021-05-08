@@ -44,6 +44,7 @@
 }
 .icons{
     -fx-fill: -fx-second-color;
+    -fx-cursor: hand;
 }
 .welcomeHello, .welcomeUser{
     -fx-font-size: 20px;
@@ -114,7 +115,7 @@
 }
 
 .inputBox{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-font-size: 15px;
     -fx-background-color: transparent; /*#202020*/
     -fx-mark-color: #ffa500;
@@ -159,7 +160,7 @@
 .yellowBackGround{
     -fx-background-color:  #FFA500;
 }
-/* #FFA532 darker yellow*/
+
 .fill{
     -fx-fill: -fx-main-color;
 }
@@ -244,7 +245,7 @@
     -fx-padding: 0 0 0 30;
 }
 
-.choiceBox{
+.choice-box{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 9;
     -fx-border-color: -fx-main-color;
@@ -257,6 +258,13 @@
     -fx-pref-height: 35;
     -fx-max-height: 35;
     -fx-padding: 0 0 0 30;
+    -fx-text-fill: black;
+
+}
+
+.choiceBox .label {
+    -fx-text-fill: black;
+    -fx-font-weight: none;
 }
 
 /*-------------MENU - RAPORT-------------*/
@@ -363,6 +371,11 @@
     -fx-background-color: silver;
 }
 
+.date-picker-popup .label{
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
 
 
 /*-------------MENU - PACKSETTINGS-------------*/
@@ -417,13 +430,14 @@
     -fx-border-color: -fx-main-color;
     -fx-border-width: 3;
     -fx-border-radius: 7;
-    -fx-min-width: 140;
-    -fx-pref-width: 140;
-    -fx-max-width: 140;
+    -fx-min-width: 100;
+    -fx-pref-width: 100;
+    -fx-max-width: 100;
     -fx-min-height: 35;
     -fx-pref-height: 35;
     -fx-max-height: 35;
-    -fx-padding: 0 0 0 5;
+    -fx-alignment: center;
+
 }
 
 .textFieldsSettingsWeight{
@@ -438,7 +452,7 @@
     -fx-min-height: 35;
     -fx-pref-height: 35;
     -fx-max-height: 35;
-    -fx-padding: 0 0 0 5;
+    -fx-alignment: center;
 }
 
 
@@ -496,6 +510,8 @@
     -fx-text-fill: -fx-main-color;
     -fx-font-weight: bold;
 }
+
+
 
 .table-view .table-row-cell:odd, .table-view .table-row-cell:even{
     -fx-alignment: center;
@@ -583,3 +599,4 @@
 .backIcon{
     -fx-fill: -fx-gray-color;
 }
+

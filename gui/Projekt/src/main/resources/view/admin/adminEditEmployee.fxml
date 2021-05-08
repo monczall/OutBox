@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -23,6 +24,6 @@
             </columns>
         </TableView>
         <TextField fx:id="parametr" layoutX="185.0" layoutY="150.0" onKeyReleased="#search" prefHeight="33.0" prefWidth="150.0" promptText="%adminAnyParameter" styleClass="inputBox" />
-      <Text layoutX="480.0" layoutY="601.0" onMouseClicked="#showEdit" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminEdit" />
+      <Button fx:id="editTable" layoutX="446.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#showEdit" styleClass="optionGroup" text="%adminEdit" />
     </children>
 </AnchorPane>

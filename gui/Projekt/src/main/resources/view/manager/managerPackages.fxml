@@ -10,7 +10,7 @@
 <AnchorPane fx:id="mainWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerPackages">
     <children>
         <Text fill="WHITE" layoutX="203.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%shipmentTitle" />
-        <FontAwesomeIconView fill="ORANGE" glyphName="DROPBOX" layoutX="152.0" layoutY="81.0" size="40" styleClass="partIcon" />
+        <FontAwesomeIconView fill="ORANGE" glyphName="DROPBOX" layoutX="152.0" layoutY="81.0" size="40" styleClass="blockIconTitle" />
         <TableView fx:id="table" layoutX="102.0" layoutY="169.0" prefHeight="467.0" prefWidth="857.0" stylesheets="@../../css/manager.css">
             <columns>
                 <TableColumn fx:id="packageNumber" prefWidth="131.3333511352539" text="%packageNumber" />

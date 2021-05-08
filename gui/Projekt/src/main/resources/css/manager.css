@@ -1,14 +1,20 @@
 /*-------------COLORS-------------*/
 *{
-    -fx-main-color: #ffa500;
     -fx-dark-color: #121212;
     -fx-color-Text:white;
     -fx-gray-color: #8f8f8f;
-    -fx-second-color: #000;
     -fx-color-error:white;
     -fx-shadow: #000;
     -fx-dark-transparent: #121212;
 
+}
+
+.blockIconTitle{
+    -fx-fill: -fx-main-color;
+}
+
+.blockIcon{
+    -fx-fill: -fx-second-color;
 }
 
 /*-------- ALL SCENES --------*/
@@ -18,27 +24,27 @@
 
 .infoBackground{  /*Background color AnchorPane*/
     -fx-background-color: #121212;
-    -fx-border-color: #ffa500;
+    -fx-border-color: -fx-main-color;
 }
 
 .textLabel{ /*section name*/
     -fx-font-size: 20px;
-    -fx-text-fill: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
     -fx-font-weight: bold;
 }
 
 .textLabelSmall{
     -fx-font-size: 16px;
-    -fx-text-fill: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
     -fx-font-weight: bold;
 }
 
 /* All buttons CSS */
 .homeBlock{
-    -fx-background-color: #ffa500;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-background-radius: 0;
@@ -47,15 +53,15 @@
 
 .homeBlock:hover, .homeBlock:hover > .blockIcon{
     -fx-background-color: transparent;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-border-width: 2.5px;
-    -fx-border-color: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-border-color: -fx-main-color;
+    -fx-fill: -fx-main-color;
     -fx-cursor: hand;
 }
 
 .infoBoxButtons{
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-text-fill: black;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -65,10 +71,10 @@
 
 .infoBoxButtons:hover, .infoBoxButtons:hover > .blockIcon{
     -fx-background-color: transparent;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-border-width: 2px;
-    -fx-border-color: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-border-color: -fx-main-color;
+    -fx-fill: -fx-main-color;
     -fx-cursor: hand;
 }
 
@@ -78,37 +84,64 @@
 
 /* All input CSS */
 .inputBox{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-font-size: 14px;
     -fx-background-color: transparent; /*#202020*/
-    -fx-mark-color: #ffa500;
+    -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-color: #ffa500;
+    -fx-border-color: -fx-main-color;
     -fx-border-width: 0 0 2 0;
     -fx-cursor: text;
 }
 
+.inputBox .list-cell{
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-main-color;
+    -fx-background: -fx-dark-color;
+
+}
+.inputBox .list-view{
+    -fx-background-color: -fx-main-color;
+    -fx-background: -fx-main-color;
+}
+.inputBox .list-view .list-cell:filled:selected{
+    /*-fx-text-fill: -fx-second-color;*/
+    /*-fx-background-color: -fx-main-color;*/
+    -fx-font-weight: bold;
+}
+.inputBox .list-view .list-cell:filled{
+    -fx-background-color: -fx-dark-color;
+}
+.inputBox .list-view .list-cell:hover{
+    -fx-text-fill: -fx-second-color;
+    -fx-background-color: -fx-main-color;
+    -fx-font-weight: bold;
+}
+.inputBox .list-view .scroll-bar:vertical .thumb{
+    -fx-background-color: -fx-second-color;
+}
+
 /* All DatePicker CSS */
 .inputData{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-font-size: 15px;
     -fx-background-color: transparent; /*#202020*/
-    -fx-mark-color: #ffa500;
+    -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-color: #ffa500;
+    -fx-border-color: -fx-main-color;
     -fx-border-width: 0 0 2 0;
 }
 
 .inputData > .text-field {
     -fx-background-color:transparent;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
 }
 
 .inputData > .text-field:focused {
     -fx-background-color:transparent;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
 }
 
 .inputData > .arrow-button { /* background calendar icon*/
@@ -117,24 +150,24 @@
 }
 
 .inputData > .arrow-button > .arrow { /*calendar icon*/
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-font-size: 22px;
 }
 
 .date-picker-popup { /*border window with date calendar*/
-    -fx-background-color:#ffa500;
+    -fx-background-color:-fx-main-color;
 }
 
 .date-picker-popup > .month-year-pane { /*background color tittle calendar*/
-    -fx-background-color: #ffa500;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
 
 .date-picker-popup > * > .spinner { /*text color tittle calendar*/
-    -fx-background-color: #ffa500;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: red;
     -fx-cursor: hand;
 }
 
@@ -162,7 +195,7 @@
 }
 
 .date-picker-popup > .calendar-grid { /*color days in week*/
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-text-fill: black;
     -fx-padding: 0;
     -fx-border-width: 1 0 0 0;
@@ -177,11 +210,11 @@
     -fx-alignment: BASELINE_CENTER;
     -fx-opacity: 1.0;
     -fx-cursor: hand;
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
 }
 
 .date-picker-popup > * > .date-cell:hover{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-background-color: black;
 }
 
@@ -192,12 +225,12 @@
 
 /*-------- MENU --------*/
 .sideBackground{
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
 }
 
 .sideButtons{
-    -fx-background-color: #ffa500;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     /*-fx-text-alignment: right;*/
@@ -206,12 +239,12 @@
 }
 .sideButtons:hover{
     -fx-background-color: #121212;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-cursor: hand;
 }
 
 .confirmButtons{
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-text-fill: black;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -221,7 +254,7 @@
 }
 .confirmButtons:hover{
     -fx-background-color: #121212;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-cursor: hand;
 }
 
@@ -230,7 +263,7 @@
 }
 
 .sideIcons{
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-background-radius: 0;
 }
 
@@ -247,7 +280,7 @@
     -fx-text-fill: linen;
     -fx-font-size: 1.666em;
     -fx-font-weight: bold;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
 }
 
 .table-view .column-header .label{
@@ -274,7 +307,7 @@
     -fx-text-fill: linen;
     -fx-font-size: 1.666em;
     -fx-font-weight: bold;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
 }
 
 .table-row-cell:even{
@@ -296,13 +329,13 @@
 }
 
 .table-row-cell:odd:filled:selected {
-    -fx-background-color: derive(#111, 0%);
-    -fx-border-color: -fx-main-color;
+    -fx-background-color: -fx-main-color, derive(#111, 0%);
+    -fx-background-insets: 0, 1 1 1 1;
 }
 
 .table-row-cell:even:filled:selected {
-    -fx-background-color: derive(#111, 23%);
-    -fx-border-color: -fx-main-color;
+    -fx-background-color: -fx-main-color, derive(#111, 23%);
+    -fx-background-insets: 0, 1 1 1 1;
 }
 
 .table-row-cell:hover {
@@ -324,13 +357,24 @@
 .table-view .table-row-cell:odd, .table-view .table-row-cell:even{
     -fx-alignment: center;
 }
+
 .label{
     -fx-text-fill: -fx-main-color;
     -fx-font-weight: bold;
 }
+
 .table-column {
     -fx-alignment: TOP-CENTER;
 }
+
+.inputArea{
+    -fx-background-color: -fx-main-color, derive(#111, 0%);
+    -fx-background-insets: 0, 1 1 1 1;
+    -fx-text-fill: white;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: -fx-main-color;
+}
+
 .button{
     -fx-base: -fx-main-color;
     -fx-font-weight: bold;
@@ -354,13 +398,13 @@
 /*-------- Raports --------*/
 
 .inputBoxCourier{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-font-size: 17px;
     -fx-background-color: transparent; /*#202020*/
-    -fx-mark-color: #ffa500;
+    -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-color: #ffa500;
+    -fx-border-color: -fx-main-color;
     -fx-border-width: 0 0 2 0;
     -fx-cursor: text;
 }
@@ -369,7 +413,7 @@
     -fx-text-fill: red;
     -fx-font-size: 17px;
     -fx-background-color: transparent; /*#202020*/
-    -fx-mark-color: #ffa500;
+    -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
     -fx-border-color: red;
@@ -382,8 +426,8 @@
     -fx-background-radius: 0;
     -fx-background-color: transparent;
     -fx-font-size: 20px;
-    -fx-text-fill: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
     -fx-font-weight: bold;
 }
 

@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -11,10 +12,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.dao.PackagesDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.*;
+import main.java.features.Alerts;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +28,8 @@ import java.util.ResourceBundle;
 public class AdminEditEmployee implements Initializable {
 
     private static int userID;
+
+    private static int userInfoID;
 
     @FXML
     private AnchorPane edit;
@@ -40,7 +46,8 @@ public class AdminEditEmployee implements Initializable {
     private TableColumn<Users, String> mail;
     @FXML
     private TableColumn<Users, String> phone;
-
+    @FXML
+    private Button editTable;
     @FXML
     private TextField parametr;
 
@@ -52,40 +59,38 @@ public class AdminEditEmployee implements Initializable {
         AdminEditEmployee.userID = userID;
     }
 
-    public void showEdit(MouseEvent mouseEvent)throws IOException
-        {
+    public static int getUserInfoID() {
+        return userInfoID;
+    }
 
+    public static void setUserInfoID(int userInfoID) {
+        AdminEditEmployee.userInfoID = userInfoID;
+    }
+
+    public void showEdit(MouseEvent mouseEvent) throws IOException {
+        if (table.getSelectionModel().getSelectedIndex() == -1) {
+            Alerts.createCustomAlert(edit, editTable, "WARNING",
+                    App.getLanguageProperties("adminNotChosen"), 250, 86, "alertFailure");
+        } else {
             setUserID(table.getSelectionModel().getSelectedItem().getUserID());
+            setUserInfoID(table.getSelectionModel().getSelectedItem().getUserInfoID());
             SceneManager.loadScene("../../../resources/view/admin/adminEdit.fxml", edit);
         }
+    }
 
-    private final ObservableList<UsersDTO> userList = FXCollections.observableArrayList();
-
-    private ObservableList<UsersDTO> searchList;
+    private final ObservableList<UsersDTO> searchList = UsersDAO.getUserEdit();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        ObservableList<Users> usersList = UsersDAO.getUserEdit();
-
-
-
-
-        for (int i = 0; i < usersList.size(); i++) {
-            userList.add(new UsersDTO(usersList.get(i).getId(), usersList.get(i).getUserInfosByUserInfoId().getName(), usersList.get(i).getUserInfosByUserInfoId().getSurname(),
-                    usersList.get(i).getUserInfosByUserInfoId().getPhoneNumber(), usersList.get(i).getUserInfosByUserInfoId().getCity(),
-                    usersList.get(i).getEmail()));
-        }
-
-        searchList = userList;
-
+        ObservableList<UsersDTO> usersList = UsersDAO.getUserEdit();
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         city.setCellValueFactory(new PropertyValueFactory<>("city"));
         mail.setCellValueFactory(new PropertyValueFactory<>("email"));
         phone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
 
-        table.setItems(userList);
+        table.setItems(usersList);
 
 
         table.getSelectionModel().select(0);
@@ -101,12 +106,11 @@ public class AdminEditEmployee implements Initializable {
                     searchList.get(i).getCity().toLowerCase().contains(searchedWord) ||
                     searchList.get(i).getEmail().toLowerCase().contains(searchedWord) ||
                     searchList.get(i).getPhoneNumber().toLowerCase().contains(searchedWord)
-                            ) {
+            ) {
                 table.getItems().add(searchList.get(i));
 
             }
         }
-        System.out.println(searchedWord);
-        System.out.println(searchList.size());
     }
 }
+

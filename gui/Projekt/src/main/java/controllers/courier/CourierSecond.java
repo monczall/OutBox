@@ -1,25 +1,32 @@
 package main.java.controllers.courier;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
-import main.java.entity.*;
+import main.java.entity.PackageHistory;
+import main.java.entity.Packages;
+import main.java.entity.PackagesDTO;
+import main.java.entity.UserInfos;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class CourierSecond implements Initializable {
@@ -28,21 +35,12 @@ public class CourierSecond implements Initializable {
     private static String comment;
     private static int packageId;
     private static String status;
-
-    public static int getPackageId() {
-        return packageId;
-    }
-
-    public static void setPackageId(int packageId) {
-        CourierSecond.packageId = packageId;
-    }
-
-    Pane pane;
-
     private final ObservableList<PackagesDTO> packages = PackagesDAO.addTable();
+    private Pane pane;
 
     @FXML
     private TableView<PackagesDTO> table;
+    TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
     @FXML
     private TableColumn<Packages, String> packageNumber;
     @FXML
@@ -61,6 +59,14 @@ public class CourierSecond implements Initializable {
     private TableColumn<Packages, Timestamp> time;
     @FXML
     private TextField searchField;
+
+    public static int getPackageId() {
+        return packageId;
+    }
+
+    public static void setPackageId(int packageId) {
+        CourierSecond.packageId = packageId;
+    }
 
     public static int getId() {
         return id;
@@ -86,16 +92,13 @@ public class CourierSecond implements Initializable {
         CourierSecond.status = status;
     }
 
-    public void updateTable()
-    {
+    public void updateTable() {
         table.getItems().clear();
         table.setItems(PackagesDAO.addTable());
     }
-    TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
 
         packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
@@ -107,8 +110,6 @@ public class CourierSecond implements Initializable {
         telephone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         table.getColumns().add(expanderRow);
         updateTable();
-        table.getSelectionModel().select(0);
-
     }
 
 
@@ -137,30 +138,44 @@ public class CourierSecond implements Initializable {
             setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
             setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
             setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
+
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
+            Button button = new Button("Zatwierdź");
+            button.setLayoutX(455);
+            button.setLayoutY(76);
+            button.setPrefHeight(25);
+            button.setPrefWidth(90);
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    String status = ExpendableRow.getStatusReturned();
+                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    if (!status.equals("")) {
+                        PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), status,
+                                Timestamp.valueOf(dateTimeFormatter.format(now)));
+                    }
+                    updateTable();
+                }
+            });
+
+            pane.getChildren().add(button);
+            FontAwesomeIconView arrow = new FontAwesomeIconView();      //Creating icon
+            arrow.setGlyphName("CHECK");
+            arrow.setSize("12");
+            arrow.getStyleClass().add("iconNext");
+            button.setGraphic(arrow);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        arg.isExpanded();
 
-        for (int i = 0; i < table.getItems().size(); i++)
-        {
-            if(expanderRow.getExpandedProperty(table.getItems().get(i)).getValue() &&
-            arg.getTableRow().getIndex() != i)
-            {
+        for (int i = 0; i < table.getItems().size(); i++) {
+            if (expanderRow.getExpandedProperty(table.getItems().get(i)).getValue() &&
+                    arg.getTableRow().getIndex() != i) {
                 expanderRow.toggleExpanded(i);
             }
         }
-
-//        for (PackagesExtended ent : table.getItems()
-//             ) {
-//            if(expanderRow.getExpandedProperty(ent).getValue() == true){
-//                expanderRow.toggleExpanded(i);
-//            }
-//            i++;
-//        }
-
-
         return pane;
     }
 }

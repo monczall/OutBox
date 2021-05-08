@@ -96,7 +96,7 @@ public class ManagerPackagesStare implements Initializable {
 
         packages = PackagesDAO.readPackages();
 
-
+        /*
         System.out.println("===================TYPY PACZEK====================");
         packageTypes = PackageTypeDAO.getTypeInfo();
         for(int i=0; i<packageTypes.size(); i++){
@@ -106,7 +106,8 @@ public class ManagerPackagesStare implements Initializable {
         System.out.println("===================INFO PACZKI====================");
 
         for(int i=0; i<packages.size(); i++){
-            System.out.println("Numer paczki (id:"+packages.get(i).getId()+"): "+packages.get(i).getPackageNumber() + "IDodbiorcy("+ packages.get(i).getUserInfoId()+")");
+            System.out.println("Numer paczki (id:"+packages.get(i).getId()+"): "+packages.get(i).getPackageNumber() +
+                    "IDodbiorcy("+ packages.get(i).getUserInfoId()+")");
         }
 
         System.out.println("===================STATUS PACZKI====================");
@@ -121,15 +122,18 @@ public class ManagerPackagesStare implements Initializable {
             users = UsersDAO.getUsersId(packages.get(i).getUserId());
             sender = UserInfosDAO.getUserInfoByID(users.get(0).getUserInfoId());
 
-            System.out.println("userinfoID: " + sender.get(0).getName() +" "+sender.get(0).getSurname()+" "+sender.get(0).getCity()+" "+sender.get(0).getPhoneNumber());
+            System.out.println("userinfoID: " + sender.get(0).getName() +" "+sender.get(0).getSurname()+" " +
+                    ""+sender.get(0).getCity()+" "+sender.get(0).getPhoneNumber());
         }
 
         System.out.println("===================ODBIORCA====================");
         for(int i=0; i<packages.size(); i++){
             recipient = UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId());
-            System.out.println("ODBIORCA("+recipient.get(0).getId()+"): "+recipient.get(0).getName() + " " +recipient.get(0).getSurname()+ " " +recipient.get(0).getCity()+ " " +recipient.get(0).getPhoneNumber());
+            System.out.println("ODBIORCA("+recipient.get(0).getId()+"): "+recipient.get(0).getName() + "" +
+                    " " +recipient.get(0).getSurname()+ " " +recipient.get(0).getCity()+ "" +
+                    " " +recipient.get(0).getPhoneNumber());
         }
-
+        */
         for(int i=0; i<packages.size(); i++){
             PackagesManager pack = new PackagesManager();
 
@@ -139,22 +143,33 @@ public class ManagerPackagesStare implements Initializable {
             pack.setTableType(PackageTypeDAO.getTypeById(packages.get(i).getTypeId()).get(0));
 
            // users = UsersDAO.getUsersId(packages.get(i).getUserId());
-            pack.setTableSenderName(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getName());
-            pack.setTableSenderSurname(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getSurname());
-            pack.setTableSenderCity(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getCity());
-            pack.setTableSenderPhone(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getPhoneNumber());
+            pack.setTableSenderName(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId())
+                    .get(0).getUserInfoId()).get(0).getName());
+            pack.setTableSenderSurname(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId())
+                    .get(0).getUserInfoId()).get(0).getSurname());
+            pack.setTableSenderCity(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId())
+                    .get(0).getUserInfoId()).get(0).getCity());
+            pack.setTableSenderPhone(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId())
+                    .get(0).getUserInfoId()).get(0).getPhoneNumber());
 
-            pack.setTableRecipientName(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getName());
-            pack.setTableRecipientSurname(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getSurname());
-            pack.setTableRecipientCity(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getCity());
-            pack.setTableRecipientPhone(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getPhoneNumber());
+            pack.setTableRecipientName(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId())
+                    .get(0).getName());
+            pack.setTableRecipientSurname(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId())
+                    .get(0).getSurname());
+            pack.setTableRecipientCity(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId())
+                    .get(0).getCity());
+            pack.setTableRecipientPhone(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId())
+                    .get(0).getPhoneNumber());
 
             tableView.getItems().add(pack);
         }
     }
 
-    private ObservableList<String> statusObservable = FXCollections.observableArrayList("Odebrana od klienta","W transporcie","Dostarczona do oddziału","Oderbana z oddziału","W transporcie do innego oddziału","Dostarczona do odbiorcy");
-    private ObservableList<String> deliveryObservable = FXCollections.observableArrayList("Mała","Średnia","Duża");
+    private ObservableList<String> statusObservable =
+            FXCollections.observableArrayList("Odebrana od klienta","W transporcie","Dostarczona do oddziału",
+                    "Oderbana z oddziału","W transporcie do innego oddziału","Dostarczona do odbiorcy");
+    private ObservableList<String> deliveryObservable =
+            FXCollections.observableArrayList("Mała","Średnia","Duża");
 
     public void findPackages(MouseEvent mouseEvent) {
 
@@ -195,15 +210,23 @@ public class ManagerPackagesStare implements Initializable {
             pack.setTableType(PackageTypeDAO.getTypeById(packages.get(i).getTypeId()).get(0));
 
             // users = UsersDAO.getUsersId(packages.get(i).getUserId());
-            pack.setTableSenderName(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getName());
-            pack.setTableSenderSurname(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getSurname());
-            pack.setTableSenderCity(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getCity());
-            pack.setTableSenderPhone(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId()).get(0).getUserInfoId()).get(0).getPhoneNumber());
+            pack.setTableSenderName(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i)
+                    .getUserId()).get(0).getUserInfoId()).get(0).getName());
+            pack.setTableSenderSurname(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId())
+                    .get(0).getUserInfoId()).get(0).getSurname());
+            pack.setTableSenderCity(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId())
+                    .get(0).getUserInfoId()).get(0).getCity());
+            pack.setTableSenderPhone(UserInfosDAO.getUserInfoByID(UsersDAO.getUsersId(packages.get(i).getUserId())
+                    .get(0).getUserInfoId()).get(0).getPhoneNumber());
 
-            pack.setTableRecipientName(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getName());
-            pack.setTableRecipientSurname(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getSurname());
-            pack.setTableRecipientCity(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getCity());
-            pack.setTableRecipientPhone(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId()).get(0).getPhoneNumber());
+            pack.setTableRecipientName(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId())
+                    .get(0).getName());
+            pack.setTableRecipientSurname(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId())
+                    .get(0).getSurname());
+            pack.setTableRecipientCity(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId())
+                    .get(0).getCity());
+            pack.setTableRecipientPhone(UserInfosDAO.getUserInfoByID(packages.get(i).getUserInfoId())
+                    .get(0).getPhoneNumber());
 
             tableView.getItems().add(pack);
         }

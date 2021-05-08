@@ -243,7 +243,7 @@ public class ClientSettings implements Initializable {
             if (!settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()
                     && Encryption.encrypt(settOldPassword.getText()).equals(UsersDAO.readPassword(Login.getUserID()))) {
 
-                UserInfosDAO.updateUserPasswords(settPassword.getText(), Login.getUserID());
+                UsersDAO.updatePassword(Login.getUserID(),settPassword.getText());
 
                 Alerts.createAlert(settingsPane, saveInformation, "CHECK", "POMYŚLNIE ZMIENIONO");
             } else
