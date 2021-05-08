@@ -140,7 +140,7 @@ public class ClientSettings implements Initializable {
             pickColor.setValue(colors.get(2));
         }
 
-        List<UserInfos> listOfUserInfo = UsersDAO.readUserInfoById(Login.getUserID());
+        List<UserInfos> listOfUserInfo = UsersDAO.readUserInfoById(Login.getUserInfoID());
 
         //Populating province combobox
         settProvince.setItems(provinces);

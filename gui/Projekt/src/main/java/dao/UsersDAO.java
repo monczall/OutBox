@@ -56,6 +56,7 @@ public class UsersDAO {
         query.setParameter("id",userId);
         List<Users> id = query.list();
 
+
         query=session.createQuery("from UserInfos u where u.id = :id");
         query.setParameter("id", id.get(0).getUserInfoId());
         List<UserInfos> user = query.list();

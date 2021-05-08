@@ -77,6 +77,8 @@ public class ClientTrackPackage implements Initializable {
                 Pane pane = fxmlLoader.load();
                 PackageItem packageItem = fxmlLoader.getController();       //Loading controller of packageItem.fxml
 
+                packageItem.setText(list.get(i).getType());
+
                 pane.setPadding(new Insets(70,0,100,70));       //Adjusting padding of pane
 
                 Button showMore = new Button("Więcej");
@@ -105,7 +107,7 @@ public class ClientTrackPackage implements Initializable {
 
                         List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(packageItem.getId());
 
-                        //Testing dynamically created statuses from list that's gonna be filled with db rows
+                        //Filling from DB
                         for(int i = 0; i < statuses.size(); i++){
                             if(i == statuses.size()-1){
 
@@ -123,7 +125,26 @@ public class ClientTrackPackage implements Initializable {
                         }
                     }
                 });
+
+                Button fullInfo = new Button();
+
+                fullInfo.setLayoutX(500);        //Setting layout where button should be and width + height
+                fullInfo.setLayoutY(115.5);
+                fullInfo.setPrefWidth(39);
+                fullInfo.setPrefHeight(39);
+                fullInfo.getStyleClass().add("btnBack");
+                fullInfo.setContentDisplay(ContentDisplay.RIGHT);
+
+                FontAwesomeIconView infoIcon = new FontAwesomeIconView();      //Creating icon
+                infoIcon.setGlyphName("INFO_CIRCLE");
+                infoIcon.setSize("23");
+                infoIcon.getStyleClass().add("backIcon");
+                fullInfo.setGraphic(infoIcon);
+
+
+
                 pane.getChildren().add(1,showMore);
+                pane.getChildren().add(2,fullInfo);
                 packageItem.setData(list.get(i));
                 packageLayout.getChildren().add(pane);
 
@@ -255,16 +276,24 @@ public class ClientTrackPackage implements Initializable {
     //Filing list with example data
     private List<PopulatePackageItem> packageTest(){
 
-        List<PackagesDTO> listOfPackages = PackagesDAO.addTable();
+        List<PackagesDTO> listOfPackages = PackagesDAO.readPackagesByID(Login.getUserID(), Login.getUserEmail());
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 
         for(int i = 0; i < listOfPackages.size(); i++){
+
             PopulatePackageItem populatePackageItem = new PopulatePackageItem();
+
             populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
             populatePackageItem.setSender(listOfPackages.get(i).getName());
             populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
             populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
+
+            if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail()))
+                populatePackageItem.setType("Nadawca");
+            else
+                populatePackageItem.setType("Odbiorca");
+
             packageItems.add(populatePackageItem);
         }
 

@@ -40,7 +40,7 @@ public class PackagesDAO {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
         String hql = "SELECT NEW main.java.entity.PackagesDTO(P.userId, P.id, P.packageNumber, P" +
                 ".timeOfPlannedDelivery, UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status," +
-                " P.additionalComment) FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId " +
+                " P.additionalComment, P.email) FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId " +
                 "AND P.userInfoId = UI.id and PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM" +
                 " PH WHERE PH.packageId = P.id )) AND NOT PH.status = 'Dostarczona' GROUP BY P.packageNumber";
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -54,12 +54,51 @@ public class PackagesDAO {
         return packages;
     }
 
+    static public ObservableList<PackagesDTO> readPackagesByID(int userId, String userEmail)
+    {
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
+                "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, " +
+                "UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, " +
+                "UI.city, PH.status, P.additionalComment, P.email) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH " +
+                "WHERE (P.userId = :id " +
+                "OR P.email = :email) " +
+                "AND P.userInfoId = UI.id " +
+                "AND P.id = PH.packageId " +
+                "AND PH.status = (SELECT PH.status " +
+                                 "FROM PH " +
+                                 "WHERE PH.id = (SELECT MAX(PH.id) " +
+                                                "FROM PH " +
+                                                "WHERE PH.packageId = P.id )) " +
+                "AND NOT PH.status = 'Dostarczona' " +
+                "AND NOT PH.status = 'Zwrócona Do Nadawcy' " +
+                "GROUP BY P.packageNumber";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery(hql);
+
+        query.setParameter("id",userId);
+        query.setParameter("email",userEmail);
+
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
+
+        return packages;
+    }
+
+
     static public ObservableList<PackagesDTO> addTableHistory()
     {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
         String hql = "SELECT NEW main.java.entity.PackagesDTO(P.userId, P.id, P.packageNumber, P" +
                 ".timeOfPlannedDelivery," +
-                " UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment) " +
+                " UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId AND P.userInfoId = UI.id AND " +
                 "PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM PH WHERE PH.packageId = P.id )) AND PH.status = 'Dostarczona'" +
                 "GROUP BY P.packageNumber";
