@@ -19,6 +19,7 @@ import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.PackageHistory;
+import main.java.entity.Packages;
 import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
 import main.java.features.Preference;
@@ -51,12 +52,59 @@ public class ClientTrackPackage implements Initializable {
     @FXML
     private VBox statusesVBox;
 
+    @FXML
+    private Pane informationAlert;
+
+    @FXML
+    private Text packageNumber;
+
+    @FXML
+    private Text senderName;
+
+    @FXML
+    private Text senderSurname;
+
+    @FXML
+    private Text senderTelephone;
+
+    @FXML
+    private Text senderStreet;
+
+    @FXML
+    private Text senderCity;
+
+    @FXML
+    private Text senderVoivodeship;
+
+    @FXML
+    private Text recipientName;
+
+    @FXML
+    private Text recipientSurname;
+
+    @FXML
+    private Text recipientTelephone;
+
+    @FXML
+    private Text recipientStreet;
+
+    @FXML
+    private Text recipientCity;
+
+    @FXML
+    private Text recipientVoivodeship;
+
+    @FXML
+    private Text timeOfDelivery;
+
+
     private static Preference pref = new Preference();
     private static ResourceBundle bundle;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        informationAlert.setTranslateY(-850);
         moreInformationPane.setTranslateX(+850);
         btnBack.setVisible(false);
 
@@ -141,7 +189,33 @@ public class ClientTrackPackage implements Initializable {
                 infoIcon.getStyleClass().add("backIcon");
                 fullInfo.setGraphic(infoIcon);
 
+                fullInfo.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
 
+                        List<Packages> infoAboutPackage = PackagesDAO.getPackagesById(packageItem.getId());
+
+                        packageNumber.setText(infoAboutPackage.get(0).getPackageNumber());
+
+                        recipientCity.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getCity());
+                        recipientStreet.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getStreetAndNumber());
+                        recipientVoivodeship.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getVoivodeship());
+                        recipientName.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getName());
+                        recipientSurname.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getSurname());
+                        recipientTelephone.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getPhoneNumber());
+
+                        senderCity.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getCity());
+                        senderStreet.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getStreetAndNumber());
+                        senderVoivodeship.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship());
+                        senderName.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getName());
+                        senderSurname.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getSurname());
+                        senderTelephone.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getPhoneNumber());
+
+                        timeOfDelivery.setText(infoAboutPackage.get(0).getTimeOfPlannedDelivery());
+
+                        Animations.moveByY(informationAlert,+850,0.5);
+                    }
+                });
 
                 pane.getChildren().add(1,showMore);
                 pane.getChildren().add(2,fullInfo);
@@ -155,6 +229,18 @@ public class ClientTrackPackage implements Initializable {
 
     }
 
+    /**
+     * <p>
+     *     Method that always create status (small gray square)
+     *     HBox is created and splited into few Panes (dataPane, squarePane, grayPane, statusPane)
+     *     dataPane contains a label with DATE (that is one of the arguments)
+     *     squarePane contains a grayPane (is has css that make this pane gray)
+     *     statusPane that contains status name (second argument)
+     *     At the end everything is added into Vbox
+     * </p>
+     * @param date date of a status
+     * @param status name of status
+     */
     private void createStatus(String date, String status){
 
         HBox statusHBox = new HBox();
@@ -196,6 +282,16 @@ public class ClientTrackPackage implements Initializable {
         statusesVBox.getChildren().add(0,statusHBox);
     }
 
+    /**
+     * <p>
+     *     Method that always create a small gray square it indicate a progress step
+     *     HBox is created and splited into three Panes (emptyPane, squarePane, grayPane)
+     *     emptyPane it is just a empty pane that helps to arrane HBox
+     *     squarePane contains a grayPane (is has css that make this pane gray)
+     *     gray that contains status name (second argument)
+     * </p>
+     * @param steps how much steps need to be created
+     */
     private void createStep(int steps){
         for(int i = 0 ; i < steps; i ++) {
             HBox stepBox = new HBox();
@@ -222,6 +318,20 @@ public class ClientTrackPackage implements Initializable {
         }
     }
 
+    /**
+     * <p>
+     *     Method that always create status (small gray square)
+     *     HBox is created and splited into few Panes (dataPane, squarePane, grayPane, currentPane)
+     *     dataPane contains a label with DATE (that is one of the arguments)
+     *     squarePane contains a grayPane (is has css that make this pane gray)
+     *     currentPane is the biggest square that indicates that this is current status
+     *     statusPane that contains status name (second argument)
+     *     At the end everything is added into Vbox
+     * </p>
+     * @param date date of a status
+     * @param status name of status
+     * @param desc description of current status (the newest in terms of date)
+     */
     private void createCurrentStatus(String date, String status, String desc){
 
         HBox statusHBox = new HBox();
@@ -274,6 +384,11 @@ public class ClientTrackPackage implements Initializable {
     }
 
     //Filing list with example data
+
+    /**
+     * Method used to display all the statuses in order from the db by HQL query
+     * @return filled List of type PopulatePackageItem it contains info about statuses
+     */
     private List<PopulatePackageItem> packageTest(){
 
         List<PackagesDTO> listOfPackages = PackagesDAO.readPackagesByID(Login.getUserID(), Login.getUserEmail());
@@ -307,5 +422,10 @@ public class ClientTrackPackage implements Initializable {
 
         //Need rework
         statusesVBox.getChildren().clear();
+    }
+
+    @FXML
+    public void closeInfoAlert(javafx.scene.input.MouseEvent mouseEvent) {
+        Animations.moveByY(informationAlert,-850,0.5);
     }
 }
