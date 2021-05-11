@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.features.Preference;
 
@@ -24,7 +25,10 @@ public class ManagerSettings implements Initializable {
 
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
 
-    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy","Czerwony", "Biały");
+    private ObservableList<String> colors = FXCollections.observableArrayList(
+            App.getLanguageProperties("colorOrange"),
+            App.getLanguageProperties("colorRed"),
+            App.getLanguageProperties("colorWhite"));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,12 +68,14 @@ public class ManagerSettings implements Initializable {
     void changeTheme(ActionEvent event) {
         Preference pref = new Preference();
 
-        if (comboColor.getValue().equals("Pomarańczowy")) {
+
+
+        if (comboColor.getValue().equals("Pomarańczowy") || comboColor.getValue().equals("Orange")) {
             pref.addPreference("color", "orange");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #ffa500;" +
                     "-fx-second-color: #000000;");
         }
-        else if (comboColor.getValue().equals("Czerwony")){
+        else if (comboColor.getValue().equals("Czerwony") || comboColor.getValue().equals("Red")){
             pref.addPreference("color", "red");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #d82020;" +
                     "-fx-second-color: #ffffff;");

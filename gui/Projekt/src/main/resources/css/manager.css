@@ -223,6 +223,11 @@
     -fx-background-color: silver;
 }
 
+.date-picker-popup .label{
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
 /*-------- MENU --------*/
 .sideBackground{
     -fx-background-color: -fx-main-color;

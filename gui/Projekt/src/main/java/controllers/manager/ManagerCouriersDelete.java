@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import main.java.App;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.UserInfos;
@@ -71,31 +72,28 @@ public class ManagerCouriersDelete implements Initializable {
 
         if(name.getText().toString().equals("") &&
                 surname.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, findCourierButton, "WARNING", "PODAJ JAKIŚ PARAMETR");
+            Alerts.createAlert(appWindow, findCourierButton, "WARNING",
+                    App.getLanguageProperties("completeAllFields"));
         }
         else
         {
             dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
-
             setDataLabel();
         }
     }
 
     public void setDataLabel(){
-        System.out.println("DataIndex: " + dataIndex + " DataUserInfosSize: "+dataUserInfos.size() + " DataUserInfosGetId: "+dataUserInfos.get(dataIndex).getId());
-        System.out.println("ZMIENIAM NA KOLEJNE ID INDEX("+dataIndex+") = " +dataUserInfos.get(dataIndex).getId());
-        dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
-        System.out.println("DataUserSIZSE: " + dataUser.size() + " DataUserID: " + dataUser.get(0).getId());
-        System.out.println(dataUser.get(0).getRole());
+
         fullName.setText(dataUserInfos.get(dataIndex).getName() + " "+dataUserInfos.get(dataIndex).getSurname());
-        cityAndStreet.setText(dataUserInfos.get(dataIndex).getCity() + " "+dataUserInfos.get(dataIndex).getStreetAndNumber());
+        cityAndStreet.setText(dataUserInfos.get(dataIndex).getCity() + " "
+                +dataUserInfos.get(dataIndex).getStreetAndNumber());
         phoneNumber.setText(dataUserInfos.get(dataIndex).getPhoneNumber());
         voivodeship.setText(dataUserInfos.get(dataIndex).getVoivodeship());
         email.setText(dataUser.get(0).getEmail());
         String role = dataUser.get(0).getRole();
+
         if(dataUserInfos.size() > 1 && (role.equals("Kurier")))
         {
-            System.out.println("DWA");
             paneResults.setVisible(true);
             button1.setVisible(true);
             button2.setVisible(true);
@@ -103,14 +101,12 @@ public class ManagerCouriersDelete implements Initializable {
         }
         else if(dataUserInfos.size() == 1 && (role.equals("Kurier")))
         {
-            System.out.println("JEDEN");
             button1.setVisible(false);
             button2.setVisible(false);
             paneResults.setVisible(true);
             noDataText.setVisible(false);
         }
         else{
-            System.out.println("NIE");
             paneResults.setVisible(false);
             noDataText.setVisible(true);
         }
