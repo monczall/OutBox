@@ -40,7 +40,7 @@ public class ManagerPackages implements Initializable {
 
     Pane pane;
 
-    private final ObservableList<PackagesDTO> packages = PackagesDAO.addTable();
+    private final ObservableList<PackagesDTO> packages = PackagesDAO.getPackagesWithStatus();
 
     @FXML
     private TableView<PackagesDTO> table;
@@ -90,7 +90,7 @@ public class ManagerPackages implements Initializable {
     public void updateTable()
     {
         table.getItems().clear();
-        table.setItems(PackagesDAO.addTable());
+        table.setItems(PackagesDAO.getPackagesWithStatus());
     }
     TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
 
@@ -109,7 +109,7 @@ public class ManagerPackages implements Initializable {
         table.getColumns().add(expanderRow);
         updateTable();
         table.getSelectionModel().select(0);
-        System.out.println(PackagesDAO.addTable().get(0).getStatus());
+        System.out.println(PackagesDAO.getPackagesWithStatus().get(0).getStatus());
     }
 
     @FXML

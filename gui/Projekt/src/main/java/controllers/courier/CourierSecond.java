@@ -35,7 +35,7 @@ public class CourierSecond implements Initializable {
     private static String comment;
     private static int packageId;
     private static String status;
-    private final ObservableList<PackagesDTO> packages = PackagesDAO.addTable();
+    private final ObservableList<PackagesDTO> packages = PackagesDAO.getPackagesWithStatus();
     private Pane pane;
 
     @FXML
@@ -94,7 +94,7 @@ public class CourierSecond implements Initializable {
 
     public void updateTable() {
         table.getItems().clear();
-        table.setItems(PackagesDAO.addTable());
+        table.setItems(PackagesDAO.getPackagesWithStatus());
     }
 
     @Override
