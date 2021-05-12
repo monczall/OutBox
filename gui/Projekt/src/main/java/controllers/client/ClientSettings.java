@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import main.java.SceneManager;
 import main.java.controllers.auth.Encryption;
+import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.UserInfos;
@@ -139,7 +140,7 @@ public class ClientSettings implements Initializable {
             pickColor.setValue(colors.get(2));
         }
 
-        List<UserInfos> listOfUserInfo = UsersDAO.readUserInfoById(1);
+        List<UserInfos> listOfUserInfo = UsersDAO.readUserInfoById(Login.getUserInfoID());
 
         //Populating province combobox
         settProvince.setItems(provinces);
@@ -217,25 +218,37 @@ public class ClientSettings implements Initializable {
 
     @FXML
     void updateInformation(ActionEvent event) {
-        if(!settStreet.getRight().isVisible() && !settCity.getRight().isVisible() && !settNumber.getRight().isVisible()
-                && !settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()) {
+        if(!settStreet.getRight().isVisible() && !settCity.getRight().isVisible()
+                && !settNumber.getRight().isVisible()) {
 
             if (!inputs[0].equals(settStreet.getText()) || !inputs[1].equals(settCity.getText())
                     || !inputs[2].equals(settProvince.getSelectionModel().getSelectedItem())
-                    || !inputs[3].equals(settNumber.getText()) || !settPassword.getText().isEmpty()) {
+                    || !inputs[3].equals(settNumber.getText())) {
 
+                inputs[0] = settStreet.getText();
+                inputs[1] = settCity.getText();
+                inputs[2] = settProvince.getSelectionModel().getSelectedItem();
+                inputs[3] = settNumber.getText();
 
-
-                UserInfosDAO.updateUserSettings(settPassword.getText(),
-                        settProvince.getSelectionModel().getSelectedItem(),settCity.getText(),
-                        settNumber.getText(),settStreet.getText(),1);
+                UserInfosDAO.updateUserSettings(settProvince.getSelectionModel().getSelectedItem(),
+                        settCity.getText(), settNumber.getText(),settStreet.getText(), Login.getUserID());
 
                 Alerts.createAlert(settingsPane, saveInformation, "CHECK", "POMYŚLNIE ZMIENIONO");
-
             }
         }
         else
             Alerts.createAlert(settingsPane,saveInformation,"WARNING", "UZUPEŁNIJ LUB POPRAW POLA");
+
+        if(!settOldPassword.getText().isEmpty()) {
+            if (!settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()
+                    && Encryption.encrypt(settOldPassword.getText()).equals(UsersDAO.readPassword(Login.getUserID()))) {
+
+                UsersDAO.updatePassword(Login.getUserID(),settPassword.getText());
+
+                Alerts.createAlert(settingsPane, saveInformation, "CHECK", "POMYŚLNIE ZMIENIONO");
+            } else
+                Alerts.createAlert(settingsPane, saveInformation, "WARNING", "NIEPOPRAWNE HASŁO");
+        }
     }
 
     public void deleteAccount(ActionEvent actionEvent) {
@@ -251,12 +264,20 @@ public class ClientSettings implements Initializable {
             UserInfosDAO.deleteUser(1);
             SceneManager.renderScene("login");
         }
-//        else
+        else{
+            Alerts.createAlert(settingsPane, saveInformation, "WARNING", "NIEPOPRAWNE HASŁO");
+            System.out.println("NIEPOPRAWNE HASLO ALBO MA AKTYWNE PACZKI");
+        }
+
     }
 
     public void actionNo(ActionEvent actionEvent) {
         Animations.moveByY(alertPane,-500,0.3);
         settingsPane.setDisable(false);
         settingsPane.setEffect(null);
+    }
+
+    public void setAlert(){
+        Alerts.createAlert(this.settingsPane, this.saveInformation, "WARNING", "NIEPOPRAWNE HASŁO");
     }
 }

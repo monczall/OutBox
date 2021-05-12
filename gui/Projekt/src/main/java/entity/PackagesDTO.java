@@ -13,10 +13,11 @@ public class PackagesDTO {
     private String city;
     private String status;
     private String additionalComment;
+    private String email;
 
     public PackagesDTO(int userInfosId, int packagesId, String packageNumber, String timeOfPlannedDelivery,
                        String name, String surname, String phoneNumber, String streetAndNumber, String city,
-                       String status, String additionalComment) {
+                       String status, String additionalComment, String email) {
         this.userInfosId = userInfosId;
         this.packagesId = packagesId;
         this.packageNumber = packageNumber;
@@ -28,6 +29,7 @@ public class PackagesDTO {
         this.city = city;
         this.status = status;
         this.additionalComment = additionalComment;
+        this.email = email;
     }
 
     public int getUserInfosId() {
@@ -72,5 +74,13 @@ public class PackagesDTO {
 
     public String getAdditionalComment() {
         return additionalComment;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

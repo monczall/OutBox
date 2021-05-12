@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.PackageHistory;
@@ -75,6 +76,8 @@ public class ClientHistoryPackage implements Initializable {
                 Pane pane = fxmlLoader.load();
                 PackageItem packageItem = fxmlLoader.getController();       //Loading controller of packageItem.fxml
 
+                packageItem.setText(list.get(i).getType());
+
                 pane.setPadding(new Insets(70,0,100,70));       //Adjusting padding of pane
 
                 Button showMore = new Button("Więcej");
@@ -121,9 +124,26 @@ public class ClientHistoryPackage implements Initializable {
                         }
                     }
                 });
+
+                Button fullInfo = new Button();
+
+                fullInfo.setLayoutX(500);        //Setting layout where button should be and width + height
+                fullInfo.setLayoutY(115.5);
+                fullInfo.setPrefWidth(39);
+                fullInfo.setPrefHeight(39);
+                fullInfo.getStyleClass().add("btnBack");
+                fullInfo.setContentDisplay(ContentDisplay.RIGHT);
+
+                FontAwesomeIconView infoIcon = new FontAwesomeIconView();      //Creating icon
+                infoIcon.setGlyphName("INFO_CIRCLE");
+                infoIcon.setSize("23");
+                infoIcon.getStyleClass().add("backIcon");
+                fullInfo.setGraphic(infoIcon);
+
+
+
                 pane.getChildren().add(1,showMore);
-                packageItem.setData(list.get(i));
-                packageLayout.getChildren().add(pane);
+                pane.getChildren().add(2,fullInfo);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -253,7 +273,7 @@ public class ClientHistoryPackage implements Initializable {
     //Filing list with example data
     private List<PopulatePackageItem> packageTest(){
 
-        List<PackagesDTO> listOfPackages = PackagesDAO.addTableHistory();
+        List<PackagesDTO> listOfPackages = PackagesDAO.readHistoryByID(Login.getUserID(),Login.getUserEmail());
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 
@@ -264,6 +284,14 @@ public class ClientHistoryPackage implements Initializable {
             populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
             populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
             packageItems.add(populatePackageItem);
+
+            if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail()))
+                populatePackageItem.setType("Nadawca");
+            else
+                populatePackageItem.setType("Odbiorca");
+
+            packageItems.add(populatePackageItem);
+
         }
 
         return packageItems;

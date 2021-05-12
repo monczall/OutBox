@@ -77,6 +77,8 @@ public class Login implements Initializable {
 
     public static int userID;
     public static int userInfoID;
+    public static String userEmail;
+
     private static Preference pref = new Preference();
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -146,6 +148,7 @@ public class Login implements Initializable {
 
                         setUserID(listOfUsers.get(i).getId());
                         setUserInfoID(listOfUsers.get(i).getUserInfoId());
+                        setUserEmail(listOfUsers.get(i).getEmail());
 
                         String role = listOfUsers.get(i).getRole();
                         if (role.equals("Klient")) {
@@ -341,6 +344,15 @@ public class Login implements Initializable {
     public static void setUserInfoID(int userInfoID) {
         Login.userInfoID = userInfoID;
     }
+
+    public static String getUserEmail() {
+        return userEmail;
+    }
+
+    public static void setUserEmail(String userEmail) {
+        Login.userEmail = userEmail;
+    }
+
 
     public void setPolishLanguage(ActionEvent actionEvent) {
         pref.addPreference("language","polish");

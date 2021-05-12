@@ -67,16 +67,15 @@ public class AdminEditEmployee implements Initializable {
         AdminEditEmployee.userInfoID = userInfoID;
     }
 
-    public void showEdit(MouseEvent mouseEvent)throws IOException
-    {
-    if (table.getSelectionModel().getSelectedIndex() == -1){
-        Alerts.createCustomAlert(edit, editTable,"WARNING",
-                App.getLanguageProperties("adminNotChosen"), 250, 86, "alertFailure");
-    }else {
-        setUserID(table.getSelectionModel().getSelectedItem().getUserID());
-        setUserInfoID(table.getSelectionModel().getSelectedItem().getUserInfoID());
-        SceneManager.loadScene("../../../resources/view/admin/adminEdit.fxml", edit);
-    }
+    public void showEdit(MouseEvent mouseEvent) throws IOException {
+        if (table.getSelectionModel().getSelectedIndex() == -1) {
+            Alerts.createCustomAlert(edit, editTable, "WARNING",
+                    App.getLanguageProperties("adminNotChosen"), 250, 86, "alertFailure");
+        } else {
+            setUserID(table.getSelectionModel().getSelectedItem().getUserID());
+            setUserInfoID(table.getSelectionModel().getSelectedItem().getUserInfoID());
+            SceneManager.loadScene("../../../resources/view/admin/adminEdit.fxml", edit);
+        }
     }
 
     private final ObservableList<UsersDTO> searchList = UsersDAO.getUserEdit();
@@ -85,9 +84,6 @@ public class AdminEditEmployee implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         ObservableList<UsersDTO> usersList = UsersDAO.getUserEdit();
-
-
-
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         city.setCellValueFactory(new PropertyValueFactory<>("city"));

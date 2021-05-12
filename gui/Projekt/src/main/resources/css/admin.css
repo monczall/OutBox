@@ -115,7 +115,7 @@
 }
 
 .inputBox{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-font-size: 15px;
     -fx-background-color: transparent; /*#202020*/
     -fx-mark-color: #ffa500;
@@ -599,3 +599,4 @@
 .backIcon{
     -fx-fill: -fx-gray-color;
 }
+

@@ -45,6 +45,8 @@ public class UsersDAO {
         session.update(users);
 
         session.getTransaction().commit();
+
+        session.close();
     }
 
     static public List<UserInfos> readUserInfoById(int userId){
@@ -53,6 +55,7 @@ public class UsersDAO {
         Query query=session.createQuery("from Users u where u.userInfoId = :id");
         query.setParameter("id",userId);
         List<Users> id = query.list();
+
 
         query=session.createQuery("from UserInfos u where u.id = :id");
         query.setParameter("id", id.get(0).getUserInfoId());
@@ -63,7 +66,9 @@ public class UsersDAO {
 
     static public boolean deleteAccount(String password, int id){
         Session session = HibernateUtil.getSessionFactory().openSession();
+
         Query query=session.createQuery("SELECT password from Users WHERE password = :password AND id = :id");
+
         query.setParameter("password", Encryption.encrypt(password));
         query.setParameter("id", id);
 
@@ -117,4 +122,11 @@ public class UsersDAO {
         return listOfUsers;
     }
 
+    static public String readPassword(int userId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query=session.createQuery("SELECT password from Users WHERE id = :id");
+        query.setParameter("id",userId);
+
+        return String.valueOf(query.list().get(0));
+    }
 }

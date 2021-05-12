@@ -11,8 +11,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import main.java.SceneManager;
+import main.java.controllers.auth.Login;
+import main.java.dao.UserInfosDAO;
+import main.java.entity.UserInfos;
 import main.java.features.Animations;
 
 import java.io.IOException;
@@ -41,12 +45,18 @@ public class Client implements Initializable {
     @FXML
     private AnchorPane appWindow;
 
+    @FXML
+    private Text name;
+
     boolean hamburgerClicked = false;
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
+    UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+    name.setText(ui.getName() + " " + ui.getSurname());
 
     try {
         SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);
