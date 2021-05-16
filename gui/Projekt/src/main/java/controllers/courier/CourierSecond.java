@@ -151,11 +151,12 @@ public class CourierSecond implements Initializable {
                     String status = ExpendableRow.getStatusReturned();
                     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     LocalDateTime now = LocalDateTime.now();
-                    if (!status.equals("")) {
-                        PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), status,
+                    if (!status.equals("") && !status.equals(arg.getValue().getStatus())) {
+                        PackageHistoryDAO.updateStatus(getPackageId(), status,
                                 Timestamp.valueOf(dateTimeFormatter.format(now)));
+                        updateTable();
                     }
-                    updateTable();
+
                 }
             });
 

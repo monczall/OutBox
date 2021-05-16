@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import main.java.SceneManager;
+import main.java.features.PdfGenerator;
 import main.java.features.Preference;
 
 import java.net.URL;
@@ -28,7 +29,6 @@ public class CourierSettings implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         pickLanguage.setItems(languages);
         if(Preference.readPreference("language").equals("english")){
             pickLanguage.setValue(languages.get(1));

@@ -43,16 +43,17 @@ public class UnitTests {
     @BeforeAll
     public static void setUp() {
         sessionFactory = HibernateUtil.getSessionFactory();
+        System.out.println(sessionFactory.isClosed());
         System.out.println("Utworzono sessionFactory");
     }
 
-    @AfterAll
-    public static void tearDown() {
-        if(sessionFactory != null){
-            sessionFactory.close();
-            System.out.println("Zniszcono sessionFactory");
-        }
-    }
+//    @AfterAll
+//    public static void tearDown() {
+//        if(sessionFactory != null){
+//            sessionFactory.close();
+//            System.out.println("Zniszcono sessionFactory");
+//        }
+//    }
 
     @Test
     public void testCreate() {

@@ -8,6 +8,7 @@ import main.java.entity.PackagesDTO;
 import main.java.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.query.Query;
 import org.junit.jupiter.api.*;
 
@@ -32,6 +33,7 @@ public class CourierTests {
     @BeforeAll
     public static void setUp() {
         sessionFactory = HibernateUtil.getSessionFactory();
+
         System.out.println("Utworzono sessionFactory");
     }
 
@@ -100,6 +102,7 @@ public class CourierTests {
             Assertions.assertTrue(readUserInfoById(getPackagesWithStatus().get(0).getUserInfosId()).size() == 1);
         }
     }
+
 
     @BeforeEach
     public void openSession() {

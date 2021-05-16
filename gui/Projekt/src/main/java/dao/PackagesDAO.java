@@ -1,5 +1,6 @@
 package main.java.dao;
 
+import com.itextpdf.text.pdf.PdfPCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.*;
@@ -73,6 +74,31 @@ public class PackagesDAO {
         }
         session.close();
 
+        return packages;
+    }
+
+    static public ObservableList<PdfDTO> readPackagesForPdf() {
+        ObservableList<PdfDTO> packages = FXCollections.observableArrayList();
+
+        String hql = "SELECT NEW main.java.entity.PdfDTO(" +
+                "P.packageNumber, PT.sizeName, " +
+                "UI.city, UI.voivodeship, PH.date) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH, PackageType PT, Users U " +
+                "WHERE P.id = PH.packageId " +
+                "AND P.userInfoId = UI.id " +
+                "AND P.userId = U.id " +
+                "GROUP BY P.packageNumber";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery(hql);
+
+
+        List<PdfDTO> results = query.list();
+        for (PdfDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
         return packages;
     }
 
@@ -175,5 +201,6 @@ public class PackagesDAO {
 
         return packageList;
     }
+
 
 }
