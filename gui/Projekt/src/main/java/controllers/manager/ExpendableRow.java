@@ -7,8 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
@@ -28,6 +30,27 @@ import java.util.stream.IntStream;
 public class ExpendableRow implements Initializable {
 
     String status = ManagerPackages.getStatus();
+
+    @FXML
+    private Label labelSender;
+
+    @FXML
+    private Label labelComment;
+
+    @FXML
+    private Text labelName;
+
+    @FXML
+    private Text labelCity;
+
+    @FXML
+    private Text labelSurname;
+
+    @FXML
+    private Text labelPhone;
+
+    @FXML
+    private Text labelStreet;
 
     @FXML
     private Text name;
@@ -63,6 +86,15 @@ public class ExpendableRow implements Initializable {
         phone.setText(ui.getPhoneNumber());
         address.setText(ui.getStreetAndNumber());
         comments.setText(ManagerPackages.getComment());
+
+        labelSender.setText(App.getLanguageProperties("sender"));
+        labelComment.setText(App.getLanguageProperties("comment"));
+
+        labelName.setText(App.getLanguageProperties("name"));
+        labelSurname.setText(App.getLanguageProperties("surname"));
+        labelCity.setText(App.getLanguageProperties("city"));
+        labelStreet.setText(App.getLanguageProperties("street"));
+        labelPhone.setText(App.getLanguageProperties("phone"));
 
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
         ol.remove(0);

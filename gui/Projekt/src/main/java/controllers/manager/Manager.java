@@ -51,27 +51,22 @@ public class Manager implements Initializable {
     boolean hamburgerClicked = false;
 
     public void openHome(MouseEvent actionEvent) throws IOException {
-        System.out.println("Manager HOME");
         SceneManager.renderScene("manager");
     }
 
     public void openCouriers(MouseEvent mouseEvent) throws IOException {
-        System.out.println("Manager Couriers");
         SceneManager.loadScene("../../../resources/view/manager/managerCouriers.fxml", mainWindow);
     }
 
     public void openPackages(MouseEvent mouseEvent) throws IOException {
-        System.out.println("Manager Packages");
         SceneManager.loadScene("../../../resources/view/manager/managerPackages.fxml", mainWindow);
     }
 
     public void openSettings(MouseEvent mouseEvent) throws IOException {
-        System.out.println("Manager Settings");
         SceneManager.loadScene("../../../resources/view/manager/managerSettings.fxml", mainWindow);
     }
 
     public void openRaports(MouseEvent mouseEvent) throws IOException {
-        System.out.println("Manager Raports");
         SceneManager.loadScene("../../../resources/view/manager/managerRaports.fxml", mainWindow);
     }
 
@@ -98,11 +93,11 @@ public class Manager implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        System.out.println("Start program");
+
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
 
-        hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
+        hamburger.setOnMouseClicked(event -> {
             if(hamburgerClicked == false) {
 
                 hamburger.setDisable(true);

@@ -103,7 +103,8 @@ public class AdminAddManager implements Initializable {
 
     public void register(){
         if(!isEmpty()){
-            if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(), registerStreetField.getText(),
+            if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(),
+                    registerStreetField.getText(),
                     registerCityField.getText(), registerVoivodeshipField.getText())){
                 if(isPhoneNumber(registerPhoneNumberField.getText())){
                     if(isEmail(registerEmailAddressField.getText())){
@@ -119,14 +120,21 @@ public class AdminAddManager implements Initializable {
                                 e.printStackTrace();
                             }
                             //POMYSLNIE DODANE
-                            UserInfosDAO.addUserInfo(registerFirstNameField.getText(), registerLastNameField.getText(),
-                                    registerEmailAddressField.getText(), registerPhoneNumberField.getText(), registerStreetField.getText(),
-                                    registerCityField.getText(),  registerVoivodeshipField.getText(),
+                            UserInfosDAO.addUserInfo(registerFirstNameField.getText(),
+                                    registerLastNameField.getText(),
+                                    registerEmailAddressField.getText(),
+                                    registerPhoneNumberField.getText(),
+                                    registerStreetField.getText(),
+                                    registerCityField.getText(),
+                                    registerVoivodeshipField.getText(),
                                     Encryption.encrypt(password), "Menadżer",
                                     AreasDAO.getAreasIdByName(registerAreaChoiceBox.getSelectionModel().getSelectedItem().toString()) );
+
                             System.out.println("Dodano kierownika");
+
                             Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"CHECK",
                                     App.getLanguageProperties("adminSuccessUserAdd"), 370, 86, "alertSuccess");
+
                             clearData();
                         }else{
                             errorOnEmailAddress();

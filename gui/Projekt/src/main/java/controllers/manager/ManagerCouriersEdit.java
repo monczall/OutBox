@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import main.java.App;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.UserInfos;
@@ -86,7 +87,7 @@ public class ManagerCouriersEdit implements Initializable {
 
         if(name.getText().toString().equals("") &&
                 surname.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, findCourierButton, "WARNING", "Podaj imie i nazwisko!");
+            Alerts.createAlert(appWindow, findCourierButton, "WARNING", App.getLanguageProperties("completeAllFields"));
         }else{
             dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
             setDataEdit();
@@ -95,7 +96,7 @@ public class ManagerCouriersEdit implements Initializable {
 
     @FXML
     void saveEditCourier(MouseEvent event) {
-        boolean status = true;
+
         if(nameInput.getText().toString().equals("") ||
                 surnameInput.getText().toString().equals("") ||
                 streetInput.getText().toString().equals("") ||
@@ -103,77 +104,14 @@ public class ManagerCouriersEdit implements Initializable {
                 inputEmail.getText().toString().equals("") ||
                 inputVoivodeship.getText().toString().equals("") ||
                 inputNumber.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, saveEditCourierButton,"WARNING","UZUPEŁNIJ WSZYSTKIE POLA");
+            Alerts.createAlert(appWindow, saveEditCourierButton,"WARNING",App.getLanguageProperties("completeAllFields"));
         }
         else {
-            if (inputEmail.getText().matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"))
-            {
-                System.out.println("mail poprawne");
-            }
-            else
-            {
-                status = false;
-                System.out.println("mail niepoprawne");
-            }
-            if (nameInput.getText().matches("[a-zA-Z]+"))
-            {
-                System.out.println("Imie poprawne");
-            }
-            else
-            {
-                status = false;
-                System.out.println("Imie niepoprawne");
-            }
-            if (surnameInput.getText().toString().matches("[a-zA-Z]+"))
-            {
-                System.out.println("Nazwisko poprawne");
-            }
-            else
-            {
-                status = false;
-                System.out.println("Nazwisko niepoprawne");
-            }
-            if (cityInput.getText().matches("[A-Za-z]+"))
-            {
-                System.out.println("Miasto poprawne");
-            }
-            else
-            {
-                status = false;
-                System.out.println("Miasto niepoprawne");
-            }
-            if (streetInput.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\" +
-                    "s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
-            {
-                System.out.println("Ulica poprawna");
-            }
-            else {
-                status = false;
-                System.out.println("Ulica niepoprawna");
-            }
-            if (inputNumber.getText().matches("[0-9]*") && inputNumber.getText().length() == 9)
-            {
-                System.out.println("Telefon poprawny");
-            }
-            else
-            {
-                status = false;
-                System.out.println("Telefon niepoprawny");
-            }
-            if (inputVoivodeship.getText().matches("[a-zA-Z]+"))
-            {
-                System.out.println("Województwo poprawne");
-            }
-            else
-            {
-                status = false;
-                System.out.println("Województwo niepoprawne");
-            }
-            if (!status) {
-                Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING", "POPRAW POLA");
+
+            if (!validation()) {
+                Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING", App.getLanguageProperties("correctFields"));
             }else{
-                System.out.println(dataUser.get(0).getPassword()+" " +
-                        ""+dataUser.get(0).getAreaId()+" "+dataUser.get(0).getUserInfoId());
+
                 UserInfosDAO.updateUser(dataUserInfos.get(dataIndex).getId(), dataUser.get(0).getId(),
                         nameInput.getText(), surnameInput.getText(), inputNumber.getText(), cityInput.getText(),
                         streetInput.getText(), inputVoivodeship.getText(), inputEmail.getText(),
@@ -188,12 +126,45 @@ public class ManagerCouriersEdit implements Initializable {
         }
     }
 
+    boolean validation(){
+
+        boolean status = true;
+
+        if (!inputEmail.getText().matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"))
+        {
+            status = false;
+        }
+        if (!nameInput.getText().matches("[a-zA-Z]+"))
+        {
+            status = false;
+        }
+        if (!surnameInput.getText().toString().matches("[a-zA-Z]+"))
+        {
+            status = false;
+
+        }
+        if (!cityInput.getText().matches("[A-Za-z]+"))
+        {
+            status = false;
+        }
+        if (!streetInput.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\" +
+                "s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
+        {
+            status = false;
+        }
+        if (!inputNumber.getText().matches("[0-9]*") && inputNumber.getText().length() == 9)
+        {
+            status = false;
+        }
+        if (!inputVoivodeship.getText().matches("[a-zA-Z]+"))
+        {
+            status = false;
+        }
+
+        return status;
+    }
+
     public void setDataEdit(){
-        System.out.println("DataIndex: " + dataIndex + " DataUserInfosSize: "+dataUserInfos.size() +
-                " DataUserInfosGetId: "+dataUserInfos.get(dataIndex).getId());
-        System.out.println("ZMIENIAM NA KOLEJNE ID INDEX("+dataIndex+") = " +dataUserInfos.get(dataIndex).getId());
-        dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
-        System.out.println("DataUserSIZSE: " + dataUser.size() + " DataUserID: " + dataUser.get(0).getId());
 
         nameInput.setText(dataUserInfos.get(dataIndex).getName());
         surnameInput.setText(dataUserInfos.get(dataIndex).getSurname());
@@ -219,7 +190,6 @@ public class ManagerCouriersEdit implements Initializable {
             notDataLabel.setVisible(false);
         }
         else{
-            System.out.println("NIE");
             dataPane.setVisible(false);
             notDataLabel.setVisible(true);
         }

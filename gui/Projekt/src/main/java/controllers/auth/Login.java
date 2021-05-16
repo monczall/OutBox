@@ -1,13 +1,10 @@
 package main.java.controllers.auth;
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -82,6 +79,7 @@ public class Login implements Initializable {
     private static Preference pref = new Preference();
 
     public void initialize(URL url, ResourceBundle rb) {
+        // Outbox logos, they change depending on used theme
         ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
         outboxBlack.setFitHeight(200);
         outboxBlack.setFitWidth(150);
@@ -89,6 +87,7 @@ public class Login implements Initializable {
         outboxWhite.setFitHeight(200);
         outboxWhite.setFitWidth(150);
 
+        // Settings icons, they change depending on used theme
         ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
         cogsBlack.setFitHeight(30);
         cogsBlack.setFitWidth(30);
@@ -96,7 +95,7 @@ public class Login implements Initializable {
         cogsWhite.setFitHeight(30);
         cogsWhite.setFitWidth(30);
 
-
+        // Language changing
         if(pref.readPreference("language").equals("english")) {
             loginPolishLanguageMenuItem.setDisable(false);
             loginEnglishLanguageMenuItem.setDisable(true);
@@ -106,6 +105,7 @@ public class Login implements Initializable {
             loginEnglishLanguageMenuItem.setDisable(false);
         }
 
+        // Changes to UI depending on used theme
         if(pref.readPreference("color").equals("red")) {
             loginRedColorMenuItem.setDisable(true);
             loginOrangeColorMenuItem.setDisable(false);
@@ -129,6 +129,7 @@ public class Login implements Initializable {
         }
 
         if (App.isConnectionError()) {
+            // Database connection error alert
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
                     loginCreateAccountButton, "WARNING",
                     App.getLanguageProperties("authDatabaseConnectionAlert"),
@@ -137,19 +138,23 @@ public class Login implements Initializable {
     }
 
     public void login() {
-        if (!isEmpty()) {
+        // Checking if fields are not empty
+        if (!isEmpty(loginEmailTextField.getText(),loginPasswordPasswordField.getText())) {
+            // Checking if email has correct format
             if (isEmail(loginEmailTextField.getText())) {
-
+                // Getting users to list
                 List<Users> listOfUsers = getUsers();
                 for (int i = 0; i < getUsers().size(); i++) {
+                    // Checking if email and password is equal to registered user
                     if (loginEmailTextField.getText().equals(listOfUsers.get(i).getEmail())
                             && Encryption.encrypt(loginPasswordPasswordField.getText()).equals
                             (listOfUsers.get(i).getPassword())) {
-
+                        //Setting user data
                         setUserID(listOfUsers.get(i).getId());
                         setUserInfoID(listOfUsers.get(i).getUserInfoId());
                         setUserEmail(listOfUsers.get(i).getEmail());
 
+                        //Checking logged in user's role
                         String role = listOfUsers.get(i).getRole();
                         if (role.equals("Klient")) {
                             SceneManager.renderScene("client");
@@ -171,39 +176,45 @@ public class Login implements Initializable {
                     }
                 }
 
-                //UserTextField
+                // UserTextField
                 loginEmailTextField.getStyleClass().clear();
                 loginEmailTextField.getStyleClass().add("textFieldsError");
-                //UserCircle
+
+                // UserCircle
                 loginUserCircleCircle.getStyleClass().clear();
                 loginUserCircleCircle.getStyleClass().add("fillError");
 
-                //PasswordTextField
+                // PasswordTextField
                 loginPasswordPasswordField.getStyleClass().clear();
                 loginPasswordPasswordField.getStyleClass().add("textFieldsError");
-                //PasswordCircle
+
+                // PasswordCircle
                 loginPasswordCircleCircle.getStyleClass().clear();
                 loginPasswordCircleCircle.getStyleClass().add("fillError");
 
+                // No user error alert
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
                         loginCreateAccountButton, "WARNING",
                         App.getLanguageProperties("authNoUserFoundAlert"),
                         435, 86, "alertFailure");
 
             } else {
-                //UserTextField
+                // UserTextField
                 loginEmailTextField.getStyleClass().clear();
                 loginEmailTextField.getStyleClass().add("textFieldsError");
-                //UserCircle
+
+                // UserCircle
                 loginUserCircleCircle.getStyleClass().clear();
                 loginUserCircleCircle.getStyleClass().add("fillError");
 
+                // Wrong email format error alert
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
                         loginCreateAccountButton, "WARNING",
                         App.getLanguageProperties("authWrongEmailFormatAlert"),
                         350, 86, "alertFailure");
             }
         } else {
+            // Wrong empty fields error alert
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
                     loginCreateAccountButton, "WARNING",
                     App.getLanguageProperties("authFillFormAlert"),
@@ -212,22 +223,26 @@ public class Login implements Initializable {
         }
     }
 
-    private boolean isEmpty() {
+    public boolean isEmpty(String email, String password) {
         int error = 0;
-        if (loginEmailTextField.getText().isEmpty()) {
-            //UserTextField
+        // Checking if email is empty
+        if (email.isEmpty()) {
+            // UserTextField
             loginEmailTextField.getStyleClass().clear();
             loginEmailTextField.getStyleClass().add("textFieldsError");
-            //UserCircle
+
+            // UserCircle
             loginUserCircleCircle.getStyleClass().clear();
             loginUserCircleCircle.getStyleClass().add("fillError");
             error++;
         }
-        if (loginPasswordPasswordField.getText().isEmpty()) {
-            //PasswordTextField
+        // Checking if password is empty
+        if (password.isEmpty()) {
+            // PasswordTextField
             loginPasswordPasswordField.getStyleClass().clear();
             loginPasswordPasswordField.getStyleClass().add("textFieldsError");
-            //PasswordCircle
+
+            // PasswordCircle
             loginPasswordCircleCircle.getStyleClass().clear();
             loginPasswordCircleCircle.getStyleClass().add("fillError");
             error++;
@@ -239,7 +254,7 @@ public class Login implements Initializable {
         }
     }
 
-    private boolean isEmail(String email) {
+    public boolean isEmail(String email) {
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+" +
                 "@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(email);
@@ -300,31 +315,37 @@ public class Login implements Initializable {
     }
 
     public void clearErrorsOnEmail(KeyEvent keyEvent) {
-        //UserTextField
+        // UserTextField
         loginEmailTextField.getStyleClass().clear();
         loginEmailTextField.getStyleClass().add("textFields");
-        //UserCircle
+
+        // UserCircle
         loginUserCircleCircle.getStyleClass().clear();
         loginUserCircleCircle.getStyleClass().add("fill");
-        //PasswordTextField
+
+        // PasswordTextField
         loginPasswordPasswordField.getStyleClass().clear();
         loginPasswordPasswordField.getStyleClass().add("textFields");
-        //PasswordCircle
+
+        // PasswordCircle
         loginPasswordCircleCircle.getStyleClass().clear();
         loginPasswordCircleCircle.getStyleClass().add("fill");
     }
 
     public void clearErrorsOnPassword(KeyEvent keyEvent) {
-        //UserTextField
+        // UserTextField
         loginEmailTextField.getStyleClass().clear();
         loginEmailTextField.getStyleClass().add("textFields");
-        //UserCircle
+
+        // UserCircle
         loginUserCircleCircle.getStyleClass().clear();
         loginUserCircleCircle.getStyleClass().add("fill");
-        //PasswordTextField
+
+        // PasswordTextField
         loginPasswordPasswordField.getStyleClass().clear();
         loginPasswordPasswordField.getStyleClass().add("textFields");
-        //PasswordCircle
+
+        // PasswordCircle
         loginPasswordCircleCircle.getStyleClass().clear();
         loginPasswordCircleCircle.getStyleClass().add("fill");
     }
@@ -383,6 +404,7 @@ public class Login implements Initializable {
         ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
         cogsBlack.setFitHeight(30);
         cogsBlack.setFitWidth(30);
+
         ImageView cogsWhite = new ImageView("main/resources/images/settings_cogs_white.png");
         cogsWhite.setFitHeight(30);
         cogsWhite.setFitWidth(30);
@@ -402,6 +424,7 @@ public class Login implements Initializable {
         ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
         cogsBlack.setFitHeight(30);
         cogsBlack.setFitWidth(30);
+
         ImageView cogsWhite = new ImageView("main/resources/images/settings_cogs_white.png");
         cogsWhite.setFitHeight(30);
         cogsWhite.setFitWidth(30);

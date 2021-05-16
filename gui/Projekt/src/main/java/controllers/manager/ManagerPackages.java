@@ -152,15 +152,6 @@ public class ManagerPackages implements Initializable {
             }
         }
 
-//        for (PackagesExtended ent : table.getItems()
-//             ) {
-//            if(expanderRow.getExpandedProperty(ent).getValue() == true){
-//                expanderRow.toggleExpanded(i);
-//            }
-//            i++;
-//        }
-
-
         return pane;
     }
 }
