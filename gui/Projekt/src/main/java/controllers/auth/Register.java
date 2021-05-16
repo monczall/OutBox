@@ -24,110 +24,110 @@ import static main.java.dao.UsersDAO.getUsers;
 public class Register {
 
     @FXML
-    private AnchorPane loginRightPaneAnchorPane;
+    private static AnchorPane loginRightPaneAnchorPane;
 
     @FXML
-    private Button registerExitButtonButton;
+    private static Button registerExitButtonButton;
 
     @FXML
-    private Button registerReturnButtonButton;
+    private static Button registerReturnButtonButton;
 
     @FXML
-    private Button registerRegisterButtonButton;
+    private static Button registerRegisterButtonButton;
 
     @FXML
-    private Circle registerFirstNameCircle;
+    private static Circle registerFirstNameCircle;
 
     @FXML
-    private TextField registerFirstNameField;
+    private static TextField registerFirstNameField;
 
     @FXML
-    private Circle registerLastNameCircle;
+    private static Circle registerLastNameCircle;
 
     @FXML
-    private TextField registerLastNameField;
+    private static TextField registerLastNameField;
 
     @FXML
-    private Circle registerPhoneNumberCircle;
+    private static Circle registerPhoneNumberCircle;
 
     @FXML
-    private TextField registerPhoneNumberField;
+    private static TextField registerPhoneNumberField;
 
     @FXML
-    private Circle registerEmailAddressCircle;
+    private static Circle registerEmailAddressCircle;
 
     @FXML
-    private TextField registerEmailAddressField;
+    private static TextField registerEmailAddressField;
 
     @FXML
-    private Circle registerStreetCircle;
+    private static Circle registerStreetCircle;
 
     @FXML
-    private TextField registerStreetField;
+    private static TextField registerStreetField;
 
     @FXML
-    private Circle registerCityCircle;
+    private static Circle registerCityCircle;
 
     @FXML
-    private TextField registerCityField;
+    private static TextField registerCityField;
 
     @FXML
-    private Circle registerVoivodeshipCircle;
+    private static Circle registerVoivodeshipCircle;
 
     @FXML
-    private TextField registerVoivodeshipField;
+    private static TextField registerVoivodeshipField;
 
     @FXML
-    private Circle registerPasswordCircle;
+    private static Circle registerPasswordCircle;
 
     @FXML
-    private PasswordField registerPasswordField;
+    private static PasswordField registerPasswordField;
 
     @FXML
-    private Circle registerRepeatPasswordCircle;
+    private static Circle registerRepeatPasswordCircle;
 
     @FXML
-    private PasswordField registerRepeatPasswordField;
+    private static PasswordField registerRepeatPasswordField;
 
 
     @FXML
-    private Label registerFirstNameErrorExample;
+    private static Label registerFirstNameErrorExample;
 
     @FXML
-    private Label registerLastNameErrorExample;
+    private static Label registerLastNameErrorExample;
 
     @FXML
-    private Label registerPhoneNumberErrorExample;
+    private static Label registerPhoneNumberErrorExample;
 
     @FXML
-    private Label registerEmailErrorExample;
+    private static Label registerEmailErrorExample;
 
     @FXML
-    private Label registerStreetErrorExample;
+    private static Label registerStreetErrorExample;
 
     @FXML
-    private Label registerCityErrorExample;
+    private static Label registerCityErrorExample;
 
     @FXML
-    private Label registerVoivodeshipErrorExample;
+    private static Label registerVoivodeshipErrorExample;
 
     @FXML
-    private Label registerSixCharsRequirement;
+    private static Label registerSixCharsRequirement;
 
     @FXML
-    private Label registerSmallLetterRequirement;
+    private static Label registerSmallLetterRequirement;
 
     @FXML
-    private Label registerBigLetterRequirement;
+    private static Label registerBigLetterRequirement;
 
     @FXML
-    private Label registerNumberRequirement;
+    private static Label registerNumberRequirement;
 
     @FXML
-    private Label registerSpecialCharRequirement;
+    private static Label registerSpecialCharRequirement;
 
     @FXML
-    private Label registerSamePasswordsRequirement;
+    private static Label registerSamePasswordsRequirement;
 
     public void register(){
         registerRegisterButtonButton.setDisable(true);
@@ -229,7 +229,7 @@ public class Register {
         registerRegisterButtonButton.setDisable(false);
     }
 
-    private boolean isValid(String firstName, String lastName,
+    public static boolean isValid(String firstName, String lastName,
                             String phoneNumber, String email, String street,
                             String city, String voivodeship, String password,
                             String password2){
@@ -266,7 +266,7 @@ public class Register {
                 "[A-Za-z]{0,40}");
 
         Pattern patternPassword = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])" +
-                "(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$");
+                "(?=.*[A-Z])(?=.*[!@#$%^&*()_\\-+=])(?=\\S+$).{6,}$");
 
         Matcher matchSingleFirstName = pattern.matcher(firstName);
         Matcher matchDoubleFirstName = patternFirstName.matcher(firstName);
@@ -442,7 +442,7 @@ public class Register {
         stage.close();
     }
     //FIRST NAME
-    private void errorOnFirstName(){
+    private static void errorOnFirstName(){
         //FirstNameField
         registerFirstNameField.getStyleClass().clear();
         registerFirstNameField.getStyleClass().add("textFieldsError");
@@ -464,7 +464,7 @@ public class Register {
         registerFirstNameErrorExample.setVisible(false);
     }
     //LAST NAME
-    private void errorOnLastName(){
+    private static void errorOnLastName(){
         //LastNameField
         registerLastNameField.getStyleClass().clear();
         registerLastNameField.getStyleClass().add("textFieldsError");
@@ -486,7 +486,7 @@ public class Register {
         registerLastNameErrorExample.setVisible(false);
     }
     //PHONE NUMBER
-    private void errorOnPhoneNumber(){
+    private static void errorOnPhoneNumber(){
         //PhoneNumberField
         registerPhoneNumberField.getStyleClass().clear();
         registerPhoneNumberField.getStyleClass().add("textFieldsError");
@@ -508,7 +508,7 @@ public class Register {
         registerPhoneNumberErrorExample.setVisible(false);
     }
     //EMAIL ADDRESS
-    private void errorOnEmailAddress(){
+    private static void errorOnEmailAddress(){
         //EmailAddressField
         registerEmailAddressField.getStyleClass().clear();
         registerEmailAddressField.getStyleClass().add("textFieldsError");
@@ -530,7 +530,7 @@ public class Register {
         registerEmailErrorExample.setVisible(false);
     }
     //STREET
-    private void errorOnStreet(){
+    private static void errorOnStreet(){
         //StreetField
         registerStreetField.getStyleClass().clear();
         registerStreetField.getStyleClass().add("textFieldsError");
@@ -552,7 +552,7 @@ public class Register {
         registerStreetErrorExample.setVisible(false);
     }
     //CITY
-    private void errorOnCity(){
+    private static void errorOnCity(){
         //CityField
         registerCityField.getStyleClass().clear();
         registerCityField.getStyleClass().add("textFieldsError");
@@ -574,7 +574,7 @@ public class Register {
         registerCityErrorExample.setVisible(false);
     }
     //VOIVODESHIP
-    private void errorOnVoivodeship(){
+    private static void errorOnVoivodeship(){
         //VoivodeshipField
         registerVoivodeshipField.getStyleClass().clear();
         registerVoivodeshipField.getStyleClass().add("textFieldsError");
@@ -596,7 +596,7 @@ public class Register {
         registerVoivodeshipErrorExample.setVisible(false);
     }
     //PASSWORD
-    private void errorOnPassword(){
+    private static void errorOnPassword(){
         //PasswordField
         registerPasswordField.getStyleClass().clear();
         registerPasswordField.getStyleClass().add("textFieldsError");
@@ -620,7 +620,7 @@ public class Register {
         registerRepeatPasswordCircle.getStyleClass().add("fill");
     }
     //REPEAT PASSWORD
-    private void errorOnConfirmPassword(){
+    private static void errorOnConfirmPassword(){
         //RepeatPasswordField
         registerRepeatPasswordField.getStyleClass().clear();
         registerRepeatPasswordField.getStyleClass().add("textFieldsError");
@@ -709,6 +709,5 @@ public class Register {
     public void checkRequirements(KeyEvent keyEvent) {
         passwordRequirements();
     }
-
 
 }

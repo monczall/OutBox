@@ -1,5 +1,6 @@
 package main.java.dao;
 
+import com.itextpdf.text.pdf.PdfPCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.*;
@@ -22,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PackagesDAO {
-
-
 
     static public List<Packages> getPackages(){
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -48,15 +47,23 @@ public class PackagesDAO {
     }
 
 
-    static public ObservableList<PackagesDTO> addTable()
+    static public ObservableList<PackagesDTO> getPackagesWithStatus()
     {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
-        String hql = "SELECT NEW main.java.entity.PackagesDTO(P.userId, P.id, P.packageNumber, P" +
-                ".timeOfPlannedDelivery, UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status," +
-                " P.additionalComment, P.email) FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId " +
-                "AND P.userInfoId = UI.id and PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM" +
-                " PH WHERE PH.packageId = P.id )) AND NOT PH.status = 'Dostarczona' GROUP BY P.packageNumber";
-
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
+                "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, UI.name, UI.surname," +
+                " UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH " +
+                "WHERE P.id = PH.packageId " +
+                "AND P.userInfoId = UI.id " +
+                "AND PH.status = (SELECT PH.status " +
+                                 "FROM PH " +
+                                 "WHERE PH.id = (SELECT MAX(PH.id) " +
+                                                "FROM PH " +
+                                                "WHERE PH.packageId = P.id )) " +
+                "AND NOT PH.status = 'Dostarczona' " +
+                "AND NOT PH.status = 'Zwrócona Do Nadawcy' " +
+                "GROUP BY P.packageNumber";
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         List<PackagesDTO> results = query.list();
@@ -65,6 +72,31 @@ public class PackagesDAO {
         }
         session.close();
 
+        return packages;
+    }
+
+    static public ObservableList<PdfDTO> readPackagesForPdf() {
+        ObservableList<PdfDTO> packages = FXCollections.observableArrayList();
+
+        String hql = "SELECT NEW main.java.entity.PdfDTO(" +
+                "P.packageNumber, PT.sizeName, " +
+                "UI.city, UI.voivodeship, PH.date) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH, PackageType PT, Users U " +
+                "WHERE P.id = PH.packageId " +
+                "AND P.userInfoId = UI.id " +
+                "AND P.userId = U.id " +
+                "GROUP BY P.packageNumber";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery(hql);
+
+
+        List<PdfDTO> results = query.list();
+        for (PdfDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
         return packages;
     }
 
@@ -167,5 +199,6 @@ public class PackagesDAO {
 
         return packageList;
     }
+
 
 }

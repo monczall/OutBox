@@ -16,6 +16,7 @@ import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.UserInfos;
 import main.java.features.Animations;
+import main.java.features.PdfGenerator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,7 +44,12 @@ public class Courier implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        try {
+            PdfGenerator.createPdf();
+        } catch (Exception e) {
+            System.out.println("blad");
+            e.printStackTrace();
+        }
 //        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
 //        loggedUser.setText(ui.getName() + " " + ui.getSurname());
 

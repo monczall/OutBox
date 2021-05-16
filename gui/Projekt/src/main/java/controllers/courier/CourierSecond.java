@@ -35,7 +35,7 @@ public class CourierSecond implements Initializable {
     private static String comment;
     private static int packageId;
     private static String status;
-    private final ObservableList<PackagesDTO> packages = PackagesDAO.addTable();
+    private final ObservableList<PackagesDTO> packages = PackagesDAO.getPackagesWithStatus();
     private Pane pane;
 
     @FXML
@@ -94,7 +94,7 @@ public class CourierSecond implements Initializable {
 
     public void updateTable() {
         table.getItems().clear();
-        table.setItems(PackagesDAO.addTable());
+        table.setItems(PackagesDAO.getPackagesWithStatus());
     }
 
     @Override
@@ -151,11 +151,12 @@ public class CourierSecond implements Initializable {
                     String status = ExpendableRow.getStatusReturned();
                     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     LocalDateTime now = LocalDateTime.now();
-                    if (!status.equals("")) {
-                        PackageHistoryDAO.updateStatus(CourierSecond.getPackageId(), status,
+                    if (!status.equals("") && !status.equals(arg.getValue().getStatus())) {
+                        PackageHistoryDAO.updateStatus(getPackageId(), status,
                                 Timestamp.valueOf(dateTimeFormatter.format(now)));
+                        updateTable();
                     }
-                    updateTable();
+
                 }
             });
 

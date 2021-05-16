@@ -75,6 +75,11 @@ public class ExpendableRow implements Initializable {
 
         IntStream.range(0, ol.size()).filter(i -> ol.get(i).toString().contains(status)).findFirst().
                 ifPresent(i -> changeStatus.getSelectionModel().select(i));
+        if(changeStatus.getSelectionModel().getSelectedIndex() != -1) {
+            setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().toString());
+        }else{
+            setStatusReturned("");
+        }
     }
 
     @FXML

@@ -1,4 +1,4 @@
-package test;
+package test.auth;
 
 import main.java.dao.HibernateUtil;
 import main.java.entity.UserInfos;
@@ -159,7 +159,7 @@ public class AuthDatabaseTests {
 
         session.beginTransaction();
 
-        int id = 9999;
+        int id = -1;
 
         Query query = session.createQuery("from UserInfos ui where ui.id = :id");
         query.setParameter("id",id);
