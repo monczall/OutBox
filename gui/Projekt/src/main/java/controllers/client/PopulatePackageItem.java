@@ -47,4 +47,9 @@ public class PopulatePackageItem {
     public void setSender(String sender) {
         this.sender = sender;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
 }

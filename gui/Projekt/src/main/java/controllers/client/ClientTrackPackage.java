@@ -109,7 +109,7 @@ public class ClientTrackPackage implements Initializable {
         btnBack.setVisible(false);
 
         //Testing how ClientTrackPackage view will look like with example data
-        List<PopulatePackageItem> list = new ArrayList<>(packageTest());
+        List<PopulatePackageItem> list = new ArrayList<>(packageTest(Login.getUserID(), Login.getUserEmail()));
         for(int i=0; i<list.size(); i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -389,9 +389,9 @@ public class ClientTrackPackage implements Initializable {
      * Method used to display all the statuses in order from the db by HQL query
      * @return filled List of type PopulatePackageItem it contains info about statuses
      */
-    private List<PopulatePackageItem> packageTest(){
+    public static List<PopulatePackageItem> packageTest(int userId, String userEmail){
 
-        List<PackagesDTO> listOfPackages = PackagesDAO.readPackagesByID(Login.getUserID(), Login.getUserEmail());
+        List<PackagesDTO> listOfPackages = PackagesDAO.readPackagesByID(userId, userEmail);
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 

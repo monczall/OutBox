@@ -56,6 +56,7 @@ public class PackagesDAO {
                 " P.additionalComment, P.email) FROM Packages P, UserInfos UI, PackageHistory PH WHERE P.id = PH.packageId " +
                 "AND P.userInfoId = UI.id and PH.status = (SELECT PH.status FROM PH WHERE PH.id = (SELECT MAX(PH.id) FROM" +
                 " PH WHERE PH.packageId = P.id )) AND NOT PH.status = 'Dostarczona' GROUP BY P.packageNumber";
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         List<PackagesDTO> results = query.list();
@@ -120,10 +121,10 @@ public class PackagesDAO {
                 "AND P.userInfoId = UI.id " +
                 "AND P.id = PH.packageId " +
                 "AND PH.status = (SELECT PH.status " +
-                "FROM PH " +
-                "WHERE PH.id = (SELECT MAX(PH.id) " +
-                "FROM PH " +
-                "WHERE PH.packageId = P.id )) " +
+                                "FROM PH " +
+                                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                                                "FROM PH " +
+                                                "WHERE PH.packageId = P.id )) " +
                 "AND PH.status = 'Dostarczona' " +
                 "AND PH.status = 'Zwrócona Do Nadawcy' " +
                 "GROUP BY P.packageNumber";
