@@ -16,8 +16,6 @@ import org.opentest4j.AssertionFailedError;
 
 import javax.xml.bind.SchemaOutputResolver;
 
-
-
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
