@@ -24,8 +24,6 @@ import java.util.List;
 
 public class PackagesDAO {
 
-
-
     static public List<Packages> getPackages(){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -155,10 +153,10 @@ public class PackagesDAO {
                 "AND P.userInfoId = UI.id " +
                 "AND P.id = PH.packageId " +
                 "AND PH.status = (SELECT PH.status " +
-                "FROM PH " +
-                "WHERE PH.id = (SELECT MAX(PH.id) " +
-                "FROM PH " +
-                "WHERE PH.packageId = P.id )) " +
+                                "FROM PH " +
+                                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                                                "FROM PH " +
+                                                "WHERE PH.packageId = P.id )) " +
                 "AND PH.status = 'Dostarczona' " +
                 "AND PH.status = 'Zwrócona Do Nadawcy' " +
                 "GROUP BY P.packageNumber";

@@ -276,8 +276,4 @@ public class ClientSettings implements Initializable {
         settingsPane.setDisable(false);
         settingsPane.setEffect(null);
     }
-
-    public void setAlert(){
-        Alerts.createAlert(this.settingsPane, this.saveInformation, "WARNING", "NIEPOPRAWNE HASŁO");
-    }
 }
