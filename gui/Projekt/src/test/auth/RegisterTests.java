@@ -20,7 +20,9 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX!";
         String password2 = "zaq1@WSX!";
 
-        Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+        Register register = new Register();
+
+        Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                 email, street, city, voivodeship, password, password2));
     }
 
@@ -38,9 +40,11 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX!";
         String password2 = "zaq1@WSX!";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
@@ -60,9 +64,11 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX!";
         String password2 = "zaq1@WSX!";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
@@ -82,9 +88,11 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX!";
         String password2 = "zaq1@WSX!";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
@@ -104,9 +112,11 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX!";
         String password2 = "zaq1@WSX!";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
@@ -126,9 +136,11 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX!";
         String password2 = "zaq1@WSX!";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
@@ -148,9 +160,11 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX!";
         String password2 = "zaq1@WSX!";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
@@ -170,9 +184,11 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX!";
         String password2 = "zaq1@WSX!";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
@@ -192,9 +208,11 @@ public class RegisterTests extends Register {
         String password = "abc123";
         String password2 = "abc123";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
@@ -214,9 +232,11 @@ public class RegisterTests extends Register {
         String password = "zaq1@WSX";
         String password2 = "zaq1@abc";
 
+        Register register = new Register();
+
         Assertions.assertThrows(NullPointerException.class,
                 ()->{
-                    Assertions.assertTrue(Register.isValid(firstName, lastName, phoneNumber,
+                    Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                             email, street, city, voivodeship, password, password2));
                 }
         );
