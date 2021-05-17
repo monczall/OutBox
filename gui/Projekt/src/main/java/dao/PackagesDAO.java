@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +86,7 @@ public class PackagesDAO {
                 "UI.city, UI.voivodeship, PH.date) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH, PackageType PT, Users U " +
                 "WHERE P.id = PH.packageId " +
+                "AND P.typeId = PT.id " +
                 "AND P.userInfoId = UI.id " +
                 "AND P.userId = U.id " +
                 "GROUP BY P.packageNumber";
@@ -92,7 +94,6 @@ public class PackagesDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery(hql);
-
 
         List<PdfDTO> results = query.list();
         for (PdfDTO ent : results) {
@@ -202,5 +203,33 @@ public class PackagesDAO {
         return packageList;
     }
 
+    static public ObservableList<PackagesDTO> getPackagesWithStatusAndNames()
+    {
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
+                "P.id, P.packageNumber, P.usersByUserId.userInfosByUserInfoId.name, P" +
+                ".usersByUserId.userInfosByUserInfoId.surname, PH.status, P.packageTypeByTypeId.sizeName," +
+                " P.userInfosByUserInfoId.name, P.userInfosByUserInfoId.surname " +
+                ") " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH " +
+                "WHERE P.id = PH.packageId " +
+                "AND PH.status = (SELECT PH.status " +
+                "FROM PH " +
+                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                "FROM PH " +
+                "WHERE PH.packageId = P.id )) " +
+                "AND NOT PH.status = 'Dostarczona' " +
+                "AND NOT PH.status = 'Zwrócona Do Nadawcy' " +
+                "GROUP BY P.packageNumber";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
+
+        return packages;
+    }
 
 }
