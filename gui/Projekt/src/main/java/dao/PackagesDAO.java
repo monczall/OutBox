@@ -19,7 +19,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PackagesDAO {
@@ -75,7 +77,7 @@ public class PackagesDAO {
         return packages;
     }
 
-    static public ObservableList<PdfDTO> readPackagesForPdf() {
+    static public ObservableList<PdfDTO> readPackagesForPdf(Date dateStart, Date dateEnd) {
         ObservableList<PdfDTO> packages = FXCollections.observableArrayList();
 
         String hql = "SELECT NEW main.java.entity.PdfDTO(" +
@@ -83,6 +85,8 @@ public class PackagesDAO {
                 "UI.city, UI.voivodeship, PH.date) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH, PackageType PT, Users U " +
                 "WHERE P.id = PH.packageId " +
+                "AND PH.date BETWEEN :dateStart AND :dateEnd " +
+                "AND P.typeId = PT.id " +
                 "AND P.userInfoId = UI.id " +
                 "AND P.userId = U.id " +
                 "GROUP BY P.packageNumber";
@@ -90,7 +94,8 @@ public class PackagesDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery(hql);
-
+        query.setParameter("dateStart", dateStart);
+        query.setParameter("dateEnd", dateEnd);
 
         List<PdfDTO> results = query.list();
         for (PdfDTO ent : results) {
