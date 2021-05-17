@@ -197,7 +197,7 @@ public class PasswordReset {
         }
     }
 
-    private boolean isEmail(String email) {
+    public boolean isEmail(String email) {
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+" +
                 "@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(email);
@@ -343,7 +343,7 @@ public class PasswordReset {
         }
     }
 
-    private boolean isValid(String password1, String password2) {
+    public boolean isValid(String password1, String password2) {
         boolean passwordError = false, passwordNotTheSameError = false;
         int error = 0;
 
