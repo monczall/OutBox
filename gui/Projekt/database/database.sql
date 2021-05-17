@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `ID` int(11) NOT NULL,
   `typeID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
-  `courierID` int(11) NOT NULL,
+  `courierID` int(11),
   `user_infoID` int(11) NOT NULL,
   `email` varchar(128) NOT NULL,
   `package_number` varchar(64) NOT NULL,
