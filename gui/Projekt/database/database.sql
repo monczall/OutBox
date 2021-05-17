@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `ID` int(11) NOT NULL,
   `typeID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
+  `courierID` int(11),
   `user_infoID` int(11) NOT NULL,
   `email` varchar(128) NOT NULL,
   `package_number` varchar(64) NOT NULL,
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
 CREATE TABLE IF NOT EXISTS `package_history` (
   `ID` int(11) NOT NULL,
   `packageID` int(11) NOT NULL,
-  `status` enum('Zarejestrowana','Odebrana Od Klienta','W Transporcie','Przekazana Do Doręczenia','Dostarczona','Nieobecność Odbiorcy','Ponowna Próba Doręczenia','Do Odebrania W Oddziale','Zwrot Do Nadawcy','Zwrócona Do Nadawcy') NOT NULL,
+  `status` enum('Zarejestrowana','Odebrana Od Klienta','W Transporcie','W Lokalnej Sortowni','W Głównej Sortowni','Przekazana Do Doręczenia','Dostarczona','Nieobecność Odbiorcy','Ponowna Próba Doręczenia','Do Odebrania W Oddziale','Zwrot Do Nadawcy','Zwrócona Do Nadawcy') NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

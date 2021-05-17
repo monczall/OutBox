@@ -21,11 +21,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PackagesDAO {
-
-
 
     static public List<Packages> getPackages(){
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -78,7 +77,7 @@ public class PackagesDAO {
         return packages;
     }
 
-    static public ObservableList<PdfDTO> readPackagesForPdf() {
+    static public ObservableList<PdfDTO> readPackagesForPdf(Date dateStart, Date dateEnd) {
         ObservableList<PdfDTO> packages = FXCollections.observableArrayList();
 
         String hql = "SELECT NEW main.java.entity.PdfDTO(" +
@@ -86,6 +85,7 @@ public class PackagesDAO {
                 "UI.city, UI.voivodeship, PH.date) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH, PackageType PT, Users U " +
                 "WHERE P.id = PH.packageId " +
+                "AND PH.date BETWEEN :dateStart AND :dateEnd " +
                 "AND P.typeId = PT.id " +
                 "AND P.userInfoId = UI.id " +
                 "AND P.userId = U.id " +
@@ -94,6 +94,8 @@ public class PackagesDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery(hql);
+        query.setParameter("dateStart", dateStart);
+        query.setParameter("dateEnd", dateEnd);
 
         List<PdfDTO> results = query.list();
         for (PdfDTO ent : results) {
@@ -156,10 +158,10 @@ public class PackagesDAO {
                 "AND P.userInfoId = UI.id " +
                 "AND P.id = PH.packageId " +
                 "AND PH.status = (SELECT PH.status " +
-                "FROM PH " +
-                "WHERE PH.id = (SELECT MAX(PH.id) " +
-                "FROM PH " +
-                "WHERE PH.packageId = P.id )) " +
+                                "FROM PH " +
+                                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                                                "FROM PH " +
+                                                "WHERE PH.packageId = P.id )) " +
                 "AND PH.status = 'Dostarczona' " +
                 "AND PH.status = 'Zwrócona Do Nadawcy' " +
                 "GROUP BY P.packageNumber";

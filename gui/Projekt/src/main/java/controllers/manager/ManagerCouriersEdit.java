@@ -152,7 +152,7 @@ public class ManagerCouriersEdit implements Initializable {
         {
             status = false;
         }
-        if (!inputNumber.getText().matches("[0-9]*") && inputNumber.getText().length() == 9)
+        if (!inputNumber.getText().matches("[0-9]*") || inputNumber.getText().length() != 9)
         {
             status = false;
         }
