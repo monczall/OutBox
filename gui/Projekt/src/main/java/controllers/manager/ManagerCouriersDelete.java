@@ -83,7 +83,7 @@ public class ManagerCouriersDelete implements Initializable {
     }
 
     public void setDataLabel(){
-
+        dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
         fullName.setText(dataUserInfos.get(dataIndex).getName() + " "+dataUserInfos.get(dataIndex).getSurname());
         cityAndStreet.setText(dataUserInfos.get(dataIndex).getCity() + " "
                 +dataUserInfos.get(dataIndex).getStreetAndNumber());

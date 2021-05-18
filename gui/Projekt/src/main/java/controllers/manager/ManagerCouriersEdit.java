@@ -117,8 +117,7 @@ public class ManagerCouriersEdit implements Initializable {
                         streetInput.getText(), inputVoivodeship.getText(), inputEmail.getText(),
                         dataUser.get(0).getPassword(),
                         "Kurier",
-                        //dataUser.get(0).getAreaId(),
-                        1,
+                        dataUser.get(0).getAreaId(),
                         dataUser.get(0).getUserInfoId());
 
                 alertPane.setVisible(true);
@@ -165,7 +164,7 @@ public class ManagerCouriersEdit implements Initializable {
     }
 
     public void setDataEdit(){
-
+        dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
         nameInput.setText(dataUserInfos.get(dataIndex).getName());
         surnameInput.setText(dataUserInfos.get(dataIndex).getSurname());
         inputNumber.setText(dataUserInfos.get(dataIndex).getPhoneNumber());
