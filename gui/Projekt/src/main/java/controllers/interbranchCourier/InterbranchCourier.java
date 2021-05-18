@@ -5,12 +5,18 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import main.java.SceneManager;
+import main.java.controllers.auth.Login;
+import main.java.dao.UserInfosDAO;
+import main.java.entity.UserInfos;
 import main.java.features.Animations;
+import main.java.features.PdfGenerator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,28 +25,34 @@ import java.util.ResourceBundle;
 
 public class InterbranchCourier implements Initializable {
 
+    boolean hamburgerClicked = false;
     @FXML
     private AnchorPane mainWindow;
-
     @FXML
     private VBox paneRight;
-
     @FXML
     private FontAwesomeIconView hamburger;
-
     @FXML
     private Pane welcomeMessage;
+    @FXML
+    private Pane alertPane;
+    @FXML
+    private AnchorPane window;
 
-    boolean hamburgerClicked = false;
-
+    @FXML
+    private Text loggedUser;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb){
-        paneRight.setTranslateX(-200);
+    public void initialize(URL url, ResourceBundle rb) {
 
+//        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+//        loggedUser.setText(ui.getName() + " " + ui.getSurname());
+
+        paneRight.setTranslateX(-200);
+        alertPane.setTranslateY(-500);
 
         hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
-            if(hamburgerClicked == false) {
+            if (hamburgerClicked == false) {
 
                 hamburger.setDisable(true);
                 hamburgerClicked = true;
@@ -51,15 +63,14 @@ public class InterbranchCourier implements Initializable {
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,+200,0.5);
-                Animations.moveByX(welcomeMessage,+170,0.5);
-                Animations.moveByX(mainWindow,+70,0.5);
+                Animations.moveByX(paneRight, +200, 0.5);
+                Animations.moveByX(welcomeMessage, +170, 0.5);
+                Animations.moveByX(mainWindow, +70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     hamburger.setDisable(false);
                 });
-            }
-            else {
+            } else {
                 hamburger.setDisable(true);
                 hamburgerClicked = false;
 
@@ -68,9 +79,9 @@ public class InterbranchCourier implements Initializable {
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,-200,0.5);
-                Animations.moveByX(welcomeMessage,-170,0.5);
-                Animations.moveByX(mainWindow,-70,0.5);
+                Animations.moveByX(paneRight, -200, 0.5);
+                Animations.moveByX(welcomeMessage, -170, 0.5);
+                Animations.moveByX(mainWindow, -70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     paneRight.setVisible(false);
@@ -79,7 +90,8 @@ public class InterbranchCourier implements Initializable {
             }
         });
         try {
-            SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
+            SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierHome.fxml",
+                    mainWindow);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,10 +107,27 @@ public class InterbranchCourier implements Initializable {
 
 
     public void openSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/interbranchCourier/interBranchCourierSettings.fxml", mainWindow);
+        SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierSettings.fxml", mainWindow);
     }
 
-    public void logout(ActionEvent actionEvent) throws IOException {
+    @FXML
+    void logout(ActionEvent event) {
+        Animations.moveByY(alertPane, +500, 0.3);
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        gaussianBlur.setRadius(8);
+        window.setDisable(true);
+        window.setEffect(gaussianBlur);
+    }
+
+    @FXML
+    void logoutNo(ActionEvent event) {
+        Animations.moveByY(alertPane, -500, 0.3);
+        window.setEffect(null);
+        window.setDisable(false);
+    }
+
+    @FXML
+    void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
     }
 }

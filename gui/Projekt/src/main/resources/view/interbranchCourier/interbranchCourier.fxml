@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" stylesheets="@../../css/courier.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.interbranchCourier.InterbranchCourier">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    </rowConstraints>
+<AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="main.java.controllers.interbranchCourier.InterbranchCourier">
     <children>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="mainBackground">
+        <AnchorPane fx:id="window" prefHeight="200.0" prefWidth="200.0" styleClass="mainBackground">
             <children>
                 <AnchorPane fx:id="mainWindow" layoutX="71.0" layoutY="30.0" prefHeight="672.0" prefWidth="1033.0" style="-fx-background-color: transparent;" />
-                <VBox fx:id="paneRight" layoutX="65.0" layoutY="18.0" prefHeight="680.0" prefWidth="163.0" styleClass="sideBackground" visible="false">
+                <VBox fx:id="paneRight" layoutX="71.0" prefHeight="701.0" prefWidth="163.0" styleClass="sideBackground" visible="false">
                     <children>
                         <Pane prefHeight="71.0" prefWidth="156.0" />
                         <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#openHome" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" stylesheets="@../../css/courier.css" text="Home" wrapText="true" />
-                        <Button mnemonicParsing="false" onAction="#openSecond" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/courier.css" text="Zmiana statusu" />
-                        <Button id="btnSettings" mnemonicParsing="false" onAction="#openSettings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/courier.css" text="Ustawienia" />
-                        <Button mnemonicParsing="false" onAction="#logout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/courier.css" text="Wyloguj" />
+                        <Button mnemonicParsing="false" onAction="#openSecond" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/courier.css" text="%changeStatus" />
+                        <Button id="btnSettings" mnemonicParsing="false" onAction="#openSettings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/courier.css" text="%settings" />
+                        <Button mnemonicParsing="false" onAction="#logout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" stylesheets="@../../css/courier.css" text="%logout" />
                         <Pane prefHeight="71.0" prefWidth="156.0" />
                     </children>
                 </VBox>
-                <AnchorPane layoutY="13.0" prefHeight="685.0" prefWidth="72.0" styleClass="sideBackground" AnchorPane.bottomAnchor="2.0">
+                <AnchorPane layoutY="13.0" prefHeight="701.0" prefWidth="72.0" styleClass="sideBackground" AnchorPane.bottomAnchor="2.0">
                     <children>
-                        <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="hamburger" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
+                        <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="iconsAwesome" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
                         <Button layoutX="-2.0" layoutY="82.0" mnemonicParsing="false" onAction="#openHome" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
                             <graphic>
                                 <FontAwesomeIconView glyphName="HOME" size="36" styleClass="icons" text="" />
@@ -60,9 +54,8 @@
                 </AnchorPane>
                 <Pane fx:id="welcomeMessage" layoutX="72.0" layoutY="25.0" prefHeight="41.0" prefWidth="200.0">
                     <children>
-                        <Text fill="WHITE" layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="Witaj" />
-                        <Text layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
-                        <Text fill="WHITE" layoutX="185.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="!" />
+                        <Text fill="WHITE" layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="%welcome" />
+                        <Text fx:id="loggedUser" layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
                     </children>
                 </Pane>
                 <ImageView fitHeight="71.0" fitWidth="87.0" layoutX="1026.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true">
@@ -72,5 +65,24 @@
                 </ImageView>
             </children>
         </AnchorPane>
+        <Pane fx:id="alertPane" layoutX="444.0" layoutY="277.0" prefHeight="123.0" prefWidth="293.0" styleClass="alert">
+            <children>
+                <Button layoutX="154.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="%no">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="CLOSE" size="23" styleClass="iconNext" />
+                    </graphic>
+                </Button>
+                <Button layoutX="48.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="%yes">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="CHECK" size="23" styleClass="backIcon" />
+                    </graphic>
+                </Button>
+                <Label alignment="CENTER" layoutX="20.0" layoutY="20.0" styleClass="alertText" text="%logoutConfirmation" />
+            </children>
+        </Pane>
     </children>
-</GridPane>
+    <stylesheets>
+        <URL value="@../../css/courier.css" />
+        <URL value="@../../css/courier.css" />
+    </stylesheets>
+</AnchorPane>

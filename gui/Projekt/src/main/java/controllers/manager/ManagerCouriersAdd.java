@@ -10,14 +10,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import main.java.App;
 import main.java.controllers.auth.Encryption;
+import main.java.controllers.auth.Login;
 import main.java.dao.AreasDAO;
 import main.java.dao.UserInfosDAO;
+import main.java.dao.UsersDAO;
+import main.java.entity.UserInfos;
+import main.java.entity.Users;
 import main.java.features.Alerts;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -53,6 +58,9 @@ public class ManagerCouriersAdd implements Initializable {
 
     @FXML
     private ComboBox<String> regionName;
+
+    List<UserInfos> dataUserInfos;
+    List<Users> dataUser;
 
     private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów","Rzeszów Rejtana");
 
@@ -90,10 +98,15 @@ public class ManagerCouriersAdd implements Initializable {
                     sendEmail(emailString,nameString,password);
                 } catch (MessagingException e) {
                     e.printStackTrace();
+                    Alerts.createAlert(appWindow, addCourierButton,"WARNING",
+                            App.getLanguageProperties("errorEmail"));
                 }
 
+                UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+                dataUser = UsersDAO.getUsersId(ui.getId());
+                int areaId = dataUser.get(0).getAreaId();
                 UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString,
-                        voivodeshipString, Encryption.encrypt(password), role, null);
+                        voivodeshipString, Encryption.encrypt(password), role, areaId);
 
                 alertPane.setVisible(true);
             }

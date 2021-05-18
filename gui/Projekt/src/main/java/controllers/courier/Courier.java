@@ -44,12 +44,7 @@ public class Courier implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            PdfGenerator.createPdf();
-        } catch (Exception e) {
-            System.out.println("blad");
-            e.printStackTrace();
-        }
+
 //        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
 //        loggedUser.setText(ui.getName() + " " + ui.getSurname());
 

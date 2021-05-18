@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.features.Animations;
@@ -41,6 +42,10 @@ public class Admin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
+
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Open Resource File");
+//        fileChooser.showSaveDialog(SceneManager.getStage());
 
         try {
             SceneManager.loadScene("../../../resources/view/admin/adminHome.fxml", mainWindow);

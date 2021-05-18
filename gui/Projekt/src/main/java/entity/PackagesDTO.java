@@ -14,6 +14,9 @@ public class PackagesDTO {
     private String status;
     private String additionalComment;
     private String email;
+    private String sizeName;
+    private String recipentName;
+    private String recipentSurname;
 
     public PackagesDTO(int userInfosId, int packagesId, String packageNumber, String timeOfPlannedDelivery,
                        String name, String surname, String phoneNumber, String streetAndNumber, String city,
@@ -30,6 +33,19 @@ public class PackagesDTO {
         this.status = status;
         this.additionalComment = additionalComment;
         this.email = email;
+    }
+
+    public PackagesDTO(int packagesId, String packageNumber, String name, String surname, String status,
+                       String sizeName,
+                       String recipentName, String recipentSurname) {
+        this.packagesId = packagesId;
+        this.packageNumber = packageNumber;
+        this.name = name;
+        this.surname = surname;
+        this.status = status;
+        this.sizeName = sizeName;
+        this.recipentName = recipentName;
+        this.recipentSurname = recipentSurname;
     }
 
     public int getUserInfosId() {
@@ -80,7 +96,15 @@ public class PackagesDTO {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getSizeName() {
+        return sizeName;
+    }
+
+    public String getRecipentName() {
+        return recipentName;
+    }
+
+    public String getRecipentSurname() {
+        return recipentSurname;
     }
 }

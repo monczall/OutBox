@@ -1,4 +1,4 @@
-package main.java.controllers.courier;
+package main.java.controllers.interbranchCourier;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
-
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.PackageStatus;
@@ -22,31 +21,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.stream.IntStream;
 
-public class ExpendableRow implements Initializable {
+public class InterbranchExpendableRow implements Initializable {
 
-    String status = CourierSecond.getStatus();
+    String status = InterbranchCourierSecond.getStatus();
     private static String statusReturned;
-
-    @FXML
-    private Text name;
-
-    @FXML
-    private Text mail;
-
-    @FXML
-    private Text city;
-
-    @FXML
-    private Text surname;
-
-    @FXML
-    private Text phone;
-
-    @FXML
-    private Text address;
-
-    @FXML
-    private TextArea comments;
 
     @FXML
     private ComboBox<PackageStatus> changeStatus;
@@ -56,19 +34,11 @@ public class ExpendableRow implements Initializable {
     }
 
     public static void setStatusReturned(String statusReturned) {
-        ExpendableRow.statusReturned = statusReturned;
+        InterbranchExpendableRow.statusReturned = statusReturned;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserInfos ui = new UserInfos();
-        ui = UsersDAO.readUserInfoById(CourierSecond.getId()).get(0);
-        city.setText(ui.getCity());
-        name.setText(ui.getName());
-        surname.setText(ui.getSurname());
-        phone.setText(ui.getPhoneNumber());
-        address.setText(ui.getStreetAndNumber());
-        comments.setText(CourierSecond.getComment());
 
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
         ol.remove(0);

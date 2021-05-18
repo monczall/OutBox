@@ -143,7 +143,7 @@ public class AdminPackSettings implements Initializable {
         int error = 0;
         Pattern patternSize = Pattern.compile("[0-9]{1,3}[x][0-9]{1,3}[x][0-9]{1,3}");
         Pattern patternWeight = Pattern.compile("[0-9]{1,3}");
-        Pattern patternPrice = Pattern.compile("[0-9]{1,3}\\,[0-9]{1,2}");
+        Pattern patternPrice = Pattern.compile("[0-9]{1,3}\\.[0-9]{1,2}");
 
         Matcher matchSize = patternSize.matcher(size);
         Matcher matchWeight = patternWeight.matcher(weight);

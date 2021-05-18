@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `ID` int(11) NOT NULL,
   `typeID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
+  `courierID` int(11) DEFAULT NULL,
   `user_infoID` int(11) NOT NULL,
   `email` varchar(128) NOT NULL,
   `package_number` varchar(64) NOT NULL,
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
 CREATE TABLE IF NOT EXISTS `package_history` (
   `ID` int(11) NOT NULL,
   `packageID` int(11) NOT NULL,
-  `status` enum('Zarejestrowana','Odebrana Od Klienta','W Transporcie','Przekazana Do Doręczenia','Dostarczona','Nieobecność Odbiorcy','Ponowna Próba Doręczenia','Do Odebrania W Oddziale','Zwrot Do Nadawcy','Zwrócona Do Nadawcy') NOT NULL,
+  `status` enum('Zarejestrowana','Odebrana Od Klienta','W Transporcie','W Lokalnej Sortowni','W Głównej Sortowni','Przekazana Do Doręczenia','Dostarczona','Nieobecność Odbiorcy','Ponowna Próba Doręczenia','Do Odebrania W Oddziale','Zwrot Do Nadawcy','Zwrócona Do Nadawcy') NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -194,7 +195,8 @@ ALTER TABLE `user_infos`
 ALTER TABLE `packages`
   ADD CONSTRAINT `packages_ibfk_1` FOREIGN KEY (`user_infoID`) REFERENCES `user_infos` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `packages_ibfk_2` FOREIGN KEY (`typeID`) REFERENCES `package_type` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `packages_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `packages_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `packages_ibfk_4` FOREIGN KEY (`courierID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `package_history`
