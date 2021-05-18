@@ -4,6 +4,8 @@ public enum PackageStatus {
     REGISTERED("Zarejestrowana"),
     RECIVED("Odebrana Od Klienta"),
     TRANSPORTING("W Transporcie"),
+    IN_SORTING_DEPARTMENT("W Lokalnej Sortowni"),
+    IN_MAIN_SORTING_DEPARTMENT("W Głównej Sortowni"),
     TO_DELIVERY("Przekazana Do Doręczenia"),
     DELIVERED("Dostarczona"),
     ABSENCE_OF_THE_RECIPENT("Nieobecność Odbiorcy"),

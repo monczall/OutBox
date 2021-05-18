@@ -14,12 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
-import main.java.entity.PackageHistory;
-import main.java.entity.Packages;
-import main.java.entity.PackagesDTO;
-import main.java.entity.UserInfos;
+import main.java.dao.UsersDAO;
+import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
 import java.io.IOException;
@@ -27,6 +26,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class InterbranchCourierSecond implements Initializable {
@@ -35,7 +35,6 @@ public class InterbranchCourierSecond implements Initializable {
     private static String comment;
     private static int packageId;
     private static String status;
-    private final ObservableList<PackagesDTO> packages = PackagesDAO.getPackagesWithStatusAndNames();
     private Pane pane;
 
     @FXML
@@ -98,7 +97,14 @@ public class InterbranchCourierSecond implements Initializable {
 
     public void updateTable() {
         table.getItems().clear();
-        table.setItems(PackagesDAO.getPackagesWithStatusAndNames());
+
+        table.setItems(getPackages());
+    }
+
+    private ObservableList<PackagesDTO> getPackages(){
+        ObservableList<PackagesDTO> packList = PackagesDAO.getPackagesWithStatusAndNames(Login.getUserID());
+
+        return packList;
     }
 
     @Override
@@ -119,16 +125,16 @@ public class InterbranchCourierSecond implements Initializable {
     @FXML
     void search(KeyEvent event) {
         table.getItems().clear();
+        ObservableList<PackagesDTO> packages = getPackages();
         String searchedWord = searchField.getText().toLowerCase();
         for (int i = 0; i < packages.size(); i++) {
             if (packages.get(i).getPackageNumber().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getSizeName().toLowerCase().contains(searchedWord) ||
                     packages.get(i).getName().toLowerCase().contains(searchedWord) ||
                     packages.get(i).getSurname().toLowerCase().contains(searchedWord) ||
-                    packages.get(i).getCity().toLowerCase().contains(searchedWord) ||
-                    packages.get(i).getStreetAndNumber().toLowerCase().contains(searchedWord) ||
-                    packages.get(i).getPhoneNumber().toLowerCase().contains(searchedWord) ||
-                    packages.get(i).getStatus().toLowerCase().contains(searchedWord) ||
-                    packages.get(i).getTimeOfPlannedDelivery().toLowerCase().contains(searchedWord)) {
+                    packages.get(i).getRecipentName().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getRecipentSurname().toLowerCase().contains(searchedWord) ||
+                    packages.get(i).getStatus().toLowerCase().contains(searchedWord)){
                 table.getItems().add(packages.get(i));
             }
         }
@@ -136,15 +142,16 @@ public class InterbranchCourierSecond implements Initializable {
 
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
-            table.getSelectionModel().select(arg.getTableRow().getIndex());
+            int selectedIndex = arg.getTableRow().getIndex();
+            table.getSelectionModel().select(selectedIndex);
             setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());
             setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
-            setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
+
             setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
 
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/interbranchCourier/interbranchCourierExpandableRow.fxml"));
             Button button = new Button("Zatwierdź");
-            button.setLayoutX(612.5);
+            button.setLayoutX(616);
             button.setLayoutY(78);
             button.setPrefHeight(25);
             button.setPrefWidth(90);
@@ -157,6 +164,15 @@ public class InterbranchCourierSecond implements Initializable {
                     if (!status.equals("") && !status.equals(arg.getValue().getStatus())) {
                         PackageHistoryDAO.updateStatus(getPackageId(), status,
                                 Timestamp.valueOf(dateTimeFormatter.format(now)));
+                        if (status.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())) {
+                            List<Users> usersList = UsersDAO.getCouriers("Kurier");
+                            for (int i = 0; i < usersList.size(); i++) {
+                                if (table.getItems().get(selectedIndex).getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
+                                    PackagesDAO.updateCourierId(table.getItems().get(selectedIndex).getPackagesId(),
+                                            usersList.get(i).getId());
+                                }
+                            }
+                        }
                         updateTable();
                     }
 

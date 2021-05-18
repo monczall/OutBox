@@ -133,6 +133,7 @@ public class UsersDAO {
         return String.valueOf(query.list().get(0));
     }
 
+
     static public void deactivateAccount(int userId)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -160,4 +161,38 @@ public class UsersDAO {
 
         return query.list();
     }
+
+    static public List<Users> getCouriers(String role){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from Users WHERE role = :role");
+        query.setParameter("role", role);
+
+        List<Users> listOfUsers = query.list();
+
+        return listOfUsers;
+    }
+
+    static public List<Users> getCouriersByAreaId(int areaId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from Users WHERE areaId = :areaId AND role = 'Kurier'");
+        query.setParameter("areaId", areaId);
+
+        List<Users> listOfUsers = query.list();
+
+        return listOfUsers;
+    }
+
+    static public Long getPackagesByCourier(int courierId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("select count(P.courierId) from Packages P WHERE P.courierId = :courierId ");
+        query.setParameter("courierId", courierId);
+
+        Long listOfUsers = (Long) query.uniqueResult();
+
+        return listOfUsers;
+    }
+    
 }

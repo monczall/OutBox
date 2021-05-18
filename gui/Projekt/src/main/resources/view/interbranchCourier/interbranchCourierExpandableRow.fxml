@@ -11,13 +11,9 @@
       <ComboBox fx:id="changeStatus" layoutX="540.0" layoutY="32.0" onAction="#setStatus" prefHeight="25.0" prefWidth="235.0" styleClass="inputBox" />
       <Text fill="WHITE" layoutX="19.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z:" />
       <Text fill="WHITE" layoutX="11.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do:" />
-      <Text fx:id="surname" fill="WHITE" layoutX="50.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
+      <Text fx:id="street1" fill="WHITE" layoutX="50.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="354.8033981323242" />
       <Text fx:id="address" fill="WHITE" layoutX="322.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
       <Label layoutX="617.0" layoutY="7.0" text="Zmiana statusu" />
-      <Text fx:id="surname1" fill="WHITE" layoutX="225.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="125.80339813232422" />
-      <Text fx:id="surname11" fill="WHITE" layoutX="368.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="125.80339813232422" />
-      <Text fx:id="surname2" fill="WHITE" layoutX="50.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
-      <Text fx:id="surname12" fill="WHITE" layoutX="225.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="125.80339813232422" />
-      <Text fx:id="surname111" fill="WHITE" layoutX="368.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="125.80339813232422" />
+      <Text fx:id="street2" fill="WHITE" layoutX="50.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="360.8033981323242" />
    </children>
 </Pane>
