@@ -72,6 +72,7 @@ public class ExpendableRow implements Initializable {
 
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
         ol.remove(0);
+        ol.remove(3);
         changeStatus.setItems(ol);
 
         IntStream.range(0, ol.size()).filter(i -> ol.get(i).toString().contains(status)).findFirst().

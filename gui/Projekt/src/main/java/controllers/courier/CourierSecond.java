@@ -14,12 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
-import main.java.entity.PackageHistory;
-import main.java.entity.Packages;
-import main.java.entity.PackagesDTO;
-import main.java.entity.UserInfos;
+import main.java.dao.UsersDAO;
+import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
 import java.io.IOException;
@@ -27,6 +26,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CourierSecond implements Initializable {
@@ -94,7 +94,7 @@ public class CourierSecond implements Initializable {
 
     public void updateTable() {
         table.getItems().clear();
-        table.setItems(PackagesDAO.getPackagesWithStatus());
+        table.setItems(PackagesDAO.getPackagesWithStatusById(Login.getUserID()));
     }
 
     @Override
@@ -133,8 +133,9 @@ public class CourierSecond implements Initializable {
 
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
-            table.getSelectionModel().select(arg.getTableRow().getIndex());
-            setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());
+            int selectedIndex = arg.getTableRow().getIndex();
+            table.getSelectionModel().select(selectedIndex);
+            setId(table.getItems().get(selectedIndex).getUserInfosId());
             setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
             setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
             setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
@@ -154,6 +155,16 @@ public class CourierSecond implements Initializable {
                     if (!status.equals("") && !status.equals(arg.getValue().getStatus())) {
                         PackageHistoryDAO.updateStatus(getPackageId(), status,
                                 Timestamp.valueOf(dateTimeFormatter.format(now)));
+                        if (status.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())) {
+                            List<Users> usersList = UsersDAO.getCouriers("Kurier Międzyoddziałowy");
+                            for (int i = 0; i < usersList.size(); i++) {
+                                if (table.getItems().get(selectedIndex).getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
+                                    PackagesDAO.updateCourierId(table.getItems().get(selectedIndex).getPackagesId(),
+                                            usersList.get(i).getId());
+                                }
+                            }
+                        }
+
                         updateTable();
                     }
 
