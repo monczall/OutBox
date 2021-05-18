@@ -9,7 +9,10 @@ import main.java.entity.UsersDTO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 
 public class UsersDAO {
 
@@ -64,7 +67,7 @@ public class UsersDAO {
         return user;
     }
 
-    static public boolean deleteAccount(String password, int id){
+    static public boolean checkIfPasswordCorrect(String password, int id){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query=session.createQuery("SELECT password from Users WHERE password = :password AND id = :id");
@@ -72,15 +75,15 @@ public class UsersDAO {
         query.setParameter("password", Encryption.encrypt(password));
         query.setParameter("id", id);
 
-        Query query1 = session.createQuery("SELECT PH.status FROM PackageHistory PH, Users U, Packages P " +
+        /*Query query1 = session.createQuery("SELECT PH.status FROM PackageHistory PH, Users U, Packages P " +
                 "WHERE U.id = :id AND PH.packageId = P.id AND U.id = P.userId AND PH.status = " +
                 "(SELECT PH.status FROM PackageHistory PH WHERE PH.id = (SELECT MAX(PH.id) " +
                 "FROM PackageHistory PH WHERE PH.packageId = P.id )) AND " +
                 "NOT PH.status = 'Dostarczona' AND NOT PH.status = 'Zwrócona Do Nadawcy' GROUP BY PH.packageId");
 
-        query1.setParameter("id", id);
+        query1.setParameter("id", id);*/
 
-        if(query.list().size() == 0 || query1.list().size() != 0)
+        if(query.list().size() == 0)
             return false;
 
         return true;
@@ -128,5 +131,33 @@ public class UsersDAO {
         query.setParameter("id",userId);
 
         return String.valueOf(query.list().get(0));
+    }
+
+    static public void deactivateAccount(int userId)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Users users = session.get(Users.class, userId);
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+
+        users.setEmail("UŻYTKOWNIK USUNIĘTY");
+        users.setPassword(dateTimeFormatter.format(now) );
+
+        session.update(users);
+        session.getTransaction().commit();
+
+        session.close();
+    }
+
+    static public List<Users> readDeactivatedAccounts(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("FROM Users WHERE email = 'UŻYTKOWNIK USUNIĘTY'");
+
+        return query.list();
     }
 }

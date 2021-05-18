@@ -2,10 +2,24 @@ package main.java;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import main.java.dao.UserInfosDAO;
+import main.java.dao.UsersDAO;
+import main.java.entity.Users;
 import main.java.features.Preference;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
+
+import static java.util.concurrent.TimeUnit.DAYS;
 
 public class App extends Application {
 
@@ -13,9 +27,22 @@ public class App extends Application {
     private static Preference pref = new Preference();
     private static String name;
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
 
         PopulateDatabase.createDbIfNotExists();
+
+        List<Users> dA = UsersDAO.readDeactivatedAccounts();
+
+        for(int i = 0; i < dA.size(); i++){
+
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate localDate = LocalDate.parse(dA.get(i).getPassword(),dateTimeFormatter);
+
+            if(ChronoUnit.DAYS.between(localDate, LocalDateTime.now()) >= 31){
+                UserInfosDAO.deleteUser(dA.get(i).getUserInfoId());
+            }
+
+        }
 
         launch(args);
     }
