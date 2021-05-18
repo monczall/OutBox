@@ -10,6 +10,7 @@ public class Packages {
     private int id;
     private int typeId;
     private int userId;
+    private Integer courierId;
     private int userInfoId;
     private String email;
     private String packageNumber;
@@ -19,6 +20,7 @@ public class Packages {
     private PackageType packageTypeByTypeId;
     private Users usersByUserId;
     private UserInfos userInfosByUserInfoId;
+    private UserInfos userInfosByCourierId;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -49,6 +51,16 @@ public class Packages {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    @Basic
+    @Column(name = "courierID", nullable = true)
+    public int getCourierId() {
+        return courierId;
+    }
+
+    public void setCourierId(Integer courierId) {
+        this.courierId = courierId;
     }
 
     @Basic
@@ -151,5 +163,16 @@ public class Packages {
 
     public void setUserInfosByUserInfoId(UserInfos userInfosByUserInfoId) {
         this.userInfosByUserInfoId = userInfosByUserInfoId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "courierID", referencedColumnName = "ID", nullable = true, insertable = false, updatable =
+            false)
+    public UserInfos getUserInfosByCourierId() {
+        return userInfosByCourierId;
+    }
+
+    public void setUserInfosByCourierId(UserInfos userInfosByCourierId) {
+        this.userInfosByCourierId = userInfosByCourierId;
     }
 }

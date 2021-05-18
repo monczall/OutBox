@@ -3,21 +3,25 @@ package main.java.entity;
 public class PackagesDTO {
 
     private int userInfosId;
-    private int packagesId;
-    private String packageNumber;
+    private final int packagesId;
+    private final String packageNumber;
     private String timeOfPlannedDelivery;
-    private String name;
-    private String surname;
+    private final String name;
+    private final String surname;
     private String phoneNumber;
     private String streetAndNumber;
     private String city;
-    private String status;
+    private final String status;
     private String additionalComment;
     private String email;
+    private String sizeName;
+    private String recipentName;
+    private String recipentSurname;
+    private String voivodeship;
 
     public PackagesDTO(int userInfosId, int packagesId, String packageNumber, String timeOfPlannedDelivery,
                        String name, String surname, String phoneNumber, String streetAndNumber, String city,
-                       String status, String additionalComment, String email) {
+                       String status, String additionalComment, String email, String voivodeship) {
         this.userInfosId = userInfosId;
         this.packagesId = packagesId;
         this.packageNumber = packageNumber;
@@ -30,6 +34,21 @@ public class PackagesDTO {
         this.status = status;
         this.additionalComment = additionalComment;
         this.email = email;
+        this.voivodeship = voivodeship;
+    }
+
+    public PackagesDTO(int packagesId, String packageNumber, String name, String surname, String status,
+                       String sizeName,
+                       String recipentName, String recipentSurname, String voivodeship) {
+        this.packagesId = packagesId;
+        this.packageNumber = packageNumber;
+        this.name = name;
+        this.surname = surname;
+        this.status = status;
+        this.sizeName = sizeName;
+        this.recipentName = recipentName;
+        this.recipentSurname = recipentSurname;
+        this.voivodeship = voivodeship;
     }
 
     public int getUserInfosId() {
@@ -80,7 +99,17 @@ public class PackagesDTO {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getSizeName() {
+        return sizeName;
     }
+
+    public String getRecipentName() {
+        return recipentName;
+    }
+
+    public String getRecipentSurname() {
+        return recipentSurname;
+    }
+
+    public String getVoivodeship() { return voivodeship; }
 }

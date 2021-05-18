@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class PackagesDAO {
 
@@ -54,7 +55,8 @@ public class PackagesDAO {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, UI.name, UI.surname," +
-                " UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email) " +
+                " UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email, " +
+                "P.userInfosByUserInfoId.voivodeship) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE P.id = PH.packageId " +
                 "AND P.userInfoId = UI.id " +
@@ -68,6 +70,40 @@ public class PackagesDAO {
                 "GROUP BY P.packageNumber";
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
+
+        return packages;
+    }
+
+
+    static public ObservableList<PackagesDTO> getPackagesWithStatusById(int courierId)
+    {
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
+                "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, UI.name, UI.surname, " +
+                "UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email, " +
+                "P.userInfosByUserInfoId.voivodeship) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH " +
+                "WHERE P.id = PH.packageId " +
+                "AND P.courierId = :courierId " +
+                "AND P.userInfoId = UI.id " +
+                "AND PH.status = (SELECT PH.status " +
+                "FROM PH " +
+                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                "FROM PH " +
+                "WHERE PH.packageId = P.id )) " +
+                "AND NOT PH.status = 'Dostarczona' " +
+                "AND NOT PH.status = 'Zwrócona Do Nadawcy' " +
+                "GROUP BY P.packageNumber";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setParameter("courierId", courierId);
+
         List<PackagesDTO> results = query.list();
         for (PackagesDTO ent : results) {
             packages.add(ent);
@@ -162,8 +198,8 @@ public class PackagesDAO {
                                 "WHERE PH.id = (SELECT MAX(PH.id) " +
                                                 "FROM PH " +
                                                 "WHERE PH.packageId = P.id )) " +
-                "AND PH.status = 'Dostarczona' " +
-                "AND PH.status = 'Zwrócona Do Nadawcy' " +
+                "AND (PH.status = 'Dostarczona' " +
+                "OR PH.status = 'Zwrócona Do Nadawcy') " +
                 "GROUP BY P.packageNumber";
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -179,6 +215,45 @@ public class PackagesDAO {
         }
         session.close();
         return packages;
+    }
+
+    static public List<Long> quantityOfPackagesType(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+
+        Query query = session.createQuery("SELECT COUNT(P.typeId) as quantity " +
+                "FROM PackageType PT, Packages P " +
+                "WHERE P.typeId = PT.id " +
+                "GROUP BY PT.sizeName " +
+                "ORDER BY PT.sizeName ASC");
+
+        List<Long> queryList = query.list();
+
+        session.close();
+
+        return queryList;
+    }
+
+    static public ObservableList<BarChartDTO> quantityOfPackagesMonthly(String month){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        ObservableList<BarChartDTO> list = FXCollections.observableArrayList();
+
+        Query query = session.createQuery("SELECT NEW main.java.entity.BarChartDTO(SUBSTRING(P.packageNumber, 1, 2), " +
+                "COUNT(P.packageNumber)) " +
+                "FROM Packages P WHERE SUBSTRING(P.packageNumber, 3, 2) = :month " +
+                "GROUP BY SUBSTRING(P.packageNumber, 1, 2)");
+
+        query.setParameter("month",month);
+
+        List<BarChartDTO> results = query.list();
+
+        for (BarChartDTO ent : results) {
+            list.add(ent);
+        }
+        session.close();
+
+        return list;
     }
 
     static public List<Packages> readPackages(){
@@ -205,5 +280,58 @@ public class PackagesDAO {
         return packageList;
     }
 
+    static public ObservableList<PackagesDTO> getPackagesWithStatusAndNames(int courierId)
+    {
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
+                "P.id, P.packageNumber, P.usersByUserId.userInfosByUserInfoId.name, P" +
+                ".usersByUserId.userInfosByUserInfoId.surname, PH.status, P.packageTypeByTypeId.sizeName," +
+                " P.userInfosByUserInfoId.name, P.userInfosByUserInfoId.surname, P.userInfosByUserInfoId.voivodeship) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH " +
+                "WHERE P.id = PH.packageId " +
+                "AND P.courierId = :courierId " +
+                "AND PH.status = (SELECT PH.status " +
+                "FROM PH " +
+                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                "FROM PH " +
+                "WHERE PH.packageId = P.id )) " +
+                "GROUP BY P.packageNumber";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setParameter("courierId", courierId);
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
+
+        return packages;
+    }
+
+    static public List<Packages> getPackagesWithoutCourierId(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from Packages P WHERE P.courierId = null");
+
+        List<Packages> listOfPackages = query.list();
+
+        return listOfPackages;
+    }
+
+    static public void updateCourierId(int packageId, int courierId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Packages packages = session.get(Packages.class, packageId);
+
+        packages.setCourierId(courierId);
+
+        session.update(packages);
+
+        session.getTransaction().commit();
+
+        session.close();
+    }
 
 }

@@ -352,3 +352,85 @@
     -fx-font-size: 16px;
     -fx-text-fill: -fx-alert-failure-color;
 }
+.check-combo-box > .combo-box{
+    -fx-background-radius: 0px;
+    -fx-background-color: transparent;
+}
+
+.toggleSort{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-main-color;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-main-color;
+    -fx-border-style: solid;
+    -fx-cursor: hand;
+}
+.toggleSort:selected, .toggleSort:selected > .userIconSettings{
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: -fx-dark-color;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-fill: -fx-dark-color;
+}
+.toggleSort:hover{
+    -fx-border-width: 5px;
+}
+.pieChart > .chart-title{
+    -fx-text-fill: -fx-main-color;
+    -fx-font-weight: bold;
+}
+.pieChart > .chart-legend{
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-background-color: transparent;
+}
+.pieChart {
+    -fx-text-fill: #121212;
+    -fx-start-agnle: 30;
+    -fx-legend-side: right;
+    -fx-pie-color: red;
+}
+.default-color0.chart-pie {
+    -fx-pie-color: white;
+}
+.data1.chart-pie, .default-color1.chart-pie  {
+    -fx-pie-color: #ffa500;
+}
+.data2.chart-pie, .default-color2.chart-pie  {
+    -fx-pie-color: #d82020;
+}
+.chart-pie-label{
+    -fx-fill: transparent;
+}
+.chart-pie-label-line {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+}
+.chart-legend-item{
+    -fx-text-fill: -fx-gray-color;
+}
+.chart-pie {
+    -fx-border-color: -fx-dark-color;
+    -fx-border-width: 3px;
+}
+.barChart{
+    -fx-background-color: transparent;
+}
+.barChart > .chart-content > .chart-plot-background{
+    -fx-text-fill: white;
+    -fx-fill: white;
+    -fx-background-color: transparent;
+}
+.chart-bar{
+    -fx-bar-fill: -fx-main-color;
+}
+.barChart > .chart-legend{
+    -fx-background-color: transparent;
+}
+.barChart > .chart-legend-item{
+    -fx-text-fill: -fx-gray-color;
+}
+#xAxis > .axis-label, #yAxis > .axis-label{
+    -fx-text-fill: white;
+}

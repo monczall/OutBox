@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.PackageStatus;
@@ -71,6 +72,7 @@ public class ExpendableRow implements Initializable {
 
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
         ol.remove(0);
+        ol.remove(3);
         changeStatus.setItems(ol);
 
         IntStream.range(0, ol.size()).filter(i -> ol.get(i).toString().contains(status)).findFirst().

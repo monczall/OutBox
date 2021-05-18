@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import main.java.App;
 import main.java.features.Alerts;
+import main.java.features.PdfGeneratorManager;
 
 import java.net.URL;
 import java.time.Instant;
@@ -48,18 +49,23 @@ public class ManagerRaports implements Initializable {
 
     String confirmText = App.getLanguageProperties("confirmRaportFromDay");
 
+    LocalDate today;
+    LocalDate past;
+
     @FXML
     public void raportCustom(MouseEvent event) {
         if(startData.getValue() != null && endData.getValue() == null){
-            LocalDate startDataValue = startData.getValue();
-            LocalDate today = LocalDate.now();
+            past = startData.getValue();
+            today = LocalDate.now();
 
-            long daysBetween = DAYS.between(startDataValue, today);
-            long daysFuture = DAYS.between(today, startDataValue);
+            long daysBetween = DAYS.between(past, today);
+            long daysFuture = DAYS.between(today, past);
 
             if(daysBetween >= 0 && daysFuture <=0) {
-
-                textOneDate.setText(confirmText + startDataValue);
+                System.out.println();
+                textOneDate.setText(confirmText + past);
+                today = past;
+                System.out.println(today+ " : " + past);
                 oneDayRaport.setVisible(true);
             }
             else{
@@ -79,6 +85,7 @@ public class ManagerRaports implements Initializable {
 
             if(daysBetween == 0){
                 textOneDate.setText(confirmText + startDataValue);
+                today=past;
                 oneDayRaport.setVisible(true);
             }
             else if(daysBetween < 0 || daysFuture > 0){
@@ -97,30 +104,30 @@ public class ManagerRaports implements Initializable {
 
     @FXML
     public void raportLastDay(MouseEvent event) {
-        LocalDate today = LocalDate.now();
-        LocalDate yesterday = today.minusDays(1);
-
-        textOneDate.setText(confirmText + yesterday.toString());
+        today = LocalDate.now();
+        past = today.minusDays(1);
+        today=past;
+        textOneDate.setText(confirmText + past.toString());
         oneDayRaport.setVisible(true);
     }
 
     @FXML
     public void raportLastMonth(MouseEvent event) {
-        LocalDate today = LocalDate.now();
-        LocalDate lastMonth = today.minusDays(30);
+        today = LocalDate.now();
+        past = today.minusDays(30);
 
         textOneDate.setText(App.getLanguageProperties("confirmRaportLastMonth") +
-                lastMonth.toString());
+                past.toString());
         oneDayRaport.setVisible(true);
     }
 
     @FXML
     public void raportLastWeek(MouseEvent event) {
-        LocalDate today = LocalDate.now();
-        LocalDate lastWeek = today.minusDays(7);
+        today = LocalDate.now();
+        past = today.minusDays(7);
 
         textOneDate.setText(App.getLanguageProperties("confirmRaportLastWeek") +
-                lastWeek.toString());
+                past.toString());
         oneDayRaport.setVisible(true);
     }
 
@@ -130,7 +137,20 @@ public class ManagerRaports implements Initializable {
     }
 
     public void confirmRaport(MouseEvent mouseEvent) {
-        //here generate raport
+        System.out.println("GENEROWANIE RAPORTU");
+        LocalDate startDataValue = startData.getValue();
+        LocalDate endDataValue = endData.getValue().plusDays(1);
+
+        Date startValue = java.sql.Date.valueOf(startDataValue);
+        Date endValue = java.sql.Date.valueOf(endDataValue);
+
+        try {
+            PdfGeneratorManager.createPdf(startValue, endValue);
+        } catch (Exception e) {
+            System.out.println("Błąd przy tworzeniu raportu PDF");
+            e.printStackTrace();
+        }
+        infoConfirmRaport.setVisible(false);
     }
 
     public void cancelRaport(MouseEvent mouseEvent) {
@@ -138,7 +158,18 @@ public class ManagerRaports implements Initializable {
     }
 
     public void confirmOneDayRaport(MouseEvent mouseEvent) {
-        //here generate raport
+
+        System.out.println(today+ " : " + past);
+        Date startValue = java.sql.Date.valueOf(past);
+        Date endValue = java.sql.Date.valueOf(today);
+
+        try {
+            PdfGeneratorManager.createPdf(startValue, endValue);
+        } catch (Exception e) {
+            System.out.println("Błąd przy tworzeniu raportu PDF");
+            e.printStackTrace();
+        }
+        oneDayRaport.setVisible(false);
     }
 
     public void cancelOneDayRaport(MouseEvent mouseEvent) {

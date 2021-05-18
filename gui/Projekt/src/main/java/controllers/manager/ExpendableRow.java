@@ -89,7 +89,6 @@ public class ExpendableRow implements Initializable {
 
         labelSender.setText(App.getLanguageProperties("sender"));
         labelComment.setText(App.getLanguageProperties("comment"));
-
         labelName.setText(App.getLanguageProperties("name"));
         labelSurname.setText(App.getLanguageProperties("surname"));
         labelCity.setText(App.getLanguageProperties("city"));

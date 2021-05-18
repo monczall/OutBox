@@ -5,8 +5,8 @@
     -fx-gray-color: #8f8f8f;
     -fx-color-error:white;
     -fx-shadow: #000;
-    -fx-dark-transparent: #121212;
-
+    -fx-dark-transparent: #121212cc;
+    -fx-shadow: #000;
 }
 
 .blockIconTitle{
@@ -453,6 +453,7 @@
 .alertText{
     -fx-font-size: 16px;
     -fx-text-fill: -fx-main-color;
+    -fx-alignment: CENTER;
 }
 
 .customAlert{
@@ -463,6 +464,10 @@
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: -fx-main-color;
+}
+
+.partIcon{
+    -fx-fill: -fx-main-color;
 }
 
 /*-------------STYLING BUTTONS-------------*/

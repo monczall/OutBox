@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.interbranchCourier.InterbranchExpendableRow">
    <children>
-      <Button layoutX="701.0" layoutY="70.0" mnemonicParsing="false" text="Zatwierdź">
-         <graphic>
-            <FontAwesomeIconView glyphName="CHECK" />
-         </graphic></Button>
-      <Label layoutX="43.0" layoutY="7.0" text="Numer paczki" />
-      <Label layoutX="367.0" layoutY="7.0" text="Adres email" />
-      <Label layoutX="43.0" layoutY="53.0" text="Uwagi" />
-      <Label layoutX="687.0" layoutY="7.0" text="Label" />
-      <ComboBox layoutX="537.0" layoutY="70.0" prefWidth="150.0" styleClass="inputBox" />
+      <Label layoutX="163.0" layoutY="7.0" text="Trasa" />
+      <ComboBox fx:id="changeStatus" layoutX="540.0" layoutY="32.0" onAction="#setStatus" prefHeight="25.0" prefWidth="235.0" styleClass="inputBox" />
+      <Text fill="WHITE" layoutX="19.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Z:" />
+      <Text fill="WHITE" layoutX="11.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do:" />
+      <Text fx:id="street1" fill="WHITE" layoutX="50.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="354.8033981323242" />
+      <Text fx:id="address" fill="WHITE" layoutX="322.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
+      <Label layoutX="617.0" layoutY="7.0" text="Zmiana statusu" />
+      <Text fx:id="street2" fill="WHITE" layoutX="50.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="360.8033981323242" />
    </children>
 </Pane>
