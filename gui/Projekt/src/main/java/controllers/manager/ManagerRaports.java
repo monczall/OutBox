@@ -47,6 +47,8 @@ public class ManagerRaports implements Initializable {
     @FXML
     private Label textOneDate;
 
+    boolean display = false;
+
     String confirmText = App.getLanguageProperties("confirmRaportFromDay");
 
     LocalDate today;
@@ -57,6 +59,7 @@ public class ManagerRaports implements Initializable {
         if(startData.getValue() != null && endData.getValue() == null){
             past = startData.getValue();
             today = LocalDate.now();
+            display=true;
 
             long daysBetween = DAYS.between(past, today);
             long daysFuture = DAYS.between(today, past);
@@ -86,12 +89,14 @@ public class ManagerRaports implements Initializable {
             if(daysBetween == 0){
                 textOneDate.setText(confirmText + startDataValue);
                 today=past;
+                display=true;
                 oneDayRaport.setVisible(true);
             }
             else if(daysBetween < 0 || daysFuture > 0){
                Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("incorrectTimeRange"));
             }
             else{
+                display=false;
                 textDateStart.setText(startDataValue.toString());
                 textDateEnd.setText(endDataValue.toString());
                 textDateDays.setText(daysBetween+" ");
@@ -106,7 +111,7 @@ public class ManagerRaports implements Initializable {
     public void raportLastDay(MouseEvent event) {
         today = LocalDate.now();
         past = today.minusDays(1);
-        today=past;
+        display=true;
         textOneDate.setText(confirmText + past.toString());
         oneDayRaport.setVisible(true);
     }
@@ -115,7 +120,7 @@ public class ManagerRaports implements Initializable {
     public void raportLastMonth(MouseEvent event) {
         today = LocalDate.now();
         past = today.minusDays(30);
-
+        display=false;
         textOneDate.setText(App.getLanguageProperties("confirmRaportLastMonth") +
                 past.toString());
         oneDayRaport.setVisible(true);
@@ -125,7 +130,7 @@ public class ManagerRaports implements Initializable {
     public void raportLastWeek(MouseEvent event) {
         today = LocalDate.now();
         past = today.minusDays(7);
-
+        display=false;
         textOneDate.setText(App.getLanguageProperties("confirmRaportLastWeek") +
                 past.toString());
         oneDayRaport.setVisible(true);
@@ -145,7 +150,7 @@ public class ManagerRaports implements Initializable {
         Date endValue = java.sql.Date.valueOf(endDataValue);
 
         try {
-            PdfGeneratorManager.createPdf(startValue, endValue);
+            PdfGeneratorManager.createPdf(startValue, endValue, display);
         } catch (Exception e) {
             System.out.println("Błąd przy tworzeniu raportu PDF");
             e.printStackTrace();
@@ -164,7 +169,7 @@ public class ManagerRaports implements Initializable {
         Date endValue = java.sql.Date.valueOf(today);
 
         try {
-            PdfGeneratorManager.createPdf(startValue, endValue);
+            PdfGeneratorManager.createPdf(startValue, endValue, display);
         } catch (Exception e) {
             System.out.println("Błąd przy tworzeniu raportu PDF");
             e.printStackTrace();

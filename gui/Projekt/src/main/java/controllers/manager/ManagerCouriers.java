@@ -26,4 +26,10 @@ public class ManagerCouriers {
         courierOptions.setVisible(true);
         SceneManager.loadScene("../../../resources/view/manager/managerCouriersEdit.fxml", courierOptions);
     }
+
+    public void areaCourier(MouseEvent mouseEvent) throws IOException {
+        courierOptions.setVisible(true);
+        System.out.println("AREA COURIER");
+        SceneManager.loadScene("../../../resources/view/manager/managerNullCourier.fxml", courierOptions);
+    }
 }
