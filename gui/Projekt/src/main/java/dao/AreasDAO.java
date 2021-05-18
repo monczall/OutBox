@@ -62,4 +62,16 @@ public class AreasDAO {
         return listOfId.get(0);
 
     }
+
+    static public List<Areas> getAreasById(int areaId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from Areas WHERE id =:areaId");
+        query.setParameter("areaId", areaId);
+
+        List<Areas> list = query.list();
+
+        return list;
+
+    }
 }

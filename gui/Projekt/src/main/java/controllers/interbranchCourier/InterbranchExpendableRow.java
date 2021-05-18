@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import main.java.dao.AreasDAO;
+import main.java.dao.PackageHistoryDAO;
+import main.java.dao.PackagesDAO;
 import main.java.entity.Areas;
 import main.java.entity.PackageStatus;
 import java.net.URL;
@@ -69,19 +71,39 @@ public class InterbranchExpendableRow implements Initializable {
         }else{
             setStatusReturned("");
         }
-        InterbranchCourierSecond.getPackageId();
-        List<Areas> areasList = AreasDAO.getAreas();
+
+        int area = PackagesDAO.getPackagesById(InterbranchCourierSecond.getPackageId()).get(0).getUsersByUserId().getAreaId();
+        Areas mainArea = AreasDAO.getAreas().get(0);
+        Areas areasList = AreasDAO.getAreasById(area).get(0);
         if(statusReturned.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())){
-            street1.setText(areasList.get(3).getDepartmentStreetAndNumber() + ", " + areasList.get(3).getCity() + ", " + areasList.get(3).getVoivodeship());
-            street2.setText(areasList.get(0).getDepartmentStreetAndNumber() + ", " + areasList.get(0).getCity() + ", " + areasList.get(0).getVoivodeship());
+
+            street1.setText(areasList.getDepartmentStreetAndNumber() + ", " + areasList.getCity() +
+                    ", " + areasList.getVoivodeship());
+            street2.setText(mainArea.getDepartmentStreetAndNumber() + ", " + mainArea.getCity() +
+                    ", " + mainArea.getVoivodeship());
         }
         else if(statusReturned.equals(PackageStatus.IN_MAIN_SORTING_DEPARTMENT.displayName())){
-            street1.setText(areasList.get(0).getDepartmentStreetAndNumber() + ", " + areasList.get(0).getCity() + ", " + areasList.get(0).getVoivodeship());
-            street2.setText(areasList.get(2).getDepartmentStreetAndNumber() + ", " + areasList.get(2).getCity() + ", " + areasList.get(2).getVoivodeship());
+
+            street1.setText(mainArea.getDepartmentStreetAndNumber() + ", " + mainArea.getCity() +
+                    ", " + mainArea.getVoivodeship());
+            street2.setText(areasList.getDepartmentStreetAndNumber() + ", " + areasList.getCity() +
+                    ", " + areasList.getVoivodeship());
         }
         else if(statusReturned.equals(PackageStatus.TRANSPORTING.displayName())){
-            street1.setText(areasList.get(0).getDepartmentStreetAndNumber() + ", " + areasList.get(0).getCity() + ", " + areasList.get(0).getVoivodeship());
-            street2.setText(areasList.get(2).getDepartmentStreetAndNumber() + ", " + areasList.get(2).getCity() + ", " + areasList.get(2).getVoivodeship());
+            List<String> packageStatus = PackageHistoryDAO.getStatusById(InterbranchCourierSecond.getPackageId());
+            String secondaryArea = areasList.getDepartmentStreetAndNumber() + ", " + areasList.getCity() +
+                    ", " + areasList.getVoivodeship();
+            String primaryArea = mainArea.getDepartmentStreetAndNumber() + ", " + mainArea.getCity() +
+                    ", " + mainArea.getVoivodeship();
+            if(packageStatus.get(packageStatus.size() - 2).equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())){
+                street1.setText(secondaryArea);
+                street2.setText(primaryArea);
+            }
+            else  if(packageStatus.get(packageStatus.size() - 2).equals(PackageStatus.IN_MAIN_SORTING_DEPARTMENT.displayName())){
+                street1.setText(primaryArea);
+                street2.setText(secondaryArea);
+            }
+
         }
     }
 
