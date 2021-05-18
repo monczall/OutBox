@@ -55,8 +55,8 @@ public class Client implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
-    UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
-    name.setText(ui.getName() + " " + ui.getSurname());
+   /* UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+    name.setText(ui.getName() + " " + ui.getSurname());*/
 
     try {
         SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);
