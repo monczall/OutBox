@@ -1,15 +1,17 @@
 package main.java.controllers.client;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -19,9 +21,11 @@ import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.PackageHistory;
+import main.java.entity.Packages;
 import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
 import main.java.features.Preference;
+import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,17 +54,86 @@ public class ClientHistoryPackage implements Initializable {
     @FXML
     private VBox statusesVBox;
 
+    @FXML
+    private Pane informationAlert;
+
+    @FXML
+    private Text packageNumber;
+
+    @FXML
+    private Text senderName;
+
+    @FXML
+    private Text senderSurname;
+
+    @FXML
+    private Text senderTelephone;
+
+    @FXML
+    private Text senderStreet;
+
+    @FXML
+    private Text senderCity;
+
+    @FXML
+    private Text senderVoivodeship;
+
+    @FXML
+    private Text recipientName;
+
+    @FXML
+    private Text recipientSurname;
+
+    @FXML
+    private Text recipientTelephone;
+
+    @FXML
+    private Text recipientStreet;
+
+    @FXML
+    private Text recipientCity;
+
+    @FXML
+    private Text recipientVoivodeship;
+
+    @FXML
+    private Text timeOfDelivery;
+
+    @FXML
+    private ToggleButton toggleFromClient;
+
+    @FXML
+    private ToggleButton toggleToClient;
+
+    List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
+
+
     private static Preference pref = new Preference();
     private static ResourceBundle bundle;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        toggleToClient.setSelected(true);
+        toggleFromClient.setSelected(true);
+
+        informationAlert.setTranslateY(-850);
         moreInformationPane.setTranslateX(+850);
         btnBack.setVisible(false);
 
-        //Testing how ClientTrackPackage view will look like with example data
-        List<PopulatePackageItem> list = new ArrayList<>(packageTest());
+        //Loading date into the dynamic objects from db query
+        loadPackages(packageFirst);
+    }
+
+    /**
+     * This method create panes with buttons dynamically
+     * Number of panes depends on size of the List
+     * It takes List with type of PopulatePackageItem object
+     *
+     * @param list
+     */
+    private void loadPackages(List<PopulatePackageItem> list){
+
         for(int i=0; i<list.size(); i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -106,7 +179,7 @@ public class ClientHistoryPackage implements Initializable {
 
                         List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(packageItem.getId());
 
-                        //Testing dynamically created statuses from list that's gonna be filled with db rows
+                        //Filling from DB
                         for(int i = 0; i < statuses.size(); i++){
                             if(i == statuses.size()-1){
 
@@ -122,6 +195,8 @@ public class ClientHistoryPackage implements Initializable {
                                 createStatus(date,statuses.get(i).getStatus());
                             }
                         }
+                        Animations.fadeAway(toggleFromClient,0.2,1,0,false);
+                        Animations.fadeAway(toggleToClient,0.2,1,0,false);
                     }
                 });
 
@@ -140,18 +215,57 @@ public class ClientHistoryPackage implements Initializable {
                 infoIcon.getStyleClass().add("backIcon");
                 fullInfo.setGraphic(infoIcon);
 
+                fullInfo.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
 
+                        List<Packages> infoAboutPackage = PackagesDAO.getPackagesById(packageItem.getId());
+
+                        packageNumber.setText(infoAboutPackage.get(0).getPackageNumber());
+
+                        recipientCity.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getCity());
+                        recipientStreet.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getStreetAndNumber());
+                        recipientVoivodeship.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getVoivodeship());
+                        recipientName.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getName());
+                        recipientSurname.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getSurname());
+                        recipientTelephone.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getPhoneNumber());
+
+                        senderCity.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getCity());
+                        senderStreet.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getStreetAndNumber());
+                        senderVoivodeship.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship());
+                        senderName.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getName());
+                        senderSurname.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getSurname());
+                        senderTelephone.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getPhoneNumber());
+
+                        timeOfDelivery.setText(infoAboutPackage.get(0).getTimeOfPlannedDelivery());
+
+                        Animations.moveByY(informationAlert,+850,0.5);
+                    }
+                });
 
                 pane.getChildren().add(1,showMore);
                 pane.getChildren().add(2,fullInfo);
+                packageItem.setData(list.get(i));
+                packageLayout.getChildren().add(pane);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
     }
 
+    /**
+     * <p>
+     *     Method that always create status (small gray square)
+     *     HBox is created and splited into few Panes (dataPane, squarePane, grayPane, statusPane)
+     *     dataPane contains a label with DATE (that is one of the arguments)
+     *     squarePane contains a grayPane (is has css that make this pane gray)
+     *     statusPane that contains status name (second argument)
+     *     At the end everything is added into Vbox
+     * </p>
+     * @param date date of a status
+     * @param status name of status
+     */
     private void createStatus(String date, String status){
 
         HBox statusHBox = new HBox();
@@ -193,6 +307,16 @@ public class ClientHistoryPackage implements Initializable {
         statusesVBox.getChildren().add(0,statusHBox);
     }
 
+    /**
+     * <p>
+     *     Method that always create a small gray square it indicate a progress step
+     *     HBox is created and splited into three Panes (emptyPane, squarePane, grayPane)
+     *     emptyPane it is just a empty pane that helps to arrane HBox
+     *     squarePane contains a grayPane (is has css that make this pane gray)
+     *     gray that contains status name (second argument)
+     * </p>
+     * @param steps how much steps need to be created
+     */
     private void createStep(int steps){
         for(int i = 0 ; i < steps; i ++) {
             HBox stepBox = new HBox();
@@ -219,6 +343,20 @@ public class ClientHistoryPackage implements Initializable {
         }
     }
 
+    /**
+     * <p>
+     *     Method that always create status (small gray square)
+     *     HBox is created and splited into few Panes (dataPane, squarePane, grayPane, currentPane)
+     *     dataPane contains a label with DATE (that is one of the arguments)
+     *     squarePane contains a grayPane (is has css that make this pane gray)
+     *     currentPane is the biggest square that indicates that this is current status
+     *     statusPane that contains status name (second argument)
+     *     At the end everything is added into Vbox
+     * </p>
+     * @param date date of a status
+     * @param status name of status
+     * @param desc description of current status (the newest in terms of date)
+     */
     private void createCurrentStatus(String date, String status, String desc){
 
         HBox statusHBox = new HBox();
@@ -270,20 +408,24 @@ public class ClientHistoryPackage implements Initializable {
         statusesVBox.getChildren().add(0,statusHBox);
     }
 
-    //Filing list with example data
-    private List<PopulatePackageItem> packageTest(){
+    /**
+     * Method used to display all the statuses in order from the db by HQL query
+     * @return filled List of type PopulatePackageItem it contains info about statuses
+     */
+    public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
 
-        List<PackagesDTO> listOfPackages = PackagesDAO.readHistoryByID(Login.getUserID(),Login.getUserEmail());
+        List<PackagesDTO> listOfPackages = PackagesDAO.readHistoryByID(userId, userEmail);
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 
         for(int i = 0; i < listOfPackages.size(); i++){
+
             PopulatePackageItem populatePackageItem = new PopulatePackageItem();
+
             populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
             populatePackageItem.setSender(listOfPackages.get(i).getName());
             populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
             populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
-            packageItems.add(populatePackageItem);
 
             if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail()))
                 populatePackageItem.setType("Nadawca");
@@ -291,7 +433,6 @@ public class ClientHistoryPackage implements Initializable {
                 populatePackageItem.setType("Odbiorca");
 
             packageItems.add(populatePackageItem);
-
         }
 
         return packageItems;
@@ -299,10 +440,76 @@ public class ClientHistoryPackage implements Initializable {
 
     @FXML
     void backToTrackPackage(ActionEvent event) throws IOException {
-        Animations.fadeAway(btnBack,0.5,1,0,false);
+        Animations.fadeAway(btnBack,0.2,1,0,false);
+        Animations.fadeAway(toggleFromClient,0.2,0,1,true);
+        Animations.fadeAway(toggleToClient,0.2,0,1,true);
         Animations.changePane(moreInformationPane,trackPackagePane,+850,0.5);
 
         //Need rework
         statusesVBox.getChildren().clear();
     }
+
+    @FXML
+    public void closeInfoAlert(javafx.scene.input.MouseEvent mouseEvent) {
+        Animations.moveByY(informationAlert,-850,0.5);
+    }
+
+    /**
+     *
+     * @param event
+     */
+    @FXML
+    void loadFromClient(ActionEvent event) {
+        List<PopulatePackageItem> list = new ArrayList<>();
+        if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
+            packageLayout.getChildren().clear();
+        }
+        else if(!toggleFromClient.isSelected() && toggleToClient.isSelected()) {
+            packageLayout.getChildren().clear();
+            for(PopulatePackageItem ppI : packageFirst) {
+                if(ppI.getType().equals("Nadawca")) {
+                    list.add(ppI);
+                }
+            }
+            loadPackages(list);
+        }
+        else {
+            for(PopulatePackageItem ppI : packageFirst) {
+                if(ppI.getType().equals("Odbiorca")) {
+                    list.add(ppI);
+                }
+            }
+            loadPackages(list);
+        }
+    }
+
+    /**
+     *
+     * @param event
+     */
+    @FXML
+    void loadToClient(ActionEvent event) {
+        List<PopulatePackageItem> list = new ArrayList<>();
+        if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
+            packageLayout.getChildren().clear();
+        }
+        else if(!toggleToClient.isSelected() && toggleFromClient.isSelected()) {
+            packageLayout.getChildren().clear();
+            for(PopulatePackageItem ppI : packageFirst) {
+                if(ppI.getType().equals("Odbiorca")) {
+                    list.add(ppI);
+                }
+            }
+            loadPackages(list);
+        }
+        else {
+            for(PopulatePackageItem ppI : packageFirst) {
+                if(ppI.getType().equals("Nadawca")) {
+                    list.add(ppI);
+                }
+            }
+            loadPackages(list);
+        }
+    }
+
 }

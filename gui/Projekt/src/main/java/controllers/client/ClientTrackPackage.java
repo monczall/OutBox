@@ -1,15 +1,17 @@
 package main.java.controllers.client;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -23,8 +25,8 @@ import main.java.entity.Packages;
 import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
 import main.java.features.Preference;
+import org.controlsfx.control.CheckComboBox;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -97,6 +99,14 @@ public class ClientTrackPackage implements Initializable {
     @FXML
     private Text timeOfDelivery;
 
+    @FXML
+    private ToggleButton toggleFromClient;
+
+    @FXML
+    private ToggleButton toggleToClient;
+
+    List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
+
 
     private static Preference pref = new Preference();
     private static ResourceBundle bundle;
@@ -104,12 +114,26 @@ public class ClientTrackPackage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        toggleToClient.setSelected(true);
+        toggleFromClient.setSelected(true);
+
         informationAlert.setTranslateY(-850);
         moreInformationPane.setTranslateX(+850);
         btnBack.setVisible(false);
 
-        //Testing how ClientTrackPackage view will look like with example data
-        List<PopulatePackageItem> list = new ArrayList<>(packageTest(Login.getUserID(), Login.getUserEmail()));
+        //Loading date into the dynamic objects from db query
+        loadPackages(packageFirst);
+    }
+
+    /**
+     * This method create panes with buttons dynamically
+     * Number of panes depends on size of the List
+     * It takes List with type of PopulatePackageItem object
+     *
+     * @param list
+     */
+    private void loadPackages(List<PopulatePackageItem> list){
+
         for(int i=0; i<list.size(); i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -171,6 +195,8 @@ public class ClientTrackPackage implements Initializable {
                                 createStatus(date,statuses.get(i).getStatus());
                             }
                         }
+                        Animations.fadeAway(toggleFromClient,0.2,1,0,false);
+                        Animations.fadeAway(toggleToClient,0.2,1,0,false);
                     }
                 });
 
@@ -226,7 +252,6 @@ public class ClientTrackPackage implements Initializable {
                 e.printStackTrace();
             }
         }
-
     }
 
     /**
@@ -383,13 +408,11 @@ public class ClientTrackPackage implements Initializable {
         statusesVBox.getChildren().add(0,statusHBox);
     }
 
-    //Filing list with example data
-
     /**
      * Method used to display all the statuses in order from the db by HQL query
      * @return filled List of type PopulatePackageItem it contains info about statuses
      */
-    public static List<PopulatePackageItem> packageTest(int userId, String userEmail){
+    public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
 
         List<PackagesDTO> listOfPackages = PackagesDAO.readPackagesByID(userId, userEmail);
 
@@ -417,7 +440,9 @@ public class ClientTrackPackage implements Initializable {
 
     @FXML
     void backToTrackPackage(ActionEvent event) throws IOException {
-        Animations.fadeAway(btnBack,0.5,1,0,false);
+        Animations.fadeAway(btnBack,0.2,1,0,false);
+        Animations.fadeAway(toggleFromClient,0.2,0,1,true);
+        Animations.fadeAway(toggleToClient,0.2,0,1,true);
         Animations.changePane(moreInformationPane,trackPackagePane,+850,0.5);
 
         //Need rework
@@ -428,4 +453,63 @@ public class ClientTrackPackage implements Initializable {
     public void closeInfoAlert(javafx.scene.input.MouseEvent mouseEvent) {
         Animations.moveByY(informationAlert,-850,0.5);
     }
+
+    /**
+     *
+     * @param event
+     */
+    @FXML
+    void loadFromClient(ActionEvent event) {
+        List<PopulatePackageItem> list = new ArrayList<>();
+        if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
+            packageLayout.getChildren().clear();
+        }
+        else if(!toggleFromClient.isSelected() && toggleToClient.isSelected()) {
+            packageLayout.getChildren().clear();
+            for(PopulatePackageItem ppI : packageFirst) {
+                if(ppI.getType().equals("Nadawca")) {
+                    list.add(ppI);
+                }
+            }
+            loadPackages(list);
+        }
+        else {
+            for(PopulatePackageItem ppI : packageFirst) {
+                if(ppI.getType().equals("Odbiorca")) {
+                    list.add(ppI);
+                }
+            }
+            loadPackages(list);
+        }
+    }
+
+    /**
+     *
+     * @param event
+     */
+    @FXML
+    void loadToClient(ActionEvent event) {
+        List<PopulatePackageItem> list = new ArrayList<>();
+        if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
+            packageLayout.getChildren().clear();
+        }
+        else if(!toggleToClient.isSelected() && toggleFromClient.isSelected()) {
+            packageLayout.getChildren().clear();
+            for(PopulatePackageItem ppI : packageFirst) {
+                if(ppI.getType().equals("Odbiorca")) {
+                    list.add(ppI);
+                }
+            }
+            loadPackages(list);
+        }
+        else {
+            for(PopulatePackageItem ppI : packageFirst) {
+                if(ppI.getType().equals("Nadawca")) {
+                    list.add(ppI);
+                }
+            }
+            loadPackages(list);
+        }
+    }
+
 }

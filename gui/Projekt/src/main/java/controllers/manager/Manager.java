@@ -13,6 +13,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.SceneManager;
+import main.java.controllers.auth.Login;
+import main.java.dao.UserInfosDAO;
+import main.java.entity.UserInfos;
 import main.java.features.Animations;
 
 import java.io.IOException;
@@ -49,6 +52,8 @@ public class Manager implements Initializable {
     private AnchorPane mainWindow;
 
     boolean hamburgerClicked = false;
+
+    UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
 
     public void openHome(MouseEvent actionEvent) throws IOException {
         SceneManager.renderScene("manager");
@@ -93,7 +98,7 @@ public class Manager implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-
+        System.out.println(ui.getName());
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
 
