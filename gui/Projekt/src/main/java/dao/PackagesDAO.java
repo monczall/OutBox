@@ -341,9 +341,8 @@ public class PackagesDAO {
 
         session.update(packages);
         session.getTransaction().commit();
-
     }
-    
+
     static public List<Packages> getPackagesWithoutCourierId(){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -366,7 +365,6 @@ public class PackagesDAO {
 
         session.getTransaction().commit();
 
->>>>>>> dd74c36270f827ab7d1a1cd47908e5aa5ce76163
         session.close();
     }
 

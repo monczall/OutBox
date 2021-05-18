@@ -5,15 +5,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerNullCourier">
    <children>
       <FontAwesomeIconView fill="ORANGE" glyphName="PACKAGES" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="Nieprzydzielone paczki" />
-      <AnchorPane layoutX="155.0" layoutY="116.0" prefHeight="299.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
+      <AnchorPane layoutX="155.0" layoutY="94.0" prefHeight="299.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
          <children>
-            <Label fx:id="packageLabel" layoutX="290.0" layoutY="-1.0" styleClass="optionGroup" text="Wybierz paczkę" />
+            <Label fx:id="packageLabel" layoutX="295.0" layoutY="-1.0" styleClass="optionGroup" text="Wybierz paczkę" />
             <Label fx:id="noDataText" alignment="CENTER" prefHeight="99.0" prefWidth="730.0" styleClass="optionGroup" text="%noDataToDisplay" />
             <Pane fx:id="panePackages" layoutX="19.0" layoutY="56.0" prefHeight="279.0" prefWidth="692.0" styleClass="packageItem">
                <children>
@@ -36,12 +37,12 @@
             <Button layoutX="126.0" layoutY="85.0" mnemonicParsing="false" onMouseClicked="#confirmButton" styleClass="btnNext" text="OK" />
          </children>
       </Pane>
-      <Button fx:id="buttonBackPackage" layoutX="114.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#buttonBack" styleClass="btnNext" text="&lt;" visible="false" />
-      <Button fx:id="buttonNextPackage" layoutX="886.0" layoutY="259.0" mnemonicParsing="false" onMouseClicked="#buttonNext" styleClass="btnNext" text="&gt;" visible="false" />
-      <AnchorPane layoutX="157.0" layoutY="366.0" prefHeight="200.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
+      <Button fx:id="buttonBackPackage" layoutX="140.0" layoutY="222.0" mnemonicParsing="false" onMouseClicked="#buttonBack" styleClass="btnNext" text="&lt;" visible="false" />
+      <Button fx:id="buttonNextPackage" layoutX="886.0" layoutY="222.0" mnemonicParsing="false" onMouseClicked="#buttonNext" styleClass="btnNext" text="&gt;" visible="false" />
+      <AnchorPane layoutX="157.0" layoutY="356.0" prefHeight="200.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
          <children>
             <Label fx:id="noDataCourierText" alignment="CENTER" layoutY="81.0" prefHeight="99.0" prefWidth="730.0" styleClass="optionGroup" text="%noDataToDisplay" />
-            <Label fx:id="courierLabel" layoutX="290.0" styleClass="optionGroup" text="Wybierz kuriera" />
+            <Label fx:id="courierLabel" layoutX="295.0" styleClass="optionGroup" text="Wybierz kuriera" />
             <Pane fx:id="paneCourier" layoutX="19.0" layoutY="56.0" prefHeight="180.0" prefWidth="692.0" styleClass="packageItem" visible="false">
                <children>
                   <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Email" />
@@ -55,8 +56,11 @@
             </Pane>
          </children>
       </AnchorPane>
-      <Button fx:id="buttonBackCourier" layoutX="124.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#buttonBackCourier" styleClass="btnNext" text="&lt;" visible="false" />
-      <Button fx:id="buttonNextCourier" layoutX="896.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#buttonNextCourier" styleClass="btnNext" text="&gt;" visible="false" />
-      <Button layoutX="449.0" layoutY="602.0" mnemonicParsing="false" onMouseClicked="#assignPackage" styleClass="btnNext" text="Przydziel paczke" />
+      <Button fx:id="buttonBackCourier" layoutX="140.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#buttonBackCourier" styleClass="btnNext" text="&lt;" visible="false" />
+      <Button fx:id="buttonNextCourier" layoutX="886.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#buttonNextCourier" styleClass="btnNext" text="&gt;" visible="false" />
+      <Button layoutX="449.0" layoutY="589.0" mnemonicParsing="false" onMouseClicked="#assignPackage" styleClass="btnNext" text="Przydziel paczke" />
+      <Line endX="783.0" layoutX="167.0" layoutY="348.0" startX="-55.0" stroke="#252525" strokeWidth="2.0" visible="false" />
+      <Line endX="783.0" layoutX="167.0" layoutY="127.0" startX="-55.0" stroke="#252525" strokeWidth="2.0" />
+      <Line endX="783.0" layoutX="167.0" layoutY="394.0" startX="-55.0" stroke="#252525" strokeWidth="2.0" />
    </children>
 </AnchorPane>
