@@ -45,8 +45,8 @@ public class InterbranchCourier implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-//        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
-//        loggedUser.setText(ui.getName() + " " + ui.getSurname());
+        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+        loggedUser.setText(ui.getName() + " " + ui.getSurname());
 
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);

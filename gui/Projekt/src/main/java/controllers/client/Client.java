@@ -49,20 +49,16 @@ public class Client implements Initializable {
     private Text name;
 
     boolean hamburgerClicked = false;
-
-
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
     UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
     name.setText(ui.getName() + " " + ui.getSurname());
 
-    try {
-        SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+    /*  Charts.createBarChart(mainWindow,"LICZBA PRZESYŁEK", "04", 61, 14, 952, 644);
+
+        Charts.createPieChart(mainWindow,"WYKRES ILOŚCI PRZESYŁEK",277,47,500,400);*/
 
     alertPane.setTranslateY(-500);
     paneRight.setTranslateX(-200);
@@ -139,7 +135,7 @@ public class Client implements Initializable {
 
     @FXML
     void viewHome(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);
+        SceneManager.renderScene("client");
     }
 
     @FXML

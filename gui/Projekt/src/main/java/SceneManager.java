@@ -56,7 +56,6 @@ public class SceneManager {
             Parent root = FXMLLoader.load(SceneManager.class.getResource(path),bundle);
             Scene scene = new Scene(root);
 
-
             //Reading preferences about color and deciding in which main color theme app should start
             if(pref.readPreference("color").equals("red")) {
                 scene.getRoot().setStyle("-fx-main-color: #d82020;" +

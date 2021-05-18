@@ -14,13 +14,9 @@ import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 import org.opentest4j.AssertionFailedError;
 
-import javax.xml.bind.SchemaOutputResolver;
-
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ClientTests {
@@ -89,9 +85,9 @@ public class ClientTests {
     public void testList() {
         System.out.println("Uruchomiono test listy...");
 
-        List<PopulatePackageItem> listActual = ClientTrackPackage.packageTest(5,"nenej26509@87708b.com");
+        List<PopulatePackageItem> listActual = ClientTrackPackage.loadPackagesList(5,"nenej26509@87708b.com");
 
-        List<PopulatePackageItem> listExpected = ClientTrackPackage.packageTest(5,"nenej26509@87708b.com");
+        List<PopulatePackageItem> listExpected = ClientTrackPackage.loadPackagesList(5,"nenej26509@87708b.com");
 
         int x = 0;
 

@@ -15,7 +15,6 @@ import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.UserInfos;
-import main.java.entity.Users;
 import main.java.features.Alerts;
 import main.java.features.Animations;
 import main.java.features.ErrorHandler;
@@ -260,13 +259,13 @@ public class ClientSettings implements Initializable {
     }
 
     public void actionYes(ActionEvent actionEvent) {
-        if(UsersDAO.deleteAccount(deletePassword.getText(),1)){
-            UserInfosDAO.deleteUser(1);
+        if(UsersDAO.checkIfPasswordCorrect(deletePassword.getText(),Login.getUserID())){
+            UsersDAO.deactivateAccount(Login.getUserID());
             SceneManager.renderScene("login");
         }
         else{
-            Alerts.createAlert(settingsPane, saveInformation, "WARNING", "NIEPOPRAWNE HASŁO");
-            System.out.println("NIEPOPRAWNE HASLO ALBO MA AKTYWNE PACZKI");
+            deletePassword.setText(null);
+            deletePassword.setPromptText("NIEPOPRAWNE HASŁO");
         }
 
     }

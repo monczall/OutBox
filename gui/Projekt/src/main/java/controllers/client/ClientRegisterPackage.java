@@ -322,7 +322,7 @@ public class ClientRegisterPackage implements Initializable {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime now = LocalDateTime.now();
         Random rand = new Random();
-        String packageNumber = String.format("%06d", rand.nextInt(1000000)) + "/" + dateTimeFormatter.format(now);
+        String packageNumber = dateTimeFormatter.format(now) + "/" + String.format("%06d", rand.nextInt(1000000));
 
         Alerts.createAlert(appWindow, btnNextSummary,"CHECK","POMYŚLNIE ZAREJESTROWANO");
         //Database insert query here
@@ -353,7 +353,7 @@ public class ClientRegisterPackage implements Initializable {
 
 
 
-        packages.setUserId(Login.getUserID());      // Hardcoded for tests
+        packages.setUserId(Login.getUserID());
         packages.setUserInfoId(userInfos.getId());
         packages.setPackageNumber(packageNumber);
         packages.setEmail(sumEmail.getText());

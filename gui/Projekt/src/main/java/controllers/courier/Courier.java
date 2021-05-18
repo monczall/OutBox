@@ -13,13 +13,18 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
+import main.java.dao.AreasDAO;
+import main.java.dao.PackagesDAO;
 import main.java.dao.UserInfosDAO;
+import main.java.dao.UsersDAO;
+import main.java.entity.Packages;
 import main.java.entity.UserInfos;
+import main.java.entity.Users;
 import main.java.features.Animations;
-import main.java.features.PdfGenerator;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -45,8 +50,33 @@ public class Courier implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-//        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
-//        loggedUser.setText(ui.getName() + " " + ui.getSurname());
+        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+        loggedUser.setText(ui.getName() + " " + ui.getSurname());
+        List<Packages> packagesList = PackagesDAO.getPackagesWithoutCourierId();
+        List<Users> usersList = UsersDAO.getCouriers("Kurier");
+        for (int i = 0; i < packagesList.size(); i++) {
+            for (int j = 0; j < usersList.size(); j++) {
+                if (packagesList.get(i).getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(j).getAreasByAreaId().getVoivodeship())) {
+                    if (packagesList.get(i).getUserInfosByUserInfoId().getCity().equals(usersList.get(j).getAreasByAreaId().getName())) {
+                        List<Users> couriersInArea = UsersDAO.getCouriersByAreaId(usersList.get(j).getAreaId());
+                        if(couriersInArea.size() > 1){
+                            int courierId = couriersInArea.get(0).getId();
+                            Long courierPackages = 999999L;
+                            for(int k = 0; k < couriersInArea.size(); k++){
+                                if(UsersDAO.getPackagesByCourier(couriersInArea.get(k).getId()) < courierPackages){
+                                    courierPackages = UsersDAO.getPackagesByCourier(couriersInArea.get(k).getId());
+                                    courierId = couriersInArea.get(k).getId();
+                                }
+                            }
+                            PackagesDAO.updateCourierId(packagesList.get(i).getId(), courierId);
+                        }else {
+                            PackagesDAO.updateCourierId(packagesList.get(i).getId(), usersList.get(j).getId());
+                        }
+                        break;
+                    }
+                }
+            }
+        }
 
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
