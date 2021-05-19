@@ -3,7 +3,7 @@ package main.java.dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.PackageType;
-import main.java.entity.PdfDTO;
+import main.java.entity.PdfAreaDTO;
 import main.java.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -63,19 +63,22 @@ public class PackageTypeDAO {
         session.close();
 	}
 
-    static public ObservableList<PdfDTO> readAreasForPdf(Date dateStart, Date dateEnd) {
-        ObservableList<PdfDTO> packages = FXCollections.observableArrayList();
 
+    static public List<PdfAreaDTO> readAreasForPdf(Date dateStart, Date dateEnd) {
+        ObservableList<PdfAreaDTO> packages = FXCollections.observableArrayList();
 
-        String hql = "SELECT NEW main.java.entity.PdfAreasDTO(" +
-                "A.name, (SELECT COUNT(P.id) FROM PackageType PT, Packages P, Users U WHERE PT.sizeName = " +
-                "'mała' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id), " +
-                "(SELECT COUNT(P.id) FROM PackageType PT, Packages P, Users U WHERE PT.sizeName = " +
-                "'średnia' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id), " +
-                "(SELECT COUNT(P.id) FROM PackageType PT, Packages P, Users U WHERE PT.sizeName = " +
-                "'duża' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id))" +
-                "FROM Areas A " +
-                "WHERE PH.date BETWEEN :dateStart AND :dateEnd ";
+        String hql = "SELECT NEW main.java.entity.PdfAreaDTO(" +
+                "A.name, (SELECT COUNT(P.id) FROM PackageType PT, Packages P, PackageHistory PH, Users U WHERE PT.sizeName = " +
+                "'mała' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd), " +
+                "(SELECT COUNT(P.id) FROM PackageType PT, PackageHistory PH, Packages P, Users U WHERE PT.sizeName = " +
+                "'średnia' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd), " +
+                "(SELECT COUNT(P.id) FROM PackageType PT, PackageHistory PH, Packages P, Users U WHERE PT.sizeName = " +
+                "'duża' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd))" +
+                "FROM Packages P, Users U, Areas A, PackageHistory PH WHERE P.id = PH.packageId AND PH.date BETWEEN " +
+                ":dateStart AND :dateEnd GROUP BY A.name";
 
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -83,11 +86,9 @@ public class PackageTypeDAO {
         query.setParameter("dateStart", dateStart);
         query.setParameter("dateEnd", dateEnd);
 
-        List<PdfDTO> results = query.list();
-        for (PdfDTO ent : results) {
-            packages.add(ent);
-        }
+        List<PdfAreaDTO> results = query.list();
+
         session.close();
-        return packages;
+        return results;
     }
 }

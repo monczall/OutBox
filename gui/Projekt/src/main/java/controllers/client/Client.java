@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
+import main.java.dao.PackagesDAO;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.UserInfos;
 import main.java.features.Animations;

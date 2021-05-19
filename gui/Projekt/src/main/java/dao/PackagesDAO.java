@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+
 public class PackagesDAO {
 
     static public List<Packages> getPackages(){
@@ -113,6 +114,17 @@ public class PackagesDAO {
         return packages;
     }
 
+    static public List<Packages> getPackagesByNullCourier(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from Packages P WHERE P.courierId IS NULL");
+
+
+        //SELECT * FROM packages P, user_infos U WHERE P.courierID IS NULL AND P.user_infoID = U.id AND U.voivodeship = "Podkarpackie"
+        List<Packages> listOfPackages = query.list();
+
+        return listOfPackages;
+    }
+
     static public ObservableList<PdfDTO> readPackagesForPdf(Date dateStart, Date dateEnd) {
         ObservableList<PdfDTO> packages = FXCollections.observableArrayList();
 
@@ -124,7 +136,7 @@ public class PackagesDAO {
                 "AND PH.date BETWEEN :dateStart AND :dateEnd " +
                 "AND P.typeId = PT.id " +
                 "AND P.userInfoId = UI.id " +
-                "AND P.userId = U.id " +
+                "AND P.userId = U.id AND PH.status = 'Zarejestrowana' " +
                 "GROUP BY P.packageNumber";
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -307,6 +319,28 @@ public class PackagesDAO {
         session.close();
 
         return packages;
+    }
+
+    static public void updatePackage(int ID, int typeID, int userID, int courierID, int userInfoID, String email, String packageNumber, String time, String additional) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Packages packages = new Packages();
+
+        packages.setId(ID);
+        packages.setTypeId(typeID);
+        packages.setUserId(userID);
+        packages.setCourierId(courierID);
+        packages.setUserInfoId(userInfoID);
+        packages.setEmail(email);
+        packages.setPackageNumber(packageNumber);
+        packages.setTimeOfPlannedDelivery(time);
+        packages.setAdditionalComment(additional);
+
+
+        session.update(packages);
+        session.getTransaction().commit();
     }
 
     static public List<Packages> getPackagesWithoutCourierId(){
