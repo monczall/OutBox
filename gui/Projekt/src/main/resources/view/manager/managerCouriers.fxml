@@ -15,10 +15,15 @@
          <graphic>
             <FontAwesomeIconView glyphName="USER_TIMES" size="60" styleClass="blockIcon" />
          </graphic></Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#editCourier" prefHeight="123.0" prefWidth="435.0" styleClass="homeBlock" text="%editCourier">
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#editCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%editCourier">
          <graphic>
             <FontAwesomeIconView glyphName="USER" size="70" styleClass="blockIcon" />
          </graphic></Button>
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="533.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#areaCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="Przydziel obszar">
+         <graphic>
+            <FontAwesomeIconView glyphName="USER" size="70" styleClass="blockIcon" />
+         </graphic>
+      </Button>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%couriersTitle" />
       <FontAwesomeIconView fill="ORANGE" glyphName="USERS" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
       <AnchorPane fx:id="courierOptions" prefHeight="672.0" prefWidth="1033.0" visible="false" />
