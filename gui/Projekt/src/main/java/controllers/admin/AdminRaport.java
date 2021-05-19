@@ -10,7 +10,6 @@ import main.java.App;
 import main.java.features.Alerts;
 import main.java.features.PdfGenerator;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -31,22 +30,30 @@ public class AdminRaport {
 
     public void generateRaport(ActionEvent actionEvent) {
 
-        LocalDate startDataValue = dateFrom.getValue();
-        LocalDate endDataValue = dateTo.getValue().plusDays(1);
-
-        Date startValue = java.sql.Date.valueOf(startDataValue);
-        Date endValue = java.sql.Date.valueOf(endDataValue);
 
         try {
-            PdfGenerator.createPdf(startValue, endValue);
-            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton,"CHECK",
-                    App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
+            if (dateFrom.getValue() == null || dateTo.getValue() == null) {
+                Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "WARNING",
+                        App.getLanguageProperties("adminGeneratePDFFailure"), 370, 86, "alertFailure");
+            } else {
+                LocalDate startDataValue = dateFrom.getValue();
+                LocalDate endDataValue = dateTo.getValue().plusDays(1);
+
+                Date startValue = java.sql.Date.valueOf(startDataValue);
+                Date endValue = java.sql.Date.valueOf(endDataValue);
+
+                if (startDataValue != null && endDataValue != null) {
+
+                    PdfGenerator.createPdf(startValue, endValue);
+                    Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "CHECK",
+                            App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
+                }
+            }
         } catch (Exception e) {
             System.out.println("Błąd przy tworzeniu raportu PDF");
-            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton,"WARNING",
-                    App.getLanguageProperties("adminGeneratePDFFailure"), 370, 86, "alertFailure");
             e.printStackTrace();
         }
+
 
     }
 
@@ -54,51 +61,59 @@ public class AdminRaport {
     public void raportLastDay(ActionEvent actionEvent) {
 
 
-        LocalDate startDataValue = LocalDate.now();
-        LocalDate endDataValue = startDataValue;
+        LocalDate startDataValue = LocalDate.now().minusDays(1);
+        LocalDate endDataValue = startDataValue.plusDays(1);
 
         Date startValue = java.sql.Date.valueOf(startDataValue);
         Date endValue = java.sql.Date.valueOf(endDataValue);
 
         try {
             PdfGenerator.createPdf(startValue, endValue);
-//            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton,"CHECK",
-//                    App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
+            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "CHECK",
+                    App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
         } catch (Exception e) {
             System.out.println("Błąd przy tworzeniu raportu PDF");
-            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton,"WARNING",
-                    App.getLanguageProperties("adminGeneratePDFFailure"), 370, 86, "alertFailure");
             e.printStackTrace();
         }
 
     }
 
-    @FXML
-    public void raportLastMonth(MouseEvent event) {
+
+    public void raportLastMonth(ActionEvent actionEvent) {
         LocalDate startDataValue = LocalDate.now();
-        LocalDate endDataValue = startDataValue;
+        LocalDate endDataValue = startDataValue.minusMonths(1).plusDays(1);
 
         Date startValue = java.sql.Date.valueOf(startDataValue);
         Date endValue = java.sql.Date.valueOf(endDataValue);
 
         try {
             PdfGenerator.createPdf(startValue, endValue);
-//            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton,"CHECK",
-//                    App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
+            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "CHECK",
+                    App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
         } catch (Exception e) {
             System.out.println("Błąd przy tworzeniu raportu PDF");
-            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton,"WARNING",
-                    App.getLanguageProperties("adminGeneratePDFFailure"), 370, 86, "alertFailure");
             e.printStackTrace();
         }
 
 
     }
 
-    @FXML
-    public void raportLastWeek(MouseEvent event) {
-        LocalDate today = LocalDate.now();
-        LocalDate lastWeek = today.minusDays(7);
+
+    public void raportLastWeek(ActionEvent actionEvent) {
+        LocalDate startDataValue = LocalDate.now();
+        LocalDate endDataValue = startDataValue.minusDays(6);
+
+        Date startValue = java.sql.Date.valueOf(startDataValue);
+        Date endValue = java.sql.Date.valueOf(endDataValue);
+
+        try {
+            PdfGenerator.createPdf(startValue, endValue);
+            Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "CHECK",
+                    App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
+        } catch (Exception e) {
+            System.out.println("Błąd przy tworzeniu raportu PDF");
+            e.printStackTrace();
+        }
 
 
     }
