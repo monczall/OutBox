@@ -13,10 +13,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
-import main.java.dao.AreasDAO;
-import main.java.dao.PackagesDAO;
-import main.java.dao.UserInfosDAO;
-import main.java.dao.UsersDAO;
+import main.java.dao.*;
 import main.java.entity.Packages;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
@@ -49,7 +46,6 @@ public class Courier implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
         loggedUser.setText(ui.getName() + " " + ui.getSurname());
         List<Packages> packagesList = PackagesDAO.getPackagesWithoutCourierId();

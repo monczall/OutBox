@@ -20,7 +20,7 @@ public class Packages {
     private PackageType packageTypeByTypeId;
     private Users usersByUserId;
     private UserInfos userInfosByUserInfoId;
-    private UserInfos userInfosByCourierId;
+    private Users usersByCourierId;
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -168,11 +168,11 @@ public class Packages {
     @ManyToOne
     @JoinColumn(name = "courierID", referencedColumnName = "ID", nullable = true, insertable = false, updatable =
             false)
-    public UserInfos getUserInfosByCourierId() {
-        return userInfosByCourierId;
+    public Users getUsersByCourierId() {
+        return usersByCourierId;
     }
 
-    public void setUserInfosByCourierId(UserInfos userInfosByCourierId) {
-        this.userInfosByCourierId = userInfosByCourierId;
+    public void setUsersByCourierId(Users usersByCourierId) {
+        this.usersByCourierId = usersByCourierId;
     }
 }
