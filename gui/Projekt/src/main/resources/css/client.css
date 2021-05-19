@@ -431,6 +431,11 @@
 .barChart > .chart-legend-item{
     -fx-text-fill: -fx-gray-color;
 }
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: -fx-gray-color;
+}
+
 #xAxis > .axis-label, #yAxis > .axis-label{
     -fx-text-fill: white;
 }

@@ -78,20 +78,6 @@ public class UserInfosDAO {
         session.close();
     }
 
-    static public void deleteUser(int id)
-    {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-
-        UserInfos userInfo = new UserInfos();
-        userInfo.setId(id);
-
-        session.delete(userInfo);
-
-        session.getTransaction().commit();
-        session.close();
-    }
-
     static public void updateUser(int userInfoId, int userId, String name, String surname, String number,
                                   String city, String street, String voivodeship, String email, String password,
                                   String role, int areaId, int userInfosID){
@@ -176,4 +162,16 @@ public class UserInfosDAO {
         session.close();
     }
 
+    static public void deleteUser(int id){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        UserInfos userInfo = new UserInfos();
+        userInfo.setId(id);
+
+        session.delete(userInfo);
+
+        session.getTransaction().commit();
+        session.close();
+    }
 }

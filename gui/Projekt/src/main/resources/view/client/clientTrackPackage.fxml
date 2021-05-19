@@ -36,6 +36,8 @@
             <FontAwesomeIconView fill="#8f8f8f" glyphName="LONG_ARROW_LEFT" size="23" styleClass="backIcon" text="" />
          </graphic>
       </Button>
+      <ToggleButton fx:id="toggleFromClient" layoutX="541.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadFromClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki nadawane" />
+      <ToggleButton fx:id="toggleToClient" layoutX="701.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadToClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki odbierane" />
       <Pane fx:id="informationAlert" layoutX="160.0" layoutY="100.0" prefHeight="536.0" prefWidth="750.0" stylesheets="@../../css/client.css">
          <children>
             <Pane layoutX="85.0" layoutY="45.0" prefHeight="349.0" prefWidth="554.0" styleClass="alert" />
@@ -64,7 +66,5 @@
             </FontAwesomeIconView>
          </children>
       </Pane>
-      <ToggleButton fx:id="toggleFromClient" layoutX="541.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadFromClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki nadawane" />
-      <ToggleButton fx:id="toggleToClient" layoutX="701.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadToClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki odbierane" />
    </children>
 </AnchorPane>

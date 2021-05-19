@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import main.java.App;
+import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.UserInfos;
@@ -57,6 +58,7 @@ public class ManagerCouriersDelete implements Initializable {
     @FXML
     private Pane alertPane;
 
+    UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
     List<UserInfos> dataUserInfos;
     List<Users> dataUser;
     int dataIndex = 0;
@@ -92,14 +94,14 @@ public class ManagerCouriersDelete implements Initializable {
         email.setText(dataUser.get(0).getEmail());
         String role = dataUser.get(0).getRole();
 
-        if(dataUserInfos.size() > 1 && (role.equals("Kurier")))
+        if(dataUserInfos.size() > 1 && (role.equals("Kurier")) && (dataUserInfos.get(dataIndex).getVoivodeship().equals(ui.getVoivodeship())))
         {
             paneResults.setVisible(true);
             button1.setVisible(true);
             button2.setVisible(true);
             noDataText.setVisible(false);
         }
-        else if(dataUserInfos.size() == 1 && (role.equals("Kurier")))
+        else if(dataUserInfos.size() == 1 && (role.equals("Kurier")) && (dataUserInfos.get(dataIndex).getVoivodeship().equals(ui.getVoivodeship())))
         {
             button1.setVisible(false);
             button2.setVisible(false);
