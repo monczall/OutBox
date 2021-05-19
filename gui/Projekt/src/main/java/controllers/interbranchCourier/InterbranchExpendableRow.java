@@ -27,22 +27,8 @@ public class InterbranchExpendableRow implements Initializable {
     private Text street1;
 
     @FXML
-    private Text address;
-
-    @FXML
-    private Text city1;
-
-    @FXML
-    private Text voivodeship1;
-
-    @FXML
     private Text street2;
 
-    @FXML
-    private Text city2;
-
-    @FXML
-    private Text voivodeship2;
     @FXML
     private ComboBox<PackageStatus> changeStatus;
 
@@ -72,7 +58,7 @@ public class InterbranchExpendableRow implements Initializable {
             setStatusReturned("");
         }
 
-        int area = PackagesDAO.getPackagesById(InterbranchCourierSecond.getPackageId()).get(0).getUsersByUserId().getAreaId();
+        int area = PackagesDAO.getPackagesById(InterbranchCourierSecond.getPackageId()).get(0).getUsersByCourierId().getAreaId();
         Areas mainArea = AreasDAO.getAreas().get(0);
         Areas areasList = AreasDAO.getAreasById(area).get(0);
         if(statusReturned.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())){
