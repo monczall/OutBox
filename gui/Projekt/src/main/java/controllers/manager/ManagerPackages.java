@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import main.java.App;
 import main.java.dao.PackagesDAO;
 import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
@@ -96,8 +97,7 @@ public class ManagerPackages implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        table.setPlaceholder(new Label("Brak danych"));
-
+        table.setPlaceholder(new Label(App.getLanguageProperties("noDataToDisplay")));
         packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
         state.setCellValueFactory(new PropertyValueFactory<>("status"));

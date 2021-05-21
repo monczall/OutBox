@@ -133,7 +133,6 @@ public class ManagerNullCourier implements Initializable {
 
         if(getPackages.size() > 1)
         {
-            System.out.println("PONAD 1");
             packageLabel.setVisible(true);
             panePackages.setVisible(true);
             buttonBackPackage.setVisible(true);
@@ -142,7 +141,6 @@ public class ManagerNullCourier implements Initializable {
         }
         else if(getPackages.size() == 1)
         {
-            System.out.println("JEDEN");
             packageLabel.setVisible(true);
             buttonBackPackage.setVisible(false);
             buttonNextPackage.setVisible(false);
@@ -150,7 +148,6 @@ public class ManagerNullCourier implements Initializable {
             noDataText.setVisible(false);
         }
         else{
-            System.out.println("BRAK");
             packageLabel.setVisible(false);
             panePackages.setVisible(false);
             noDataText.setVisible(true);
@@ -171,7 +168,6 @@ public class ManagerNullCourier implements Initializable {
 
         if(dataUserCourier.size() > 1)
         {
-            System.out.println("PONAD 1 kurier");
             courierLabel.setVisible(true);
             paneCourier.setVisible(true);
             buttonBackCourier.setVisible(true);
@@ -293,7 +289,6 @@ public class ManagerNullCourier implements Initializable {
         else{
             courierLabel.setVisible(true);
             noDataCourierText.setVisible(false);
-            System.out.println("ILE KURIERIÓW: " + dataUserCourier.size());
 
             howManyCouriers.setText((dataIndexCourier+1)+"/"+String.valueOf(dataUserCourier.size()));
             setDataLabelCourier();
