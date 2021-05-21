@@ -22,7 +22,7 @@ public class PackageItem{
     @FXML
     private Text recipientText;
 
-    //Method used for filling the labels in package preview
+    // Method used for filling the labels in package preview
     public void setData(PopulatePackageItem populatePackageItem){
         packageNumber.setText(populatePackageItem.getPackageNumber());
         packageStatus.setText(populatePackageItem.getStatus());
@@ -30,8 +30,10 @@ public class PackageItem{
         itemId.setText(String.valueOf(populatePackageItem.getId()));
     }
 
-    //Method used to get package number for query in db
-    public int getId(){ return Integer.valueOf(itemId.getText()); }
+    // Method used to get package number for query in db
+    public int getId(){
+        return Integer.valueOf(itemId.getText());
+    }
 
     public void setText(String text){
         recipientText.setText(text);

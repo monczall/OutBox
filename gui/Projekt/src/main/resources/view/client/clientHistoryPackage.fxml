@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.client.ClientHistoryPackage">
    <children>
-      <AnchorPane fx:id="trackPackagePane" layoutX="160.0" layoutY="101.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;">
+      <AnchorPane fx:id="trackPackagePane" layoutX="160.0" layoutY="101.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <Label alignment="CENTER" prefHeight="99.0" prefWidth="730.0" styleClass="optionGroup" text="%clientNoPackage" />
             <ScrollPane prefHeight="516.0" prefWidth="730.0" style="-fx-background-color: transparent;">
@@ -24,21 +24,21 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%clientHistoryCAPS" />
-      <FontAwesomeIconView fill="ORANGE" glyphName="BOOK" layoutX="172.0" layoutY="81.0" size="40" styleClass="partIcon" />
-      <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-      <AnchorPane fx:id="moreInformationPane" layoutX="160.0" layoutY="101.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;">
+      <Text layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%clientHistoryCAPS" visible="false" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="BOOK" layoutX="172.0" layoutY="81.0" size="40" styleClass="partIcon" visible="false" />
+      <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" visible="false" />
+      <AnchorPane fx:id="moreInformationPane" layoutX="160.0" layoutY="101.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;" visible="false">
          <children>
             <VBox fx:id="statusesVBox" layoutX="33.0" prefHeight="536.0" prefWidth="692.0" />
          </children></AnchorPane>
-      <Button fx:id="btnBack" layoutX="742.0" layoutY="51.0" mnemonicParsing="false" onAction="#backToTrackPackage" styleClass="btnBack" stylesheets="@../../css/client.css" text="%back">
+      <Button fx:id="btnBack" layoutX="742.0" layoutY="51.0" mnemonicParsing="false" onAction="#backToTrackPackage" styleClass="btnBack" stylesheets="@../../css/client.css" text="%back" visible="false">
          <graphic>
             <FontAwesomeIconView fill="#8f8f8f" glyphName="LONG_ARROW_LEFT" size="23" styleClass="backIcon" text="" />
          </graphic>
       </Button>
-      <ToggleButton fx:id="toggleFromClient" layoutX="541.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadFromClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki nadawane" />
-      <ToggleButton fx:id="toggleToClient" layoutX="701.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadToClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki odbierane" />
-      <Pane fx:id="informationAlert" layoutX="160.0" layoutY="100.0" prefHeight="536.0" prefWidth="750.0" stylesheets="@../../css/client.css">
+      <ToggleButton fx:id="toggleFromClient" layoutX="541.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadFromClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki nadawane" visible="false" />
+      <ToggleButton fx:id="toggleToClient" layoutX="701.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadToClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki odbierane" visible="false" />
+      <Pane fx:id="informationAlert" layoutX="160.0" layoutY="100.0" prefHeight="536.0" prefWidth="750.0" stylesheets="@../../css/client.css" visible="false">
          <children>
             <Pane layoutX="85.0" layoutY="45.0" prefHeight="349.0" prefWidth="554.0" styleClass="alert" />
             <Label alignment="CENTER" contentDisplay="TOP" layoutX="85.0" layoutY="60.0" prefHeight="25.0" prefWidth="554.0" styleClass="textOption" text="%packageNumber" textAlignment="CENTER" />

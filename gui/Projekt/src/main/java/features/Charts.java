@@ -1,9 +1,7 @@
 package main.java.features;
 
-import com.sun.prism.paint.Color;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
@@ -14,6 +12,7 @@ import java.time.YearMonth;
 import java.util.List;
 
 public class Charts {
+
     //ObservableList<PieChart.Data> data,
     public static void createPieChart(AnchorPane createPlace, String title,
                                       int layoutX, int layoutY, int width, int height){

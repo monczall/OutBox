@@ -160,7 +160,7 @@ public class PackagesDAO {
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, " +
                 "UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, " +
-                "UI.city, PH.status, P.additionalComment, P.email) " +
+                "UI.city, PH.status, P.additionalComment, P.email, UI.voivodeship) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE (P.userId = :id " +
                 "OR P.email = :email) " +
@@ -199,7 +199,7 @@ public class PackagesDAO {
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, " +
                 "UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, " +
-                "UI.city, PH.status, P.additionalComment, P.email) " +
+                "UI.city, PH.status, P.additionalComment, P.email, UI.voivodeship) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE (P.userId = :id " +
                 "OR P.email = :email) " +

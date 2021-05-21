@@ -1,8 +1,6 @@
 package main.java.controllers.client;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,8 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -25,7 +21,6 @@ import main.java.entity.Packages;
 import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
 import main.java.features.Preference;
-import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,9 +30,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientTrackPackage implements Initializable {
-
-    @FXML
-    private AnchorPane mainPane;
 
     @FXML
     private AnchorPane trackPackagePane;
@@ -105,8 +97,7 @@ public class ClientTrackPackage implements Initializable {
     @FXML
     private ToggleButton toggleToClient;
 
-    List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
-
+    private List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
 
     private static Preference pref = new Preference();
     private static ResourceBundle bundle;
@@ -117,141 +108,14 @@ public class ClientTrackPackage implements Initializable {
         toggleToClient.setSelected(true);
         toggleFromClient.setSelected(true);
 
+        // Moving panes for animation purposes
         informationAlert.setTranslateY(-850);
         moreInformationPane.setTranslateX(+850);
+
         btnBack.setVisible(false);
 
-        //Loading date into the dynamic objects from db query
+        // Loading date into the dynamic objects from db query
         loadPackages(packageFirst);
-    }
-
-    /**
-     * This method create panes with buttons dynamically
-     * Number of panes depends on size of the List
-     * It takes List with type of PopulatePackageItem object
-     *
-     * @param list
-     */
-    private void loadPackages(List<PopulatePackageItem> list){
-
-        for(int i=0; i<list.size(); i++){
-            FXMLLoader fxmlLoader = new FXMLLoader();
-
-            if(pref.readPreference("language").equals("english"))
-                bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
-            else
-                bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
-
-            fxmlLoader.setLocation(getClass().getResource("../../../resources/view/client/packageItem.fxml"));
-            fxmlLoader.setResources(bundle);
-
-            try {
-                Pane pane = fxmlLoader.load();
-                PackageItem packageItem = fxmlLoader.getController();       //Loading controller of packageItem.fxml
-
-                packageItem.setText(list.get(i).getType());
-
-                pane.setPadding(new Insets(70,0,100,70));       //Adjusting padding of pane
-
-                Button showMore = new Button("Więcej");
-
-                showMore.setLayoutX(549);        //Setting layout where button should be and width + height
-                showMore.setLayoutY(115.5);
-                showMore.setPrefWidth(136);
-                showMore.setPrefHeight(39);
-                showMore.getStyleClass().add("btnNext");
-                showMore.setContentDisplay(ContentDisplay.RIGHT);
-
-                FontAwesomeIconView arrow = new FontAwesomeIconView();      //Creating icon
-                arrow.setGlyphName("LONG_ARROW_RIGHT");
-                arrow.setSize("23");
-                arrow.getStyleClass().add("iconNext");
-                showMore.setGraphic(arrow);      // Adding icon into the button
-
-                showMore.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-
-                        Animations.changePane(trackPackagePane,moreInformationPane,-850,0.5);
-
-                        btnBack.setVisible(true);
-                        btnBack.setOpacity(1);
-
-                        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(packageItem.getId());
-
-                        //Filling from DB
-                        for(int i = 0; i < statuses.size(); i++){
-                            if(i == statuses.size()-1){
-
-                                if(i != 0)
-                                    createStep(4);
-                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                createCurrentStatus(date,statuses.get(i).getStatus(),"Jakis opis");
-                            }
-                            else{
-                                if(i != 0)
-                                    createStep(2);
-                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                createStatus(date,statuses.get(i).getStatus());
-                            }
-                        }
-                        Animations.fadeAway(toggleFromClient,0.2,1,0,false);
-                        Animations.fadeAway(toggleToClient,0.2,1,0,false);
-                    }
-                });
-
-                Button fullInfo = new Button();
-
-                fullInfo.setLayoutX(500);        //Setting layout where button should be and width + height
-                fullInfo.setLayoutY(115.5);
-                fullInfo.setPrefWidth(39);
-                fullInfo.setPrefHeight(39);
-                fullInfo.getStyleClass().add("btnBack");
-                fullInfo.setContentDisplay(ContentDisplay.RIGHT);
-
-                FontAwesomeIconView infoIcon = new FontAwesomeIconView();      //Creating icon
-                infoIcon.setGlyphName("INFO_CIRCLE");
-                infoIcon.setSize("23");
-                infoIcon.getStyleClass().add("backIcon");
-                fullInfo.setGraphic(infoIcon);
-
-                fullInfo.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-
-                        List<Packages> infoAboutPackage = PackagesDAO.getPackagesById(packageItem.getId());
-
-                        packageNumber.setText(infoAboutPackage.get(0).getPackageNumber());
-
-                        recipientCity.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getCity());
-                        recipientStreet.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getStreetAndNumber());
-                        recipientVoivodeship.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getVoivodeship());
-                        recipientName.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getName());
-                        recipientSurname.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getSurname());
-                        recipientTelephone.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getPhoneNumber());
-
-                        senderCity.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getCity());
-                        senderStreet.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getStreetAndNumber());
-                        senderVoivodeship.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship());
-                        senderName.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getName());
-                        senderSurname.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getSurname());
-                        senderTelephone.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getPhoneNumber());
-
-                        timeOfDelivery.setText(infoAboutPackage.get(0).getTimeOfPlannedDelivery());
-
-                        Animations.moveByY(informationAlert,+850,0.5);
-                    }
-                });
-
-                pane.getChildren().add(1,showMore);
-                pane.getChildren().add(2,fullInfo);
-                packageItem.setData(list.get(i));
-                packageLayout.getChildren().add(pane);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
@@ -266,7 +130,7 @@ public class ClientTrackPackage implements Initializable {
      * @param date date of a status
      * @param status name of status
      */
-    private void createStatus(String date, String status){
+    public void createStatus(String date, String status){
 
         HBox statusHBox = new HBox();
 
@@ -317,7 +181,7 @@ public class ClientTrackPackage implements Initializable {
      * </p>
      * @param steps how much steps need to be created
      */
-    private void createStep(int steps){
+    public void createStep(int steps){
         for(int i = 0 ; i < steps; i ++) {
             HBox stepBox = new HBox();
 
@@ -357,7 +221,7 @@ public class ClientTrackPackage implements Initializable {
      * @param status name of status
      * @param desc description of current status (the newest in terms of date)
      */
-    private void createCurrentStatus(String date, String status, String desc){
+    public void createCurrentStatus(String date, String status, String desc){
 
         HBox statusHBox = new HBox();
 
@@ -410,6 +274,8 @@ public class ClientTrackPackage implements Initializable {
 
     /**
      * Method used to display all the statuses in order from the db by HQL query
+     * @param userId used to show packages that client registered
+     * @param userEmail used to show packages that are 'coming' to actual client
      * @return filled List of type PopulatePackageItem it contains info about statuses
      */
     public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
@@ -427,10 +293,12 @@ public class ClientTrackPackage implements Initializable {
             populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
             populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
 
-            if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail()))
+            if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail())) {
                 populatePackageItem.setType("Nadawca");
-            else
+            }
+            else {
                 populatePackageItem.setType("Odbiorca");
+            }
 
             packageItems.add(populatePackageItem);
         }
@@ -438,6 +306,7 @@ public class ClientTrackPackage implements Initializable {
         return packageItems;
     }
 
+    // Method that leads to list of all active packages
     @FXML
     void backToTrackPackage(ActionEvent event) throws IOException {
         Animations.fadeAway(btnBack,0.2,1,0,false);
@@ -449,18 +318,19 @@ public class ClientTrackPackage implements Initializable {
         statusesVBox.getChildren().clear();
     }
 
+    // Method handle event on icon that is closing alert
     @FXML
-    public void closeInfoAlert(javafx.scene.input.MouseEvent mouseEvent) {
+    void closeInfoAlert(javafx.scene.input.MouseEvent mouseEvent) {
         Animations.moveByY(informationAlert,-850,0.5);
     }
 
-    /**
-     *
-     * @param event
-     */
+    // Method handles showing only packages that client registered
     @FXML
     void loadFromClient(ActionEvent event) {
         List<PopulatePackageItem> list = new ArrayList<>();
+
+        /* If both buttons are not selected then VBox is
+         cleared (and shows nothing)*/
         if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
         }
@@ -483,13 +353,13 @@ public class ClientTrackPackage implements Initializable {
         }
     }
 
-    /**
-     *
-     * @param event
-     */
+    // Method handles showing only packages that are going to actuall client
     @FXML
     void loadToClient(ActionEvent event) {
         List<PopulatePackageItem> list = new ArrayList<>();
+
+        /* If both buttons are not selected then VBox is
+         cleared (and shows nothing)*/
         if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
         }
@@ -509,6 +379,145 @@ public class ClientTrackPackage implements Initializable {
                 }
             }
             loadPackages(list);
+        }
+    }
+
+    /**
+     * This method create panes with buttons - dynamically
+     * Number of panes depends on size of the List
+     * It takes List with type of PopulatePackageItem object
+     *
+     * @param list
+     */
+    private void loadPackages(List<PopulatePackageItem> list){
+
+        for(int i=0; i<list.size(); i++){
+            FXMLLoader fxmlLoader = new FXMLLoader();
+
+            if(pref.readPreference("language").equals("english"))
+                bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
+            else
+                bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
+
+            fxmlLoader.setLocation(getClass().getResource("../../../resources/view/client/packageItem.fxml"));
+            fxmlLoader.setResources(bundle);
+
+            try {
+                Pane pane = fxmlLoader.load();
+                PackageItem packageItem = fxmlLoader.getController();       // Loading controller of packageItem.fxml
+
+                packageItem.setText(list.get(i).getType());
+
+                pane.setPadding(new Insets(70,0,100,70));       // Adjusting padding of pane
+
+                Button showMore = new Button("Więcej");
+
+                showMore.setLayoutX(549);        // Setting layouts where button should be
+                showMore.setLayoutY(115.5);
+                showMore.setPrefWidth(136);      // Setting width + height
+                showMore.setPrefHeight(39);
+                showMore.getStyleClass().add("btnNext");
+                showMore.setContentDisplay(ContentDisplay.RIGHT);
+
+                FontAwesomeIconView arrow = new FontAwesomeIconView();      //Creating icon
+                arrow.setGlyphName("LONG_ARROW_RIGHT");
+                arrow.setSize("23");
+                arrow.getStyleClass().add("iconNext");
+                showMore.setGraphic(arrow);      // Adding icon into the button
+
+                /* Adding function to handle click event on the button
+                 This Event leads user to the pane that show statuses*/
+                showMore.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                        Animations.changePane(trackPackagePane,moreInformationPane,-850,0.5);
+
+                        btnBack.setVisible(true);
+                        btnBack.setOpacity(1);
+
+                        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(packageItem.getId());
+
+                        // Creating statuses depending on database information
+                        for(int i = 0; i < statuses.size(); i++) {
+
+                            if(i == statuses.size()-1) {
+                                if(i != 0){
+                                    createStep(4);
+                                }
+
+                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
+                                createCurrentStatus(date,statuses.get(i).getStatus(),"Jakis opis");
+                            }
+                            else {
+                                if(i != 0) {
+                                    createStep(2);
+                                }
+
+                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
+                                createStatus(date,statuses.get(i).getStatus());
+                            }
+                        }
+
+                        Animations.fadeAway(toggleFromClient,0.2,1,0,false);
+                        Animations.fadeAway(toggleToClient,0.2,1,0,false);
+                    }
+                });
+
+                Button fullInfo = new Button();
+
+                fullInfo.setLayoutX(500);        //Setting layout where button should be
+                fullInfo.setLayoutY(115.5);
+                fullInfo.setPrefWidth(39);      //Setting width + height
+                fullInfo.setPrefHeight(39);
+                fullInfo.getStyleClass().add("btnBack");
+                fullInfo.setContentDisplay(ContentDisplay.RIGHT);
+
+                FontAwesomeIconView infoIcon = new FontAwesomeIconView();      //Creating icon
+                infoIcon.setGlyphName("INFO_CIRCLE");
+                infoIcon.setSize("23");
+                infoIcon.getStyleClass().add("backIcon");
+                fullInfo.setGraphic(infoIcon);
+
+                /* Adding function to handle click event on the button
+                 This Event shows user a pane with full information
+                 about package*/
+                fullInfo.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                        List<Packages> infoAboutPackage = PackagesDAO.getPackagesById(packageItem.getId());
+
+                        packageNumber.setText(infoAboutPackage.get(0).getPackageNumber());
+
+                        recipientCity.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getCity());
+                        recipientStreet.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getStreetAndNumber());
+                        recipientVoivodeship.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getVoivodeship());
+                        recipientName.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getName());
+                        recipientSurname.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getSurname());
+                        recipientTelephone.setText(infoAboutPackage.get(0).getUserInfosByUserInfoId().getPhoneNumber());
+
+                        senderCity.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getCity());
+                        senderStreet.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getStreetAndNumber());
+                        senderVoivodeship.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship());
+                        senderName.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getName());
+                        senderSurname.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getSurname());
+                        senderTelephone.setText(infoAboutPackage.get(0).getUsersByUserId().getUserInfosByUserInfoId().getPhoneNumber());
+
+                        timeOfDelivery.setText(infoAboutPackage.get(0).getTimeOfPlannedDelivery());
+
+                        Animations.moveByY(informationAlert,+850,0.5);
+                    }
+                });
+
+                pane.getChildren().add(1,showMore);
+                pane.getChildren().add(2,fullInfo);
+                packageItem.setData(list.get(i));
+                packageLayout.getChildren().add(pane);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
