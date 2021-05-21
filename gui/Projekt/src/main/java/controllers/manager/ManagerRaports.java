@@ -142,7 +142,6 @@ public class ManagerRaports implements Initializable {
     }
 
     public void confirmRaport(MouseEvent mouseEvent) {
-        System.out.println("GENEROWANIE RAPORTU");
         LocalDate startDataValue = startData.getValue();
         LocalDate endDataValue = endData.getValue().plusDays(1);
 
@@ -151,8 +150,9 @@ public class ManagerRaports implements Initializable {
 
         try {
             PdfGeneratorManager.createPdf(startValue, endValue, display);
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("reportSuccess"));
         } catch (Exception e) {
-            System.out.println("Błąd przy tworzeniu raportu PDF");
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("raportError"));
             e.printStackTrace();
         }
         infoConfirmRaport.setVisible(false);
@@ -170,8 +170,9 @@ public class ManagerRaports implements Initializable {
 
         try {
             PdfGeneratorManager.createPdf(startValue, endValue, display);
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("reportSuccess"));
         } catch (Exception e) {
-            System.out.println("Błąd przy tworzeniu raportu PDF");
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("raportError"));
             e.printStackTrace();
         }
         oneDayRaport.setVisible(false);

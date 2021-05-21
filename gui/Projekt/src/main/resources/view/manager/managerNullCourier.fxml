@@ -11,20 +11,20 @@
 <AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerNullCourier">
    <children>
       <FontAwesomeIconView fill="ORANGE" glyphName="PACKAGES" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="Nieprzydzielone paczki" />
+      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%unassignedPackages" />
       <AnchorPane layoutX="155.0" layoutY="94.0" prefHeight="299.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
          <children>
-            <Label fx:id="packageLabel" layoutX="295.0" layoutY="-1.0" styleClass="optionGroup" text="Wybierz paczkę" />
+            <Label fx:id="packageLabel" layoutX="295.0" layoutY="-1.0" styleClass="optionGroup" text="%selectPackage" />
             <Label fx:id="noDataText" alignment="CENTER" prefHeight="99.0" prefWidth="730.0" styleClass="optionGroup" text="%noDataToDisplay" />
             <Pane fx:id="panePackages" layoutX="19.0" layoutY="56.0" prefHeight="279.0" prefWidth="692.0" styleClass="packageItem">
                <children>
-                  <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Miasto" />
-                  <Text layoutX="94.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Numer paczki" />
-                  <Text layoutX="94.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Ulica" />
+                  <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%city" />
+                  <Text layoutX="94.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%packageNumber" />
+                  <Text layoutX="94.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%street" />
                   <Label fx:id="packageNumber" layoutX="97.0" layoutY="17.0" styleClass="optionGroup" text="XXX XXX" />
                   <Label fx:id="cityAndStreet" layoutX="97.0" layoutY="109.0" styleClass="optionGroup" text="XXXX ul. XXXXX 27" />
                   <Label fx:id="city" layoutX="97.0" layoutY="62.0" styleClass="optionGroup" text="XXXXXX" />
-                  <Text layoutX="94.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Województwo" />
+                  <Text layoutX="94.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%voivodeship" />
                   <Label fx:id="voivo" layoutX="97.0" layoutY="155.0" styleClass="optionGroup" text="XXXX ul. XXXXX 27" />
                   <Label fx:id="howManyPackages" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="593.0" layoutY="6.0" prefHeight="30.0" prefWidth="91.0" styleClass="optionGroup" text="1/1" />
                </children>
@@ -33,7 +33,7 @@
       </AnchorPane>
       <Pane fx:id="alertPane" layoutX="379.0" layoutY="149.0" prefHeight="139.0" prefWidth="300.0" styleClass="customAlert" visible="false">
          <children>
-            <Label fx:id="labelAlertPane" alignment="CENTER" layoutX="12.0" layoutY="6.0" prefHeight="79.0" prefWidth="278.0" styleClass="textLabel" text="Przydzielono paczkę" textAlignment="CENTER" textFill="#13d301" wrapText="true" />
+            <Label fx:id="labelAlertPane" alignment="CENTER" layoutX="12.0" layoutY="6.0" prefHeight="79.0" prefWidth="278.0" styleClass="textLabel" text="%assignedPackage" textAlignment="CENTER" textFill="#13d301" wrapText="true" />
             <Button layoutX="126.0" layoutY="85.0" mnemonicParsing="false" onMouseClicked="#confirmButton" styleClass="btnNext" text="OK" />
          </children>
       </Pane>
@@ -42,12 +42,12 @@
       <AnchorPane layoutX="157.0" layoutY="356.0" prefHeight="200.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
          <children>
             <Label fx:id="noDataCourierText" alignment="CENTER" layoutY="81.0" prefHeight="99.0" prefWidth="730.0" styleClass="optionGroup" text="%noDataToDisplay" />
-            <Label fx:id="courierLabel" layoutX="295.0" styleClass="optionGroup" text="Wybierz kuriera" />
+            <Label fx:id="courierLabel" layoutX="295.0" styleClass="optionGroup" text="%selectCourier" />
             <Pane fx:id="paneCourier" layoutX="19.0" layoutY="56.0" prefHeight="180.0" prefWidth="692.0" styleClass="packageItem" visible="false">
                <children>
-                  <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Email" />
-                  <Text layoutX="94.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Imie i nazwisko" />
-                  <Text layoutX="94.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Numer telefonu" />
+                  <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%email" />
+                  <Text layoutX="94.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%nameAndSurname" />
+                  <Text layoutX="94.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%phone" />
                   <Label fx:id="courierNameSurname" layoutX="97.0" layoutY="17.0" styleClass="optionGroup" text="XXX XXX" />
                   <Label fx:id="courierPhone" layoutX="97.0" layoutY="109.0" styleClass="optionGroup" text="XXXX ul. XXXXX 27" />
                   <Label fx:id="courierEmail" layoutX="97.0" layoutY="62.0" styleClass="optionGroup" text="XXXXXX" />
@@ -58,7 +58,7 @@
       </AnchorPane>
       <Button fx:id="buttonBackCourier" layoutX="140.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#buttonBackCourier" styleClass="btnNext" text="&lt;" visible="false" />
       <Button fx:id="buttonNextCourier" layoutX="886.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#buttonNextCourier" styleClass="btnNext" text="&gt;" visible="false" />
-      <Button layoutX="449.0" layoutY="589.0" mnemonicParsing="false" onMouseClicked="#assignPackage" styleClass="btnNext" text="Przydziel paczke" />
+      <Button layoutX="449.0" layoutY="589.0" mnemonicParsing="false" onMouseClicked="#assignPackage" styleClass="btnNext" text="%assignPackage" />
       <Line endX="783.0" layoutX="167.0" layoutY="348.0" startX="-55.0" stroke="#252525" strokeWidth="2.0" visible="false" />
       <Line endX="783.0" layoutX="167.0" layoutY="127.0" startX="-55.0" stroke="#252525" strokeWidth="2.0" />
       <Line endX="783.0" layoutX="167.0" layoutY="394.0" startX="-55.0" stroke="#252525" strokeWidth="2.0" />

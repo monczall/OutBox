@@ -58,7 +58,9 @@ public class InterbranchExpendableRow implements Initializable {
             setStatusReturned("");
         }
 
+
         int area = PackagesDAO.getPackagesById(InterbranchCourierSecond.getPackageId()).get(0).getUsersByCourierId().getAreaId();
+
         Areas mainArea = AreasDAO.getAreas().get(0);
         Areas areasList = AreasDAO.getAreasById(area).get(0);
         if(statusReturned.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())){

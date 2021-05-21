@@ -33,7 +33,7 @@
                   <TextField fx:id="streetInput" alignment="CENTER" layoutX="254.0" layoutY="99.0" prefHeight="33.0" prefWidth="221.0" styleClass="inputBox" />
                   <Text layoutX="251.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%streetAndNumber" textAlignment="CENTER" wrappingWidth="225.0" />
                   <TextField fx:id="inputNumber" alignment="CENTER" layoutX="500.0" layoutY="23.0" prefHeight="33.0" prefWidth="137.0" styleClass="inputBox" />
-                  <TextField fx:id="inputVoivodeship" alignment="CENTER" layoutX="508.0" layoutY="99.0" prefHeight="33.0" prefWidth="174.0" styleClass="inputBox" />
+                  <TextField fx:id="inputVoivodeship" alignment="CENTER" disable="true" editable="false" layoutX="508.0" layoutY="99.0" prefHeight="33.0" prefWidth="174.0" styleClass="inputBox" />
                   <Text layoutX="481.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%voivodeship" textAlignment="CENTER" wrappingWidth="228.515625" />
                   <Text layoutX="298.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%email" textAlignment="CENTER" wrappingWidth="187.1328125" />
                   <TextField fx:id="inputEmail" alignment="CENTER" layoutX="300.0" layoutY="23.0" prefHeight="33.0" prefWidth="182.0" styleClass="inputBox" />

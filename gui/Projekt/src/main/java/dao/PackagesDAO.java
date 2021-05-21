@@ -136,7 +136,7 @@ public class PackagesDAO {
                 "AND PH.date BETWEEN :dateStart AND :dateEnd " +
                 "AND P.typeId = PT.id " +
                 "AND P.userInfoId = UI.id " +
-                "AND P.userId = U.id " +
+                "AND P.userId = U.id AND PH.status = 'Zarejestrowana' " +
                 "GROUP BY P.packageNumber";
 
         Session session = HibernateUtil.getSessionFactory().openSession();

@@ -53,21 +53,20 @@
             <Pane fx:id="hello" layoutX="92.0" layoutY="16.0" prefHeight="58.0" prefWidth="201.0">
                <children>
                   <Text fill="WHITE" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="%adminHello" />
-                  <Text layoutX="50.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Administratorze" />
-                  <Text fill="WHITE" layoutX="195.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="!" />
+                  <Text layoutX="50.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="%adminAdmin" />
                </children>
             </Pane>
          </children>
 
             </AnchorPane>
-      <Pane fx:id="alertPane" layoutX="401.0" layoutY="186.0" prefHeight="123.0" prefWidth="293.0" styleClass="alert">
+      <Pane fx:id="alertPane" layoutX="401.0" layoutY="186.0" prefHeight="123.0" prefWidth="320.0" styleClass="alert">
          <children>
-            <Button layoutX="154.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="%no">
+            <Button layoutX="166.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="%no">
                <graphic>
                   <FontAwesomeIconView glyphName="CLOSE" size="23" styleClass="iconNext" />
                </graphic>
             </Button>
-            <Button layoutX="48.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="%yes">
+            <Button layoutX="60.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="%yes">
                <graphic>
                   <FontAwesomeIconView fill="#ff2a2a" glyphName="CHECK" size="23" styleClass="backIcon" />
                </graphic>
