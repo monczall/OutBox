@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.controllers.auth.Encryption;
 import main.java.controllers.auth.Login;
@@ -80,8 +81,10 @@ public class ClientSettings implements Initializable {
     private CustomPasswordField deletePassword;
 
     // List of colors for combobox
-    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony",
-            "Biały");
+    private ObservableList<String> colors = FXCollections.observableArrayList(App.getLanguageProperties("colorOrange"), App.getLanguageProperties("colorRed"),
+            App.getLanguageProperties("colorWhite"));
+
+
 
     // List of languages for combobox
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
@@ -188,12 +191,12 @@ public class ClientSettings implements Initializable {
     @FXML
     void changeColor(ActionEvent event) {
 
-        if (pickColor.getValue().equals("Pomarańczowy")) {
+        if (pickColor.getValue().equals(App.getLanguageProperties("colorOrange"))) {
             pref.addPreference("color", "orange");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #ffa500;" +
                     "-fx-second-color: #000000;");
         }
-        else if (pickColor.getValue().equals("Czerwony")) {
+        else if (pickColor.getValue().equals(App.getLanguageProperties("colorRed"))) {
             pref.addPreference("color", "red");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #d82020;" +
                     "-fx-second-color: #ffffff;");

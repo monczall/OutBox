@@ -21,7 +21,7 @@ public class PackagesDTO {
 
     public PackagesDTO(int userInfosId, int packagesId, String packageNumber, String timeOfPlannedDelivery,
                        String name, String surname, String phoneNumber, String streetAndNumber, String city,
-                       String status, String additionalComment, String email, String voivodeship) {
+                       String status, String additionalComment, String email, String voivodeship, String recipentName) {
         this.userInfosId = userInfosId;
         this.packagesId = packagesId;
         this.packageNumber = packageNumber;
@@ -35,6 +35,7 @@ public class PackagesDTO {
         this.additionalComment = additionalComment;
         this.email = email;
         this.voivodeship = voivodeship;
+        this.recipentName = recipentName;
     }
 
     public PackagesDTO(int packagesId, String packageNumber, String name, String surname, String status,

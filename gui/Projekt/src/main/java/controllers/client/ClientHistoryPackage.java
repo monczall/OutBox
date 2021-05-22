@@ -12,12 +12,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import main.java.App;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.PackageHistory;
 import main.java.entity.Packages;
+import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
+import main.java.features.Charts;
 import main.java.features.Preference;
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +30,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientHistoryPackage implements Initializable {
+
+    @FXML
+    private AnchorPane mainPane;
 
     @FXML
     private AnchorPane trackPackagePane;
@@ -94,7 +100,7 @@ public class ClientHistoryPackage implements Initializable {
     @FXML
     private ToggleButton toggleToClient;
 
-    private List<PopulatePackageItem> packageFirst = new ArrayList<>(ClientTrackPackage.loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
+    private List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
 
     private static Preference pref = new Preference();
     private static ResourceBundle bundle;
@@ -102,9 +108,10 @@ public class ClientHistoryPackage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-       /* Charts.createBarChart(mainPane,"LICZBA PRZESYŁEK", "04", 61, 14, 952, 644);
+        /*Charts.createBarChart(mainPane,"LICZBA PRZESYŁEK", "04", 61, 14, 952, 644);*/
 
-        Charts.createPieChart(mainPane,"WYKRES ILOŚCI PRZESYŁEK",150,47,500,400);*/
+
+        /*Charts.createPieChart(mainPane,"WYKRES ILOŚCI PRZESYŁEK",150,47,500,400);*/
 
         toggleToClient.setSelected(true);
         toggleFromClient.setSelected(true);
@@ -117,6 +124,35 @@ public class ClientHistoryPackage implements Initializable {
         loadPackages(packageFirst);
     }
 
+    public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
+
+        List<PackagesDTO> listOfPackages = PackagesDAO.readHistoryByID(userId, userEmail);
+
+        List<PopulatePackageItem> packageItems = new ArrayList<>();
+
+        for(int i = 0; i < listOfPackages.size(); i++){
+
+            PopulatePackageItem populatePackageItem = new PopulatePackageItem();
+
+            populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
+            populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
+            populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
+
+            if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail())) {
+                populatePackageItem.setType(App.getLanguageProperties("clientSender"));
+                populatePackageItem.setSender(listOfPackages.get(i).getName());
+            }
+            else {
+                populatePackageItem.setType(App.getLanguageProperties("clientRecipient"));
+                populatePackageItem.setSender(listOfPackages.get(i).getRecipentName());
+            }
+
+            packageItems.add(populatePackageItem);
+        }
+
+        return packageItems;
+    }
+
     // Method that leads to list of all history packages
     @FXML
     void backToTrackPackage(ActionEvent event) throws IOException {
@@ -124,9 +160,6 @@ public class ClientHistoryPackage implements Initializable {
         Animations.fadeAway(toggleFromClient,0.2,0,1,true);
         Animations.fadeAway(toggleToClient,0.2,0,1,true);
         Animations.changePane(moreInformationPane,trackPackagePane,+850,0.5);
-
-        //Need rework
-        statusesVBox.getChildren().clear();
     }
 
     // Method handle event on icon that is closing alert
@@ -148,7 +181,7 @@ public class ClientHistoryPackage implements Initializable {
         else if(!toggleFromClient.isSelected() && toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
             for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals("Nadawca")) {
+                if(ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
                     list.add(ppI);
                 }
             }
@@ -156,7 +189,7 @@ public class ClientHistoryPackage implements Initializable {
         }
         else {
             for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals("Odbiorca")) {
+                if(ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
                     list.add(ppI);
                 }
             }
@@ -164,7 +197,7 @@ public class ClientHistoryPackage implements Initializable {
         }
     }
 
-    // Method handles showing only packages that are going to actuall client
+    // Method handles showing only packages that are going to actual client
     @FXML
     void loadToClient(ActionEvent event) {
         List<PopulatePackageItem> list = new ArrayList<>();
@@ -177,7 +210,7 @@ public class ClientHistoryPackage implements Initializable {
         else if(!toggleToClient.isSelected() && toggleFromClient.isSelected()) {
             packageLayout.getChildren().clear();
             for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals("Odbiorca")) {
+                if(ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
                     list.add(ppI);
                 }
             }
@@ -185,7 +218,7 @@ public class ClientHistoryPackage implements Initializable {
         }
         else {
             for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals("Nadawca")) {
+                if(ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
                     list.add(ppI);
                 }
             }
@@ -243,13 +276,13 @@ public class ClientHistoryPackage implements Initializable {
                 showMore.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-
+                        statusesVBox.getChildren().clear();
                         Animations.changePane(trackPackagePane,moreInformationPane,-850,0.5);
 
                         btnBack.setVisible(true);
                         btnBack.setOpacity(1);
 
-                        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(packageItem.getId());
+                        List<PackageHistory> statuses = clientTrackPackage.translateStatuses(packageItem.getId());
 
                         // Creating statuses depending on database information
                         for(int i = 0; i < statuses.size(); i++) {
@@ -259,7 +292,7 @@ public class ClientHistoryPackage implements Initializable {
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                clientTrackPackage.createCurrentStatus(date,statuses.get(i).getStatus(),"Jakis opis");
+                                clientTrackPackage.createCurrentStatus(date,statuses.get(i).getStatus(),clientTrackPackage.addDescription(statuses.get(i).getStatus()));
                             }
                             else {
                                 if(i != 0){

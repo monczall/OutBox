@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import main.java.App;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
@@ -30,6 +31,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientTrackPackage implements Initializable {
+
+    public String arrayOfDescriptions[] = {
+            App.getLanguageProperties("statusOne"),
+            App.getLanguageProperties("statusTwo"),
+            App.getLanguageProperties("statusThree"),
+            App.getLanguageProperties("statusFour"),
+            App.getLanguageProperties("statusFive"),
+            App.getLanguageProperties("statusSix"),
+            App.getLanguageProperties("statusSeven"),
+            App.getLanguageProperties("statusEight"),
+            App.getLanguageProperties("statusNine"),
+            App.getLanguageProperties("statusTen"),
+            App.getLanguageProperties("statusElven"),
+            App.getLanguageProperties("statusTwelve"),
+    };
 
     @FXML
     private AnchorPane trackPackagePane;
@@ -117,6 +133,95 @@ public class ClientTrackPackage implements Initializable {
         // Loading date into the dynamic objects from db query
         loadPackages(packageFirst);
     }
+
+    public String addDescription(String currentStatus){
+                if(currentStatus.equals("Zarejestrowana") || currentStatus.equals("Registered")) {
+                    return arrayOfDescriptions[0];
+                }
+                else if(currentStatus.equals("Odebrana Od Klienta") || currentStatus.equals("Received From Client")) {
+                    return arrayOfDescriptions[1];
+                }
+                else if(currentStatus.equals("W Transporcie") || currentStatus.equals("In Transport")) {
+                    return arrayOfDescriptions[2];
+                }
+                else if(currentStatus.equals("W Lokalnej Sortowni") || currentStatus.equals("In Local Hub")) {
+                    return arrayOfDescriptions[3];
+                }
+                else if(currentStatus.equals("W Głównej Sortowni") || currentStatus.equals("In Main Hub")) {
+                    return arrayOfDescriptions[4];
+                }
+                else if(currentStatus.equals("Przekazana Do Doręczenia") || currentStatus.equals("Handed Over For Delivery")) {
+                    return arrayOfDescriptions[5];
+                }
+                else if(currentStatus.equals("Dostarczona") || currentStatus.equals("Delivered")) {
+                    return arrayOfDescriptions[6];
+                }
+                else if(currentStatus.equals("Nieobecność Odbiorcy") || currentStatus.equals("Recipient's Absence")) {
+                    return arrayOfDescriptions[7];
+                }
+                else if(currentStatus.equals("Ponowna Próba Doręczenia") || currentStatus.equals("Retry Delviery")) {
+                    return arrayOfDescriptions[8];
+                }
+                else if(currentStatus.equals("Do Odebrania W Odziale") || currentStatus.equals("To Be Picked In Hub")) {
+                    return arrayOfDescriptions[9];
+                }
+                else if(currentStatus.equals("Zwrot Do Nadawcy") || currentStatus.equals("Returning To The Sender")) {
+                    return arrayOfDescriptions[10];
+                }
+                else {
+                    return arrayOfDescriptions[11];
+                }
+    }
+
+    public static List<PackageHistory> translateStatuses(int id){
+        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(id);
+
+        if(Preference.readPreference("language").equals("english")) {
+            for(int i = 0; i < statuses.size(); i++) {
+                if(statuses.get(i).getStatus().equals("Zarejestrowana")) {
+                    statuses.get(i).setStatus("Registered");
+                }
+                else if(statuses.get(i).getStatus().equals("Odebrana Od Klienta")) {
+                    statuses.get(i).setStatus("Received From Client");
+                }
+                else if(statuses.get(i).getStatus().equals("W Transporcie")) {
+                    statuses.get(i).setStatus("In Transport");
+                }
+                else if(statuses.get(i).getStatus().equals("W Lokalnej Sortowni")) {
+                    statuses.get(i).setStatus("In Local Hub");
+                }
+                else if(statuses.get(i).getStatus().equals("W Głównej Sortowni")) {
+                    statuses.get(i).setStatus("In Main Hub");
+                }
+                else if(statuses.get(i).getStatus().equals("Przekazana Do Doręczenia")) {
+                    statuses.get(i).setStatus("Handed Over For Delivery");
+                }
+                else if(statuses.get(i).getStatus().equals("Dostarczona")) {
+                    statuses.get(i).setStatus("Delivered");
+                }
+                else if(statuses.get(i).getStatus().equals("Nieobecność Odbiorcy")) {
+                    statuses.get(i).setStatus("Recipient's Absence");
+                }
+                else if(statuses.get(i).getStatus().equals("Ponowna Próba Doręczenia")) {
+                    statuses.get(i).setStatus("Retry Delivery");
+                }
+                else if(statuses.get(i).getStatus().equals("Do Odebrania W Odziale")) {
+                    statuses.get(i).setStatus("To Be Picked In Hub");
+                }
+                else if(statuses.get(i).getStatus().equals("Zwrot Do Nadawcy")) {
+                    statuses.get(i).setStatus("Returning To The Sender");
+                }
+                else if(statuses.get(i).getStatus().equals("Zwrócona Do Nadawcy")) {
+                    statuses.get(i).setStatus("Returned To The Sender");
+                }
+            }
+        }
+        else {
+            return statuses;
+        }
+        return statuses;
+    }
+
 
     /**
      * <p>
@@ -289,15 +394,16 @@ public class ClientTrackPackage implements Initializable {
             PopulatePackageItem populatePackageItem = new PopulatePackageItem();
 
             populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
-            populatePackageItem.setSender(listOfPackages.get(i).getName());
             populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
             populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
 
             if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail())) {
-                populatePackageItem.setType("Nadawca");
+                populatePackageItem.setType(App.getLanguageProperties("clientSender"));
+                populatePackageItem.setSender(listOfPackages.get(i).getName());
             }
             else {
-                populatePackageItem.setType("Odbiorca");
+                populatePackageItem.setType(App.getLanguageProperties("clientRecipient"));
+                populatePackageItem.setSender(listOfPackages.get(i).getRecipentName());
             }
 
             packageItems.add(populatePackageItem);
@@ -313,9 +419,6 @@ public class ClientTrackPackage implements Initializable {
         Animations.fadeAway(toggleFromClient,0.2,0,1,true);
         Animations.fadeAway(toggleToClient,0.2,0,1,true);
         Animations.changePane(moreInformationPane,trackPackagePane,+850,0.5);
-
-        //Need rework
-        statusesVBox.getChildren().clear();
     }
 
     // Method handle event on icon that is closing alert
@@ -337,7 +440,7 @@ public class ClientTrackPackage implements Initializable {
         else if(!toggleFromClient.isSelected() && toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
             for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals("Nadawca")) {
+                if(ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
                     list.add(ppI);
                 }
             }
@@ -345,7 +448,7 @@ public class ClientTrackPackage implements Initializable {
         }
         else {
             for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals("Odbiorca")) {
+                if(ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
                     list.add(ppI);
                 }
             }
@@ -353,7 +456,7 @@ public class ClientTrackPackage implements Initializable {
         }
     }
 
-    // Method handles showing only packages that are going to actuall client
+    // Method handles showing only packages that are going to actual client
     @FXML
     void loadToClient(ActionEvent event) {
         List<PopulatePackageItem> list = new ArrayList<>();
@@ -366,7 +469,7 @@ public class ClientTrackPackage implements Initializable {
         else if(!toggleToClient.isSelected() && toggleFromClient.isSelected()) {
             packageLayout.getChildren().clear();
             for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals("Odbiorca")) {
+                if(ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
                     list.add(ppI);
                 }
             }
@@ -374,7 +477,7 @@ public class ClientTrackPackage implements Initializable {
         }
         else {
             for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals("Nadawca")) {
+                if(ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
                     list.add(ppI);
                 }
             }
@@ -383,11 +486,12 @@ public class ClientTrackPackage implements Initializable {
     }
 
     /**
+     * <p>
      * This method create panes with buttons - dynamically
      * Number of panes depends on size of the List
      * It takes List with type of PopulatePackageItem object
-     *
-     * @param list
+     * </p>
+     * @param list list of information needed to generate blocks
      */
     private void loadPackages(List<PopulatePackageItem> list){
 
@@ -430,13 +534,14 @@ public class ClientTrackPackage implements Initializable {
                 showMore.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-
+                        statusesVBox.getChildren().clear();
                         Animations.changePane(trackPackagePane,moreInformationPane,-850,0.5);
 
                         btnBack.setVisible(true);
                         btnBack.setOpacity(1);
 
-                        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(packageItem.getId());
+
+                        List<PackageHistory> statuses = translateStatuses(packageItem.getId());
 
                         // Creating statuses depending on database information
                         for(int i = 0; i < statuses.size(); i++) {
@@ -447,7 +552,7 @@ public class ClientTrackPackage implements Initializable {
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                createCurrentStatus(date,statuses.get(i).getStatus(),"Jakis opis");
+                                createCurrentStatus(date,statuses.get(i).getStatus(),addDescription(statuses.get(i).getStatus()));
                             }
                             else {
                                 if(i != 0) {
