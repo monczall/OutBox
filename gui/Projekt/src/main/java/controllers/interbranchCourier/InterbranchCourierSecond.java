@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
+import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
@@ -167,7 +168,18 @@ public class InterbranchCourierSecond implements Initializable {
                         if (status.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())) {
                             List<Users> usersList = UsersDAO.getCouriers("Kurier");
                             for (int i = 0; i < usersList.size(); i++) {
-                                if (table.getItems().get(selectedIndex).getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
+                                if (PackagesDAO.getPackagesById(table.getItems().get(selectedIndex).getPackagesId()).get(0).
+                                        getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
+                                    PackagesDAO.updateCourierId(table.getItems().get(selectedIndex).getPackagesId(),
+                                            usersList.get(i).getId());
+                                }
+                            }
+                        }
+                        else if (status.equals(PackageStatus.IN_MAIN_SORTING_DEPARTMENT.displayName())) {
+                            List<Users> usersList = UsersDAO.getCouriers("Kurier Międzyoddziałowy");
+                            for (int i = 0; i < usersList.size(); i++) {
+                                if (PackagesDAO.getPackagesById(table.getItems().get(selectedIndex).getPackagesId()).get(0).
+                                        getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
                                     PackagesDAO.updateCourierId(table.getItems().get(selectedIndex).getPackagesId(),
                                             usersList.get(i).getId());
                                 }

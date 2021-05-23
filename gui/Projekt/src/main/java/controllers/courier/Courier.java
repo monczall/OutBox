@@ -52,8 +52,8 @@ public class Courier implements Initializable {
         List<Users> usersList = UsersDAO.getCouriers("Kurier");
         for (int i = 0; i < packagesList.size(); i++) {
             for (int j = 0; j < usersList.size(); j++) {
-                if (packagesList.get(i).getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(j).getAreasByAreaId().getVoivodeship())) {
-                    if (packagesList.get(i).getUserInfosByUserInfoId().getCity().equals(usersList.get(j).getAreasByAreaId().getName())) {
+                if (packagesList.get(i).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(j).getAreasByAreaId().getVoivodeship())) {
+                    if (packagesList.get(i).getUsersByUserId().getUserInfosByUserInfoId().getCity().equals(usersList.get(j).getAreasByAreaId().getName())) {
                         List<Users> couriersInArea = UsersDAO.getCouriersByAreaId(usersList.get(j).getAreaId());
                         if(couriersInArea.size() > 1){
                             int courierId = couriersInArea.get(0).getId();

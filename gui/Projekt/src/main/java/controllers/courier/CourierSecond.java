@@ -158,7 +158,9 @@ public class CourierSecond implements Initializable {
                         if (status.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())) {
                             List<Users> usersList = UsersDAO.getCouriers("Kurier Międzyoddziałowy");
                             for (int i = 0; i < usersList.size(); i++) {
-                                if (table.getItems().get(selectedIndex).getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
+                                if (UsersDAO.readUserInfoById(PackagesDAO.getPackagesById(table.getItems().get(selectedIndex)
+                                        .getPackagesId()).get(0).getUserId()).get(0).getVoivodeship().equals(usersList.get(i).
+                                        getAreasByAreaId().getVoivodeship())) {
                                     PackagesDAO.updateCourierId(table.getItems().get(selectedIndex).getPackagesId(),
                                             usersList.get(i).getId());
                                 }
