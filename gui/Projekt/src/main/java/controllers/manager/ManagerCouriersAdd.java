@@ -45,7 +45,7 @@ public class ManagerCouriersAdd implements Initializable {
     private TextField email;
 
     @FXML
-    private TextField numberPhone,voivodeship;
+    private TextField numberPhone;
 
     @FXML
     private AnchorPane appWindow;
@@ -61,6 +61,7 @@ public class ManagerCouriersAdd implements Initializable {
 
     List<UserInfos> dataUserInfos;
     List<Users> dataUser;
+    UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
 
     private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów","Rzeszów Rejtana");
 
@@ -71,7 +72,6 @@ public class ManagerCouriersAdd implements Initializable {
                 street.getText().toString().equals("") ||
                 city.getText().toString().equals("") ||
                 email.getText().toString().equals("") ||
-                voivodeship.getText().toString().equals("") ||
                 numberPhone.getText().toString().equals("")){
             Alerts.createAlert(appWindow, addCourierButton,"WARNING",
                     App.getLanguageProperties("completeAllFields"));
@@ -88,7 +88,6 @@ public class ManagerCouriersAdd implements Initializable {
                 String streetString = street.getText();
                 String surnameString = surname.getText();
                 String cityString = city.getText();
-                String voivodeshipString = voivodeship.getText();
                 String role = "Kurier";
 
                 String password = new Random().ints(10, 33, 122)
@@ -106,7 +105,7 @@ public class ManagerCouriersAdd implements Initializable {
                 dataUser = UsersDAO.getUsersId(ui.getId());
                 int areaId = dataUser.get(0).getAreaId();
                 UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString,
-                        voivodeshipString, Encryption.encrypt(password), role, areaId);
+                        ui.getVoivodeship(), Encryption.encrypt(password), role, areaId);
 
                 alertPane.setVisible(true);
             }
@@ -171,15 +170,6 @@ public class ManagerCouriersAdd implements Initializable {
             status = false;
             errorValidation(numberPhone);
         }
-        if (voivodeship.getText().matches("[a-zA-Z]+"))
-        {
-            goodValidation(voivodeship);
-        }
-        else
-        {
-            status = false;
-            errorValidation(voivodeship);
-        }
 
         return status;
     }
@@ -201,7 +191,6 @@ public class ManagerCouriersAdd implements Initializable {
         street.setText("");
         city.setText("");
         email.setText("");
-        voivodeship.setText("");
         numberPhone.setText("");
         alertPane.setVisible(false);
     }
@@ -267,7 +256,6 @@ public class ManagerCouriersAdd implements Initializable {
         goodValidation(street);
         goodValidation(city);
         goodValidation(numberPhone);
-        goodValidation(voivodeship);
         goodValidation(email);
 
         regionName.setItems(regions);

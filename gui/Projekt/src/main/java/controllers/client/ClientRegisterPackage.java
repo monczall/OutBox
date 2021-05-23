@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import main.java.SceneManager;
 import main.java.controllers.auth.Login;
 import main.java.dao.HibernateUtil;
 import main.java.dao.PackageTypeDAO;
@@ -22,7 +21,6 @@ import main.java.features.Animations;
 import main.java.features.ErrorHandler;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.hibernate.Session;
-
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -165,8 +163,6 @@ public class ClientRegisterPackage implements Initializable {
 
     private ToggleGroup packageGroup = new ToggleGroup();
 
-
-
     ArrayList<CustomTextField> list = new ArrayList<CustomTextField>();
 
     ObservableList<String> timeOfDeliveryList = FXCollections.observableArrayList("10:30 - 15:30", "15:30 - 17:30", "17:30 - 21:00", "Dowolny");
@@ -175,6 +171,9 @@ public class ClientRegisterPackage implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         List<PackageType> listOfTypeInfo = PackageTypeDAO.getTypeInfo();
+
+        // Reading a list with types of packages and converting them into right string
+        // Size, weight and price
         smallSize.setText(listOfTypeInfo.get(0).getSize().replaceAll("x"," x ") + " cm");
         medSize.setText(listOfTypeInfo.get(1).getSize().replaceAll("x"," x ") + " cm");
         bigSize.setText(listOfTypeInfo.get(2).getSize().replaceAll("x"," x  ") + " cm");
@@ -187,7 +186,7 @@ public class ClientRegisterPackage implements Initializable {
         medPrice.setText(listOfTypeInfo.get(1).getPrice() + " zł");
         bigPrice.setText(listOfTypeInfo.get(2).getPrice() + " zł");
 
-
+        // Adding all the inputs for changing if they are empty
         list.add(nameInput);
         list.add(surnameInput);
         list.add(emailInput);
@@ -196,10 +195,11 @@ public class ClientRegisterPackage implements Initializable {
         list.add(provinceInput);
         list.add(numberInput);
 
+        // Adding values inside Combobox and setting a start value to 'dowolny' type
         pickTimeOfDelivery.setItems(timeOfDeliveryList);
         pickTimeOfDelivery.setValue(timeOfDeliveryList.get(3));
 
-        // Added three buttons to the group
+        // Added three buttons to the group (it allows user to only pick one)
         smallPackage.setToggleGroup(packageGroup);
         smallPackage.setUserData("Mała");
 
@@ -209,11 +209,13 @@ public class ClientRegisterPackage implements Initializable {
         bigPackage.setToggleGroup(packageGroup);
         bigPackage.setUserData("Duża");
 
-        recipientDetailsPane.setTranslateX(+800);           // After panel is initialized three panes are moved 800 pixels to the right
-        deliveryTimePane.setTranslateX(+800);               // for animation purposes
+        // After panel is initialized three panes are moved 800 pixels to the right
+        // for animation purposes
+        recipientDetailsPane.setTranslateX(+800);
+        deliveryTimePane.setTranslateX(+800);
         registerSummaryPane.setTranslateX(+800);
 
-        //Checking inputs
+        //Checking all the inputs given while registering package
         ErrorHandler.checkInputs(nameInput, "[a-zA-Z]+",
                 "Imie powinno zawierać tylko litery");
 
@@ -240,32 +242,35 @@ public class ClientRegisterPackage implements Initializable {
 
 
 
-    // Button actions that leads forward
+    // Method handles moving pane from Size pane to Recipient pane
     @FXML
     void fromSizeToRecipient(ActionEvent event) {
-        if(packageGroup.getSelectedToggle() != null){
-            //System.out.println(packageGroup.getSelectedToggle().getUserData().toString());
+        if(packageGroup.getSelectedToggle() != null) {
             Animations.changePane(packageSizePane,recipientDetailsPane,-800,0.7);
             Animations.moveByX(navCircle, +114,0.7);
         }
-        else{
+        else {
             Alerts.createAlert(appWindow, btnNextRecipient,"WARNING","WYBIERZ ROZMIAR PACZKI");
         }
     }
 
+    // Method handles moving pane from Recipient pane to Time pane
     @FXML
     void fromRecipientToTime(ActionEvent event) {
         ErrorHandler.checkIfEmpty(list);
         if(!nameInput.getRight().isVisible() && !surnameInput.getRight().isVisible() && !emailInput.getRight().isVisible()
            && !streetInput.getRight().isVisible() && !cityInput.getRight().isVisible() && !provinceInput.getRight().isVisible()
-           && !numberInput.getRight().isVisible()){
+           && !numberInput.getRight().isVisible()) {
             Animations.changePane(recipientDetailsPane,deliveryTimePane,-800,0.7);
             Animations.moveByX(navCircle,+114,0.7);
         }
-        else
+        else {
             Alerts.createAlert(appWindow, btnNextTime,"WARNING","UZUPEŁNIJ LUB POPRAW POLA");
+        }
+
     }
 
+    // Method handles moving pane from Time pane to Summary pane
     @FXML
     void fromTimeToSummary(ActionEvent event) {
         if(!pickTimeOfDelivery.getSelectionModel().isEmpty()){
@@ -273,6 +278,8 @@ public class ClientRegisterPackage implements Initializable {
             Animations.changePane(deliveryTimePane,registerSummaryPane,-800,0.7);
             Animations.moveByX(navCircle,+114,0.7);
 
+            // Setting all the inputs from previous panes to the final one
+            // It allows use to check if everything was inputted correctly in one place
             sumType.setText(packageGroup.getSelectedToggle().getUserData().toString());
             sumName.setText(nameInput.getText());
             sumSurname.setText(surnameInput.getText());
@@ -284,49 +291,60 @@ public class ClientRegisterPackage implements Initializable {
             sumEmail.setText(emailInput.getText());
             sumNumber.setText(numberInput.getText());
 
-            if(sumType.getText().equals("Mała"))
+            if(sumType.getText().equals("Mała")) {
                 sumSize.setText(smallSize.getText());
-            else if(sumType.getText().equals("Średnia"))
+            }
+            else if(sumType.getText().equals("Średnia")) {
                 sumSize.setText(medSize.getText());
-            else
+            }
+            else {
                 sumSize.setText(bigSize.getText());
+            }
+
         }
-        else
+        else {
             Alerts.createAlert(appWindow, btnNextSummary,"WARNING","WYBIECZ CZAS PRZYJAZDU");
+        }
 
     }
 
-    // Button actions that leads backward
+    // Method handles moving pane from Recipient pane to Size pane
     @FXML
     void fromRecipientToSize(ActionEvent event) {
         Animations.changePane(recipientDetailsPane,packageSizePane,+800,0.7);
         Animations.moveByX(navCircle,-114,0.7);
     }
 
+    // Method handles moving pane from Time pane to Recipient pane
     @FXML
     void fromTimeToRecipient(ActionEvent event) {
         Animations.changePane(deliveryTimePane,recipientDetailsPane,+800,0.7);
         Animations.moveByX(navCircle,-114,0.7);
     }
 
+    // Method handles moving pane from Summary pane to Time pane
     @FXML
     void fromSummaryToTime(ActionEvent event) {
         Animations.changePane(registerSummaryPane,deliveryTimePane,+800,0.7);
         Animations.moveByX(navCircle,-114,0.7);
     }
 
+    // Method handles moving pane from Summary pane to Time pane
     @FXML
     void registerPackage(ActionEvent event) {
         btnRegister.setDisable(true);
 
+        //Generating package number
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime now = LocalDateTime.now();
         Random rand = new Random();
+
         String packageNumber = dateTimeFormatter.format(now) + "/" + String.format("%06d", rand.nextInt(1000000));
 
+        //Showing alert that everything went well
         Alerts.createAlert(appWindow, btnNextSummary,"CHECK","POMYŚLNIE ZAREJESTROWANO");
-        //Database insert query here
 
+        //Executing database queries
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -343,15 +361,15 @@ public class ClientRegisterPackage implements Initializable {
 
         session.save(userInfos);
 
-
-        if(sumType.getText().equals("Mała"))
+        if(sumType.getText().equals("Mała")) {
             packages.setTypeId(1);
-        else if(sumType.getText().equals("Średnia"))
+        }
+        else if(sumType.getText().equals("Średnia")) {
             packages.setTypeId(2);
-        else
+        }
+        else {
             packages.setTypeId(3);;
-
-
+        }
 
         packages.setUserId(Login.getUserID());
         packages.setUserInfoId(userInfos.getId());
@@ -359,7 +377,6 @@ public class ClientRegisterPackage implements Initializable {
         packages.setEmail(sumEmail.getText());
         packages.setTimeOfPlannedDelivery(sumTime.getText());
         packages.setAdditionalComment(additionalComment.getText());
-
 
         session.save(packages);
 

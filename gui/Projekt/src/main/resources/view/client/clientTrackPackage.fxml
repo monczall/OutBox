@@ -36,22 +36,22 @@
             <FontAwesomeIconView fill="#8f8f8f" glyphName="LONG_ARROW_LEFT" size="23" styleClass="backIcon" text="" />
          </graphic>
       </Button>
-      <ToggleButton fx:id="toggleFromClient" layoutX="541.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadFromClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki nadawane" />
-      <ToggleButton fx:id="toggleToClient" layoutX="701.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadToClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="Przesyłki odbierane" />
+      <ToggleButton fx:id="toggleFromClient" layoutX="541.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadFromClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="%postedPackage" />
+      <ToggleButton fx:id="toggleToClient" layoutX="701.0" layoutY="50.0" mnemonicParsing="false" onAction="#loadToClient" prefHeight="41.0" prefWidth="161.0" styleClass="toggleSort" stylesheets="@../../css/client.css" text="%recivedPackage" />
       <Pane fx:id="informationAlert" layoutX="160.0" layoutY="100.0" prefHeight="536.0" prefWidth="750.0" stylesheets="@../../css/client.css">
          <children>
             <Pane layoutX="85.0" layoutY="45.0" prefHeight="349.0" prefWidth="554.0" styleClass="alert" />
-            <Label alignment="CENTER" contentDisplay="TOP" layoutX="85.0" layoutY="60.0" prefHeight="25.0" prefWidth="554.0" styleClass="textOption" text="Numer przesyłki" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="85.0" layoutY="60.0" prefHeight="25.0" prefWidth="554.0" styleClass="textOption" text="%packageNumber" textAlignment="CENTER" />
             <Text fx:id="packageNumber" layoutX="85.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Numer przesyłki" textAlignment="CENTER" wrappingWidth="553.9999970793724" />
-            <Label alignment="CENTER" contentDisplay="TOP" layoutX="91.0" layoutY="113.0" prefHeight="25.0" prefWidth="277.0" styleClass="textOption" text="Nadawca" textAlignment="CENTER" />
-            <Label alignment="CENTER" contentDisplay="TOP" layoutX="362.0" layoutY="113.0" prefHeight="25.0" prefWidth="277.0" styleClass="textOption" text="Odbiorca" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="91.0" layoutY="113.0" prefHeight="25.0" prefWidth="277.0" styleClass="textOption" text="%sender" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="362.0" layoutY="113.0" prefHeight="25.0" prefWidth="277.0" styleClass="textOption" text="%recipient" textAlignment="CENTER" />
             <Text fx:id="senderName" layoutX="91.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Imie" textAlignment="CENTER" wrappingWidth="277.00001008436084" />
             <Text fx:id="senderSurname" layoutX="91.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Nazwisko" textAlignment="CENTER" wrappingWidth="277.00001008436084" />
             <Text fx:id="senderTelephone" layoutX="91.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Numer Telefonu" textAlignment="CENTER" wrappingWidth="277.00001008436084" />
             <Text fx:id="senderStreet" layoutX="91.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Ulica i numer" textAlignment="CENTER" wrappingWidth="277.00001008436084" />
             <Text fx:id="senderCity" layoutX="91.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Miasto" textAlignment="CENTER" wrappingWidth="277.00001008436084" />
             <Text fx:id="senderVoivodeship" layoutX="91.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Województwo" textAlignment="CENTER" wrappingWidth="277.00001008436084" />
-            <Label alignment="CENTER" contentDisplay="TOP" layoutX="85.0" layoutY="325.0" prefHeight="25.0" prefWidth="554.0" styleClass="textOption" text="Planowany czas dojazdu" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="85.0" layoutY="325.0" prefHeight="25.0" prefWidth="554.0" styleClass="textOption" text="%timeOfDelivery" textAlignment="CENTER" />
             <Text fx:id="recipientName" layoutX="362.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Imie" textAlignment="CENTER" wrappingWidth="277.00001008436084" />
             <Text fx:id="recipientSurname" layoutX="362.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Nazwisko" textAlignment="CENTER" wrappingWidth="277.00001008436084" />
             <Text fx:id="recipientTelephone" layoutX="362.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="Numer Telefonu" textAlignment="CENTER" wrappingWidth="277.00001008436084" />

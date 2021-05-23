@@ -1,9 +1,7 @@
 package main.java.features;
 
-import com.sun.prism.paint.Color;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
@@ -14,7 +12,22 @@ import java.time.YearMonth;
 import java.util.List;
 
 public class Charts {
+
     //ObservableList<PieChart.Data> data,
+
+    /**
+     * Method that creates a pie chart it takes a six arguments
+     * First is the place where chart will be created
+     * Second is the title of chart
+     * Third and fourth are layout of chart
+     * Fifth and sixth is the width and height of chart
+     * @param createPlace place where chart will be created
+     * @param title title of chart
+     * @param layoutX X axis layout
+     * @param layoutY Y axis layout
+     * @param width width of chart
+     * @param height height of chart
+     */
     public static void createPieChart(AnchorPane createPlace, String title,
                                       int layoutX, int layoutY, int width, int height){
 
@@ -41,7 +54,16 @@ public class Charts {
         createPlace.getChildren().add(pieChart);
     }
 
-
+    /**
+     *
+     * @param createPlace place where chart will be created
+     * @param legend title of legends
+     * @param month used to generate chart from this month
+     * @param layoutX X axis layout
+     * @param layoutY Y axis layout
+     * @param width width of chart
+     * @param height height of chart
+     */
     public static void createBarChart(AnchorPane createPlace, String legend, String month,
                                       int layoutX, int layoutY, int width, int height){
         CategoryAxis xAxis = new CategoryAxis();
@@ -53,7 +75,6 @@ public class Charts {
         yAxis.setLabel("Ilość");
         yAxis.setTickLabelFill(Paint.valueOf("white"));
         yAxis.setId("yAxis");
-
 
         BarChart<String, Long> barChart = new BarChart(xAxis,yAxis);
 
