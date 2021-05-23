@@ -25,7 +25,7 @@ public class InterbranchCourierSettings implements Initializable {
 
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
 
-    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy","Czerwony", "Biały");
+    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony", "Biały");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,7 +50,11 @@ public class InterbranchCourierSettings implements Initializable {
 
     }
 
-
+    /**
+     * method that changes system preference of language to polish or english
+     * and changes displaying language in application
+     * @param event
+     */
     @FXML
     void changeLanguage(ActionEvent event) {
         Preference pref = new Preference();
@@ -59,7 +63,10 @@ public class InterbranchCourierSettings implements Initializable {
         else
             pref.addPreference("language","polski");
     }
-
+    /**
+     * method that adds system preference of color, which changes theme of application
+     * @param event
+     */
     @FXML
     void changeTheme(ActionEvent event) {
         Preference pref = new Preference();
