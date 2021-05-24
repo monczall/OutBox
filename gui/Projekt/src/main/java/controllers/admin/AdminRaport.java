@@ -28,8 +28,12 @@ public class AdminRaport {
     @FXML
     private AnchorPane RightPaneAnchorPane;
 
-    public void generateRaport(ActionEvent actionEvent) {
+    /**
+     * Method that generate report to PDF file from date to date choose from DataPicker
+     * @param actionEvent action event
+     */
 
+    public void generateRaport(ActionEvent actionEvent) {
 
         try {
             if (dateFrom.getValue() == null || dateTo.getValue() == null) {
@@ -57,7 +61,10 @@ public class AdminRaport {
 
     }
 
-
+    /**
+     * Method that generate report to PDF file from last day
+     * @param actionEvent action event
+     */
     public void raportLastDay(ActionEvent actionEvent) {
 
 
@@ -78,7 +85,10 @@ public class AdminRaport {
 
     }
 
-
+    /**
+     * Method that generate report to PDF file from last month
+     * @param actionEvent action event
+     */
     public void raportLastMonth(ActionEvent actionEvent) {
         LocalDate startDataValue = LocalDate.now();
         LocalDate endDataValue = startDataValue.minusMonths(1).plusDays(1);
@@ -98,7 +108,10 @@ public class AdminRaport {
 
     }
 
-
+    /**
+     * Method that generate report to PDF file from last week
+     * @param actionEvent action event
+     */
     public void raportLastWeek(ActionEvent actionEvent) {
         LocalDate startDataValue = LocalDate.now();
         LocalDate endDataValue = startDataValue.minusDays(6);

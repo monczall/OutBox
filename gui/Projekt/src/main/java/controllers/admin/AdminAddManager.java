@@ -36,11 +36,6 @@ import static main.java.dao.UsersDAO.getUsers;
 
 public class AdminAddManager implements Initializable {
 
-    @FXML
-    private Button registerExitButtonButton;
-
-    @FXML
-    private Button registerReturnButtonButton;
 
     @FXML
     private Button registerRegisterButtonButton;
@@ -101,6 +96,11 @@ public class AdminAddManager implements Initializable {
     String email;
     String name;
 
+    /**
+     * Method that adds an manager to the base
+     * Retrieves entered data from inputs and checks their correctness
+     */
+
     public void register(){
         if(!isEmpty()){
             if(isValid(registerFirstNameField.getText(), registerLastNameField.getText(),
@@ -119,7 +119,7 @@ public class AdminAddManager implements Initializable {
                             } catch (MessagingException e) {
                                 e.printStackTrace();
                             }
-                            //POMYSLNIE DODANE
+                            //IDEALLY ADDED
                             UserInfosDAO.addUserInfo(registerFirstNameField.getText(),
                                     registerLastNameField.getText(),
                                     registerEmailAddressField.getText(),
@@ -130,7 +130,7 @@ public class AdminAddManager implements Initializable {
                                     Encryption.encrypt(password), "Menadżer",
                                     AreasDAO.getAreasIdByName(registerAreaChoiceBox.getSelectionModel().getSelectedItem().toString()) );
 
-                            System.out.println("Dodano kierownika");
+                            System.out.println("Manager added");
 
                             Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton,"CHECK",
                                     App.getLanguageProperties("adminSuccessUserAdd"), 370, 86, "alertSuccess");
@@ -158,7 +158,7 @@ public class AdminAddManager implements Initializable {
                             App.getLanguageProperties("adminInvalidNumber"), 565, 86, "alertFailure");
                 }
             }else{
-                //SPRAWDZENIE BLEDOW
+                //CHECK FOR ERRORS
 
 
 
@@ -174,6 +174,11 @@ public class AdminAddManager implements Initializable {
         }
     }
 
+    /**
+     * Method that checks if all data is given and there are no empty inputs
+     * True is returned if all data is entered, otherwise false
+     * @return
+     */
     private boolean isEmpty(){
         int error = 0;
         if(registerFirstNameField.getText().isEmpty()){
@@ -215,6 +220,17 @@ public class AdminAddManager implements Initializable {
             return false;
         }
     }
+
+    /**
+     * Method that checks if all data is correctly entered
+     * True is returned if all data are correct compared to patterns, otherwise false
+     * @param firstName first name
+     * @param lastName last name
+     * @param street street
+     * @param city city
+     * @param voivodeship voivodeship
+     * @return
+     */
 
     private boolean isValid(String firstName, String lastName, String street, String city, String voivodeship){
         int error = 0;
@@ -266,6 +282,13 @@ public class AdminAddManager implements Initializable {
         }
     }
 
+    /**
+     * Method that checks if phone number is correctly entered
+     * True is returned if data are correct compared to patterns, otherwise false
+     * @param phoneNumber phone number
+     * @return
+     */
+
     private boolean isPhoneNumber(String phoneNumber){
         Pattern patternPhoneNumber = Pattern.compile("\\+?[0-9]{0,3}\\s?[0-9]{2,3}\\s?[0-9]{2,3}\\s?[0-9]{2,3}\\s?");
 
@@ -278,6 +301,12 @@ public class AdminAddManager implements Initializable {
         }
     }
 
+    /**
+     * Method that checks if email is correctly entered
+     * True is returned if data are correct compared to patterns, otherwise false
+     * @param email email
+     * @return
+     */
     private boolean isEmail(String email){
         Pattern patternEmail = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher matchEmail = patternEmail.matcher(email);
@@ -288,6 +317,13 @@ public class AdminAddManager implements Initializable {
             return false;
         }
     }
+
+    /**
+     * Method that checks if email already exist
+     * True is returned if email is in use, otherwise false
+     * @param email email
+     * @return
+     */
 
     private boolean ifExist(String email){
         List<Users> listOfUsers = getUsers();
@@ -302,7 +338,9 @@ public class AdminAddManager implements Initializable {
         return false;
 
     }
-
+    /**
+     * Method that clear inputs after area add
+     */
     private void clearData() {
         registerFirstNameField.setText(" ");
         registerLastNameField.setText(" ");
@@ -316,11 +354,17 @@ public class AdminAddManager implements Initializable {
 
     }
 
-
+    /**
+     * Method that doing "register" function after button click
+     * @param mouseEvent mouse event
+     */
     public void handleRegister(MouseEvent mouseEvent) {
         register();
     }
-
+    /**
+     * Method that doing "register" function after enter pressed
+     * @param keyEvent enter pressed
+     */
     public void handleRegisterOnEnterPressed(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.ENTER)
         {
@@ -328,15 +372,10 @@ public class AdminAddManager implements Initializable {
         }
     }
 
-    public void handleReturn(ActionEvent actionEvent) {
-        SceneManager.renderScene("login");
-    }
 
-    public void handleExit(ActionEvent actionEvent) {
-        Stage stage = (Stage) registerExitButtonButton.getScene().getWindow();
-        stage.close();
-    }
-    //FIRST NAME
+    /**
+     * Method that change css style while an error occurred
+     */
     private void errorOnFirstName(){
         //FirstNameField
         registerFirstNameField.getStyleClass().clear();
@@ -345,7 +384,10 @@ public class AdminAddManager implements Initializable {
         registerFirstNameCircle.getStyleClass().clear();
         registerFirstNameCircle.getStyleClass().add("circleError");
     }
-
+    /**
+     * Method that change css style while fields with errors are change
+     * @param keyEvent key event
+     */
     public void clearErrorsOnFirstName(KeyEvent keyEvent) {
         //FirstNameField
         registerFirstNameField.getStyleClass().clear();
@@ -354,7 +396,9 @@ public class AdminAddManager implements Initializable {
         registerFirstNameCircle.getStyleClass().clear();
         registerFirstNameCircle.getStyleClass().add("circle");
     }
-    //LAST NAME
+    /**
+     * Method that change css style while an error occurred
+     */
     private void errorOnLastName(){
         //LastNameField
         registerLastNameField.getStyleClass().clear();
@@ -363,7 +407,10 @@ public class AdminAddManager implements Initializable {
         registerLastNameCircle.getStyleClass().clear();
         registerLastNameCircle.getStyleClass().add("circleError");
     }
-
+    /**
+     * Method that change css style while fields with errors are change
+     * @param keyEvent key event
+     */
     public void clearErrorsOnLastName(KeyEvent keyEvent) {
         //LastNameField
         registerLastNameField.getStyleClass().clear();
@@ -372,7 +419,9 @@ public class AdminAddManager implements Initializable {
         registerLastNameCircle.getStyleClass().clear();
         registerLastNameCircle.getStyleClass().add("circle");
     }
-    //PHONE NUMBER
+    /**
+     * Method that change css style while an error occurred
+     */
     private void errorOnPhoneNumber(){
         //PhoneNumberField
         registerPhoneNumberField.getStyleClass().clear();
@@ -381,7 +430,10 @@ public class AdminAddManager implements Initializable {
         registerPhoneNumberCircle.getStyleClass().clear();
         registerPhoneNumberCircle.getStyleClass().add("circleError");
     }
-
+    /**
+     * Method that change css style while fields with errors are change
+     * @param keyEvent key event
+     */
     public void clearErrorsOnPhoneNumber(KeyEvent keyEvent) {
         //PhoneNumberField
         registerPhoneNumberField.getStyleClass().clear();
@@ -390,7 +442,9 @@ public class AdminAddManager implements Initializable {
         registerPhoneNumberCircle.getStyleClass().clear();
         registerPhoneNumberCircle.getStyleClass().add("circle");
     }
-    //EMAIL ADDRESS
+    /**
+     * Method that change css style while an error occurred
+     */
     private void errorOnEmailAddress(){
         //EmailAddressField
         registerEmailAddressField.getStyleClass().clear();
@@ -399,7 +453,10 @@ public class AdminAddManager implements Initializable {
         registerEmailAddressCircle.getStyleClass().clear();
         registerEmailAddressCircle.getStyleClass().add("circleError");
     }
-
+    /**
+     * Method that change css style while fields with errors are change
+     * @param keyEvent key event
+     */
     public void clearErrorsOnEmailAddress(KeyEvent keyEvent) {
         //EmailAddressField
         registerEmailAddressField.getStyleClass().clear();
@@ -408,7 +465,9 @@ public class AdminAddManager implements Initializable {
         registerEmailAddressCircle.getStyleClass().clear();
         registerEmailAddressCircle.getStyleClass().add("circle");
     }
-    //STREET
+    /**
+     * Method that change css style while an error occurred
+     */
     private void errorOnStreet(){
         //StreetField
         registerStreetField.getStyleClass().clear();
@@ -417,7 +476,10 @@ public class AdminAddManager implements Initializable {
         registerStreetCircle.getStyleClass().clear();
         registerStreetCircle.getStyleClass().add("circleError");
     }
-
+    /**
+     * Method that change css style while fields with errors are change
+     * @param keyEvent key event
+     */
     public void clearErrorsOnStreet(KeyEvent keyEvent) {
         //StreetField
         registerStreetField.getStyleClass().clear();
@@ -426,7 +488,9 @@ public class AdminAddManager implements Initializable {
         registerStreetCircle.getStyleClass().clear();
         registerStreetCircle.getStyleClass().add("circle");
     }
-    //CITY
+    /**
+     * Method that change css style while an error occurred
+     */
     private void errorOnCity(){
         //CityField
         registerCityField.getStyleClass().clear();
@@ -435,7 +499,10 @@ public class AdminAddManager implements Initializable {
         registerCityCircle.getStyleClass().clear();
         registerCityCircle.getStyleClass().add("circleError");
     }
-
+    /**
+     * Method that change css style while fields with errors are change
+     * @param keyEvent key event
+     */
     public void clearErrorsOnCity(KeyEvent keyEvent) {
         //CityField
         registerCityField.getStyleClass().clear();
@@ -444,7 +511,9 @@ public class AdminAddManager implements Initializable {
         registerCityCircle.getStyleClass().clear();
         registerCityCircle.getStyleClass().add("circle");
     }
-    //VOIVODESHIP
+    /**
+     * Method that change css style while an error occurred
+     */
     private void errorOnVoivodeship(){
         //VoivodeshipField
         registerVoivodeshipField.getStyleClass().clear();
@@ -453,7 +522,10 @@ public class AdminAddManager implements Initializable {
         registerVoivodeshipCircle.getStyleClass().clear();
         registerVoivodeshipCircle.getStyleClass().add("circleError");
     }
-
+    /**
+     * Method that change css style while fields with errors are change
+     * @param keyEvent key event
+     */
     public void clearErrorsOnVoivodeship(KeyEvent keyEvent) {
         //VoivodeshipField
         registerVoivodeshipField.getStyleClass().clear();
@@ -464,32 +536,40 @@ public class AdminAddManager implements Initializable {
     }
 
 
-    //AREA
+    /**
+     * Method that change css style while an error occurred
+     */
     private void errorOnArea(){
 
-      //  registerAreaChoiceBox.getStyleClass().clear();
-      //  registerAreaChoiceBox.getStyleClass().add("textFieldsError");
-
+        //AreaName
         registerAreaCircle.getStyleClass().clear();
         registerAreaCircle.getStyleClass().add("circleError");
     }
-
+    /**
+     * Method that change css style while fields with errors are change
+     * @param mouseEvent mouse event
+     */
     public void clearErrorOnArea(MouseEvent mouseEvent) {
 
-       // registerAreaChoiceBox.getStyleClass().clear();
-      //  registerAreaChoiceBox.getStyleClass().add("textFields");
-
+        //AreaName
         registerAreaCircle.getStyleClass().clear();
         registerAreaCircle.getStyleClass().add("circle");
     }
 
 
-
+    // Method that add areas to choiceBox
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         registerAreaChoiceBox.setItems(AreasDAO.getAreasName());
     }
 
+    /**
+     * Method that send email to new created manager with generated password
+     * @param recipient e-mail recipient
+     * @param firstName first name
+     * @param password password
+     * @throws MessagingException sending email throw
+     */
     public static void sendEmail(String recipient,
                                  String firstName,
                                  String password
@@ -524,6 +604,15 @@ public class AdminAddManager implements Initializable {
         System.out.println("Message sent successfully");
     }
 
+    /**
+     * Method that prepare pattern of email that will be send
+     * @param session session
+     * @param outBoxEmailAccount new email
+     * @param recipient e-mail recipient
+     * @param firstName first name
+     * @param password password
+     * @return
+     */
     private static Message prepareMessage(Session session,
                                           String outBoxEmailAccount,
                                           String recipient,

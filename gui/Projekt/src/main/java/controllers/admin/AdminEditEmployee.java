@@ -51,22 +51,43 @@ public class AdminEditEmployee implements Initializable {
     @FXML
     private TextField parametr;
 
+    /**
+     * Method that return userID
+     * @return
+     */
     public static int getUserID() {
         return userID;
     }
 
+    /**
+     * Method that set userID
+     * @param userID
+     */
     public static void setUserID(int userID) {
         AdminEditEmployee.userID = userID;
     }
 
+    /**
+     * Method that return userInfoID
+     * @return
+     */
     public static int getUserInfoID() {
         return userInfoID;
     }
 
+    /**
+     * Method that set userInfoID
+     * @param userInfoID userInfoID
+     */
     public static void setUserInfoID(int userInfoID) {
         AdminEditEmployee.userInfoID = userInfoID;
     }
 
+    /**
+     * Method that move as to editing employee scene after chose an employee
+     * @param mouseEvent mose event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void showEdit(MouseEvent mouseEvent) throws IOException {
         if (table.getSelectionModel().getSelectedIndex() == -1) {
             Alerts.createCustomAlert(edit, editTable, "WARNING",
@@ -96,6 +117,10 @@ public class AdminEditEmployee implements Initializable {
         table.getSelectionModel().select(0);
     }
 
+    /**
+     * Method that after typing character will be searching any parameters from base
+     * @param event key event
+     */
     @FXML
     void search(KeyEvent event) {
         table.getItems().clear();

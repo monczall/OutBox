@@ -455,6 +455,22 @@
     -fx-alignment: center;
 }
 
+.textFieldsSettingsPackegeError{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 9;
+    -fx-border-color: RED;
+    -fx-border-width: 3;
+    -fx-border-radius: 7;
+    -fx-min-width: 100;
+    -fx-pref-width: 100;
+    -fx-max-width: 100;
+    -fx-min-height: 35;
+    -fx-pref-height: 35;
+    -fx-max-height: 35;
+    -fx-alignment: center;
+
+}
+
 
 /*-------------MENU - EDIT - LIST-------------*/
 
