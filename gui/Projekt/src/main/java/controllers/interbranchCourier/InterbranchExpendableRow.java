@@ -42,9 +42,6 @@ public class InterbranchExpendableRow implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
-
         ObservableList<PackageStatus> ol = FXCollections.observableArrayList(PackageStatus.values());
         ol.remove(0, 2);
         ol.remove(3, 10);
@@ -57,7 +54,6 @@ public class InterbranchExpendableRow implements Initializable {
         }else{
             setStatusReturned("");
         }
-
 
         int area = PackagesDAO.getPackagesById(InterbranchCourierSecond.getPackageId()).get(0).getUsersByCourierId().getAreaId();
 
@@ -94,7 +90,10 @@ public class InterbranchExpendableRow implements Initializable {
 
         }
     }
-
+    /**
+     * method that changes status of package in courier panel after each change in combo box
+     * @param event
+     */
     @FXML
     void setStatus(ActionEvent event) {
         setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().toString());

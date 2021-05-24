@@ -50,7 +50,11 @@ public class CourierSettings implements Initializable {
 
     }
 
-
+    /**
+     * method that changes system preference of language to polish or english
+     * and changes displaying language in application
+     * @param event
+     */
     @FXML
     void changeLanguage(ActionEvent event) {
         Preference pref = new Preference();
@@ -60,6 +64,10 @@ public class CourierSettings implements Initializable {
             pref.addPreference("language","polski");
     }
 
+    /**
+     * method that adds system preference of color, which changes theme of application
+     * @param event
+     */
     @FXML
     void changeTheme(ActionEvent event) {
         Preference pref = new Preference();

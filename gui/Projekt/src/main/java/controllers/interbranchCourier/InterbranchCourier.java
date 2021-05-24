@@ -96,20 +96,36 @@ public class InterbranchCourier implements Initializable {
             e.printStackTrace();
         }
     }
-
+    /**
+     * method that opens home panel after clicking button
+     * @param actionEvent
+     * @throws IOException
+     */
     public void openHome(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
     }
 
+    /**
+     * method that opens main panel after clicking button
+     * @param actionEvent
+     * @throws IOException
+     */
     public void openSecond(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierSecond.fxml", mainWindow);
     }
 
-
+    /**
+     * method that opens settings panel after clicking button
+     * @param actionEvent
+     * @throws IOException
+     */
     public void openSettings(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierSettings.fxml", mainWindow);
     }
-
+    /**
+     * method that blurs application and creating logout confirmation, that slides from top
+     * @param event
+     */
     @FXML
     void logout(ActionEvent event) {
         Animations.moveByY(alertPane, +500, 0.3);
@@ -118,14 +134,20 @@ public class InterbranchCourier implements Initializable {
         window.setDisable(true);
         window.setEffect(gaussianBlur);
     }
-
+    /**
+     * if button "no" is clicked, then logout confirmation slides to top and disappearing
+     * @param event
+     */
     @FXML
     void logoutNo(ActionEvent event) {
         Animations.moveByY(alertPane, -500, 0.3);
         window.setEffect(null);
         window.setDisable(false);
     }
-
+    /**
+     *  if button "yes" is clicked, then returning to login panel
+     * @param event
+     */
     @FXML
     void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");

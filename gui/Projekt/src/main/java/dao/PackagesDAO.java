@@ -57,7 +57,7 @@ public class PackagesDAO {
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, UI.name, UI.surname," +
                 " UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email, " +
-                "P.userInfosByUserInfoId.voivodeship) " +
+                "P.userInfosByUserInfoId.voivodeship, P.userInfosByUserInfoId.name) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE P.id = PH.packageId " +
                 "AND P.userInfoId = UI.id " +
@@ -87,7 +87,7 @@ public class PackagesDAO {
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, UI.name, UI.surname, " +
                 "UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email, " +
-                "P.userInfosByUserInfoId.voivodeship) " +
+                "P.userInfosByUserInfoId.voivodeship, P.userInfosByUserInfoId.name) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE P.id = PH.packageId " +
                 "AND P.courierId = :courierId " +
@@ -159,8 +159,8 @@ public class PackagesDAO {
 
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, " +
-                "UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, " +
-                "UI.city, PH.status, P.additionalComment, P.email) " +
+                "P.usersByUserId.userInfosByUserInfoId.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, " +
+                "UI.city, PH.status, P.additionalComment, P.email, UI.voivodeship, P.userInfosByUserInfoId.name) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE (P.userId = :id " +
                 "OR P.email = :email) " +
@@ -198,8 +198,9 @@ public class PackagesDAO {
 
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, " +
-                "UI.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, " +
-                "UI.city, PH.status, P.additionalComment, P.email) " +
+                "P.usersByUserId.userInfosByUserInfoId.name, UI.surname, UI.phoneNumber, UI.streetAndNumber, " +
+                "UI.city, PH.status, P.additionalComment, P.email, " +
+                "UI.voivodeship, P.userInfosByUserInfoId.name) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE (P.userId = :id " +
                 "OR P.email = :email) " +
@@ -298,7 +299,9 @@ public class PackagesDAO {
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.id, P.packageNumber, P.usersByUserId.userInfosByUserInfoId.name, P" +
                 ".usersByUserId.userInfosByUserInfoId.surname, PH.status, P.packageTypeByTypeId.sizeName," +
-                " P.userInfosByUserInfoId.name, P.userInfosByUserInfoId.surname, P.userInfosByUserInfoId.voivodeship) " +
+                " P.userInfosByUserInfoId.name, P.userInfosByUserInfoId.surname, P.usersByUserId" +
+                ".userInfosByUserInfoId" +
+                ".voivodeship) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE P.id = PH.packageId " +
                 "AND P.courierId = :courierId " +

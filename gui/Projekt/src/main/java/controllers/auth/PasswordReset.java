@@ -209,6 +209,18 @@ public class PasswordReset {
         }
     }
 
+    /**
+     * <p>
+     *     Method used to start procedure of sending email to user, that
+     *     wants to reset password. It sends prepared message to user.
+     * </p>
+     * @param recipient string representing email address of user,
+     *                 that is receiving email
+     * @param firstName string representing first name of user,
+     *                  that is receiving email
+     * @param verificationCode generated 4-digit string
+     * @throws MessagingException in case of error
+     */
     public static void sendEmail(String recipient,
                                  String firstName,
                                  String verificationCode
@@ -243,6 +255,17 @@ public class PasswordReset {
         System.out.println("Message sent successfully");
     }
 
+    /**
+     * <p>
+     *     Method used to prepare message that is going to be send to user.
+     * </p>
+     * @param session session that is held after login
+     * @param outBoxEmailAccount sender's email
+     * @param recipient receiver's email
+     * @param firstName receiver's first name
+     * @param verificationCode code sent to user
+     * @return returns message or null
+     */
     private static Message prepareMessage(Session session,
                                           String outBoxEmailAccount,
                                           String recipient,
@@ -279,6 +302,11 @@ public class PasswordReset {
         verifyCode();
     }
 
+    /**
+     * <p>
+     *     Method that verifies if user passed correct verification code.
+     * </p>
+     */
     public void verifyCode() {
         if (passwordResetVerificationCodeField.getText().equals(verificationCode)) {
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
@@ -343,6 +371,17 @@ public class PasswordReset {
         }
     }
 
+    /**
+     * <p>
+     *     Method verifies if passed strings are correct passwords.
+     *     Passwords should have at least: one small letter, one big letter,
+     *     one digit, six chars and special character. Typed in passwords should
+     *     be the same.
+     * </p>
+     * @param password1 user's password
+     * @param password2 repeated password
+     * @return returns boolean value
+     */
     public boolean isValid(String password1, String password2) {
         boolean passwordError = false, passwordNotTheSameError = false;
         int error = 0;
@@ -394,6 +433,12 @@ public class PasswordReset {
         }
     }
 
+    /**
+     * <p>
+     *     Method changes visual appearance of section that shows user
+     *     if typed in password meets its requirements.
+     * </p>
+     */
     private void passwordRequirements() {
         Pattern sixChars = Pattern.compile(".{6,}");
         Pattern smallLetter = Pattern.compile(".*[a-z]+.*");
