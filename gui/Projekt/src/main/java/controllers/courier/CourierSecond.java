@@ -92,6 +92,9 @@ public class CourierSecond implements Initializable {
         CourierSecond.status = status;
     }
 
+    /**
+     * method that clears table and populating it again
+     */
     public void updateTable() {
         table.getItems().clear();
         table.setItems(PackagesDAO.getPackagesWithStatusById(Login.getUserID()));
@@ -112,7 +115,10 @@ public class CourierSecond implements Initializable {
         updateTable();
     }
 
-
+    /**
+     * this method searches for inserted word in whole table after every key released
+     * @param event
+     */
     @FXML
     void search(KeyEvent event) {
         table.getItems().clear();
@@ -131,6 +137,11 @@ public class CourierSecond implements Initializable {
         }
     }
 
+    /**
+     * method that loads expanded row to table and populating it with data from database
+     * @param arg
+     * @return Pane with information of package
+     */
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
             int selectedIndex = arg.getTableRow().getIndex();
@@ -147,6 +158,11 @@ public class CourierSecond implements Initializable {
             button.setPrefHeight(25);
             button.setPrefWidth(90);
             button.setOnAction(new EventHandler<ActionEvent>() {
+                /**
+                 * method which updates status in packages and if specified conditions are
+                 * fulfilled then updates courier which is assigned to package
+                 * @param event
+                 */
                 @Override
                 public void handle(ActionEvent event) {
                     String status = ExpendableRow.getStatusReturned();
@@ -166,10 +182,8 @@ public class CourierSecond implements Initializable {
                                 }
                             }
                         }
-
                         updateTable();
                     }
-
                 }
             });
 

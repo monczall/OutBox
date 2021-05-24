@@ -59,12 +59,14 @@ public class ManagerCouriersAdd implements Initializable {
     @FXML
     private ComboBox<String> regionName;
 
-    List<UserInfos> dataUserInfos;
     List<Users> dataUser;
     UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
 
     private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów","Rzeszów Rejtana");
 
+    /**
+     * The method responsible for adding the courier to the database
+     */
     public void addCourier(MouseEvent mouseEvent) {
 
         if(name.getText().toString().equals("") ||
@@ -112,6 +114,10 @@ public class ManagerCouriersAdd implements Initializable {
         }
     }
 
+    /**
+     * The method validates the entered data
+     * @return boolean
+     */
     boolean validation(){
 
         boolean status = true;
@@ -174,16 +180,27 @@ public class ManagerCouriersAdd implements Initializable {
         return status;
     }
 
+    /**
+     * If textfield is valid it is set to the default color
+     * @param name textfield
+     */
     void goodValidation(TextField name){
         name.getStyleClass().clear();
         name.getStyleClass().add("inputBoxCourier");
     }
 
+    /**
+     * If textfield is incorrect it is set to red
+     * @param name textfield
+     */
     void errorValidation(TextField name){
         name.getStyleClass().clear();
         name.getStyleClass().add("inputBoxCourierError");
     }
 
+    /**
+     * Button that closes the window confirming adding a courier
+     */
     @FXML
     void confirmButton(MouseEvent event) {
         name.setText("");
@@ -195,14 +212,21 @@ public class ManagerCouriersAdd implements Initializable {
         alertPane.setVisible(false);
     }
 
+    /**
+     * The method responsible for sending the generated password to the e-mail address provided
+     * @param recipient e-mail recipient
+     * @param firstName name recipient
+     * @param password password recipient
+     * @throws MessagingException
+     */
     public static void sendEmail(String recipient,
                                  String firstName,
                                  String password
     ) throws MessagingException {
-        System.out.println("Starting process of sending email");
 
         Properties properties = new Properties();
 
+        //Email setting
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -210,6 +234,7 @@ public class ManagerCouriersAdd implements Initializable {
 
         String outBoxEmailAccount = "outbox2137@gmail.com";
         String outBoxEmailPassword = "zaq1@WSX";
+
 
         Session session = Session.getInstance(properties,
                 new Authenticator() {
@@ -220,6 +245,7 @@ public class ManagerCouriersAdd implements Initializable {
                     }
                 });
 
+        //Message setting
         Message message = prepareMessage(session,
                 outBoxEmailAccount,
                 recipient,
@@ -227,9 +253,17 @@ public class ManagerCouriersAdd implements Initializable {
                 password);
 
         Transport.send(message);
-        System.out.println("Message sent successfully");
     }
 
+    /**
+     * The method responsible for preparing the message
+     * @param session
+     * @param outBoxEmailAccount sender e-mail
+     * @param recipient e-mail recipient
+     * @param firstName name recipient
+     * @param password password recipient
+     * @return null
+     */
     private static Message prepareMessage(Session session,
                                           String outBoxEmailAccount,
                                           String recipient,
@@ -251,6 +285,7 @@ public class ManagerCouriersAdd implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //set textfields to defualt
         goodValidation(name);
         goodValidation(surname);
         goodValidation(street);

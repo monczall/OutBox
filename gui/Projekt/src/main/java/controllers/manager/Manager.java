@@ -22,6 +22,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ *
+ */
+
 public class Manager implements Initializable {
 
     @FXML
@@ -53,28 +57,47 @@ public class Manager implements Initializable {
 
     boolean hamburgerClicked = false;
 
+    //Logged in user data loading
     UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
 
+    /**
+     * Loading the home panel
+     */
     public void openHome(MouseEvent actionEvent) throws IOException {
         SceneManager.renderScene("manager");
     }
 
+    /**
+     * Loading the courier management panel
+     */
     public void openCouriers(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/manager/managerCouriers.fxml", mainWindow);
     }
 
+    /**
+     * Loading the panel for previewing packages
+     */
     public void openPackages(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/manager/managerPackages.fxml", mainWindow);
     }
 
+    /**
+     * Loading the panel with settings
+     */
     public void openSettings(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/manager/managerSettings.fxml", mainWindow);
     }
 
+    /**
+     * Loading the report management panel
+     */
     public void openRaports(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/manager/managerRaports.fxml", mainWindow);
     }
 
+    /**
+     * The logout box is loaded
+     */
     @FXML
     public void logout(MouseEvent mouseEvent) {
         Animations.moveByY(alertPane,+500,0.3);
@@ -84,6 +107,9 @@ public class Manager implements Initializable {
         window.setEffect(gaussianBlur);
     }
 
+    /**
+     * Cancel login
+     */
     @FXML
     public void logoutNo(ActionEvent event) {
         Animations.moveByY(alertPane,-500,0.3);
@@ -91,6 +117,9 @@ public class Manager implements Initializable {
         window.setDisable(false);
     }
 
+    /**
+     * Accept logout and load login scene
+     */
     @FXML
     public void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
@@ -98,10 +127,11 @@ public class Manager implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        System.out.println(ui.getName());
+
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
 
+        //If hamburger button is clicked then menu slides in and transition last for 0.5s
         hamburger.setOnMouseClicked(event -> {
             if(hamburgerClicked == false) {
 
