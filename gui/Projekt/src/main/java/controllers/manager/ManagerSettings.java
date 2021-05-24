@@ -33,6 +33,7 @@ public class ManagerSettings implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //set language
         comboLanguage.setItems(languages);
         if(Preference.readPreference("language").equals("english")){
             comboLanguage.setValue(languages.get(1));
@@ -41,6 +42,7 @@ public class ManagerSettings implements Initializable {
             comboLanguage.setValue(languages.get(0));
         }
 
+        //set colors
         comboColor.setItems(colors);
         if(Preference.readPreference("color").equals("orange")){
             comboColor.setValue(colors.get(0));
@@ -54,7 +56,9 @@ public class ManagerSettings implements Initializable {
 
     }
 
-
+    /**
+     * change the language
+     */
     @FXML
     void changeLanguage(ActionEvent event) {
         Preference pref = new Preference();
@@ -64,11 +68,12 @@ public class ManagerSettings implements Initializable {
             pref.addPreference("language","polski");
     }
 
+    /**
+     * change of theme
+     */
     @FXML
     void changeTheme(ActionEvent event) {
         Preference pref = new Preference();
-
-
 
         if (comboColor.getValue().equals("Pomarańczowy") || comboColor.getValue().equals("Orange")) {
             pref.addPreference("color", "orange");

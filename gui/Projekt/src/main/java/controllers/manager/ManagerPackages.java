@@ -31,10 +31,18 @@ public class ManagerPackages implements Initializable {
     private static int packageId;
     private static String status;
 
+    /**
+     * reurn package id
+     * @return id
+     */
     public static int getPackageId() {
         return packageId;
     }
 
+    /**
+     * set package id
+     * @param packageId
+     */
     public static void setPackageId(int packageId) {
         ManagerPackages.packageId = packageId;
     }
@@ -64,30 +72,57 @@ public class ManagerPackages implements Initializable {
     @FXML
     private TextField searchField;
 
+    /**
+     * return
+     * @return id
+     */
     public static int getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         ManagerPackages.id = id;
     }
 
+    /**
+     *
+     * @return comment
+     */
     public static String getComment() {
         return comment;
     }
 
+    /**
+     * set comment
+     * @param comment
+     */
     public static void setComment(String comment) {
         ManagerPackages.comment = comment;
     }
 
+    /**
+     *
+     * @return status
+     */
     public static String getStatus() {
         return status;
     }
 
+    /**
+     * set status
+     * @param status
+     */
     public static void setStatus(String status) {
         ManagerPackages.status = status;
     }
 
+    /**
+     * update data from table
+     */
     public void updateTable()
     {
         table.getItems().clear();
@@ -97,6 +132,8 @@ public class ManagerPackages implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        //set data in table
         table.setPlaceholder(new Label(App.getLanguageProperties("noDataToDisplay")));
         packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
@@ -112,6 +149,9 @@ public class ManagerPackages implements Initializable {
         System.out.println(PackagesDAO.getPackagesWithStatus().get(0).getStatus());
     }
 
+    /**
+     *
+     */
     @FXML
     void search(KeyEvent event) {
         table.getItems().clear();
@@ -130,6 +170,11 @@ public class ManagerPackages implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param arg
+     * @return pane
+     */
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
             table.getSelectionModel().select(arg.getTableRow().getIndex());

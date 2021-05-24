@@ -103,6 +103,10 @@ public class ExpendableRow implements Initializable {
                 ifPresent(i -> changeStatus.getSelectionModel().select(i));
     }
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     void updateStatus(ActionEvent event) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

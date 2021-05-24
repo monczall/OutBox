@@ -63,13 +63,18 @@ public class ManagerCouriersDelete implements Initializable {
     List<Users> dataUser;
     int dataIndex = 0;
 
+    /**
+     * Confirmation of removing the courier
+     */
     @FXML
     public void confirmDeleteCourierButton(javafx.event.ActionEvent actionEvent) {
         UserInfosDAO.deleteUser(dataUserInfos.get(dataIndex).getId());
         alertPane.setVisible(true);
     }
 
-
+    /**
+     * The method responsible for finding a courier with the given data
+     */
     public void findCourier(MouseEvent mouseEvent) {
 
         if(name.getText().toString().equals("") &&
@@ -84,6 +89,9 @@ public class ManagerCouriersDelete implements Initializable {
         }
     }
 
+    /**
+     *  Setting the requested data
+     */
     public void setDataLabel(){
         dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
         fullName.setText(dataUserInfos.get(dataIndex).getName() + " "+dataUserInfos.get(dataIndex).getSurname());
@@ -94,26 +102,30 @@ public class ManagerCouriersDelete implements Initializable {
         email.setText(dataUser.get(0).getEmail());
         String role = dataUser.get(0).getRole();
 
+        //If there is more than one courier, it shows buttons to switch between them
         if(dataUserInfos.size() > 1 && (role.equals("Kurier")) && (dataUserInfos.get(dataIndex).getVoivodeship().equals(ui.getVoivodeship())))
         {
             paneResults.setVisible(true);
             button1.setVisible(true);
             button2.setVisible(true);
             noDataText.setVisible(false);
-        }
+        }// if only one courier
         else if(dataUserInfos.size() == 1 && (role.equals("Kurier")) && (dataUserInfos.get(dataIndex).getVoivodeship().equals(ui.getVoivodeship())))
         {
             button1.setVisible(false);
             button2.setVisible(false);
             paneResults.setVisible(true);
             noDataText.setVisible(false);
-        }
+        } //If not found, display a message
         else{
             paneResults.setVisible(false);
             noDataText.setVisible(true);
         }
     }
 
+    /**
+     * button to change the courier
+     */
     @FXML
     void buttonBack(MouseEvent event) {
         dataIndex--;
@@ -124,6 +136,9 @@ public class ManagerCouriersDelete implements Initializable {
         setDataLabel();
     }
 
+    /**
+     * button to change the courier
+     */
     @FXML
     void buttonNext(MouseEvent event) {
         dataIndex++;
@@ -134,6 +149,9 @@ public class ManagerCouriersDelete implements Initializable {
         setDataLabel();
     }
 
+    /**
+     * Window confirming the removal of the courier and setting the default settings
+     */
     @FXML
     void confirmButton(MouseEvent event) {
         paneResults.setVisible(false);
@@ -148,6 +166,8 @@ public class ManagerCouriersDelete implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //set default visible
         button1.setVisible(false);
         button2.setVisible(false);
         paneResults.setVisible(false);
