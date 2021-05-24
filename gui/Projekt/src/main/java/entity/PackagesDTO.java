@@ -11,7 +11,7 @@ public class PackagesDTO {
     private String phoneNumber;
     private String streetAndNumber;
     private String city;
-    private final String status;
+    private String status;
     private String additionalComment;
     private String email;
     private String sizeName;
@@ -113,4 +113,8 @@ public class PackagesDTO {
     }
 
     public String getVoivodeship() { return voivodeship; }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
