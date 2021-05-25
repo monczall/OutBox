@@ -85,6 +85,9 @@ public class ManagerCouriersEdit implements Initializable {
     List<Users> dataUser;
     int dataIndex = 0;
 
+    /**
+     * The method responsible for finding a courier with the given data
+     */
     public void findCourier(MouseEvent mouseEvent) {
 
         if(name.getText().toString().equals("") &&
@@ -96,6 +99,9 @@ public class ManagerCouriersEdit implements Initializable {
         }
     }
 
+    /**
+     * The method responsible for saving the data
+     */
     @FXML
     void saveEditCourier(MouseEvent event) {
 
@@ -127,6 +133,10 @@ public class ManagerCouriersEdit implements Initializable {
         }
     }
 
+    /**
+     * Method validates the entered data
+     * @return boolean
+     */
     boolean validation(){
 
         boolean status = true;
@@ -165,6 +175,9 @@ public class ManagerCouriersEdit implements Initializable {
         return status;
     }
 
+    /**
+     * Method responsible for setting the data
+     */
     public void setDataEdit(){
         dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
         nameInput.setText(dataUserInfos.get(dataIndex).getName());
@@ -176,26 +189,30 @@ public class ManagerCouriersEdit implements Initializable {
         inputEmail.setText(dataUser.get(0).getEmail());
         String role = dataUser.get(0).getRole();
 
+        //If there is more than one courier, it shows buttons to switch between them
         if(dataUserInfos.size() > 1 && role.equals("Kurier") && (dataUserInfos.get(dataIndex).getVoivodeship().equals(ui.getVoivodeship())))
         {
             dataPane.setVisible(true);
             button1.setVisible(true);
             button2.setVisible(true);
             notDataLabel.setVisible(false);
-        }
+        }// if only one courier
         else if(dataUserInfos.size() == 1 && (role.equals("Kurier")) && (dataUserInfos.get(dataIndex).getVoivodeship().equals(ui.getVoivodeship())))
         {
             button1.setVisible(false);
             button2.setVisible(false);
             dataPane.setVisible(true);
             notDataLabel.setVisible(false);
-        }
+        }//If not found, display a message
         else{
             dataPane.setVisible(false);
             notDataLabel.setVisible(true);
         }
     }
 
+    /**
+     * button to change the courier
+     */
     @FXML
     void buttonBack(MouseEvent event) {
         dataIndex--;
@@ -206,6 +223,9 @@ public class ManagerCouriersEdit implements Initializable {
         setDataEdit();
     }
 
+    /**
+     * button to change the courier
+     */
     @FXML
     void buttonNext(MouseEvent event) {
         dataIndex++;
@@ -216,6 +236,9 @@ public class ManagerCouriersEdit implements Initializable {
         setDataEdit();
     }
 
+    /**
+     * Window confirming the removal of the courier and setting the default settings
+     */
     @FXML
     void confirmButton(MouseEvent event) {
         dataPane.setVisible(false);

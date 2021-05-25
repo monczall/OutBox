@@ -35,6 +35,14 @@ public class PdfGeneratorManager {
     private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 12,
             Font.BOLD);
 
+    /**
+     *
+     * @param start
+     * @param end
+     * @param display
+     * @throws IOException
+     * @throws DocumentException
+     */
     public static void createPdf(Date start, Date end, boolean display) throws IOException, DocumentException {
         File file = new File(FILE);
         file.getParentFile().mkdirs();
@@ -45,6 +53,7 @@ public class PdfGeneratorManager {
         Font font = new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD, GrayColor.GRAYWHITE);
         BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
         Font tableFont = new Font(baseFont);
+        smallBold = new Font(baseFont, 12, Font.BOLD);
 
         Document document = new Document(PageSize.A4.rotate());
         PdfWriter.getInstance(document, new FileOutputStream(dest));
@@ -115,13 +124,13 @@ public class PdfGeneratorManager {
         Paragraph number = new Paragraph(App.getLanguageProperties("numberOfPackages"), smallBold);
         document.add(number);
 
-        Paragraph small = new Paragraph(App.getLanguageProperties("small")+": " + smallCounter, smallFont);
+        Paragraph small = new Paragraph(App.getLanguageProperties("small")+": " + smallCounter, tableFont);
         document.add(small);
 
-        Paragraph medium = new Paragraph(App.getLanguageProperties("medium")+": " + midCounter, smallFont);
+        Paragraph medium = new Paragraph(App.getLanguageProperties("medium")+": " + midCounter, tableFont);
         document.add(medium);
 
-        Paragraph big = new Paragraph(App.getLanguageProperties("big")+": " + bigCounter, smallFont);
+        Paragraph big = new Paragraph(App.getLanguageProperties("big")+": " + bigCounter, tableFont);
         document.add(big);
 
         Paragraph empty = new Paragraph();
@@ -168,6 +177,12 @@ public class PdfGeneratorManager {
         document.close();
     }
 
+    /**
+     *
+     * @param text
+     * @param font
+     * @return
+     */
     private PdfPCell createCell(String text, Font font){
         PdfPCell cell = new PdfPCell(new Phrase(text, font));
         cell.setBackgroundColor(GrayColor.GRAYBLACK);
@@ -175,6 +190,11 @@ public class PdfGeneratorManager {
         return cell;
     }
 
+    /**
+     * 
+     * @param paragraph
+     * @param number
+     */
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
             paragraph.add(new Paragraph(" "));

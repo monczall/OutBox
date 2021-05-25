@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.PackageStatus;
+import main.java.entity.PackagesDTO;
 import main.java.entity.UserInfos;
 
 import java.io.IOException;
@@ -61,8 +62,7 @@ public class ExpendableRow implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserInfos ui = new UserInfos();
-        ui = UsersDAO.readUserInfoById(CourierSecond.getId()).get(0);
+        UserInfos ui = UsersDAO.readUserInfoById(CourierSecond.getId()).get(0);
         city.setText(ui.getCity());
         name.setText(ui.getName());
         surname.setText(ui.getSurname());
@@ -78,14 +78,18 @@ public class ExpendableRow implements Initializable {
         IntStream.range(0, ol.size()).filter(i -> ol.get(i).toString().contains(status)).findFirst().
                 ifPresent(i -> changeStatus.getSelectionModel().select(i));
         if(changeStatus.getSelectionModel().getSelectedIndex() != -1) {
-            setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().toString());
+            setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().displayName());
         }else{
             setStatusReturned("");
         }
     }
 
+    /**
+     * method that changes status of package in courier panel after each change in combo box
+     * @param event
+     */
     @FXML
     void setStatus(ActionEvent event) {
-        setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().toString());
+        setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().displayName());
     }
 }

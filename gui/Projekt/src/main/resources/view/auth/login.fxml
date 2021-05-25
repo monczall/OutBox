@@ -239,21 +239,6 @@
                         prefHeight="35.0" prefWidth="250.0"
                         styleClass="loginButton" text="%authLogin"
                         AnchorPane.topAnchor="450.0"/>
-                <Button layoutX="46.0" layoutY="500.0" mnemonicParsing="false"
-                        onMouseClicked="#handleUser"
-                        styleClass="createAccountButton" text="Uzytkownik"/>
-                <Button layoutX="165.0" layoutY="500.0" mnemonicParsing="false"
-                        onMouseClicked="#handleCourier"
-                        styleClass="createAccountButton" text="Kurier"/>
-                <Button layoutX="165.0" layoutY="547.0" mnemonicParsing="false"
-                        onMouseClicked="#handleCourier2"
-                        styleClass="createAccountButton" text="Kurier2"/>
-                <Button layoutX="46.0" layoutY="547.0" mnemonicParsing="false"
-                        onMouseClicked="#handleManager"
-                        styleClass="createAccountButton" text="Kierownik"/>
-                <Button layoutX="46.0" layoutY="590.0" mnemonicParsing="false"
-                        onMouseClicked="#handleAdmin"
-                        styleClass="createAccountButton" text="Administrator"/>
             </children>
         </AnchorPane>
     </children>

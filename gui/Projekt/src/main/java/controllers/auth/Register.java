@@ -1,7 +1,10 @@
 package main.java.controllers.auth;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -15,13 +18,18 @@ import main.java.dao.UserInfosDAO;
 import main.java.entity.Users;
 import main.java.features.Alerts;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static main.java.dao.UsersDAO.getUsers;
 
-public class Register {
+public class Register implements Initializable {
+
+    @FXML
+    public ComboBox<String> registerVoivodeshipField;
 
     @FXML
     private AnchorPane loginRightPaneAnchorPane;
@@ -75,9 +83,6 @@ public class Register {
     private Circle registerVoivodeshipCircle;
 
     @FXML
-    private TextField registerVoivodeshipField;
-
-    @FXML
     private Circle registerPasswordCircle;
 
     @FXML
@@ -129,6 +134,19 @@ public class Register {
     @FXML
     private Label registerSamePasswordsRequirement;
 
+    ObservableList<String> voivodeships =
+            FXCollections.observableArrayList( "Dolnoslaskie",
+                    "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Lodzkie",
+                    "Malopolskie",  "Mazowieckie", "Opolskie",  "Podkarpackie",
+                    "Podlaskie",  "Pomorskie",  "Slaskie",  "Swietokrzyskie",
+                    "Warminsko-mazurskie",  "Wielkopolskie",
+                    "Zachodniopomorskie");
+
+    public void initialize(URL url, ResourceBundle rb) {
+        registerVoivodeshipField.setItems(voivodeships);
+        registerVoivodeshipField.setValue("Dolnoslaskie");
+    }
+
     public void register(){
         registerRegisterButtonButton.setDisable(true);
         if(isValid(registerFirstNameField.getText(),
@@ -137,7 +155,7 @@ public class Register {
                 registerEmailAddressField.getText(),
                 registerStreetField.getText(),
                 registerCityField.getText(),
-                registerVoivodeshipField.getText(),
+                registerVoivodeshipField.getValue(),
                 registerPasswordField.getText(),
                 registerRepeatPasswordField.getText())){
             boolean emailExists = false;
@@ -198,7 +216,7 @@ public class Register {
                 String phoneNumber = registerPhoneNumberField.getText();
                 String street = registerStreetField.getText();
                 String city = registerCityField.getText();
-                String voivodeship = registerVoivodeshipField.getText();
+                String voivodeship = registerVoivodeshipField.getValue();
                 String password = Encryption.encrypt(
                         registerPasswordField.getText());
                 String role = "Klient";
@@ -229,6 +247,32 @@ public class Register {
         registerRegisterButtonButton.setDisable(false);
     }
 
+    /**
+     * <p>
+     *     Method verifies if passed strings meets requirements that are set
+     *     in patterns.
+     *     First name: contains letters only. Length: [2-30]
+     *     Last name: contains letters only. Length: [2-30]
+     *     Phone number: contains digits only. Length: [9-11]
+     *     Email: contains letters and digits and special chars.
+     *     Street and number: contains letters and digits. Length: [3-131]
+     *     City: contains letters only. Length: [2-120]
+     *     Voivodeship: contains letters, and certain special chars. Length: [7-120]
+     *     Passwords: one small letter, one big letter,
+     *     one digit, six chars and special character. Typed in passwords should
+     *     be the same.
+     * </p>
+     * @param firstName string passed by user
+     * @param lastName string passed by user
+     * @param phoneNumber string passed by user
+     * @param email string passed by user
+     * @param street string passed by user
+     * @param city string passed by user
+     * @param voivodeship string passed by user
+     * @param password string passed by user
+     * @param password2 string passed by user
+     * @return returns boolean value
+     */
     public boolean isValid(String firstName, String lastName,
                             String phoneNumber, String email, String street,
                             String city, String voivodeship, String password,

@@ -14,11 +14,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import main.java.App;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.*;
+import main.java.features.Preference;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class CourierSecond implements Initializable {
     private static String comment;
     private static int packageId;
     private static String status;
-    private final ObservableList<PackagesDTO> packages = PackagesDAO.getPackagesWithStatus();
+    private final ObservableList<PackagesDTO> packages = changeLanguage();
     private Pane pane;
 
     @FXML
@@ -92,9 +94,29 @@ public class CourierSecond implements Initializable {
         CourierSecond.status = status;
     }
 
+
+    /**
+     * method that clears table and populating it again
+     */
     public void updateTable() {
+        ObservableList<PackagesDTO> statuses = changeLanguage();
         table.getItems().clear();
-        table.setItems(PackagesDAO.getPackagesWithStatusById(Login.getUserID()));
+        table.setItems(statuses);
+    }
+
+    private ObservableList<PackagesDTO> changeLanguage(){
+        ObservableList<PackagesDTO> statuses = PackagesDAO.getPackagesWithStatusById(Login.getUserID());
+        PackageStatus[] status = PackageStatus.values();
+        if (Preference.readPreference("language").equals("english")) {
+            for (int i = 0; i < statuses.size(); i++) {
+                for (int j = 0; j < status.length; j++) {
+                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
+                        statuses.get(i).setStatus(status[j].engDisplayName());
+                    }
+                }
+            }
+        }
+        return statuses;
     }
 
     @Override
@@ -110,9 +132,15 @@ public class CourierSecond implements Initializable {
         telephone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         table.getColumns().add(expanderRow);
         updateTable();
+
+
     }
 
-
+    /**
+     * this method searches for inserted word in whole table after every key released
+     *
+     * @param event
+     */
     @FXML
     void search(KeyEvent event) {
         table.getItems().clear();
@@ -131,6 +159,12 @@ public class CourierSecond implements Initializable {
         }
     }
 
+    /**
+     * method that loads expanded row to table and populating it with data from database
+     *
+     * @param arg
+     * @return Pane with information of package
+     */
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
             int selectedIndex = arg.getTableRow().getIndex();
@@ -141,12 +175,17 @@ public class CourierSecond implements Initializable {
             setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
 
             pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
-            Button button = new Button("Zatwierdź");
+            Button button = new Button(App.getLanguageProperties("confirmText"));
             button.setLayoutX(455);
             button.setLayoutY(76);
             button.setPrefHeight(25);
             button.setPrefWidth(90);
             button.setOnAction(new EventHandler<ActionEvent>() {
+                /**
+                 * method which updates status in packages and if specified conditions are
+                 * fulfilled then updates courier which is assigned to package
+                 * @param event
+                 */
                 @Override
                 public void handle(ActionEvent event) {
                     String status = ExpendableRow.getStatusReturned();
@@ -158,16 +197,16 @@ public class CourierSecond implements Initializable {
                         if (status.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())) {
                             List<Users> usersList = UsersDAO.getCouriers("Kurier Międzyoddziałowy");
                             for (int i = 0; i < usersList.size(); i++) {
-                                if (table.getItems().get(selectedIndex).getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
+                                if (UsersDAO.readUserInfoById(PackagesDAO.getPackagesById(table.getItems().get(selectedIndex)
+                                        .getPackagesId()).get(0).getUserId()).get(0).getVoivodeship().equals(usersList.get(i).
+                                        getAreasByAreaId().getVoivodeship())) {
                                     PackagesDAO.updateCourierId(table.getItems().get(selectedIndex).getPackagesId(),
                                             usersList.get(i).getId());
                                 }
                             }
                         }
-
                         updateTable();
                     }
-
                 }
             });
 

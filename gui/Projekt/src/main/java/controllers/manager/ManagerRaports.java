@@ -54,6 +54,9 @@ public class ManagerRaports implements Initializable {
     LocalDate today;
     LocalDate past;
 
+    /**
+     * date validation and report generation selection
+     */
     @FXML
     public void raportCustom(MouseEvent event) {
         if(startData.getValue() != null && endData.getValue() == null){
@@ -106,7 +109,9 @@ public class ManagerRaports implements Initializable {
         }
     }
 
-
+    /**
+     * generating a report from the last day
+     */
     @FXML
     public void raportLastDay(MouseEvent event) {
         today = LocalDate.now();
@@ -116,6 +121,9 @@ public class ManagerRaports implements Initializable {
         oneDayRaport.setVisible(true);
     }
 
+    /**
+     * generating a report for the last 30 days
+     */
     @FXML
     public void raportLastMonth(MouseEvent event) {
         today = LocalDate.now();
@@ -126,6 +134,9 @@ public class ManagerRaports implements Initializable {
         oneDayRaport.setVisible(true);
     }
 
+    /**
+     * generating a report for the last 7 days
+     */
     @FXML
     public void raportLastWeek(MouseEvent event) {
         today = LocalDate.now();
@@ -136,11 +147,9 @@ public class ManagerRaports implements Initializable {
         oneDayRaport.setVisible(true);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
+    /**
+     * generating a report from a selected date range
+     */
     public void confirmRaport(MouseEvent mouseEvent) {
         LocalDate startDataValue = startData.getValue();
         LocalDate endDataValue = endData.getValue().plusDays(1);
@@ -158,10 +167,16 @@ public class ManagerRaports implements Initializable {
         infoConfirmRaport.setVisible(false);
     }
 
+    /**
+     * cancellation of report generation
+     */
     public void cancelRaport(MouseEvent mouseEvent) {
         infoConfirmRaport.setVisible(false);
     }
 
+    /**
+     * one day report generation confirmation
+     */
     public void confirmOneDayRaport(MouseEvent mouseEvent) {
 
         System.out.println(today+ " : " + past);
@@ -178,7 +193,16 @@ public class ManagerRaports implements Initializable {
         oneDayRaport.setVisible(false);
     }
 
+    /**
+     * cancellation of report generation
+     */
     public void cancelOneDayRaport(MouseEvent mouseEvent) {
         oneDayRaport.setVisible(false);
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
 }

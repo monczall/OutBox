@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
+import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.*;
 import org.controlsfx.control.table.TableRowExpanderColumn;
@@ -94,10 +95,11 @@ public class InterbranchCourierSecond implements Initializable {
     public static void setStatus(String status) {
         InterbranchCourierSecond.status = status;
     }
-
+    /**
+     * method that clears table and populating it again
+     */
     public void updateTable() {
         table.getItems().clear();
-
         table.setItems(getPackages());
     }
 
@@ -121,7 +123,10 @@ public class InterbranchCourierSecond implements Initializable {
         updateTable();
     }
 
-
+    /**
+     * this method searches for inserted word in whole table after every key released
+     * @param event
+     */
     @FXML
     void search(KeyEvent event) {
         table.getItems().clear();
@@ -139,7 +144,11 @@ public class InterbranchCourierSecond implements Initializable {
             }
         }
     }
-
+    /**
+     * method that loads expanded row to table and populating it with data from database
+     * @param arg
+     * @return Pane with information of package
+     */
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
             int selectedIndex = arg.getTableRow().getIndex();
@@ -156,6 +165,11 @@ public class InterbranchCourierSecond implements Initializable {
             button.setPrefHeight(25);
             button.setPrefWidth(90);
             button.setOnAction(new EventHandler<ActionEvent>() {
+                /**
+                 * method which updates status in packages and if specified conditions are
+                 * fulfilled then updates courier which is assigned to package
+                 * @param event
+                 */
                 @Override
                 public void handle(ActionEvent event) {
                     String status = InterbranchExpendableRow.getStatusReturned();
@@ -167,7 +181,18 @@ public class InterbranchCourierSecond implements Initializable {
                         if (status.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())) {
                             List<Users> usersList = UsersDAO.getCouriers("Kurier");
                             for (int i = 0; i < usersList.size(); i++) {
-                                if (table.getItems().get(selectedIndex).getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
+                                if (PackagesDAO.getPackagesById(table.getItems().get(selectedIndex).getPackagesId()).get(0).
+                                        getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
+                                    PackagesDAO.updateCourierId(table.getItems().get(selectedIndex).getPackagesId(),
+                                            usersList.get(i).getId());
+                                }
+                            }
+                        }
+                        else if (status.equals(PackageStatus.IN_MAIN_SORTING_DEPARTMENT.displayName())) {
+                            List<Users> usersList = UsersDAO.getCouriers("Kurier Międzyoddziałowy");
+                            for (int i = 0; i < usersList.size(); i++) {
+                                if (PackagesDAO.getPackagesById(table.getItems().get(selectedIndex).getPackagesId()).get(0).
+                                        getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {
                                     PackagesDAO.updateCourierId(table.getItems().get(selectedIndex).getPackagesId(),
                                             usersList.get(i).getId());
                                 }

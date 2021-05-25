@@ -89,17 +89,20 @@ public class ManagerNullCourier implements Initializable {
     @FXML
     private Label courierLabel;
 
-
-
+    //packages data
     UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
     List<Packages> getPackages;
     List<UserInfos> dataUserInfos;
     int dataIndex = 0;
 
+    //courier data
     List<UserInfos> dataUserInfosCourier;
     List<Users> dataUserCourier;
     int dataIndexCourier = 0;
 
+    /**
+     * assigning the package to the courier
+     */
     @FXML
     void assignPackage(MouseEvent event) {
 
@@ -113,7 +116,9 @@ public class ManagerNullCourier implements Initializable {
         alertPane.setVisible(true);
     }
 
-
+    /**
+     * button to confirm the assignment
+     */
     public void confirmButton(MouseEvent mouseEvent) {
         dataIndex = 0;
         getPackages = PackagesDAO.getPackagesByNullCourier();
@@ -122,6 +127,9 @@ public class ManagerNullCourier implements Initializable {
         alertPane.setVisible(false);
     }
 
+    /**
+     * displaying loaded data about packages
+     */
     public void setDataLabel(){
 
         dataUserInfos = UserInfosDAO.getUserInfoByID(getPackages.get(dataIndex).getUserInfoId());
@@ -157,6 +165,9 @@ public class ManagerNullCourier implements Initializable {
         howManyPackages.setText((dataIndex+1)+"/"+String.valueOf(getPackages.size()));
     }
 
+    /**
+     * displaying loaded data about couriers
+     */
     public void setDataLabelCourier(){
         dataUserInfosCourier = UserInfosDAO.getUserInfoByID(dataUserCourier.get(dataIndexCourier).getId());
 
@@ -191,6 +202,9 @@ public class ManagerNullCourier implements Initializable {
         }
     }
 
+    /**
+     * button for selecting a package
+     */
     @FXML
     void buttonBack(MouseEvent event) {
         dataIndex--;
@@ -201,6 +215,9 @@ public class ManagerNullCourier implements Initializable {
         setDataLabel();
     }
 
+    /**
+     * button for selecting a package
+     */
     @FXML
     void buttonNext(MouseEvent event) {
         dataIndex++;
@@ -211,6 +228,9 @@ public class ManagerNullCourier implements Initializable {
         setDataLabel();
     }
 
+    /**
+     * button for selecting a courier
+     */
     @FXML
     void buttonBackCourier(MouseEvent event) {
         dataIndexCourier--;
@@ -221,6 +241,9 @@ public class ManagerNullCourier implements Initializable {
         setDataLabelCourier();
     }
 
+    /**
+     * button for selecting a courier
+     */
     @FXML
     void buttonNextCourier(MouseEvent event) {
         dataIndexCourier++;
@@ -231,10 +254,12 @@ public class ManagerNullCourier implements Initializable {
         setDataLabelCourier();
     }
 
+    /**
+     *  Selecting packages that meet the relevant criteria
+     */
     void clearDataPackages(){
         for(int i=0; i<getPackages.size(); i++) {
             dataUserInfos = UserInfosDAO.getUserInfoByID(getPackages.get(i).getUserInfoId());
-            //System.out.println("["+i+"]  [user]" + dataUserInfos.get(0).getVoivodeship() +"/[UI]"+ui.getVoivodeship());
             if (!dataUserInfos.get(0).getVoivodeship().equals(ui.getVoivodeship())) {
                 getPackages.remove(i);
                 i--;
@@ -243,7 +268,6 @@ public class ManagerNullCourier implements Initializable {
 
         for(int i=0; i<getPackages.size(); i++) {
             dataUserInfos = UserInfosDAO.getUserInfoByID(getPackages.get(i).getUserInfoId());
-            //System.out.println("["+i+"]  [user]" + dataUserInfos.get(0).getVoivodeship() +"/[UI]"+ui.getVoivodeship());
             if (!dataUserInfos.get(0).getVoivodeship().equals(ui.getVoivodeship())) {
                 getPackages.remove(i);
                 i--;
@@ -264,6 +288,9 @@ public class ManagerNullCourier implements Initializable {
         }
     }
 
+    /**
+     * Choosing couriers that meet the relevant criteria
+     */
     void clearDataCouriers(){
         for(int i=0; i<dataUserCourier.size(); i++) {
 

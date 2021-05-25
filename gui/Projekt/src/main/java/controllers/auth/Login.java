@@ -223,6 +223,18 @@ public class Login implements Initializable {
         }
     }
 
+    /**
+     * <p>
+     *     Method is used to check if given strings are empty.
+     *     In case of empty string it marks inputs from where string came
+     *     on red color, indicating that there is error of fields,
+     *     and returns true. If strings are not empty i does nothing and returns
+     *     true.
+     * </p>
+     * @param email string that needs to be checked if empty
+     * @param password string that needs to be checked if empty
+     * @return returns boolean value
+     */
     public boolean isEmpty(String email, String password) {
         int error = 0;
         // Checking if email is empty
@@ -254,6 +266,15 @@ public class Login implements Initializable {
         }
     }
 
+    /**
+     * <p>
+     *      Method is used to determinate if given string is email.
+     *      It matches string with given pattern. In case of correct email it
+     *      returns true, otherwise it returns false.
+     * </p>
+     * @param email string that needs to be checked if its email
+     * @return returns boolean value
+     */
     public boolean isEmail(String email) {
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+" +
                 "@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
@@ -289,31 +310,13 @@ public class Login implements Initializable {
         stage.close();
     }
 
-    public void handleUser(MouseEvent mouseEvent) {
-        SceneManager.renderScene("client");
-        System.out.println("Zalogowano jako uzytkownik!");
-    }
-
-    public void handleCourier(MouseEvent mouseEvent) {
-        SceneManager.renderScene("courier");
-        System.out.println("Zalogowano jako kurier!");
-    }
-
-    public void handleCourier2(MouseEvent mouseEvent) {
-        SceneManager.renderScene("interbranchCourier");
-        System.out.println("Zalogowano jako kurier miedzyoddzialowy!");
-    }
-
-    public void handleManager(MouseEvent mouseEvent) {
-        SceneManager.renderScene("manager");
-        System.out.println("Zalogowano jako kierownik!");
-    }
-
-    public void handleAdmin(MouseEvent mouseEvent) {
-        SceneManager.renderScene("admin");
-        System.out.println("Zalogowano jako admin!");
-    }
-
+    /**
+     * <p>
+     *     Method is used to clear errors on certain fields.
+     *     It's doing it by changing appearance of them.
+     * </p>
+     * @param keyEvent key that is being pressed
+     */
     public void clearErrorsOnEmail(KeyEvent keyEvent) {
         // UserTextField
         loginEmailTextField.getStyleClass().clear();
@@ -332,6 +335,13 @@ public class Login implements Initializable {
         loginPasswordCircleCircle.getStyleClass().add("fill");
     }
 
+    /**
+     * <p>
+     *     Method is used to clear errors on certain fields.
+     *     It's doing it by changing appearance of them.
+     * </p>
+     * @param keyEvent key that is being pressed
+     */
     public void clearErrorsOnPassword(KeyEvent keyEvent) {
         // UserTextField
         loginEmailTextField.getStyleClass().clear();
@@ -400,6 +410,13 @@ public class Login implements Initializable {
         SceneManager.renderScene("login");
     }
 
+    /**
+     * <p>
+     *     Method used to change visual appearance of settings button on mouse
+     *     enter event
+     * </p>
+     * @param mouseEvent mouse enter event
+     */
     public void handleMouseEnterMenuSettingsButton(MouseEvent mouseEvent) {
         ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
         cogsBlack.setFitHeight(30);
@@ -420,6 +437,13 @@ public class Login implements Initializable {
         }
     }
 
+    /**
+     * <p>
+     *     Method used to change visual appearance of settings button on mouse
+     *     exiting event
+     * </p>
+     * @param mouseEvent mouse exit event
+     */
     public void handleMouseExitMenuSettingsButton(MouseEvent mouseEvent) {
         ImageView cogsBlack = new ImageView("main/resources/images/settings_cogs_black.png");
         cogsBlack.setFitHeight(30);

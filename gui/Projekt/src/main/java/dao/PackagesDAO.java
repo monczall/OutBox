@@ -299,7 +299,9 @@ public class PackagesDAO {
         String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
                 "P.id, P.packageNumber, P.usersByUserId.userInfosByUserInfoId.name, P" +
                 ".usersByUserId.userInfosByUserInfoId.surname, PH.status, P.packageTypeByTypeId.sizeName," +
-                " P.userInfosByUserInfoId.name, P.userInfosByUserInfoId.surname, P.userInfosByUserInfoId.voivodeship) " +
+                " P.userInfosByUserInfoId.name, P.userInfosByUserInfoId.surname, P.usersByUserId" +
+                ".userInfosByUserInfoId" +
+                ".voivodeship) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH " +
                 "WHERE P.id = PH.packageId " +
                 "AND P.courierId = :courierId " +

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.features.PdfGenerator;
 import main.java.features.Preference;
@@ -25,7 +26,10 @@ public class CourierSettings implements Initializable {
 
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
 
-    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy","Czerwony", "Biały");
+    private ObservableList<String> colors = FXCollections.observableArrayList(
+            App.getLanguageProperties("colorOrange"),
+            App.getLanguageProperties("colorRed"),
+            App.getLanguageProperties("colorWhite"));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,7 +54,11 @@ public class CourierSettings implements Initializable {
 
     }
 
-
+    /**
+     * method that changes system preference of language to polish or english
+     * and changes displaying language in application
+     * @param event
+     */
     @FXML
     void changeLanguage(ActionEvent event) {
         Preference pref = new Preference();
@@ -60,6 +68,10 @@ public class CourierSettings implements Initializable {
             pref.addPreference("language","polski");
     }
 
+    /**
+     * method that adds system preference of color, which changes theme of application
+     * @param event
+     */
     @FXML
     void changeTheme(ActionEvent event) {
         Preference pref = new Preference();
