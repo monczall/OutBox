@@ -618,4 +618,15 @@
 .partIcon{
     -fx-fill: -fx-main-color;
 }
+.inputBoxCourier{
+     -fx-text-fill: -fx-main-color;
+     -fx-font-size: 17px;
+     -fx-background-color: transparent; /*#202020*/
+     -fx-mark-color: -fx-main-color;
+     -fx-border-style: solid;
+     -fx-border-width: 2px;
+     -fx-border-color: -fx-main-color;
+     -fx-border-width: 0 0 2 0;
+     -fx-cursor: text;
+ }
 
