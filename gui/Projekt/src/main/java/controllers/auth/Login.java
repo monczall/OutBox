@@ -13,6 +13,9 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.java.App;
 import main.java.SceneManager;
+import main.java.dao.PackagesDAO;
+import main.java.dao.UsersDAO;
+import main.java.entity.Packages;
 import main.java.entity.Users;
 import main.java.features.Alerts;
 import main.java.features.Preference;
@@ -79,6 +82,32 @@ public class Login implements Initializable {
     private static Preference pref = new Preference();
 
     public void initialize(URL url, ResourceBundle rb) {
+        List<Packages> packagesList = PackagesDAO.getPackagesWithoutCourierId();
+        List<Users> usersList = UsersDAO.getCouriers("Kurier");
+        for (int i = 0; i < packagesList.size(); i++) {
+            for (int j = 0; j < usersList.size(); j++) {
+                if (packagesList.get(i).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(j).getAreasByAreaId().getVoivodeship())) {
+                    if (packagesList.get(i).getUsersByUserId().getUserInfosByUserInfoId().getCity().equals(usersList.get(j).getAreasByAreaId().getName())) {
+                        List<Users> couriersInArea = UsersDAO.getCouriersByAreaId(usersList.get(j).getAreaId());
+                        if(couriersInArea.size() > 1){
+                            int courierId = couriersInArea.get(0).getId();
+                            Long courierPackages = 999999L;
+                            for(int k = 0; k < couriersInArea.size(); k++){
+                                if(UsersDAO.getPackagesByCourier(couriersInArea.get(k).getId()) < courierPackages){
+                                    courierPackages = UsersDAO.getPackagesByCourier(couriersInArea.get(k).getId());
+                                    courierId = couriersInArea.get(k).getId();
+                                }
+                            }
+                            PackagesDAO.updateCourierId(packagesList.get(i).getId(), courierId);
+                        }else {
+                            PackagesDAO.updateCourierId(packagesList.get(i).getId(), usersList.get(j).getId());
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
         // Outbox logos, they change depending on used theme
         ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
         outboxBlack.setFitHeight(200);

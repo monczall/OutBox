@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import main.java.App;
-import main.java.SceneManager;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
@@ -102,7 +101,12 @@ public class CourierSecond implements Initializable {
         table.setItems(statuses);
     }
 
-    private ObservableList<PackagesDTO> changeLanguage(){
+    /**
+     * method that translating statuses in list
+     *
+     * @return translated list
+     */
+    private ObservableList<PackagesDTO> changeLanguage() {
         ObservableList<PackagesDTO> statuses = PackagesDAO.getPackagesWithStatusById(Login.getUserID());
         PackageStatus[] status = PackageStatus.values();
         if (Preference.readPreference("language").equals("english")) {
@@ -175,7 +179,7 @@ public class CourierSecond implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             ResourceBundle resourceBundle;
             Preference pref = new Preference();
-            if(pref.readPreference("language").equals("english"))
+            if (Preference.readPreference("language").equals("english"))
                 resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
             else {
                 resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");

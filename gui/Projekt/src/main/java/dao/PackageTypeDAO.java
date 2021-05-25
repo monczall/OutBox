@@ -12,7 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 public class PackageTypeDAO {
-
+    /**
+     * Method used to get the list of all packages types that are in database.
+     * Returned List is type of PackageType.
+     * @return List of package types
+     */
     static public List<PackageType> getPackageTypes(){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -22,17 +26,6 @@ public class PackageTypeDAO {
 
         return listOfPackageTypes;
     }
-
-    static public List<PackageType> getTypeInfo(){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        Query query = session.createQuery("from PackageType");
-
-        List<PackageType> listOfTypeInfo = query.list();
-
-        return listOfTypeInfo;
-    }
-
 
     static public List<String> getTypeById(int typeId){
         Session session = HibernateUtil.getSessionFactory().openSession();
