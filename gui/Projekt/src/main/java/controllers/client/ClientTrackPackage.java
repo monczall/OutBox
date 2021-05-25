@@ -18,6 +18,7 @@ import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.PackageHistory;
+import main.java.entity.PackageStatus;
 import main.java.entity.Packages;
 import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
@@ -43,7 +44,7 @@ public class ClientTrackPackage implements Initializable {
             App.getLanguageProperties("statusEight"),
             App.getLanguageProperties("statusNine"),
             App.getLanguageProperties("statusTen"),
-            App.getLanguageProperties("statusElven"),
+            App.getLanguageProperties("statusEleven"),
             App.getLanguageProperties("statusTwelve"),
     };
 
@@ -134,6 +135,14 @@ public class ClientTrackPackage implements Initializable {
         loadPackages(packageFirst);
     }
 
+    /**
+     * <p>
+     *  Method returns a description depending on status
+     *  that is passed to the method.
+     * </p>
+     * @param currentStatus status of package
+     * @return description of the newest status
+     */
     public String addDescription(String currentStatus){
                 if(currentStatus.equals("Zarejestrowana") || currentStatus.equals("Registered")) {
                     return arrayOfDescriptions[0];
@@ -159,7 +168,7 @@ public class ClientTrackPackage implements Initializable {
                 else if(currentStatus.equals("Nieobecność Odbiorcy") || currentStatus.equals("Recipient's Absence")) {
                     return arrayOfDescriptions[7];
                 }
-                else if(currentStatus.equals("Ponowna Próba Doręczenia") || currentStatus.equals("Retry Delviery")) {
+                else if(currentStatus.equals("Ponowna Próba Doręczenia") || currentStatus.equals("Retry Delivery")) {
                     return arrayOfDescriptions[8];
                 }
                 else if(currentStatus.equals("Do Odebrania W Odziale") || currentStatus.equals("To Be Picked In Hub")) {
@@ -173,55 +182,53 @@ public class ClientTrackPackage implements Initializable {
                 }
     }
 
+    /**
+     * <p>
+     *  Method returns a list of type PackageHistory
+     *  with translated statuses
+     * </p>
+     * @param id user id
+     * @return  list with translated statuses
+     */
     public static List<PackageHistory> translateStatuses(int id){
         List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(id);
 
-        if(Preference.readPreference("language").equals("english")) {
-            for(int i = 0; i < statuses.size(); i++) {
-                if(statuses.get(i).getStatus().equals("Zarejestrowana")) {
-                    statuses.get(i).setStatus("Registered");
-                }
-                else if(statuses.get(i).getStatus().equals("Odebrana Od Klienta")) {
-                    statuses.get(i).setStatus("Received From Client");
-                }
-                else if(statuses.get(i).getStatus().equals("W Transporcie")) {
-                    statuses.get(i).setStatus("In Transport");
-                }
-                else if(statuses.get(i).getStatus().equals("W Lokalnej Sortowni")) {
-                    statuses.get(i).setStatus("In Local Hub");
-                }
-                else if(statuses.get(i).getStatus().equals("W Głównej Sortowni")) {
-                    statuses.get(i).setStatus("In Main Hub");
-                }
-                else if(statuses.get(i).getStatus().equals("Przekazana Do Doręczenia")) {
-                    statuses.get(i).setStatus("Handed Over For Delivery");
-                }
-                else if(statuses.get(i).getStatus().equals("Dostarczona")) {
-                    statuses.get(i).setStatus("Delivered");
-                }
-                else if(statuses.get(i).getStatus().equals("Nieobecność Odbiorcy")) {
-                    statuses.get(i).setStatus("Recipient's Absence");
-                }
-                else if(statuses.get(i).getStatus().equals("Ponowna Próba Doręczenia")) {
-                    statuses.get(i).setStatus("Retry Delivery");
-                }
-                else if(statuses.get(i).getStatus().equals("Do Odebrania W Odziale")) {
-                    statuses.get(i).setStatus("To Be Picked In Hub");
-                }
-                else if(statuses.get(i).getStatus().equals("Zwrot Do Nadawcy")) {
-                    statuses.get(i).setStatus("Returning To The Sender");
-                }
-                else if(statuses.get(i).getStatus().equals("Zwrócona Do Nadawcy")) {
-                    statuses.get(i).setStatus("Returned To The Sender");
+        PackageStatus[] status = PackageStatus.values();
+        if (Preference.readPreference("language").equals("english")) {
+            for (int i = 0; i < statuses.size(); i++) {
+                for (int j = 0; j < status.length; j++) {
+                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
+                        statuses.get(i).setStatus(status[j].engDisplayName());
+                    }
                 }
             }
         }
-        else {
-            return statuses;
-        }
+
         return statuses;
     }
 
+    /**
+     * <p>
+     *  Method returns list of type PackageDTO
+     *  with translated most recent statuses
+     * </p>
+     * @param statuses most recent status
+     * @return list with translated most recent status
+     */
+    public static List<PackagesDTO> translateLastStatus(List<PackagesDTO> statuses){
+        PackageStatus[] status = PackageStatus.values();
+
+        if (Preference.readPreference("language").equals("english")) {
+            for (int i = 0; i < statuses.size(); i++) {
+                for (int j = 0; j < status.length; j++) {
+                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
+                        statuses.get(i).setStatus(status[j].engDisplayName());
+                    }
+                }
+            }
+        }
+        return statuses;
+    }
 
     /**
      * <p>
@@ -234,8 +241,9 @@ public class ClientTrackPackage implements Initializable {
      * </p>
      * @param date date of a status
      * @param status name of status
+     * @param createPlace where status will be created
      */
-    public void createStatus(String date, String status){
+    public void createStatus(String date, String status, VBox createPlace){
 
         HBox statusHBox = new HBox();
 
@@ -273,7 +281,7 @@ public class ClientTrackPackage implements Initializable {
         statusHBox.getChildren().add(squarePane);
         statusHBox.getChildren().add(statusPane);
 
-        statusesVBox.getChildren().add(0,statusHBox);
+        createPlace.getChildren().add(0,statusHBox);
     }
 
     /**
@@ -286,7 +294,7 @@ public class ClientTrackPackage implements Initializable {
      * </p>
      * @param steps how much steps need to be created
      */
-    public void createStep(int steps){
+    public void createStep(int steps, VBox createPlace){
         for(int i = 0 ; i < steps; i ++) {
             HBox stepBox = new HBox();
 
@@ -308,7 +316,7 @@ public class ClientTrackPackage implements Initializable {
             stepBox.getChildren().add(emptyPane);
             stepBox.getChildren().add(squarePane);
 
-            statusesVBox.getChildren().add(0,stepBox);
+            createPlace.getChildren().add(0,stepBox);
         }
     }
 
@@ -326,7 +334,7 @@ public class ClientTrackPackage implements Initializable {
      * @param status name of status
      * @param desc description of current status (the newest in terms of date)
      */
-    public void createCurrentStatus(String date, String status, String desc){
+    public void createCurrentStatus(String date, String status, String desc, VBox createPlace){
 
         HBox statusHBox = new HBox();
 
@@ -374,18 +382,20 @@ public class ClientTrackPackage implements Initializable {
         statusHBox.getChildren().add(squarePane);
         statusHBox.getChildren().add(statusPane);
 
-        statusesVBox.getChildren().add(0,statusHBox);
+        createPlace.getChildren().add(0,statusHBox);
     }
 
     /**
-     * Method used to display all the statuses in order from the db by HQL query
+     * <p>
+     *  Method used to display all the statuses in order from the db by HQL query
+     * </p>
      * @param userId used to show packages that client registered
      * @param userEmail used to show packages that are 'coming' to actual client
      * @return filled List of type PopulatePackageItem it contains info about statuses
      */
     public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
 
-        List<PackagesDTO> listOfPackages = PackagesDAO.readPackagesByID(userId, userEmail);
+        List<PackagesDTO> listOfPackages =  translateLastStatus(PackagesDAO.readPackagesByID(userId, userEmail));
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 
@@ -548,19 +558,22 @@ public class ClientTrackPackage implements Initializable {
 
                             if(i == statuses.size()-1) {
                                 if(i != 0){
-                                    createStep(4);
+                                    createStep(4, statusesVBox);
                                 }
 
-                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                createCurrentStatus(date,statuses.get(i).getStatus(),addDescription(statuses.get(i).getStatus()));
+                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(
+                                        statuses.get(i).getDate());
+
+                                createCurrentStatus(date,statuses.get(i).getStatus(),
+                                        addDescription(statuses.get(i).getStatus()),statusesVBox);
                             }
                             else {
                                 if(i != 0) {
-                                    createStep(2);
+                                    createStep(2, statusesVBox);
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                createStatus(date,statuses.get(i).getStatus());
+                                createStatus(date,statuses.get(i).getStatus(), statusesVBox);
                             }
                         }
 

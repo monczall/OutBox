@@ -55,7 +55,7 @@ public class Packages {
 
     @Basic
     @Column(name = "courierID", nullable = true)
-    public int getCourierId() {
+    public Integer getCourierId() {
         return courierId;
     }
 

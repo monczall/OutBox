@@ -9,9 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import org.controlsfx.control.ToggleSwitch?>
 <?import org.controlsfx.control.textfield.CustomPasswordField?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
@@ -25,9 +23,8 @@
                   <Text fill="#8f8f8f" layoutX="3.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%pickLanguage" />
                   <Line endX="594.0" layoutX="99.0" layoutY="118.0" startX="-96.0" stroke="#252525" strokeWidth="2.0" />
                   <Text layoutX="6.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%theme" />
-                  <Text fill="#8f8f8f" layoutX="6.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%darkMode" />
-                  <Text fill="#8f8f8f" layoutX="6.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%mainColor" />
-                  <ComboBox fx:id="pickColor" layoutX="450.0" layoutY="176.0" onAction="#changeColor" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox">
+                  <Text fill="#8f8f8f" layoutX="5.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%mainColor" />
+                  <ComboBox fx:id="pickColor" layoutX="449.0" layoutY="138.0" onAction="#changeColor" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
@@ -36,11 +33,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
                   <Line endX="594.0" endY="0.49554443359375" layoutX="96.0" layoutY="24.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-                  <ToggleSwitch fx:id="darkMode" alignment="CENTER" layoutX="647.0" layoutY="136.0" prefHeight="18.0" prefWidth="40.0" selected="true" styleClass="toggleSwitch">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </ToggleSwitch>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="userInformationPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" styleClass="mainBackground" visible="false">

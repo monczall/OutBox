@@ -481,10 +481,6 @@ public class Register implements Initializable {
         SceneManager.renderScene("login");
     }
 
-    public void handleExit(ActionEvent actionEvent) {
-        Stage stage = (Stage) registerExitButtonButton.getScene().getWindow();
-        stage.close();
-    }
     //FIRST NAME
     private void errorOnFirstName(){
         //FirstNameField

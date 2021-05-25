@@ -364,3 +364,8 @@
     -fx-cursor: hand;
     -fx-content-display: LEFT;
 }
+
+.rowText{
+    -fx-text-alignment: right;
+
+}

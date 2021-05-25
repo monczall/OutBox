@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.features.PdfGenerator;
 import main.java.features.Preference;
@@ -25,7 +26,10 @@ public class InterbranchCourierSettings implements Initializable {
 
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
 
-    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony", "Biały");
+    private ObservableList<String> colors = FXCollections.observableArrayList(
+            App.getLanguageProperties("colorOrange"),
+            App.getLanguageProperties("colorRed"),
+            App.getLanguageProperties("colorWhite"));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,8 +64,10 @@ public class InterbranchCourierSettings implements Initializable {
         Preference pref = new Preference();
         if(pickLanguage.getValue().equals("English"))
             pref.addPreference("language","english");
-        else
-            pref.addPreference("language","polski");
+        else {
+            pref.addPreference("language", "polski");
+        }
+        SceneManager.renderScene("interbranchCourier");
     }
     /**
      * method that adds system preference of color, which changes theme of application

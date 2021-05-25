@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -25,6 +26,8 @@ import main.java.features.Preference;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -100,6 +103,9 @@ public class ClientHistoryPackage implements Initializable {
     @FXML
     private ToggleButton toggleToClient;
 
+    @FXML
+    private BarChart<String,Long> barChart;
+
     private List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
 
     private static Preference pref = new Preference();
@@ -108,8 +114,17 @@ public class ClientHistoryPackage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        /*Charts.createBarChart(mainPane,"LICZBA PRZESYŁEK", "04", 61, 14, 952, 644);*/
+        barChart.getXAxis().setLabel("Dzień");
+        barChart.getXAxis().setId("xAxis");
 
+        barChart.getYAxis().setLabel("Ilość przysyłek");
+        barChart.getYAxis().setId("xAxis");
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM");
+
+        LocalDateTime now = LocalDateTime.now();
+
+        Charts.createBarChart(barChart,dateTimeFormatter.format(now));
 
         /*Charts.createPieChart(mainPane,"WYKRES ILOŚCI PRZESYŁEK",150,47,500,400);*/
 
@@ -124,9 +139,19 @@ public class ClientHistoryPackage implements Initializable {
         loadPackages(packageFirst);
     }
 
+
+    /**
+     * <p>
+     *  Method used to display all the packages in order from the db by HQL query
+     *  (history)
+     * </p>
+     * @param userId used to show packages that client registered
+     * @param userEmail used to show packages that are 'coming' to actual client
+     * @return filled List of type PopulatePackageItem it contains info about statuses
+     */
     public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
 
-        List<PackagesDTO> listOfPackages = PackagesDAO.readHistoryByID(userId, userEmail);
+        List<PackagesDTO> listOfPackages = ClientTrackPackage.translateLastStatus(PackagesDAO.readHistoryByID(userId, userEmail));
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 
@@ -240,10 +265,12 @@ public class ClientHistoryPackage implements Initializable {
         for(int i=0; i<list.size(); i++){
             FXMLLoader fxmlLoader = new FXMLLoader();
 
-            if(pref.readPreference("language").equals("english"))
+            if(pref.readPreference("language").equals("english")) {
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
-            else
+            }
+            else {
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
+            }
 
             fxmlLoader.setLocation(getClass().getResource("../../../resources/view/client/packageItem.fxml"));
             fxmlLoader.setResources(bundle);
@@ -288,19 +315,20 @@ public class ClientHistoryPackage implements Initializable {
                         for(int i = 0; i < statuses.size(); i++) {
                             if(i == statuses.size()-1) {
                                 if(i != 0) {
-                                    clientTrackPackage.createStep(4);
+                                    clientTrackPackage.createStep(4, statusesVBox);
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                clientTrackPackage.createCurrentStatus(date,statuses.get(i).getStatus(),clientTrackPackage.addDescription(statuses.get(i).getStatus()));
+                                clientTrackPackage.createCurrentStatus(date,statuses.get(i).getStatus(),
+                                        clientTrackPackage.addDescription(statuses.get(i).getStatus()), statusesVBox);
                             }
                             else {
                                 if(i != 0){
-                                    clientTrackPackage.createStep(2);
+                                    clientTrackPackage.createStep(2, statusesVBox);
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                clientTrackPackage.createStatus(date,statuses.get(i).getStatus());
+                                clientTrackPackage.createStatus(date, statuses.get(i).getStatus(), statusesVBox);
                             }
                         }
                         Animations.fadeAway(toggleFromClient,0.2,1,0,false);

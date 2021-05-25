@@ -305,10 +305,6 @@ public class Login implements Initializable {
         SceneManager.renderScene("passwordReset");
     }
 
-    public void handleExit(ActionEvent actionEvent) {
-        Stage stage = (Stage) loginExitButtonButton.getScene().getWindow();
-        stage.close();
-    }
 
     /**
      * <p>

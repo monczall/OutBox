@@ -50,7 +50,7 @@ public class InterbranchExpendableRow implements Initializable {
         IntStream.range(0, ol.size()).filter(i -> ol.get(i).toString().contains(status)).findFirst().
                 ifPresent(i -> changeStatus.getSelectionModel().select(i));
         if(changeStatus.getSelectionModel().getSelectedIndex() != -1) {
-            setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().toString());
+            setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().displayName());
         }else{
             setStatusReturned("");
         }
@@ -96,6 +96,6 @@ public class InterbranchExpendableRow implements Initializable {
      */
     @FXML
     void setStatus(ActionEvent event) {
-        setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().toString());
+        setStatusReturned(changeStatus.getSelectionModel().getSelectedItem().displayName());
     }
 }
