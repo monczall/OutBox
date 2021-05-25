@@ -3,6 +3,8 @@ package main.java.features;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import javafx.collections.ObservableList;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import main.java.App;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageTypeDAO;
@@ -10,6 +12,9 @@ import main.java.dao.PackagesDAO;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.PdfDTO;
 import main.java.entity.UserInfos;
+
+import java.io.File;
+import java.io.IOException;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,10 +26,11 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+
+
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class PdfGeneratorManager {
-    private static String FILE = "D:/manager raport.pdf";
 
     private static Font catFont = new Font(Font.FontFamily.HELVETICA, 18,
             Font.BOLD);
@@ -36,19 +42,30 @@ public class PdfGeneratorManager {
             Font.BOLD);
 
     /**
-     *
-     * @param start
-     * @param end
-     * @param display
+     * creating a pdf file
+     * @param start date
+     * @param end date
+     * @param display type of date display in the report
+     * @param pathFile path and filename (extension set to pdf in ManagerRaports.java)
      * @throws IOException
      * @throws DocumentException
      */
-    public static void createPdf(Date start, Date end, boolean display) throws IOException, DocumentException {
-        File file = new File(FILE);
+    public static void createPdf(Date start, Date end, boolean display, String pathFile) throws IOException, DocumentException {
+
+        File file = new File(pathFile);
         file.getParentFile().mkdirs();
-        new PdfGeneratorManager().fillPdf(FILE, start, end, display);
+        new PdfGeneratorManager().fillPdf(pathFile, start, end, display);
     }
 
+    /**
+     * filling the file with data
+     * @param dest name file
+     * @param start date
+     * @param end date
+     * @param display type of date display in the report
+     * @throws IOException
+     * @throws DocumentException
+     */
     public void fillPdf(String dest, Date start, Date end, boolean display) throws IOException, DocumentException {
         Font font = new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD, GrayColor.GRAYWHITE);
         BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);

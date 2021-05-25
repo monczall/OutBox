@@ -1,7 +1,14 @@
 package main.java;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.Users;
@@ -18,6 +25,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import static java.util.concurrent.TimeUnit.DAYS;
 
@@ -26,6 +34,7 @@ public class App extends Application {
     static boolean connectionError = false;
     private static Preference pref = new Preference();
     private static String name;
+
 
     public static void main(String[] args) throws FileNotFoundException, ParseException {
 
@@ -112,11 +121,9 @@ public class App extends Application {
         SceneManager.addScene(
                 "admin",
                 "../resources/view/admin/admin.fxml");
-
-        primaryStage.setResizable(false);
-      //primaryStage.initStyle(StageStyle.UNDECORATED);
-
+        SceneManager.getStage().initStyle(StageStyle.UNDECORATED);
         SceneManager.renderScene("login");
+
     }
 
     public static boolean isConnectionError() {

@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import main.java.App;
+import main.java.SceneManager;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
@@ -108,10 +109,10 @@ public class CourierSecond implements Initializable {
         ObservableList<PackagesDTO> statuses = PackagesDAO.getPackagesWithStatusById(Login.getUserID());
         PackageStatus[] status = PackageStatus.values();
         if (Preference.readPreference("language").equals("english")) {
-            for (int i = 0; i < statuses.size(); i++) {
-                for (int j = 0; j < status.length; j++) {
-                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
-                        statuses.get(i).setStatus(status[j].engDisplayName());
+            for (PackagesDTO packagesDTO : statuses) {
+                for (PackageStatus packageStatus : status) {
+                    if (packagesDTO.getStatus().equals(packageStatus.displayName())) {
+                        packagesDTO.setStatus(packageStatus.engDisplayName());
                     }
                 }
             }
@@ -173,8 +174,17 @@ public class CourierSecond implements Initializable {
             setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
             setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
             setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
-
-            pane = FXMLLoader.load(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            ResourceBundle resourceBundle;
+            Preference pref = new Preference();
+            if(pref.readPreference("language").equals("english"))
+                resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
+            else {
+                resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
+            }
+            loader.setLocation(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
+            loader.setResources(resourceBundle);
+            pane = loader.load();
             Button button = new Button(App.getLanguageProperties("confirmText"));
             button.setLayoutX(455);
             button.setLayoutY(76);

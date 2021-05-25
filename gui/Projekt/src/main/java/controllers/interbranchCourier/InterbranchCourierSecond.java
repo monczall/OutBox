@@ -14,12 +14,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import main.java.App;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
-import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
-import main.java.entity.*;
+import main.java.entity.PackageStatus;
+import main.java.entity.PackagesDTO;
+import main.java.entity.Users;
+import main.java.features.Preference;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
 import java.io.IOException;
@@ -95,18 +98,37 @@ public class InterbranchCourierSecond implements Initializable {
     public static void setStatus(String status) {
         InterbranchCourierSecond.status = status;
     }
+
     /**
      * method that clears table and populating it again
      */
     public void updateTable() {
         table.getItems().clear();
-        table.setItems(getPackages());
+        table.setItems(changeLanguage());
     }
 
-    private ObservableList<PackagesDTO> getPackages(){
-        ObservableList<PackagesDTO> packList = PackagesDAO.getPackagesWithStatusAndNames(Login.getUserID());
-
-        return packList;
+    private ObservableList<PackagesDTO> changeLanguage() {
+        ObservableList<PackagesDTO> statuses = PackagesDAO.getPackagesWithStatusAndNames(Login.getUserID());
+        PackageStatus[] status = PackageStatus.values();
+        if (Preference.readPreference("language").equals("english")) {
+            for (PackagesDTO packagesDTO : statuses) {
+                if (packagesDTO.getSizeName().equals("mała")) {
+                    packagesDTO.setSizeName("small");
+                }
+                else if (packagesDTO.getSizeName().equals("średnia")) {
+                    packagesDTO.setSizeName("medium");
+                }
+                else if (packagesDTO.getSizeName().equals("duża")) {
+                    packagesDTO.setSizeName("big");
+                }
+                for (PackageStatus packageStatus : status) {
+                    if (packagesDTO.getStatus().equals(packageStatus.displayName())) {
+                        packagesDTO.setStatus(packageStatus.engDisplayName());
+                    }
+                }
+            }
+        }
+        return statuses;
     }
 
     @Override
@@ -125,12 +147,13 @@ public class InterbranchCourierSecond implements Initializable {
 
     /**
      * this method searches for inserted word in whole table after every key released
+     *
      * @param event
      */
     @FXML
     void search(KeyEvent event) {
         table.getItems().clear();
-        ObservableList<PackagesDTO> packages = getPackages();
+        ObservableList<PackagesDTO> packages = changeLanguage();
         String searchedWord = searchField.getText().toLowerCase();
         for (int i = 0; i < packages.size(); i++) {
             if (packages.get(i).getPackageNumber().toLowerCase().contains(searchedWord) ||
@@ -139,13 +162,15 @@ public class InterbranchCourierSecond implements Initializable {
                     packages.get(i).getSurname().toLowerCase().contains(searchedWord) ||
                     packages.get(i).getRecipentName().toLowerCase().contains(searchedWord) ||
                     packages.get(i).getRecipentSurname().toLowerCase().contains(searchedWord) ||
-                    packages.get(i).getStatus().toLowerCase().contains(searchedWord)){
+                    packages.get(i).getStatus().toLowerCase().contains(searchedWord)) {
                 table.getItems().add(packages.get(i));
             }
         }
     }
+
     /**
      * method that loads expanded row to table and populating it with data from database
+     *
      * @param arg
      * @return Pane with information of package
      */
@@ -158,8 +183,19 @@ public class InterbranchCourierSecond implements Initializable {
 
             setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
 
-            pane = FXMLLoader.load(getClass().getResource("../../../resources/view/interbranchCourier/interbranchCourierExpandableRow.fxml"));
-            Button button = new Button("Zatwierdź");
+            FXMLLoader loader = new FXMLLoader();
+            ResourceBundle resourceBundle;
+            Preference pref = new Preference();
+            if (Preference.readPreference("language").equals("english"))
+                resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
+            else {
+                resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
+            }
+            loader.setLocation(getClass().getResource("../../../resources/view/interbranchCourier/interbranchCourierExpandableRow.fxml"));
+            loader.setResources(resourceBundle);
+            pane = loader.load();
+
+            Button button = new Button(App.getLanguageProperties("confirmText"));
             button.setLayoutX(616);
             button.setLayoutY(78);
             button.setPrefHeight(25);
@@ -187,8 +223,7 @@ public class InterbranchCourierSecond implements Initializable {
                                             usersList.get(i).getId());
                                 }
                             }
-                        }
-                        else if (status.equals(PackageStatus.IN_MAIN_SORTING_DEPARTMENT.displayName())) {
+                        } else if (status.equals(PackageStatus.IN_MAIN_SORTING_DEPARTMENT.displayName())) {
                             List<Users> usersList = UsersDAO.getCouriers("Kurier Międzyoddziałowy");
                             for (int i = 0; i < usersList.size(); i++) {
                                 if (PackagesDAO.getPackagesById(table.getItems().get(selectedIndex).getPackagesId()).get(0).

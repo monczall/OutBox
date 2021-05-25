@@ -588,8 +588,4 @@ public class PasswordReset {
         SceneManager.renderScene("login");
     }
 
-    public void handleExit(ActionEvent actionEvent) {
-        Stage stage = (Stage) passwordResetReturnButtonButton.getScene().getWindow();
-        stage.close();
-    }
 }

@@ -116,6 +116,8 @@ public class ManagerCouriersAdd implements Initializable {
 
     /**
      * The method validates the entered data
+     * true - all fields are correct
+     * false - at least one field is incorrect
      * @return boolean
      */
     boolean validation(){
@@ -181,7 +183,7 @@ public class ManagerCouriersAdd implements Initializable {
     }
 
     /**
-     * If textfield is valid it is set to the default color
+     * If textfield is valid it is set to the default style
      * @param name textfield
      */
     void goodValidation(TextField name){
@@ -190,7 +192,7 @@ public class ManagerCouriersAdd implements Initializable {
     }
 
     /**
-     * If textfield is incorrect it is set to red
+     * If textfield is incorrect it is set to error style
      * @param name textfield
      */
     void errorValidation(TextField name){

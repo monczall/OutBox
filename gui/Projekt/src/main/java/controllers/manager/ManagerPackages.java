@@ -146,11 +146,10 @@ public class ManagerPackages implements Initializable {
         table.getColumns().add(expanderRow);
         updateTable();
         table.getSelectionModel().select(0);
-        System.out.println(PackagesDAO.getPackagesWithStatus().get(0).getStatus());
     }
 
     /**
-     *
+     * the method finds packages after each click
      */
     @FXML
     void search(KeyEvent event) {
@@ -171,7 +170,7 @@ public class ManagerPackages implements Initializable {
     }
 
     /**
-     *
+     * the method returns a panel with additional information about the package
      * @param arg
      * @return pane
      */

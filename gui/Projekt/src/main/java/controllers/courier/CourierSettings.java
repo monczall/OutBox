@@ -64,8 +64,10 @@ public class CourierSettings implements Initializable {
         Preference pref = new Preference();
         if(pickLanguage.getValue().equals("English"))
             pref.addPreference("language","english");
-        else
-            pref.addPreference("language","polski");
+        else {
+            pref.addPreference("language", "polski");
+        }
+        SceneManager.renderScene("courier");
     }
 
     /**

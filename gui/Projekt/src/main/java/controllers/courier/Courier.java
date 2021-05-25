@@ -115,11 +115,6 @@ public class Courier implements Initializable {
                 });
             }
         });
-        try {
-            SceneManager.loadScene("../../../resources/view/courier/courierHome.fxml", mainWindow);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -128,7 +123,7 @@ public class Courier implements Initializable {
      * @throws IOException
      */
     public void openHome(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/courier/courierHome.fxml", mainWindow);
+        SceneManager.renderScene("courier");
     }
     /**
      * method that opens main panel after clicking button

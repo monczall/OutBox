@@ -6,11 +6,16 @@ import javafx.scene.control.*;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import main.java.App;
+import main.java.SceneManager;
 import main.java.features.Alerts;
 import main.java.features.PdfGeneratorManager;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -28,6 +33,9 @@ public class ManagerRaports implements Initializable {
 
     @FXML
     private DatePicker endData;
+
+    @FXML
+    private TextField fileName;
 
     @FXML
     private Button createCustomRaportButton;
@@ -68,10 +76,8 @@ public class ManagerRaports implements Initializable {
             long daysFuture = DAYS.between(today, past);
 
             if(daysBetween >= 0 && daysFuture <=0) {
-                System.out.println();
                 textOneDate.setText(confirmText + past);
                 today = past;
-                System.out.println(today+ " : " + past);
                 oneDayRaport.setVisible(true);
             }
             else{
@@ -151,20 +157,55 @@ public class ManagerRaports implements Initializable {
      * generating a report from a selected date range
      */
     public void confirmRaport(MouseEvent mouseEvent) {
-        LocalDate startDataValue = startData.getValue();
-        LocalDate endDataValue = endData.getValue().plusDays(1);
 
-        Date startValue = java.sql.Date.valueOf(startDataValue);
-        Date endValue = java.sql.Date.valueOf(endDataValue);
+        String pathFile;
+        //if no path is selected for saving the report
+        File selectedDirectory = filePathSelection();
+        if(selectedDirectory == null){
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("fileSaveLocationNotSelected"));
+        }
+        else{
+            if(validateFileName()) {
+                File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
-        try {
-            PdfGeneratorManager.createPdf(startValue, endValue, display);
-            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("reportSuccess"));
-        } catch (Exception e) {
-            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("raportError"));
-            e.printStackTrace();
+                if (f.exists() && f.isFile()) {
+                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("fileExists"));
+                } else {
+
+                    if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
+                        pathFile = selectedDirectory + fileName.getText() + ".pdf";
+                    }
+                    else{
+                        pathFile = selectedDirectory + "\\" +  fileName.getText() + ".pdf";
+                    }
+
+                    LocalDate startDataValue = startData.getValue();
+                    LocalDate endDataValue = endData.getValue().plusDays(1);
+
+                    Date startValue = java.sql.Date.valueOf(startDataValue);
+                    Date endValue = java.sql.Date.valueOf(endDataValue);
+
+                    try {
+                        PdfGeneratorManager.createPdf(startValue, endValue, display, pathFile);
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("reportSuccess"));
+                    } catch (Exception e) {
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("raportError"));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else{
+                Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("nameFile"));
+            }
         }
         infoConfirmRaport.setVisible(false);
+    }
+
+    boolean validateFileName(){
+        if(fileName.getText().isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -177,18 +218,44 @@ public class ManagerRaports implements Initializable {
     /**
      * one day report generation confirmation
      */
-    public void confirmOneDayRaport(MouseEvent mouseEvent) {
+    public void confirmOneDayReport(MouseEvent mouseEvent) {
 
-        System.out.println(today+ " : " + past);
-        Date startValue = java.sql.Date.valueOf(past);
-        Date endValue = java.sql.Date.valueOf(today);
+        String pathFile;
+        //if no path is selected for saving the report
+        File selectedDirectory = filePathSelection();
+        if(selectedDirectory == null){
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("fileSaveLocationNotSelected"));
+        }
+        else{
+            if(validateFileName()) {
+                File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
-        try {
-            PdfGeneratorManager.createPdf(startValue, endValue, display);
-            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("reportSuccess"));
-        } catch (Exception e) {
-            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("raportError"));
-            e.printStackTrace();
+                if (f.exists() && f.isFile()) {
+                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", "Taki plik już istnieje!");
+                } else {
+
+                    if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
+                        pathFile = selectedDirectory + fileName.getText() + ".pdf";
+                    }
+                    else{
+                        pathFile = selectedDirectory + "\\" +  fileName.getText() + ".pdf";
+                    }
+
+                    Date startValue = java.sql.Date.valueOf(past);
+                    Date endValue = java.sql.Date.valueOf(today);
+
+                    try {
+                        PdfGeneratorManager.createPdf(startValue, endValue, display, pathFile);
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("reportSuccess"));
+                    } catch (Exception e) {
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("raportError"));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else{
+                Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("nameFile"));
+            }
         }
         oneDayRaport.setVisible(false);
     }
@@ -199,6 +266,21 @@ public class ManagerRaports implements Initializable {
     public void cancelOneDayRaport(MouseEvent mouseEvent) {
         oneDayRaport.setVisible(false);
     }
+
+    /**
+     * Choose where to save the file
+     * @return File path
+     */
+    public File filePathSelection(){
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle(App.getLanguageProperties("titleSaveRaport"));
+        File defaultDirectory = new File("c:/");
+        chooser.setInitialDirectory(defaultDirectory);
+        File selectedDirectory = chooser.showDialog(SceneManager.getStage());
+
+        return selectedDirectory;
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
