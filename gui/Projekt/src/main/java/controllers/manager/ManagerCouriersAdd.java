@@ -14,6 +14,7 @@ import main.java.controllers.auth.Login;
 import main.java.dao.AreasDAO;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
+import main.java.entity.Areas;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
 import main.java.features.Alerts;
@@ -56,13 +57,28 @@ public class ManagerCouriersAdd implements Initializable {
     @FXML
     private Pane alertPane;
 
+
     @FXML
-    private ComboBox<String> regionName;
+    private Label areaCourierName;
+
+    @FXML
+    private Label areaCourierCity;
+
+    @FXML
+    private Label areaCourierStreet;
+
+    @FXML
+    private Label howManyAreas;
+
+    @FXML
+    private Button buttonNext;
+
+    @FXML
+    private Button buttonBack;
 
     List<Users> dataUser;
-    UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
 
-    private ObservableList<String> regions = FXCollections.observableArrayList("Rzeszów","Rzeszów Rejtana");
+    Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
 
     /**
      * The method responsible for adding the courier to the database
@@ -107,7 +123,7 @@ public class ManagerCouriersAdd implements Initializable {
                 dataUser = UsersDAO.getUsersId(ui.getId());
                 int areaId = dataUser.get(0).getAreaId();
                 UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString,
-                        ui.getVoivodeship(), Encryption.encrypt(password), role, areaId);
+                        ui.getVoivodeship(), Encryption.encrypt(password), role, uu.getAreaId());
 
                 alertPane.setVisible(true);
             }
@@ -284,6 +300,7 @@ public class ManagerCouriersAdd implements Initializable {
         return null;
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -295,7 +312,6 @@ public class ManagerCouriersAdd implements Initializable {
         goodValidation(numberPhone);
         goodValidation(email);
 
-        regionName.setItems(regions);
-        regionName.setValue(regions.get(0));
     }
+
 }

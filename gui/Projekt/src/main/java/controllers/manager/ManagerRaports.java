@@ -231,7 +231,7 @@ public class ManagerRaports implements Initializable {
                 File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
                 if (f.exists() && f.isFile()) {
-                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", "Taki plik już istnieje!");
+                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("fileExists"));
                 } else {
 
                     if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
