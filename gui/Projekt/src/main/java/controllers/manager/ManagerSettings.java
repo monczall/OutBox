@@ -62,10 +62,13 @@ public class ManagerSettings implements Initializable {
     @FXML
     void changeLanguage(ActionEvent event) {
         Preference pref = new Preference();
-        if(comboLanguage.getValue().equals("English"))
-            pref.addPreference("language","english");
-        else
-            pref.addPreference("language","polski");
+        if(comboLanguage.getValue().equals("English")) {
+            pref.addPreference("language", "english");
+        }
+        else {
+            pref.addPreference("language", "polski");
+        }
+        SceneManager.renderScene("manager");
     }
 
     /**
@@ -90,6 +93,5 @@ public class ManagerSettings implements Initializable {
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #ffffff;" +
                     "-fx-second-color: #000000;");
         }
-
     }
 }

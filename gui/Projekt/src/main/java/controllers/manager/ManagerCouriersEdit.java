@@ -134,7 +134,9 @@ public class ManagerCouriersEdit implements Initializable {
     }
 
     /**
-     * Method validates the entered data
+     * The method validates the entered data
+     * true - all fields are correct
+     * false - at least one field is incorrect
      * @return boolean
      */
     boolean validation(){

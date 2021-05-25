@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
@@ -11,7 +12,7 @@
    <children>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%reportsTtitle" />
       <FontAwesomeIconView fill="ORANGE" glyphName="LINE_CHART" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
-      <Button fx:id="createCustomRaportButton" alignment="BOTTOM_CENTER" layoutX="393.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#raportCustom" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="%managerCustomRaport" />
+      <Button fx:id="createCustomRaportButton" alignment="BOTTOM_CENTER" layoutX="393.0" layoutY="554.0" mnemonicParsing="false" onMouseClicked="#raportCustom" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="%managerCustomRaport" />
       <DatePicker fx:id="startData" layoutX="282.0" layoutY="372.0" promptText="%managerDateFrom" styleClass="inputData" />
       <DatePicker fx:id="endData" layoutX="590.0" layoutY="372.0" promptText="%managerDateTo" styleClass="inputData" />
       <Button alignment="CENTER" layoutX="202.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastDay" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="%managerReportLastDay" textAlignment="CENTER" wrapText="true" />
@@ -38,12 +39,13 @@
          <children>
             <AnchorPane layoutX="280.0" layoutY="117.0" prefHeight="179.0" prefWidth="478.0" styleClass="infoBackground">
                <children>
-                  <Button layoutX="309.0" layoutY="119.0" mnemonicParsing="false" onMouseClicked="#confirmOneDayRaport" prefHeight="33.0" prefWidth="102.0" styleClass="infoBoxButtons" text="%confirmText" />
+                  <Button layoutX="309.0" layoutY="119.0" mnemonicParsing="false" onMouseClicked="#confirmOneDayReport" prefHeight="33.0" prefWidth="102.0" styleClass="infoBoxButtons" text="%confirmText" />
                   <Button layoutX="68.0" layoutY="119.0" mnemonicParsing="false" onMouseClicked="#cancelOneDayRaport" prefHeight="33.0" prefWidth="91.0" styleClass="infoBoxButtons" text="%cancelText" />
                   <Label fx:id="textOneDate" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="2.0" layoutY="25.0" prefHeight="94.0" prefWidth="474.0" styleClass="textLabel" text="Potwierdzenie wygenerowania raportu z dnia XX.XX.XXXX" textAlignment="CENTER" wrapText="true" />
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
+      <TextField fx:id="fileName" layoutX="431.0" layoutY="462.0" prefHeight="25.0" prefWidth="233.0" promptText="%nameFileInput" styleClass="inputBoxCourier" />
    </children>
 </AnchorPane>
