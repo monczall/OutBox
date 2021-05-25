@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerRaports">
+<AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerRaports">
    <children>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%reportsTtitle" />
-      <FontAwesomeIconView fill="ORANGE" glyphName="LINE_CHART" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="FILE_PDF_ALT" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
       <Button fx:id="createCustomRaportButton" alignment="BOTTOM_CENTER" layoutX="393.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#raportCustom" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="%managerCustomRaport" />
       <DatePicker fx:id="startData" layoutX="282.0" layoutY="372.0" promptText="%managerDateFrom" styleClass="inputData" />
       <DatePicker fx:id="endData" layoutX="590.0" layoutY="372.0" promptText="%managerDateTo" styleClass="inputData" />

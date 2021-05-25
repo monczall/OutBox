@@ -96,6 +96,13 @@ public class Manager implements Initializable {
     }
 
     /**
+     * Loading the charts panel
+     */
+    public void openCharts(MouseEvent mouseEvent) throws IOException {
+        SceneManager.loadScene("../../../resources/view/manager/managerCharts.fxml", mainWindow);
+    }
+
+    /**
      * The logout box is loaded
      */
     @FXML

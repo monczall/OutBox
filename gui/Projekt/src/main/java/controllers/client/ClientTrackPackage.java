@@ -18,6 +18,7 @@ import main.java.controllers.auth.Login;
 import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.PackageHistory;
+import main.java.entity.PackageStatus;
 import main.java.entity.Packages;
 import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
@@ -134,6 +135,14 @@ public class ClientTrackPackage implements Initializable {
         loadPackages(packageFirst);
     }
 
+    /**
+     * <p>
+     *  Method returns a description depending on status
+     *  that is passed to the method.
+     * </p>
+     * @param currentStatus status of package
+     * @return description of the newest status
+     */
     public String addDescription(String currentStatus){
                 if(currentStatus.equals("Zarejestrowana") || currentStatus.equals("Registered")) {
                     return arrayOfDescriptions[0];
@@ -173,55 +182,53 @@ public class ClientTrackPackage implements Initializable {
                 }
     }
 
+    /**
+     * <p>
+     *  Method returns a list of type PackageHistory
+     *  with translated statuses
+     * </p>
+     * @param id user id
+     * @return  list with translated statuses
+     */
     public static List<PackageHistory> translateStatuses(int id){
         List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(id);
 
-        if(Preference.readPreference("language").equals("english")) {
-            for(int i = 0; i < statuses.size(); i++) {
-                if(statuses.get(i).getStatus().equals("Zarejestrowana")) {
-                    statuses.get(i).setStatus("Registered");
-                }
-                else if(statuses.get(i).getStatus().equals("Odebrana Od Klienta")) {
-                    statuses.get(i).setStatus("Received From Client");
-                }
-                else if(statuses.get(i).getStatus().equals("W Transporcie")) {
-                    statuses.get(i).setStatus("In Transport");
-                }
-                else if(statuses.get(i).getStatus().equals("W Lokalnej Sortowni")) {
-                    statuses.get(i).setStatus("In Local Hub");
-                }
-                else if(statuses.get(i).getStatus().equals("W Głównej Sortowni")) {
-                    statuses.get(i).setStatus("In Main Hub");
-                }
-                else if(statuses.get(i).getStatus().equals("Przekazana Do Doręczenia")) {
-                    statuses.get(i).setStatus("Handed Over For Delivery");
-                }
-                else if(statuses.get(i).getStatus().equals("Dostarczona")) {
-                    statuses.get(i).setStatus("Delivered");
-                }
-                else if(statuses.get(i).getStatus().equals("Nieobecność Odbiorcy")) {
-                    statuses.get(i).setStatus("Recipient's Absence");
-                }
-                else if(statuses.get(i).getStatus().equals("Ponowna Próba Doręczenia")) {
-                    statuses.get(i).setStatus("Retry Delivery");
-                }
-                else if(statuses.get(i).getStatus().equals("Do Odebrania W Odziale")) {
-                    statuses.get(i).setStatus("To Be Picked In Hub");
-                }
-                else if(statuses.get(i).getStatus().equals("Zwrot Do Nadawcy")) {
-                    statuses.get(i).setStatus("Returning To The Sender");
-                }
-                else if(statuses.get(i).getStatus().equals("Zwrócona Do Nadawcy")) {
-                    statuses.get(i).setStatus("Returned To The Sender");
+        PackageStatus[] status = PackageStatus.values();
+        if (Preference.readPreference("language").equals("english")) {
+            for (int i = 0; i < statuses.size(); i++) {
+                for (int j = 0; j < status.length; j++) {
+                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
+                        statuses.get(i).setStatus(status[j].engDisplayName());
+                    }
                 }
             }
         }
-        else {
-            return statuses;
-        }
+
         return statuses;
     }
 
+    /**
+     * <p>
+     *  Method returns list of type PackageDTO
+     *  with translated most recent statuses
+     * </p>
+     * @param statuses most recent status
+     * @return list with translated most recent status
+     */
+    public static List<PackagesDTO> translateLastStatus(List<PackagesDTO> statuses){
+        PackageStatus[] status = PackageStatus.values();
+
+        if (Preference.readPreference("language").equals("english")) {
+            for (int i = 0; i < statuses.size(); i++) {
+                for (int j = 0; j < status.length; j++) {
+                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
+                        statuses.get(i).setStatus(status[j].engDisplayName());
+                    }
+                }
+            }
+        }
+        return statuses;
+    }
 
     /**
      * <p>
@@ -388,7 +395,7 @@ public class ClientTrackPackage implements Initializable {
      */
     public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
 
-        List<PackagesDTO> listOfPackages = PackagesDAO.readPackagesByID(userId, userEmail);
+        List<PackagesDTO> listOfPackages =  translateLastStatus(PackagesDAO.readPackagesByID(userId, userEmail));
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 

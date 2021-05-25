@@ -139,9 +139,19 @@ public class ClientHistoryPackage implements Initializable {
         loadPackages(packageFirst);
     }
 
+
+    /**
+     * <p>
+     *  Method used to display all the packages in order from the db by HQL query
+     *  (history)
+     * </p>
+     * @param userId used to show packages that client registered
+     * @param userEmail used to show packages that are 'coming' to actual client
+     * @return filled List of type PopulatePackageItem it contains info about statuses
+     */
     public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
 
-        List<PackagesDTO> listOfPackages = PackagesDAO.readHistoryByID(userId, userEmail);
+        List<PackagesDTO> listOfPackages = ClientTrackPackage.translateLastStatus(PackagesDAO.readHistoryByID(userId, userEmail));
 
         List<PopulatePackageItem> packageItems = new ArrayList<>();
 

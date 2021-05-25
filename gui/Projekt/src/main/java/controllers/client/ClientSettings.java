@@ -201,11 +201,12 @@ public class ClientSettings implements Initializable {
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #d82020;" +
                     "-fx-second-color: #ffffff;");
         }
-        else {
+        else if (pickColor.getValue().equals(App.getLanguageProperties("colorWhite"))) {
             pref.addPreference("color", "white");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #FFFFFF;" +
                     "-fx-second-color: #000000;");
         }
+
     }
 
     // Method that handle changing language in application
