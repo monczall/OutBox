@@ -587,5 +587,5 @@ public class PasswordReset {
     public void handleReturn(ActionEvent actionEvent) {
         SceneManager.renderScene("login");
     }
-    
+
 }

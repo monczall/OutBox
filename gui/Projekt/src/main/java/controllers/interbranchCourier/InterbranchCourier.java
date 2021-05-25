@@ -89,12 +89,6 @@ public class InterbranchCourier implements Initializable {
                 });
             }
         });
-        try {
-            SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierHome.fxml",
-                    mainWindow);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     /**
      * method that opens home panel after clicking button
@@ -102,7 +96,7 @@ public class InterbranchCourier implements Initializable {
      * @throws IOException
      */
     public void openHome(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierHome.fxml", mainWindow);
+        SceneManager.renderScene("interbranchCourier");
     }
 
     /**

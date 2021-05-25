@@ -117,4 +117,8 @@ public class PackagesDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void setSizeName(String sizeName) {
+        this.sizeName = sizeName;
+    }
 }

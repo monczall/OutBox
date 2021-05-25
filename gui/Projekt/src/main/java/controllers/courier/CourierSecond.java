@@ -109,10 +109,10 @@ public class CourierSecond implements Initializable {
         ObservableList<PackagesDTO> statuses = PackagesDAO.getPackagesWithStatusById(Login.getUserID());
         PackageStatus[] status = PackageStatus.values();
         if (Preference.readPreference("language").equals("english")) {
-            for (int i = 0; i < statuses.size(); i++) {
-                for (int j = 0; j < status.length; j++) {
-                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
-                        statuses.get(i).setStatus(status[j].engDisplayName());
+            for (PackagesDTO packagesDTO : statuses) {
+                for (PackageStatus packageStatus : status) {
+                    if (packagesDTO.getStatus().equals(packageStatus.displayName())) {
+                        packagesDTO.setStatus(packageStatus.engDisplayName());
                     }
                 }
             }
