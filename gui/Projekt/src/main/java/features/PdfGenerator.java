@@ -27,17 +27,16 @@ import main.java.entity.PdfAreaDTO;
 import main.java.entity.PdfDTO;
 
 public class PdfGenerator {
-    private static String FILE = "D:/sample.pdf";
 
     private static Font subFont = new Font(Font.FontFamily.HELVETICA, 16,
             Font.BOLD);
     private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 12,
             Font.BOLD);
 
-    public static void createPdf(Date start, Date end) throws IOException, DocumentException {
-        File file = new File(FILE);
+    public static void createPdf(Date start, Date end, String pathFile) throws IOException, DocumentException {
+        File file = new File(pathFile);
         file.getParentFile().mkdirs();
-        new PdfGenerator().fillPdf(FILE, start, end);
+        new PdfGenerator().fillPdf(pathFile, start, end);
     }
 
     public void fillPdf(String dest, Date start, Date end) throws IOException, DocumentException {
