@@ -63,6 +63,17 @@ public class AreasDAO {
 
     }
 
+    static public List<Areas> getAreasByVoivodeship(String voivodeship){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("from Areas WHERE voivodeship=:voivodeship");
+        query.setParameter("voivodeship", voivodeship);
+
+        List<Areas> listOfAreas = query.list();
+
+        return listOfAreas;
+    }
+
     static public List<Areas> getAreasById(int areaId){
         Session session = HibernateUtil.getSessionFactory().openSession();
 

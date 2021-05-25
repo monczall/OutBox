@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerRaports">
+<AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerRaports">
    <children>
       <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%reportsTtitle" />
       <FontAwesomeIconView fill="ORANGE" glyphName="FILE_PDF_ALT" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
-      <Button fx:id="createCustomRaportButton" alignment="BOTTOM_CENTER" layoutX="393.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#raportCustom" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="%managerCustomRaport" />
+      <Button fx:id="createCustomRaportButton" alignment="BOTTOM_CENTER" layoutX="393.0" layoutY="569.0" mnemonicParsing="false" onMouseClicked="#raportCustom" prefHeight="39.0" prefWidth="308.0" styleClass="homeBlock" text="%managerCustomRaport" />
       <DatePicker fx:id="startData" layoutX="282.0" layoutY="372.0" promptText="%managerDateFrom" styleClass="inputData" />
       <DatePicker fx:id="endData" layoutX="590.0" layoutY="372.0" promptText="%managerDateTo" styleClass="inputData" />
       <Button alignment="CENTER" layoutX="202.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#raportLastDay" prefHeight="94.0" prefWidth="210.0" styleClass="homeBlock" text="%managerReportLastDay" textAlignment="CENTER" wrapText="true" />
@@ -46,6 +46,6 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <TextField fx:id="fileName" layoutX="431.0" layoutY="462.0" prefHeight="25.0" prefWidth="233.0" promptText="%nameFileInput" styleClass="inputBoxCourier" />
+      <TextField fx:id="fileName" layoutX="431.0" layoutY="464.0" prefHeight="25.0" prefWidth="233.0" promptText="%nameFileInput" styleClass="inputBoxCourier" />
    </children>
 </AnchorPane>

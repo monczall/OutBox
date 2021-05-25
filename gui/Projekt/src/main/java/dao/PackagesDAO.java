@@ -118,8 +118,6 @@ public class PackagesDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Packages P WHERE P.courierId IS NULL");
 
-
-        //SELECT * FROM packages P, user_infos U WHERE P.courierID IS NULL AND P.user_infoID = U.id AND U.voivodeship = "Podkarpackie"
         List<Packages> listOfPackages = query.list();
 
         return listOfPackages;
@@ -130,7 +128,7 @@ public class PackagesDAO {
 
         String hql = "SELECT NEW main.java.entity.PdfDTO(" +
                 "P.packageNumber, PT.sizeName, " +
-                "UI.city, UI.voivodeship, PH.date) " +
+                "UI.city, UI.voivodeship, PH.date, U.areaId) " +
                 "FROM Packages P, UserInfos UI, PackageHistory PH, PackageType PT, Users U " +
                 "WHERE P.id = PH.packageId " +
                 "AND PH.date BETWEEN :dateStart AND :dateEnd " +

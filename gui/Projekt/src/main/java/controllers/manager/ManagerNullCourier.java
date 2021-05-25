@@ -90,9 +90,11 @@ public class ManagerNullCourier implements Initializable {
     private Label courierLabel;
 
     //packages data
+    Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
     UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
     List<Packages> getPackages;
     List<UserInfos> dataUserInfos;
+    List<Users> dataUser;
     int dataIndex = 0;
 
     //courier data
@@ -137,7 +139,6 @@ public class ManagerNullCourier implements Initializable {
         cityAndStreet.setText(dataUserInfos.get(0).getStreetAndNumber());
         voivo.setText(dataUserInfos.get(0).getVoivodeship());
         city.setText(dataUserInfos.get(0).getCity());
-
 
         if(getPackages.size() > 1)
         {
@@ -267,12 +268,14 @@ public class ManagerNullCourier implements Initializable {
         }
 
         for(int i=0; i<getPackages.size(); i++) {
-            dataUserInfos = UserInfosDAO.getUserInfoByID(getPackages.get(i).getUserInfoId());
-            if (!dataUserInfos.get(0).getVoivodeship().equals(ui.getVoivodeship())) {
+            dataUser = UsersDAO.getUsersId(getPackages.get(i).getUserId());
+            if (!dataUser.get(0).getAreaId().equals(uu.getAreaId())) {
                 getPackages.remove(i);
                 i--;
             }
+            System.out.println(dataUser.get(0).getAreaId() + " : " + uu.getAreaId());
         }
+
         if(getPackages.size()==0){
             packageLabel.setVisible(false);
             panePackages.setVisible(false);
@@ -301,7 +304,7 @@ public class ManagerNullCourier implements Initializable {
         }
         for(int i=0; i<dataUserCourier.size(); i++) {
             dataUserInfosCourier = UserInfosDAO.getUserInfoByID(dataUserCourier.get(i).getId());
-            if (!dataUserInfosCourier.get(0).getVoivodeship().equals(ui.getVoivodeship())) {
+            if (!dataUserCourier.get(i).getAreaId().equals(uu.getAreaId())) {
                 dataUserCourier.remove(i);
                 i--;
             }

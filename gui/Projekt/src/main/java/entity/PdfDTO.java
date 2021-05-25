@@ -9,13 +9,23 @@ public class PdfDTO {
     private String city;
     private String voivodeship;
     private Date date;
+    private int areaID;
 
-    public PdfDTO(String packageNumber, String size, String city, String voivodeship, Date date) {
+    public PdfDTO(String packageNumber, String size, String city, String voivodeship, Date date, int areaID) {
         this.packageNumber = packageNumber;
         this.size = size;
         this.city = city;
         this.voivodeship = voivodeship;
         this.date = date;
+        this.areaID = areaID;
+    }
+
+    public int getAreaID() {
+        return areaID;
+    }
+
+    public void setAreaID(int areaID) {
+        this.areaID = areaID;
     }
 
     public String getPackageNumber() {
