@@ -29,7 +29,11 @@
       <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
       <AnchorPane fx:id="moreInformationPane" layoutX="160.0" layoutY="101.0" prefHeight="470.0" prefWidth="692.0" style="-fx-background-color: #121212;">
          <children>
-            <VBox fx:id="statusesVBox" layoutX="33.0" prefHeight="536.0" prefWidth="692.0" />
+            <ScrollPane prefHeight="507.0" prefWidth="730.0">
+               <content>
+                  <VBox fx:id="statusesVBox" minHeight="505.0" minWidth="703.0" style="-fx-background-color: transparent;" />
+               </content>
+            </ScrollPane>
          </children></AnchorPane>
       <Button fx:id="btnBack" layoutX="742.0" layoutY="51.0" mnemonicParsing="false" onAction="#backToTrackPackage" styleClass="btnBack" stylesheets="@../../css/client.css" text="%back">
          <graphic>

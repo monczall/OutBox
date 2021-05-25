@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -14,338 +15,135 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ComboBox?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-          minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0"
-          stylesheets="@../../css/authModule.css"
-          xmlns="http://javafx.com/javafx/15.0.1"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="main.java.controllers.auth.Register">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" stylesheets="@../../css/authModule.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.auth.Register">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="330.0"
-                           prefWidth="330.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="770.0" minWidth="770.0"
-                           prefWidth="770.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="330.0" prefWidth="330.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="770.0" minWidth="770.0" prefWidth="770.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <AnchorPane fx:id="loginLeftPaneAnchorPane" maxHeight="650.0"
-                    maxWidth="330.0" minHeight="650.0" minWidth="330.0"
-                    prefHeight="650.0" prefWidth="330.0"
-                    styleClass="secondaryBackground">
+        <AnchorPane fx:id="loginLeftPaneAnchorPane" maxHeight="650.0" maxWidth="330.0" minHeight="650.0" minWidth="330.0" prefHeight="650.0" prefWidth="330.0" styleClass="secondaryBackground">
             <children>
-                <ImageView fx:id="registerLogoImageView" fitHeight="150.0"
-                           fitWidth="200.0" layoutX="90.0" layoutY="45.0"
-                           pickOnBounds="true" preserveRatio="true"
-                           styleClass="fillIcon" AnchorPane.bottomAnchor="410.0"
-                           AnchorPane.leftAnchor="90.0"
-                           AnchorPane.rightAnchor="90.0"
-                           AnchorPane.topAnchor="45.0">
+                <ImageView fx:id="registerLogoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="90.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" styleClass="fillIcon" AnchorPane.bottomAnchor="410.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="45.0">
                     <image>
-                        <Image url="@../../images/outbox_black.png"/>
+                        <Image url="@../../images/outbox_black.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="registerSloganLabel" alignment="CENTER"
-                       layoutX="42.0" layoutY="195.0" styleClass="themeMainText"
-                       text="%authOutboxSubtitle" AnchorPane.leftAnchor="0.0"
-                       AnchorPane.rightAnchor="0.0">
+                <Label fx:id="registerSloganLabel" alignment="CENTER" layoutX="42.0" layoutY="195.0" styleClass="themeMainText" text="%authOutboxSubtitle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="registerWelcomeLabel" alignment="CENTER"
-                       layoutX="84.0" layoutY="325.0" styleClass="themeMainText"
-                       text="%authWelcome" AnchorPane.leftAnchor="0.0"
-                       AnchorPane.rightAnchor="0.0">
+                <Label fx:id="registerWelcomeLabel" alignment="CENTER" layoutX="84.0" layoutY="325.0" styleClass="themeMainText" text="%authWelcome" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font name="System Bold" size="20.0"/>
+                        <Font name="System Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label fx:id="registerRegisterToContinueLabel"
-                       alignment="CENTER" layoutX="40.0" layoutY="355.0"
-                       maxHeight="121.0" maxWidth="250.0" minHeight="100.0"
-                       minWidth="250.0" prefHeight="121.0" prefWidth="250.0"
-                       styleClass="themeMainText"
-                       text="%authRegisterDescription" textAlignment="CENTER"
-                       textFill="#121212" textOverrun="CLIP" wrapText="true"
-                       AnchorPane.leftAnchor="10.0"
-                       AnchorPane.rightAnchor="10.0">
+                <Label fx:id="registerRegisterToContinueLabel" alignment="CENTER" layoutX="40.0" layoutY="355.0" maxHeight="121.0" maxWidth="250.0" minHeight="100.0" minWidth="250.0" prefHeight="121.0" prefWidth="250.0" styleClass="themeMainText" text="%authRegisterDescription" textAlignment="CENTER" textFill="#121212" textOverrun="CLIP" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <font>
-                        <Font size="15.0"/>
+                        <Font size="15.0" />
                     </font>
                 </Label>
-                <Button fx:id="registerExitButtonButton" layoutX="14.0"
-                        layoutY="611.0" mnemonicParsing="false"
-                        onAction="#handleExit" styleClass="exitButton"
-                        text="%authExit"/>
-                <Button fx:id="registerReturnButtonButton" layoutX="12.0"
-                        layoutY="14.0" mnemonicParsing="false"
-                        onAction="#handleReturn" styleClass="exitButton"
-                        text="%authReturn"/>
+                <Button fx:id="registerReturnButtonButton" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleReturn" styleClass="exitButton" text="%authReturn" />
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="loginRightPaneAnchorPane" maxHeight="650.0"
-                    maxWidth="770.0" minHeight="650.0" minWidth="770.0"
-                    prefHeight="650.0" prefWidth="770.0"
-                    styleClass="primaryBackground" GridPane.columnIndex="1">
+        <AnchorPane fx:id="loginRightPaneAnchorPane" maxHeight="650.0" maxWidth="770.0" minHeight="650.0" minWidth="770.0" prefHeight="650.0" prefWidth="770.0" styleClass="primaryBackground" GridPane.columnIndex="1">
             <children>
-                <Label fx:id="registerRegisterLabel" alignment="CENTER"
-                       layoutX="314.0" layoutY="58.0"
-                       styleClass="themeTouchOfColorText" text="%authRegister"
-                       textFill="ORANGE" AnchorPane.leftAnchor="10.0"
-                       AnchorPane.rightAnchor="10.0"
-                       AnchorPane.topAnchor="58.0">
+                <Label fx:id="registerRegisterLabel" alignment="CENTER" layoutX="314.0" layoutY="58.0" styleClass="themeTouchOfColorText" text="%authRegister" textFill="ORANGE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="58.0">
                     <font>
-                        <Font name="System Bold" size="28.0"/>
+                        <Font name="System Bold" size="28.0" />
                     </font>
                 </Label>
-                <Label layoutX="90.0" layoutY="130.0" styleClass="altText"
-                       text="%authFirstName">
+                <Label layoutX="90.0" layoutY="130.0" styleClass="altText" text="%authFirstName">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="registerFirstNameField" layoutX="65.0"
-                           layoutY="150.0" maxHeight="35.0" maxWidth="250.0"
-                           minHeight="35.0" minWidth="250.0"
-                           onKeyPressed="#handleRegisterOnEnterPressed"
-                           onKeyTyped="#clearErrorsOnFirstName"
-                           prefHeight="35.0" prefWidth="250.0"
-                           promptText="%authFirstNameExample"
-                           styleClass="textFields"/>
-                <Circle fx:id="registerFirstNameCircle" fill="ORANGE"
-                        layoutX="65.0" layoutY="168.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Label layoutX="90.0" layoutY="210.0" styleClass="altText"
-                       text="%authLastName">
+                <TextField fx:id="registerFirstNameField" layoutX="65.0" layoutY="150.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnFirstName" prefHeight="35.0" prefWidth="250.0" promptText="%authFirstNameExample" styleClass="textFields" />
+                <Circle fx:id="registerFirstNameCircle" fill="ORANGE" layoutX="65.0" layoutY="168.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Label layoutX="90.0" layoutY="210.0" styleClass="altText" text="%authLastName">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="registerLastNameField" layoutX="65.0"
-                           layoutY="230.0" maxHeight="35.0" maxWidth="250.0"
-                           minHeight="35.0" minWidth="250.0"
-                           onKeyPressed="#handleRegisterOnEnterPressed"
-                           onKeyTyped="#clearErrorsOnLastName" prefHeight="35.0"
-                           prefWidth="250.0" promptText="%authLastNameExample"
-                           styleClass="textFields"/>
-                <Circle fx:id="registerLastNameCircle" fill="ORANGE"
-                        layoutX="65.0" layoutY="248.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Label layoutX="90.0" layoutY="290.0" styleClass="altText"
-                       text="%authPhoneNumber">
+                <TextField fx:id="registerLastNameField" layoutX="65.0" layoutY="230.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnLastName" prefHeight="35.0" prefWidth="250.0" promptText="%authLastNameExample" styleClass="textFields" />
+                <Circle fx:id="registerLastNameCircle" fill="ORANGE" layoutX="65.0" layoutY="248.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Label layoutX="90.0" layoutY="290.0" styleClass="altText" text="%authPhoneNumber">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="registerPhoneNumberField" layoutX="65.0"
-                           layoutY="310.0" maxHeight="35.0" maxWidth="250.0"
-                           minHeight="35.0" minWidth="250.0"
-                           onKeyPressed="#handleRegisterOnEnterPressed"
-                           onKeyTyped="#clearErrorsOnPhoneNumber"
-                           prefHeight="35.0" prefWidth="250.0"
-                           promptText="%authPhoneExample"
-                           styleClass="textFields"/>
-                <Circle fx:id="registerPhoneNumberCircle" fill="ORANGE"
-                        layoutX="65.0" layoutY="325.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Label layoutX="90.0" layoutY="370.0" styleClass="altText"
-                       text="%authEmailAddres">
+                <TextField fx:id="registerPhoneNumberField" layoutX="65.0" layoutY="310.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnPhoneNumber" prefHeight="35.0" prefWidth="250.0" promptText="%authPhoneExample" styleClass="textFields" />
+                <Circle fx:id="registerPhoneNumberCircle" fill="ORANGE" layoutX="65.0" layoutY="325.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Label layoutX="90.0" layoutY="370.0" styleClass="altText" text="%authEmailAddres">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="registerEmailAddressField" layoutX="65.0"
-                           layoutY="390.0" maxHeight="35.0" maxWidth="250.0"
-                           minHeight="35.0" minWidth="250.0"
-                           onKeyPressed="#handleRegisterOnEnterPressed"
-                           onKeyTyped="#clearErrorsOnEmailAddress"
-                           prefHeight="35.0" prefWidth="250.0"
-                           promptText="%authEmailExample"
-                           styleClass="textFields"/>
-                <Circle fx:id="registerEmailAddressCircle" fill="ORANGE"
-                        layoutX="65.0" layoutY="405.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Label layoutX="505.0" layoutY="130.0" styleClass="altText"
-                       text="%authStreetAndNumber">
+                <TextField fx:id="registerEmailAddressField" layoutX="65.0" layoutY="390.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnEmailAddress" prefHeight="35.0" prefWidth="250.0" promptText="%authEmailExample" styleClass="textFields" />
+                <Circle fx:id="registerEmailAddressCircle" fill="ORANGE" layoutX="65.0" layoutY="405.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Label layoutX="505.0" layoutY="130.0" styleClass="altText" text="%authStreetAndNumber">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="registerStreetField" layoutX="482.0"
-                           layoutY="150.0" maxHeight="35.0" maxWidth="250.0"
-                           minHeight="35.0" minWidth="250.0"
-                           onKeyPressed="#handleRegisterOnEnterPressed"
-                           onKeyTyped="#clearErrorsOnStreet" prefHeight="35.0"
-                           prefWidth="250.0"
-                           promptText="%authStreetAndNumberExample"
-                           styleClass="textFields"/>
-                <Circle fx:id="registerStreetCircle" fill="ORANGE"
-                        layoutX="480.0" layoutY="168.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Label layoutX="505.0" layoutY="210.0" styleClass="altText"
-                       text="%authCity">
+                <TextField fx:id="registerStreetField" layoutX="482.0" layoutY="150.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnStreet" prefHeight="35.0" prefWidth="250.0" promptText="%authStreetAndNumberExample" styleClass="textFields" />
+                <Circle fx:id="registerStreetCircle" fill="ORANGE" layoutX="480.0" layoutY="168.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Label layoutX="505.0" layoutY="210.0" styleClass="altText" text="%authCity">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="registerCityField" layoutX="482.0"
-                           layoutY="230.0" maxHeight="35.0" maxWidth="250.0"
-                           minHeight="35.0" minWidth="250.0"
-                           onKeyPressed="#handleRegisterOnEnterPressed"
-                           onKeyTyped="#clearErrorsOnCity" prefHeight="35.0"
-                           prefWidth="250.0" promptText="%authCityExample"
-                           styleClass="textFields"/>
-                <Circle fx:id="registerCityCircle" fill="ORANGE" layoutX="482.0"
-                        layoutY="248.0" radius="25.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Label layoutX="505.0" layoutY="290.0" styleClass="altText"
-                       text="%authVoivodeship">
+                <TextField fx:id="registerCityField" layoutX="482.0" layoutY="230.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnCity" prefHeight="35.0" prefWidth="250.0" promptText="%authCityExample" styleClass="textFields" />
+                <Circle fx:id="registerCityCircle" fill="ORANGE" layoutX="482.0" layoutY="248.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Label layoutX="505.0" layoutY="290.0" styleClass="altText" text="%authVoivodeship">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <ComboBox fx:id="registerVoivodeshipField" layoutX="482.0"
-                           layoutY="310.0" maxHeight="35.0" maxWidth="250.0"
-                           minHeight="35.0" minWidth="250.0"
-                           prefHeight="35.0" prefWidth="250.0"
-                           styleClass="textFields"/>
-                <Circle fx:id="registerVoivodeshipCircle" fill="ORANGE"
-                        layoutX="482.0" layoutY="328.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Label layoutX="87.0" layoutY="442.0" styleClass="altText"
-                       text="%authPassword">
+                <ComboBox fx:id="registerVoivodeshipField" layoutX="482.0" layoutY="310.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" prefHeight="35.0" prefWidth="250.0" styleClass="textFields" />
+                <Circle fx:id="registerVoivodeshipCircle" fill="ORANGE" layoutX="482.0" layoutY="328.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Label layoutX="87.0" layoutY="442.0" styleClass="altText" text="%authPassword">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <PasswordField fx:id="registerPasswordField" layoutX="64.0"
-                               layoutY="462.0" maxHeight="35.0" maxWidth="250.0"
-                               minHeight="35.0" minWidth="250.0"
-                               onKeyPressed="#handleRegisterOnEnterPressed"
-                               onKeyReleased="#checkRequirements"
-                               onKeyTyped="#clearErrorsOnPassword"
-                               prefHeight="35.0" prefWidth="250.0"
-                               promptText="%authEnterStrongPassword"
-                               styleClass="textFields"/>
-                <Circle fx:id="registerPasswordCircle" fill="ORANGE"
-                        layoutX="64.0" layoutY="480.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Label layoutX="504.0" layoutY="442.0" styleClass="altText"
-                       text="%authConfirmPassword">
+                <PasswordField fx:id="registerPasswordField" layoutX="64.0" layoutY="462.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyReleased="#checkRequirements" onKeyTyped="#clearErrorsOnPassword" prefHeight="35.0" prefWidth="250.0" promptText="%authEnterStrongPassword" styleClass="textFields" />
+                <Circle fx:id="registerPasswordCircle" fill="ORANGE" layoutX="64.0" layoutY="480.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Label layoutX="504.0" layoutY="442.0" styleClass="altText" text="%authConfirmPassword">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <PasswordField fx:id="registerRepeatPasswordField"
-                               layoutX="481.0" layoutY="462.0" maxHeight="35.0"
-                               maxWidth="250.0" minHeight="35.0"
-                               minWidth="250.0"
-                               onKeyPressed="#handleRegisterOnEnterPressed"
-                               onKeyReleased="#checkRequirements"
-                               onKeyTyped="#clearErrorsOnRepeatPassword"
-                               prefHeight="35.0" prefWidth="250.0"
-                               promptText="%authConfirmPassword"
-                               styleClass="textFields"/>
-                <Circle fx:id="registerRepeatPasswordCircle" fill="ORANGE"
-                        layoutX="481.0" layoutY="480.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <Button fx:id="registerRegisterButtonButton" layoutX="261.0"
-                        layoutY="601.0" maxHeight="35.0" maxWidth="250.0"
-                        minHeight="35.0" minWidth="250.0"
-                        mnemonicParsing="false" onMouseClicked="#handleRegister"
-                        prefHeight="35.0" prefWidth="250.0"
-                        styleClass="loginButton" text="%authRegister"/>
-                <FontAwesomeIconView glyphName="USER" layoutX="54.0"
-                                     layoutY="179.0" size="32"
-                                     styleClass="fillIcon"/>
-                <FontAwesomeIconView glyphName="USER" layoutX="54.0"
-                                     layoutY="258.0" size="32"
-                                     styleClass="fillIcon"/>
-                <FontAwesomeIconView glyphName="MOBILE_PHONE" layoutX="55.0"
-                                     layoutY="342.0" size="48"
-                                     styleClass="fillIcon" text=""/>
-                <FontAwesomeIconView glyphName="ENVELOPE" layoutX="49.0"
-                                     layoutY="416.0" size="32"
-                                     styleClass="fillIcon"/>
-                <FontAwesomeIconView glyphName="LOCK" layoutX="54.0"
-                                     layoutY="491.0" size="32"
-                                     styleClass="fillIcon"/>
-                <FontAwesomeIconView glyphName="LOCK" layoutX="471.0"
-                                     layoutY="491.0" size="32"
-                                     styleClass="fillIcon"/>
-                <FontAwesomeIconView glyphName="BUILDING" layoutX="468.0"
-                                     layoutY="259.0" size="32"
-                                     styleClass="fillIcon"/>
-                <FontAwesomeIconView glyphName="INSTITUTION" layoutX="464.0"
-                                     layoutY="338.0" size="32"
-                                     styleClass="fillIcon"/>
-                <FontAwesomeIconView glyphName="MAP_MARKER" layoutX="471.0"
-                                     layoutY="179.0" size="32"
-                                     styleClass="fillIcon"/>
-                <Label fx:id="registerFirstNameErrorExample" layoutX="88.0"
-                       layoutY="185.0" styleClass="yellowText"
-                       text="%authFirstNameErrorExample" textFill="WHITE"
-                       visible="false"/>
-                <Label fx:id="registerLastNameErrorExample" layoutX="88.0"
-                       layoutY="265.0" styleClass="yellowText"
-                       text="%authLastNameErrorExample" textFill="WHITE"
-                       visible="false"/>
-                <Label fx:id="registerPhoneNumberErrorExample" layoutX="88.0"
-                       layoutY="345.0" styleClass="yellowText"
-                       text="%authPhoneErrorExample" textFill="WHITE"
-                       visible="false"/>
-                <Label fx:id="registerEmailErrorExample" layoutX="88.0"
-                       layoutY="425.0" styleClass="yellowText"
-                       text="%authEmailErrorExample" textFill="WHITE"
-                       visible="false"/>
-                <Label fx:id="registerStreetErrorExample" layoutX="501.0"
-                       layoutY="185.0" styleClass="yellowText"
-                       text="%authStreetAndNumberErrorExample" textFill="WHITE"
-                       visible="false"/>
-                <Label fx:id="registerCityErrorExample" layoutX="501.0"
-                       layoutY="265.0" styleClass="yellowText"
-                       text="%authCityErrorExample" textFill="WHITE"
-                       visible="false"/>
-                <Label fx:id="registerVoivodeshipErrorExample" layoutX="501.0"
-                       layoutY="345.0" styleClass="yellowText"
-                       text="%authVoivodeshipErrorExample" textFill="WHITE"
-                       visible="false"/>
-                <Label layoutX="88.0" layoutY="497.0"
-                       styleClass="themeTouchOfColorText"
-                       text="%authPasswordRequirements"/>
-                <Label fx:id="registerSixCharsRequirement" layoutX="88.0"
-                       layoutY="513.0" styleClass="altText"
-                       text="%authPasswordSixChar"/>
-                <Label fx:id="registerSmallLetterRequirement" layoutX="88.0"
-                       layoutY="528.0" styleClass="altText"
-                       text="%authPasswordSmallLetter"/>
-                <Label fx:id="registerBigLetterRequirement" layoutX="88.0"
-                       layoutY="543.0" styleClass="altText"
-                       text="%authPasswordBigLetter"/>
-                <Label fx:id="registerNumberRequirement" layoutX="88.0"
-                       layoutY="558.0" styleClass="altText"
-                       text="%authPasswordNumber"/>
-                <Label fx:id="registerSpecialCharRequirement" layoutX="88.0"
-                       layoutY="573.0" styleClass="altText"
-                       text="%authPasswordSpecialChar"/>
-                <Label layoutX="500.0" layoutY="499.0"
-                       styleClass="themeTouchOfColorText"
-                       text="%authPasswordRequirements"/>
-                <Label fx:id="registerSamePasswordsRequirement" layoutX="500.0"
-                       layoutY="515.0" styleClass="altText"
-                       text="%authPasswordMatch"/>
+                <PasswordField fx:id="registerRepeatPasswordField" layoutX="481.0" layoutY="462.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyReleased="#checkRequirements" onKeyTyped="#clearErrorsOnRepeatPassword" prefHeight="35.0" prefWidth="250.0" promptText="%authConfirmPassword" styleClass="textFields" />
+                <Circle fx:id="registerRepeatPasswordCircle" fill="ORANGE" layoutX="481.0" layoutY="480.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <Button fx:id="registerRegisterButtonButton" layoutX="261.0" layoutY="601.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="%authRegister" />
+                <FontAwesomeIconView glyphName="USER" layoutX="54.0" layoutY="179.0" size="32" styleClass="fillIcon" />
+                <FontAwesomeIconView glyphName="USER" layoutX="54.0" layoutY="258.0" size="32" styleClass="fillIcon" />
+                <FontAwesomeIconView glyphName="MOBILE_PHONE" layoutX="55.0" layoutY="342.0" size="48" styleClass="fillIcon" text="" />
+                <FontAwesomeIconView glyphName="ENVELOPE" layoutX="49.0" layoutY="416.0" size="32" styleClass="fillIcon" />
+                <FontAwesomeIconView glyphName="LOCK" layoutX="54.0" layoutY="491.0" size="32" styleClass="fillIcon" />
+                <FontAwesomeIconView glyphName="LOCK" layoutX="471.0" layoutY="491.0" size="32" styleClass="fillIcon" />
+                <FontAwesomeIconView glyphName="BUILDING" layoutX="468.0" layoutY="259.0" size="32" styleClass="fillIcon" />
+                <FontAwesomeIconView glyphName="INSTITUTION" layoutX="464.0" layoutY="338.0" size="32" styleClass="fillIcon" />
+                <FontAwesomeIconView glyphName="MAP_MARKER" layoutX="471.0" layoutY="179.0" size="32" styleClass="fillIcon" />
+                <Label fx:id="registerFirstNameErrorExample" layoutX="88.0" layoutY="185.0" styleClass="yellowText" text="%authFirstNameErrorExample" textFill="WHITE" visible="false" />
+                <Label fx:id="registerLastNameErrorExample" layoutX="88.0" layoutY="265.0" styleClass="yellowText" text="%authLastNameErrorExample" textFill="WHITE" visible="false" />
+                <Label fx:id="registerPhoneNumberErrorExample" layoutX="88.0" layoutY="345.0" styleClass="yellowText" text="%authPhoneErrorExample" textFill="WHITE" visible="false" />
+                <Label fx:id="registerEmailErrorExample" layoutX="88.0" layoutY="425.0" styleClass="yellowText" text="%authEmailErrorExample" textFill="WHITE" visible="false" />
+                <Label fx:id="registerStreetErrorExample" layoutX="501.0" layoutY="185.0" styleClass="yellowText" text="%authStreetAndNumberErrorExample" textFill="WHITE" visible="false" />
+                <Label fx:id="registerCityErrorExample" layoutX="501.0" layoutY="265.0" styleClass="yellowText" text="%authCityErrorExample" textFill="WHITE" visible="false" />
+                <Label fx:id="registerVoivodeshipErrorExample" layoutX="501.0" layoutY="345.0" styleClass="yellowText" text="%authVoivodeshipErrorExample" textFill="WHITE" visible="false" />
+                <Label layoutX="88.0" layoutY="497.0" styleClass="themeTouchOfColorText" text="%authPasswordRequirements" />
+                <Label fx:id="registerSixCharsRequirement" layoutX="88.0" layoutY="513.0" styleClass="altText" text="%authPasswordSixChar" />
+                <Label fx:id="registerSmallLetterRequirement" layoutX="88.0" layoutY="528.0" styleClass="altText" text="%authPasswordSmallLetter" />
+                <Label fx:id="registerBigLetterRequirement" layoutX="88.0" layoutY="543.0" styleClass="altText" text="%authPasswordBigLetter" />
+                <Label fx:id="registerNumberRequirement" layoutX="88.0" layoutY="558.0" styleClass="altText" text="%authPasswordNumber" />
+                <Label fx:id="registerSpecialCharRequirement" layoutX="88.0" layoutY="573.0" styleClass="altText" text="%authPasswordSpecialChar" />
+                <Label layoutX="500.0" layoutY="499.0" styleClass="themeTouchOfColorText" text="%authPasswordRequirements" />
+                <Label fx:id="registerSamePasswordsRequirement" layoutX="500.0" layoutY="515.0" styleClass="altText" text="%authPasswordMatch" />
             </children>
         </AnchorPane>
     </children>

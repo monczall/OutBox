@@ -10,8 +10,6 @@ import javafx.scene.layout.Pane;
 
 public class Alerts {
 
-    /* Method is creating alert that lasts for four seconds (....)*/
-
     /**
      * Method is creating alert that last for two seconds
      * it takes as arguments four elements, AnchorPane that will

@@ -433,9 +433,8 @@
 }
 .chart-vertical-grid-lines,
 .chart-horizontal-grid-lines {
-    -fx-stroke: -fx-gray-color;
+    -fx-stroke: transparent;
 }
-
 #xAxis > .axis-label, #yAxis > .axis-label{
     -fx-text-fill: white;
 }

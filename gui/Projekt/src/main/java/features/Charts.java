@@ -54,34 +54,14 @@ public class Charts {
         createPlace.getChildren().add(pieChart);
     }
 
-    /**
-     *
-     * @param createPlace place where chart will be created
-     * @param legend title of legends
-     * @param month used to generate chart from this month
-     * @param layoutX X axis layout
-     * @param layoutY Y axis layout
-     * @param width width of chart
-     * @param height height of chart
-     */
-    public static void createBarChart(AnchorPane createPlace, String legend, String month,
-                                      int layoutX, int layoutY, int width, int height){
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Dzień");
-        xAxis.setTickLabelFill(Paint.valueOf("white"));
-        xAxis.setId("xAxis");
 
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Ilość");
-        yAxis.setTickLabelFill(Paint.valueOf("white"));
-        yAxis.setId("yAxis");
+    public static void createBarChart(BarChart<String,Long> barChart, String month){
 
-        BarChart<String, Long> barChart = new BarChart(xAxis,yAxis);
+        barChart.setTitle("Ilość przesyłek w miesiącu " + month);
 
         XYChart.Series dataXY = new XYChart.Series();
-        dataXY.setName(legend);
+        dataXY.setName("legenda");
 
-        System.out.println(month);
         List<BarChartDTO> listTest = PackagesDAO.quantityOfPackagesMonthly(month);
 
         int j = 1;
@@ -90,9 +70,10 @@ public class Charts {
 
         for(int i = 0; i < listTest.size(); i++) {
             for( ; j <= yearMonth.lengthOfMonth(); j++){
-                if(listTest.get(i).getDay().equals(String.valueOf(j))) {
-
-                    dataXY.getData().add(new XYChart.Data(listTest.get(i).getDay(),
+                System.out.println(listTest.get(i).getDay() + " ");
+                if(Long.valueOf(listTest.get(i).getDay()) == j) {
+                    System.out.println(listTest.get(i).getDay() + " w ifie\n");
+                    dataXY.getData().add(new XYChart.Data(String.valueOf(Long.valueOf(listTest.get(i).getDay())),
                             listTest.get(i).getQuantity()));
                     j = Integer.valueOf(listTest.get(i).getDay()) + 1;
 
@@ -108,13 +89,5 @@ public class Charts {
         }
 
         barChart.getData().add(dataXY);
-
-        barChart.setLayoutX(layoutX);
-        barChart.setLayoutY(layoutY);
-        barChart.setPrefWidth(width);
-        barChart.setPrefHeight(height);
-        barChart.getStyleClass().add("barChart");
-
-        createPlace.getChildren().add(barChart);
     }
 }

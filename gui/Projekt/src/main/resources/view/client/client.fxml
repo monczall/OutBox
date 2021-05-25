@@ -45,7 +45,6 @@
                      </graphic>
                   </Button>
                   <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-                  <Text fill="WHITE" layoutX="454.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%announcements" />
                </children>
             </AnchorPane>
             <VBox fx:id="paneRight" layoutX="65.0" layoutY="1.0" prefHeight="688.0" prefWidth="163.0" styleClass="sideBackground" visible="false">
