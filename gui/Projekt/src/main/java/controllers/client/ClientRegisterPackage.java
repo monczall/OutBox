@@ -376,6 +376,7 @@ public class ClientRegisterPackage implements Initializable {
         packages.setPackageNumber(packageNumber);
         packages.setEmail(sumEmail.getText());
         packages.setTimeOfPlannedDelivery(sumTime.getText());
+        packages.setCourierId(null);
         packages.setAdditionalComment(additionalComment.getText());
 
         session.save(packages);
