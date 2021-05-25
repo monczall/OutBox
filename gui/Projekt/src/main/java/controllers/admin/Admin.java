@@ -43,11 +43,6 @@ public class Admin implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Open Resource File");
-//        fileChooser.showSaveDialog(SceneManager.getStage());
-
-
 
 
         paneRight.setTranslateX(-200);
@@ -95,40 +90,76 @@ public class Admin implements Initializable {
     }
 
 
-
-
     @FXML
     private Pane hello;
 
+    /**
+     * Method that change scene to "admin"
+     * @param mouseEvent mouse event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void go_home(MouseEvent mouseEvent) throws IOException {
         SceneManager.renderScene("admin");
-
     }
 
+    /**
+     * Method that change scene to "editEmployee"
+     * @param mouseEvent mouse event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void go_edit_employee(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
     }
 
+    /**
+     * Method that change scene to "addManager"
+     * @param mouseEvent mouse event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void go_add_manager(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
     }
 
+    /**
+     * Method that change scene to "addArea"
+     * @param mouseEvent mouse event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void go_add_area(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminAddArea.fxml", mainWindow);
     }
 
+    /**
+     * Method that change scene to "packSettings"
+     * @param mouseEvent mouse event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void go_pack_settings(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminPackSettings.fxml", mainWindow);
     }
 
+    /**
+     * Method that change scene to "raports"
+     * @param mouseEvent mouse event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void go_raport(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminRaport.fxml", mainWindow);
     }
 
+    /**
+     * Method that change scene to "settings"
+     * @param mouseEvent mouse event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void go_settings(MouseEvent mouseEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminSettings.fxml", mainWindow);
     }
 
+    /**
+     * Method that show alert with logout option
+     * @param mouseEvent mosue event
+     */
     @FXML
     void go_logout(MouseEvent mouseEvent) {
         Animations.moveByY(alertPane,+500,0.3);
@@ -138,6 +169,10 @@ public class Admin implements Initializable {
         window.setEffect(gaussianBlur);
     }
 
+    /**
+     * Method that close alert with logout if "NO" is chosen
+     * @param event event
+     */
     @FXML
     void logoutNo(ActionEvent event) {
         Animations.moveByY(alertPane,-500,0.3);
@@ -145,11 +180,19 @@ public class Admin implements Initializable {
         window.setDisable(false);
     }
 
+    /**
+     * Method that logout admin
+     * @param event event
+     */
     @FXML
     void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
     }
 
+    /**
+     * Method that close alert with logout if "NO" is chosen
+     * @param actionEvent event
+     */
     public void logout(ActionEvent actionEvent) {
         Animations.moveByY(alertPane,+500,0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
@@ -158,26 +201,51 @@ public class Admin implements Initializable {
         window.setEffect(gaussianBlur);
     }
 
+    /**
+     * Method that change scene to "packSettings"
+     * @param actionEvent action event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void viewPackSettings(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminPackSettings.fxml", mainWindow);
     }
-
+    /**
+     * Method that change scene to "raports"
+     * @param actionEvent action event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void viewRaport(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminRaport.fxml", mainWindow);
     }
-
+    /**
+     * Method that change scene to "settings"
+     * @param actionEvent action event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void viewSettings(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminSettings.fxml", mainWindow);
     }
-
+    /**
+     * Method that change scene to "addArea"
+     * @param actionEvent action event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void viewAddArea(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminAddArea.fxml", mainWindow);
     }
-
+    /**
+     * Method that change scene to "editEmployee"
+     * @param actionEvent action event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void viewEditEmployee(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
     }
-
+    /**
+     * Method that change scene to "addManager"
+     * @param actionEvent action event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void viewAddManager(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
     }

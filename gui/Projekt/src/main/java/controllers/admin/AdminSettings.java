@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import main.java.App;
 import main.java.SceneManager;
 import main.java.features.Animations;
 import main.java.features.Preference;
@@ -32,7 +33,8 @@ public class AdminSettings implements Initializable {
     Preference pref = new Preference();
 
     //List of colors for combobox
-    private ObservableList<String> colors = FXCollections.observableArrayList("Pomarańczowy", "Czerwony", "Biały");
+    private ObservableList<String> colors = FXCollections.observableArrayList(App.getLanguageProperties("colorOrange"), App.getLanguageProperties("colorRed"),
+            App.getLanguageProperties("colorWhite"));
     //List of languages for combobox
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
 
@@ -65,34 +67,43 @@ public class AdminSettings implements Initializable {
     }
 
 
-
+    /**
+     * Method that change app color
+     * @param event event
+     */
     @FXML
     void changeColor(ActionEvent event) {
 
-        if (pickColor.getValue().equals("Pomarańczowy")) {
+        if (pickColor.getValue().equals(App.getLanguageProperties("colorOrange"))) {
             pref.addPreference("color", "orange");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #ffa500;" +
                     "-fx-second-color: #000000;");
         }
-        else if (pickColor.getValue().equals("Czerwony")){
+        else if (pickColor.getValue().equals(App.getLanguageProperties("colorRed"))){
             pref.addPreference("color", "red");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #d82020;" +
                     "-fx-second-color: #ffffff;");
         }
-        else{
+        else if (pickColor.getValue().equals(App.getLanguageProperties("colorWhite"))) {
             pref.addPreference("color", "white");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #FFFFFF;" +
                     "-fx-second-color: #000000;");
         }
     }
 
+    /**
+     * Method that change language
+     * @param event event
+     */
     @FXML
     void changeLanguage(ActionEvent event) {
         Preference pref = new Preference();
 
         if(pickLanguage.getValue().equals("English"))
             pref.addPreference("language","english");
-        else
+        else {
             pref.addPreference("language","polski");
+    }
+    SceneManager.renderScene("admin");
     }
 }

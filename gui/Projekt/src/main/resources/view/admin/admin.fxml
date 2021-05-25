@@ -34,7 +34,7 @@
                   </Button>
                   <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="181.0" layoutY="438.0" mnemonicParsing="false" onAction="#viewRaport" prefHeight="123.0" prefWidth="212.0" styleClass="homeBlock" text="%adminGenerateReport">
                      <graphic>
-                        <FontAwesomeIconView glyphName="BOOK" size="70" styleClass="blockIcon" />
+                        <FontAwesomeIconView glyphName="FILE_PDF_ALT" size="70" styleClass="blockIcon" />
                      </graphic>
                   </Button>
                   <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="415.0" layoutY="438.0" mnemonicParsing="false" onAction="#viewSettings" prefHeight="123.0" prefWidth="212.0" styleClass="homeBlock" text="%adminSettings">
@@ -87,7 +87,7 @@
                   <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="icons" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
                   <FontAwesomeIconView glyphName="HOME" layoutX="16.0" layoutY="120.0" onMouseClicked="#go_home" size="36" styleClass="icons" text="" />
                   <FontAwesomeIconView glyphName="USERS" layoutX="14.0" layoutY="189.0" onMouseClicked="#go_edit_employee" size="36" styleClass="icons" />
-                  <FontAwesomeIconView glyphName="BOOK" layoutX="17.0" layoutY="469.0" onMouseClicked="#go_raport" size="36" styleClass="icons" />
+                  <FontAwesomeIconView glyphName="FILE_PDF_ALT" layoutX="17.0" layoutY="469.0" onMouseClicked="#go_raport" size="36" styleClass="icons" />
                   <FontAwesomeIconView id="iconSettings" glyphName="COG" layoutX="18.0" layoutY="539.0" onMouseClicked="#go_settings" size="36" styleClass="icons" text="" />
                   <FontAwesomeIconView glyphName="POWER_OFF" layoutX="20.0" layoutY="609.0" onMouseClicked="#go_logout" size="36" styleClass="icons" />
                   <FontAwesomeIconView glyphName="USER_PLUS" layoutX="15.0" layoutY="258.0" onMouseClicked="#go_add_manager" size="36" styleClass="icons" />

@@ -53,7 +53,7 @@ public class AdminRaport {
                 File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
                 if (f.exists() && f.isFile()) {
-                    Alerts.createAlert(RightPaneAnchorPane, raportButton, "WARNING", App.getLanguageProperties("fileExist"));
+                    Alerts.createAlert(RightPaneAnchorPane, raportButton, "WARNING", App.getLanguageProperties("fileExists"));
                 } else {
 
                     if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
@@ -121,7 +121,7 @@ public class AdminRaport {
                 File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
                 if (f.exists() && f.isFile()) {
-                    Alerts.createAlert(RightPaneAnchorPane, raportButton, "WARNING", App.getLanguageProperties("fileExist"));
+                    Alerts.createAlert(RightPaneAnchorPane, raportButton, "WARNING", App.getLanguageProperties("fileExists"));
                 } else {
 
                     if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
@@ -169,7 +169,7 @@ public class AdminRaport {
                 File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
                 if (f.exists() && f.isFile()) {
-                    Alerts.createAlert(RightPaneAnchorPane, raportButton, "WARNING", App.getLanguageProperties("fileExist"));
+                    Alerts.createAlert(RightPaneAnchorPane, raportButton, "WARNING", App.getLanguageProperties("fileExists"));
                 } else {
 
                     if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
@@ -215,7 +215,7 @@ public class AdminRaport {
                 File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
                 if (f.exists() && f.isFile()) {
-                    Alerts.createAlert(RightPaneAnchorPane, raportButton, "WARNING", App.getLanguageProperties("fileExist"));
+                    Alerts.createAlert(RightPaneAnchorPane, raportButton, "WARNING", App.getLanguageProperties("fileExists"));
                 } else {
 
                     if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
