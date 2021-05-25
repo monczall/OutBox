@@ -12,7 +12,15 @@ import static main.java.App.setConnectionError;
 
 public class PopulateDatabase {
 
-
+    /**
+     * <p>
+     *     Method used to create database structure and fill it with data if it
+     *     doesn't exists. Additionally if database exists, but is empty - fills
+     *     certain tables.
+     * </p>
+     *
+     * @throws FileNotFoundException is being thrown if there is no file at given location
+     */
     public static void createDbIfNotExists() throws FileNotFoundException {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
@@ -50,7 +58,7 @@ public class PopulateDatabase {
                 Reader packagesReader = new BufferedReader(new FileReader("database/populate_packages.sql"));
                 srPackages.runScript(packagesReader);
             }
-            if(PackageHistoryDAO.getPackageHistories().size() == 0){
+            if(PackageHistoryDAO.getStatuses().size() == 0){
                 ScriptRunner srPackageHistories = new ScriptRunner(con);
                 Reader packageHistoriesReader = new BufferedReader(new FileReader("database/populate_package_history.sql"));
                 srPackageHistories.runScript(packageHistoriesReader);
