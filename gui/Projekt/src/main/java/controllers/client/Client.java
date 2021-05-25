@@ -7,10 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
@@ -152,6 +154,18 @@ public class Client implements Initializable {
     @FXML
     void viewTrackPackage(ActionEvent event) throws IOException {
         SceneManager.loadScene("../../../resources/view/client/clientTrackPackage.fxml", mainWindow);
+    }
+
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.setIconified(true);
     }
 
 }

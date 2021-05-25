@@ -2,22 +2,10 @@ package test;
 
 import javafx.collections.ObservableList;
 import main.java.dao.HibernateUtil;
-import main.java.dao.PackageHistoryDAO;
-import main.java.entity.PackageHistory;
 import main.java.entity.PackagesDTO;
-import main.java.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.hibernate.query.Query;
 import org.junit.jupiter.api.*;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import main.java.dao.PackagesDAO;
 
 import static main.java.dao.PackageHistoryDAO.getStatuses;
 import static main.java.dao.PackagesDAO.*;
