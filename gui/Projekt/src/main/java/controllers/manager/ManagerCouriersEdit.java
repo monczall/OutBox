@@ -80,7 +80,7 @@ public class ManagerCouriersEdit implements Initializable {
     @FXML
     private Button button2;
 
-    UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+    Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
     List<UserInfos> dataUserInfos;
     List<Users> dataUser;
     int dataIndex = 0;
@@ -192,14 +192,14 @@ public class ManagerCouriersEdit implements Initializable {
         String role = dataUser.get(0).getRole();
 
         //If there is more than one courier, it shows buttons to switch between them
-        if(dataUserInfos.size() > 1 && role.equals("Kurier") && (dataUserInfos.get(dataIndex).getVoivodeship().equals(ui.getVoivodeship())))
+        if(dataUserInfos.size() > 1 && role.equals("Kurier") && dataUser.get(0).getAreaId() == uu.getAreaId())
         {
             dataPane.setVisible(true);
             button1.setVisible(true);
             button2.setVisible(true);
             notDataLabel.setVisible(false);
         }// if only one courier
-        else if(dataUserInfos.size() == 1 && (role.equals("Kurier")) && (dataUserInfos.get(dataIndex).getVoivodeship().equals(ui.getVoivodeship())))
+        else if(dataUserInfos.size() == 1 && (role.equals("Kurier")) && dataUser.get(0).getAreaId() == uu.getAreaId())
         {
             button1.setVisible(false);
             button2.setVisible(false);

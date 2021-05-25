@@ -47,11 +47,7 @@ public class Admin implements Initializable {
 //        fileChooser.setTitle("Open Resource File");
 //        fileChooser.showSaveDialog(SceneManager.getStage());
 
-        try {
-            SceneManager.loadScene("../../../resources/view/admin/adminHome.fxml", mainWindow);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
 
         paneRight.setTranslateX(-200);
@@ -105,7 +101,7 @@ public class Admin implements Initializable {
     private Pane hello;
 
     public void go_home(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminHome.fxml", mainWindow);
+        SceneManager.renderScene("admin");
 
     }
 
@@ -152,5 +148,37 @@ public class Admin implements Initializable {
     @FXML
     void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
+    }
+
+    public void logout(ActionEvent actionEvent) {
+        Animations.moveByY(alertPane,+500,0.3);
+        GaussianBlur gaussianBlur = new GaussianBlur();
+        gaussianBlur.setRadius(8);
+        window.setDisable(true);
+        window.setEffect(gaussianBlur);
+    }
+
+    public void viewPackSettings(ActionEvent actionEvent) throws IOException {
+        SceneManager.loadScene("../../../resources/view/admin/adminPackSettings.fxml", mainWindow);
+    }
+
+    public void viewRaport(ActionEvent actionEvent) throws IOException {
+        SceneManager.loadScene("../../../resources/view/admin/adminRaport.fxml", mainWindow);
+    }
+
+    public void viewSettings(ActionEvent actionEvent) throws IOException {
+        SceneManager.loadScene("../../../resources/view/admin/adminSettings.fxml", mainWindow);
+    }
+
+    public void viewAddArea(ActionEvent actionEvent) throws IOException {
+        SceneManager.loadScene("../../../resources/view/admin/adminAddArea.fxml", mainWindow);
+    }
+
+    public void viewEditEmployee(ActionEvent actionEvent) throws IOException {
+        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
+    }
+
+    public void viewAddManager(ActionEvent actionEvent) throws IOException {
+        SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
     }
 }

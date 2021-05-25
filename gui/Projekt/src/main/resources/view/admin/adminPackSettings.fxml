@@ -23,7 +23,7 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
                                 <Text layoutX="85.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminSmall" />
                                 <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
-                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" />
+                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" styleClass="partIcon" />
                         <TextField fx:id="smallSize" layoutX="56.0" layoutY="159.0" minWidth="142.0" onKeyTyped="#clearErrorsOnSmallSize" prefWidth="142.0" styleClass="textFieldsSettingsPackege" />
                         <TextField fx:id="smallWeight" layoutX="56.0" layoutY="208.0" onKeyTyped="#clearErrorsOnSmallWeight" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
                         <TextField fx:id="smallPrice" layoutX="56.0" layoutY="257.0" onKeyTyped="#clearErrorsOnSmallPrice" styleClass="textFieldsSettingsPackege" />
@@ -41,8 +41,8 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
                                 <Text layoutX="71.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminMedium" />
                                 <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
-                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" />
-                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="113.0" size="10" />
+                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" styleClass="partIcon" />
+                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="113.0" size="10" styleClass="partIcon" />
                         <TextField fx:id="medSize" layoutX="59.0" layoutY="159.0" onKeyTyped="#clearErrorsOnMedSize" styleClass="textFieldsSettingsPackege" />
                         <TextField fx:id="medWeight" layoutX="58.0" layoutY="206.0" onKeyTyped="#clearErrorsOnMedWeight" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
                         <TextField fx:id="medPrice" layoutX="58.0" layoutY="251.0" onKeyTyped="#clearErrorsOnMedPrice" styleClass="textFieldsSettingsPackege" />
@@ -60,9 +60,9 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="CUBE" layoutX="88.0" layoutY="90.0" size="40" textOrigin="TOP" />
                                 <Text layoutX="84.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%adminBig" />
                                 <Text layoutX="88.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="textOption" text="max." />
-                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" />
-                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="113.0" size="10" />
-                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="104.0" size="10" />
+                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="122.0" size="10" styleClass="partIcon" />
+                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="113.0" size="10" styleClass="partIcon" />
+                                <FontAwesomeIconView fill="ORANGE" glyphName="SQUARE" layoutX="124.0" layoutY="104.0" size="10" styleClass="partIcon" />
                         <TextField fx:id="bigSize" layoutX="58.0" layoutY="159.0" onKeyTyped="#clearErrorsOnBigSize" styleClass="textFieldsSettingsPackege" />
                         <TextField fx:id="bigWeight" layoutX="58.0" layoutY="205.0" onKeyTyped="#clearErrorsOnBigWeight" prefHeight="25.0" prefWidth="95.0" styleClass="textFieldsSettingsWeight" />
                         <TextField fx:id="bigPrice" layoutX="58.0" layoutY="254.0" onKeyTyped="#clearErrorsOnBigPrice" styleClass="textFieldsSettingsPackege" />

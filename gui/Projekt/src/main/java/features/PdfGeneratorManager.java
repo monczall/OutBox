@@ -10,8 +10,10 @@ import main.java.controllers.auth.Login;
 import main.java.dao.PackageTypeDAO;
 import main.java.dao.PackagesDAO;
 import main.java.dao.UserInfosDAO;
+import main.java.dao.UsersDAO;
 import main.java.entity.PdfDTO;
 import main.java.entity.UserInfos;
+import main.java.entity.Users;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,6 +69,9 @@ public class PdfGeneratorManager {
      * @throws DocumentException
      */
     public void fillPdf(String dest, Date start, Date end, boolean display) throws IOException, DocumentException {
+
+        int tableNumber = 0;
+
         Font font = new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD, GrayColor.GRAYWHITE);
         BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
         Font tableFont = new Font(baseFont);
@@ -88,6 +93,8 @@ public class PdfGeneratorManager {
         LocalDate localEnd = Instant.ofEpochMilli(end.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
 
         UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+        Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
+
         Paragraph paragraph;
 
 
@@ -176,19 +183,23 @@ public class PdfGeneratorManager {
         table.setHeaderRows(1);
         ObservableList<PdfDTO> list = PackagesDAO.readPackagesForPdf(start, end);
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-        for (int counter = 0; counter < list.size(); counter++) {
-            if (counter % 2 == 1){
-                table.getDefaultCell().setBackgroundColor(GrayColor.GRAYWHITE);
-            }else{
-                table.getDefaultCell().setBackgroundColor(GrayColor.LIGHT_GRAY);
-            }
-            table.addCell(String.valueOf(counter + 1));
-            table.addCell(new Phrase(list.get(counter).getPackageNumber(), tableFont));
-            table.addCell(new Phrase(list.get(counter).getSize(), tableFont));
-            table.addCell(new Phrase(list.get(counter).getCity(), tableFont));
-            table.addCell(new Phrase(list.get(counter).getVoivodeship(), tableFont));
-            table.addCell(new Phrase(simpleDateFormat.format(list.get(counter).getDate()), tableFont));
 
+        for (int counter = 0; counter < list.size(); counter++) {
+            if(list.get(counter).getAreaID() == uu.getAreaId()){
+                tableNumber++;
+
+                if (tableNumber % 2 == 1){
+                    table.getDefaultCell().setBackgroundColor(GrayColor.GRAYWHITE);
+                }else{
+                    table.getDefaultCell().setBackgroundColor(GrayColor.LIGHT_GRAY);
+                }
+                table.addCell(String.valueOf(counter + 1));
+                table.addCell(new Phrase(list.get(counter).getPackageNumber(), tableFont));
+                table.addCell(new Phrase(list.get(counter).getSize(), tableFont));
+                table.addCell(new Phrase(list.get(counter).getCity(), tableFont));
+                table.addCell(new Phrase(list.get(counter).getVoivodeship(), tableFont));
+                table.addCell(new Phrase(simpleDateFormat.format(list.get(counter).getDate()), tableFont));
+            }
         }
         document.add(table);
         document.close();

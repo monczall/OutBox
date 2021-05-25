@@ -7,10 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -123,6 +120,7 @@ public class CourierSecond implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        table.setPlaceholder(new Label(App.getLanguageProperties("noDataToDisplay")));
         packageNumber.setCellValueFactory(new PropertyValueFactory<>("packageNumber"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOfPlannedDelivery"));
         state.setCellValueFactory(new PropertyValueFactory<>("status"));
