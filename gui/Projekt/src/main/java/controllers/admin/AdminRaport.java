@@ -34,9 +34,11 @@ public class AdminRaport {
      */
 
     public void generateRaport(ActionEvent actionEvent) {
-
         try {
-            if (dateFrom.getValue() == null || dateTo.getValue() == null) {
+            if (dateFrom.getValue() == null || dateTo.getValue() == null ||
+                    dateFrom.getValue().isAfter(dateTo.getValue()) == true ||
+                    dateFrom.getValue().isAfter(LocalDate.now()) ||
+                    dateTo.getValue().isAfter(LocalDate.now())) {
                 Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "WARNING",
                         App.getLanguageProperties("adminGeneratePDFFailure"), 370, 86, "alertFailure");
             } else {

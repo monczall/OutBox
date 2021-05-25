@@ -37,4 +37,8 @@ public class PdfDTO {
     public Date getDate() {
         return date;
     }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 }

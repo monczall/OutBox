@@ -137,7 +137,7 @@ public class UserInfosDAO {
     }
 
 
-    static public void editUser(int userId, String name, String surname, String email,String number,String street,
+    static public void editUser(int userId, String name, String surname, String number,String street,
                                 String city, String voivodeship, String role, int areaId
                                             ) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -152,7 +152,7 @@ public class UserInfosDAO {
         users.getUserInfosByUserInfoId().setPhoneNumber(number);
         users.getUserInfosByUserInfoId().setStreetAndNumber(street);
 
-        users.setEmail(email);
+
         users.setRole(role);
         users.setAreaId(areaId);
 

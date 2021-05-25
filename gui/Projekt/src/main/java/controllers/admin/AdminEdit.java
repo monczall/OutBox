@@ -109,34 +109,18 @@ public class AdminEdit implements Initializable {
             if(isValid(editFirstNameField.getText(), editLastNameField.getText(), editStreetField.getText(), editCityField.getText(),
                     editVoivodeshipField.getText())){
                 if(isPhoneNumber(editPhoneNumberField.getText())){
-                    if(isEmail(editEmailAddressField.getText())){
-                        if(!ifExist(editEmailAddressField.getText())) {
                         System.out.println("An employee was edited");
                         // SUCCESSFULLY ADDED
                         UserInfosDAO.editUser(AdminEditEmployee.getUserID(), editFirstNameField.getText(), editLastNameField.getText(),
-                                editEmailAddressField.getText(), editPhoneNumberField.getText(), editStreetField.getText(),
+                                editPhoneNumberField.getText(), editStreetField.getText(),
                                 editCityField.getText(),  editVoivodeshipField.getText(),
                                 editRoleChoiceBox.getSelectionModel().getSelectedItem().toString(),
                                 AreasDAO.getAreasIdByName(editAreaChoiceBox.getSelectionModel().getSelectedItem().toString()) );
 
                         Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"CHECK",
                                 App.getLanguageProperties("adminSuccessEdit"), 360, 86, "alertSuccess");
-                        }else{
-                            errorOnEmailAddress();
-
-                            Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"WARNING",
-                                    App.getLanguageProperties("adminEmailExist"), 310, 86, "alertFailure");
                         }
-
-
-
-                    }else{
-                        errorOnEmailAddress();
-
-                        Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"WARNING",
-                                App.getLanguageProperties("adminInvalidEmail"), 560, 86, "alertFailure");
-                    }
-                }else{
+                else{
                     errorOnPhoneNumber();
 
                     Alerts.createCustomAlert(RightPaneAnchorPane, editEditButtonButton,"WARNING",
@@ -174,10 +158,7 @@ public class AdminEdit implements Initializable {
             errorOnPhoneNumber();
             error++;
         }
-        if(editEmailAddressField.getText().isEmpty()){
-            errorOnEmailAddress();
-            error++;
-        }
+
         if(editStreetField.getText().isEmpty()){
             errorOnStreet();
             error++;
@@ -287,22 +268,6 @@ public class AdminEdit implements Initializable {
         }
     }
 
-    /**
-     * Method that checks if email is correctly entered
-     * True is returned if data are correct compared to patterns, otherwise false
-     * @param email email
-     * @return
-     */
-    private boolean isEmail(String email){
-        Pattern patternEmail = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-        Matcher matchEmail = patternEmail.matcher(email);
-
-        if(matchEmail.matches()){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     /**
      * Method that checks if email already exist
@@ -587,7 +552,6 @@ public class AdminEdit implements Initializable {
         editLastNameField.setText(userList.get(0).getUserInfosByUserInfoId().getSurname());
 
         editPhoneNumberField.setText(userList.get(0).getUserInfosByUserInfoId().getPhoneNumber());
-        editEmailAddressField.setText(userList.get(0).getEmail());
         editStreetField.setText(userList.get(0).getUserInfosByUserInfoId().getStreetAndNumber());
 
         editCityField.setText(userList.get(0).getUserInfosByUserInfoId().getCity());

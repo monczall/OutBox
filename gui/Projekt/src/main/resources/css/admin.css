@@ -615,4 +615,7 @@
 .backIcon{
     -fx-fill: -fx-gray-color;
 }
+.partIcon{
+    -fx-fill: -fx-main-color;
+}
 
