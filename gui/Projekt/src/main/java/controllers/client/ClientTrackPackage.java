@@ -43,7 +43,7 @@ public class ClientTrackPackage implements Initializable {
             App.getLanguageProperties("statusEight"),
             App.getLanguageProperties("statusNine"),
             App.getLanguageProperties("statusTen"),
-            App.getLanguageProperties("statusElven"),
+            App.getLanguageProperties("statusEleven"),
             App.getLanguageProperties("statusTwelve"),
     };
 
@@ -159,7 +159,7 @@ public class ClientTrackPackage implements Initializable {
                 else if(currentStatus.equals("Nieobecność Odbiorcy") || currentStatus.equals("Recipient's Absence")) {
                     return arrayOfDescriptions[7];
                 }
-                else if(currentStatus.equals("Ponowna Próba Doręczenia") || currentStatus.equals("Retry Delviery")) {
+                else if(currentStatus.equals("Ponowna Próba Doręczenia") || currentStatus.equals("Retry Delivery")) {
                     return arrayOfDescriptions[8];
                 }
                 else if(currentStatus.equals("Do Odebrania W Odziale") || currentStatus.equals("To Be Picked In Hub")) {
@@ -234,8 +234,9 @@ public class ClientTrackPackage implements Initializable {
      * </p>
      * @param date date of a status
      * @param status name of status
+     * @param createPlace where status will be created
      */
-    public void createStatus(String date, String status){
+    public void createStatus(String date, String status, VBox createPlace){
 
         HBox statusHBox = new HBox();
 
@@ -273,7 +274,7 @@ public class ClientTrackPackage implements Initializable {
         statusHBox.getChildren().add(squarePane);
         statusHBox.getChildren().add(statusPane);
 
-        statusesVBox.getChildren().add(0,statusHBox);
+        createPlace.getChildren().add(0,statusHBox);
     }
 
     /**
@@ -286,7 +287,7 @@ public class ClientTrackPackage implements Initializable {
      * </p>
      * @param steps how much steps need to be created
      */
-    public void createStep(int steps){
+    public void createStep(int steps, VBox createPlace){
         for(int i = 0 ; i < steps; i ++) {
             HBox stepBox = new HBox();
 
@@ -308,7 +309,7 @@ public class ClientTrackPackage implements Initializable {
             stepBox.getChildren().add(emptyPane);
             stepBox.getChildren().add(squarePane);
 
-            statusesVBox.getChildren().add(0,stepBox);
+            createPlace.getChildren().add(0,stepBox);
         }
     }
 
@@ -326,7 +327,7 @@ public class ClientTrackPackage implements Initializable {
      * @param status name of status
      * @param desc description of current status (the newest in terms of date)
      */
-    public void createCurrentStatus(String date, String status, String desc){
+    public void createCurrentStatus(String date, String status, String desc, VBox createPlace){
 
         HBox statusHBox = new HBox();
 
@@ -374,11 +375,13 @@ public class ClientTrackPackage implements Initializable {
         statusHBox.getChildren().add(squarePane);
         statusHBox.getChildren().add(statusPane);
 
-        statusesVBox.getChildren().add(0,statusHBox);
+        createPlace.getChildren().add(0,statusHBox);
     }
 
     /**
-     * Method used to display all the statuses in order from the db by HQL query
+     * <p>
+     *  Method used to display all the statuses in order from the db by HQL query
+     * </p>
      * @param userId used to show packages that client registered
      * @param userEmail used to show packages that are 'coming' to actual client
      * @return filled List of type PopulatePackageItem it contains info about statuses
@@ -548,19 +551,22 @@ public class ClientTrackPackage implements Initializable {
 
                             if(i == statuses.size()-1) {
                                 if(i != 0){
-                                    createStep(4);
+                                    createStep(4, statusesVBox);
                                 }
 
-                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                createCurrentStatus(date,statuses.get(i).getStatus(),addDescription(statuses.get(i).getStatus()));
+                                String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(
+                                        statuses.get(i).getDate());
+
+                                createCurrentStatus(date,statuses.get(i).getStatus(),
+                                        addDescription(statuses.get(i).getStatus()),statusesVBox);
                             }
                             else {
                                 if(i != 0) {
-                                    createStep(2);
+                                    createStep(2, statusesVBox);
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                createStatus(date,statuses.get(i).getStatus());
+                                createStatus(date,statuses.get(i).getStatus(), statusesVBox);
                             }
                         }
 
