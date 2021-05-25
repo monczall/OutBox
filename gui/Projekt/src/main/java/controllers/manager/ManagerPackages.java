@@ -15,8 +15,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import main.java.App;
+import main.java.controllers.auth.Login;
 import main.java.dao.PackagesDAO;
+import main.java.dao.UserInfosDAO;
+import main.java.dao.UsersDAO;
 import main.java.entity.*;
+import main.java.features.Preference;
 import org.controlsfx.control.table.TableRowExpanderColumn;
 
 import java.io.IOException;
@@ -49,7 +53,7 @@ public class ManagerPackages implements Initializable {
 
     Pane pane;
 
-    private final ObservableList<PackagesDTO> packages = PackagesDAO.getPackagesWithStatus();
+    private final ObservableList<PackagesDTO> packages = changeLanguage();
 
     @FXML
     private TableView<PackagesDTO> table;
@@ -120,13 +124,38 @@ public class ManagerPackages implements Initializable {
         ManagerPackages.status = status;
     }
 
+    private ObservableList<PackagesDTO> changeLanguage(){
+        String voivodeship = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0).getVoivodeship();
+        ObservableList<PackagesDTO> translatedPackages = PackagesDAO.getPackagesWithStatus();
+
+        for (int i = 0; i < translatedPackages.size(); i++) {
+
+            if(!translatedPackages.get(i).getVoivodeship().equals(voivodeship) && !UsersDAO.readUserInfoById(translatedPackages.get(i).
+                    getUserInfosId()).get(0).getVoivodeship().equals(voivodeship)){
+                System.out.println(translatedPackages.get(i).getPackagesId());
+                translatedPackages.remove(i);
+            }
+        }
+        PackageStatus[] status = PackageStatus.values();
+        if (Preference.readPreference("language").equals("english")) {
+            for (PackagesDTO packagesDTO : translatedPackages) {
+                for (PackageStatus packageStatus : status) {
+                    if (packagesDTO.getStatus().equals(packageStatus.displayName())) {
+                        packagesDTO.setStatus(packageStatus.engDisplayName());
+                    }
+                }
+            }
+        }
+        return translatedPackages;
+    }
+
     /**
      * update data from table
      */
     public void updateTable()
     {
         table.getItems().clear();
-        table.setItems(PackagesDAO.getPackagesWithStatus());
+        table.setItems(changeLanguage());
     }
     TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
 
