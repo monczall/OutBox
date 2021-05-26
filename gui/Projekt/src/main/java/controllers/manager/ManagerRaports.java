@@ -224,14 +224,16 @@ public class ManagerRaports implements Initializable {
         //if no path is selected for saving the report
         File selectedDirectory = filePathSelection();
         if(selectedDirectory == null){
-            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("fileSaveLocationNotSelected"));
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",
+                    App.getLanguageProperties("fileSaveLocationNotSelected"));
         }
         else{
             if(validateFileName()) {
                 File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
                 if (f.exists() && f.isFile()) {
-                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("fileExists"));
+                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                            App.getLanguageProperties("fileExists"));
                 } else {
 
                     if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
@@ -244,17 +246,21 @@ public class ManagerRaports implements Initializable {
                     Date startValue = java.sql.Date.valueOf(past);
                     Date endValue = java.sql.Date.valueOf(today);
 
+
                     try {
                         PdfGeneratorManager.createPdf(startValue, endValue, display, pathFile);
-                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("reportSuccess"));
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                                App.getLanguageProperties("reportSuccess"));
                     } catch (Exception e) {
-                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("raportError"));
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                                App.getLanguageProperties("raportError"));
                         e.printStackTrace();
                     }
                 }
             }
             else{
-                Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("nameFile"));
+                Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                        App.getLanguageProperties("nameFile"));
             }
         }
         oneDayRaport.setVisible(false);

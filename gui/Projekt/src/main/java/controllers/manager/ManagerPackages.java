@@ -77,7 +77,7 @@ public class ManagerPackages implements Initializable {
     private TextField searchField;
 
     /**
-     * return
+     *
      * @return id
      */
     public static int getId() {
@@ -85,7 +85,7 @@ public class ManagerPackages implements Initializable {
     }
 
     /**
-     *
+     * set id
      * @param id
      */
     public void setId(int id) {
@@ -130,7 +130,8 @@ public class ManagerPackages implements Initializable {
 
         for (int i = 0; i < translatedPackages.size(); i++) {
 
-            if(!translatedPackages.get(i).getVoivodeship().equals(voivodeship) && !UsersDAO.readUserInfoById(translatedPackages.get(i).
+            if(!translatedPackages.get(i).getVoivodeship().equals(voivodeship) &&
+                    !UsersDAO.readUserInfoById(translatedPackages.get(i).
                     getUserInfosId()).get(0).getVoivodeship().equals(voivodeship)){
                 System.out.println(translatedPackages.get(i).getPackagesId());
                 translatedPackages.remove(i);
@@ -148,7 +149,6 @@ public class ManagerPackages implements Initializable {
         }
         return translatedPackages;
     }
-
     /**
      * update data from table
      */
