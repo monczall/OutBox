@@ -362,6 +362,37 @@ public class PackagesDAO {
         return packages;
     }
 
+    static public ObservableList<PackagesDTO> getPackagesByVoivodeship(String voivodeship)
+    {
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
+                "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, UI.name, UI.surname," +
+                " UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email, " +
+                "P.userInfosByUserInfoId.voivodeship, P.userInfosByUserInfoId.name) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH " +
+                "WHERE P.id = PH.packageId " +
+                "AND (P.usersByUserId.userInfosByUserInfoId.voivodeship = :voivodeship " +
+                "OR P.userInfosByUserInfoId.voivodeship = :voivodeship) " +
+                "AND P.userInfoId = UI.id " +
+                "AND PH.status = (SELECT PH.status " +
+                "FROM PH " +
+                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                "FROM PH " +
+                "WHERE PH.packageId = P.id )) " +
+                "GROUP BY P.packageNumber";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setParameter("voivodeship", voivodeship);
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
+
+        return packages;
+    }
+
     static public void updatePackage(int ID, int typeID, int userID, int courierID, int userInfoID, String email, String packageNumber, String time, String additional) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
