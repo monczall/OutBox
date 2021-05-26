@@ -19,7 +19,7 @@
          <graphic>
             <FontAwesomeIconView glyphName="CUBES" size="60" styleClass="blockIcon" />
          </graphic></Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="224.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Raporty">
+      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="224.0" layoutY="341.0" mnemonicParsing="false" onMouseClicked="#openReports" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="Raporty">
          <graphic>
             <FontAwesomeIconView glyphName="LINE_CHART" size="65" styleClass="blockIcon" />
          </graphic></Button>
@@ -28,6 +28,6 @@
             <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon" />
          </graphic></Button>
       <Text layoutX="160.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="HOME" />
-      <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="100.0" layoutY="70.0" size="48" />
+      <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="100.0" layoutY="70.0" size="48" styleClass="blockIconTitle" />
    </children>
 </AnchorPane>

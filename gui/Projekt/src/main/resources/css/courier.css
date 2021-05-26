@@ -106,6 +106,7 @@
 /*-------------STYLING INPUTS-------------*/
 .inputBox{
     -fx-text-fill: -fx-main-color;
+    -fx-font-size: 15px;
     -fx-background-color: transparent;
     -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
@@ -183,16 +184,15 @@
 }
 
 .inputArea .content{
-    -fx-background-color: -fx-dark-color;
-    -fx-border-color: -fx-main-color;
+    -fx-border-width: 0;
 }
 
 .inputArea{
-    -fx-border-color: -fx-main-color;
-    -fx-text-fill: -fx-main-color;
-    -fx-font-size: 15px;
-    -fx-background-radius: 0;
-    -fx-background-color: -fx-main-color;
+    -fx-background-color: -fx-main-color, derive(#111, 0%);
+    -fx-background-insets: 0, 1 1 1 1;
+    -fx-text-fill: white;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: -fx-main-color;
 }
 /*-------------STYLING SCROLLPANE-------------*/
 .scroll-pane{
@@ -224,15 +224,7 @@
     -fx-background-color: transparent;
 }
 /*-------------STYLING BUTTONS-------------*/
-.btnBack{
-    -fx-background-color: transparent;
-    -fx-text-fill: -fx-gray-color;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-background-radius: 0;
-    -fx-border-color: -fx-gray-color;
-    -fx-cursor: hand;
-}
+
 .btnBack:hover, .btnBack:hover > .backIcon{
     -fx-background-color: -fx-gray-color;
     -fx-text-fill: -fx-dark-color;
@@ -256,33 +248,6 @@
     -fx-border-color: -fx-main-color;
     -fx-fill: -fx-main-color;
 }
-
-/*-------------STYLING TABLEVIEW-------------*/
-
-/* TABLEVIEW CSS - NOT NEEDED FOR NOW
-.packageTable, .packageTable . column-header-background .filler, .packageTable .corner{
-    -fx-background-color: transparent;
-}
-.packageTable .column-header{
-    -fx-background-color: -fx-main-color;
-    -fx-font-size: 16px;
-    -fx-fill: -fx-second-color;
-    -fx-alignment: CENTER;
-}
-.packageTable .table-cell{
-    -fx-border-color: transparent;
-    -fx-alignment: CENTER;
-    -fx-padding: 15px;
-    -fx-font-size: 14px;
-    -fx-text-fill: -fx-main-color;
-
-}
-.packageTable .table-row-cell:odd{
-    -fx-background-color: -fx-gray-color;
-}
-.packageTable .table-row-cell:even{
-    -fx-background-color: -fx-gray-color;
-}*/
 
 .packageItem{
     -fx-background-color:  #262628;
@@ -329,11 +294,15 @@
 .table-row-cell:even{
     -fx-table-cell-border-color: transparent;
     -fx-control-inner-background: derive(#111, 23%);
+    -fx-background-color: -fx-main-color, derive(#111, 23%);
+    -fx-background-insets: 0, 0;
 }
 
 .table-row-cell:odd{
     -fx-table-cell-border-color: transparent;
     -fx-control-inner-background: derive(#111, 0%);
+    -fx-background-color: -fx-main-color, derive(#111, 0%);
+    -fx-background-insets: 0, 0;
 }
 
 .table-row-cell:empty {
@@ -341,17 +310,18 @@
 }
 
 .table-row-cell:odd:filled:selected {
-    -fx-background-color: derive(#111, 0%);
-    -fx-border-color: -fx-main-color;
+    -fx-background-color: -fx-main-color, derive(#111, 0%);
+    -fx-background-insets: 0, 1 1 1 1;
+
 }
 
 .table-row-cell:even:filled:selected {
-    -fx-background-color: derive(#111, 23%);
-    -fx-border-color: -fx-main-color;
+    -fx-background-color: -fx-main-color, derive(#111, 23%);
+    -fx-background-insets: 0, 1 1 1 1;
 }
 
 .table-row-cell:hover {
-    /* Tutaj bedzie hover na tabeli */
+
 }
 
 .table-view .column-header .label {
@@ -378,5 +348,24 @@
 }
 .button{
     -fx-base: -fx-main-color;
+    -fx-text-fill: -fx-second-color;
     -fx-font-weight: bold;
+}
+.iconsAwesome{
+    -fx-fill: -fx-second-color;
+}
+.btnBack{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-gray-color;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-gray-color;
+    -fx-cursor: hand;
+    -fx-content-display: LEFT;
+}
+
+.rowText{
+    -fx-text-alignment: right;
+
 }

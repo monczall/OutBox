@@ -6,9 +6,16 @@ import javafx.scene.control.*;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
+import main.java.App;
+import main.java.SceneManager;
 import main.java.features.Alerts;
+import main.java.features.PdfGeneratorManager;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -28,13 +35,13 @@ public class ManagerRaports implements Initializable {
     private DatePicker endData;
 
     @FXML
+    private TextField fileName;
+
+    @FXML
     private Button createCustomRaportButton;
 
     @FXML
     private AnchorPane appWindow,infoConfirmRaport,oneDayRaport;
-
-    @FXML
-    private TextField days;
 
     @FXML
     private Label textDateStart;
@@ -48,33 +55,37 @@ public class ManagerRaports implements Initializable {
     @FXML
     private Label textOneDate;
 
-    String confirmText = "Potwierdzenie wygenerowania raportu z dnia ";
-    /*
-    LocalDate today = LocalDate.now()
-    LocalDate yesterday = today.minusDays(1);
-    // Duration oneDay = Duration.between(today, yesterday); // throws an exception
-    Duration.between(today.atStartOfDay(), yesterday.atStartOfDay()).toDays() // another option
+    boolean display = false;
+
+    String confirmText = App.getLanguageProperties("confirmRaportFromDay");
+
+    LocalDate today;
+    LocalDate past;
+
+    /**
+     * date validation and report generation selection
      */
     @FXML
     public void raportCustom(MouseEvent event) {
         if(startData.getValue() != null && endData.getValue() == null){
-            LocalDate startDataValue = startData.getValue();
-            LocalDate today = LocalDate.now();
-            long daysBetween = DAYS.between(startDataValue, today);
-            long daysFuture = DAYS.between(today, startDataValue);
+            past = startData.getValue();
+            today = LocalDate.now();
+            display=true;
+
+            long daysBetween = DAYS.between(past, today);
+            long daysFuture = DAYS.between(today, past);
 
             if(daysBetween >= 0 && daysFuture <=0) {
-                System.out.println("Generowanie raportu z dnia " + startDataValue);
-                textOneDate.setText(confirmText + startDataValue);
+                textOneDate.setText(confirmText + past);
+                today = past;
                 oneDayRaport.setVisible(true);
             }
             else{
-                Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING","NIEPRAWIDŁOWA DATA");
+                Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("incorrectDate"));
             }
         }
         else if (startData.getValue() == null || endData.getValue() == null) {
-
-            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING","WYBIERZ PRZEDZIAŁ CZASU");
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("chooseTimePeriod"));
         }
         else{
             LocalDate startDataValue = startData.getValue();
@@ -85,17 +96,16 @@ public class ManagerRaports implements Initializable {
             long daysFuture = DAYS.between(today, endDataValue);
 
             if(daysBetween == 0){
-                System.out.println("Generowanie raportu z dnia " + startDataValue);
                 textOneDate.setText(confirmText + startDataValue);
+                today=past;
+                display=true;
                 oneDayRaport.setVisible(true);
             }
             else if(daysBetween < 0 || daysFuture > 0){
-                Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING","BŁĘDNY PRZEDZIAŁ CZASU");
+               Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("incorrectTimeRange"));
             }
             else{
-                System.out.println("Od: " + startDataValue + "\nDo: " + endDataValue);
-                System.out.println("Generowanie raportu z " + daysBetween +" dni");
-
+                display=false;
                 textDateStart.setText(startDataValue.toString());
                 textDateEnd.setText(endDataValue.toString());
                 textDateDays.setText(daysBetween+" ");
@@ -105,52 +115,176 @@ public class ManagerRaports implements Initializable {
         }
     }
 
-
+    /**
+     * generating a report from the last day
+     */
     @FXML
     public void raportLastDay(MouseEvent event) {
-        LocalDate today = LocalDate.now();
-        LocalDate yesterday = today.minusDays(1);
-        System.out.println("raportLastDay: " + yesterday);
-        textOneDate.setText(confirmText + yesterday.toString());
+        today = LocalDate.now();
+        past = today.minusDays(1);
+        display=true;
+        textOneDate.setText(confirmText + past.toString());
         oneDayRaport.setVisible(true);
     }
 
+    /**
+     * generating a report for the last 30 days
+     */
     @FXML
     public void raportLastMonth(MouseEvent event) {
-        LocalDate today = LocalDate.now();
-        LocalDate lastMonth = today.minusDays(30);
-        System.out.println("raportLastMonth: " + lastMonth);
-        textOneDate.setText("Potwierdzenie wygenerowania raportu z ostatniego miesiąca, od dnia: " + lastMonth.toString());
+        today = LocalDate.now();
+        past = today.minusDays(30);
+        display=false;
+        textOneDate.setText(App.getLanguageProperties("confirmRaportLastMonth") +
+                past.toString());
         oneDayRaport.setVisible(true);
     }
 
+    /**
+     * generating a report for the last 7 days
+     */
     @FXML
     public void raportLastWeek(MouseEvent event) {
-        LocalDate today = LocalDate.now();
-        LocalDate lastWeek = today.minusDays(7);
-        System.out.println("raportLastWeek: " + lastWeek);
-        textOneDate.setText("Potwierdzenie wygenerowania raportu z ostatniego tygodnia, od dnia: " + lastWeek.toString());
+        today = LocalDate.now();
+        past = today.minusDays(7);
+        display=false;
+        textOneDate.setText(App.getLanguageProperties("confirmRaportLastWeek") +
+                past.toString());
         oneDayRaport.setVisible(true);
     }
+
+    /**
+     * generating a report from a selected date range
+     */
+    public void confirmRaport(MouseEvent mouseEvent) {
+
+        String pathFile;
+        //if no path is selected for saving the report
+        File selectedDirectory = filePathSelection();
+        if(selectedDirectory == null){
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("fileSaveLocationNotSelected"));
+        }
+        else{
+            if(validateFileName()) {
+                File f = new File(selectedDirectory + fileName.getText() + ".pdf");
+
+                if (f.exists() && f.isFile()) {
+                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("fileExists"));
+                } else {
+
+                    if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
+                        pathFile = selectedDirectory + fileName.getText() + ".pdf";
+                    }
+                    else{
+                        pathFile = selectedDirectory + "\\" +  fileName.getText() + ".pdf";
+                    }
+
+                    LocalDate startDataValue = startData.getValue();
+                    LocalDate endDataValue = endData.getValue().plusDays(1);
+
+                    Date startValue = java.sql.Date.valueOf(startDataValue);
+                    Date endValue = java.sql.Date.valueOf(endDataValue);
+
+                    try {
+                        PdfGeneratorManager.createPdf(startValue, endValue, display, pathFile);
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("reportSuccess"));
+                    } catch (Exception e) {
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("raportError"));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else{
+                Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("nameFile"));
+            }
+        }
+        infoConfirmRaport.setVisible(false);
+    }
+
+    boolean validateFileName(){
+        if(fileName.getText().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * cancellation of report generation
+     */
+    public void cancelRaport(MouseEvent mouseEvent) {
+        infoConfirmRaport.setVisible(false);
+    }
+
+    /**
+     * one day report generation confirmation
+     */
+    public void confirmOneDayReport(MouseEvent mouseEvent) {
+
+        String pathFile;
+        //if no path is selected for saving the report
+        File selectedDirectory = filePathSelection();
+        if(selectedDirectory == null){
+            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("fileSaveLocationNotSelected"));
+        }
+        else{
+            if(validateFileName()) {
+                File f = new File(selectedDirectory + fileName.getText() + ".pdf");
+
+                if (f.exists() && f.isFile()) {
+                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("fileExists"));
+                } else {
+
+                    if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
+                        pathFile = selectedDirectory + fileName.getText() + ".pdf";
+                    }
+                    else{
+                        pathFile = selectedDirectory + "\\" +  fileName.getText() + ".pdf";
+                    }
+
+                    Date startValue = java.sql.Date.valueOf(past);
+                    Date endValue = java.sql.Date.valueOf(today);
+
+                    try {
+                        PdfGeneratorManager.createPdf(startValue, endValue, display, pathFile);
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("reportSuccess"));
+                    } catch (Exception e) {
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("raportError"));
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else{
+                Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("nameFile"));
+            }
+        }
+        oneDayRaport.setVisible(false);
+    }
+
+    /**
+     * cancellation of report generation
+     */
+    public void cancelOneDayRaport(MouseEvent mouseEvent) {
+        oneDayRaport.setVisible(false);
+    }
+
+    /**
+     * Choose where to save the file
+     * @return File path
+     */
+    public File filePathSelection(){
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle(App.getLanguageProperties("titleSaveRaport"));
+        File defaultDirectory = new File("c:/");
+        chooser.setInitialDirectory(defaultDirectory);
+        File selectedDirectory = chooser.showDialog(SceneManager.getStage());
+
+        return selectedDirectory;
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-    public void confirmRaport(MouseEvent mouseEvent) {
-        //here generate raport
-    }
-
-    public void cancelRaport(MouseEvent mouseEvent) {
-        infoConfirmRaport.setVisible(false);
-    }
-
-    public void confirmOneDayRaport(MouseEvent mouseEvent) {
-        //here generate raport
-    }
-
-    public void cancelOneDayRaport(MouseEvent mouseEvent) {
-        oneDayRaport.setVisible(false);
-    }
 }

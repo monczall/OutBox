@@ -11,10 +11,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.SceneManager;
+import main.java.controllers.auth.Login;
+import main.java.dao.UserInfosDAO;
+import main.java.entity.UserInfos;
 import main.java.features.Animations;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +27,7 @@ public class Client implements Initializable {
 
     @FXML
     private VBox paneRight;
+
     @FXML
     private FontAwesomeIconView hamburger;
 
@@ -39,67 +44,65 @@ public class Client implements Initializable {
     private Pane alertPane;
 
     @FXML
-    private AnchorPane appWindow;
+    private Text name;
 
     boolean hamburgerClicked = false;
-
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
+        //Loading name and surname from database
+        UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+        name.setText(ui.getName() + " " + ui.getSurname());
 
-    try {
-        SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        //Changing position of nodes for animation purposes
+        alertPane.setTranslateY(-500);
+        paneRight.setTranslateX(-200);
 
-    alertPane.setTranslateY(-500);
-    paneRight.setTranslateX(-200);
+        // If hamburger button is clicked then menu slides in and transition last for 0.5s
+        hamburger.setOnMouseClicked(event -> {
+            if(hamburgerClicked == false) {
 
+                hamburger.setDisable(true);
+                hamburgerClicked = true;
+                paneRight.setVisible(true);
 
-    hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
-        if(hamburgerClicked == false) {
+                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), paneRight);
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.play();
 
-            hamburger.setDisable(true);
-            hamburgerClicked = true;
-            paneRight.setVisible(true);
+                Animations.moveByX(paneRight,+200,0.5);
+                Animations.moveByX(welcomeMessage,+160,0.5);
+                Animations.moveByX(mainWindow,+70,0.5);
 
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), paneRight);
-            fadeTransition.setFromValue(0);
-            fadeTransition.setToValue(1);
-            fadeTransition.play();
+                fadeTransition.setOnFinished(event1 -> {
+                    hamburger.setDisable(false);
+                });
+            }
+            else {
+                hamburger.setDisable(true);
+                hamburgerClicked = false;
 
-            Animations.moveByX(paneRight,+200,0.5);
-            Animations.moveByX(welcomeMessage,+160,0.5);
-            Animations.moveByX(mainWindow,+70,0.5);
+                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), paneRight);
+                fadeTransition.setFromValue(1);
+                fadeTransition.setToValue(0);
+                fadeTransition.play();
 
-            fadeTransition.setOnFinished(event1 -> {
-                hamburger.setDisable(false);
-            });
-        }
-        else {
-            hamburger.setDisable(true);
-            hamburgerClicked = false;
+                Animations.moveByX(paneRight,-200,0.5);
+                Animations.moveByX(welcomeMessage,-160,0.5);
+                Animations.moveByX(mainWindow,-70,0.5);
 
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), paneRight);
-            fadeTransition.setFromValue(1);
-            fadeTransition.setToValue(0);
-            fadeTransition.play();
-
-            Animations.moveByX(paneRight,-200,0.5);
-            Animations.moveByX(welcomeMessage,-160,0.5);
-            Animations.moveByX(mainWindow,-70,0.5);
-
-            fadeTransition.setOnFinished(event1 -> {
-                paneRight.setVisible(false);
-                hamburger.setDisable(false);
-            });
-        }
-    });
+                fadeTransition.setOnFinished(event1 -> {
+                    paneRight.setVisible(false);
+                    hamburger.setDisable(false);
+                });
+            }
+        });
 
     }
 
+    //Method that handle 'logout' button
     @FXML
     void logout(ActionEvent event) {
         Animations.moveByY(alertPane,+500,0.3);
@@ -109,6 +112,7 @@ public class Client implements Initializable {
         window.setEffect(gaussianBlur);
     }
 
+    //Method that handle 'no' button inside logout popup
     @FXML
     void logoutNo(ActionEvent event) {
         Animations.moveByY(alertPane,-500,0.3);
@@ -116,35 +120,52 @@ public class Client implements Initializable {
         window.setDisable(false);
     }
 
+    //Method that handle 'yes' button inside logout popup
     @FXML
     void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
     }
 
-
+    //Method that handle 'history' button
     @FXML
     void viewHistory(ActionEvent event) throws IOException {
         SceneManager.loadScene("../../../resources/view/client/clientHistoryPackage.fxml", mainWindow);
     }
 
+    //Method that handle 'home' button
     @FXML
     void viewHome(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientHome.fxml", mainWindow);
+        SceneManager.renderScene("client");
     }
 
+    //Method that handle 'registerPackage' button
     @FXML
     void viewRegisterPackage(ActionEvent event) throws IOException {
         SceneManager.loadScene("../../../resources/view/client/clientRegisterPackage.fxml", mainWindow);
     }
 
+    //Method that handle 'settings' button
     @FXML
     void viewSettings(ActionEvent event) throws IOException {
         SceneManager.loadScene("../../../resources/view/client/clientSettings.fxml", mainWindow);
     }
 
+    //Method that handle 'trackPackage' button
     @FXML
     void viewTrackPackage(ActionEvent event) throws IOException {
         SceneManager.loadScene("../../../resources/view/client/clientTrackPackage.fxml", mainWindow);
+    }
+
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.setIconified(true);
     }
 
 }

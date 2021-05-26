@@ -9,13 +9,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.courier.Courier">
    <children>
         <AnchorPane fx:id="window" prefHeight="200.0" prefWidth="200.0" styleClass="mainBackground">
             <children>
-                <AnchorPane fx:id="mainWindow" layoutX="71.0" layoutY="30.0" prefHeight="672.0" prefWidth="1033.0" style="-fx-background-color: transparent;" />
+                <AnchorPane fx:id="mainWindow" layoutX="71.0" layoutY="30.0" prefHeight="672.0" prefWidth="1033.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="527.0" layoutY="393.0" mnemonicParsing="false" onAction="#logout" prefHeight="123.0" prefWidth="330.0" styleClass="homeBlock" text="%logout">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="POWER_OFF" size="70" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="177.0" layoutY="234.0" mnemonicParsing="false" onAction="#openSecond" prefHeight="125.0" prefWidth="679.0" styleClass="homeBlock" text="%changeStatus">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="DROPBOX" size="70" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="177.0" layoutY="393.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="123.0" prefWidth="330.0" styleClass="homeBlock" text="%settings">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
+                  <Text fill="WHITE" layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="HOME" />
+                  <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="176.0" layoutY="81.0" size="40" styleClass="partIcon" />
+                  <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
+               </children></AnchorPane>
                 <VBox fx:id="paneRight" layoutX="71.0" prefHeight="701.0" prefWidth="163.0" styleClass="sideBackground" visible="false">
                     <children>
                         <Pane prefHeight="71.0" prefWidth="156.0" />
@@ -28,7 +49,7 @@
                 </VBox>
                 <AnchorPane layoutY="13.0" prefHeight="701.0" prefWidth="72.0" styleClass="sideBackground" AnchorPane.bottomAnchor="2.0">
                     <children>
-                        <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="hamburger" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
+                        <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="iconsAwesome" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
                         <Button layoutX="-2.0" layoutY="82.0" mnemonicParsing="false" onAction="#openHome" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
                             <graphic>
                                 <FontAwesomeIconView glyphName="HOME" size="36" styleClass="icons" text="" />
@@ -54,8 +75,7 @@
                 <Pane fx:id="welcomeMessage" layoutX="72.0" layoutY="25.0" prefHeight="41.0" prefWidth="200.0">
                     <children>
                         <Text fill="WHITE" layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="%welcome" />
-                        <Text layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
-                        <Text fill="WHITE" layoutX="185.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeHello" text="!" />
+                        <Text fx:id="loggedUser" layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
                     </children>
                 </Pane>
                 <ImageView fitHeight="71.0" fitWidth="87.0" layoutX="1026.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true">

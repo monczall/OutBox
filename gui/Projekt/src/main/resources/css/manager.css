@@ -1,3 +1,22 @@
+/*-------------COLORS-------------*/
+*{
+    -fx-dark-color: #121212;
+    -fx-color-Text:white;
+    -fx-gray-color: #8f8f8f;
+    -fx-color-error:white;
+    -fx-shadow: #000;
+    -fx-dark-transparent: #121212cc;
+    -fx-shadow: #000;
+}
+
+.blockIconTitle{
+    -fx-fill: -fx-main-color;
+}
+
+.blockIcon{
+    -fx-fill: -fx-second-color;
+}
+
 /*-------- ALL SCENES --------*/
 .mainBackground{  /*Background color AnchorPane*/
     -fx-background-color: #121212;
@@ -5,20 +24,27 @@
 
 .infoBackground{  /*Background color AnchorPane*/
     -fx-background-color: #121212;
-    -fx-border-color: #ffa500;
+    -fx-border-color: -fx-main-color;
 }
 
 .textLabel{ /*section name*/
     -fx-font-size: 20px;
-    -fx-text-fill: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-font-weight: bold;
+}
+
+.textLabelSmall{
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
     -fx-font-weight: bold;
 }
 
 /* All buttons CSS */
 .homeBlock{
-    -fx-background-color: #ffa500;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-background-radius: 0;
@@ -27,14 +53,15 @@
 
 .homeBlock:hover, .homeBlock:hover > .blockIcon{
     -fx-background-color: transparent;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-border-width: 2.5px;
-    -fx-border-color: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-border-color: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-cursor: hand;
 }
 
 .infoBoxButtons{
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-text-fill: black;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -44,45 +71,77 @@
 
 .infoBoxButtons:hover, .infoBoxButtons:hover > .blockIcon{
     -fx-background-color: transparent;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-border-width: 2px;
-    -fx-border-color: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-border-color: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-cursor: hand;
+}
+
+.table-column {
+    -fx-alignment: TOP-CENTER;
 }
 
 /* All input CSS */
 .inputBox{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-font-size: 14px;
     -fx-background-color: transparent; /*#202020*/
-    -fx-mark-color: #ffa500;
+    -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-color: #ffa500;
+    -fx-border-color: -fx-main-color;
     -fx-border-width: 0 0 2 0;
     -fx-cursor: text;
 }
 
+.inputBox .list-cell{
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-main-color;
+    -fx-background: -fx-dark-color;
+
+}
+.inputBox .list-view{
+    -fx-background-color: -fx-main-color;
+    -fx-background: -fx-main-color;
+}
+.inputBox .list-view .list-cell:filled:selected{
+    /*-fx-text-fill: -fx-second-color;*/
+    /*-fx-background-color: -fx-main-color;*/
+    -fx-font-weight: bold;
+}
+.inputBox .list-view .list-cell:filled{
+    -fx-background-color: -fx-dark-color;
+}
+.inputBox .list-view .list-cell:hover{
+    -fx-text-fill: -fx-second-color;
+    -fx-background-color: -fx-main-color;
+    -fx-font-weight: bold;
+}
+.inputBox .list-view .scroll-bar:vertical .thumb{
+    -fx-background-color: -fx-second-color;
+}
+
 /* All DatePicker CSS */
 .inputData{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-font-size: 15px;
     -fx-background-color: transparent; /*#202020*/
-    -fx-mark-color: #ffa500;
+    -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-color: #ffa500;
+    -fx-border-color: -fx-main-color;
     -fx-border-width: 0 0 2 0;
 }
 
 .inputData > .text-field {
     -fx-background-color:transparent;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
 }
 
 .inputData > .text-field:focused {
     -fx-background-color:transparent;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
 }
 
 .inputData > .arrow-button { /* background calendar icon*/
@@ -91,24 +150,24 @@
 }
 
 .inputData > .arrow-button > .arrow { /*calendar icon*/
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-font-size: 22px;
 }
 
 .date-picker-popup { /*border window with date calendar*/
-    -fx-background-color:#ffa500;
+    -fx-background-color:-fx-main-color;
 }
 
 .date-picker-popup > .month-year-pane { /*background color tittle calendar*/
-    -fx-background-color: #ffa500;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
 
 .date-picker-popup > * > .spinner { /*text color tittle calendar*/
-    -fx-background-color: #ffa500;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: red;
     -fx-cursor: hand;
 }
 
@@ -136,7 +195,7 @@
 }
 
 .date-picker-popup > .calendar-grid { /*color days in week*/
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-text-fill: black;
     -fx-padding: 0;
     -fx-border-width: 1 0 0 0;
@@ -151,11 +210,11 @@
     -fx-alignment: BASELINE_CENTER;
     -fx-opacity: 1.0;
     -fx-cursor: hand;
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
 }
 
 .date-picker-popup > * > .date-cell:hover{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-background-color: black;
 }
 
@@ -164,14 +223,19 @@
     -fx-background-color: silver;
 }
 
+.date-picker-popup .label{
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
 /*-------- MENU --------*/
 .sideBackground{
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
 }
 
 .sideButtons{
-    -fx-background-color: #ffa500;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     /*-fx-text-alignment: right;*/
@@ -180,12 +244,12 @@
 }
 .sideButtons:hover{
     -fx-background-color: #121212;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-cursor: hand;
 }
 
 .confirmButtons{
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-text-fill: black;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -195,7 +259,7 @@
 }
 .confirmButtons:hover{
     -fx-background-color: #121212;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-cursor: hand;
 }
 
@@ -204,7 +268,7 @@
 }
 
 .sideIcons{
-    -fx-background-color: #ffa500;
+    -fx-background-color: -fx-main-color;
     -fx-background-radius: 0;
 }
 
@@ -212,47 +276,31 @@
     -fx-cursor: hand;
 }
 
-
-/*-------- TableView --------*/
-
-.tableview{
-    -fx-border-color: transparent;
+.table-view{
     -fx-background-color: transparent;
-}
-
-.table-view .column-header-background .filler {
-    -fx-background-color: transparent;
+    -fx-selection-bar-non-focused: derive(#111, 00%);
 }
 
 .tableview .placeholder .label {
     -fx-text-fill: linen;
     -fx-font-size: 1.666em;
     -fx-font-weight: bold;
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
 }
 
-.table-view .column-header {
-    -fx-border-color: black;
-    -fx-background-color: #ffa500;
-    -fx-border-width: 0.5px;
-}
-
-.table-view .column-header-background{
-    -fx-background-color: black;
-}
-
-.table-view .column-header-background .label{
+.table-view .column-header .label{
     -fx-background-color: transparent;
-    -fx-font-weight:bold;
-    -fx-text-fill: black;
 }
 
-.table-view .table-column{
-    -fx-alignment:center;
-}
-
-/*-------------TableColumn-----------------------*/
 .table-view .table-cell{
+    -fx-text-fill: #c0c0c0;
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.expandableRow{
     -fx-text-fill: silver;
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
@@ -260,20 +308,81 @@
     -fx-font-size: 14px;
 }
 
-.table-row-cell:odd{
-    -fx-background-color: #1e1e1e;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em;
+.tableview .placeholder .label {
+    -fx-text-fill: linen;
+    -fx-font-size: 1.666em;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-main-color;
 }
-.table-row-cell:even{
-    -fx-background-color: #292929;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em;
-}
-.table-row-cell:hover{
-    -fx-text-fill: red;
-    -fx-background-color: #393939;
 
+.table-row-cell:even{
+    -fx-table-cell-border-color: transparent;
+    -fx-control-inner-background: derive(#111, 23%);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:odd{
+    -fx-table-cell-border-color: transparent;
+    -fx-control-inner-background: derive(#111, 0%);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:odd:filled:selected {
+    -fx-background-color: -fx-main-color, derive(#111, 0%);
+    -fx-background-insets: 0, 1 1 1 1;
+}
+
+.table-row-cell:even:filled:selected {
+    -fx-background-color: -fx-main-color, derive(#111, 23%);
+    -fx-background-insets: 0, 1 1 1 1;
+}
+
+.table-row-cell:hover {
+    /* Tutaj bedzie hover na tabeli */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #171717;
+    -fx-background-color: -fx-main-color;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: -fx-main-color;
+}
+
+.table-view .table-row-cell:odd, .table-view .table-row-cell:even{
+    -fx-alignment: center;
+}
+
+.label{
+    -fx-text-fill: -fx-main-color;
+    -fx-font-weight: bold;
+}
+
+.table-column {
+    -fx-alignment: TOP-CENTER;
+}
+
+.inputArea{
+    -fx-background-color: -fx-main-color, derive(#111, 0%);
+    -fx-background-insets: 0, 1 1 1 1;
+    -fx-text-fill: white;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: -fx-main-color;
+}
+
+.button{
+    -fx-base: -fx-main-color;
+    -fx-font-weight: bold;
 }
 /*-------------STYLING TOGGLE SWITCH-------------*/
 .toggleSwitch .thumb{
@@ -291,25 +400,16 @@
     -fx-effect: dropshadow(three-pass-box, -fx-main-color, 10, 0, 0, 0);
 }
 
-/*-------- Home --------*/
-
-
-/*-------- Couriers --------*/
-
-
-/*-------- Packages --------*/
-
-
 /*-------- Raports --------*/
 
 .inputBoxCourier{
-    -fx-text-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
     -fx-font-size: 17px;
     -fx-background-color: transparent; /*#202020*/
-    -fx-mark-color: #ffa500;
+    -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-color: #ffa500;
+    -fx-border-color: -fx-main-color;
     -fx-border-width: 0 0 2 0;
     -fx-cursor: text;
 }
@@ -318,7 +418,7 @@
     -fx-text-fill: red;
     -fx-font-size: 17px;
     -fx-background-color: transparent; /*#202020*/
-    -fx-mark-color: #ffa500;
+    -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
     -fx-border-color: red;
@@ -331,8 +431,8 @@
     -fx-background-radius: 0;
     -fx-background-color: transparent;
     -fx-font-size: 20px;
-    -fx-text-fill: #ffa500;
-    -fx-fill: #ffa500;
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
     -fx-font-weight: bold;
 }
 
@@ -353,6 +453,21 @@
 .alertText{
     -fx-font-size: 16px;
     -fx-text-fill: -fx-main-color;
+    -fx-alignment: CENTER;
+}
+
+.customAlert{
+    -fx-background-color: -fx-dark-color; /*#262628*/
+    -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
+    -fx-border-color: -fx-main-color;
+    -fx-border-radius: 0;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-main-color;
+}
+
+.partIcon{
+    -fx-fill: -fx-main-color;
 }
 
 /*-------------STYLING BUTTONS-------------*/
@@ -377,6 +492,7 @@
     -fx-border-color: -fx-main-color;
     -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
+    -fx-border-width: 2.5px;
     -fx-font-weight: bold;
     -fx-background-radius: 0;
     -fx-cursor: hand;
@@ -390,10 +506,89 @@
     -fx-fill: -fx-main-color;
 }
 
-
-
-
-
-
-
-
+.settingsBlock{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-main-color;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-main-color;
+    -fx-border-style: solid;
+    -fx-cursor: hand;
+}
+.settingsBlock:selected, .settingsBlock:selected > .userIconSettings{
+    -fx-background-color: -fx-main-color;
+    -fx-text-fill: -fx-dark-color;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-fill: -fx-dark-color;
+}
+.settingsBlock:hover{
+    /*-fx-background-color: -fx-main-color;*/
+    /*-fx-text-fill: -fx-dark-color;*/
+    -fx-border-width: 5px;
+}
+.pieChart > .chart-title{
+    -fx-text-fill: -fx-main-color;
+    -fx-font-weight: bold;
+}
+.pieChart > .chart-legend{
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-background-color: transparent;
+}
+.pieChart {
+    -fx-text-fill: #121212;
+    -fx-start-agnle: 30;
+    -fx-legend-side: right;
+    -fx-pie-color: red;
+}
+.default-color0.chart-pie {
+    -fx-pie-color: white;
+}
+.data1.chart-pie, .default-color1.chart-pie  {
+    -fx-pie-color: #ffa500;
+}
+.data2.chart-pie, .default-color2.chart-pie  {
+    -fx-pie-color: #d82020;
+}
+.chart-pie-label{
+    -fx-fill: transparent;
+}
+.chart-pie-label-line {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+}
+.chart-legend-item{
+    -fx-text-fill: white;
+}
+.chart-legend{
+    -fx-background-color: transparent;
+}
+.chart-pie {
+    -fx-border-color: -fx-dark-color;
+    -fx-border-width: 3px;
+}
+.barChart{
+    -fx-background-color: transparent;
+}
+.barChart > .chart-content > .chart-plot-background{
+    -fx-text-fill: white;
+    -fx-fill: white;
+    -fx-background-color: transparent;
+}
+.chart-bar{
+    -fx-bar-fill: -fx-main-color;
+}
+.barChart > .chart-legend{
+    -fx-background-color: transparent;
+}
+.barChart > .chart-legend-item{
+    -fx-text-fill: -fx-gray-color;
+}
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines {
+    -fx-stroke: transparent;
+}
+#xAxis > .axis-label, #yAxis > .axis-label{
+    -fx-text-fill: white;
+}
