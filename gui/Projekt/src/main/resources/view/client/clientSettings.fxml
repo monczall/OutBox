@@ -76,18 +76,18 @@
       </AnchorPane>
       <Pane fx:id="alertPane" layoutX="373.0" layoutY="128.0" prefHeight="157.0" prefWidth="293.0" styleClass="alert" stylesheets="@../../css/client.css">
          <children>
-            <Button layoutX="154.0" layoutY="104.0" mnemonicParsing="false" onAction="#actionNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="WRÓĆ">
+            <Button layoutX="153.0" layoutY="104.0" mnemonicParsing="false" onAction="#actionNo" prefHeight="41.0" prefWidth="127.0" styleClass="btnNext" text="%back">
                <graphic>
                   <FontAwesomeIconView glyphName="CLOSE" size="23" styleClass="iconNext" />
                </graphic>
             </Button>
-            <Button layoutX="48.0" layoutY="104.0" mnemonicParsing="false" onAction="#actionYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="USUŃ">
+            <Button layoutX="19.0" layoutY="104.0" mnemonicParsing="false" onAction="#actionYes" prefHeight="42.0" prefWidth="127.0" styleClass="btnBack" text="%delete">
                <graphic>
                   <FontAwesomeIconView glyphName="CHECK" size="23" styleClass="backIcon" />
                </graphic>
             </Button>
-            <Label alignment="TOP_LEFT" layoutY="20.0" prefHeight="25.0" prefWidth="293.0" styleClass="alertText" text="%clientDeleteAccount" />
-            <CustomPasswordField fx:id="deletePassword" layoutX="61.0" layoutY="53.0" promptText="%clientPassword" styleClass="inputBox" />
+            <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="50.0" prefWidth="293.0" styleClass="alertText" text="%clientDeleteAccount" textAlignment="CENTER" wrapText="true" />
+            <CustomPasswordField fx:id="deletePassword" alignment="CENTER" layoutX="61.0" layoutY="53.0" promptText="%clientPassword" styleClass="inputBox" />
          </children>
       </Pane>
    </children>

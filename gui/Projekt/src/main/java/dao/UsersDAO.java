@@ -41,6 +41,8 @@ public class UsersDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
+        newPassword = Encryption.encrypt(newPassword);
+
         Users users = session.get(Users.class, userId);
 
         users.setPassword(newPassword);
