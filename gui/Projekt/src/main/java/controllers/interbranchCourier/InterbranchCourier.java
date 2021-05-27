@@ -16,7 +16,6 @@ import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.UserInfos;
 import main.java.features.Animations;
-import main.java.features.PdfGenerator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -90,8 +89,10 @@ public class InterbranchCourier implements Initializable {
             }
         });
     }
+
     /**
      * method that opens home panel after clicking button
+     *
      * @param actionEvent
      * @throws IOException
      */
@@ -101,6 +102,7 @@ public class InterbranchCourier implements Initializable {
 
     /**
      * method that opens main panel after clicking button
+     *
      * @param actionEvent
      * @throws IOException
      */
@@ -110,14 +112,17 @@ public class InterbranchCourier implements Initializable {
 
     /**
      * method that opens settings panel after clicking button
+     *
      * @param actionEvent
      * @throws IOException
      */
     public void openSettings(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierSettings.fxml", mainWindow);
     }
+
     /**
      * method that blurs application and creating logout confirmation, that slides from top
+     *
      * @param event
      */
     @FXML
@@ -128,8 +133,10 @@ public class InterbranchCourier implements Initializable {
         window.setDisable(true);
         window.setEffect(gaussianBlur);
     }
+
     /**
      * if button "no" is clicked, then logout confirmation slides to top and disappearing
+     *
      * @param event
      */
     @FXML
@@ -138,8 +145,10 @@ public class InterbranchCourier implements Initializable {
         window.setEffect(null);
         window.setDisable(false);
     }
+
     /**
-     *  if button "yes" is clicked, then returning to login panel
+     * if button "yes" is clicked, then returning to login panel
+     *
      * @param event
      */
     @FXML

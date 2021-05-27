@@ -104,6 +104,10 @@ public class InterbranchCourierSecond implements Initializable {
         table.setItems(changeLanguage());
     }
 
+    /**
+     * method that translates list of packages
+     * @return translated list
+     */
     private ObservableList<PackagesDTO> changeLanguage() {
         ObservableList<PackagesDTO> statuses = PackagesDAO.getPackagesWithStatusAndNames(Login.getUserID());
         PackageStatus[] status = PackageStatus.values();
@@ -111,11 +115,9 @@ public class InterbranchCourierSecond implements Initializable {
             for (PackagesDTO packagesDTO : statuses) {
                 if (packagesDTO.getSizeName().equals("mała")) {
                     packagesDTO.setSizeName("small");
-                }
-                else if (packagesDTO.getSizeName().equals("średnia")) {
+                } else if (packagesDTO.getSizeName().equals("średnia")) {
                     packagesDTO.setSizeName("medium");
-                }
-                else if (packagesDTO.getSizeName().equals("duża")) {
+                } else if (packagesDTO.getSizeName().equals("duża")) {
                     packagesDTO.setSizeName("big");
                 }
                 for (PackageStatus packageStatus : status) {

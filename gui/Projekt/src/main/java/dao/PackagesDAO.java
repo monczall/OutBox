@@ -1,33 +1,27 @@
 package main.java.dao;
 
-import com.itextpdf.text.pdf.PdfPCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.*;
-import main.java.entity.PackageHistory_;
-import main.java.entity.Packages_;
-import main.java.entity.UserInfos_;
 import main.java.entity.Packages;
-import main.java.entity.UserInfos;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 public class PackagesDAO {
 
+    /**
+     * <p>
+     *     Method used to get the list of all packages that are in database.
+     *     Returned List is type of Packages.
+     * </p>
+     *
+     * @return returns list of packages
+     */
     static public List<Packages> getPackages(){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -38,6 +32,15 @@ public class PackagesDAO {
         return listOfPackages;
     }
 
+    /**
+     * <p>
+     *     Method used to get list of columns that are connected to give packageID.
+     *     Returned List is type of Packages.
+     * </p>
+     *
+     * @param packageId ID of package that needs to be read
+     * @return list of package columns
+     */
     static public List<Packages> getPackagesById(int packageId){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -50,7 +53,15 @@ public class PackagesDAO {
         return listOfPackages;
     }
 
-
+    /**
+     * <p>
+     *     Method used to return list of all packages that have statuses
+     *     different than: "Dostarczona" or "Zwrócona do nadawcy". Returned
+     *     ObservableList is type of PackagesDTO and is grouped by packageNumber.
+     * </p>
+     *
+     * @return list of packages
+     */
     static public ObservableList<PackagesDTO> getPackagesWithStatus()
     {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
@@ -80,7 +91,16 @@ public class PackagesDAO {
         return packages;
     }
 
-
+    /**
+     * <p>
+     *     Method used to return list of all packages with given courierId
+     *     that have statuses different than: "Dostarczona" or
+     *     "Zwrócona do nadawcy". Returned ObservableList is type of PackagesDTO
+     *     and is grouped by packageNumber.
+     * </p>
+     *
+     * @return list of packages
+     */
     static public ObservableList<PackagesDTO> getPackagesWithStatusById(int courierId)
     {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
@@ -114,6 +134,15 @@ public class PackagesDAO {
         return packages;
     }
 
+    /**
+     * <p>
+     *     Method used to return list of packages without assigned courierID. It
+     *     means that it returns packages that are not yet connected to any courier.
+     *     Returned List is type of Packages.
+     * </p>
+     *
+     * @return list of packages
+     */
     static public List<Packages> getPackagesByNullCourier(){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("from Packages P WHERE P.courierId IS NULL");
@@ -123,6 +152,17 @@ public class PackagesDAO {
         return listOfPackages;
     }
 
+    /**
+     * <p>
+     *      Method used in generating PDF with packages that status is
+     *      "Zarejestrowana" and its date is between given dates. Returns
+     *      ObservableList type of PdfDTO.
+     * </p>
+     *
+     * @param dateStart date "from"
+     * @param dateEnd date "to"
+     * @return ObservableList of packages
+     */
     static public ObservableList<PdfDTO> readPackagesForPdf(Date dateStart, Date dateEnd) {
         ObservableList<PdfDTO> packages = FXCollections.observableArrayList();
 
@@ -313,6 +353,37 @@ public class PackagesDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(hql);
         query.setParameter("courierId", courierId);
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
+
+        return packages;
+    }
+
+    static public ObservableList<PackagesDTO> getPackagesByVoivodeship(String voivodeship)
+    {
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
+                "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, UI.name, UI.surname," +
+                " UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email, " +
+                "P.userInfosByUserInfoId.voivodeship, P.userInfosByUserInfoId.name) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH " +
+                "WHERE P.id = PH.packageId " +
+                "AND (P.usersByUserId.userInfosByUserInfoId.voivodeship = :voivodeship " +
+                "OR P.userInfosByUserInfoId.voivodeship = :voivodeship) " +
+                "AND P.userInfoId = UI.id " +
+                "AND PH.status = (SELECT PH.status " +
+                "FROM PH " +
+                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                "FROM PH " +
+                "WHERE PH.packageId = P.id )) " +
+                "GROUP BY P.packageNumber";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setParameter("voivodeship", voivodeship);
         List<PackagesDTO> results = query.list();
         for (PackagesDTO ent : results) {
             packages.add(ent);

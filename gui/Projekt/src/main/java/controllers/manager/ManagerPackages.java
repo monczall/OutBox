@@ -1,8 +1,6 @@
 package main.java.controllers.manager;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,12 +10,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import main.java.App;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackagesDAO;
-import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.*;
 import main.java.features.Preference;
@@ -34,29 +30,11 @@ public class ManagerPackages implements Initializable {
     private static String comment;
     private static int packageId;
     private static String status;
-
-    /**
-     * reurn package id
-     * @return id
-     */
-    public static int getPackageId() {
-        return packageId;
-    }
-
-    /**
-     * set package id
-     * @param packageId
-     */
-    public static void setPackageId(int packageId) {
-        ManagerPackages.packageId = packageId;
-    }
-
-    Pane pane;
-
     private final ObservableList<PackagesDTO> packages = changeLanguage();
-
+    Pane pane;
     @FXML
     private TableView<PackagesDTO> table;
+    TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
     @FXML
     private TableColumn<Packages, String> packageNumber;
     @FXML
@@ -77,7 +55,24 @@ public class ManagerPackages implements Initializable {
     private TextField searchField;
 
     /**
-     * return
+     * reurn package id
+     *
+     * @return id
+     */
+    public static int getPackageId() {
+        return packageId;
+    }
+
+    /**
+     * set package id
+     *
+     * @param packageId
+     */
+    public static void setPackageId(int packageId) {
+        ManagerPackages.packageId = packageId;
+    }
+
+    /**
      * @return id
      */
     public static int getId() {
@@ -85,6 +80,7 @@ public class ManagerPackages implements Initializable {
     }
 
     /**
+     * set id
      *
      * @param id
      */
@@ -93,7 +89,6 @@ public class ManagerPackages implements Initializable {
     }
 
     /**
-     *
      * @return comment
      */
     public static String getComment() {
@@ -102,6 +97,7 @@ public class ManagerPackages implements Initializable {
 
     /**
      * set comment
+     *
      * @param comment
      */
     public static void setComment(String comment) {
@@ -109,7 +105,6 @@ public class ManagerPackages implements Initializable {
     }
 
     /**
-     *
      * @return status
      */
     public static String getStatus() {
@@ -118,22 +113,27 @@ public class ManagerPackages implements Initializable {
 
     /**
      * set status
+     *
      * @param status
      */
     public static void setStatus(String status) {
         ManagerPackages.status = status;
     }
 
-    private ObservableList<PackagesDTO> changeLanguage(){
-        String voivodeship = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0).getVoivodeship();
-        ObservableList<PackagesDTO> translatedPackages = PackagesDAO.getPackagesWithStatus();
+    private ObservableList<PackagesDTO> changeLanguage() {
+        String areaName = UsersDAO.getUsersById(Login.getUserID()).get(0).getAreasByAreaId().getName();
+        ObservableList<PackagesDTO> translatedPackages =
+                PackagesDAO.getPackagesByVoivodeship(UsersDAO.getUsersById(Login.getUserID()).get(0).getAreasByAreaId().getVoivodeship());
 
-        for (int i = 0; i < translatedPackages.size(); i++) {
+        if (!areaName.contains(UsersDAO.getUsersById(Login.getUserID()).get(0).getAreasByAreaId().getVoivodeship())) {
+            for (int i = 0; i < translatedPackages.size(); i++) {
+                int packId = translatedPackages.get(i).getPackagesId();
 
-            if(!translatedPackages.get(i).getVoivodeship().equals(voivodeship) && !UsersDAO.readUserInfoById(translatedPackages.get(i).
-                    getUserInfosId()).get(0).getVoivodeship().equals(voivodeship)){
-                System.out.println(translatedPackages.get(i).getPackagesId());
-                translatedPackages.remove(i);
+                if (!PackagesDAO.getPackagesById(packId).get(0).getUsersByUserId().getUserInfosByUserInfoId().getCity().equals(areaName)
+                        && !PackagesDAO.getPackagesById(packId).get(0).getUserInfosByUserInfoId().getCity().equals(areaName)) {
+                    translatedPackages.remove(i);
+                    i--;
+                }
             }
         }
         PackageStatus[] status = PackageStatus.values();
@@ -152,12 +152,10 @@ public class ManagerPackages implements Initializable {
     /**
      * update data from table
      */
-    public void updateTable()
-    {
+    public void updateTable() {
         table.getItems().clear();
         table.setItems(changeLanguage());
     }
-    TableRowExpanderColumn<PackagesDTO> expanderRow = new TableRowExpanderColumn<PackagesDTO>(this::createEditor);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -200,6 +198,7 @@ public class ManagerPackages implements Initializable {
 
     /**
      * the method returns a panel with additional information about the package
+     *
      * @param arg
      * @return pane
      */
@@ -216,11 +215,9 @@ public class ManagerPackages implements Initializable {
         }
         arg.isExpanded();
 
-        for (int i = 0; i < table.getItems().size(); i++)
-        {
-            if(expanderRow.getExpandedProperty(table.getItems().get(i)).getValue() &&
-                    arg.getTableRow().getIndex() != i)
-            {
+        for (int i = 0; i < table.getItems().size(); i++) {
+            if (expanderRow.getExpandedProperty(table.getItems().get(i)).getValue() &&
+                    arg.getTableRow().getIndex() != i) {
                 expanderRow.toggleExpanded(i);
             }
         }

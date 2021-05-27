@@ -176,11 +176,12 @@ public class ClientRegisterPackage implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        
         // Populating province combobox
         provinceInput.setItems(provinces);
 
-        List<PackageType> listOfTypeInfo = PackageTypeDAO.getTypeInfo();
+        List<PackageType> listOfTypeInfo = PackageTypeDAO.getPackageTypes();
+
 
         // Reading a list with types of packages and converting them into right string
         // Size, weight and price

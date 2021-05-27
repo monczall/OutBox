@@ -1,21 +1,14 @@
 package test;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import main.java.controllers.admin.AdminAddArea;
 import main.java.dao.HibernateUtil;
 import main.java.entity.PackageType;
-import main.java.entity.PackagesDTO;
 import main.java.entity.Users;
-import main.java.entity.UsersDTO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
 
-import static main.java.dao.PackageHistoryDAO.getStatuses;
-import static main.java.dao.PackagesDAO.*;
 import static main.java.dao.UsersDAO.*;
 import static main.java.dao.PackageTypeDAO.*;
 
@@ -66,7 +59,7 @@ public class AdminTests {
     public void shouldBeEqualTypeOfPackages() {
         System.out.println("Uruchomiono test sprawdzający ilość typów paczek w bazie");
 
-        Assertions.assertTrue(getTypeInfo().size() == 3);
+        Assertions.assertTrue(getPackageTypes().size() == 3);
     }
 
 
@@ -76,7 +69,7 @@ public class AdminTests {
 
         int counter = 0;
 
-        List<PackageType> list = getTypeInfo();
+        List<PackageType> list = getPackageTypes();
 
         for (int i = 0; i < list.size(); i++) {
             if (!list.get(i).getSize().matches("[0-9]{1,3}[x][0-9]{1,3}[x][0-9]{1,3}")){

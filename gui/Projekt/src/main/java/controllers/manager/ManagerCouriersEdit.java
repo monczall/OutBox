@@ -92,7 +92,8 @@ public class ManagerCouriersEdit implements Initializable {
 
         if(name.getText().toString().equals("") &&
                 surname.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, findCourierButton, "WARNING", App.getLanguageProperties("completeAllFields"));
+            Alerts.createAlert(appWindow, findCourierButton, "WARNING",
+                    App.getLanguageProperties("completeAllFields"));
         }else{
             dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
             setDataEdit();
@@ -112,12 +113,14 @@ public class ManagerCouriersEdit implements Initializable {
                 inputEmail.getText().toString().equals("") ||
                 inputVoivodeship.getText().toString().equals("") ||
                 inputNumber.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, saveEditCourierButton,"WARNING",App.getLanguageProperties("completeAllFields"));
+            Alerts.createAlert(appWindow, saveEditCourierButton,"WARNING",
+                    App.getLanguageProperties("completeAllFields"));
         }
         else {
 
             if (!validation()) {
-                Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING", App.getLanguageProperties("correctFields"));
+                Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING",
+                        App.getLanguageProperties("correctFields"));
             }else{
 
                 UserInfosDAO.updateUser(dataUserInfos.get(dataIndex).getId(), dataUser.get(0).getId(),

@@ -27,24 +27,38 @@ import main.java.entity.PdfAreaDTO;
 import main.java.entity.PdfDTO;
 
 public class PdfGenerator {
-    private static String FILE = "D:/sample.pdf";
 
     private static Font subFont = new Font(Font.FontFamily.HELVETICA, 16,
             Font.BOLD);
     private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 12,
             Font.BOLD);
 
-    public static void createPdf(Date start, Date end) throws IOException, DocumentException {
-        File file = new File(FILE);
+    /**
+     * Method that creating a PDF file
+     * @param start date
+     * @param end date
+     * @param pathFile path and filename (extension set to pdf in AdminRaport.java)
+     * @throws IOException if doesn't find a path then throw IOException
+     * @throws DocumentException error while processing the document
+     */
+    public static void createPdf(Date start, Date end, String pathFile) throws IOException, DocumentException {
+        File file = new File(pathFile);
         file.getParentFile().mkdirs();
-        new PdfGenerator().fillPdf(FILE, start, end);
+        new PdfGenerator().fillPdf(pathFile, start, end);
     }
 
+    /**
+     * Method that filling PDF file with data from base
+     * @param dest name file
+     * @param start date
+     * @param end date
+     * @throws IOException if doesn't find a path then throw IOException
+     * @throws DocumentException error while processing the document
+     */
     public void fillPdf(String dest, Date start, Date end) throws IOException, DocumentException {
         Font font = new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD, GrayColor.GRAYWHITE);
         BaseFont baseFont = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
         Font tableFont = new Font(baseFont);
-        Font headerFont = new Font(baseFont,13, Font.BOLD, GrayColor.GRAYWHITE);
 
         Document document = new Document(PageSize.A4.rotate());
         PdfWriter.getInstance(document, new FileOutputStream(dest));
@@ -239,6 +253,12 @@ public class PdfGenerator {
         document.close();
     }
 
+    /**
+     * Method that create cell in table
+     * @param text text
+     * @param font font
+     * @return
+     */
     private PdfPCell createCell(String text, Font font){
         PdfPCell cell = new PdfPCell(new Phrase(text, font));
         cell.setBackgroundColor(GrayColor.GRAYBLACK);
@@ -246,6 +266,11 @@ public class PdfGenerator {
         return cell;
     }
 
+    /**
+     * Method that add empty line to pdf
+     * @param paragraph paragraph
+     * @param number number of empty lines
+     */
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
             paragraph.add(new Paragraph(" "));

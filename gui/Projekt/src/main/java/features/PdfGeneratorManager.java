@@ -49,8 +49,8 @@ public class PdfGeneratorManager {
      * @param end date
      * @param display type of date display in the report
      * @param pathFile path and filename (extension set to pdf in ManagerRaports.java)
-     * @throws IOException
-     * @throws DocumentException
+     * @throws IOException if doesn't find a path then throw IOException
+     * @throws DocumentException error while processing the document
      */
     public static void createPdf(Date start, Date end, boolean display, String pathFile) throws IOException, DocumentException {
 
@@ -65,8 +65,8 @@ public class PdfGeneratorManager {
      * @param start date
      * @param end date
      * @param display type of date display in the report
-     * @throws IOException
-     * @throws DocumentException
+     * @throws IOException if doesn't find a path then throw IOException
+     * @throws DocumentException error while processing the document0
      */
     public void fillPdf(String dest, Date start, Date end, boolean display) throws IOException, DocumentException {
 
@@ -185,9 +185,11 @@ public class PdfGeneratorManager {
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 
         for (int counter = 0; counter < list.size(); counter++) {
+            System.out.println("LIST ID: " + list.get(counter).getAreaID());
+            System.out.println("AREAID: " + uu.getAreaId());
             if(list.get(counter).getAreaID() == uu.getAreaId()){
                 tableNumber++;
-
+                System.out.println("TAK");
                 if (tableNumber % 2 == 1){
                     table.getDefaultCell().setBackgroundColor(GrayColor.GRAYWHITE);
                 }else{
@@ -200,15 +202,16 @@ public class PdfGeneratorManager {
                 table.addCell(new Phrase(list.get(counter).getVoivodeship(), tableFont));
                 table.addCell(new Phrase(simpleDateFormat.format(list.get(counter).getDate()), tableFont));
             }
+            System.out.println("NIE");
         }
         document.add(table);
         document.close();
     }
 
     /**
-     *
-     * @param text
-     * @param font
+     * Method that create cell in table
+     * @param text text
+     * @param font font
      * @return
      */
     private PdfPCell createCell(String text, Font font){
@@ -219,9 +222,9 @@ public class PdfGeneratorManager {
     }
 
     /**
-     * 
-     * @param paragraph
-     * @param number
+     * Method that add empty line to pdf
+     * @param paragraph paragraph
+     * @param number number of empty lines
      */
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
