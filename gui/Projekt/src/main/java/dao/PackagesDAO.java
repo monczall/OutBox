@@ -169,13 +169,12 @@ public class PackagesDAO {
 
         String hql = "SELECT NEW main.java.entity.PdfDTO(" +
                 "P.packageNumber, PT.sizeName, " +
-                "UI.city, UI.voivodeship, PH.date, U.areaId) " +
-                "FROM Packages P, UserInfos UI, PackageHistory PH, PackageType PT, Users U " +
+                "P.userInfosByUserInfoId.city, P.userInfosByUserInfoId.voivodeship, PH.date, P.id, P.usersByCourierId.areaId) " +
+                "FROM Packages P, PackageHistory PH, PackageType PT " +
                 "WHERE P.id = PH.packageId " +
                 "AND PH.date BETWEEN :dateStart AND :dateEnd " +
                 "AND P.typeId = PT.id " +
-                "AND P.userInfoId = UI.id " +
-                "AND P.userId = U.id AND PH.status = 'Zarejestrowana' " +
+                "AND PH.status = 'Zarejestrowana' " +
                 "GROUP BY P.packageNumber";
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -185,6 +184,7 @@ public class PackagesDAO {
         query.setParameter("dateEnd", dateEnd);
 
         List<PdfDTO> results = query.list();
+
         for (PdfDTO ent : results) {
             packages.add(ent);
         }

@@ -187,11 +187,16 @@ public class PdfGeneratorManager {
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 
         for (int counter = 0; counter < list.size(); counter++) {
-            if(list.get(counter).getAreaID() == uu.getAreaId()){
+            if (list.get(counter).getAreaID() == uu.getAreaId() ||
+                    (list.get(counter).getCity().equals(uu.getUserInfosByUserInfoId().getCity()) &&
+                            list.get(counter).getVoivodeship().equals(uu.getUserInfosByUserInfoId().getVoivodeship()))
+                    || (uu.getAreasByAreaId().getName().contains(list.get(counter).getVoivodeship())
+                    || uu.getAreasByAreaId().getName().contains(PackagesDAO.getPackagesById(list.get(counter).getPackageID()).get(0).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship()))) {
+
                 tableNumber++;
-                if (tableNumber % 2 == 1){
+                if (tableNumber % 2 == 1) {
                     table.getDefaultCell().setBackgroundColor(GrayColor.GRAYWHITE);
-                }else{
+                } else {
                     table.getDefaultCell().setBackgroundColor(GrayColor.LIGHT_GRAY);
                 }
                 table.addCell(String.valueOf(counter + 1));
@@ -202,6 +207,7 @@ public class PdfGeneratorManager {
                 table.addCell(new Phrase(simpleDateFormat.format(list.get(counter).getDate()), tableFont));
             }
         }
+
         document.add(table);
         document.close();
     }

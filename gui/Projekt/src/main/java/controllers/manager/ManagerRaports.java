@@ -90,7 +90,7 @@ public class ManagerRaports implements Initializable {
         else{
             LocalDate startDataValue = startData.getValue();
             LocalDate endDataValue = endData.getValue();
-            LocalDate today = LocalDate.now();
+            today = LocalDate.now();
 
             long daysBetween = DAYS.between(startDataValue, endDataValue);
             long daysFuture = DAYS.between(today, endDataValue);
@@ -109,8 +109,10 @@ public class ManagerRaports implements Initializable {
                 textDateStart.setText(startDataValue.toString());
                 textDateEnd.setText(endDataValue.toString());
                 textDateDays.setText(daysBetween+" ");
-
+                today=endDataValue;
+                past=startDataValue;
                 infoConfirmRaport.setVisible(true);
+
             }
         }
     }
