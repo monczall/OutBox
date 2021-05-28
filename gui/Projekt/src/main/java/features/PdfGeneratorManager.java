@@ -2,9 +2,9 @@ package main.java.features;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import com.sun.scenario.effect.ImageData;
 import javafx.collections.ObservableList;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
+
 import main.java.App;
 import main.java.controllers.auth.Login;
 import main.java.dao.PackageTypeDAO;
@@ -18,11 +18,8 @@ import main.java.entity.Users;
 import java.io.File;
 import java.io.IOException;
 
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
