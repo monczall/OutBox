@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
@@ -154,5 +155,17 @@ public class InterbranchCourier implements Initializable {
     @FXML
     void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
+    }
+
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.setIconified(true);
     }
 }
