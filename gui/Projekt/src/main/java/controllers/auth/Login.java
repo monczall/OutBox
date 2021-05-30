@@ -338,7 +338,7 @@ public class Login implements Initializable {
     /**
      * <p>
      *     Method is used to clear errors on certain fields.
-     *     It's doing it by changing appearance of them.
+     *     It's doing it by changing their appearance.
      * </p>
      * @param keyEvent key that is being pressed
      */
@@ -350,32 +350,16 @@ public class Login implements Initializable {
         // UserCircle
         loginUserCircleCircle.getStyleClass().clear();
         loginUserCircleCircle.getStyleClass().add("fill");
-
-        // PasswordTextField
-        loginPasswordPasswordField.getStyleClass().clear();
-        loginPasswordPasswordField.getStyleClass().add("textFields");
-
-        // PasswordCircle
-        loginPasswordCircleCircle.getStyleClass().clear();
-        loginPasswordCircleCircle.getStyleClass().add("fill");
     }
 
     /**
      * <p>
      *     Method is used to clear errors on certain fields.
-     *     It's doing it by changing appearance of them.
+     *     It's doing it by changing their appearance.
      * </p>
      * @param keyEvent key that is being pressed
      */
     public void clearErrorsOnPassword(KeyEvent keyEvent) {
-        // UserTextField
-        loginEmailTextField.getStyleClass().clear();
-        loginEmailTextField.getStyleClass().add("textFields");
-
-        // UserCircle
-        loginUserCircleCircle.getStyleClass().clear();
-        loginUserCircleCircle.getStyleClass().add("fill");
-
         // PasswordTextField
         loginPasswordPasswordField.getStyleClass().clear();
         loginPasswordPasswordField.getStyleClass().add("textFields");

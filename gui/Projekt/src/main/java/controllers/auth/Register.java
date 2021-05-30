@@ -217,7 +217,7 @@ public class Register implements Initializable {
                 isUserNew++;
             }else{
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authPhoneNumberAlreadyInUseAlert"),
                         350, 86, "alertFailure");
@@ -228,7 +228,7 @@ public class Register implements Initializable {
                 isUserNew++;
             }else{
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authEmailAddressAlreadyInUseAlert"),
                         350, 86, "alertFailure");
@@ -262,7 +262,7 @@ public class Register implements Initializable {
                 //REJESTRACJA POMYSLNA
                 System.out.println("Zarejestrowano");
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"CHECK",
+                        registerRegisterButtonButton,"CHECK",
                         App.getLanguageProperties(
                                 "authRegisterSuccessfulAlert"),
                         293, 86, "alertSuccess");
@@ -411,7 +411,7 @@ public class Register implements Initializable {
             if(firstNameError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties("" +
                                 "authWrongFirstNameFormatAlert"),
                         350, 86, "alertFailure");
@@ -419,7 +419,7 @@ public class Register implements Initializable {
             if(lastNameError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongLastNameFormatAlert"),
                         350, 86, "alertFailure");
@@ -427,7 +427,7 @@ public class Register implements Initializable {
             if(phoneNumberError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongPhoneNumberFormatAlert"),
                         390, 86, "alertFailure");
@@ -435,7 +435,7 @@ public class Register implements Initializable {
             if(emailError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongEmailFormatAlert"),
                         350, 86, "alertFailure");
@@ -443,7 +443,7 @@ public class Register implements Initializable {
             if(streetError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongStreetFormatAlert"),
                         350, 86, "alertFailure");
@@ -451,7 +451,7 @@ public class Register implements Initializable {
             if(cityError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongCityFormatAlert"),
                         380, 86, "alertFailure");
@@ -459,7 +459,7 @@ public class Register implements Initializable {
             if(voivodeshipError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongVoivodeshipFormatAlert"),
                         365, 86, "alertFailure");
@@ -467,7 +467,7 @@ public class Register implements Initializable {
             if(passwordError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongPasswordFormatAlert"),
                         350, 86, "alertFailure");
@@ -475,7 +475,7 @@ public class Register implements Initializable {
             if(passwordNotTheSameError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authPasswordsNotTheSameAlert"),
                         350, 86, "alertFailure");
@@ -484,7 +484,7 @@ public class Register implements Initializable {
         }else{
 
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    registerReturnButtonButton,"WARNING",
+                    registerRegisterButtonButton,"WARNING",
                     App.getLanguageProperties(
                             "authErrorsOnTextFieldsAlert"),
                     350, 86, "alertFailure");
