@@ -225,7 +225,7 @@ public class Login implements Initializable {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
                         loginLoginButtonButton, "WARNING",
                         App.getLanguageProperties("authNoUserFoundAlert"),
-                        435, 86, "alertFailure");
+                        485, 86, "alertFailure");
 
             } else {
                 // UserTextField

@@ -210,7 +210,7 @@ public class PasswordReset implements Initializable {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
                         passwordResetReturnButtonButton, "WARNING",
                         App.getLanguageProperties("authNoEmailUserFoundAlert"),
-                        350, 86, "alertFailure");
+                        390, 86, "alertFailure");
             }
         } else {
             errorOnEmail();
@@ -279,8 +279,8 @@ public class PasswordReset implements Initializable {
         Alerts.createCustomAlert(loginRightPaneAnchorPane,
                 passwordResetReturnButtonButton, "CHECK",
                 App.getLanguageProperties(
-                        "authVerificationSuccessfulAlert"),
-                293, 86, "alertSuccess");
+                        "authEmailSentSuccessfullyAlert"),
+                300, 86, "alertSuccess");
     }
 
     /**
@@ -341,7 +341,7 @@ public class PasswordReset implements Initializable {
                     passwordResetReturnButtonButton, "CHECK",
                     App.getLanguageProperties(
                             "authVerificationSuccessfulAlert"),
-                    293, 86, "alertSuccess");
+                    300, 86, "alertSuccess");
 
             //Block verification code field and verify button
             passwordResetVerificationCodeField.setDisable(true);
@@ -373,7 +373,7 @@ public class PasswordReset implements Initializable {
                     passwordResetReturnButtonButton, "WARNING",
                     App.getLanguageProperties(
                             "authVerificationCodeInvalidAlert"),
-                    293, 86, "alertFailure");
+                    300, 86, "alertFailure");
         }
     }
 
