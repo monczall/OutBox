@@ -1,8 +1,10 @@
 package main.java.controllers.manager;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import main.java.SceneManager;
 
 import java.io.IOException;

@@ -8,6 +8,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import main.java.features.Animations;
 import main.java.features.Charts;
 
@@ -38,8 +39,6 @@ public class ManagerCharts implements Initializable {
 
     @FXML
     private PieChart pieChart;
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
