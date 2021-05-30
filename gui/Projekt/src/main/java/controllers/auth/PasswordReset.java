@@ -391,8 +391,8 @@ public class PasswordReset implements Initializable {
         if (isValid(passwordResetPasswordField.getText(),
                 passwordResetConfirmPasswordField.getText())) {
 
-            UsersDAO.updatePassword(userId, Encryption.encrypt(
-                    passwordResetPasswordField.getText()));
+            UsersDAO.updatePassword(userId,
+                    passwordResetPasswordField.getText());
             System.out.println("Password Reset Successful");
 
             SceneManager.renderScene("successfulPasswordReset");
