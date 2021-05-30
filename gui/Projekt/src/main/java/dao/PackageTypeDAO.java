@@ -27,19 +27,15 @@ public class PackageTypeDAO {
         return listOfPackageTypes;
     }
 
-    static public List<String> getTypeById(int typeId){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        Query query=session.createQuery("SELECT sizeName from PackageType WHERE id = :typeId");
-
-        query.setParameter("typeId",typeId);
-
-        List<String> type = query.list();
-
-        return type;
-
-    }
-	
+    /**
+     * <p>
+     *     Method used to update information about given packageTypeId
+     * </p>
+     * @param packTypeId package to edit
+     * @param size max package size of given type (ex. 25cm x 25cm x 25cm)
+     * @param weight max package weight of given type
+     * @param price price to pay for package delivery
+     */
 	static public void updatePackageType(int packTypeId, String size, String weight, String price){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -56,7 +52,14 @@ public class PackageTypeDAO {
         session.close();
 	}
 
-
+    /**
+     * <p>
+     *     Method used to get packages in areas in between selected date.
+     * </p>
+     * @param dateStart starting date
+     * @param dateEnd ending date
+     * @return List type of PdfAreaDTO
+     */
     static public List<PdfAreaDTO> readAreasForPdf(Date dateStart, Date dateEnd) {
         ObservableList<PdfAreaDTO> packages = FXCollections.observableArrayList();
 
