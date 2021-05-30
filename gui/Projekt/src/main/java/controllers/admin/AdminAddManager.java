@@ -207,7 +207,7 @@ public class AdminAddManager implements Initializable {
 
 
                 Alerts.createCustomAlert(RightPaneAnchorPane, registerRegisterButtonButton, "WARNING",
-                        App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
+                        App.getLanguageProperties("adminInvalidData"), 490, 86, "alertFailure");
             }
         } else {
 
@@ -219,9 +219,8 @@ public class AdminAddManager implements Initializable {
 
     /**
      * Method that checks if all data is given and there are no empty inputs
-     * True is returned if all data is entered, otherwise false
      *
-     * @return
+     * @return True is returned if all data is entered, otherwise false
      */
     private boolean isEmpty() {
         int error = 0;
@@ -263,14 +262,13 @@ public class AdminAddManager implements Initializable {
 
     /**
      * Method that checks if all data is correctly entered
-     * True is returned if all data are correct compared to patterns, otherwise false
      *
      * @param firstName   first name
      * @param lastName    last name
      * @param street      street
      * @param city        city
      * @param voivodeship voivodeship
-     * @return
+     * @return True is returned if all data are correct compared to patterns, otherwise false
      */
 
     private boolean isValid(String firstName, String lastName, String street, String city, String voivodeship) {
@@ -321,10 +319,9 @@ public class AdminAddManager implements Initializable {
 
     /**
      * Method that checks if phone number is correctly entered
-     * True is returned if data are correct compared to patterns, otherwise false
      *
      * @param phoneNumber phone number
-     * @return
+     * @return True is returned if data are correct compared to patterns, otherwise false
      */
 
     private boolean isPhoneNumber(String phoneNumber) {
@@ -337,10 +334,9 @@ public class AdminAddManager implements Initializable {
 
     /**
      * Method that checks if email is correctly entered
-     * True is returned if data are correct compared to patterns, otherwise false
      *
      * @param email email
-     * @return
+     * @return True is returned if data are correct compared to patterns, otherwise false
      */
     private boolean isEmail(String email) {
         Pattern patternEmail = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
@@ -351,10 +347,9 @@ public class AdminAddManager implements Initializable {
 
     /**
      * Method that checks if email already exist
-     * True is returned if email is in use, otherwise false
      *
      * @param email email
-     * @return
+     * @return True is returned if email is in use, otherwise false
      */
 
     private boolean ifExist(String email) {

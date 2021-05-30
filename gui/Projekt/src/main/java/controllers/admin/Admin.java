@@ -251,12 +251,22 @@ public class Admin implements Initializable {
         SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
     }
 
+    /**
+     * Method that closes the application
+     *
+     * @param event event
+     */
     @FXML
     void exitApp(ActionEvent event) {
         Stage stage = (Stage) mainWindow.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Method that minimizes the application
+     *
+     * @param event event
+     */
     @FXML
     void minApp(ActionEvent event) {
         Stage stage = (Stage) mainWindow.getScene().getWindow();

@@ -88,7 +88,7 @@ public class AdminPackSettings implements Initializable {
 
 
                 Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges, "WARNING",
-                        App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
+                        App.getLanguageProperties("adminFail"), 420, 86, "alertFailure");
             }
         } else {
             Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges, "WARNING",
@@ -98,9 +98,8 @@ public class AdminPackSettings implements Initializable {
 
     /**
      * Method that checks if all data is given and there are no empty inputs
-     * True is returned if all data is entered, otherwise false
      *
-     * @return
+     * @return True is returned if all data is entered, otherwise false
      */
     private boolean isEmpty() {
         int error = 0;
@@ -326,12 +325,11 @@ public class AdminPackSettings implements Initializable {
 
     /**
      * Method that checks if all data is correctly entered
-     * True is returned if all data are correct compared to patterns, otherwise false
      *
      * @param size   size
      * @param weight weight
      * @param price  price
-     * @return
+     * @return True is returned if all data are correct compared to patterns, otherwise false
      */
     private boolean isValid(String size, String weight, String price) {
         int error = 0;

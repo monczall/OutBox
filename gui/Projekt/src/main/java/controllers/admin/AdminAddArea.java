@@ -68,7 +68,7 @@ public class AdminAddArea {
 
 
                 Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton, "WARNING",
-                        App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
+                        App.getLanguageProperties("adminInvalidData"), 490, 86, "alertFailure");
             }
         } else {
             Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton, "WARNING",
@@ -78,9 +78,8 @@ public class AdminAddArea {
 
     /**
      * Method that checks if all data is given and there are no empty inputs
-     * True is returned if all data is entered, otherwise false
      *
-     * @return
+     * @return True is returned if all data is entered, otherwise false
      */
 
     private boolean isEmpty() {
@@ -109,13 +108,12 @@ public class AdminAddArea {
 
     /**
      * Method that checks if all data is correctly entered
-     * True is returned if all data are correct compared to patterns, otherwise false
      *
      * @param street      street name
      * @param city        city name
      * @param voivodeship voivodeship name
      * @param name        name of area
-     * @return
+     * @return True is returned if all data are correct compared to patterns, otherwise false
      */
 
     private boolean isValid(String street, String city, String voivodeship, String name) {
@@ -125,7 +123,7 @@ public class AdminAddArea {
                 "{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}");
         Pattern patternCity = Pattern.compile("[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
         Pattern patternVoivodeship = Pattern.compile("[A-Za-z]{7,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
-        Pattern patternName = Pattern.compile("[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?[0-9]{0,3}");
+        Pattern patternName = Pattern.compile("[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
 
 
         Matcher matchStreet = patternStreet.matcher(street);
