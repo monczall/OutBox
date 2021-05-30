@@ -524,7 +524,7 @@ public class AdminEdit implements Initializable {
         editAreaChoiceBox.setItems(AreasDAO.getAreasName());
 
         editRoleChoiceBox.setItems(FXCollections.observableArrayList(
-                "Kurier", "Kurier międzyoddziałowy", "Menadżer"));
+                "Kurier", "Kurier Międzyoddziałowy", "Menadżer"));
 
 
         List<Users> userList = UsersDAO.getUsersById(AdminEditEmployee.getUserID());
