@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +18,7 @@ import main.java.SceneManager;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.Users;
 import main.java.features.Alerts;
+import main.java.features.Preference;
 
 import java.net.URL;
 import java.util.List;
@@ -134,6 +136,11 @@ public class Register implements Initializable {
     @FXML
     private Label registerSamePasswordsRequirement;
 
+    @FXML
+    private ImageView registerLogoImageView;
+
+    private static Preference pref = new Preference();
+
     ObservableList<String> voivodeships =
             FXCollections.observableArrayList( "Dolnoslaskie",
                     "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Lodzkie",
@@ -145,6 +152,25 @@ public class Register implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         registerVoivodeshipField.setItems(voivodeships);
         registerVoivodeshipField.setValue("Dolnoslaskie");
+
+        // Outbox logos, they change depending on used theme
+        ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
+        outboxBlack.setFitHeight(200);
+        outboxBlack.setFitWidth(150);
+        ImageView outboxWhite = new ImageView("main/resources/images/outbox_white.png");
+        outboxWhite.setFitHeight(200);
+        outboxWhite.setFitWidth(150);
+
+        // Changes to UI depending on used theme
+        if(pref.readPreference("color").equals("red")) {
+            registerLogoImageView.setImage(outboxWhite.getImage());
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            registerLogoImageView.setImage(outboxBlack.getImage());
+        }
+        else{
+            registerLogoImageView.setImage(outboxBlack.getImage());
+        }
     }
 
     public void register(){
@@ -191,7 +217,7 @@ public class Register implements Initializable {
                 isUserNew++;
             }else{
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authPhoneNumberAlreadyInUseAlert"),
                         350, 86, "alertFailure");
@@ -202,7 +228,7 @@ public class Register implements Initializable {
                 isUserNew++;
             }else{
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authEmailAddressAlreadyInUseAlert"),
                         350, 86, "alertFailure");
@@ -236,7 +262,7 @@ public class Register implements Initializable {
                 //REJESTRACJA POMYSLNA
                 System.out.println("Zarejestrowano");
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"CHECK",
+                        registerRegisterButtonButton,"CHECK",
                         App.getLanguageProperties(
                                 "authRegisterSuccessfulAlert"),
                         293, 86, "alertSuccess");
@@ -385,7 +411,7 @@ public class Register implements Initializable {
             if(firstNameError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties("" +
                                 "authWrongFirstNameFormatAlert"),
                         350, 86, "alertFailure");
@@ -393,7 +419,7 @@ public class Register implements Initializable {
             if(lastNameError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongLastNameFormatAlert"),
                         350, 86, "alertFailure");
@@ -401,7 +427,7 @@ public class Register implements Initializable {
             if(phoneNumberError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongPhoneNumberFormatAlert"),
                         390, 86, "alertFailure");
@@ -409,7 +435,7 @@ public class Register implements Initializable {
             if(emailError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongEmailFormatAlert"),
                         350, 86, "alertFailure");
@@ -417,7 +443,7 @@ public class Register implements Initializable {
             if(streetError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongStreetFormatAlert"),
                         350, 86, "alertFailure");
@@ -425,7 +451,7 @@ public class Register implements Initializable {
             if(cityError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongCityFormatAlert"),
                         380, 86, "alertFailure");
@@ -433,7 +459,7 @@ public class Register implements Initializable {
             if(voivodeshipError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongVoivodeshipFormatAlert"),
                         365, 86, "alertFailure");
@@ -441,7 +467,7 @@ public class Register implements Initializable {
             if(passwordError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authWrongPasswordFormatAlert"),
                         350, 86, "alertFailure");
@@ -449,7 +475,7 @@ public class Register implements Initializable {
             if(passwordNotTheSameError){
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerReturnButtonButton,"WARNING",
+                        registerRegisterButtonButton,"WARNING",
                         App.getLanguageProperties(
                                 "authPasswordsNotTheSameAlert"),
                         350, 86, "alertFailure");
@@ -458,7 +484,7 @@ public class Register implements Initializable {
         }else{
 
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    registerReturnButtonButton,"WARNING",
+                    registerRegisterButtonButton,"WARNING",
                     App.getLanguageProperties(
                             "authErrorsOnTextFieldsAlert"),
                     350, 86, "alertFailure");
@@ -750,4 +776,15 @@ public class Register implements Initializable {
         passwordRequirements();
     }
 
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.setIconified(true);
+    }
 }

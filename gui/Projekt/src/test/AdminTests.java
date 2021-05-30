@@ -59,7 +59,7 @@ public class AdminTests {
     public void shouldBeEqualTypeOfPackages() {
         System.out.println("Uruchomiono test sprawdzający ilość typów paczek w bazie");
 
-        Assertions.assertTrue(getTypeInfo().size() == 3);
+        Assertions.assertTrue(getPackageTypes().size() == 3);
     }
 
 
@@ -69,7 +69,7 @@ public class AdminTests {
 
         int counter = 0;
 
-        List<PackageType> list = getTypeInfo();
+        List<PackageType> list = getPackageTypes();
 
         for (int i = 0; i < list.size(); i++) {
             if (!list.get(i).getSize().matches("[0-9]{1,3}[x][0-9]{1,3}[x][0-9]{1,3}")){

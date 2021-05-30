@@ -103,9 +103,6 @@ public class ClientHistoryPackage implements Initializable {
     @FXML
     private ToggleButton toggleToClient;
 
-    @FXML
-    private BarChart<String,Long> barChart;
-
     private List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
 
     private static Preference pref = new Preference();
@@ -113,20 +110,6 @@ public class ClientHistoryPackage implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        barChart.getXAxis().setLabel("Dzień");
-        barChart.getXAxis().setId("xAxis");
-
-        barChart.getYAxis().setLabel("Ilość przysyłek");
-        barChart.getYAxis().setId("xAxis");
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM");
-
-        LocalDateTime now = LocalDateTime.now();
-
-        Charts.createBarChart(barChart,dateTimeFormatter.format(now));
-
-        /*Charts.createPieChart(mainPane,"WYKRES ILOŚCI PRZESYŁEK",150,47,500,400);*/
 
         toggleToClient.setSelected(true);
         toggleFromClient.setSelected(true);

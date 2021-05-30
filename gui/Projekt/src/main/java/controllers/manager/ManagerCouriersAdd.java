@@ -2,12 +2,14 @@ package main.java.controllers.manager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import main.java.App;
 import main.java.controllers.auth.Encryption;
 import main.java.controllers.auth.Login;
@@ -299,7 +301,6 @@ public class ManagerCouriersAdd implements Initializable {
         }
         return null;
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

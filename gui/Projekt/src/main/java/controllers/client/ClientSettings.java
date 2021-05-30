@@ -1,5 +1,6 @@
 package main.java.controllers.client;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -90,18 +91,29 @@ public class ClientSettings implements Initializable {
     private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
 
     // List of provinces for combobox
-    private ObservableList<String> provinces = FXCollections.observableArrayList( "Dolnośląskie",
-            "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Łódzkie",  "Małopolskie",  "Mazowieckie",
-            "Opolskie",  "Podkarpackie",  "Podlaskie",  "Pomorskie",  "Śląskie",  "Świętokrzyskie",
-            "Warmińsko-mazurskie",  "Wielkopolskie",  "Zachodniopomorskie");
+    private ObservableList<String> provinces = FXCollections.observableArrayList( "Dolnoslaskie",
+            "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Lodzkie",  "Malopolskie",  "Mazowieckie",
+            "Opolskie",  "Podkarpackie",  "Podlaskie",  "Pomorskie",  "Slaskie",  "Swietokrzyskie",
+            "Warminsko-mazurskie",  "Wielkopolskie",  "Zachodniopomorskie");
 
     private String[] inputs = new String[5];
 
     private Preference pref = new Preference();
 
+    private FontAwesomeIconView alertIcon = new FontAwesomeIconView();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        alertIcon.setSize("16");
+        alertIcon.setGlyphName("WARNING");
+        alertIcon.setLayoutX(21);
+        alertIcon.setLayoutY(54);
+        alertIcon.getStyleClass().add("partIcon");
+
+        settOldPassword.setRight(alertIcon);
+
+        settOldPassword.getRight().setVisible(false);
         // Created a group and added two buttons (App settings and user settings)
         // It allows user to only click one button
         ToggleGroup group = new ToggleGroup();
@@ -158,20 +170,20 @@ public class ClientSettings implements Initializable {
 
         // Checking errors in inputs
         ErrorHandler.checkInputs(settCity,"[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}",
-                "Miasto powinno zawierać tylko litery");
+                App.getLanguageProperties("clientCityPrompt"));
 
         ErrorHandler.checkInputs(settStreet,
                 "[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s" +
                         "[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}",
-                "Ulica powinna miec format ULICA NUMER");
+                App.getLanguageProperties("clientStreetPrompt"));
 
         ErrorHandler.checkPasswords(settPassword,settRepeatPassword,
                 "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$",
-                "Podane hasło ma niepoprawny format",
-                "Hasła powinny być takie same");
+                App.getLanguageProperties("clientPasswordPrompt"),
+                App.getLanguageProperties("clientSamePrompt"));
 
         ErrorHandler.checkInputs(settNumber, "\\+?[0-9]{0,2}\\s?[0-9]{3}\\s?[0-9]{3}\\s?[0-9]{3}",
-                "Numer powinno zawierać tylko cyfry");
+                App.getLanguageProperties("clientNumberPrompt"));
 
     }
 
@@ -223,6 +235,7 @@ public class ClientSettings implements Initializable {
     // Method that handle updating information from database
     @FXML
     void updateInformation(ActionEvent event) {
+        settOldPassword.getRight().setVisible(false);
         // Checking if error icon is visible
         if(!settStreet.getRight().isVisible() && !settCity.getRight().isVisible()
                 && !settNumber.getRight().isVisible()) {
@@ -243,24 +256,43 @@ public class ClientSettings implements Initializable {
                 inputs[2] = settProvince.getSelectionModel().getSelectedItem();
                 inputs[3] = settNumber.getText();
 
-                Alerts.createAlert(settingsPane, saveInformation, "CHECK", "POMYŚLNIE ZMIENIONO");
+                Alerts.createAlert(settingsPane, saveInformation,
+                        "CHECK",
+                        App.getLanguageProperties("successfullyChanged"));
             }
         }
         else {
-            Alerts.createAlert(settingsPane,saveInformation,"WARNING", "UZUPEŁNIJ LUB POPRAW POLA");
+            Alerts.createAlert(settingsPane,saveInformation,
+                    "WARNING",
+                    App.getLanguageProperties("correctOrCompleteFields"));
         }
 
         // Checking if passwords were provided, changed and if they contains any error
         if(!settOldPassword.getText().isEmpty()) {
             if (!settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()
                     && Encryption.encrypt(settOldPassword.getText()).equals(UsersDAO.readPassword(Login.getUserID()))) {
+                if(!settPassword.getText().isEmpty()) {
+                    // Updating passwords
+                    UsersDAO.updatePassword(Login.getUserID(),settPassword.getText());
 
-                // Updating passwords
-                UsersDAO.updatePassword(Login.getUserID(),settPassword.getText());
+                    Alerts.createAlert(settingsPane, saveInformation,
+                            "CHECK",
+                            App.getLanguageProperties("successfullyChanged"));
+                } else{
+                    Alerts.createAlert(settingsPane, saveInformation,
+                            "WARNING",
+                            App.getLanguageProperties("providePasswords"));
+                    settPassword.setRight(alertIcon);
+                    settPassword.getRight().setVisible(true);
 
-                Alerts.createAlert(settingsPane, saveInformation, "CHECK", "POMYŚLNIE ZMIENIONO");
+                }
+
             } else {
-                Alerts.createAlert(settingsPane, saveInformation, "WARNING", "NIEPOPRAWNE HASŁO");
+                Alerts.createAlert(settingsPane, saveInformation,
+                        "WARNING",
+                        App.getLanguageProperties("incorrectPassword"));
+
+                settOldPassword.getRight().setVisible(true);
             }
         }
     }
@@ -285,7 +317,7 @@ public class ClientSettings implements Initializable {
         }
         else {
             deletePassword.setText(null);
-            deletePassword.setPromptText("NIEPOPRAWNE HASŁO");
+            deletePassword.setPromptText(App.getLanguageProperties("incorrectPassword"));
         }
 
     }

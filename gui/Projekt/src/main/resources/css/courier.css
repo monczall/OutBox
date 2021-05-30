@@ -367,5 +367,21 @@
 
 .rowText{
     -fx-text-alignment: right;
+}
 
+.minIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+.minBtn:hover > .minIcon {
+    -fx-scale-y: 4;
+}
+.exitIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+.exitButton:hover > .exitPane > .exitIcon{
+    -fx-scale-x: 1.625;
 }

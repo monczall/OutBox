@@ -62,7 +62,7 @@
             </VBox>
             <AnchorPane layoutY="-1.0" prefHeight="688.0" prefWidth="72.0" styleClass="sideBackground">
                <children>
-                  <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="icons" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
+                  <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="hamburger" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
                   <Button layoutX="-2.0" layoutY="82.0" mnemonicParsing="false" onAction="#viewHome" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
                      <graphic>
                         <FontAwesomeIconView glyphName="HOME" size="36" styleClass="icons" text="" />
@@ -101,7 +101,7 @@
                   <Text fx:id="name" layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Sample Sampl" />
                </children>
             </Pane>
-            <ImageView fitHeight="71.0" fitWidth="87.0" layoutX="971.0" layoutY="581.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="71.0" fitWidth="87.0" layoutX="1015.0" layoutY="596.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/outbox_white.png" />
                </image>

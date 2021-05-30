@@ -46,7 +46,7 @@ public class AdminPackSettings implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        List<PackageType> listOfTypeInfo = PackageTypeDAO.getTypeInfo();
+        List<PackageType> listOfTypeInfo = PackageTypeDAO.getPackageTypes();
         smallSize.setText(listOfTypeInfo.get(0).getSize());
         medSize.setText(listOfTypeInfo.get(1).getSize());
         bigSize.setText(listOfTypeInfo.get(2).getSize());

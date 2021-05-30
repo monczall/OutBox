@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.TextAlignment;
 
 
 public class Alerts {
@@ -40,6 +41,9 @@ public class Alerts {
         Label alertText = new Label(text);
         alertText.setLayoutX(62);
         alertText.setLayoutY(31);
+        alertText.setPrefWidth(231);
+        alertText.setWrapText(true);
+        alertText.setTextAlignment(TextAlignment.CENTER);
         alertText.getStyleClass().add("alertText");
 
         pane.getChildren().add(alertText);

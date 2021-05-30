@@ -7,9 +7,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="667.0" prefWidth="1104.0" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.Manager">
+<AnchorPane prefHeight="667.0" prefWidth="1104.0" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.Manager">
    <children>
       <AnchorPane fx:id="window" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="1104.0" styleClass="mainBackground">
          <children>
@@ -141,6 +142,27 @@
                   </Button>
                </children>
             </AnchorPane>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1057.0" layoutY="9.0" mnemonicParsing="false" onAction="#exitApp" prefHeight="31.0" prefWidth="36.0" style="-fx-background-color: transparent;" styleClass="exitButton" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <Pane prefHeight="16.0" prefWidth="13.0" styleClass="exitPane">
+                     <children>
+                        <Line endX="-43.75" layoutX="65.0" layoutY="11.0" rotate="-45.0" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="exitIcon" />
+                        <Line endX="-43.75" layoutX="65.0" layoutY="11.0" rotate="45.0" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="exitIcon" />
+                     </children>
+                  </Pane>
+               </graphic>
+            </Button>
+            <Button alignment="BOTTOM_CENTER" contentDisplay="RIGHT" layoutX="1005.0" layoutY="1.0" mnemonicParsing="false" onAction="#minApp" prefHeight="38.0" prefWidth="40.0" style="-fx-background-color: transparent;" styleClass="minBtn">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <Line endX="-43.75" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="minIcon" />
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <Pane fx:id="alertPane" layoutX="430.0" layoutY="146.0" prefHeight="123.0" prefWidth="293.0" styleClass="alert">

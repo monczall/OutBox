@@ -191,6 +191,15 @@ public class PackagesDAO {
         return packages;
     }
 
+    /**
+     * <p>
+     *     Method used to read all packages informations that are not yet
+     *     delivered ("Dostarczona" or "Zwrócona do nadawcy")
+     * </p>
+     * @param userId id of user connected to package
+     * @param userEmail email of user connected to package
+     * @return packageDTO
+     */
     static public ObservableList<PackagesDTO> readPackagesByID(int userId, String userEmail)
     {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
@@ -229,7 +238,15 @@ public class PackagesDAO {
         return packages;
     }
 
-
+    /**
+     * <p>
+     *     Method used to read all packages informations that are not yet
+     *     delivered ("Dostarczona" or "Zwrócona do nadawcy")
+     * </p>
+     * @param userId id of user connected to package
+     * @param userEmail email of user connected to package
+     * @return packageDTO
+     */
     static public ObservableList<PackagesDTO> readHistoryByID(int userId, String userEmail)
     {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
@@ -268,6 +285,12 @@ public class PackagesDAO {
         return packages;
     }
 
+    /**
+     * <p>
+     *     Method used to return number of package types that are in database.
+     * </p>
+     * @return List of package types
+     */
     static public List<Long> quantityOfPackagesType(){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -285,6 +308,13 @@ public class PackagesDAO {
         return queryList;
     }
 
+    /**
+     * <p>
+     *     Method used to get number of packages delivered in given month
+     * </p>
+     * @param month month that we are investigating
+     * @return ObservalbeList of BarChartDTO
+     */
     static public ObservableList<BarChartDTO> quantityOfPackagesMonthly(String month){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -307,30 +337,13 @@ public class PackagesDAO {
         return list;
     }
 
-    static public List<Packages> readPackages(){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        Query query = session.createQuery("FROM Packages GROUP BY packageNumber");
-
-        List<Packages> packageList = query.list();
-
-        session.close();
-
-        return packageList;
-    }
-
-    static public List<Packages> readPackagesForManager(String sql){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        Query query = session.createQuery(sql);
-
-        List<Packages> packageList = query.list();
-
-        session.close();
-
-        return packageList;
-    }
-
+    /**
+     * <p>
+     *     Method used to get packages for courier to deliver
+     * </p>
+     * @param courierId id of courier that delivers the package
+     * @return observableList of packagesDTO
+     */
     static public ObservableList<PackagesDTO> getPackagesWithStatusAndNames(int courierId)
     {
         ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
@@ -362,6 +375,58 @@ public class PackagesDAO {
         return packages;
     }
 
+    /**
+     * <p>
+     *     Method used to get packages that are in given voivodeship
+     * </p>
+     * @param voivodeship name of province we are looking in
+     * @return observableList of packagesDTO
+     */
+    static public ObservableList<PackagesDTO> getPackagesByVoivodeship(String voivodeship)
+    {
+        ObservableList<PackagesDTO> packages = FXCollections.observableArrayList();
+        String hql = "SELECT NEW main.java.entity.PackagesDTO(" +
+                "P.userId, P.id, P.packageNumber, P.timeOfPlannedDelivery, UI.name, UI.surname," +
+                " UI.phoneNumber, UI.streetAndNumber, UI.city, PH.status, P.additionalComment, P.email, " +
+                "P.userInfosByUserInfoId.voivodeship, P.userInfosByUserInfoId.name) " +
+                "FROM Packages P, UserInfos UI, PackageHistory PH " +
+                "WHERE P.id = PH.packageId " +
+                "AND (P.usersByUserId.userInfosByUserInfoId.voivodeship = :voivodeship " +
+                "OR P.userInfosByUserInfoId.voivodeship = :voivodeship) " +
+                "AND P.userInfoId = UI.id " +
+                "AND PH.status = (SELECT PH.status " +
+                "FROM PH " +
+                "WHERE PH.id = (SELECT MAX(PH.id) " +
+                "FROM PH " +
+                "WHERE PH.packageId = P.id )) " +
+                "GROUP BY P.packageNumber";
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(hql);
+        query.setParameter("voivodeship", voivodeship);
+        List<PackagesDTO> results = query.list();
+        for (PackagesDTO ent : results) {
+            packages.add(ent);
+        }
+        session.close();
+
+        return packages;
+    }
+
+    /**
+     * <p>
+     *     Method used to update package data
+     * </p>
+     * @param ID id of package
+     * @param typeID if of package type
+     * @param userID id of user sending package
+     * @param courierID id of assigned courier
+     * @param userInfoID sender's userInfoID
+     * @param email email of recipient
+     * @param packageNumber generated package number
+     * @param time time brackets of delivery
+     * @param additional some additional comments
+     */
     static public void updatePackage(int ID, int typeID, int userID, int courierID, int userInfoID, String email, String packageNumber, String time, String additional) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -384,6 +449,12 @@ public class PackagesDAO {
         session.getTransaction().commit();
     }
 
+    /**
+     * <p>
+     *     Method used to get all packages without courier assigned to it
+     * </p>
+     * @return List in type of Packages
+     */
     static public List<Packages> getPackagesWithoutCourierId(){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -394,6 +465,13 @@ public class PackagesDAO {
         return listOfPackages;
     }
 
+    /**
+     * <p>
+     *     Method used to change given courierId of given packageId
+     * </p>
+     * @param packageId id of modified package
+     * @param courierId id of new courier
+     */
     static public void updateCourierId(int packageId, int courierId){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
