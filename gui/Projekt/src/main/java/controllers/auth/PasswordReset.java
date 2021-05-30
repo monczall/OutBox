@@ -2,6 +2,7 @@ package main.java.controllers.auth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,26 +17,26 @@ import main.java.SceneManager;
 import main.java.dao.UsersDAO;
 import main.java.entity.Users;
 import main.java.features.Alerts;
+import main.java.features.Preference;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static main.java.dao.UserInfosDAO.getUserInfoByID;
 import static main.java.dao.UsersDAO.getUsers;
 
-public class PasswordReset {
+public class PasswordReset implements Initializable {
 
     @FXML
     private AnchorPane loginLeftPaneAnchorPane;
-
-    @FXML
-    private ImageView passwordResetLogoImageView;
 
     @FXML
     private Label passwordResetSloganLabel;
@@ -45,9 +46,6 @@ public class PasswordReset {
 
     @FXML
     private Label passwordResetInfoLabel;
-
-    @FXML
-    private Button passwordResetExitButtonButton;
 
     @FXML
     private Button passwordResetReturnButtonButton;
@@ -115,10 +113,36 @@ public class PasswordReset {
     @FXML
     private Label passwordResetSamePasswordsRequirement;
 
+    @FXML
+    private ImageView passwordResetLogoImageView;
+
+    private static Preference pref = new Preference();
 
     int userId;
     int userInfoId;
     private String verificationCode = "";
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Outbox logos, they change depending on used theme
+        ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
+        outboxBlack.setFitHeight(200);
+        outboxBlack.setFitWidth(150);
+        ImageView outboxWhite = new ImageView("main/resources/images/outbox_white.png");
+        outboxWhite.setFitHeight(200);
+        outboxWhite.setFitWidth(150);
+
+        // Changes to UI depending on used theme
+        if(pref.readPreference("color").equals("red")) {
+            passwordResetLogoImageView.setImage(outboxWhite.getImage());
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            passwordResetLogoImageView.setImage(outboxBlack.getImage());
+        }
+        else{
+            passwordResetLogoImageView.setImage(outboxBlack.getImage());
+        }
+    }
 
     public void handleSendVerificationCode(
             ActionEvent actionEvent) throws MessagingException {
@@ -184,14 +208,14 @@ public class PasswordReset {
             } else {
                 errorOnEmail();
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetExitButtonButton, "WARNING",
+                        passwordResetReturnButtonButton, "WARNING",
                         App.getLanguageProperties("authNoEmailUserFoundAlert"),
                         350, 86, "alertFailure");
             }
         } else {
             errorOnEmail();
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetExitButtonButton, "WARNING",
+                    passwordResetReturnButtonButton, "WARNING",
                     App.getLanguageProperties("authWrongEmailFormatAlert"),
                     350, 86, "alertFailure");
         }
@@ -221,7 +245,7 @@ public class PasswordReset {
      * @param verificationCode generated 4-digit string
      * @throws MessagingException in case of error
      */
-    public static void sendEmail(String recipient,
+    public void sendEmail(String recipient,
                                  String firstName,
                                  String verificationCode
     ) throws MessagingException {
@@ -252,7 +276,11 @@ public class PasswordReset {
                 verificationCode);
 
         Transport.send(message);
-        System.out.println("Message sent successfully");
+        Alerts.createCustomAlert(loginRightPaneAnchorPane,
+                passwordResetReturnButtonButton, "CHECK",
+                App.getLanguageProperties(
+                        "authVerificationSuccessfulAlert"),
+                293, 86, "alertSuccess");
     }
 
     /**
@@ -310,7 +338,7 @@ public class PasswordReset {
     public void verifyCode() {
         if (passwordResetVerificationCodeField.getText().equals(verificationCode)) {
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetExitButtonButton, "CHECK",
+                    passwordResetReturnButtonButton, "CHECK",
                     App.getLanguageProperties(
                             "authVerificationSuccessfulAlert"),
                     293, 86, "alertSuccess");
@@ -342,7 +370,7 @@ public class PasswordReset {
         } else {
             errorOnVerificationCode();
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetExitButtonButton, "WARNING",
+                    passwordResetReturnButtonButton, "WARNING",
                     App.getLanguageProperties(
                             "authVerificationCodeInvalidAlert"),
                     293, 86, "alertFailure");
@@ -409,14 +437,14 @@ public class PasswordReset {
         } else if (error == 1) {
             if (passwordError) {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetExitButtonButton, "WARNING",
+                        passwordResetReturnButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongPasswordFormatAlert"),
                         350, 86, "alertFailure");
             }
             if (passwordNotTheSameError) {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetExitButtonButton, "WARNING",
+                        passwordResetReturnButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authPasswordsNotTheSameAlert"),
                         350, 86, "alertFailure");
@@ -425,7 +453,7 @@ public class PasswordReset {
         } else {
 
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetExitButtonButton, "WARNING",
+                    passwordResetReturnButtonButton, "WARNING",
                     App.getLanguageProperties(
                             "authErrorsOnTextFieldsAlert"),
                     350, 86, "alertFailure");
@@ -588,4 +616,15 @@ public class PasswordReset {
         SceneManager.renderScene("login");
     }
 
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.setIconified(true);
+    }
 }

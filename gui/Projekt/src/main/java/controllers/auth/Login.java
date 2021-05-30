@@ -160,7 +160,7 @@ public class Login implements Initializable {
         if (App.isConnectionError()) {
             // Database connection error alert
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    loginCreateAccountButton, "WARNING",
+                    loginLoginButtonButton, "WARNING",
                     App.getLanguageProperties("authDatabaseConnectionAlert"),
                     425, 86, "alertFailure");
         }
@@ -223,7 +223,7 @@ public class Login implements Initializable {
 
                 // No user error alert
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        loginCreateAccountButton, "WARNING",
+                        loginLoginButtonButton, "WARNING",
                         App.getLanguageProperties("authNoUserFoundAlert"),
                         435, 86, "alertFailure");
 
@@ -238,14 +238,14 @@ public class Login implements Initializable {
 
                 // Wrong email format error alert
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        loginCreateAccountButton, "WARNING",
+                        loginLoginButtonButton, "WARNING",
                         App.getLanguageProperties("authWrongEmailFormatAlert"),
                         350, 86, "alertFailure");
             }
         } else {
             // Wrong empty fields error alert
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    loginCreateAccountButton, "WARNING",
+                    loginLoginButtonButton, "WARNING",
                     App.getLanguageProperties("authFillFormAlert"),
                     293, 86,
                     "alertFailure");
@@ -487,5 +487,16 @@ public class Login implements Initializable {
         else{
             loginSettingsMenuButton.setGraphic(cogsWhite);
         }
+    }
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.setIconified(true);
     }
 }

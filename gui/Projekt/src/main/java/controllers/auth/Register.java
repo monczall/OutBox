@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +18,7 @@ import main.java.SceneManager;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.Users;
 import main.java.features.Alerts;
+import main.java.features.Preference;
 
 import java.net.URL;
 import java.util.List;
@@ -134,6 +136,11 @@ public class Register implements Initializable {
     @FXML
     private Label registerSamePasswordsRequirement;
 
+    @FXML
+    private ImageView registerLogoImageView;
+
+    private static Preference pref = new Preference();
+
     ObservableList<String> voivodeships =
             FXCollections.observableArrayList( "Dolnoslaskie",
                     "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Lodzkie",
@@ -145,6 +152,25 @@ public class Register implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         registerVoivodeshipField.setItems(voivodeships);
         registerVoivodeshipField.setValue("Dolnoslaskie");
+
+        // Outbox logos, they change depending on used theme
+        ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
+        outboxBlack.setFitHeight(200);
+        outboxBlack.setFitWidth(150);
+        ImageView outboxWhite = new ImageView("main/resources/images/outbox_white.png");
+        outboxWhite.setFitHeight(200);
+        outboxWhite.setFitWidth(150);
+
+        // Changes to UI depending on used theme
+        if(pref.readPreference("color").equals("red")) {
+            registerLogoImageView.setImage(outboxWhite.getImage());
+        }
+        else if(pref.readPreference("color").equals("orange")) {
+            registerLogoImageView.setImage(outboxBlack.getImage());
+        }
+        else{
+            registerLogoImageView.setImage(outboxBlack.getImage());
+        }
     }
 
     public void register(){
@@ -750,4 +776,15 @@ public class Register implements Initializable {
         passwordRequirements();
     }
 
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.setIconified(true);
+    }
 }
