@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import main.java.App;
 import main.java.dao.PackageTypeDAO;
 import main.java.entity.PackageType;
@@ -64,14 +63,15 @@ public class AdminPackSettings implements Initializable {
 
     /**
      * Method that save data from inputs about package data
+     *
      * @param actionEvent action event
      */
     @FXML
     public void saveChanges(ActionEvent actionEvent) {
 
-        if(!isEmpty()) {
+        if (!isEmpty()) {
             if (isValid(smallSize.getText(), smallWeight.getText(), smallPrice.getText())
-            && isValid(medSize.getText(), medWeight.getText(), medPrice.getText())
+                    && isValid(medSize.getText(), medWeight.getText(), medPrice.getText())
                     && isValid(bigSize.getText(), bigWeight.getText(), bigPrice.getText())) {
 
                 PackageTypeDAO.updatePackageType(1, smallSize.getText(), smallWeight.getText(), smallPrice.getText());
@@ -80,18 +80,18 @@ public class AdminPackSettings implements Initializable {
 
                 PackageTypeDAO.updatePackageType(3, bigSize.getText(), bigWeight.getText(), bigPrice.getText());
 
-                Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges,"CHECK",
+                Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges, "CHECK",
                         App.getLanguageProperties("adminSuccessPackEdit"), 320, 86, "alertSuccess");
 
-            }else{
+            } else {
                 // CHECK FOR ERRORS
 
 
-                Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges,"WARNING",
+                Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges, "WARNING",
                         App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
             }
-        }else{
-            Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges,"WARNING",
+        } else {
+            Alerts.createCustomAlert(RightPaneAnchorPane, btnSaveChanges, "WARNING",
                     App.getLanguageProperties("adminBlankFields"), 525, 86, "alertFailure");
         }
     }
@@ -99,6 +99,7 @@ public class AdminPackSettings implements Initializable {
     /**
      * Method that checks if all data is given and there are no empty inputs
      * True is returned if all data is entered, otherwise false
+     *
      * @return
      */
     private boolean isEmpty() {
@@ -139,12 +140,9 @@ public class AdminPackSettings implements Initializable {
             errorOnBigPrice();
             error++;
         }
-        if(error > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return error > 0;
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -153,8 +151,10 @@ public class AdminPackSettings implements Initializable {
         smallSize.getStyleClass().clear();
         smallSize.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnSmallSize(KeyEvent keyEvent) {
@@ -162,6 +162,7 @@ public class AdminPackSettings implements Initializable {
         smallSize.getStyleClass().clear();
         smallSize.getStyleClass().add("textFieldsSettingsPackege");
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -170,8 +171,10 @@ public class AdminPackSettings implements Initializable {
         smallWeight.getStyleClass().clear();
         smallWeight.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnSmallWeight(KeyEvent keyEvent) {
@@ -179,6 +182,7 @@ public class AdminPackSettings implements Initializable {
         smallWeight.getStyleClass().clear();
         smallWeight.getStyleClass().add("textFieldsSettingsPackege");
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -187,8 +191,10 @@ public class AdminPackSettings implements Initializable {
         smallPrice.getStyleClass().clear();
         smallPrice.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnSmallPrice(KeyEvent keyEvent) {
@@ -196,6 +202,7 @@ public class AdminPackSettings implements Initializable {
         smallPrice.getStyleClass().clear();
         smallPrice.getStyleClass().add("textFieldsSettingsPackege");
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -204,8 +211,10 @@ public class AdminPackSettings implements Initializable {
         medSize.getStyleClass().clear();
         medSize.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnMedSize(KeyEvent keyEvent) {
@@ -213,6 +222,7 @@ public class AdminPackSettings implements Initializable {
         medSize.getStyleClass().clear();
         medSize.getStyleClass().add("textFieldsSettingsPackege");
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -221,8 +231,10 @@ public class AdminPackSettings implements Initializable {
         medWeight.getStyleClass().clear();
         medWeight.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnMedWeight(KeyEvent keyEvent) {
@@ -230,6 +242,7 @@ public class AdminPackSettings implements Initializable {
         medWeight.getStyleClass().clear();
         medWeight.getStyleClass().add("textFieldsSettingsPackege");
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -238,8 +251,10 @@ public class AdminPackSettings implements Initializable {
         medPrice.getStyleClass().clear();
         medPrice.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnMedPrice(KeyEvent keyEvent) {
@@ -247,6 +262,7 @@ public class AdminPackSettings implements Initializable {
         medPrice.getStyleClass().clear();
         medPrice.getStyleClass().add("textFieldsSettingsPackege");
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -255,8 +271,10 @@ public class AdminPackSettings implements Initializable {
         bigSize.getStyleClass().clear();
         bigSize.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnBigSize(KeyEvent keyEvent) {
@@ -264,6 +282,7 @@ public class AdminPackSettings implements Initializable {
         bigSize.getStyleClass().clear();
         bigSize.getStyleClass().add("textFieldsSettingsPackege");
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -272,8 +291,10 @@ public class AdminPackSettings implements Initializable {
         bigWeight.getStyleClass().clear();
         bigWeight.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnBigWeight(KeyEvent keyEvent) {
@@ -281,6 +302,7 @@ public class AdminPackSettings implements Initializable {
         bigWeight.getStyleClass().clear();
         bigWeight.getStyleClass().add("textFieldsSettingsPackege");
     }
+
     /**
      * Method that change css style while an error occurred
      */
@@ -289,8 +311,10 @@ public class AdminPackSettings implements Initializable {
         bigPrice.getStyleClass().clear();
         bigPrice.getStyleClass().add("textFieldsSettingsPackegeError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnBigPrice(KeyEvent keyEvent) {
@@ -300,15 +324,13 @@ public class AdminPackSettings implements Initializable {
     }
 
 
-
-
-
     /**
      * Method that checks if all data is correctly entered
      * True is returned if all data are correct compared to patterns, otherwise false
-     * @param size size
+     *
+     * @param size   size
      * @param weight weight
-     * @param price price
+     * @param price  price
      * @return
      */
     private boolean isValid(String size, String weight, String price) {
@@ -321,25 +343,21 @@ public class AdminPackSettings implements Initializable {
         Matcher matchWeight = patternWeight.matcher(weight);
         Matcher matchPrice = patternPrice.matcher(price);
 
-        if(!matchSize.matches()){
+        if (!matchSize.matches()) {
 
             error++;
         }
 
-        if(!matchWeight.matches()){
+        if (!matchWeight.matches()) {
 
             error++;
         }
 
-        if(!matchPrice.matches()){
+        if (!matchPrice.matches()) {
 
             error++;
         }
 
-        if(error > 0){
-            return false;
-        }else{
-            return true;
-        }
+        return error <= 0;
     }
 }
