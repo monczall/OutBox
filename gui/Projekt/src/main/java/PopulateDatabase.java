@@ -63,7 +63,7 @@ public class PopulateDatabase {
                 Reader packageHistoriesReader = new BufferedReader(new FileReader("database/populate_package_history.sql"));
                 srPackageHistories.runScript(packageHistoriesReader);
             }
-            
+
         } catch (SQLException e) {
             //Pushing alert if error when connecting to database
             setConnectionError(true);
