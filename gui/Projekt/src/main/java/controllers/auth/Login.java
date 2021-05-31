@@ -160,7 +160,7 @@ public class Login implements Initializable {
         if (App.isConnectionError()) {
             // Database connection error alert
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    loginCreateAccountButton, "WARNING",
+                    loginLoginButtonButton, "WARNING",
                     App.getLanguageProperties("authDatabaseConnectionAlert"),
                     425, 86, "alertFailure");
         }
@@ -223,9 +223,9 @@ public class Login implements Initializable {
 
                 // No user error alert
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        loginCreateAccountButton, "WARNING",
+                        loginLoginButtonButton, "WARNING",
                         App.getLanguageProperties("authNoUserFoundAlert"),
-                        435, 86, "alertFailure");
+                        485, 86, "alertFailure");
 
             } else {
                 // UserTextField
@@ -238,14 +238,14 @@ public class Login implements Initializable {
 
                 // Wrong email format error alert
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        loginCreateAccountButton, "WARNING",
+                        loginLoginButtonButton, "WARNING",
                         App.getLanguageProperties("authWrongEmailFormatAlert"),
                         350, 86, "alertFailure");
             }
         } else {
             // Wrong empty fields error alert
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    loginCreateAccountButton, "WARNING",
+                    loginLoginButtonButton, "WARNING",
                     App.getLanguageProperties("authFillFormAlert"),
                     293, 86,
                     "alertFailure");
@@ -338,7 +338,7 @@ public class Login implements Initializable {
     /**
      * <p>
      *     Method is used to clear errors on certain fields.
-     *     It's doing it by changing appearance of them.
+     *     It's doing it by changing their appearance.
      * </p>
      * @param keyEvent key that is being pressed
      */
@@ -350,32 +350,16 @@ public class Login implements Initializable {
         // UserCircle
         loginUserCircleCircle.getStyleClass().clear();
         loginUserCircleCircle.getStyleClass().add("fill");
-
-        // PasswordTextField
-        loginPasswordPasswordField.getStyleClass().clear();
-        loginPasswordPasswordField.getStyleClass().add("textFields");
-
-        // PasswordCircle
-        loginPasswordCircleCircle.getStyleClass().clear();
-        loginPasswordCircleCircle.getStyleClass().add("fill");
     }
 
     /**
      * <p>
      *     Method is used to clear errors on certain fields.
-     *     It's doing it by changing appearance of them.
+     *     It's doing it by changing their appearance.
      * </p>
      * @param keyEvent key that is being pressed
      */
     public void clearErrorsOnPassword(KeyEvent keyEvent) {
-        // UserTextField
-        loginEmailTextField.getStyleClass().clear();
-        loginEmailTextField.getStyleClass().add("textFields");
-
-        // UserCircle
-        loginUserCircleCircle.getStyleClass().clear();
-        loginUserCircleCircle.getStyleClass().add("fill");
-
         // PasswordTextField
         loginPasswordPasswordField.getStyleClass().clear();
         loginPasswordPasswordField.getStyleClass().add("textFields");
@@ -487,5 +471,16 @@ public class Login implements Initializable {
         else{
             loginSettingsMenuButton.setGraphic(cogsWhite);
         }
+    }
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.setIconified(true);
     }
 }

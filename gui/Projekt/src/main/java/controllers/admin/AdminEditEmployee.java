@@ -1,6 +1,5 @@
 package main.java.controllers.admin;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,12 +11,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import main.java.App;
 import main.java.SceneManager;
-import main.java.dao.PackagesDAO;
 import main.java.dao.UsersDAO;
-import main.java.entity.*;
+import main.java.entity.Users;
+import main.java.entity.UsersDTO;
 import main.java.features.Alerts;
 
 import java.io.IOException;
@@ -30,10 +28,9 @@ public class AdminEditEmployee implements Initializable {
     private static int userID;
 
     private static int userInfoID;
-
+    private final ObservableList<UsersDTO> searchList = UsersDAO.getUserEdit();
     @FXML
     private AnchorPane edit;
-
     @FXML
     private TableView<UsersDTO> table;
     @FXML
@@ -53,7 +50,8 @@ public class AdminEditEmployee implements Initializable {
 
     /**
      * Method that return userID
-     * @return
+     *
+     * @return return userID
      */
     public static int getUserID() {
         return userID;
@@ -61,7 +59,8 @@ public class AdminEditEmployee implements Initializable {
 
     /**
      * Method that set userID
-     * @param userID
+     *
+     * @param userID set userID
      */
     public static void setUserID(int userID) {
         AdminEditEmployee.userID = userID;
@@ -69,7 +68,8 @@ public class AdminEditEmployee implements Initializable {
 
     /**
      * Method that return userInfoID
-     * @return
+     *
+     * @return return userInfoID
      */
     public static int getUserInfoID() {
         return userInfoID;
@@ -77,6 +77,7 @@ public class AdminEditEmployee implements Initializable {
 
     /**
      * Method that set userInfoID
+     *
      * @param userInfoID userInfoID
      */
     public static void setUserInfoID(int userInfoID) {
@@ -85,6 +86,7 @@ public class AdminEditEmployee implements Initializable {
 
     /**
      * Method that move as to editing employee scene after chose an employee
+     *
      * @param mouseEvent mose event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -98,8 +100,6 @@ public class AdminEditEmployee implements Initializable {
             SceneManager.loadScene("../../../resources/view/admin/adminEdit.fxml", edit);
         }
     }
-
-    private final ObservableList<UsersDTO> searchList = UsersDAO.getUserEdit();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -119,6 +119,7 @@ public class AdminEditEmployee implements Initializable {
 
     /**
      * Method that after typing character will be searching any parameters from base
+     *
      * @param event key event
      */
     @FXML
