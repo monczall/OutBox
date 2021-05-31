@@ -5,13 +5,12 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.features.Animations;
@@ -241,12 +240,36 @@ public class Admin implements Initializable {
     public void viewEditEmployee(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "addManager"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewAddManager(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
+    }
+
+    /**
+     * Method that closes the application
+     *
+     * @param event event
+     */
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * Method that minimizes the application
+     *
+     * @param event event
+     */
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.setIconified(true);
     }
 }

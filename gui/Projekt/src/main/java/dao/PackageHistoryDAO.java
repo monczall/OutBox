@@ -3,7 +3,6 @@ package main.java.dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.*;
-import main.java.entity.PackageHistory_;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;

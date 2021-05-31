@@ -1,5 +1,6 @@
 package main.java.controllers.manager;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import main.java.App;
 import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
@@ -53,7 +55,13 @@ public class ManagerCouriersDelete implements Initializable {
     private Label email;
 
     @FXML
+    private Label role;
+
+    @FXML
     private Label voivodeship;
+
+    @FXML
+    private Label howManyPackages;
 
     @FXML
     private Pane alertPane;
@@ -68,12 +76,13 @@ public class ManagerCouriersDelete implements Initializable {
      */
     @FXML
     public void confirmDeleteCourierButton(javafx.event.ActionEvent actionEvent) {
-        UserInfosDAO.deleteUser(dataUserInfos.get(dataIndex).getId());
+        UserInfosDAO.deleteUser(dataUser.get(dataIndex).getUserInfoId());
+        dataUser.remove(dataIndex);
         alertPane.setVisible(true);
     }
 
     /**
-     * The method responsible for finding a courier with the given data
+     * Choosing find couriers that meet the relevant criteria
      */
     public void findCourier(MouseEvent mouseEvent) {
 
@@ -85,43 +94,37 @@ public class ManagerCouriersDelete implements Initializable {
         else
         {
             dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
-            setDataLabel();
+            clearDataCouriesFind();
         }
+    }
+
+    /**
+     * method that changes status of package in courier panel after each change in combo box
+     */
+    public void clearDataCouriesFind(){
+       for(int i=0; i<dataUser.size(); i++){
+           System.out.println("("+i+")"+dataUser.get(i).getUserInfoId() +" : "+dataUserInfos.get(0).getId());
+            if(dataUser.get(i).getUserInfoId() == dataUserInfos.get(0).getId()){
+                dataIndex = i;
+                setDataLabel();
+                break;
+            }
+       }
     }
 
     /**
      *  Setting the requested data
      */
     public void setDataLabel(){
-        dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
-        fullName.setText(dataUserInfos.get(dataIndex).getName() + " "+dataUserInfos.get(dataIndex).getSurname());
-        cityAndStreet.setText(dataUserInfos.get(dataIndex).getCity() + " "
-                +dataUserInfos.get(dataIndex).getStreetAndNumber());
-        phoneNumber.setText(dataUserInfos.get(dataIndex).getPhoneNumber());
-        voivodeship.setText(dataUserInfos.get(dataIndex).getVoivodeship());
-        email.setText(dataUser.get(0).getEmail());
-        String role = dataUser.get(0).getRole();
-
-
-        //If there is more than one courier, it shows buttons to switch between them
-        if(dataUserInfos.size() > 1 && (role.equals("Kurier")) && dataUser.get(0).getAreaId() == uu.getAreaId())
-        {
-            paneResults.setVisible(true);
-            button1.setVisible(true);
-            button2.setVisible(true);
-            noDataText.setVisible(false);
-        }// if only one courier
-        else if(dataUserInfos.size() == 1 && (role.equals("Kurier")) && dataUser.get(0).getAreaId() == uu.getAreaId())
-        {
-            button1.setVisible(false);
-            button2.setVisible(false);
-            paneResults.setVisible(true);
-            noDataText.setVisible(false);
-        } //If not found, display a message
-        else{
-            paneResults.setVisible(false);
-            noDataText.setVisible(true);
-        }
+        howManyPackages.setText(dataIndex+1 + "/" + dataUser.size());
+        dataUserInfos = UserInfosDAO.getUserInfoByID(dataUser.get(dataIndex).getId());
+        fullName.setText(dataUserInfos.get(0).getName() + " "+dataUserInfos.get(0).getSurname());
+        cityAndStreet.setText(dataUserInfos.get(0).getCity() + " "
+                +dataUserInfos.get(0).getStreetAndNumber());
+        phoneNumber.setText(dataUserInfos.get(0).getPhoneNumber());
+        voivodeship.setText(dataUserInfos.get(0).getVoivodeship());
+        email.setText(dataUser.get(dataIndex).getEmail());
+        role.setText(dataUser.get(dataIndex).getRole());
     }
 
     /**
@@ -144,8 +147,8 @@ public class ManagerCouriersDelete implements Initializable {
     void buttonNext(MouseEvent event) {
         dataIndex++;
 
-        if(dataIndex>dataUserInfos.size()-1){
-            dataIndex=dataUserInfos.size()-1;
+        if(dataIndex>dataUser.size()-1){
+            dataIndex=dataUser.size()-1;
         }
         setDataLabel();
     }
@@ -155,23 +158,56 @@ public class ManagerCouriersDelete implements Initializable {
      */
     @FXML
     void confirmButton(MouseEvent event) {
-        paneResults.setVisible(false);
         name.setText("");
         surname.setText("");
-        noDataText.setVisible(true);
-        button1.setVisible(false);
-        button2.setVisible(false);
-        alertPane.setVisible(false);
         dataIndex = 0;
+        clearDataCouries();
+        alertPane.setVisible(false);
+    }
+
+    /**
+     * Choosing couriers that meet the relevant criteria
+     */
+    void clearDataCouries(){
+        for(int i=0; i<dataUser.size(); i++) {
+            if (dataUser.get(i).getAreaId() != uu.getAreaId()) {
+                dataUser.remove(i);
+                i--;
+            }
+        }
+
+        for(int i=0; i<dataUser.size(); i++) {
+            if (!dataUser.get(i).getRole().equals("Kurier") && !dataUser.get(i).getRole().equals("Kurier Międzyoddziałowy")) {
+                dataUser.remove(i);
+                i--;
+            }
+        }
+
+        if(dataUser.size()==0){
+            howManyPackages.setText("Brak");
+            noDataText.setVisible(true);
+            button1.setVisible(false);
+            button2.setVisible(false);
+            paneResults.setVisible(false);
+        }
+        else{
+            noDataText.setVisible(false);
+            button1.setVisible(true);
+            button2.setVisible(true);
+            paneResults.setVisible(true);
+            setDataLabel();
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        dataUser = UsersDAO.getUsers();
+        clearDataCouries();
 
         //set default visible
-        button1.setVisible(false);
-        button2.setVisible(false);
-        paneResults.setVisible(false);
+        button1.setVisible(true);
+        button2.setVisible(true);
+        paneResults.setVisible(true);
     }
 
 }

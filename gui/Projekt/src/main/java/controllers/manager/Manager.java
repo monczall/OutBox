@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
@@ -130,6 +131,26 @@ public class Manager implements Initializable {
     @FXML
     public void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
+    }
+
+    /**
+     * button to close applications
+     *
+     */
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * button that minimizes applications
+     *
+     */
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.setIconified(true);
     }
 
     @Override

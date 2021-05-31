@@ -3,7 +3,10 @@ package main.java;
 import main.java.dao.*;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,59 +17,77 @@ public class PopulateDatabase {
 
     /**
      * <p>
-     *     Method used to create database structure and fill it with data if it
-     *     doesn't exists. Additionally if database exists, but is empty - fills
-     *     certain tables.
+     * Method used to create database structure and fill it with data if it
+     * doesn't exists. Additionally if database exists, but is empty - fills
+     * certain tables.
      * </p>
      *
      * @throws FileNotFoundException is being thrown if there is no file at given location
      */
     public static void createDbIfNotExists() throws FileNotFoundException {
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/outbox", "root", "");
             System.out.println("Connection established......");
-            //Initialize the script runner
-            ScriptRunner sr = new ScriptRunner(con);
-            //Creating a reader object
-            Reader reader = new BufferedReader(new FileReader("database/database.sql"));
-            //Running the script
-            sr.runScript(reader);
-
-            //Checking if tables are empty and eventually filling them
-            if(UserInfosDAO.getUserInfos().size() == 0){
+            if (UserInfosDAO.getUserInfos().size() == 0) {
                 ScriptRunner srUserInfos = new ScriptRunner(con);
                 Reader userInfosReader = new BufferedReader(new FileReader("database/populate_user_infos.sql"));
                 srUserInfos.runScript(userInfosReader);
             }
-            if(AreasDAO.getAreas().size() == 0){
+            if (AreasDAO.getAreas().size() == 0) {
                 ScriptRunner srAreas = new ScriptRunner(con);
                 Reader areasReader = new BufferedReader(new FileReader("database/populate_areas.sql"));
                 srAreas.runScript(areasReader);
             }
-            if(PackageTypeDAO.getPackageTypes().size() == 0){
+            if (PackageTypeDAO.getPackageTypes().size() == 0) {
                 ScriptRunner srPackageTypes = new ScriptRunner(con);
                 Reader packageTypesReader = new BufferedReader(new FileReader("database/populate_package_type.sql"));
                 srPackageTypes.runScript(packageTypesReader);
             }
-            if(UsersDAO.getUsers().size() == 0){
+            if (UsersDAO.getUsers().size() == 0) {
                 ScriptRunner srUsers = new ScriptRunner(con);
                 Reader usersReader = new BufferedReader(new FileReader("database/populate_users.sql"));
                 srUsers.runScript(usersReader);
             }
-            if(PackagesDAO.getPackages().size() == 0){
+            if (PackagesDAO.getPackages().size() == 0) {
                 ScriptRunner srPackages = new ScriptRunner(con);
                 Reader packagesReader = new BufferedReader(new FileReader("database/populate_packages.sql"));
                 srPackages.runScript(packagesReader);
             }
-            if(PackageHistoryDAO.getStatuses().size() == 0){
+            if (PackageHistoryDAO.getStatuses().size() == 0) {
                 ScriptRunner srPackageHistories = new ScriptRunner(con);
                 Reader packageHistoriesReader = new BufferedReader(new FileReader("database/populate_package_history.sql"));
                 srPackageHistories.runScript(packageHistoriesReader);
             }
-
         } catch (SQLException e) {
-            //Pushing alert if error when connecting to database
-            setConnectionError(true);
+            try {
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "");
+                ScriptRunner sr = new ScriptRunner(con);
+                //Creating a reader object
+                Reader reader = new BufferedReader(new FileReader("database/database.sql"));
+                //Running the script
+                sr.runScript(reader);
+
+
+                Reader userInfosReader = new BufferedReader(new FileReader("database/populate_user_infos.sql"));
+                sr.runScript(userInfosReader);
+                Reader areasReader = new BufferedReader(new FileReader("database/populate_areas.sql"));
+                sr.runScript(areasReader);
+                Reader packageTypesReader = new BufferedReader(new FileReader("database/populate_package_type.sql"));
+                sr.runScript(packageTypesReader);
+                Reader usersReader = new BufferedReader(new FileReader("database/populate_users.sql"));
+                sr.runScript(usersReader);
+                Reader packagesReader = new BufferedReader(new FileReader("database/populate_packages.sql"));
+                sr.runScript(packagesReader);
+                Reader packageHistoriesReader = new BufferedReader(new FileReader("database/populate_package_history.sql"));
+                sr.runScript(packageHistoriesReader);
+
+                //Checking if tables are empty and eventually filling them
+
+            } catch (SQLException ex) {
+                //Pushing alert if error when connecting to database
+                setConnectionError(true);
+            }
+
         }
     }
 }

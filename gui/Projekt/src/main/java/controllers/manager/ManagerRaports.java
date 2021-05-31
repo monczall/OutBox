@@ -201,6 +201,10 @@ public class ManagerRaports implements Initializable {
         infoConfirmRaport.setVisible(false);
     }
 
+    /**
+     * checks that a file name has been given
+     * @return boolena
+     */
     boolean validateFileName(){
         if(fileName.getText().isEmpty()) {
             return false;
@@ -221,14 +225,14 @@ public class ManagerRaports implements Initializable {
     public void confirmOneDayReport(MouseEvent mouseEvent) {
 
         String pathFile;
-        //if no path is selected for saving the report
-        File selectedDirectory = filePathSelection();
-        if(selectedDirectory == null){
-            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",
-                    App.getLanguageProperties("fileSaveLocationNotSelected"));
+
+        if(validateFileName()){
+            Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                    App.getLanguageProperties("nameFile"));
         }
         else{
-            if(validateFileName()) {
+            File selectedDirectory = filePathSelection();
+            if(selectedDirectory != null) {
                 File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
                 if (f.exists() && f.isFile()) {
@@ -259,8 +263,8 @@ public class ManagerRaports implements Initializable {
                 }
             }
             else{
-                Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
-                        App.getLanguageProperties("nameFile"));
+                Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",
+                        App.getLanguageProperties("fileSaveLocationNotSelected"));
             }
         }
         oneDayRaport.setVisible(false);

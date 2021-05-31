@@ -1,25 +1,21 @@
 package main.java.controllers.admin;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 import main.java.App;
-import main.java.SceneManager;
 import main.java.dao.AreasDAO;
-import main.java.dao.PackageTypeDAO;
 import main.java.features.Alerts;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AdminAddArea {
-
 
 
     @FXML
@@ -57,81 +53,77 @@ public class AdminAddArea {
      * Retrieves entered data from inputs and checks their correctness
      */
 
-    public void register(){
-        if(!isEmpty()){
+    public void register() {
+        if (!isEmpty()) {
 
-            if(isValid(registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText(), registerAreaName.getText())){
+            if (isValid(registerStreetField.getText(), registerCityField.getText(), registerVoivodeshipField.getText(), registerAreaName.getText())) {
                 // SUCCESSFUL ADDING AREA
                 AreasDAO.insertAreas(registerAreaName.getText(), registerVoivodeshipField.getText(), registerCityField.getText(), registerStreetField.getText());
                 System.out.println("An area has been added");
-                Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton,"CHECK",
+                Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton, "CHECK",
                         App.getLanguageProperties("adminSuccessAreaAdd"), 320, 86, "alertSuccess");
                 clearData();
-            }else{
+            } else {
                 // CHECK FOR ERRORS
 
 
-                Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton,"WARNING",
-                        App.getLanguageProperties("adminInvalidData"), 670, 86, "alertFailure");
+                Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton, "WARNING",
+                        App.getLanguageProperties("adminInvalidData"), 490, 86, "alertFailure");
             }
-        }else{
-            Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton,"WARNING",
+        } else {
+            Alerts.createCustomAlert(RightPaneAnchorPane, addAreaButton, "WARNING",
                     App.getLanguageProperties("adminBlankFields"), 525, 86, "alertFailure");
         }
     }
 
     /**
      * Method that checks if all data is given and there are no empty inputs
-     * True is returned if all data is entered, otherwise false
-     * @return
+     *
+     * @return True is returned if all data is entered, otherwise false
      */
 
-    private boolean isEmpty(){
+    private boolean isEmpty() {
         int error = 0;
 
-        if(registerStreetField.getText().isEmpty()){
+        if (registerStreetField.getText().isEmpty()) {
             errorOnStreet();
             error++;
         }
-        if(registerCityField.getText().isEmpty()){
+        if (registerCityField.getText().isEmpty()) {
             errorOnCity();
             error++;
         }
-        if(registerVoivodeshipField.getText().isEmpty()){
+        if (registerVoivodeshipField.getText().isEmpty()) {
             errorOnVoivodeship();
             error++;
         }
 
-        if(registerAreaName.getText().isEmpty()){
+        if (registerAreaName.getText().isEmpty()) {
             errorOnArea();
             error++;
         }
 
-        if(error > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return error > 0;
     }
 
     /**
      * Method that checks if all data is correctly entered
-     * True is returned if all data are correct compared to patterns, otherwise false
-     * @param street street name
-     * @param city city name
+     *
+     * @param street      street name
+     * @param city        city name
      * @param voivodeship voivodeship name
-     * @param name name of area
-     * @return
+     * @param name        name of area
+     * @return True is returned if all data are correct compared to patterns, otherwise false
      */
 
-    private boolean isValid(String street, String city, String voivodeship, String name){
+    private boolean isValid(String street, String city, String voivodeship, String name) {
         int error = 0;
 
         Pattern patternStreet = Pattern.compile("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]" +
                 "{0,40}?\\s?\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}");
         Pattern patternCity = Pattern.compile("[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
         Pattern patternVoivodeship = Pattern.compile("[A-Za-z]{7,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
-        Pattern patternName = Pattern.compile("[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?[0-9]{0,3}");
+        Pattern patternName = Pattern.compile("[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}");
 
 
         Matcher matchStreet = patternStreet.matcher(street);
@@ -142,31 +134,26 @@ public class AdminAddArea {
 
         Matcher matchName = patternName.matcher(name);
 
-        if(!matchStreet.matches()){
+        if (!matchStreet.matches()) {
             errorOnStreet();
             error++;
         }
-        if(!matchCity.matches()){
+        if (!matchCity.matches()) {
             errorOnCity();
             error++;
         }
-        if(!matchVoivodeship.matches()){
+        if (!matchVoivodeship.matches()) {
             errorOnVoivodeship();
             error++;
         }
 
-        if(!matchName.matches()){
+        if (!matchName.matches()) {
             errorOnArea();
             error++;
         }
 
-        if(error > 0){
-            return false;
-        }else{
-            return true;
-        }
+        return error <= 0;
     }
-
 
 
     /**
@@ -182,9 +169,9 @@ public class AdminAddArea {
     }
 
 
-
     /**
      * Method that doing "register" function after button click
+     *
      * @param mouseEvent mouse event
      */
     public void handleRegister(MouseEvent mouseEvent) {
@@ -192,27 +179,22 @@ public class AdminAddArea {
     }
 
 
-
     /**
      * Method that doing "register" function after enter pressed
+     *
      * @param keyEvent enter pressed
      */
     public void handleRegisterOnEnterPressed(KeyEvent keyEvent) {
-        if(keyEvent.getCode() == KeyCode.ENTER)
-        {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
             register();
         }
     }
 
 
-
-
-
-
     /**
      * Method that change css style while an error occurred
      */
-    private void errorOnStreet(){
+    private void errorOnStreet() {
         //StreetField
         registerStreetField.getStyleClass().clear();
         registerStreetField.getStyleClass().add("textFieldsError");
@@ -224,6 +206,7 @@ public class AdminAddArea {
 
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnStreet(KeyEvent keyEvent) {
@@ -234,10 +217,11 @@ public class AdminAddArea {
         registerStreetCircle.getStyleClass().clear();
         registerStreetCircle.getStyleClass().add("circle");
     }
+
     /**
      * Method that change css style while an error occurred
      */
-    private void errorOnCity(){
+    private void errorOnCity() {
         //CityField
         registerCityField.getStyleClass().clear();
         registerCityField.getStyleClass().add("textFieldsError");
@@ -245,8 +229,10 @@ public class AdminAddArea {
         registerCityCircle.getStyleClass().clear();
         registerCityCircle.getStyleClass().add("circleError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnCity(KeyEvent keyEvent) {
@@ -257,10 +243,11 @@ public class AdminAddArea {
         registerCityCircle.getStyleClass().clear();
         registerCityCircle.getStyleClass().add("circle");
     }
+
     /**
      * Method that change css style while an error occurred
      */
-    private void errorOnVoivodeship(){
+    private void errorOnVoivodeship() {
         //VoivodeshipField
         registerVoivodeshipField.getStyleClass().clear();
         registerVoivodeshipField.getStyleClass().add("textFieldsError");
@@ -268,8 +255,10 @@ public class AdminAddArea {
         registerVoivodeshipCircle.getStyleClass().clear();
         registerVoivodeshipCircle.getStyleClass().add("circleError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnVoivodeship(KeyEvent keyEvent) {
@@ -282,11 +271,10 @@ public class AdminAddArea {
     }
 
 
-
     /**
      * Method that change css style while an error occurred
      */
-    private void errorOnArea(){
+    private void errorOnArea() {
         //Area Name
         registerAreaName.getStyleClass().clear();
         registerAreaName.getStyleClass().add("textFieldsError");
@@ -294,8 +282,10 @@ public class AdminAddArea {
         registerAreaCircle.getStyleClass().clear();
         registerAreaCircle.getStyleClass().add("circleError");
     }
+
     /**
      * Method that change css style while fields with errors are change
+     *
      * @param keyEvent key event
      */
     public void clearErrorsOnArea(KeyEvent keyEvent) {

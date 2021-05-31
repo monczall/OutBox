@@ -2,12 +2,14 @@ package main.java.controllers.manager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import main.java.App;
 import main.java.controllers.auth.Encryption;
 import main.java.controllers.auth.Login;
@@ -18,6 +20,7 @@ import main.java.entity.Areas;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
 import main.java.features.Alerts;
+import main.java.features.Preference;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -57,34 +60,34 @@ public class ManagerCouriersAdd implements Initializable {
     @FXML
     private Pane alertPane;
 
+    @FXML
+    private ComboBox<String> comboRole;
 
     @FXML
-    private Label areaCourierName;
+    private ObservableList<String> role = FXCollections.observableArrayList("Kurier","Kurier Międzyoddziałowy");
 
-    @FXML
-    private Label areaCourierCity;
-
-    @FXML
-    private Label areaCourierStreet;
-
-    @FXML
-    private Label howManyAreas;
-
-    @FXML
-    private Button buttonNext;
-
-    @FXML
-    private Button buttonBack;
-
+    String roleString;
     List<Users> dataUser;
 
     Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
 
     /**
+     * Choosing the role of the courier
+     */
+    @FXML
+    void changeRole(ActionEvent event) {
+        if(comboRole.getValue().equals("Kurier")) {
+            roleString = "Kurier";
+        }
+        else {
+            roleString = "Kurier Międzyoddziałowy";
+        }
+    }
+
+    /**
      * The method responsible for adding the courier to the database
      */
     public void addCourier(MouseEvent mouseEvent) {
-
         if(name.getText().toString().equals("") ||
                 surname.getText().toString().equals("") ||
                 street.getText().toString().equals("") ||
@@ -106,7 +109,6 @@ public class ManagerCouriersAdd implements Initializable {
                 String streetString = street.getText();
                 String surnameString = surname.getText();
                 String cityString = city.getText();
-                String role = "Kurier";
 
                 String password = new Random().ints(10, 33, 122)
                         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
@@ -123,7 +125,7 @@ public class ManagerCouriersAdd implements Initializable {
                 dataUser = UsersDAO.getUsersId(ui.getId());
                 int areaId = dataUser.get(0).getAreaId();
                 UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString,
-                        ui.getVoivodeship(), Encryption.encrypt(password), role, uu.getAreaId());
+                        ui.getVoivodeship(), Encryption.encrypt(password), roleString, uu.getAreaId());
 
                 alertPane.setVisible(true);
             }
@@ -300,7 +302,6 @@ public class ManagerCouriersAdd implements Initializable {
         return null;
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -312,6 +313,10 @@ public class ManagerCouriersAdd implements Initializable {
         goodValidation(numberPhone);
         goodValidation(email);
 
+
+        comboRole.setItems(role);
+        comboRole.setValue(role.get(0));
+        roleString="Kurier";
     }
 
 }

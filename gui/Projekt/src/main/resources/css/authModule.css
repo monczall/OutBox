@@ -115,7 +115,7 @@
     -fx-scale-y: 0.9;
     -fx-scale-x: 0.9;
 }
-.exitButton{
+.returnButton{
     -fx-background-color: -fx-theme-secondary-color;
     -fx-background-radius: 3;
     -fx-min-width: 60;
@@ -127,7 +127,7 @@
     -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
-.exitButton:hover{
+.returnButton:hover{
     -fx-background-color: -fx-theme-color;
     -fx-background-radius: 3;
     -fx-border-color: -fx-theme-secondary-color;
@@ -141,7 +141,7 @@
     -fx-text-fill: -fx-theme-secondary-color;
     -fx-alignment: center;
 }
-.exitButton:pressed{
+.returnButton:pressed{
     -fx-scale-y: 0.9;
     -fx-scale-x: 0.9;
 }
@@ -192,6 +192,23 @@
     -fx-border-width: 2;
     -fx-border-radius: 5;
 }
+.minIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+.minBtn:hover > .minIcon {
+    -fx-scale-y: 4;
+}
+.exitIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+.exitButton:hover > .exitPane > .exitIcon{
+    -fx-scale-x: 1.625;
+}
+
 /*-------------TEXT FIELDS-------------*/
 .textFields{
     -fx-background-color: -fx-textFields-bg;
@@ -222,7 +239,7 @@
     -fx-padding: 0 0 0 30;
 }
 .textFieldsError{
-    -fx-background-color: #FFE0E0;
+    -fx-background-color: #FFC0C0;
     -fx-background-radius: 9;
     -fx-border-color: -fx-error;
     -fx-border-width: 3;
