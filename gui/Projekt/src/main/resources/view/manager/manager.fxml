@@ -17,27 +17,27 @@
             <AnchorPane fx:id="mainWindow2" prefHeight="667.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" />
             <AnchorPane fx:id="mainWindow" layoutX="71.0" layoutY="15.0" prefHeight="645.0" prefWidth="1033.0" style="-fx-background-color: transparent;">
                <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="304.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="123.0" prefWidth="208.0" styleClass="homeBlock" text="%managerCouriers">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="123.0" prefWidth="235.0" styleClass="homeBlock" text="%managerCouriers">
                      <graphic>
                         <FontAwesomeIconView glyphName="USERS" size="60" styleClass="blockIcon" />
                      </graphic>
                   </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="543.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="123.0" prefWidth="208.0" styleClass="homeBlock" text="%managerPackages">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="560.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="123.0" prefWidth="235.0" styleClass="homeBlock" text="%managerPackages">
                      <graphic>
                         <FontAwesomeIconView glyphName="CUBES" size="60" styleClass="blockIcon" />
                      </graphic>
                   </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="304.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="%managerReports">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%managerReports">
                      <graphic>
                         <FontAwesomeIconView glyphName="LINE_CHART" size="65" styleClass="blockIcon" />
                      </graphic>
                   </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="463.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="%settings">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="475.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%settings">
                      <graphic>
                         <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon" />
                      </graphic>
                   </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="621.0" layoutY="350.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="130.0" styleClass="homeBlock" text="%logout">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="645.0" layoutY="350.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%logout">
                      <graphic>
                         <FontAwesomeIconView glyphName="POWER_OFF" onMouseClicked="#logout" size="70" styleClass="blockIcon" />
                      </graphic>

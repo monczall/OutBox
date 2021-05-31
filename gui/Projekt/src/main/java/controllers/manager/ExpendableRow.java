@@ -104,8 +104,8 @@ public class ExpendableRow implements Initializable {
     }
 
     /**
+     * method that changes status of package in courier panel after each change in combo box
      *
-     * @param event
      */
     @FXML
     void updateStatus(ActionEvent event) {

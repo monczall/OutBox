@@ -2,6 +2,7 @@ package main.java.controllers.manager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import main.java.App;
+import main.java.SceneManager;
 import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
@@ -48,7 +50,10 @@ public class ManagerCouriersEdit implements Initializable {
     private Label notDataLabel;
 
     @FXML
-    private Pane dataPane,paneResults;
+    private Label howManyPackages;
+
+    @FXML
+    private Pane dataPane;
 
     @FXML
     private TextField nameInput;
@@ -69,9 +74,6 @@ public class ManagerCouriersEdit implements Initializable {
     private TextField inputNumber;
 
     @FXML
-    private TextField inputVoivodeship;
-
-    @FXML
     private TextField inputEmail;
 
     @FXML
@@ -80,10 +82,31 @@ public class ManagerCouriersEdit implements Initializable {
     @FXML
     private Button button2;
 
+    @FXML
+    private ComboBox<String> comboRole;
+
+    @FXML
+    private ObservableList<String> role = FXCollections.observableArrayList("Kurier","Kurier Międzyoddziałowy");
+
     Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
     List<UserInfos> dataUserInfos;
     List<Users> dataUser;
+
     int dataIndex = 0;
+    String roleString;
+
+    /**
+     * Choosing the role of the courier
+     */
+    @FXML
+    void changeRole(ActionEvent event) {
+        if(comboRole.getValue().equals("Kurier")) {
+            roleString = "Kurier";
+        }
+        else {
+            roleString = "Kurier Międzyoddziałowy";
+        }
+    }
 
     /**
      * The method responsible for finding a courier with the given data
@@ -92,11 +115,21 @@ public class ManagerCouriersEdit implements Initializable {
 
         if(name.getText().toString().equals("") &&
                 surname.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, findCourierButton, "WARNING",
-                    App.getLanguageProperties("completeAllFields"));
+            Alerts.createAlert(appWindow, findCourierButton, "WARNING", App.getLanguageProperties("completeAllFields"));
         }else{
             dataUserInfos = UserInfosDAO.getUserInfoByNameAndSurname(name.getText(), surname.getText());
-            setDataEdit();
+            clearDataCouriesFind();
+        }
+    }
+
+    public void clearDataCouriesFind(){
+        for(int i=0; i<dataUser.size(); i++){
+            System.out.println("("+i+")"+dataUser.get(i).getUserInfoId() +" : "+dataUserInfos.get(0).getId());
+            if(dataUser.get(i).getUserInfoId() == dataUserInfos.get(0).getId()){
+                dataIndex = i;
+                setDataEdit();
+                break;
+            }
         }
     }
 
@@ -111,27 +144,25 @@ public class ManagerCouriersEdit implements Initializable {
                 streetInput.getText().toString().equals("") ||
                 cityInput.getText().toString().equals("") ||
                 inputEmail.getText().toString().equals("") ||
-                inputVoivodeship.getText().toString().equals("") ||
                 inputNumber.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, saveEditCourierButton,"WARNING",
-                    App.getLanguageProperties("completeAllFields"));
+            Alerts.createAlert(appWindow, saveEditCourierButton,"WARNING",App.getLanguageProperties("completeAllFields"));
         }
         else {
 
             if (!validation()) {
-                Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING",
-                        App.getLanguageProperties("correctFields"));
+                Alerts.createAlert(appWindow, saveEditCourierButton, "WARNING", App.getLanguageProperties("correctFields"));
             }else{
-
-                UserInfosDAO.updateUser(dataUserInfos.get(dataIndex).getId(), dataUser.get(0).getId(),
+                System.out.println(roleString);
+                UserInfosDAO.updateUser(dataUserInfos.get(0).getId(), dataUser.get(dataIndex).getId(),
                         nameInput.getText(), surnameInput.getText(), inputNumber.getText(), cityInput.getText(),
-                        streetInput.getText(), inputVoivodeship.getText(), inputEmail.getText(),
-                        dataUser.get(0).getPassword(),
-                        "Kurier",
-                        dataUser.get(0).getAreaId(),
-                        dataUser.get(0).getUserInfoId());
+                        streetInput.getText(), dataUserInfos.get(0).getVoivodeship(), inputEmail.getText(),
+                        dataUser.get(dataIndex).getPassword(),
+                        roleString,
+                        dataUser.get(dataIndex).getAreaId(),
+                        dataUser.get(dataIndex).getUserInfoId());
 
                 alertPane.setVisible(true);
+                clearDataCouries();
             }
         }
     }
@@ -172,10 +203,6 @@ public class ManagerCouriersEdit implements Initializable {
         {
             status = false;
         }
-        if (!inputVoivodeship.getText().matches("[a-zA-Z]+"))
-        {
-            status = false;
-        }
 
         return status;
     }
@@ -184,34 +211,28 @@ public class ManagerCouriersEdit implements Initializable {
      * Method responsible for setting the data
      */
     public void setDataEdit(){
-        dataUser = UsersDAO.getUsersId(dataUserInfos.get(dataIndex).getId());
-        nameInput.setText(dataUserInfos.get(dataIndex).getName());
-        surnameInput.setText(dataUserInfos.get(dataIndex).getSurname());
-        inputNumber.setText(dataUserInfos.get(dataIndex).getPhoneNumber());
-        cityInput.setText(dataUserInfos.get(dataIndex).getCity());
-        streetInput.setText(dataUserInfos.get(dataIndex).getStreetAndNumber());
-        inputVoivodeship.setText(dataUserInfos.get(dataIndex).getVoivodeship());
-        inputEmail.setText(dataUser.get(0).getEmail());
-        String role = dataUser.get(0).getRole();
+        howManyPackages.setText(dataIndex+1 + "/" + dataUser.size());
+        dataUserInfos = UserInfosDAO.getUserInfoByID(dataUser.get(dataIndex).getId());
+        nameInput.setText(dataUserInfos.get(0).getName());
+        surnameInput.setText(dataUserInfos.get(0).getSurname());
+        inputNumber.setText(dataUserInfos.get(0).getPhoneNumber());
+        cityInput.setText(dataUserInfos.get(0).getCity());
+        streetInput.setText(dataUserInfos.get(0).getStreetAndNumber());
+        inputEmail.setText(dataUser.get(dataIndex).getEmail());
 
-        //If there is more than one courier, it shows buttons to switch between them
-        if(dataUserInfos.size() > 1 && role.equals("Kurier") && dataUser.get(0).getAreaId() == uu.getAreaId())
+        if(dataUser.get(dataIndex).getRole().equals("Kurier")){
+            comboRole.setValue(role.get(0));
+        }
+        else
         {
-            dataPane.setVisible(true);
-            button1.setVisible(true);
-            button2.setVisible(true);
-            notDataLabel.setVisible(false);
-        }// if only one courier
-        else if(dataUserInfos.size() == 1 && (role.equals("Kurier")) && dataUser.get(0).getAreaId() == uu.getAreaId())
-        {
-            button1.setVisible(false);
-            button2.setVisible(false);
-            dataPane.setVisible(true);
-            notDataLabel.setVisible(false);
-        }//If not found, display a message
+            comboRole.setValue(role.get(1));
+        }
+
+        if(comboRole.getValue().equals("Kurier")) {
+            roleString = "Kurier";
+        }
         else{
-            dataPane.setVisible(false);
-            notDataLabel.setVisible(true);
+            roleString = "Kurier Międzyoddziałowy";
         }
     }
 
@@ -235,8 +256,8 @@ public class ManagerCouriersEdit implements Initializable {
     void buttonNext(MouseEvent event) {
         dataIndex++;
 
-        if(dataIndex>dataUserInfos.size()-1){
-            dataIndex=dataUserInfos.size()-1;
+        if(dataIndex>dataUser.size()-1){
+            dataIndex=dataUser.size()-1;
         }
         setDataEdit();
     }
@@ -246,21 +267,59 @@ public class ManagerCouriersEdit implements Initializable {
      */
     @FXML
     void confirmButton(MouseEvent event) {
-        dataPane.setVisible(false);
         name.setText("");
         surname.setText("");
-        notDataLabel.setVisible(true);
-        button1.setVisible(false);
-        button2.setVisible(false);
-        alertPane.setVisible(false);
-        notDataLabel.setVisible(true);
         dataIndex = 0;
+        clearDataCouries();
+        alertPane.setVisible(false);
+    }
+
+    /**
+     * Choosing couriers that meet the relevant criteria
+     */
+    void clearDataCouries(){
+        dataUser = UsersDAO.getUsers();
+        dataIndex=0;
+        for(int i=0; i<dataUser.size(); i++) {
+            if (dataUser.get(i).getAreaId() != uu.getAreaId()) {
+                dataUser.remove(i);
+                i--;
+            }
+        }
+
+        for(int i=0; i<dataUser.size(); i++) {
+            if (!dataUser.get(i).getRole().equals("Kurier") && !dataUser.get(i).getRole().equals("Kurier Międzyoddziałowy")) {
+                dataUser.remove(i);
+                i--;
+            }
+        }
+
+        if(dataUser.size()==0){
+            howManyPackages.setText("Brak");
+            notDataLabel.setVisible(true);
+            button1.setVisible(false);
+            button2.setVisible(false);
+            dataPane.setVisible(false);
+        }
+        else{
+            notDataLabel.setVisible(false);
+            button1.setVisible(true);
+            button2.setVisible(true);
+            dataPane.setVisible(true);
+            setDataEdit();
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dataPane.setVisible(false);
-        button1.setVisible(false);
-        button2.setVisible(false);
+        clearDataCouries();
+
+        //set default visible
+        button1.setVisible(true);
+        button2.setVisible(true);
+        dataPane.setVisible(true);
+
+        comboRole.setItems(role);
     }
+
 }

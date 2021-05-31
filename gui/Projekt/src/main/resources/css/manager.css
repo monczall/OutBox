@@ -7,6 +7,7 @@
     -fx-shadow: #000;
     -fx-dark-transparent: #121212cc;
     -fx-shadow: #000;
+    -fx-error-color:#d82020;
 }
 
 .blockIconTitle{
@@ -15,6 +16,18 @@
 
 .blockIcon{
     -fx-fill: -fx-second-color;
+}
+
+.minIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+
+.exitIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
 }
 
 /*-------- ALL SCENES --------*/
@@ -167,7 +180,7 @@
 
 .date-picker-popup > * > .spinner { /*text color tittle calendar*/
     -fx-background-color: -fx-main-color;
-    -fx-text-fill: red;
+    -fx-text-fill: -fx-error-color;
     -fx-cursor: hand;
 }
 
@@ -415,13 +428,13 @@
 }
 
 .inputBoxCourierError{
-    -fx-text-fill: red;
+    -fx-text-fill: -fx-error-color;
     -fx-font-size: 17px;
     -fx-background-color: transparent; /*#202020*/
     -fx-mark-color: -fx-main-color;
     -fx-border-style: solid;
     -fx-border-width: 2px;
-    -fx-border-color: red;
+    -fx-border-color: -fx-error-color;
     -fx-border-width: 0 0 2 0;
     -fx-cursor: text;
 }
@@ -540,7 +553,7 @@
     -fx-text-fill: #121212;
     -fx-start-agnle: 30;
     -fx-legend-side: right;
-    -fx-pie-color: red;
+    -fx-pie-color: -fx-error-color;
 }
 .default-color0.chart-pie {
     -fx-pie-color: white;
@@ -549,7 +562,7 @@
     -fx-pie-color: #ffa500;
 }
 .data2.chart-pie, .default-color2.chart-pie  {
-    -fx-pie-color: #d82020;
+    -fx-pie-color: -fx-error-color;
 }
 .chart-pie-label{
     -fx-fill: transparent;

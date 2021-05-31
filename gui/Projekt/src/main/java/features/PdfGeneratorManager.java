@@ -185,11 +185,8 @@ public class PdfGeneratorManager {
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 
         for (int counter = 0; counter < list.size(); counter++) {
-            System.out.println("LIST ID: " + list.get(counter).getAreaID());
-            System.out.println("AREAID: " + uu.getAreaId());
             if(list.get(counter).getAreaID() == uu.getAreaId()){
                 tableNumber++;
-                System.out.println("TAK");
                 if (tableNumber % 2 == 1){
                     table.getDefaultCell().setBackgroundColor(GrayColor.GRAYWHITE);
                 }else{
@@ -202,7 +199,6 @@ public class PdfGeneratorManager {
                 table.addCell(new Phrase(list.get(counter).getVoivodeship(), tableFont));
                 table.addCell(new Phrase(simpleDateFormat.format(list.get(counter).getDate()), tableFont));
             }
-            System.out.println("NIE");
         }
         document.add(table);
         document.close();

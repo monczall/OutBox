@@ -38,5 +38,7 @@
             <Button layoutX="126.0" layoutY="85.0" mnemonicParsing="false" onMouseClicked="#confirmButton" styleClass="btnNext" text="OK" />
          </children>
       </Pane>
+      <ComboBox fx:id="comboRole" layoutX="547.0" layoutY="420.0" onAction="#changeRole" prefHeight="25.0" prefWidth="233.0" styleClass="inputBox" />
+      <Label layoutX="255.0" layoutY="430.0" styleClass="textOption" text="%adminRole" />
    </children>
 </AnchorPane>
