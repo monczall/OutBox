@@ -266,7 +266,7 @@ public class ClientHistoryPackage implements Initializable {
 
                 pane.setPadding(new Insets(70,0,100,70));       //Adjusting padding of pane
 
-                Button showMore = new Button("Więcej");
+                Button showMore = new Button(App.getLanguageProperties("packageMore"));
 
                 showMore.setLayoutX(549);        //Setting layout where button should be and width + height
                 showMore.setLayoutY(115.5);

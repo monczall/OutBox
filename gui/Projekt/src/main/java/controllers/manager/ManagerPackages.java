@@ -66,7 +66,7 @@ public class ManagerPackages implements Initializable {
     /**
      * set package id
      *
-     * @param packageId
+     * @param packageId packageid
      */
     public static void setPackageId(int packageId) {
         ManagerPackages.packageId = packageId;
@@ -82,7 +82,7 @@ public class ManagerPackages implements Initializable {
     /**
      * set id
      *
-     * @param id
+     * @param id id
      */
     public void setId(int id) {
         ManagerPackages.id = id;
@@ -98,7 +98,7 @@ public class ManagerPackages implements Initializable {
     /**
      * set comment
      *
-     * @param comment
+     * @param comment comment
      */
     public static void setComment(String comment) {
         ManagerPackages.comment = comment;
@@ -114,7 +114,7 @@ public class ManagerPackages implements Initializable {
     /**
      * set status
      *
-     * @param status
+     * @param status status
      */
     public static void setStatus(String status) {
         ManagerPackages.status = status;
@@ -199,7 +199,6 @@ public class ManagerPackages implements Initializable {
     /**
      * the method returns a panel with additional information about the package
      *
-     * @param arg
      * @return pane
      */
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {

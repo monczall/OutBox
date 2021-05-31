@@ -8,6 +8,7 @@ import javafx.scene.paint.Paint;
 import main.java.App;
 import main.java.dao.PackagesDAO;
 import main.java.entity.BarChartDTO;
+import main.java.entity.PieChartDTO;
 
 import java.time.YearMonth;
 import java.util.List;
@@ -23,15 +24,28 @@ public class Charts {
      * Third and fourth are layout of chart
      * Fifth and sixth is the width and height of chart
      */
-    public static void createPieChart(PieChart pieChart){
+    public static void createPieChart(PieChart pieChart, String month){
 
-        List<Long> quantityByTypes = PackagesDAO.quantityOfPackagesType();
+        List<PieChartDTO> quantityByTypes = PackagesDAO.quantityOfPackagesType(month);
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
 
-        ObservableList<PieChart.Data> data = FXCollections.observableArrayList(
-                new PieChart.Data(App.getLanguageProperties("small") + " - "+quantityByTypes.get(0),quantityByTypes.get(0)),
-                new PieChart.Data( App.getLanguageProperties("medium") + " - "+quantityByTypes.get(1),quantityByTypes.get(1)),
-                new PieChart.Data(App.getLanguageProperties("big") + " - "+quantityByTypes.get(2),quantityByTypes.get(2))
-        );
+        for(int i = 0; i < quantityByTypes.size(); i++) {
+            if(quantityByTypes.get(i).getType().equals("mała")) {
+                data.add(new PieChart.Data(App.getLanguageProperties("small") +
+                        " - " + quantityByTypes.get(i).getQuantity(),
+                        quantityByTypes.get(i).getQuantity()));
+            }
+            else if(quantityByTypes.get(i).getType().equals("średnia")) {
+                data.add(new PieChart.Data(App.getLanguageProperties("medium") +
+                        " - " + quantityByTypes.get(i).getQuantity(),
+                        quantityByTypes.get(i).getQuantity()));
+            }
+            else {
+                data.add(new PieChart.Data(App.getLanguageProperties("big") +
+                        " - " + quantityByTypes.get(i).getQuantity(),
+                        quantityByTypes.get(i).getQuantity()));
+            }
+        }
 
         pieChart.setData(data);
         pieChart.setClockwise(true);

@@ -51,7 +51,7 @@ public class AdminEditEmployee implements Initializable {
     /**
      * Method that return userID
      *
-     * @return
+     * @return return userID
      */
     public static int getUserID() {
         return userID;
@@ -60,7 +60,7 @@ public class AdminEditEmployee implements Initializable {
     /**
      * Method that set userID
      *
-     * @param userID
+     * @param userID set userID
      */
     public static void setUserID(int userID) {
         AdminEditEmployee.userID = userID;
@@ -69,7 +69,7 @@ public class AdminEditEmployee implements Initializable {
     /**
      * Method that return userInfoID
      *
-     * @return
+     * @return return userInfoID
      */
     public static int getUserInfoID() {
         return userInfoID;

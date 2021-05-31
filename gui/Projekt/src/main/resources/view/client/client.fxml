@@ -85,7 +85,7 @@
                   </Button>
                   <Button layoutX="-2.0" layoutY="313.0" mnemonicParsing="false" onAction="#viewSettings" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
                      <graphic>
-                        <FontAwesomeIconView id="iconSettings" glyphName="COG" size="36" styleClass="icons" text="" />
+                        <FontAwesomeIconView id="iconSettings" glyphName="SLIDERS" size="36" styleClass="icons" text="" />
                      </graphic>
                   </Button>
                   <Button layoutX="-2.0" layoutY="371.0" mnemonicParsing="false" onAction="#logout" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">

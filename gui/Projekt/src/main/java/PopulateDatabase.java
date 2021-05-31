@@ -58,9 +58,6 @@ public class PopulateDatabase {
                 Reader packageHistoriesReader = new BufferedReader(new FileReader("database/populate_package_history.sql"));
                 srPackageHistories.runScript(packageHistoriesReader);
             }
-            //Initialize the script runner
-
-
         } catch (SQLException e) {
             try {
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "");

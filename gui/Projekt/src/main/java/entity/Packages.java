@@ -1,5 +1,7 @@
 package main.java.entity;
 
+import javafx.beans.value.ObservableValue;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -175,6 +177,5 @@ public class Packages {
     public void setUsersByCourierId(Users usersByCourierId) {
         this.usersByCourierId = usersByCourierId;
     }
-
 
 }
