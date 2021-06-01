@@ -24,7 +24,7 @@
             </columns>
         </TableView>
         <TextField fx:id="parametr" layoutX="185.0" layoutY="150.0" onKeyReleased="#search" prefHeight="33.0" prefWidth="150.0" promptText="%adminAnyParameter" styleClass="inputBox" />
-      <Button fx:id="editTable" layoutX="446.0" layoutY="529.0" mnemonicParsing="false" onMouseClicked="#showEdit" styleClass="optionGroup" text="%adminEdit" />
+      <Button fx:id="editTable" layoutX="471.0" layoutY="531.0" mnemonicParsing="false" onMouseClicked="#showEdit" styleClass="btnSaveChanges" text="%adminEdit" />
       <FontAwesomeIconView fill="ORANGE" glyphName="SEARCH" layoutX="153.0" layoutY="176.0" size="25" styleClass="partIcon" />
     </children>
 </AnchorPane>

@@ -66,7 +66,7 @@
       </Label>
       <TextField fx:id="registerVoivodeshipField" layoutX="613.0" layoutY="315.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgVoivodeship" styleClass="textFields" />
       <Circle fx:id="registerVoivodeshipCircle" fill="ORANGE" layoutX="613.0" layoutY="333.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
-      <Button fx:id="registerRegisterButtonButton" layoutX="392.0" layoutY="533.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="%adminAddManager" />
+      <Button fx:id="registerRegisterButtonButton" layoutX="392.0" layoutY="533.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="btnSaveChanges" text="%adminAddManager" />
       <FontAwesomeIconView glyphName="USER" layoutX="185.0" layoutY="184.0" size="32" />
       <FontAwesomeIconView glyphName="USER" layoutX="185.0" layoutY="263.0" size="32" />
       <FontAwesomeIconView glyphName="MOBILE_PHONE" layoutX="186.0" layoutY="347.0" size="48" text="" />

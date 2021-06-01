@@ -62,7 +62,7 @@
                      </graphic>
                   </Button>
                </children></AnchorPane>
-            <ImageView fitHeight="204.0" fitWidth="87.0" layoutX="988.0" layoutY="580.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="204.0" fitWidth="87.0" layoutX="1013.0" layoutY="580.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/outbox_white.png" />
                </image>

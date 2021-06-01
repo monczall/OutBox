@@ -37,7 +37,7 @@
         </Label>
         <TextField fx:id="registerVoivodeshipField" layoutX="213.0" layoutY="359.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleRegisterOnEnterPressed" onKeyTyped="#clearErrorsOnVoivodeship" prefHeight="35.0" prefWidth="250.0" promptText="%adminEgVoivodeship" styleClass="textFields" />
         <Circle fx:id="registerVoivodeshipCircle" fill="ORANGE" layoutX="213.0" layoutY="377.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
-        <Button fx:id="addAreaButton" layoutX="392.0" layoutY="502.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="%adminAddArea" />
+        <Button fx:id="addAreaButton" layoutX="392.0" layoutY="502.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleRegister" prefHeight="35.0" prefWidth="250.0" styleClass="btnSaveChanges" text="%adminAddArea" />
         <FontAwesomeIconView glyphName="BUILDING" layoutX="589.0" layoutY="230.0" size="32" />
         <FontAwesomeIconView glyphName="INSTITUTION" layoutX="195.0" layoutY="387.0" size="32" />
         <FontAwesomeIconView glyphName="MAP_MARKER" layoutX="204.0" layoutY="233.0" size="32" />
