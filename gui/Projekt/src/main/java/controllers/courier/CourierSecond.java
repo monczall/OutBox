@@ -184,7 +184,7 @@ public class CourierSecond implements Initializable {
             else {
                 resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
             }
-            loader.setLocation(getClass().getResource("../../../resources/view/courier/expandableRow.fxml"));
+            loader.setLocation(getClass().getClassLoader().getResource("main/resources/view/courier/expandableRow.fxml"));
             loader.setResources(resourceBundle);
             pane = loader.load();
             Button button = new Button(App.getLanguageProperties("confirmText"));

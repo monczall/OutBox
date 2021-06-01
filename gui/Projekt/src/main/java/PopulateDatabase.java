@@ -31,32 +31,33 @@ public class PopulateDatabase {
             System.out.println("Connection established......");
             if (UserInfosDAO.getUserInfos().size() == 0) {
                 ScriptRunner srUserInfos = new ScriptRunner(con);
-                Reader userInfosReader = new BufferedReader(new FileReader("database/populate_user_infos.sql"));
+                Reader userInfosReader = new BufferedReader(new FileReader("main/resources/database" +
+                        "/populate_user_infos.sql"));
                 srUserInfos.runScript(userInfosReader);
             }
             if (AreasDAO.getAreas().size() == 0) {
                 ScriptRunner srAreas = new ScriptRunner(con);
-                Reader areasReader = new BufferedReader(new FileReader("database/populate_areas.sql"));
+                Reader areasReader = new BufferedReader(new FileReader("main/resources/database/populate_areas.sql"));
                 srAreas.runScript(areasReader);
             }
             if (PackageTypeDAO.getPackageTypes().size() == 0) {
                 ScriptRunner srPackageTypes = new ScriptRunner(con);
-                Reader packageTypesReader = new BufferedReader(new FileReader("database/populate_package_type.sql"));
+                Reader packageTypesReader = new BufferedReader(new FileReader("main/resources/database/populate_package_type.sql"));
                 srPackageTypes.runScript(packageTypesReader);
             }
             if (UsersDAO.getUsers().size() == 0) {
                 ScriptRunner srUsers = new ScriptRunner(con);
-                Reader usersReader = new BufferedReader(new FileReader("database/populate_users.sql"));
+                Reader usersReader = new BufferedReader(new FileReader("main/resources/database/populate_users.sql"));
                 srUsers.runScript(usersReader);
             }
             if (PackagesDAO.getPackages().size() == 0) {
                 ScriptRunner srPackages = new ScriptRunner(con);
-                Reader packagesReader = new BufferedReader(new FileReader("database/populate_packages.sql"));
+                Reader packagesReader = new BufferedReader(new FileReader("main/resources/database/populate_packages.sql"));
                 srPackages.runScript(packagesReader);
             }
             if (PackageHistoryDAO.getStatuses().size() == 0) {
                 ScriptRunner srPackageHistories = new ScriptRunner(con);
-                Reader packageHistoriesReader = new BufferedReader(new FileReader("database/populate_package_history.sql"));
+                Reader packageHistoriesReader = new BufferedReader(new FileReader("main/resources/database/populate_package_history.sql"));
                 srPackageHistories.runScript(packageHistoriesReader);
             }
         } catch (SQLException e) {
@@ -65,22 +66,22 @@ public class PopulateDatabase {
 
                 ScriptRunner sr = new ScriptRunner(con);
                 //Creating a reader object
-                Reader reader = new BufferedReader(new FileReader("database/database.sql"));
+                Reader reader = new BufferedReader(new FileReader("main/resources/database/database.sql"));
                 //Running the script
                 sr.runScript(reader);
 
 
-                Reader userInfosReader = new BufferedReader(new FileReader("database/populate_user_infos.sql"));
+                Reader userInfosReader = new BufferedReader(new FileReader("main/resources/database/populate_user_infos.sql"));
                 sr.runScript(userInfosReader);
-                Reader areasReader = new BufferedReader(new FileReader("database/populate_areas.sql"));
+                Reader areasReader = new BufferedReader(new FileReader("main/resources/database/populate_areas.sql"));
                 sr.runScript(areasReader);
-                Reader packageTypesReader = new BufferedReader(new FileReader("database/populate_package_type.sql"));
+                Reader packageTypesReader = new BufferedReader(new FileReader("main/resources/database/populate_package_type.sql"));
                 sr.runScript(packageTypesReader);
-                Reader usersReader = new BufferedReader(new FileReader("database/populate_users.sql"));
+                Reader usersReader = new BufferedReader(new FileReader("main/resources/database/populate_users.sql"));
                 sr.runScript(usersReader);
-                Reader packagesReader = new BufferedReader(new FileReader("database/populate_packages.sql"));
+                Reader packagesReader = new BufferedReader(new FileReader("main/resources/database/populate_packages.sql"));
                 sr.runScript(packagesReader);
-                Reader packageHistoriesReader = new BufferedReader(new FileReader("database/populate_package_history.sql"));
+                Reader packageHistoriesReader = new BufferedReader(new FileReader("main/resources/database/populate_package_history.sql"));
                 sr.runScript(packageHistoriesReader);
 
                 //Checking if tables are empty and eventually filling them

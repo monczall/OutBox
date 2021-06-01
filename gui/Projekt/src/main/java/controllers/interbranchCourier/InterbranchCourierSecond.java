@@ -191,7 +191,7 @@ public class InterbranchCourierSecond implements Initializable {
             else {
                 resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
             }
-            loader.setLocation(getClass().getResource("main/resources/view/interbranchCourier" +
+            loader.setLocation(getClass().getClassLoader().getResource("main/resources/view/interbranchCourier" +
                     "/interbranchCourierExpandableRow.fxml"));
             loader.setResources(resourceBundle);
             pane = loader.load();
