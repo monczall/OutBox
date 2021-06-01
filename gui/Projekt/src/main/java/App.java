@@ -97,7 +97,7 @@ public class App extends Application {
 
         SceneManager.addScene(
                 "login",
-                "../resources/view/auth/login.fxml");
+                "main/resources/view/auth/login.fxml");
         SceneManager.addScene(
                 "register",
                 "../resources/view/auth/register.fxml");
@@ -114,7 +114,7 @@ public class App extends Application {
 
         SceneManager.addScene(
                 "client",
-                "../resources/view/client/client.fxml");
+                "main/resources/view/client/client.fxml");
 
         SceneManager.addScene(
                 "courier",
