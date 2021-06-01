@@ -72,35 +72,35 @@ public class Manager implements Initializable {
      * Loading the courier management panel
      */
     public void openCouriers(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerCouriers.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerCouriers.fxml", mainWindow);
     }
 
     /**
      * Loading the panel for previewing packages
      */
     public void openPackages(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerPackages.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerPackages.fxml", mainWindow);
     }
 
     /**
      * Loading the panel with settings
      */
     public void openSettings(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerSettings.fxml", mainWindow);
     }
 
     /**
      * Loading the report management panel
      */
     public void openRaports(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerRaports.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerRaports.fxml", mainWindow);
     }
 
     /**
      * Loading the charts panel
      */
     public void openCharts(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerCharts.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerCharts.fxml", mainWindow);
     }
 
     /**
