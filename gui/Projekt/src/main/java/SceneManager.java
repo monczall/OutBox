@@ -64,7 +64,7 @@ public class SceneManager {
             else
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
 
-            root = FXMLLoader.load(SceneManager.class.getResource(path), bundle);
+            root = FXMLLoader.load(SceneManager.class.getClassLoader().getResource(path), bundle);
             Scene scene = new Scene(root);
 
 
