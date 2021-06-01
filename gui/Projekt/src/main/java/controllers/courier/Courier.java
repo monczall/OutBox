@@ -108,7 +108,7 @@ public class Courier implements Initializable {
      * @throws IOException
      */
     public void openSecond(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/courier/courierSecond.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/courier/courierSecond.fxml", mainWindow);
     }
 
     /**
@@ -118,7 +118,7 @@ public class Courier implements Initializable {
      * @throws IOException
      */
     public void openSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/courier/courierSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/courier/courierSettings.fxml", mainWindow);
     }
 
     /**

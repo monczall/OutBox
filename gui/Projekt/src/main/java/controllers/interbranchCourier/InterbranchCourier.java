@@ -108,7 +108,7 @@ public class InterbranchCourier implements Initializable {
      * @throws IOException
      */
     public void openSecond(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierSecond.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/interbranchCourier/interbranchCourierSecond.fxml", mainWindow);
     }
 
     /**
@@ -118,7 +118,7 @@ public class InterbranchCourier implements Initializable {
      * @throws IOException
      */
     public void openSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/interbranchCourier/interbranchCourierSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/interbranchCourier/interbranchCourierSettings.fxml", mainWindow);
     }
 
     /**

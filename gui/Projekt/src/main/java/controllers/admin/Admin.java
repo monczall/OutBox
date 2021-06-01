@@ -107,7 +107,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_edit_employee(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminEditEmployee.fxml", mainWindow);
     }
 
     /**
@@ -116,7 +116,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_add_manager(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminAddManager.fxml", mainWindow);
     }
 
     /**
@@ -125,7 +125,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_add_area(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminAddArea.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminAddArea.fxml", mainWindow);
     }
 
     /**
@@ -134,7 +134,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_pack_settings(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminPackSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminPackSettings.fxml", mainWindow);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_raport(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminRaport.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminRaport.fxml", mainWindow);
     }
 
     /**
@@ -152,7 +152,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_settings(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminSettings.fxml", mainWindow);
     }
 
     /**
@@ -206,7 +206,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewPackSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminPackSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminPackSettings.fxml", mainWindow);
     }
     /**
      * Method that change scene to "raports"
@@ -214,7 +214,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewRaport(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminRaport.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminRaport.fxml", mainWindow);
     }
     /**
      * Method that change scene to "settings"
@@ -222,7 +222,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminSettings.fxml", mainWindow);
     }
     /**
      * Method that change scene to "addArea"
@@ -230,7 +230,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewAddArea(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminAddArea.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminAddArea.fxml", mainWindow);
     }
     /**
      * Method that change scene to "editEmployee"
@@ -238,7 +238,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewEditEmployee(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminEditEmployee.fxml", mainWindow);
     }
 
     /**
@@ -248,7 +248,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewAddManager(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminAddManager.fxml", mainWindow);
     }
 
     /**
