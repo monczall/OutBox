@@ -208,14 +208,14 @@ public class PasswordReset implements Initializable {
             } else {
                 errorOnEmail();
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetReturnButtonButton, "WARNING",
+                        passwordResetSendCodeButton, "WARNING",
                         App.getLanguageProperties("authNoEmailUserFoundAlert"),
                         390, 86, "alertFailure");
             }
         } else {
             errorOnEmail();
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetReturnButtonButton, "WARNING",
+                    passwordResetSendCodeButton, "WARNING",
                     App.getLanguageProperties("authWrongEmailFormatAlert"),
                     350, 86, "alertFailure");
         }
@@ -370,7 +370,7 @@ public class PasswordReset implements Initializable {
         } else {
             errorOnVerificationCode();
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetReturnButtonButton, "WARNING",
+                    passwordResetVerifyCodeButton, "WARNING",
                     App.getLanguageProperties(
                             "authVerificationCodeInvalidAlert"),
                     300, 86, "alertFailure");
@@ -437,14 +437,14 @@ public class PasswordReset implements Initializable {
         } else if (error == 1) {
             if (passwordError) {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetReturnButtonButton, "WARNING",
+                        passwordResetSetNewPasswordButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongPasswordFormatAlert"),
                         350, 86, "alertFailure");
             }
             if (passwordNotTheSameError) {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetReturnButtonButton, "WARNING",
+                        passwordResetSetNewPasswordButton, "WARNING",
                         App.getLanguageProperties(
                                 "authPasswordsNotTheSameAlert"),
                         350, 86, "alertFailure");
@@ -453,7 +453,7 @@ public class PasswordReset implements Initializable {
         } else {
 
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetReturnButtonButton, "WARNING",
+                    passwordResetSetNewPasswordButton, "WARNING",
                     App.getLanguageProperties(
                             "authErrorsOnTextFieldsAlert"),
                     350, 86, "alertFailure");
