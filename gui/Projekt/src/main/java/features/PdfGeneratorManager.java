@@ -100,13 +100,18 @@ public class PdfGeneratorManager {
 
         if(display){
             paragraph = new Paragraph(
-                    App.getLanguageProperties("reportGeneratedBy") + ui.getName() + " " + ui.getSurname() + "\n\n" + App.getLanguageProperties("dateGenerated") + simpleDateFormat.format(now)
+                    App.getLanguageProperties("reportGeneratedBy") + ui.getName() + " "
+                            + ui.getSurname() + "\n\n" + App.getLanguageProperties("dateGenerated")
+                            + simpleDateFormat.format(now)
                             + "\n\n" + App.getLanguageProperties("ofDay") + start,tableFont);
         }
         else{
             paragraph = new Paragraph(
-                    App.getLanguageProperties("reportGeneratedBy") + ui.getName() + " " + ui.getSurname() + "\n\n" + App.getLanguageProperties("dateGenerated") + simpleDateFormat.format(now)
-                            + "\n\n" + App.getLanguageProperties("fromThePeriod") + start + " - " + localEnd,tableFont);
+                    App.getLanguageProperties("reportGeneratedBy") + ui.getName() + " "
+                            + ui.getSurname() + "\n\n" + App.getLanguageProperties("dateGenerated")
+                            + simpleDateFormat.format(now)
+                            + "\n\n" + App.getLanguageProperties("fromThePeriod") + start + " - "
+                            + localEnd,tableFont);
         }
 
 
