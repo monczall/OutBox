@@ -135,7 +135,7 @@ public class Client implements Initializable {
     //Method that handle 'history' button
     @FXML
     void viewHistory(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientHistoryPackage.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/client/clientHistoryPackage.fxml", mainWindow);
     }
 
     //Method that handle 'home' button
@@ -147,19 +147,19 @@ public class Client implements Initializable {
     //Method that handle 'registerPackage' button
     @FXML
     void viewRegisterPackage(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientRegisterPackage.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/client/clientRegisterPackage.fxml", mainWindow);
     }
 
     //Method that handle 'settings' button
     @FXML
     void viewSettings(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/client/clientSettings.fxml", mainWindow);
     }
 
     //Method that handle 'trackPackage' button
     @FXML
     void viewTrackPackage(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientTrackPackage.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/client/clientTrackPackage.fxml", mainWindow);
     }
 
     @FXML
