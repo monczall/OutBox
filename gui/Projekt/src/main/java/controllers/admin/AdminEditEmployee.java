@@ -97,7 +97,7 @@ public class AdminEditEmployee implements Initializable {
         } else {
             setUserID(table.getSelectionModel().getSelectedItem().getUserID());
             setUserInfoID(table.getSelectionModel().getSelectedItem().getUserInfoID());
-            SceneManager.loadScene("../../../resources/view/admin/adminEdit.fxml", edit);
+            SceneManager.loadScene("main/resources/view/admin/adminEdit.fxml", edit);
         }
     }
 

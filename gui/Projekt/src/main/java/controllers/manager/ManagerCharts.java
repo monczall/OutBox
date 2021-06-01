@@ -64,7 +64,7 @@ public class ManagerCharts implements Initializable {
 
         Charts.createBarChart(barChart,dateTimeFormatter.format(now));
 
-        Charts.createPieChart(pieChart);
+        Charts.createPieChart(pieChart,dateTimeFormatter.format(now));
 
     }
 

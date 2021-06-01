@@ -2,6 +2,7 @@ package main.java.dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import main.java.controllers.auth.Login;
 import main.java.entity.*;
 import main.java.entity.Packages;
 
@@ -285,27 +286,41 @@ public class PackagesDAO {
         return packages;
     }
 
-    /**
-     * <p>
+     /** <p>
      *     Method used to return number of package types that are in database.
      * </p>
      * @return List of package types
      */
-    static public List<Long> quantityOfPackagesType(){
+    static public ObservableList<PieChartDTO> quantityOfPackagesType(String month){
         Session session = HibernateUtil.getSessionFactory().openSession();
 
+        ObservableList<PieChartDTO> list = FXCollections.observableArrayList();
 
-        Query query = session.createQuery("SELECT COUNT(P.typeId) as quantity " +
+        Query query = session.createQuery("SELECT NEW main.java.entity.PieChartDTO(PT.sizeName, COUNT(P.typeId)) " +
                 "FROM PackageType PT, Packages P " +
-                "WHERE P.typeId = PT.id " +
-                "GROUP BY PT.sizeName " +
-                "ORDER BY PT.sizeName ASC");
+                "WHERE SUBSTRING(P.packageNumber, 3, 2) = :month " +
+                "AND P.typeId = PT.id " +
+                "AND (P.usersByCourierId.areaId = :areaId " +
+                "OR P.userInfosByUserInfoId.voivodeship = :voivodeship " +
+                "OR P.userInfosByUserInfoId.city = :city ) " +
+                "GROUP BY PT.sizeName ");
 
-        List<Long> queryList = query.list();
+        Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
 
+        query.setParameter("month",month);
+        query.setParameter("areaId",uu.getAreaId());
+        query.setParameter("voivodeship",uu.getUserInfosByUserInfoId().getVoivodeship());
+        query.setParameter("city",uu.getUserInfosByUserInfoId().getCity());
+
+
+        List<PieChartDTO> results = query.list();
+
+        for (PieChartDTO ent : results) {
+            list.add(ent);
+        }
         session.close();
 
-        return queryList;
+        return list;
     }
 
     /**
@@ -323,9 +338,18 @@ public class PackagesDAO {
         Query query = session.createQuery("SELECT NEW main.java.entity.BarChartDTO(SUBSTRING(P.packageNumber, 1, 2), " +
                 "COUNT(P.packageNumber)) " +
                 "FROM Packages P WHERE SUBSTRING(P.packageNumber, 3, 2) = :month " +
+                "AND (P.usersByCourierId.areaId = :areaId " +
+                "OR P.userInfosByUserInfoId.voivodeship = :voivodeship " +
+                "OR P.userInfosByUserInfoId.city = :city ) " +
                 "GROUP BY SUBSTRING(P.packageNumber, 1, 2)");
 
+        Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
+
         query.setParameter("month",month);
+        query.setParameter("areaId",uu.getAreaId());
+        query.setParameter("voivodeship",uu.getUserInfosByUserInfoId().getVoivodeship());
+        query.setParameter("city",uu.getUserInfosByUserInfoId().getCity());
+
 
         List<BarChartDTO> results = query.list();
 

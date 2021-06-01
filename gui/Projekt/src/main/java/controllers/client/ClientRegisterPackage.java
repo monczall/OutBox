@@ -176,7 +176,7 @@ public class ClientRegisterPackage implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+
         // Populating province combobox
         provinceInput.setItems(provinces);
 
@@ -348,7 +348,7 @@ public class ClientRegisterPackage implements Initializable {
         btnRegister.setDisable(true);
 
         //Generating package number
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
         LocalDateTime now = LocalDateTime.now();
         Random rand = new Random();
 

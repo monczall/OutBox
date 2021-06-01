@@ -1,5 +1,6 @@
 package main.java;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import main.java.dao.*;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
@@ -58,12 +59,10 @@ public class PopulateDatabase {
                 Reader packageHistoriesReader = new BufferedReader(new FileReader("database/populate_package_history.sql"));
                 srPackageHistories.runScript(packageHistoriesReader);
             }
-            //Initialize the script runner
-
-
         } catch (SQLException e) {
             try {
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
+
                 ScriptRunner sr = new ScriptRunner(con);
                 //Creating a reader object
                 Reader reader = new BufferedReader(new FileReader("database/database.sql"));
@@ -86,11 +85,10 @@ public class PopulateDatabase {
 
                 //Checking if tables are empty and eventually filling them
 
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 //Pushing alert if error when connecting to database
                 setConnectionError(true);
             }
-
         }
     }
 }

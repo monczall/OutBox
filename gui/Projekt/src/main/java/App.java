@@ -9,12 +9,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.java.dao.HibernateUtil;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.Users;
 import main.java.features.Preference;
+import org.hibernate.HibernateException;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -40,17 +43,25 @@ public class App extends Application {
 
         PopulateDatabase.createDbIfNotExists();
 
-        List<Users> dA = UsersDAO.readDeactivatedAccounts();
+        try{
+            List<Users> dA = UsersDAO.readDeactivatedAccounts();
 
-        for(int i = 0; i < dA.size(); i++){
+            for(int i = 0; i < dA.size(); i++){
 
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate localDate = LocalDate.parse(dA.get(i).getPassword(),dateTimeFormatter);
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate localDate = LocalDate.parse(dA.get(i).getPassword(),dateTimeFormatter);
 
-            if(ChronoUnit.DAYS.between(localDate, LocalDateTime.now()) >= 31){
-                UserInfosDAO.deleteUser(dA.get(i).getUserInfoId());
+                if(ChronoUnit.DAYS.between(localDate, LocalDateTime.now()) >= 31){
+                    UserInfosDAO.deleteUser(dA.get(i).getUserInfoId());
+                }
+
             }
-
+        }
+        catch (ExceptionInInitializerError iie){
+            System.out.println("Connection failed");
+        }
+        catch (HibernateException he){
+            System.out.println("Connection failed");
         }
 
         launch(args);
@@ -86,41 +97,44 @@ public class App extends Application {
 
         SceneManager.addScene(
                 "login",
-                "../resources/view/auth/login.fxml");
+                "main/resources/view/auth/login.fxml");
         SceneManager.addScene(
                 "register",
-                "../resources/view/auth/register.fxml");
+                "main/resources/view/auth/register.fxml");
         SceneManager.addScene(
                 "passwordReset",
-                "../resources/view/auth/passwordReset.fxml");
+                "main/resources/view/auth/passwordReset.fxml");
         SceneManager.addScene(
                 "successfulAccountCreation",
-                "../resources/view/auth/successfulAccountCreation.fxml");
+                "main/resources/view/auth/successfulAccountCreation.fxml");
         SceneManager.addScene(
                 "successfulPasswordReset",
-                "../resources/view/auth/successfulPasswordReset.fxml");
+                "main/resources/view/auth/successfulPasswordReset.fxml");
 
 
         SceneManager.addScene(
                 "client",
-                "../resources/view/client/client.fxml");
+                "main/resources/view/client/client.fxml");
 
         SceneManager.addScene(
                 "courier",
-                "../resources/view/courier/courier.fxml");
+                "main/resources/view/courier/courier.fxml");
 
         SceneManager.addScene(
                 "interbranchCourier",
-                "../resources/view/interbranchCourier/" +
+                "main/resources/view/interbranchCourier/" +
                 "interbranchCourier.fxml");
 
         SceneManager.addScene(
                 "manager",
-                "../resources/view/manager/manager.fxml");
+                "main/resources/view/manager/manager.fxml");
 
         SceneManager.addScene(
                 "admin",
-                "../resources/view/admin/admin.fxml");
+                "main/resources/view/admin/admin.fxml");
+
+        SceneManager.getStage().setTitle("OutBox");
+
         SceneManager.getStage().initStyle(StageStyle.UNDECORATED);
         SceneManager.renderScene("login");
 

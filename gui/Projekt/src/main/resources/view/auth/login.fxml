@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -13,267 +14,172 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-          minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0"
-          stylesheets="@../../css/authModule.css"
-          xmlns="http://javafx.com/javafx/8.0.171"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="main.java.controllers.auth.Login">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" stylesheets="@../../css/authModule.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.auth.Login">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="330.0"
-                           prefWidth="330.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="770.0" minWidth="770.0"
-                           prefWidth="770.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="330.0" minWidth="330.0" prefWidth="330.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="770.0" minWidth="770.0" prefWidth="770.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <AnchorPane fx:id="loginLeftPaneAnchorPane" maxHeight="650.0"
-                    maxWidth="330.0" minHeight="650.0" minWidth="330.0"
-                    prefHeight="650.0" prefWidth="330.0"
-                    styleClass="secondaryBackground">
+        <AnchorPane fx:id="loginLeftPaneAnchorPane" maxHeight="650.0" maxWidth="330.0" minHeight="650.0" minWidth="330.0" prefHeight="650.0" prefWidth="330.0" styleClass="secondaryBackground">
             <children>
-                <ImageView fx:id="loginLogoImageView" fitHeight="150.0"
-                           fitWidth="200.0" layoutX="90.0" layoutY="45.0"
-                           pickOnBounds="true" preserveRatio="true"
-                           styleClass="fillIcon" AnchorPane.bottomAnchor="410.0"
-                           AnchorPane.leftAnchor="90.0"
-                           AnchorPane.rightAnchor="90.0"
-                           AnchorPane.topAnchor="45.0">
+                <ImageView fx:id="loginLogoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="90.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" styleClass="fillIcon" AnchorPane.bottomAnchor="410.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="45.0">
                     <image>
-                        <Image url="@../../images/outbox_black.png"/>
+                        <Image url="@../../images/outbox_black.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="loginSloganLabel" alignment="CENTER"
-                       layoutX="42.0" layoutY="195.0" styleClass="themeMainText"
-                       text="%authOutboxSubtitle" AnchorPane.leftAnchor="0.0"
-                       AnchorPane.rightAnchor="0.0">
+                <Label fx:id="loginSloganLabel" alignment="CENTER" layoutX="42.0" layoutY="195.0" styleClass="themeMainText" text="%authOutboxSubtitle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font name="System Bold" size="16.0"/>
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="loginWelcomeLabel" alignment="CENTER"
-                       layoutX="77.0" layoutY="310.0" styleClass="themeMainText"
-                       text="%authWelcome" AnchorPane.leftAnchor="0.0"
-                       AnchorPane.rightAnchor="0.0">
+                <Label fx:id="loginWelcomeLabel" alignment="CENTER" layoutX="77.0" layoutY="310.0" styleClass="themeMainText" text="%authWelcome" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font name="System Bold" size="20.0"/>
+                        <Font name="System Bold" size="20.0" />
                     </font>
                 </Label>
-                <Label fx:id="loginLoginLabel" alignment="CENTER"
-                       layoutX="108.0" layoutY="340.0"
-                       styleClass="themeMainText" text="%authLoginOr"
-                       textFill="#121212" AnchorPane.leftAnchor="0.0"
-                       AnchorPane.rightAnchor="0.0">
+                <Label fx:id="loginLoginLabel" alignment="CENTER" layoutX="108.0" layoutY="340.0" styleClass="themeMainText" text="%authLoginOr" textFill="#121212" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Label>
-                <VBox alignment="CENTER" layoutX="101.0" layoutY="367.0"
-                      prefHeight="27.0" prefWidth="230.0"
-                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                <VBox alignment="CENTER" layoutX="101.0" layoutY="367.0" prefHeight="27.0" prefWidth="230.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <children>
-                        <Button fx:id="loginCreateAccountButton"
-                                alignment="CENTER" mnemonicParsing="false"
-                                onMouseClicked="#handleCreateAccount"
-                                styleClass="createAccountButton"
-                                text="%authCreateAccount"/>
+                        <Button fx:id="loginCreateAccountButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleCreateAccount" styleClass="createAccountButton" text="%authCreateAccount">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                     </children>
                 </VBox>
-                <MenuButton fx:id="loginSettingsMenuButton"
-                            contentDisplay="CENTER" layoutX="270.0"
-                            layoutY="598.0" mnemonicParsing="false"
-                            onMouseEntered="#handleMouseEnterMenuSettingsButton"
-                            onMouseExited="#handleMouseExitMenuSettingsButton"
-                            popupSide="LEFT" styleClass="menuButton">
+                <MenuButton fx:id="loginSettingsMenuButton" contentDisplay="CENTER" layoutX="270.0" layoutY="598.0" mnemonicParsing="false" onMouseEntered="#handleMouseEnterMenuSettingsButton" onMouseExited="#handleMouseExitMenuSettingsButton" popupSide="LEFT" styleClass="menuButton">
 
                     <items>
-                        <MenuItem fx:id="loginPolishLanguageMenuItem"
-                                  disable="true" mnemonicParsing="false"
-                                  onAction="#setPolishLanguage"
-                                  styleClass="menuItemButton"
-                                  text="%authPolish">
+                        <MenuItem fx:id="loginPolishLanguageMenuItem" disable="true" mnemonicParsing="false" onAction="#setPolishLanguage" styleClass="menuItemButton" text="%authPolish">
                             <graphic>
                                 <ImageView fitHeight="17.5" fitWidth="35">
                                     <image>
-                                        <Image url="@../../images/settings_lang_pl.png"/>
+                                        <Image url="@../../images/settings_lang_pl.png" />
                                     </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                 </ImageView>
                             </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="loginEnglishLanguageMenuItem"
-                                  disable="true" mnemonicParsing="false"
-                                  onAction="#setEnglishLanguage"
-                                  styleClass="menuItemButton"
-                                  text="%authEnglish">
+                        <MenuItem fx:id="loginEnglishLanguageMenuItem" disable="true" mnemonicParsing="false" onAction="#setEnglishLanguage" styleClass="menuItemButton" text="%authEnglish">
                             <graphic>
                                 <ImageView fitHeight="17.5" fitWidth="35">
                                     <image>
-                                        <Image url="@../../images/settings_lang_en.png"/>
+                                        <Image url="@../../images/settings_lang_en.png" />
                                     </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                 </ImageView>
                             </graphic>
                         </MenuItem>
-                        <SeparatorMenuItem disable="true"
-                                           mnemonicParsing="false"
-                                           styleClass="menuItemButton"/>
-                        <MenuItem fx:id="loginOrangeColorMenuItem"
-                                  disable="true" mnemonicParsing="false"
-                                  onAction="#setOrangeColor"
-                                  styleClass="menuItemButton"
-                                  text="%authOrange">
+                        <SeparatorMenuItem disable="true" mnemonicParsing="false" styleClass="menuItemButton" />
+                        <MenuItem fx:id="loginOrangeColorMenuItem" disable="true" mnemonicParsing="false" onAction="#setOrangeColor" styleClass="menuItemButton" text="%authOrange">
                             <graphic>
                                 <ImageView fitHeight="17.5" fitWidth="35">
                                     <image>
-                                        <Image url="@../../images/settings_color_orange.png"/>
+                                        <Image url="@../../images/settings_color_orange.png" />
                                     </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                 </ImageView>
                             </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="loginRedColorMenuItem" disable="true"
-                                  mnemonicParsing="false"
-                                  onAction="#setRedColor"
-                                  styleClass="menuItemButton" text="%authRed">
+                        <MenuItem fx:id="loginRedColorMenuItem" disable="true" mnemonicParsing="false" onAction="#setRedColor" styleClass="menuItemButton" text="%authRed">
                             <graphic>
                                 <ImageView fitHeight="17.5" fitWidth="35">
                                     <image>
-                                        <Image url="@../../images/settings_color_red.png"/>
+                                        <Image url="@../../images/settings_color_red.png" />
                                     </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                 </ImageView>
                             </graphic>
                         </MenuItem>
-                        <MenuItem fx:id="loginWhiteColorMenuItem" disable="true"
-                                  mnemonicParsing="false"
-                                  onAction="#setWhiteColor"
-                                  styleClass="menuItemButton" text="%authWhite">
+                        <MenuItem fx:id="loginWhiteColorMenuItem" disable="true" mnemonicParsing="false" onAction="#setWhiteColor" styleClass="menuItemButton" text="%authWhite">
                             <graphic>
                                 <ImageView fitHeight="17.5" fitWidth="35">
                                     <image>
-                                        <Image url="@../../images/settings_color_white.png"/>
+                                        <Image url="@../../images/settings_color_white.png" />
                                     </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                                 </ImageView>
                             </graphic>
                         </MenuItem>
                     </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </MenuButton>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="loginRightPaneAnchorPane" maxHeight="650.0"
-                    maxWidth="770.0" minHeight="650.0" minWidth="770.0"
-                    prefHeight="650.0" prefWidth="770.0"
-                    styleClass="primaryBackground" GridPane.columnIndex="1">
+        <AnchorPane fx:id="loginRightPaneAnchorPane" maxHeight="650.0" maxWidth="770.0" minHeight="650.0" minWidth="770.0" prefHeight="650.0" prefWidth="770.0" styleClass="primaryBackground" GridPane.columnIndex="1">
             <children>
-                <Label fx:id="loginLoginToCountinueLabel" alignment="CENTER"
-                       layoutX="1.0" layoutY="176.0" prefHeight="40.0"
-                       prefWidth="770.0" styleClass="themeTouchOfColorText"
-                       text="%authLoginToProceed" textFill="ORANGE"
-                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                <Label fx:id="loginLoginToCountinueLabel" alignment="CENTER" layoutX="1.0" layoutY="176.0" prefHeight="40.0" prefWidth="770.0" styleClass="themeTouchOfColorText" text="%authLoginToProceed" textFill="ORANGE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font name="System Bold" size="28.0"/>
+                        <Font name="System Bold" size="28.0" />
                     </font>
                 </Label>
-                <TextField fx:id="loginEmailTextField" layoutX="276.0"
-                           layoutY="268.0" maxHeight="35.0" maxWidth="250.0"
-                           minHeight="35.0" minWidth="250.0"
-                           onKeyPressed="#handleLoginOnEnterPressed"
-                           onKeyTyped="#clearErrorsOnEmail" prefHeight="35.0"
-                           prefWidth="250.0" promptText="%authEmail"
-                           styleClass="textFields"
-                           AnchorPane.topAnchor="250.0"/>
-                <Circle fx:id="loginUserCircleCircle" fill="ORANGE"
-                        layoutX="276.0" layoutY="268.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <FontAwesomeIconView glyphName="USER" layoutX="265.0"
-                                     layoutY="279.0" size="32"
-                                     styleClass="fillIcon"/>
-                <PasswordField fx:id="loginPasswordPasswordField"
-                               layoutX="276.0" layoutY="333.0" maxHeight="35.0"
-                               maxWidth="250.0" minHeight="35.0"
-                               minWidth="250.0"
-                               onKeyPressed="#handleLoginOnEnterPressed"
-                               onKeyTyped="#clearErrorsOnPassword"
-                               prefHeight="35.0" prefWidth="250.0"
-                               promptText="%authPassword"
-                               styleClass="textFields"
-                               AnchorPane.topAnchor="325.0"/>
-                <Circle fx:id="loginPasswordCircleCircle" fill="ORANGE"
-                        layoutX="276.0" layoutY="343.0" radius="25.0"
-                        stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0"
-                        styleClass="fill"/>
-                <FontAwesomeIconView glyphName="LOCK" layoutX="266.0"
-                                     layoutY="354.0" size="32"
-                                     styleClass="fillIcon"/>
-                <Label fx:id="loginForgotPasswordLabel" alignment="CENTER_RIGHT"
-                       layoutX="429.0" layoutY="368.0" styleClass="altText"
-                       text="%authForgotPassword" textFill="#424242"
-                       AnchorPane.rightAnchor="180.0">
+                <TextField fx:id="loginEmailTextField" layoutX="276.0" layoutY="268.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleLoginOnEnterPressed" onKeyTyped="#clearErrorsOnEmail" prefHeight="35.0" prefWidth="250.0" promptText="%authEmail" styleClass="textFields" AnchorPane.topAnchor="250.0" />
+                <Circle fx:id="loginUserCircleCircle" fill="ORANGE" layoutX="276.0" layoutY="268.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <FontAwesomeIconView glyphName="USER" layoutX="265.0" layoutY="279.0" size="32" styleClass="fillIcon" />
+                <PasswordField fx:id="loginPasswordPasswordField" layoutX="276.0" layoutY="333.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" onKeyPressed="#handleLoginOnEnterPressed" onKeyTyped="#clearErrorsOnPassword" prefHeight="35.0" prefWidth="250.0" promptText="%authPassword" styleClass="textFields" AnchorPane.topAnchor="325.0" />
+                <Circle fx:id="loginPasswordCircleCircle" fill="ORANGE" layoutX="276.0" layoutY="343.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="fill" />
+                <FontAwesomeIconView glyphName="LOCK" layoutX="266.0" layoutY="354.0" size="32" styleClass="fillIcon" />
+                <Label fx:id="loginForgotPasswordLabel" alignment="CENTER_RIGHT" layoutX="429.0" layoutY="368.0" styleClass="altText" text="%authForgotPassword" textFill="#424242" AnchorPane.rightAnchor="180.0">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <Label fx:id="loginPasswordResetLabel" alignment="CENTER_RIGHT"
-                       layoutX="441.0" layoutY="393.0"
-                       onMouseClicked="#handlePasswordReset"
-                       styleClass="themeTouchOfColorText"
-                       text="%authPasswordReset" textFill="ORANGE"
-                       AnchorPane.rightAnchor="180.0">
+                <Label fx:id="loginPasswordResetLabel" alignment="CENTER_RIGHT" layoutX="441.0" layoutY="393.0" onMouseClicked="#handlePasswordReset" styleClass="themeTouchOfColorText" text="%authPasswordReset" textFill="ORANGE" AnchorPane.rightAnchor="180.0">
                     <font>
-                        <Font name="System Italic" size="16.0"/>
+                        <Font name="System Italic" size="16.0" />
                     </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </Label>
-                <Button fx:id="loginLoginButtonButton" alignment="CENTER"
-                        layoutX="260.0" layoutY="450.0" maxHeight="35.0"
-                        maxWidth="250.0" minHeight="35.0" minWidth="250.0"
-                        mnemonicParsing="false" onMouseClicked="#handleLogin"
-                        prefHeight="35.0" prefWidth="250.0"
-                        styleClass="loginButton" text="%authLogin"
-                        AnchorPane.topAnchor="450.0"/>
-                <Button alignment="CENTER" contentDisplay="CENTER"
-                        layoutX="727.0" layoutY="9.0" mnemonicParsing="false"
-                        onAction="#exitApp" prefHeight="31.0" prefWidth="36.0"
-                        style="-fx-background-color: transparent;"
-                        styleClass="exitButton" textAlignment="CENTER">
+                <Button fx:id="loginLoginButtonButton" alignment="CENTER" layoutX="260.0" layoutY="450.0" maxHeight="35.0" maxWidth="250.0" minHeight="35.0" minWidth="250.0" mnemonicParsing="false" onMouseClicked="#handleLogin" prefHeight="35.0" prefWidth="250.0" styleClass="loginButton" text="%authLogin" AnchorPane.topAnchor="450.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="727.0" layoutY="9.0" mnemonicParsing="false" onAction="#exitApp" prefHeight="31.0" prefWidth="36.0" style="-fx-background-color: transparent;" styleClass="exitButton" textAlignment="CENTER">
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                     <graphic>
-                        <Pane prefHeight="16.0" prefWidth="13.0"
-                              styleClass="exitPane">
+                        <Pane prefHeight="16.0" prefWidth="13.0" styleClass="exitPane">
                             <children>
-                                <Line endX="-43.75" layoutX="65.0"
-                                      layoutY="11.0" rotate="-45.0" scaleX="1.3"
-                                      scaleY="2.1" startX="-65.75"
-                                      stroke="ORANGE" styleClass="exitIcon"/>
-                                <Line endX="-43.75" layoutX="65.0"
-                                      layoutY="11.0" rotate="45.0" scaleX="1.3"
-                                      scaleY="2.1" startX="-65.75"
-                                      stroke="ORANGE" styleClass="exitIcon"/>
+                                <Line endX="-43.75" layoutX="65.0" layoutY="11.0" rotate="-45.0" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="exitIcon" />
+                                <Line endX="-43.75" layoutX="65.0" layoutY="11.0" rotate="45.0" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="exitIcon" />
                             </children>
                         </Pane>
                     </graphic>
                 </Button>
-                <Button alignment="BOTTOM_CENTER" contentDisplay="RIGHT"
-                        layoutX="675.0" layoutY="1.0" mnemonicParsing="false"
-                        onAction="#minApp" prefHeight="38.0" prefWidth="40.0"
-                        style="-fx-background-color: transparent;"
-                        styleClass="minBtn">
+                <Button alignment="BOTTOM_CENTER" contentDisplay="RIGHT" layoutX="675.0" layoutY="1.0" mnemonicParsing="false" onAction="#minApp" prefHeight="38.0" prefWidth="40.0" style="-fx-background-color: transparent;" styleClass="minBtn">
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                     <graphic>
-                        <Line endX="-43.75" scaleX="1.3" scaleY="2.1"
-                              startX="-65.75" stroke="ORANGE"
-                              styleClass="minIcon"/>
+                        <Line endX="-43.75" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="minIcon" />
                     </graphic>
                 </Button>
             </children>

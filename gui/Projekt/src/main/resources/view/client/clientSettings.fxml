@@ -21,10 +21,10 @@
                <children>
                   <Text layoutX="6.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%language" />
                   <Text fill="#8f8f8f" layoutX="3.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%pickLanguage" />
-                  <Line endX="594.0" layoutX="99.0" layoutY="118.0" startX="-96.0" stroke="#252525" strokeWidth="2.0" />
-                  <Text layoutX="6.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%theme" />
-                  <Text fill="#8f8f8f" layoutX="5.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%mainColor" />
-                  <ComboBox fx:id="pickColor" layoutX="449.0" layoutY="138.0" onAction="#changeColor" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox">
+                  <Line endX="594.0" layoutX="99.0" layoutY="133.0" startX="-96.0" stroke="#252525" strokeWidth="2.0" />
+                  <Text layoutX="6.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%theme" />
+                  <Text fill="#8f8f8f" layoutX="5.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%mainColor" />
+                  <ComboBox fx:id="pickColor" layoutX="449.0" layoutY="153.0" onAction="#changeColor" prefHeight="29.0" prefWidth="242.0" styleClass="inputBox">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
@@ -33,6 +33,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
                   <Line endX="594.0" endY="0.49554443359375" layoutX="96.0" layoutY="24.0" startX="-96.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
+                  <Text layoutX="306.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="Uwaga: Zostaniesz przeniesiony do widoku startowego." />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="userInformationPane" layoutX="171.0" layoutY="193.0" prefHeight="470.0" prefWidth="692.0" styleClass="mainBackground" visible="false">
@@ -55,15 +56,15 @@
                   <CustomTextField fx:id="settStreet" layoutX="449.0" layoutY="45.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                   <CustomTextField fx:id="settCity" layoutX="449.0" layoutY="90.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                   <CustomTextField fx:id="settNumber" layoutX="449.0" layoutY="180.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
-                  <CustomPasswordField fx:id="settPassword" layoutX="448.0" layoutY="305.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
-                  <CustomPasswordField fx:id="settRepeatPassword" layoutX="449.0" layoutY="350.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
+                  <CustomPasswordField fx:id="settPassword" layoutX="448.0" layoutY="298.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
+                  <CustomPasswordField fx:id="settRepeatPassword" layoutX="449.0" layoutY="343.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                   <Button fx:id="saveInformation" layoutX="449.0" layoutY="401.0" mnemonicParsing="false" onAction="#updateInformation" prefHeight="33.0" prefWidth="242.0" styleClass="btnNext" text="%saveChanges" />
                   <Button fx:id="btnDelete" layoutY="401.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="33.0" prefWidth="242.0" styleClass="btnBack" text="%deleteAcc">
                      <graphic>
                         <FontAwesomeIconView glyphName="CLOSE" size="21" styleClass="backIcon" />
                      </graphic>
                   </Button>
-                  <CustomPasswordField fx:id="settOldPassword" layoutX="449.0" layoutY="261.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
+                  <CustomPasswordField fx:id="settOldPassword" layoutX="449.0" layoutY="254.0" prefHeight="33.0" prefWidth="242.0" styleClass="inputBox" />
                </children>
             </AnchorPane>
             <Pane layoutX="169.0" layoutY="-68.0" prefHeight="248.0" prefWidth="701.0" styleClass="mainBackground" stylesheets="@../../css/client.css" />
@@ -74,7 +75,7 @@
             <ToggleButton fx:id="userSettings" layoutX="518.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeUserSettings" prefHeight="52.0" prefWidth="348.0" styleClass="settingsBlock" text="%user" />
          </children>
       </AnchorPane>
-      <Pane fx:id="alertPane" layoutX="373.0" layoutY="128.0" prefHeight="157.0" prefWidth="293.0" styleClass="alert" stylesheets="@../../css/client.css">
+      <Pane fx:id="alertPane" layoutX="373.0" layoutY="128.0" prefHeight="157.0" prefWidth="293.0" styleClass="alert" stylesheets="@../../css/client.css" visible="false">
          <children>
             <Button layoutX="153.0" layoutY="104.0" mnemonicParsing="false" onAction="#actionNo" prefHeight="41.0" prefWidth="127.0" styleClass="btnNext" text="%back">
                <graphic>

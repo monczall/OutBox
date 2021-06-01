@@ -3,11 +3,11 @@ package main.java.controllers.client;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -22,6 +22,12 @@ import main.java.features.Animations;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Client implements Initializable {
 
@@ -160,6 +166,7 @@ public class Client implements Initializable {
     void exitApp(ActionEvent event) {
         Stage stage = (Stage) mainWindow.getScene().getWindow();
         stage.close();
+        System.exit(0);
     }
 
     @FXML

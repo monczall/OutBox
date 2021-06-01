@@ -174,7 +174,6 @@ public class Register implements Initializable {
     }
 
     public void register(){
-        registerRegisterButtonButton.setDisable(true);
         if(isValid(registerFirstNameField.getText(),
                 registerLastNameField.getText(),
                 registerPhoneNumberField.getText(),
@@ -270,7 +269,6 @@ public class Register implements Initializable {
             }
 
         }
-        registerRegisterButtonButton.setDisable(false);
     }
 
     /**
