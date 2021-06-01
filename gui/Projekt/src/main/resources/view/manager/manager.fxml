@@ -17,19 +17,19 @@
             <AnchorPane fx:id="mainWindow2" prefHeight="667.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" />
             <AnchorPane fx:id="mainWindow" layoutX="71.0" layoutY="15.0" prefHeight="645.0" prefWidth="1033.0" style="-fx-background-color: transparent;">
                <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="123.0" prefWidth="235.0" styleClass="homeBlock" text="%managerCouriers">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%managerCouriers">
                      <graphic>
                         <FontAwesomeIconView glyphName="USERS" size="60" styleClass="blockIcon" />
                      </graphic>
                   </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="560.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="123.0" prefWidth="235.0" styleClass="homeBlock" text="%managerPackages">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="475.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%managerPackages">
                      <graphic>
                         <FontAwesomeIconView glyphName="CUBES" size="60" styleClass="blockIcon" />
                      </graphic>
                   </Button>
                   <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%managerReports">
                      <graphic>
-                        <FontAwesomeIconView glyphName="LINE_CHART" size="65" styleClass="blockIcon" />
+                        <FontAwesomeIconView glyphName="FILE_PDF_ALT" size="65" styleClass="blockIcon" />
                      </graphic>
                   </Button>
                   <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="475.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%settings">
@@ -44,6 +44,11 @@
                   </Button>
                   <Text layoutX="110.0" layoutY="-41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="HOME" x="100.0" y="100.0" />
                   <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="100.0" layoutY="-37.0" size="48" styleClass="blockIconTitle" x="49.0" y="100.0" />
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="645.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openCharts" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%charts">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="PIE_CHART" size="60" styleClass="blockIcon" />
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
             <VBox fx:id="paneRight" layoutX="65.0" layoutY="-1.0" prefHeight="673.0" prefWidth="163.0" styleClass="sideBackground">

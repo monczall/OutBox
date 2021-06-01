@@ -114,6 +114,7 @@ public class ClientSettings implements Initializable {
         settOldPassword.setRight(alertIcon);
 
         settOldPassword.getRight().setVisible(false);
+
         // Created a group and added two buttons (App settings and user settings)
         // It allows user to only click one button
         ToggleGroup group = new ToggleGroup();
@@ -230,6 +231,7 @@ public class ClientSettings implements Initializable {
         else {
             pref.addPreference("language","polski");
         }
+        SceneManager.renderScene("client");
     }
 
     // Method that handle updating information from database
