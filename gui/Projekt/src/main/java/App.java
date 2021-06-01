@@ -131,7 +131,7 @@ public class App extends Application {
 
         SceneManager.addScene(
                 "admin",
-                "../resources/view/admin/admin.fxml");
+                "main/resources/view/admin/admin.fxml");
 
         SceneManager.getStage().setTitle("OutBox");
 

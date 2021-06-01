@@ -572,7 +572,7 @@ public class AdminEdit implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void back(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", RightPaneAnchorPane);
+        SceneManager.loadScene("main/resources/view/admin/adminEditEmployee.fxml", RightPaneAnchorPane);
     }
 
     /**
@@ -583,7 +583,7 @@ public class AdminEdit implements Initializable {
      */
     public void deleteEmployee(MouseEvent mouseEvent) throws IOException {
         UserInfosDAO.deleteUser(AdminEditEmployee.getUserInfoID());
-        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", RightPaneAnchorPane);
+        SceneManager.loadScene("main/resources/view/admin/adminEditEmployee.fxml", RightPaneAnchorPane);
         Alerts.createCustomAlert(RightPaneAnchorPane, deleteButton, "CHECK",
                 App.getLanguageProperties("adminSuccessDelete"), 360, 86, "alertSuccess");
     }

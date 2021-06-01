@@ -42,7 +42,7 @@ public class SceneManager {
         else
             bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
 
-        Node newLoadedPane = FXMLLoader.load(Courier.class.getResource(path), bundle);
+        Node newLoadedPane = FXMLLoader.load(SceneManager.class.getClassLoader().getResource(path), bundle);
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(newLoadedPane);
     }
