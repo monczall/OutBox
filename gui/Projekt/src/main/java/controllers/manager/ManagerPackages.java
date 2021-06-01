@@ -208,7 +208,7 @@ public class ManagerPackages implements Initializable {
             setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
             setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
             setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
-            pane = FXMLLoader.load(getClass().getResource("../../../resources/view/manager/expandableRow.fxml"));
+            pane = FXMLLoader.load(getClass().getClassLoader().getResource("main/resources/view/manager/expandableRow.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

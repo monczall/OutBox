@@ -513,7 +513,7 @@ public class ClientTrackPackage implements Initializable {
             else
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
 
-            fxmlLoader.setLocation(getClass().getResource("../../../resources/view/client/packageItem.fxml"));
+            fxmlLoader.setLocation(getClass().getClassLoader().getResource("main/resources/view/client/packageItem.fxml"));
             fxmlLoader.setResources(bundle);
 
             try {
