@@ -67,7 +67,7 @@ public class PdfGenerator {
         PdfPTable mainTable = new PdfPTable(2);
         mainTable.setWidthPercentage(100);
 
-        Image image = Image.getInstance("main/resources/images/outbox_black.png");
+        Image image = Image.getInstance(getClass().getClassLoader().getResource("main/resources/images/outbox_black.png"));
         image.scaleAbsolute(100, 100);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

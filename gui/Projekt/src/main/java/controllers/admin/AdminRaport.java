@@ -137,7 +137,7 @@ public class AdminRaport {
                         }
 
                         try {
-                            PdfGenerator.createPdf(startValue, endValue, pathFile);
+                            PdfGenerator.createPdf(endValue, startValue,  pathFile);
                             Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "CHECK",
                                     App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
                         } catch (Exception e) {
@@ -189,7 +189,7 @@ public class AdminRaport {
                         }
 
                         try {
-                            PdfGenerator.createPdf(startValue, endValue, pathFile);
+                            PdfGenerator.createPdf(endValue, startValue, pathFile);
                             Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "CHECK",
                                     App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
                         } catch (Exception e) {
@@ -241,7 +241,7 @@ public class AdminRaport {
                         }
 
                         try {
-                            PdfGenerator.createPdf(startValue, endValue, pathFile);
+                            PdfGenerator.createPdf(endValue, startValue, pathFile);
                             Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "CHECK",
                                     App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
                         } catch (Exception e) {
