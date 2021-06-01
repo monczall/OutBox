@@ -159,45 +159,48 @@ public class ManagerRaports implements Initializable {
     public void confirmRaport(MouseEvent mouseEvent) {
 
         String pathFile;
-        //if no path is selected for saving the report
-        File selectedDirectory = filePathSelection();
-        if(selectedDirectory == null){
-            Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",App.getLanguageProperties("fileSaveLocationNotSelected"));
+
+        if(validateFileName()){
+            Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                    App.getLanguageProperties("nameFile"));
         }
         else{
-            if(validateFileName()) {
-                File f = new File(selectedDirectory + fileName.getText() + ".pdf");
+            File selectedDirectory = filePathSelection();
+            if(selectedDirectory != null) {
 
+                if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
+                    pathFile = selectedDirectory + fileName.getText() + ".pdf";
+                }
+                else{
+                    pathFile = selectedDirectory + "\\" +  fileName.getText() + ".pdf";
+                }
+                File f = new File(pathFile);
                 if (f.exists() && f.isFile()) {
-                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("fileExists"));
+                    Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                            App.getLanguageProperties("fileExists"));
                 } else {
 
-                    if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
-                        pathFile = selectedDirectory + fileName.getText() + ".pdf";
-                    }
-                    else{
-                        pathFile = selectedDirectory + "\\" +  fileName.getText() + ".pdf";
-                    }
+                    Date startValue = java.sql.Date.valueOf(past);
+                    Date endValue = java.sql.Date.valueOf(today);
 
-                    LocalDate startDataValue = startData.getValue();
-                    LocalDate endDataValue = endData.getValue().plusDays(1);
-
-                    Date startValue = java.sql.Date.valueOf(startDataValue);
-                    Date endValue = java.sql.Date.valueOf(endDataValue);
 
                     try {
                         PdfGeneratorManager.createPdf(startValue, endValue, display, pathFile);
-                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("reportSuccess"));
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                                App.getLanguageProperties("reportSuccess"));
                     } catch (Exception e) {
-                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("raportError"));
+                        Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
+                                App.getLanguageProperties("raportError"));
                         e.printStackTrace();
                     }
                 }
             }
             else{
-                Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING", App.getLanguageProperties("nameFile"));
+                Alerts.createAlert(appWindow, createCustomRaportButton,"WARNING",
+                        App.getLanguageProperties("fileSaveLocationNotSelected"));
             }
         }
+
         infoConfirmRaport.setVisible(false);
     }
 
@@ -207,9 +210,9 @@ public class ManagerRaports implements Initializable {
      */
     boolean validateFileName(){
         if(fileName.getText().isEmpty()) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -233,19 +236,18 @@ public class ManagerRaports implements Initializable {
         else{
             File selectedDirectory = filePathSelection();
             if(selectedDirectory != null) {
-                File f = new File(selectedDirectory + fileName.getText() + ".pdf");
 
+                if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
+                    pathFile = selectedDirectory + fileName.getText() + ".pdf";
+                }
+                else{
+                    pathFile = selectedDirectory + "\\" +  fileName.getText() + ".pdf";
+                }
+                File f = new File(pathFile);
                 if (f.exists() && f.isFile()) {
                     Alerts.createAlert(appWindow, createCustomRaportButton, "WARNING",
                             App.getLanguageProperties("fileExists"));
                 } else {
-
-                    if(selectedDirectory.toString().substring(selectedDirectory.toString().length() - 1).equals("\\")){
-                        pathFile = selectedDirectory + fileName.getText() + ".pdf";
-                    }
-                    else{
-                        pathFile = selectedDirectory + "\\" +  fileName.getText() + ".pdf";
-                    }
 
                     Date startValue = java.sql.Date.valueOf(past);
                     Date endValue = java.sql.Date.valueOf(today);
@@ -289,6 +291,7 @@ public class ManagerRaports implements Initializable {
         File selectedDirectory = chooser.showDialog(SceneManager.getStage());
 
         return selectedDirectory;
+
     }
 
 

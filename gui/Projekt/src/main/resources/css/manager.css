@@ -605,3 +605,34 @@
 #xAxis > .axis-label, #yAxis > .axis-label{
     -fx-text-fill: white;
 }
+
+.backIcon{
+    -fx-fill: -fx-gray-color;
+}
+
+.minIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+.minBtn:hover > .minIcon {
+    -fx-scale-y: 4;
+}
+
+.exitIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+.exitButton:hover > .exitPane > .exitIcon{
+    -fx-scale-x: 1.625;
+}
+.sideIcons:hover{
+    -fx-translate-x: 2px;
+    -fx-background-color: transparent;
+}
+.hamburger{
+    -fx-background-color: -fx-main-color;
+    -fx-cursor: hand;
+    -fx-background-radius: 0;
+}
