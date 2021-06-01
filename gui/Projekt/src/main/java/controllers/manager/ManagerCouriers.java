@@ -19,7 +19,7 @@ public class ManagerCouriers {
      */
     public void addCourier(MouseEvent mouseEvent) throws IOException {
         courierOptions.setVisible(true);
-        SceneManager.loadScene("../../../resources/view/manager/managerCouriersAdd.fxml", courierOptions);
+        SceneManager.loadScene("main/resources/view/manager/managerCouriersAdd.fxml", courierOptions);
     }
 
     /**
@@ -27,7 +27,7 @@ public class ManagerCouriers {
      */
     public void deleteCourier(MouseEvent mouseEvent) throws IOException {
         courierOptions.setVisible(true);
-        SceneManager.loadScene("../../../resources/view/manager/managerCouriersDelete.fxml", courierOptions);
+        SceneManager.loadScene("main/resources/view/manager/managerCouriersDelete.fxml", courierOptions);
     }
 
     /**
@@ -35,7 +35,7 @@ public class ManagerCouriers {
      */
     public void editCourier(MouseEvent mouseEvent) throws IOException {
         courierOptions.setVisible(true);
-        SceneManager.loadScene("../../../resources/view/manager/managerCouriersEdit.fxml", courierOptions);
+        SceneManager.loadScene("main/resources/view/manager/managerCouriersEdit.fxml", courierOptions);
     }
 
     /**
@@ -43,6 +43,6 @@ public class ManagerCouriers {
      */
     public void areaCourier(MouseEvent mouseEvent) throws IOException {
         courierOptions.setVisible(true);
-        SceneManager.loadScene("../../../resources/view/manager/managerNullCourier.fxml", courierOptions);
+        SceneManager.loadScene("main/resources/view/manager/managerNullCourier.fxml", courierOptions);
     }
 }
