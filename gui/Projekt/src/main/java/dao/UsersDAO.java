@@ -38,6 +38,7 @@ public class UsersDAO {
      *     Method used to get all users that exists in database by userInfoId.
      *     Returned list is type of Users.
      * </p>
+     * @param id id of an user
      * @return list of users
      */
     static public List<Users> getUsersId(int id){
@@ -80,6 +81,7 @@ public class UsersDAO {
      *     Method used to get all users infos that exists in database by userID.
      *     Returned list is type of UserInfos.
      * </p>
+     * @param userId
      * @return list of users infos
      */
     static public List<UserInfos> readUserInfoById(int userId){

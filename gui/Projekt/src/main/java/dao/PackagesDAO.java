@@ -99,7 +99,7 @@ public class PackagesDAO {
      *     "Zwrócona do nadawcy". Returned ObservableList is type of PackagesDTO
      *     and is grouped by packageNumber.
      * </p>
-     *
+     * @param courierId id of courier
      * @return list of packages
      */
     static public ObservableList<PackagesDTO> getPackagesWithStatusById(int courierId)
@@ -290,6 +290,7 @@ public class PackagesDAO {
      /** <p>
      *     Method used to return number of package types that are in database.
      * </p>
+      * @param month current month
      * @return List of package types
      */
     static public ObservableList<PieChartDTO> quantityOfPackagesType(String month){

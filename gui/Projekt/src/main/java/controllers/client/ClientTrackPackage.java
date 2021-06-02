@@ -156,19 +156,19 @@ public class ClientTrackPackage implements Initializable {
                 else if(currentStatus.equals("W Lokalnej Sortowni") || currentStatus.equals("In Local Hub")) {
                     return arrayOfDescriptions[3];
                 }
-                else if(currentStatus.equals("W Głównej Sortowni") || currentStatus.equals("In Main Hub")) {
+                else if(currentStatus.equals("W Glownej Sortowni") || currentStatus.equals("In Main Hub")) {
                     return arrayOfDescriptions[4];
                 }
-                else if(currentStatus.equals("Przekazana Do Doręczenia") || currentStatus.equals("Handed Over For Delivery")) {
+                else if(currentStatus.equals("Przekazana Do Doreczenia") || currentStatus.equals("Handed Over For Delivery")) {
                     return arrayOfDescriptions[5];
                 }
                 else if(currentStatus.equals("Dostarczona") || currentStatus.equals("Delivered")) {
                     return arrayOfDescriptions[6];
                 }
-                else if(currentStatus.equals("Nieobecność Odbiorcy") || currentStatus.equals("Recipient's Absence")) {
+                else if(currentStatus.equals("Nieobecnosc Odbiorcy") || currentStatus.equals("Recipient's Absence")) {
                     return arrayOfDescriptions[7];
                 }
-                else if(currentStatus.equals("Ponowna Próba Doręczenia") || currentStatus.equals("Retry Delivery")) {
+                else if(currentStatus.equals("Ponowna Proba Doreczenia") || currentStatus.equals("Retry Delivery")) {
                     return arrayOfDescriptions[8];
                 }
                 else if(currentStatus.equals("Do Odebrania W Odziale") || currentStatus.equals("To Be Picked In Hub")) {
@@ -293,6 +293,7 @@ public class ClientTrackPackage implements Initializable {
      *     gray that contains status name (second argument)
      * </p>
      * @param steps how much steps need to be created
+     * @param createPlace where step is going to be crated
      */
     public void createStep(int steps, VBox createPlace){
         for(int i = 0 ; i < steps; i ++) {
@@ -333,6 +334,7 @@ public class ClientTrackPackage implements Initializable {
      * @param date date of a status
      * @param status name of status
      * @param desc description of current status (the newest in terms of date)
+     * @param createPlace where status will be created
      */
     public void createCurrentStatus(String date, String status, String desc, VBox createPlace){
 
