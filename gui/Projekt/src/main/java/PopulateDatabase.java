@@ -4,10 +4,7 @@ import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import main.java.dao.*;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,39 +22,50 @@ public class PopulateDatabase {
      *
      * @throws FileNotFoundException is being thrown if there is no file at given location
      */
-    public static void createDbIfNotExists() throws FileNotFoundException {
+    public  void createDbIfNotExists() throws FileNotFoundException {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/outbox", "root", "");
             System.out.println("Connection established......");
             if (UserInfosDAO.getUserInfos().size() == 0) {
                 ScriptRunner srUserInfos = new ScriptRunner(con);
-                Reader userInfosReader = new BufferedReader(new FileReader("main/resources/database" +
-                        "/populate_user_infos.sql"));
+                InputStream in = getClass().getClassLoader().getResourceAsStream("main/resources/database" +
+                        "/populate_user_infos.sql");
+                Reader userInfosReader = new BufferedReader(new InputStreamReader(in));
                 srUserInfos.runScript(userInfosReader);
             }
             if (AreasDAO.getAreas().size() == 0) {
                 ScriptRunner srAreas = new ScriptRunner(con);
-                Reader areasReader = new BufferedReader(new FileReader("main/resources/database/populate_areas.sql"));
+                InputStream in = getClass().getClassLoader().getResourceAsStream("main/resources/database" +
+                        "/populate_areas.sql");
+                Reader areasReader = new BufferedReader(new InputStreamReader(in));
                 srAreas.runScript(areasReader);
             }
             if (PackageTypeDAO.getPackageTypes().size() == 0) {
                 ScriptRunner srPackageTypes = new ScriptRunner(con);
-                Reader packageTypesReader = new BufferedReader(new FileReader("main/resources/database/populate_package_type.sql"));
+                InputStream in = getClass().getClassLoader().getResourceAsStream("main/resources/database" +
+                        "/populate_package_type.sql");
+                Reader packageTypesReader = new BufferedReader(new InputStreamReader(in));
                 srPackageTypes.runScript(packageTypesReader);
             }
             if (UsersDAO.getUsers().size() == 0) {
                 ScriptRunner srUsers = new ScriptRunner(con);
-                Reader usersReader = new BufferedReader(new FileReader("main/resources/database/populate_users.sql"));
+                InputStream in = getClass().getClassLoader().getResourceAsStream("main/resources/database" +
+                        "/populate_users.sql");
+                Reader usersReader = new BufferedReader(new InputStreamReader(in));
                 srUsers.runScript(usersReader);
             }
             if (PackagesDAO.getPackages().size() == 0) {
                 ScriptRunner srPackages = new ScriptRunner(con);
-                Reader packagesReader = new BufferedReader(new FileReader("main/resources/database/populate_packages.sql"));
+                InputStream in = getClass().getClassLoader().getResourceAsStream("main/resources/database" +
+                        "/populate_packages.sql");
+                Reader packagesReader = new BufferedReader(new InputStreamReader(in));
                 srPackages.runScript(packagesReader);
             }
             if (PackageHistoryDAO.getStatuses().size() == 0) {
                 ScriptRunner srPackageHistories = new ScriptRunner(con);
-                Reader packageHistoriesReader = new BufferedReader(new FileReader("main/resources/database/populate_package_history.sql"));
+                InputStream in = getClass().getClassLoader().getResourceAsStream("main/resources/database" +
+                        "/populate_package_history.sql");
+                Reader packageHistoriesReader = new BufferedReader(new InputStreamReader(in));
                 srPackageHistories.runScript(packageHistoriesReader);
             }
         } catch (SQLException e) {
@@ -65,23 +73,32 @@ public class PopulateDatabase {
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
 
                 ScriptRunner sr = new ScriptRunner(con);
-                //Creating a reader object
-                Reader reader = new BufferedReader(new FileReader("main/resources/database/database.sql"));
-                //Running the script
+                InputStream in = getClass().getClassLoader().getResourceAsStream("main/resources/database/database.sql");
+                Reader reader = new BufferedReader(new InputStreamReader(in));
                 sr.runScript(reader);
 
-
-                Reader userInfosReader = new BufferedReader(new FileReader("main/resources/database/populate_user_infos.sql"));
+                in = getClass().getClassLoader().getResourceAsStream("main/resources/database/populate_user_infos.sql");
+                Reader userInfosReader = new BufferedReader(new InputStreamReader(in));
                 sr.runScript(userInfosReader);
-                Reader areasReader = new BufferedReader(new FileReader("main/resources/database/populate_areas.sql"));
+
+                in = getClass().getClassLoader().getResourceAsStream("main/resources/database/populate_areas.sql");
+                Reader areasReader = new BufferedReader(new InputStreamReader(in));
                 sr.runScript(areasReader);
-                Reader packageTypesReader = new BufferedReader(new FileReader("main/resources/database/populate_package_type.sql"));
+
+                in = getClass().getClassLoader().getResourceAsStream("main/resources/database/populate_package_type.sql");
+                Reader packageTypesReader = new BufferedReader(new InputStreamReader(in));
                 sr.runScript(packageTypesReader);
-                Reader usersReader = new BufferedReader(new FileReader("main/resources/database/populate_users.sql"));
+
+                in = getClass().getClassLoader().getResourceAsStream("main/resources/database/populate_users.sql");
+                Reader usersReader = new BufferedReader(new InputStreamReader(in));
                 sr.runScript(usersReader);
-                Reader packagesReader = new BufferedReader(new FileReader("main/resources/database/populate_packages.sql"));
+
+                in = getClass().getClassLoader().getResourceAsStream("main/resources/database/populate_packages.sql");
+                Reader packagesReader = new BufferedReader(new InputStreamReader(in));
                 sr.runScript(packagesReader);
-                Reader packageHistoriesReader = new BufferedReader(new FileReader("main/resources/database/populate_package_history.sql"));
+
+                in = getClass().getClassLoader().getResourceAsStream("main/resources/database/populate_package_history.sql");
+                Reader packageHistoriesReader = new BufferedReader(new InputStreamReader(in));
                 sr.runScript(packageHistoriesReader);
 
                 //Checking if tables are empty and eventually filling them

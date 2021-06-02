@@ -126,14 +126,14 @@ public class PdfGeneratorManager {
         int midCounter = 0;
         int bigCounter = 0;
         for(int i = 0; i < packList.size(); i++) {
-            if (packList.get(i).getSize().equals("mała") ) {
+            if (packList.get(i).getSize().equals("mala") ) {
                 smallCounter++;
 
             }
-            if (packList.get(i).getSize().equals("średnia")) {
+            if (packList.get(i).getSize().equals("srednia")) {
                 midCounter++;
             }
-            if (packList.get(i).getSize().equals("duża")) {
+            if (packList.get(i).getSize().equals("duza")) {
                 bigCounter++;
             }
         }

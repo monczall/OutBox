@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
 CREATE TABLE IF NOT EXISTS `package_history` (
   `ID` int(11) NOT NULL,
   `packageID` int(11) NOT NULL,
-  `status` enum('Zarejestrowana','Odebrana Od Klienta','W Transporcie','W Lokalnej Sortowni','W Głównej Sortowni','Przekazana Do Doręczenia','Dostarczona','Nieobecność Odbiorcy','Ponowna Próba Doręczenia','Do Odebrania W Oddziale','Zwrot Do Nadawcy','Zwrócona Do Nadawcy') NOT NULL,
+  `status` enum('Zarejestrowana','Odebrana Od Klienta','W Transporcie','W Lokalnej Sortowni','W Glownej Sortowni','Przekazana Do Doreczenia','Dostarczona','Nieobecnosc Odbiorcy','Ponowna Proba Doreczenia','Do Odebrania W Oddziale','Zwrot Do Nadawcy','Zwrocona Do Nadawcy') NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `areaID` int(11) DEFAULT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(256) NOT NULL,
-  `role` enum('Klient','Kurier','Kurier Międzyoddziałowy','Menadżer','Administrator') NOT NULL
+  `role` enum('Klient','Kurier','Kurier Miedzyoddzialowy','Menadzer','Administrator') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

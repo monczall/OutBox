@@ -41,7 +41,8 @@ public class App extends Application {
 
     public static void main(String[] args) throws FileNotFoundException, ParseException {
 
-        PopulateDatabase.createDbIfNotExists();
+        PopulateDatabase pd = new PopulateDatabase();
+        pd.createDbIfNotExists();
 
         try{
             List<Users> dA = UsersDAO.readDeactivatedAccounts();
@@ -58,10 +59,10 @@ public class App extends Application {
             }
         }
         catch (ExceptionInInitializerError iie){
-            System.out.println("Connection failed");
+            iie.printStackTrace();
         }
         catch (HibernateException he){
-            System.out.println("Connection failed");
+            he.printStackTrace();
         }
 
         launch(args);

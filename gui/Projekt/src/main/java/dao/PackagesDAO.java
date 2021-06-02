@@ -120,6 +120,7 @@ public class PackagesDAO {
                 "WHERE PH.packageId = P.id )) " +
                 "AND NOT PH.status = 'Dostarczona' " +
                 "AND NOT PH.status = 'Zwrócona Do Nadawcy' " +
+                "AND NOT PH.status = 'Do Odebrania W Oddziale' " +
                 "GROUP BY P.packageNumber";
 
         Session session = HibernateUtil.getSessionFactory().openSession();

@@ -89,7 +89,7 @@ public class AdminTests {
         List<Users> list = getUsers();
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getRole().equals("Kurier") || list.get(i).getRole().equals("Menadżer")){
+            if (list.get(i).getRole().equals("Kurier") || list.get(i).getRole().equals("Menadzer")){
                 if (list.get(i).getAreaId() == null) {
                     counter++;
                 }

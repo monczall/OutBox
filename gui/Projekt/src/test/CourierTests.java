@@ -62,7 +62,7 @@ public class CourierTests {
         ObservableList<PackagesDTO> packages = getPackagesWithStatus();
         for(int i = 0; i < packages.size(); i++){
             if(packages.get(i).getStatus().equals("Dostarczona")
-            || packages.get(i).getStatus().equals("Zwrócona Do Nadawcy")){
+            || packages.get(i).getStatus().equals("Zwrocona Do Nadawcy")){
                 counter++;
             }
         }
