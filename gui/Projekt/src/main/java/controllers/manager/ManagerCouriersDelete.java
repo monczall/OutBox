@@ -177,7 +177,7 @@ public class ManagerCouriersDelete implements Initializable {
         }
 
         for(int i=0; i<dataUser.size(); i++) {
-            if (!dataUser.get(i).getRole().equals("Kurier") && !dataUser.get(i).getRole().equals("Kurier Międzyoddziałowy")) {
+            if (!dataUser.get(i).getRole().equals("Kurier") && !dataUser.get(i).getRole().equals("Kurier Miedzyoddzialowy")) {
                 dataUser.remove(i);
                 i--;
             }

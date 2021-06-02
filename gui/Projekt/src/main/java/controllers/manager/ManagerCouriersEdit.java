@@ -86,7 +86,7 @@ public class ManagerCouriersEdit implements Initializable {
     private ComboBox<String> comboRole;
 
     @FXML
-    private ObservableList<String> role = FXCollections.observableArrayList("Kurier","Kurier Międzyoddziałowy");
+    private ObservableList<String> role = FXCollections.observableArrayList("Kurier","Kurier Miedzyoddzialowy");
 
     Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
     List<UserInfos> dataUserInfos;
@@ -104,7 +104,7 @@ public class ManagerCouriersEdit implements Initializable {
             roleString = "Kurier";
         }
         else {
-            roleString = "Kurier Międzyoddziałowy";
+            roleString = "Kurier Miedzyoddzialowy";
         }
     }
 
@@ -232,7 +232,7 @@ public class ManagerCouriersEdit implements Initializable {
             roleString = "Kurier";
         }
         else{
-            roleString = "Kurier Międzyoddziałowy";
+            roleString = "Kurier Miedzyoddzialowy";
         }
     }
 
@@ -288,7 +288,7 @@ public class ManagerCouriersEdit implements Initializable {
         }
 
         for(int i=0; i<dataUser.size(); i++) {
-            if (!dataUser.get(i).getRole().equals("Kurier") && !dataUser.get(i).getRole().equals("Kurier Międzyoddziałowy")) {
+            if (!dataUser.get(i).getRole().equals("Kurier") && !dataUser.get(i).getRole().equals("Kurier Miedzyoddzialowy")) {
                 dataUser.remove(i);
                 i--;
             }

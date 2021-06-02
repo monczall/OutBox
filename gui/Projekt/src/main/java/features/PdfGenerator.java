@@ -110,14 +110,14 @@ public class PdfGenerator {
         int midCounter = 0;
         int bigCounter = 0;
         for(int i = 0; i < packList.size(); i++) {
-            if (packList.get(i).getSize().equals("mała") ) {
+            if (packList.get(i).getSize().equals("mala") ) {
                 smallCounter++;
 
             }
-            if (packList.get(i).getSize().equals("średnia")) {
+            if (packList.get(i).getSize().equals("srednia")) {
                 midCounter++;
             }
-            if (packList.get(i).getSize().equals("duża")) {
+            if (packList.get(i).getSize().equals("duza")) {
                 bigCounter++;
             }
         }
@@ -223,13 +223,13 @@ public class PdfGenerator {
         ObservableList<PdfDTO> list = PackagesDAO.readPackagesForPdf(start, end);
         if (Preference.readPreference("language").equals("english")) {
             for (PdfDTO pdfDTO : list) {
-                if (pdfDTO.getSize().equals("mała")) {
+                if (pdfDTO.getSize().equals("mala")) {
                     pdfDTO.setSize("small");
                 }
-                else if (pdfDTO.getSize().equals("średnia")) {
+                else if (pdfDTO.getSize().equals("srednia")) {
                     pdfDTO.setSize("medium");
                 }
-                else if (pdfDTO.getSize().equals("duża")) {
+                else if (pdfDTO.getSize().equals("duza")) {
                     pdfDTO.setSize("big");
                 }
             }

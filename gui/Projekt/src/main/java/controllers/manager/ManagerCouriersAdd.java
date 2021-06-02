@@ -64,7 +64,7 @@ public class ManagerCouriersAdd implements Initializable {
     private ComboBox<String> comboRole;
 
     @FXML
-    private ObservableList<String> role = FXCollections.observableArrayList("Kurier","Kurier Międzyoddziałowy");
+    private ObservableList<String> role = FXCollections.observableArrayList("Kurier","Kurier Miedzyoddzialowy");
 
     String roleString;
     List<Users> dataUser;
@@ -80,7 +80,7 @@ public class ManagerCouriersAdd implements Initializable {
             roleString = "Kurier";
         }
         else {
-            roleString = "Kurier Międzyoddziałowy";
+            roleString = "Kurier Miedzyoddzialowy";
         }
     }
 
