@@ -7,13 +7,13 @@ INSERT INTO `users` (`ID`, `user_infoID`, `areaID`, `email`, `password`, `role`)
 (5, 5, 2, 'k.rzeszow2@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Kurier'),
 (6, 6, 3, 'k.kolbuszowa@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Kurier'),
 (7, 7, 5, 'k.krakow@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Kurier'),
-(8, 8, 4, 'ko.podkarpacie@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Kurier Międzyoddziałowy'),
-(9, 9, 6, 'ko.maloposkie@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Kurier Międzyoddziałowy'),
-(10, 10, 2, 'm.rzeszow@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadżer'),
-(11, 11, 3, 'm.kolbuszowa@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadżer'),
-(12, 12, 4, 'm.podkarpacie@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadżer'),
-(13, 13, 5, 'm.krakow@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadżer'),
-(14, 14, 6, 'm.malopolskie@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadżer'),
+(8, 8, 4, 'ko.podkarpacie@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Kurier Miedzyoddzialowy'),
+(9, 9, 6, 'ko.maloposkie@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Kurier Miedzyoddzialowy'),
+(10, 10, 2, 'm.rzeszow@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadzer'),
+(11, 11, 3, 'm.kolbuszowa@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadzer'),
+(12, 12, 4, 'm.podkarpacie@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadzer'),
+(13, 13, 5, 'm.krakow@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadzer'),
+(14, 14, 6, 'm.malopolskie@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Menadzer'),
 (15, 15, NULL, 'admin@gmail.com', '9e38e8d688743e0d07d669a1fcbcd35b', 'Administrator');
 
 
