@@ -225,7 +225,7 @@ public class InterbranchCourierSecond implements Initializable {
                                 }
                             }
                         } else if (status.equals(PackageStatus.IN_MAIN_SORTING_DEPARTMENT.displayName())) {
-                            List<Users> usersList = UsersDAO.getCouriers("Kurier Międzyoddziałowy");
+                            List<Users> usersList = UsersDAO.getCouriers("Kurier Miedzyoddzialowy");
                             for (int i = 0; i < usersList.size(); i++) {
                                 if (PackagesDAO.getPackagesById(table.getItems().get(selectedIndex).getPackagesId()).get(0).
                                         getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(i).getAreasByAreaId().getVoivodeship())) {

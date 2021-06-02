@@ -12,13 +12,13 @@ public class AreasDAO {
 
     /**
      * <p>
-     *     Method used to get the list of all areas that are in database.
-     *     Returned List is type of Areas.
+     * Method used to get the list of all areas that are in database.
+     * Returned List is type of Areas.
      * </p>
      *
      * @return list of areas
      */
-    static public List<Areas> getAreas(){
+    static public List<Areas> getAreas() {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery("from Areas");
@@ -30,17 +30,17 @@ public class AreasDAO {
 
     /**
      * <p>
-     *     Method used to insert new areas to database. It requires name,
-     *     voivodeship, city, street and street number.
+     * Method used to insert new areas to database. It requires name,
+     * voivodeship, city, street and street number.
      * </p>
      *
-     * @param name friendly name of new area
-     * @param voivodeship name of voivodeship where area is located
-     * @param city name of city where area is located
+     * @param name                         friendly name of new area
+     * @param voivodeship                  name of voivodeship where area is located
+     * @param city                         name of city where area is located
      * @param department_street_and_number name and number of street
-     *                                    where area is located
+     *                                     where area is located
      */
-    static public void insertAreas(String name, String voivodeship, String city, String department_street_and_number){
+    static public void insertAreas(String name, String voivodeship, String city, String department_street_and_number) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -58,13 +58,13 @@ public class AreasDAO {
 
     /**
      * <p>
-     *     Method used to return all area names that are available in database.
-     *     Returned ObservableList is type of String.
+     * Method used to return all area names that are available in database.
+     * Returned ObservableList is type of String.
      * </p>
      *
      * @return returns observable list of strings
      */
-    static public ObservableList<String> getAreasName(){
+    static public ObservableList<String> getAreasName() {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery("select name from Areas");
@@ -79,14 +79,14 @@ public class AreasDAO {
 
     /**
      * <p>
-     *      Method used to get ID that is related to given name of area.
-     *      Returned value is type of int.
+     * Method used to get ID that is related to given name of area.
+     * Returned value is type of int.
      * </p>
      *
      * @param name name of area that we want to get ID of
      * @return returns ID of given area
      */
-    static public int getAreasIdByName(String name){
+    static public int getAreasIdByName(String name) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery("select id from Areas WHERE name =:name");
@@ -100,14 +100,14 @@ public class AreasDAO {
 
     /**
      * <p>
-     *      Method used to get list of columns from area by given areaID.
-     *      Returned list is type of Areas.
+     * Method used to get list of columns from area by given areaID.
+     * Returned list is type of Areas.
      * </p>
      *
      * @param areaId is ID of area that we are looking for
      * @return list of columns from found area
      */
-    static public List<Areas> getAreasById(int areaId){
+    static public List<Areas> getAreasById(int areaId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery("from Areas WHERE id =:areaId");

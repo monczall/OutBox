@@ -207,7 +207,7 @@ public class CourierSecond implements Initializable {
                         PackageHistoryDAO.updateStatus(getPackageId(), status,
                                 Timestamp.valueOf(dateTimeFormatter.format(now)));
                         if (status.equals(PackageStatus.IN_SORTING_DEPARTMENT.displayName())) {
-                            List<Users> usersList = UsersDAO.getCouriers("Kurier Międzyoddziałowy");
+                            List<Users> usersList = UsersDAO.getCouriers("Kurier Miedzyoddzialowy");
                             for (int i = 0; i < usersList.size(); i++) {
                                 if (UsersDAO.readUserInfoById(PackagesDAO.getPackagesById(table.getItems().get(selectedIndex)
                                         .getPackagesId()).get(0).getUserId()).get(0).getVoivodeship().equals(usersList.get(i).

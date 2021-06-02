@@ -65,13 +65,13 @@ public class PackageTypeDAO {
 
         String hql = "SELECT NEW main.java.entity.PdfAreaDTO(" +
                 "A.name, (SELECT COUNT(P.id) FROM PackageType PT, Packages P, PackageHistory PH, Users U WHERE PT.sizeName = " +
-                "'mała' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "'mala' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
                 "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd), " +
                 "(SELECT COUNT(P.id) FROM PackageType PT, PackageHistory PH, Packages P, Users U WHERE PT.sizeName = " +
-                "'średnia' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "'srednia' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
                 "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd), " +
                 "(SELECT COUNT(P.id) FROM PackageType PT, PackageHistory PH, Packages P, Users U WHERE PT.sizeName = " +
-                "'duża' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "'duza' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
                 "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd))" +
                 "FROM Packages P, Users U, Areas A, PackageHistory PH WHERE P.id = PH.packageId AND PH.date BETWEEN " +
                 ":dateStart AND :dateEnd GROUP BY A.name";
