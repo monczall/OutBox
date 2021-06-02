@@ -173,7 +173,7 @@ public class AdminAddManager implements Initializable {
                                     registerStreetField.getText(),
                                     registerCityField.getText(),
                                     registerVoivodeshipField.getText(),
-                                    Encryption.encrypt(password), "Menadżer",
+                                    Encryption.encrypt(password), "Menadzer",
                                     AreasDAO.getAreasIdByName(registerAreaChoiceBox.getSelectionModel().getSelectedItem().toString()));
 
                             System.out.println("Manager added");

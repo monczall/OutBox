@@ -199,10 +199,10 @@ public class Login implements Initializable {
                         } else if (role.equals("Kurier")) {
                             SceneManager.renderScene("courier");
 
-                        } else if (role.equals("Kurier Międzyoddziałowy")) {
+                        } else if (role.equals("Kurier Miedzyoddzialowy")) {
                             SceneManager.renderScene("interbranchCourier");
 
-                        } else if (role.equals("Menadżer")) {
+                        } else if (role.equals("Menadzer")) {
                             SceneManager.renderScene("manager");
 
                         } else if (role.equals("Administrator")) {

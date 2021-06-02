@@ -40,15 +40,14 @@ public class Admin implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb){
-
+    public void initialize(URL url, ResourceBundle rb) {
 
 
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
 
         hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
-            if(hamburgerClicked == false) {
+            if (hamburgerClicked == false) {
 
                 hamburger.setDisable(true);
                 hamburgerClicked = true;
@@ -59,15 +58,14 @@ public class Admin implements Initializable {
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,+200,0.5);
-                Animations.moveByX(hello,+170,0.5);
-                Animations.moveByX(mainWindow,+70,0.5);
+                Animations.moveByX(paneRight, +200, 0.5);
+                Animations.moveByX(hello, +170, 0.5);
+                Animations.moveByX(mainWindow, +70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     hamburger.setDisable(false);
                 });
-            }
-            else {
+            } else {
                 hamburger.setDisable(true);
                 hamburgerClicked = false;
 
@@ -76,9 +74,9 @@ public class Admin implements Initializable {
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,-200,0.5);
-                Animations.moveByX(hello,-170,0.5);
-                Animations.moveByX(mainWindow,-70,0.5);
+                Animations.moveByX(paneRight, -200, 0.5);
+                Animations.moveByX(hello, -170, 0.5);
+                Animations.moveByX(mainWindow, -70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     paneRight.setVisible(false);
@@ -94,6 +92,7 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "admin"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -103,6 +102,7 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "editEmployee"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -112,6 +112,7 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "addManager"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -121,6 +122,7 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "addArea"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -130,6 +132,7 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "packSettings"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -139,6 +142,7 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "raports"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -148,6 +152,7 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "settings"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -157,11 +162,12 @@ public class Admin implements Initializable {
 
     /**
      * Method that show alert with logout option
+     *
      * @param mouseEvent mosue event
      */
     @FXML
     void go_logout(MouseEvent mouseEvent) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         window.setDisable(true);
@@ -170,17 +176,19 @@ public class Admin implements Initializable {
 
     /**
      * Method that close alert with logout if "NO" is chosen
+     *
      * @param event event
      */
     @FXML
     void logoutNo(ActionEvent event) {
-        Animations.moveByY(alertPane,-500,0.3);
+        Animations.moveByY(alertPane, -500, 0.3);
         window.setEffect(null);
         window.setDisable(false);
     }
 
     /**
      * Method that logout admin
+     *
      * @param event event
      */
     @FXML
@@ -190,10 +198,11 @@ public class Admin implements Initializable {
 
     /**
      * Method that close alert with logout if "NO" is chosen
+     *
      * @param actionEvent event
      */
     public void logout(ActionEvent actionEvent) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         window.setDisable(true);
@@ -202,38 +211,47 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "packSettings"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewPackSettings(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("main/resources/view/admin/adminPackSettings.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "raports"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewRaport(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("main/resources/view/admin/adminRaport.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "settings"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewSettings(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("main/resources/view/admin/adminSettings.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "addArea"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewAddArea(ActionEvent actionEvent) throws IOException {
         SceneManager.loadScene("main/resources/view/admin/adminAddArea.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "editEmployee"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
