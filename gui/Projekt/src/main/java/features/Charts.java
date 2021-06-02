@@ -15,14 +15,10 @@ import java.util.List;
 
 public class Charts {
 
-    //ObservableList<PieChart.Data> data,
-
     /**
-     * Method that creates a pie chart it takes a six arguments
-     * First is the place where chart will be created
-     * Second is the title of chart
-     * Third and fourth are layout of chart
-     * Fifth and sixth is the width and height of chart
+     * Method that populate a pie chart it has two arguments. takes information from current month
+     * @param pieChart pieChart from FXML that will be populated
+     * @param month month that will be used to query in DB
      */
     public static void createPieChart(PieChart pieChart, String month){
 
@@ -30,12 +26,12 @@ public class Charts {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
 
         for(int i = 0; i < quantityByTypes.size(); i++) {
-            if(quantityByTypes.get(i).getType().equals("mała")) {
+            if(quantityByTypes.get(i).getType().equals("mala")) {
                 data.add(new PieChart.Data(App.getLanguageProperties("small") +
                         " - " + quantityByTypes.get(i).getQuantity(),
                         quantityByTypes.get(i).getQuantity()));
             }
-            else if(quantityByTypes.get(i).getType().equals("średnia")) {
+            else if(quantityByTypes.get(i).getType().equals("srednia")) {
                 data.add(new PieChart.Data(App.getLanguageProperties("medium") +
                         " - " + quantityByTypes.get(i).getQuantity(),
                         quantityByTypes.get(i).getQuantity()));
@@ -53,6 +49,11 @@ public class Charts {
     }
 
 
+    /**
+     * This method populate a barChart it takes information from current month
+     * @param barChart chart from FXML
+     * @param month month that will be used to query in DB
+     */
     public static void createBarChart(BarChart<String,Long> barChart, String month){
 
         barChart.setTitle(App.getLanguageProperties("numberOfPackagesInMonth"));

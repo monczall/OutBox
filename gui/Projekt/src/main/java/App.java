@@ -111,7 +111,6 @@ public class App extends Application {
                 "successfulPasswordReset",
                 "main/resources/view/auth/successfulPasswordReset.fxml");
 
-
         SceneManager.addScene(
                 "client",
                 "main/resources/view/client/client.fxml");

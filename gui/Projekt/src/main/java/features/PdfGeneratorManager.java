@@ -216,7 +216,7 @@ public class PdfGeneratorManager {
      * Method that create cell in table
      * @param text text
      * @param font font
-     * @return
+     * @return a pdf CELL
      */
     private PdfPCell createCell(String text, Font font){
         PdfPCell cell = new PdfPCell(new Phrase(text, font));
