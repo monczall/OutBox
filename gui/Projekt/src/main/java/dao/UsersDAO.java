@@ -209,7 +209,7 @@ public class UsersDAO {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
 
-        users.setEmail("UŻYTKOWNIK USUNIĘTY");
+        users.setEmail("UZYTKOWNIK USUNIETY");
         users.setPassword(dateTimeFormatter.format(now) );
 
         session.update(users);
@@ -229,7 +229,7 @@ public class UsersDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("FROM Users WHERE email = 'UŻYTKOWNIK USUNIĘTY'");
+        Query query = session.createQuery("FROM Users WHERE email = 'UZYTKOWNIK USUNIETY'");
 
         return query.list();
     }
