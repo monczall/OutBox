@@ -79,7 +79,7 @@
                         <Text fx:id="loggedUser" layoutX="57.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="welcomeUser" text="Imie Nazwisko" />
                     </children>
                 </Pane>
-                <ImageView fitHeight="71.0" fitWidth="87.0" layoutX="1026.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="71.0" fitWidth="87.0" layoutX="1026.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../images/outbox_white.png" />
                     </image>
