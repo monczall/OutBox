@@ -15,11 +15,13 @@
          <graphic>
             <FontAwesomeIconView glyphName="USER_TIMES" size="60" styleClass="blockIcon" />
          </graphic></Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#editCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%editCourier">
+      <Button  fx:id="courierButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="336.0"
+               mnemonicParsing="false" onMouseClicked="#editCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%editCourier">
          <graphic>
             <FontAwesomeIconView glyphName="USER" size="70" styleClass="blockIcon" />
          </graphic></Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="533.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#areaCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%unassignedPackages">
+      <Button fx:id="areaButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="533.0" layoutY="336.0"
+              mnemonicParsing="false" onMouseClicked="#areaCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%unassignedPackages">
          <graphic>
             <FontAwesomeIconView glyphName="PACKAGES" size="70" styleClass="blockIcon" />
          </graphic>

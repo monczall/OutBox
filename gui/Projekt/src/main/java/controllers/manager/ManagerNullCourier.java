@@ -73,7 +73,7 @@ public class ManagerNullCourier implements Initializable {
     private Label courierPhone;
 
     @FXML
-    private Label courierEmail;
+    private Label courierCity;
 
     @FXML
     private Label howManyCouriers;
@@ -134,7 +134,7 @@ public class ManagerNullCourier implements Initializable {
      */
     public void setDataLabel(){
 
-        dataUserInfos = UserInfosDAO.getUserInfoByID(getPackages.get(dataIndex).getUserInfoId());
+        dataUserInfos = UserInfosDAO.getUserInfoByID(getPackages.get(dataIndex).getUsersByUserId().getUserInfoId());
         packageNumber.setText(getPackages.get(dataIndex).getPackageNumber());
         cityAndStreet.setText(dataUserInfos.get(0).getStreetAndNumber());
         voivo.setText(dataUserInfos.get(0).getVoivodeship());
@@ -174,7 +174,7 @@ public class ManagerNullCourier implements Initializable {
 
         courierNameSurname.setText(dataUserInfosCourier.get(0).getName()+" "+dataUserInfosCourier.get(0).getSurname());
         courierPhone.setText(dataUserInfosCourier.get(0).getPhoneNumber());
-        courierEmail.setText(dataUserCourier.get(dataIndexCourier).getEmail());
+        courierCity.setText(dataUserCourier.get(dataIndexCourier).getAreasByAreaId().getCity());
 
         howManyCouriers.setText((dataIndexCourier+1)+"/"+String.valueOf(dataUserCourier.size()));
 
@@ -260,21 +260,23 @@ public class ManagerNullCourier implements Initializable {
      */
     void clearDataPackages(){
         for(int i=0; i<getPackages.size(); i++) {
-            dataUserInfos = UserInfosDAO.getUserInfoByID(getPackages.get(i).getUserInfoId());
+            dataUserInfos = UserInfosDAO.getUserInfoByID(getPackages.get(i).getUsersByUserId().getUserInfoId());
             if (!dataUserInfos.get(0).getVoivodeship().equals(ui.getVoivodeship())) {
                 getPackages.remove(i);
                 i--;
             }
         }
 
-        for(int i=0; i<getPackages.size(); i++) {
-            dataUser = UsersDAO.getUsersId(getPackages.get(i).getUserId());
-            if (!dataUser.get(0).getAreaId().equals(uu.getAreaId())) {
-                getPackages.remove(i);
-                i--;
-            }
-            System.out.println(dataUser.get(0).getAreaId() + " : " + uu.getAreaId());
-        }
+//        for(int i=0; i<getPackages.size(); i++) {
+//            dataUser = UsersDAO.getUsersId(getPackages.get(i).getUserId());
+//            System.out.println(dataUser.get(0).getAreaId());
+//            if (!dataUser.get(0).getAreaId().equals(uu.getAreaId())) {
+//                System.out.println(i);
+//                getPackages.remove(i);
+//                i--;
+//            }
+//            System.out.println(dataUser.get(0).getAreaId() + " : " + uu.getAreaId());
+//        }
 
         if(getPackages.size()==0){
             packageLabel.setVisible(false);
@@ -304,7 +306,7 @@ public class ManagerNullCourier implements Initializable {
         }
         for(int i=0; i<dataUserCourier.size(); i++) {
             dataUserInfosCourier = UserInfosDAO.getUserInfoByID(dataUserCourier.get(i).getId());
-            if (!dataUserCourier.get(i).getAreaId().equals(uu.getAreaId())) {
+            if (!dataUserCourier.get(i).getAreasByAreaId().getVoivodeship().equals(uu.getAreasByAreaId().getVoivodeship())) {
                 dataUserCourier.remove(i);
                 i--;
             }

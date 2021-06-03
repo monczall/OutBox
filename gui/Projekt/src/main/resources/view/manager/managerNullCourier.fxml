@@ -45,12 +45,13 @@
             <Label fx:id="courierLabel" layoutX="295.0" styleClass="optionGroup" text="%selectCourier" />
             <Pane fx:id="paneCourier" layoutX="19.0" layoutY="56.0" prefHeight="180.0" prefWidth="692.0" styleClass="packageItem" visible="false">
                <children>
-                  <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%email" />
+                  <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption"
+                        text="%city" />
                   <Text layoutX="94.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%nameAndSurname" />
                   <Text layoutX="94.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%phone" />
                   <Label fx:id="courierNameSurname" layoutX="97.0" layoutY="17.0" styleClass="optionGroup" text="XXX XXX" />
                   <Label fx:id="courierPhone" layoutX="97.0" layoutY="109.0" styleClass="optionGroup" text="XXXX ul. XXXXX 27" />
-                  <Label fx:id="courierEmail" layoutX="97.0" layoutY="62.0" styleClass="optionGroup" text="XXXXXX" />
+                  <Label fx:id="courierCity" layoutX="97.0" layoutY="62.0" styleClass="optionGroup" text="XXXXXX" />
                   <Label fx:id="howManyCouriers" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="593.0" layoutY="6.0" prefHeight="30.0" prefWidth="91.0" styleClass="optionGroup" text="1/1" />
                </children>
             </Pane>
