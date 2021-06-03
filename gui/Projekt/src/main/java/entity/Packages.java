@@ -1,9 +1,6 @@
 package main.java.entity;
 
-import javafx.beans.value.ObservableValue;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 

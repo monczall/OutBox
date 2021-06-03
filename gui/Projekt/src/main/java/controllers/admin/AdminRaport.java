@@ -36,6 +36,7 @@ public class AdminRaport {
 
     /**
      * Method that generate report to PDF file from date to date choose from DataPicker
+     *
      * @param actionEvent action event
      */
 
@@ -102,6 +103,7 @@ public class AdminRaport {
 
     /**
      * Method that generate report to PDF file from last day
+     *
      * @param actionEvent action event
      */
     public void raportLastDay(ActionEvent actionEvent) {
@@ -137,7 +139,7 @@ public class AdminRaport {
                         }
 
                         try {
-                            PdfGenerator.createPdf(endValue, startValue,  pathFile);
+                            PdfGenerator.createPdf(endValue, startValue, pathFile);
                             Alerts.createCustomAlert(RightPaneAnchorPane, raportButton, "CHECK",
                                     App.getLanguageProperties("adminGeneratePDF"), 350, 86, "alertSuccess");
                         } catch (Exception e) {
@@ -155,6 +157,7 @@ public class AdminRaport {
 
     /**
      * Method that generate report to PDF file from last month
+     *
      * @param actionEvent action event
      */
     public void raportLastMonth(ActionEvent actionEvent) {
@@ -259,14 +262,11 @@ public class AdminRaport {
 
     }
 
-    boolean validateFileName(){
-        if(fileName.getText().isEmpty()) {
-            return false;
-        }
-        return true;
+    boolean validateFileName() {
+        return !fileName.getText().isEmpty();
     }
 
-    public File filePathSelection(){
+    public File filePathSelection() {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle(App.getLanguageProperties("titleSaveRaport"));
         File defaultDirectory = new File("c:/");

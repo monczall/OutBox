@@ -16,6 +16,11 @@ import java.util.ResourceBundle;
 
 public class AdminSettings implements Initializable {
 
+    //List of colors for combobox
+    private final ObservableList<String> colors = FXCollections.observableArrayList(App.getLanguageProperties("colorOrange"), App.getLanguageProperties("colorRed"),
+            App.getLanguageProperties("colorWhite"));
+    //List of languages for combobox
+    private final ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
     Preference pref = new Preference();
     @FXML
     private ComboBox<String> pickColor;
@@ -23,11 +28,6 @@ public class AdminSettings implements Initializable {
     private ComboBox<String> pickLanguage;
     @FXML
     private AnchorPane userInformationPane;
-    //List of colors for combobox
-    private final ObservableList<String> colors = FXCollections.observableArrayList(App.getLanguageProperties("colorOrange"), App.getLanguageProperties("colorRed"),
-            App.getLanguageProperties("colorWhite"));
-    //List of languages for combobox
-    private final ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -6,7 +6,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -23,6 +26,7 @@ import main.java.features.ErrorHandler;
 import main.java.features.Preference;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -30,77 +34,53 @@ import java.util.ResourceBundle;
 
 public class ClientSettings implements Initializable {
 
+    // List of colors for combobox
+    private final ObservableList<String> colors = FXCollections.observableArrayList(App.getLanguageProperties("colorOrange"), App.getLanguageProperties("colorRed"),
+            App.getLanguageProperties("colorWhite"));
+    // List of languages for combobox
+    private final ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
+    // List of provinces for combobox
+    private final ObservableList<String> provinces = FXCollections.observableArrayList("Dolnoslaskie",
+            "Kujawsko-pomorskie", "Lubelskie", "Lubuskie", "Lodzkie", "Malopolskie", "Mazowieckie",
+            "Opolskie", "Podkarpackie", "Podlaskie", "Pomorskie", "Slaskie", "Swietokrzyskie",
+            "Warminsko-mazurskie", "Wielkopolskie", "Zachodniopomorskie");
+    private final String[] inputs = new String[5];
+    private final Preference pref = new Preference();
+    private final FontAwesomeIconView alertIcon = new FontAwesomeIconView();
     @FXML
     private AnchorPane settingsPane;
-
     @FXML
     private ToggleButton appSettings;
-
     @FXML
     private ToggleButton userSettings;
-
     @FXML
     private AnchorPane appSettingsPane;
-
     @FXML
     private AnchorPane userInformationPane;
-
     @FXML
     private ComboBox<String> pickColor;
-
     @FXML
     private ComboBox<String> pickLanguage;
-
     @FXML
     private CustomTextField settStreet;
-
     @FXML
     private CustomTextField settCity;
-
     @FXML
     private CustomTextField settNumber;
-
     @FXML
     private CustomPasswordField settOldPassword;
-
     @FXML
     private CustomPasswordField settPassword;
-
     @FXML
     private CustomPasswordField settRepeatPassword;
-
     @FXML
     private ComboBox<String> settProvince;
-
     @FXML
     private Button saveInformation;
-
     @FXML
     private Pane alertPane;
-
     @FXML
     private CustomPasswordField deletePassword;
-
-    // List of colors for combobox
-    private ObservableList<String> colors = FXCollections.observableArrayList(App.getLanguageProperties("colorOrange"), App.getLanguageProperties("colorRed"),
-            App.getLanguageProperties("colorWhite"));
-
-
-
-    // List of languages for combobox
-    private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
-
-    // List of provinces for combobox
-    private ObservableList<String> provinces = FXCollections.observableArrayList( "Dolnoslaskie",
-            "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Lodzkie",  "Malopolskie",  "Mazowieckie",
-            "Opolskie",  "Podkarpackie",  "Podlaskie",  "Pomorskie",  "Slaskie",  "Swietokrzyskie",
-            "Warminsko-mazurskie",  "Wielkopolskie",  "Zachodniopomorskie");
-
-    private String[] inputs = new String[5];
-
-    private Preference pref = new Preference();
-
-    private FontAwesomeIconView alertIcon = new FontAwesomeIconView();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -129,22 +109,19 @@ public class ClientSettings implements Initializable {
 
         // Populating language combobox
         pickLanguage.setItems(languages);
-        if(pref.readPreference("language").equals("english")) {
+        if (Preference.readPreference("language").equals("english")) {
             pickLanguage.setValue(languages.get(1));
-        }
-        else {
+        } else {
             pickLanguage.setValue(languages.get(0));
         }
 
         // Populating color combobox
         pickColor.setItems(colors);
-        if(pref.readPreference("color").equals("orange")) {
+        if (Preference.readPreference("color").equals("orange")) {
             pickColor.setValue(colors.get(0));
-        }
-        else if(Preference.readPreference("color").equals("red")) {
+        } else if (Preference.readPreference("color").equals("red")) {
             pickColor.setValue(colors.get(1));
-        }
-        else {
+        } else {
             pickColor.setValue(colors.get(2));
         }
 
@@ -170,7 +147,7 @@ public class ClientSettings implements Initializable {
         alertPane.setTranslateY(-500);
 
         // Checking errors in inputs
-        ErrorHandler.checkInputs(settCity,"[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}",
+        ErrorHandler.checkInputs(settCity, "[A-Za-z]{2,40}\\s?\\-?\\s?[A-Za-z]{0,40}\\s?\\-?\\s?[A-Za-z]{0,40}",
                 App.getLanguageProperties("clientCityPrompt"));
 
         ErrorHandler.checkInputs(settStreet,
@@ -178,7 +155,7 @@ public class ClientSettings implements Initializable {
                         "[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}",
                 App.getLanguageProperties("clientStreetPrompt"));
 
-        ErrorHandler.checkPasswords(settPassword,settRepeatPassword,
+        ErrorHandler.checkPasswords(settPassword, settRepeatPassword,
                 "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$",
                 App.getLanguageProperties("clientPasswordPrompt"),
                 App.getLanguageProperties("clientSamePrompt"));
@@ -191,13 +168,13 @@ public class ClientSettings implements Initializable {
     // Method that handle changing pane to 'AppSettings'
     @FXML
     void changeAppSettings(ActionEvent event) throws IOException {
-        Animations.changePane(userInformationPane,appSettingsPane,-800,0.5,appSettings,userSettings);
+        Animations.changePane(userInformationPane, appSettingsPane, -800, 0.5, appSettings, userSettings);
     }
 
     // Method that handle changing pane to 'UserSettings'
     @FXML
     void changeUserSettings(ActionEvent event) throws IOException {
-        Animations.changePane(appSettingsPane,userInformationPane,+800,0.5,userSettings,appSettings);
+        Animations.changePane(appSettingsPane, userInformationPane, +800, 0.5, userSettings, appSettings);
     }
 
     // Method that handle changing main theme in application
@@ -208,13 +185,11 @@ public class ClientSettings implements Initializable {
             pref.addPreference("color", "orange");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #ffa500;" +
                     "-fx-second-color: #000000;");
-        }
-        else if (pickColor.getValue().equals(App.getLanguageProperties("colorRed"))) {
+        } else if (pickColor.getValue().equals(App.getLanguageProperties("colorRed"))) {
             pref.addPreference("color", "red");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #d82020;" +
                     "-fx-second-color: #ffffff;");
-        }
-        else if (pickColor.getValue().equals(App.getLanguageProperties("colorWhite"))) {
+        } else if (pickColor.getValue().equals(App.getLanguageProperties("colorWhite"))) {
             pref.addPreference("color", "white");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #FFFFFF;" +
                     "-fx-second-color: #000000;");
@@ -225,11 +200,10 @@ public class ClientSettings implements Initializable {
     // Method that handle changing language in application
     @FXML
     void changeLanguage(ActionEvent event) {
-        if(pickLanguage.getValue().equals("English")) {
-            pref.addPreference("language","english");
-        }
-        else {
-            pref.addPreference("language","polski");
+        if (pickLanguage.getValue().equals("English")) {
+            pref.addPreference("language", "english");
+        } else {
+            pref.addPreference("language", "polski");
         }
         SceneManager.renderScene("client");
     }
@@ -239,7 +213,7 @@ public class ClientSettings implements Initializable {
     void updateInformation(ActionEvent event) {
         settOldPassword.getRight().setVisible(false);
         // Checking if error icon is visible
-        if(!settStreet.getRight().isVisible() && !settCity.getRight().isVisible()
+        if (!settStreet.getRight().isVisible() && !settCity.getRight().isVisible()
                 && !settNumber.getRight().isVisible()) {
 
             // Checking if current text inside inputs are different from the one
@@ -250,7 +224,7 @@ public class ClientSettings implements Initializable {
 
                 // Updating information
                 UserInfosDAO.updateUserSettings(settProvince.getSelectionModel().getSelectedItem(),
-                        settCity.getText(), settNumber.getText(),settStreet.getText(), Login.getUserID());
+                        settCity.getText(), settNumber.getText(), settStreet.getText(), Login.getUserID());
 
                 // Assigment of new values that are inside database after query
                 inputs[0] = settStreet.getText();
@@ -262,25 +236,24 @@ public class ClientSettings implements Initializable {
                         "CHECK",
                         App.getLanguageProperties("successfullyChanged"));
             }
-        }
-        else {
-            Alerts.createAlert(settingsPane,saveInformation,
+        } else {
+            Alerts.createAlert(settingsPane, saveInformation,
                     "WARNING",
                     App.getLanguageProperties("correctOrCompleteFields"));
         }
 
         // Checking if passwords were provided, changed and if they contains any error
-        if(!settOldPassword.getText().isEmpty()) {
+        if (!settOldPassword.getText().isEmpty()) {
             if (!settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()
                     && Encryption.encrypt(settOldPassword.getText()).equals(UsersDAO.readPassword(Login.getUserID()))) {
-                if(!settPassword.getText().isEmpty()) {
+                if (!settPassword.getText().isEmpty()) {
                     // Updating passwords
-                    UsersDAO.updatePassword(Login.getUserID(),settPassword.getText());
+                    UsersDAO.updatePassword(Login.getUserID(), settPassword.getText());
 
                     Alerts.createAlert(settingsPane, saveInformation,
                             "CHECK",
                             App.getLanguageProperties("successfullyChanged"));
-                } else{
+                } else {
                     Alerts.createAlert(settingsPane, saveInformation,
                             "WARNING",
                             App.getLanguageProperties("providePasswords"));
@@ -302,7 +275,7 @@ public class ClientSettings implements Initializable {
     // Method that handle deleting account
     @FXML
     public void deleteAccount(ActionEvent actionEvent) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         settingsPane.setDisable(true);
@@ -313,11 +286,10 @@ public class ClientSettings implements Initializable {
     @FXML
     public void actionYes(ActionEvent actionEvent) {
         // If password is correct then account is being deleted
-        if(UsersDAO.checkIfPasswordCorrect(deletePassword.getText(),Login.getUserID())) {
+        if (UsersDAO.checkIfPasswordCorrect(deletePassword.getText(), Login.getUserID())) {
             UsersDAO.deactivateAccount(Login.getUserID());
             SceneManager.renderScene("login");
-        }
-        else {
+        } else {
             deletePassword.setText(null);
             deletePassword.setPromptText(App.getLanguageProperties("incorrectPassword"));
         }
@@ -327,7 +299,7 @@ public class ClientSettings implements Initializable {
     // Method that handle 'no' button inside delete account popup
     @FXML
     public void actionNo(ActionEvent actionEvent) {
-        Animations.moveByY(alertPane,-500,0.3);
+        Animations.moveByY(alertPane, -500, 0.3);
         settingsPane.setDisable(false);
         settingsPane.setEffect(null);
     }

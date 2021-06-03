@@ -9,8 +9,8 @@ import org.junit.jupiter.api.*;
 
 import java.util.List;
 
+import static main.java.dao.PackageTypeDAO.getPackageTypes;
 import static main.java.dao.UsersDAO.*;
-import static main.java.dao.PackageTypeDAO.*;
 
 public class AdminTests {
 
@@ -25,7 +25,7 @@ public class AdminTests {
 
     @AfterAll
     public static void tearDown() {
-        if(sessionFactory != null){
+        if (sessionFactory != null) {
             sessionFactory.close();
             System.out.println("Zniszczono sessionFactory");
         }
@@ -72,7 +72,7 @@ public class AdminTests {
         List<PackageType> list = getPackageTypes();
 
         for (int i = 0; i < list.size(); i++) {
-            if (!list.get(i).getSize().matches("[0-9]{1,3}[x][0-9]{1,3}[x][0-9]{1,3}")){
+            if (!list.get(i).getSize().matches("[0-9]{1,3}[x][0-9]{1,3}[x][0-9]{1,3}")) {
                 counter++;
             }
 
@@ -89,7 +89,7 @@ public class AdminTests {
         List<Users> list = getUsers();
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getRole().equals("Kurier") || list.get(i).getRole().equals("Menadzer")){
+            if (list.get(i).getRole().equals("Kurier") || list.get(i).getRole().equals("Menadzer")) {
                 if (list.get(i).getAreaId() == null) {
                     counter++;
                 }
@@ -100,9 +100,6 @@ public class AdminTests {
     }
 
 
-
-
-
     @BeforeEach
     public void openSession() {
         session = sessionFactory.openSession();
@@ -111,8 +108,7 @@ public class AdminTests {
 
     @AfterEach
     public void closeSession() {
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
             System.out.println("Zamknięto sesje\n");
         }

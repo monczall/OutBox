@@ -4,22 +4,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import main.java.App;
-import main.java.SceneManager;
 import main.java.dao.PackageHistoryDAO;
-import main.java.dao.PackagesDAO;
-import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.PackageStatus;
 import main.java.entity.UserInfos;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -105,14 +100,13 @@ public class ExpendableRow implements Initializable {
 
     /**
      * method that changes status of package in courier panel after each change in combo box
-     *
      */
     @FXML
     void updateStatus(ActionEvent event) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        if(changeStatus.getSelectionModel().getSelectedIndex() != -1){
-            if (!changeStatus.getValue().toString().equals(status)){
+        if (changeStatus.getSelectionModel().getSelectedIndex() != -1) {
+            if (!changeStatus.getValue().toString().equals(status)) {
                 PackageHistoryDAO.updateStatus(ManagerPackages.getPackageId(), changeStatus.getValue().toString(),
                         Timestamp.valueOf(dateTimeFormatter.format(now)));
             }

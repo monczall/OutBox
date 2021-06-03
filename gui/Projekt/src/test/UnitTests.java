@@ -1,7 +1,6 @@
 package test;
 
 import main.java.dao.HibernateUtil;
-import main.java.dao.PackageHistoryDAO;
 import main.java.entity.PackageHistory;
 import main.java.entity.Users;
 import org.hibernate.Session;
@@ -102,12 +101,11 @@ public class UnitTests {
 
     @AfterEach
     public void closeSession() {
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
             System.out.println("Zamknięto sesje");
         }
     }
 
 
-    }
+}

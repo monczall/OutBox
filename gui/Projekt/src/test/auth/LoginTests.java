@@ -2,7 +2,8 @@ package test.auth;
 
 import main.java.controllers.auth.Encryption;
 import main.java.controllers.auth.Login;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
 public class LoginTests extends Login {
@@ -17,7 +18,7 @@ public class LoginTests extends Login {
     }
 
     @Test
-    public void shouldNotBeEmail(){
+    public void shouldNotBeEmail() {
         System.out.println("Test sprawdzający czy string jest emailem");
 
         String email = "email!gmail.com";
@@ -43,7 +44,7 @@ public class LoginTests extends Login {
         String password = "Strong_Password2132!";
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> isEmpty(email, password)
+                () -> isEmpty(email, password)
         );
     }
 
@@ -55,7 +56,7 @@ public class LoginTests extends Login {
         String password = "";
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> isEmpty(email, password)
+                () -> isEmpty(email, password)
         );
     }
 
@@ -65,7 +66,7 @@ public class LoginTests extends Login {
 
         setUserID(1);
 
-        Assertions.assertEquals(1,getUserID());
+        Assertions.assertEquals(1, getUserID());
     }
 
     @Test
@@ -75,7 +76,7 @@ public class LoginTests extends Login {
         setUserID(1);
 
         Assertions.assertThrows(AssertionFailedError.class,
-                ()-> Assertions.assertEquals(2,getUserID()));
+                () -> Assertions.assertEquals(2, getUserID()));
     }
 
     @Test
@@ -84,7 +85,7 @@ public class LoginTests extends Login {
 
         setUserInfoID(1);
 
-        Assertions.assertEquals(1,getUserInfoID());
+        Assertions.assertEquals(1, getUserInfoID());
     }
 
     @Test
@@ -94,7 +95,7 @@ public class LoginTests extends Login {
         setUserInfoID(1);
 
         Assertions.assertThrows(AssertionFailedError.class,
-                ()-> Assertions.assertEquals(2,getUserInfoID()));
+                () -> Assertions.assertEquals(2, getUserInfoID()));
     }
 
     @Test
@@ -127,7 +128,7 @@ public class LoginTests extends Login {
         String passwordAfterEncryption = Encryption.encrypt(password);
 
         Assertions.assertThrows(AssertionFailedError.class,
-                ()-> Assertions.assertEquals("WRONG_HASH",
+                () -> Assertions.assertEquals("WRONG_HASH",
                         passwordAfterEncryption));
     }
 }

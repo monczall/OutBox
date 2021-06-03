@@ -1,44 +1,38 @@
 package main.java.features;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-
-
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
-import com.sun.scenario.effect.ImageData;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Cell;
 import main.java.App;
 import main.java.dao.PackageTypeDAO;
 import main.java.dao.PackagesDAO;
-import main.java.entity.PackagesDTO;
 import main.java.entity.PdfAreaDTO;
 import main.java.entity.PdfDTO;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
+
 public class PdfGenerator {
 
-    private static Font subFont = new Font(Font.FontFamily.HELVETICA, 16,
+    private static final Font subFont = new Font(Font.FontFamily.HELVETICA, 16,
             Font.BOLD);
-    private static Font smallBold = new Font(Font.FontFamily.HELVETICA, 12,
+    private static final Font smallBold = new Font(Font.FontFamily.HELVETICA, 12,
             Font.BOLD);
 
     /**
      * Method that creating a PDF file
-     * @param start date
-     * @param end date
+     *
+     * @param start    date
+     * @param end      date
      * @param pathFile path and filename (extension set to pdf in AdminRaport.java)
-     * @throws IOException if doesn't find a path then throw IOException
+     * @throws IOException       if doesn't find a path then throw IOException
      * @throws DocumentException error while processing the document
      */
     public static void createPdf(Date start, Date end, String pathFile) throws IOException, DocumentException {
@@ -48,11 +42,24 @@ public class PdfGenerator {
     }
 
     /**
+     * Method that add empty line to pdf
+     *
+     * @param paragraph paragraph
+     * @param number    number of empty lines
+     */
+    private static void addEmptyLine(Paragraph paragraph, int number) {
+        for (int i = 0; i < number; i++) {
+            paragraph.add(new Paragraph(" "));
+        }
+    }
+
+    /**
      * Method that filling PDF file with data from base
-     * @param dest name file
+     *
+     * @param dest  name file
      * @param start date
-     * @param end date
-     * @throws IOException if doesn't find a path then throw IOException
+     * @param end   date
+     * @throws IOException       if doesn't find a path then throw IOException
      * @throws DocumentException error while processing the document
      */
     public void fillPdf(String dest, Date start, Date end) throws IOException, DocumentException {
@@ -81,7 +88,6 @@ public class PdfGenerator {
                 tableFont);
 
 
-
         PdfPCell cell = new PdfPCell(image);
         cell.setBorder(Rectangle.NO_BORDER);
         PdfPCell cell2 = new PdfPCell(paragraph);
@@ -96,7 +102,6 @@ public class PdfGenerator {
         document.add(mainTable);
 
 
-
         Paragraph empty = new Paragraph();
         addEmptyLine(empty, 1);
         document.add(empty);
@@ -109,8 +114,8 @@ public class PdfGenerator {
         int smallCounter = 0;
         int midCounter = 0;
         int bigCounter = 0;
-        for(int i = 0; i < packList.size(); i++) {
-            if (packList.get(i).getSize().equals("mala") ) {
+        for (int i = 0; i < packList.size(); i++) {
+            if (packList.get(i).getSize().equals("mala")) {
                 smallCounter++;
 
             }
@@ -126,7 +131,7 @@ public class PdfGenerator {
         Double midPrice = Double.valueOf(PackageTypeDAO.getPackageTypes().get(1).getPrice());
         Double bigPrice = Double.valueOf(PackageTypeDAO.getPackageTypes().get(2).getPrice());
 
-        Double packValue = smallCounter*smallPrice + midCounter*midPrice + bigCounter*bigPrice;
+        Double packValue = smallCounter * smallPrice + midCounter * midPrice + bigCounter * bigPrice;
 
         Paragraph value = new Paragraph(App.getLanguageProperties("valueOfPackages") + packValue + " zł", tableFont);
         document.add(value);
@@ -134,13 +139,13 @@ public class PdfGenerator {
         Paragraph number = new Paragraph(App.getLanguageProperties("numberOfPackages"), smallBold);
         document.add(number);
 
-        Paragraph small = new Paragraph(App.getLanguageProperties("small")+": " + smallCounter, tableFont);
+        Paragraph small = new Paragraph(App.getLanguageProperties("small") + ": " + smallCounter, tableFont);
         document.add(small);
 
-        Paragraph medium = new Paragraph(App.getLanguageProperties("medium")+": " + midCounter, tableFont);
+        Paragraph medium = new Paragraph(App.getLanguageProperties("medium") + ": " + midCounter, tableFont);
         document.add(medium);
 
-        Paragraph big = new Paragraph(App.getLanguageProperties("big")+": " + bigCounter, tableFont);
+        Paragraph big = new Paragraph(App.getLanguageProperties("big") + ": " + bigCounter, tableFont);
         document.add(big);
 
 
@@ -164,7 +169,6 @@ public class PdfGenerator {
         tableArea.getDefaultCell().setBackgroundColor(new GrayColor(0.75f));
 
 
-
         tableArea.setHeaderRows(1);
         List<PdfAreaDTO> listArea = PackageTypeDAO.readAreasForPdf(start, end);
 
@@ -181,9 +185,9 @@ public class PdfGenerator {
 
         tableArea.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
         for (int counter = 0; counter < listArea.size(); counter++) {
-            if (counter % 2 == 1){
+            if (counter % 2 == 1) {
                 tableArea.getDefaultCell().setBackgroundColor(GrayColor.GRAYWHITE);
-            }else{
+            } else {
                 tableArea.getDefaultCell().setBackgroundColor(GrayColor.LIGHT_GRAY);
             }
             tableArea.addCell(String.valueOf(counter + 1));
@@ -218,27 +222,24 @@ public class PdfGenerator {
         table.getDefaultCell().setBackgroundColor(new GrayColor(0.75f));
 
 
-
         table.setHeaderRows(1);
         ObservableList<PdfDTO> list = PackagesDAO.readPackagesForPdf(start, end);
         if (Preference.readPreference("language").equals("english")) {
             for (PdfDTO pdfDTO : list) {
                 if (pdfDTO.getSize().equals("mala")) {
                     pdfDTO.setSize("small");
-                }
-                else if (pdfDTO.getSize().equals("srednia")) {
+                } else if (pdfDTO.getSize().equals("srednia")) {
                     pdfDTO.setSize("medium");
-                }
-                else if (pdfDTO.getSize().equals("duza")) {
+                } else if (pdfDTO.getSize().equals("duza")) {
                     pdfDTO.setSize("big");
                 }
             }
         }
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
         for (int counter = 0; counter < list.size(); counter++) {
-            if (counter % 2 == 1){
+            if (counter % 2 == 1) {
                 table.getDefaultCell().setBackgroundColor(GrayColor.GRAYWHITE);
-            }else{
+            } else {
                 table.getDefaultCell().setBackgroundColor(GrayColor.LIGHT_GRAY);
             }
             table.addCell(String.valueOf(counter + 1));
@@ -255,25 +256,15 @@ public class PdfGenerator {
 
     /**
      * Method that create cell in table
+     *
      * @param text text
      * @param font font
      * @return
      */
-    private PdfPCell createCell(String text, Font font){
+    private PdfPCell createCell(String text, Font font) {
         PdfPCell cell = new PdfPCell(new Phrase(text, font));
         cell.setBackgroundColor(GrayColor.GRAYBLACK);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         return cell;
-    }
-
-    /**
-     * Method that add empty line to pdf
-     * @param paragraph paragraph
-     * @param number number of empty lines
-     */
-    private static void addEmptyLine(Paragraph paragraph, int number) {
-        for (int i = 0; i < number; i++) {
-            paragraph.add(new Paragraph(" "));
-        }
     }
 }

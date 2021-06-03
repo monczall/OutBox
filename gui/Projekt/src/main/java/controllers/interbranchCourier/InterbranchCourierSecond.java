@@ -106,6 +106,7 @@ public class InterbranchCourierSecond implements Initializable {
 
     /**
      * method that translates list of packages
+     *
      * @return translated list
      */
     private ObservableList<PackagesDTO> changeLanguage() {

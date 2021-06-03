@@ -7,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -33,7 +36,10 @@ import java.util.ResourceBundle;
 
 public class ClientTrackPackage implements Initializable {
 
-    public String arrayOfDescriptions[] = {
+    private static final Preference pref = new Preference();
+    private static ResourceBundle bundle;
+    private final List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));
+    public String[] arrayOfDescriptions = {
             App.getLanguageProperties("statusOne"),
             App.getLanguageProperties("statusTwo"),
             App.getLanguageProperties("statusThree"),
@@ -47,77 +53,137 @@ public class ClientTrackPackage implements Initializable {
             App.getLanguageProperties("statusEleven"),
             App.getLanguageProperties("statusTwelve"),
     };
-
     @FXML
     private AnchorPane trackPackagePane;
-
     @FXML
     private VBox packageLayout;
-
     @FXML
     private Button btnBack;
-
     @FXML
     private AnchorPane moreInformationPane;
-
     @FXML
     private VBox statusesVBox;
-
     @FXML
     private Pane informationAlert;
-
     @FXML
     private Text packageNumber;
-
     @FXML
     private Text senderName;
-
     @FXML
     private Text senderSurname;
-
     @FXML
     private Text senderTelephone;
-
     @FXML
     private Text senderStreet;
-
     @FXML
     private Text senderCity;
-
     @FXML
     private Text senderVoivodeship;
-
     @FXML
     private Text recipientName;
-
     @FXML
     private Text recipientSurname;
-
     @FXML
     private Text recipientTelephone;
-
     @FXML
     private Text recipientStreet;
-
     @FXML
     private Text recipientCity;
-
     @FXML
     private Text recipientVoivodeship;
-
     @FXML
     private Text timeOfDelivery;
-
     @FXML
     private ToggleButton toggleFromClient;
-
     @FXML
     private ToggleButton toggleToClient;
 
-    private List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
+    /**
+     * <p>
+     * Method returns a list of type PackageHistory
+     * with translated statuses
+     * </p>
+     *
+     * @param id user id
+     * @return list with translated statuses
+     */
+    public static List<PackageHistory> translateStatuses(int id) {
+        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(id);
 
-    private static Preference pref = new Preference();
-    private static ResourceBundle bundle;
+        PackageStatus[] status = PackageStatus.values();
+        if (Preference.readPreference("language").equals("english")) {
+            for (int i = 0; i < statuses.size(); i++) {
+                for (int j = 0; j < status.length; j++) {
+                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
+                        statuses.get(i).setStatus(status[j].engDisplayName());
+                    }
+                }
+            }
+        }
+
+        return statuses;
+    }
+
+    /**
+     * <p>
+     * Method returns list of type PackageDTO
+     * with translated most recent statuses
+     * </p>
+     *
+     * @param statuses most recent status
+     * @return list with translated most recent status
+     */
+    public static List<PackagesDTO> translateLastStatus(List<PackagesDTO> statuses) {
+        PackageStatus[] status = PackageStatus.values();
+
+        if (Preference.readPreference("language").equals("english")) {
+            for (int i = 0; i < statuses.size(); i++) {
+                for (int j = 0; j < status.length; j++) {
+                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
+                        statuses.get(i).setStatus(status[j].engDisplayName());
+                    }
+                }
+            }
+        }
+        return statuses;
+    }
+
+    /**
+     * <p>
+     * Method used to display all the statuses in order from the db by HQL query
+     * </p>
+     *
+     * @param userId    used to show packages that client registered
+     * @param userEmail used to show packages that are 'coming' to actual client
+     * @return filled List of type PopulatePackageItem it contains info about statuses
+     */
+    public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail) {
+
+        List<PackagesDTO> listOfPackages = translateLastStatus(PackagesDAO.readPackagesByID(userId, userEmail));
+
+        List<PopulatePackageItem> packageItems = new ArrayList<>();
+
+        for (int i = 0; i < listOfPackages.size(); i++) {
+
+            PopulatePackageItem populatePackageItem = new PopulatePackageItem();
+
+            populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
+            populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
+            populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
+
+            if (listOfPackages.get(i).getEmail().equals(Login.getUserEmail())) {
+                populatePackageItem.setType(App.getLanguageProperties("clientSender"));
+                populatePackageItem.setSender(listOfPackages.get(i).getName());
+            } else {
+                populatePackageItem.setType(App.getLanguageProperties("clientRecipient"));
+                populatePackageItem.setSender(listOfPackages.get(i).getRecipentName());
+            }
+
+            packageItems.add(populatePackageItem);
+        }
+
+        return packageItems;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -137,113 +203,56 @@ public class ClientTrackPackage implements Initializable {
 
     /**
      * <p>
-     *  Method returns a description depending on status
-     *  that is passed to the method.
+     * Method returns a description depending on status
+     * that is passed to the method.
      * </p>
+     *
      * @param currentStatus status of package
      * @return description of the newest status
      */
-    public String addDescription(String currentStatus){
-                if(currentStatus.equals("Zarejestrowana") || currentStatus.equals("Registered")) {
-                    return arrayOfDescriptions[0];
-                }
-                else if(currentStatus.equals("Odebrana Od Klienta") || currentStatus.equals("Received From Client")) {
-                    return arrayOfDescriptions[1];
-                }
-                else if(currentStatus.equals("W Transporcie") || currentStatus.equals("In Transport")) {
-                    return arrayOfDescriptions[2];
-                }
-                else if(currentStatus.equals("W Lokalnej Sortowni") || currentStatus.equals("In Local Hub")) {
-                    return arrayOfDescriptions[3];
-                }
-                else if(currentStatus.equals("W Glownej Sortowni") || currentStatus.equals("In Main Hub")) {
-                    return arrayOfDescriptions[4];
-                }
-                else if(currentStatus.equals("Przekazana Do Doreczenia") || currentStatus.equals("Handed Over For Delivery")) {
-                    return arrayOfDescriptions[5];
-                }
-                else if(currentStatus.equals("Dostarczona") || currentStatus.equals("Delivered")) {
-                    return arrayOfDescriptions[6];
-                }
-                else if(currentStatus.equals("Nieobecnosc Odbiorcy") || currentStatus.equals("Recipient's Absence")) {
-                    return arrayOfDescriptions[7];
-                }
-                else if(currentStatus.equals("Ponowna Proba Doreczenia") || currentStatus.equals("Retry Delivery")) {
-                    return arrayOfDescriptions[8];
-                }
-                else if(currentStatus.equals("Do Odebrania W Odziale") || currentStatus.equals("To Be Picked In Hub")) {
-                    return arrayOfDescriptions[9];
-                }
-                else if(currentStatus.equals("Zwrot Do Nadawcy") || currentStatus.equals("Returning To The Sender")) {
-                    return arrayOfDescriptions[10];
-                }
-                else {
-                    return arrayOfDescriptions[11];
-                }
-    }
-
-    /**
-     * <p>
-     *  Method returns a list of type PackageHistory
-     *  with translated statuses
-     * </p>
-     * @param id user id
-     * @return  list with translated statuses
-     */
-    public static List<PackageHistory> translateStatuses(int id){
-        List<PackageHistory> statuses = PackageHistoryDAO.getDateAndStatusById(id);
-
-        PackageStatus[] status = PackageStatus.values();
-        if (Preference.readPreference("language").equals("english")) {
-            for (int i = 0; i < statuses.size(); i++) {
-                for (int j = 0; j < status.length; j++) {
-                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
-                        statuses.get(i).setStatus(status[j].engDisplayName());
-                    }
-                }
-            }
+    public String addDescription(String currentStatus) {
+        if (currentStatus.equals("Zarejestrowana") || currentStatus.equals("Registered")) {
+            return arrayOfDescriptions[0];
+        } else if (currentStatus.equals("Odebrana Od Klienta") || currentStatus.equals("Received From Client")) {
+            return arrayOfDescriptions[1];
+        } else if (currentStatus.equals("W Transporcie") || currentStatus.equals("In Transport")) {
+            return arrayOfDescriptions[2];
+        } else if (currentStatus.equals("W Lokalnej Sortowni") || currentStatus.equals("In Local Hub")) {
+            return arrayOfDescriptions[3];
+        } else if (currentStatus.equals("W Glownej Sortowni") || currentStatus.equals("In Main Hub")) {
+            return arrayOfDescriptions[4];
+        } else if (currentStatus.equals("Przekazana Do Doreczenia") || currentStatus.equals("Handed Over For Delivery")) {
+            return arrayOfDescriptions[5];
+        } else if (currentStatus.equals("Dostarczona") || currentStatus.equals("Delivered")) {
+            return arrayOfDescriptions[6];
+        } else if (currentStatus.equals("Nieobecnosc Odbiorcy") || currentStatus.equals("Recipient's Absence")) {
+            return arrayOfDescriptions[7];
+        } else if (currentStatus.equals("Ponowna Proba Doreczenia") || currentStatus.equals("Retry Delivery")) {
+            return arrayOfDescriptions[8];
+        } else if (currentStatus.equals("Do Odebrania W Odziale") || currentStatus.equals("To Be Picked In Hub")) {
+            return arrayOfDescriptions[9];
+        } else if (currentStatus.equals("Zwrot Do Nadawcy") || currentStatus.equals("Returning To The Sender")) {
+            return arrayOfDescriptions[10];
+        } else {
+            return arrayOfDescriptions[11];
         }
-
-        return statuses;
     }
 
     /**
      * <p>
-     *  Method returns list of type PackageDTO
-     *  with translated most recent statuses
+     * Method that always create status (small gray square)
+     * HBox is created and splited into few Panes (dataPane, squarePane, grayPane, statusPane)
+     * dataPane contains a label with DATE (that is one of the arguments)
+     * squarePane contains a grayPane (is has css that make this pane gray)
+     * statusPane that contains status name (second argument)
+     * At the end everything is added into Vbox
      * </p>
-     * @param statuses most recent status
-     * @return list with translated most recent status
-     */
-    public static List<PackagesDTO> translateLastStatus(List<PackagesDTO> statuses){
-        PackageStatus[] status = PackageStatus.values();
-
-        if (Preference.readPreference("language").equals("english")) {
-            for (int i = 0; i < statuses.size(); i++) {
-                for (int j = 0; j < status.length; j++) {
-                    if (statuses.get(i).getStatus().equals(status[j].displayName())) {
-                        statuses.get(i).setStatus(status[j].engDisplayName());
-                    }
-                }
-            }
-        }
-        return statuses;
-    }
-
-    /**
-     * <p>
-     *     Method that always create status (small gray square)
-     *     HBox is created and splited into few Panes (dataPane, squarePane, grayPane, statusPane)
-     *     dataPane contains a label with DATE (that is one of the arguments)
-     *     squarePane contains a grayPane (is has css that make this pane gray)
-     *     statusPane that contains status name (second argument)
-     *     At the end everything is added into Vbox
-     * </p>
-     * @param date date of a status
-     * @param status name of status
+     *
+     * @param date        date of a status
+     * @param status      name of status
      * @param createPlace where status will be created
      */
-    public void createStatus(String date, String status, VBox createPlace){
+    public void createStatus(String date, String status, VBox createPlace) {
 
         HBox statusHBox = new HBox();
 
@@ -281,22 +290,23 @@ public class ClientTrackPackage implements Initializable {
         statusHBox.getChildren().add(squarePane);
         statusHBox.getChildren().add(statusPane);
 
-        createPlace.getChildren().add(0,statusHBox);
+        createPlace.getChildren().add(0, statusHBox);
     }
 
     /**
      * <p>
-     *     Method that always create a small gray square it indicate a progress step
-     *     HBox is created and splited into three Panes (emptyPane, squarePane, grayPane)
-     *     emptyPane it is just a empty pane that helps to arrane HBox
-     *     squarePane contains a grayPane (is has css that make this pane gray)
-     *     gray that contains status name (second argument)
+     * Method that always create a small gray square it indicate a progress step
+     * HBox is created and splited into three Panes (emptyPane, squarePane, grayPane)
+     * emptyPane it is just a empty pane that helps to arrane HBox
+     * squarePane contains a grayPane (is has css that make this pane gray)
+     * gray that contains status name (second argument)
      * </p>
-     * @param steps how much steps need to be created
+     *
+     * @param steps       how much steps need to be created
      * @param createPlace where step is going to be crated
      */
-    public void createStep(int steps, VBox createPlace){
-        for(int i = 0 ; i < steps; i ++) {
+    public void createStep(int steps, VBox createPlace) {
+        for (int i = 0; i < steps; i++) {
             HBox stepBox = new HBox();
 
             Pane emptyPane = new Pane();
@@ -317,26 +327,27 @@ public class ClientTrackPackage implements Initializable {
             stepBox.getChildren().add(emptyPane);
             stepBox.getChildren().add(squarePane);
 
-            createPlace.getChildren().add(0,stepBox);
+            createPlace.getChildren().add(0, stepBox);
         }
     }
 
     /**
      * <p>
-     *     Method that always create status (small gray square)
-     *     HBox is created and splited into few Panes (dataPane, squarePane, grayPane, currentPane)
-     *     dataPane contains a label with DATE (that is one of the arguments)
-     *     squarePane contains a grayPane (is has css that make this pane gray)
-     *     currentPane is the biggest square that indicates that this is current status
-     *     statusPane that contains status name (second argument)
-     *     At the end everything is added into Vbox
+     * Method that always create status (small gray square)
+     * HBox is created and splited into few Panes (dataPane, squarePane, grayPane, currentPane)
+     * dataPane contains a label with DATE (that is one of the arguments)
+     * squarePane contains a grayPane (is has css that make this pane gray)
+     * currentPane is the biggest square that indicates that this is current status
+     * statusPane that contains status name (second argument)
+     * At the end everything is added into Vbox
      * </p>
-     * @param date date of a status
-     * @param status name of status
-     * @param desc description of current status (the newest in terms of date)
+     *
+     * @param date        date of a status
+     * @param status      name of status
+     * @param desc        description of current status (the newest in terms of date)
      * @param createPlace where status will be created
      */
-    public void createCurrentStatus(String date, String status, String desc, VBox createPlace){
+    public void createCurrentStatus(String date, String status, String desc, VBox createPlace) {
 
         HBox statusHBox = new HBox();
 
@@ -384,59 +395,22 @@ public class ClientTrackPackage implements Initializable {
         statusHBox.getChildren().add(squarePane);
         statusHBox.getChildren().add(statusPane);
 
-        createPlace.getChildren().add(0,statusHBox);
-    }
-
-    /**
-     * <p>
-     *  Method used to display all the statuses in order from the db by HQL query
-     * </p>
-     * @param userId used to show packages that client registered
-     * @param userEmail used to show packages that are 'coming' to actual client
-     * @return filled List of type PopulatePackageItem it contains info about statuses
-     */
-    public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
-
-        List<PackagesDTO> listOfPackages =  translateLastStatus(PackagesDAO.readPackagesByID(userId, userEmail));
-
-        List<PopulatePackageItem> packageItems = new ArrayList<>();
-
-        for(int i = 0; i < listOfPackages.size(); i++){
-
-            PopulatePackageItem populatePackageItem = new PopulatePackageItem();
-
-            populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
-            populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
-            populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
-
-            if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail())) {
-                populatePackageItem.setType(App.getLanguageProperties("clientSender"));
-                populatePackageItem.setSender(listOfPackages.get(i).getName());
-            }
-            else {
-                populatePackageItem.setType(App.getLanguageProperties("clientRecipient"));
-                populatePackageItem.setSender(listOfPackages.get(i).getRecipentName());
-            }
-
-            packageItems.add(populatePackageItem);
-        }
-
-        return packageItems;
+        createPlace.getChildren().add(0, statusHBox);
     }
 
     // Method that leads to list of all active packages
     @FXML
     void backToTrackPackage(ActionEvent event) throws IOException {
-        Animations.fadeAway(btnBack,0.2,1,0,false);
-        Animations.fadeAway(toggleFromClient,0.2,0,1,true);
-        Animations.fadeAway(toggleToClient,0.2,0,1,true);
-        Animations.changePane(moreInformationPane,trackPackagePane,+850,0.5);
+        Animations.fadeAway(btnBack, 0.2, 1, 0, false);
+        Animations.fadeAway(toggleFromClient, 0.2, 0, 1, true);
+        Animations.fadeAway(toggleToClient, 0.2, 0, 1, true);
+        Animations.changePane(moreInformationPane, trackPackagePane, +850, 0.5);
     }
 
     // Method handle event on icon that is closing alert
     @FXML
     void closeInfoAlert(javafx.scene.input.MouseEvent mouseEvent) {
-        Animations.moveByY(informationAlert,-850,0.5);
+        Animations.moveByY(informationAlert, -850, 0.5);
     }
 
     // Method handles showing only packages that client registered
@@ -446,21 +420,19 @@ public class ClientTrackPackage implements Initializable {
 
         /* If both buttons are not selected then VBox is
          cleared (and shows nothing)*/
-        if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
+        if (!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
-        }
-        else if(!toggleFromClient.isSelected() && toggleToClient.isSelected()) {
+        } else if (!toggleFromClient.isSelected() && toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
-            for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
+            for (PopulatePackageItem ppI : packageFirst) {
+                if (ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
                     list.add(ppI);
                 }
             }
             loadPackages(list);
-        }
-        else {
-            for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
+        } else {
+            for (PopulatePackageItem ppI : packageFirst) {
+                if (ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
                     list.add(ppI);
                 }
             }
@@ -475,21 +447,19 @@ public class ClientTrackPackage implements Initializable {
 
         /* If both buttons are not selected then VBox is
          cleared (and shows nothing)*/
-        if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
+        if (!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
-        }
-        else if(!toggleToClient.isSelected() && toggleFromClient.isSelected()) {
+        } else if (!toggleToClient.isSelected() && toggleFromClient.isSelected()) {
             packageLayout.getChildren().clear();
-            for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
+            for (PopulatePackageItem ppI : packageFirst) {
+                if (ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
                     list.add(ppI);
                 }
             }
             loadPackages(list);
-        }
-        else {
-            for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
+        } else {
+            for (PopulatePackageItem ppI : packageFirst) {
+                if (ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
                     list.add(ppI);
                 }
             }
@@ -503,14 +473,15 @@ public class ClientTrackPackage implements Initializable {
      * Number of panes depends on size of the List
      * It takes List with type of PopulatePackageItem object
      * </p>
+     *
      * @param list list of information needed to generate blocks
      */
-    private void loadPackages(List<PopulatePackageItem> list){
+    private void loadPackages(List<PopulatePackageItem> list) {
 
-        for(int i=0; i<list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
 
-            if(pref.readPreference("language").equals("english"))
+            if (Preference.readPreference("language").equals("english"))
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
             else
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
@@ -524,7 +495,7 @@ public class ClientTrackPackage implements Initializable {
 
                 packageItem.setText(list.get(i).getType());
 
-                pane.setPadding(new Insets(70,0,100,70));       // Adjusting padding of pane
+                pane.setPadding(new Insets(70, 0, 100, 70));       // Adjusting padding of pane
 
                 Button showMore = new Button(App.getLanguageProperties("packageMore"));
 
@@ -547,7 +518,7 @@ public class ClientTrackPackage implements Initializable {
                     @Override
                     public void handle(ActionEvent event) {
                         statusesVBox.getChildren().clear();
-                        Animations.changePane(trackPackagePane,moreInformationPane,-850,0.5);
+                        Animations.changePane(trackPackagePane, moreInformationPane, -850, 0.5);
 
                         btnBack.setVisible(true);
                         btnBack.setOpacity(1);
@@ -556,31 +527,30 @@ public class ClientTrackPackage implements Initializable {
                         List<PackageHistory> statuses = translateStatuses(packageItem.getId());
 
                         // Creating statuses depending on database information
-                        for(int i = 0; i < statuses.size(); i++) {
+                        for (int i = 0; i < statuses.size(); i++) {
 
-                            if(i == statuses.size()-1) {
-                                if(i != 0){
+                            if (i == statuses.size() - 1) {
+                                if (i != 0) {
                                     createStep(4, statusesVBox);
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(
                                         statuses.get(i).getDate());
 
-                                createCurrentStatus(date,statuses.get(i).getStatus(),
-                                        addDescription(statuses.get(i).getStatus()),statusesVBox);
-                            }
-                            else {
-                                if(i != 0) {
+                                createCurrentStatus(date, statuses.get(i).getStatus(),
+                                        addDescription(statuses.get(i).getStatus()), statusesVBox);
+                            } else {
+                                if (i != 0) {
                                     createStep(2, statusesVBox);
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                createStatus(date,statuses.get(i).getStatus(), statusesVBox);
+                                createStatus(date, statuses.get(i).getStatus(), statusesVBox);
                             }
                         }
 
-                        Animations.fadeAway(toggleFromClient,0.2,1,0,false);
-                        Animations.fadeAway(toggleToClient,0.2,1,0,false);
+                        Animations.fadeAway(toggleFromClient, 0.2, 1, 0, false);
+                        Animations.fadeAway(toggleToClient, 0.2, 1, 0, false);
                     }
                 });
 
@@ -626,12 +596,12 @@ public class ClientTrackPackage implements Initializable {
 
                         timeOfDelivery.setText(infoAboutPackage.get(0).getTimeOfPlannedDelivery());
 
-                        Animations.moveByY(informationAlert,+850,0.5);
+                        Animations.moveByY(informationAlert, +850, 0.5);
                     }
                 });
 
-                pane.getChildren().add(1,showMore);
-                pane.getChildren().add(2,fullInfo);
+                pane.getChildren().add(1, showMore);
+                pane.getChildren().add(2, fullInfo);
                 packageItem.setData(list.get(i));
                 packageLayout.getChildren().add(pane);
 

@@ -23,12 +23,13 @@ public class Animations {
      * the next argument is value of how much pixels will panes move before
      * their visibility is set to false, next argument is duration of animation (in seconds).
      * </p>
+     *
      * @param actualPane pane which is actually showed
-     * @param nextPane pane which will be moved
-     * @param value number of pixels
-     * @param duration seconds of animation
+     * @param nextPane   pane which will be moved
+     * @param value      number of pixels
+     * @param duration   seconds of animation
      */
-    public static void changePane(AnchorPane actualPane, AnchorPane nextPane, double value, double duration){
+    public static void changePane(AnchorPane actualPane, AnchorPane nextPane, double value, double duration) {
 
         actualPane.setDisable(true);    //Panes are disabled for time when animation is played (it stops user for clicking another button and starts animation over again
         nextPane.setDisable(true);      // which leads to unintended problems
@@ -68,14 +69,15 @@ public class Animations {
      * the next argument is value of how much pixels will panes move before their visibility is set to false, next argument is duration of animation (in seconds). The last two
      * arguments are ToggleButtons that are being disabled to not let te user click them multiple times
      * </p>
-     * @param actualPane pane which is actually showed
-     * @param nextPane pane which will be moved
-     * @param value number of pixels
-     * @param duration seconds of animation
+     *
+     * @param actualPane   pane which is actually showed
+     * @param nextPane     pane which will be moved
+     * @param value        number of pixels
+     * @param duration     seconds of animation
      * @param actualToggle button that caused the animation
-     * @param nextToggle next button
+     * @param nextToggle   next button
      */
-    public static void changePane(AnchorPane actualPane, AnchorPane nextPane, double value, double duration, ToggleButton actualToggle, ToggleButton nextToggle){
+    public static void changePane(AnchorPane actualPane, AnchorPane nextPane, double value, double duration, ToggleButton actualToggle, ToggleButton nextToggle) {
 
         actualToggle.setDisable(true);
         nextToggle.setDisable(true);
@@ -109,11 +111,12 @@ public class Animations {
 
     /**
      * <p>
-     *  Function that moves an item by value on x-axis (if value is negative then it moves to the left, otherwise to the right)
-     *  Function takes node (e.g AnchorPane, Circle), value (number of pixels) and duration (seconds - how long animation is going to last) arguments
+     * Function that moves an item by value on x-axis (if value is negative then it moves to the left, otherwise to the right)
+     * Function takes node (e.g AnchorPane, Circle), value (number of pixels) and duration (seconds - how long animation is going to last) arguments
      * </p>
-     * @param item node that will be moved
-     * @param value number of pixels
+     *
+     * @param item     node that will be moved
+     * @param value    number of pixels
      * @param duration seconds of animation
      */
     public static void moveByX(Node item, double value, double duration) {
@@ -127,8 +130,9 @@ public class Animations {
      * Function that moves an item by value on y-axis (if value is negative then it moves up , otherwise down)
      * Function takes node (e.g AnchorPane, Circle), value (number of pixels) and duration (seconds - how long animation is going to last) arguments
      * </p>
-     * @param item node that will be moved
-     * @param value number of pixels
+     *
+     * @param item     node that will be moved
+     * @param value    number of pixels
      * @param duration seconds of animation
      */
     public static void moveByY(Node item, double value, double duration) {
@@ -145,14 +149,15 @@ public class Animations {
      * It blocks button (causeOfAnim) so that prevent spamming button and
      * AnchorPane (parent) is used to create alert inside this AnchorPane.
      * </p>
-     * @param item pane that will show up
-     * @param value value of pixels in Y axis
-     * @param durationOfMove time of move (in seconds)
+     *
+     * @param item            pane that will show up
+     * @param value           value of pixels in Y axis
+     * @param durationOfMove  time of move (in seconds)
      * @param durationOfPause time of pause after move is completed (in seconds)
-     * @param causeOfAnim node that caused an animation
-     * @param parent AnchorPane in which alert will be created
+     * @param causeOfAnim     node that caused an animation
+     * @param parent          AnchorPane in which alert will be created
      */
-    public static void alertAnim(Pane item, double value, double durationOfMove, double durationOfPause, Node causeOfAnim, AnchorPane parent){
+    public static void alertAnim(Pane item, double value, double durationOfMove, double durationOfPause, Node causeOfAnim, AnchorPane parent) {
         causeOfAnim.setDisable(true);
         causeOfAnim.setOpacity(1);
         TranslateTransition translateStart = new TranslateTransition(Duration.seconds(durationOfMove), item);
@@ -160,10 +165,10 @@ public class Animations {
 
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(durationOfPause));
 
-        TranslateTransition translateBack = new TranslateTransition(Duration.seconds(durationOfMove),item);
+        TranslateTransition translateBack = new TranslateTransition(Duration.seconds(durationOfMove), item);
         translateBack.setByY(-value);
 
-        SequentialTransition sequentialTransition = new SequentialTransition(translateStart,pauseTransition,translateBack);
+        SequentialTransition sequentialTransition = new SequentialTransition(translateStart, pauseTransition, translateBack);
         sequentialTransition.play();
 
         sequentialTransition.setOnFinished(event -> {
@@ -174,20 +179,21 @@ public class Animations {
 
     /**
      * <p>
-     *  Method that fade away an item.
-     *  Method takes five arguments - node (e.g button), duration of fading in seconds
-     *  valueFrom - starting opacity and valueTo - opacity at the finish of animation.
-     *  visibility is set to either true or false depending on user input.
+     * Method that fade away an item.
+     * Method takes five arguments - node (e.g button), duration of fading in seconds
+     * valueFrom - starting opacity and valueTo - opacity at the finish of animation.
+     * visibility is set to either true or false depending on user input.
      * </p>
-     * @param item that will be
-     * @param duration seconds of animation
-     * @param valueFrom starting opacity
-     * @param valueTo opacity at the finish of animation
+     *
+     * @param item       that will be
+     * @param duration   seconds of animation
+     * @param valueFrom  starting opacity
+     * @param valueTo    opacity at the finish of animation
      * @param visibility boolean value that set visibility of button at the end of animation
      */
-    public static void fadeAway(Node item, double duration,int valueFrom, int valueTo, boolean visibility){
+    public static void fadeAway(Node item, double duration, int valueFrom, int valueTo, boolean visibility) {
         item.setDisable(true);
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration),item);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(duration), item);
         fadeTransition.setFromValue(valueFrom);
         fadeTransition.setToValue(valueTo);
         fadeTransition.play();

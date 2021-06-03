@@ -1,189 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane prefHeight="667.0" prefWidth="1104.0" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.Manager">
-   <children>
-      <AnchorPane fx:id="window" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="1104.0" styleClass="mainBackground">
-         <children>
-            <AnchorPane fx:id="mainWindow2" prefHeight="667.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" />
-            <AnchorPane fx:id="mainWindow" layoutX="71.0" layoutY="15.0" prefHeight="645.0" prefWidth="1033.0" style="-fx-background-color: transparent;">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%managerCouriers">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="USERS" size="60" styleClass="blockIcon" />
-                     </graphic>
-                  </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="475.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%managerPackages">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="CUBES" size="60" styleClass="blockIcon" />
-                     </graphic>
-                  </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%managerReports">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="FILE_PDF_ALT" size="65" styleClass="blockIcon" />
-                     </graphic>
-                  </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="475.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%settings">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon" />
-                     </graphic>
-                  </Button>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="645.0" layoutY="350.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%logout">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="POWER_OFF" onMouseClicked="#logout" size="70" styleClass="blockIcon" />
-                     </graphic>
-                  </Button>
-                  <Text layoutX="110.0" layoutY="-41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="HOME" x="100.0" y="100.0" />
-                  <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="100.0" layoutY="-37.0" size="48" styleClass="blockIconTitle" x="49.0" y="100.0" />
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="645.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#openCharts" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock" text="%charts">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="PIE_CHART" size="60" styleClass="blockIcon" />
-                     </graphic>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <VBox fx:id="paneRight" layoutX="65.0" layoutY="-1.0" prefHeight="673.0" prefWidth="163.0" styleClass="sideBackground">
-               <children>
-                  <Pane prefHeight="71.0" prefWidth="156.0" />
-                  <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onMouseClicked="#openHome" prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" text="Home" wrapText="true">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%managerCouriers">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%managerPackages">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%managerReports">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#openCharts" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%charts">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button id="btnSettings" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%settings">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%logout">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Pane prefHeight="71.0" prefWidth="156.0" />
-               </children>
-            </VBox>
-            <AnchorPane layoutY="13.0" prefHeight="673.0" prefWidth="72.0" styleClass="sideBackground" AnchorPane.bottomAnchor="-5.0">
-               <children>
-                  <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40" styleClass="blockIcon" text="  " textOrigin="CENTER" wrappingWidth="74.28571319580078" />
-                  <Button layoutX="-2.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#openHome" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="HOME" onMouseClicked="#openHome" size="36" styleClass="blockIcon" text="" />
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button layoutX="-2.0" layoutY="139.0" mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="USERS" size="36" styleClass="blockIcon" />
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button layoutX="-2.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="CUBES" onMouseClicked="#openPackages" size="36" styleClass="blockIcon" />
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button layoutX="-2.0" layoutY="256.0" mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="FILE_PDF_ALT" size="36" styleClass="blockIcon" />
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button layoutX="-1.0" layoutY="371.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
-                     <graphic>
-                        <FontAwesomeIconView id="iconSettings" glyphName="COG" onMouseClicked="#openSettings" size="36" styleClass="blockIcon" text="" />
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button layoutY="428.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="POWER_OFF" onMouseClicked="#logout" size="36" styleClass="blockIcon" />
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button layoutY="313.0" mnemonicParsing="false" onMouseClicked="#openCharts" prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="PIE_CHART" size="36" styleClass="blockIcon" />
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1057.0" layoutY="9.0" mnemonicParsing="false" onAction="#exitApp" prefHeight="31.0" prefWidth="36.0" style="-fx-background-color: transparent;" styleClass="exitButton" textAlignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <Pane prefHeight="16.0" prefWidth="13.0" styleClass="exitPane">
-                     <children>
-                        <Line endX="-43.75" layoutX="65.0" layoutY="11.0" rotate="-45.0" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="exitIcon" />
-                        <Line endX="-43.75" layoutX="65.0" layoutY="11.0" rotate="45.0" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="exitIcon" />
-                     </children>
-                  </Pane>
-               </graphic>
-            </Button>
-            <Button alignment="BOTTOM_CENTER" contentDisplay="RIGHT" layoutX="1005.0" layoutY="1.0" mnemonicParsing="false" onAction="#minApp" prefHeight="38.0" prefWidth="40.0" style="-fx-background-color: transparent;" styleClass="minBtn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <Line endX="-43.75" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="minIcon" />
-               </graphic>
-            </Button>
-         </children>
-      </AnchorPane>
-      <Pane fx:id="alertPane" layoutX="430.0" layoutY="146.0" prefHeight="123.0" prefWidth="293.0" styleClass="alert">
-         <children>
-            <Button layoutX="154.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0" prefWidth="99.0" styleClass="btnNext" text="%no">
-               <graphic>
-                  <FontAwesomeIconView glyphName="CLOSE" size="23" styleClass="iconNext" />
-               </graphic>
-            </Button>
-            <Button layoutX="48.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0" prefWidth="99.0" styleClass="btnBack" text="%yes">
-               <graphic>
-                  <FontAwesomeIconView glyphName="CHECK" size="23" styleClass="backIcon" />
-               </graphic>
-            </Button>
-            <Label layoutX="33.0" layoutY="20.0" styleClass="alertText" text="%confirmLogout" />
-         </children>
-      </Pane>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="667.0" prefWidth="1104.0"
+            stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1"
+            fx:controller="main.java.controllers.manager.Manager">
+    <children>
+        <AnchorPane fx:id="window" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="1104.0"
+                    styleClass="mainBackground">
+            <children>
+                <AnchorPane fx:id="mainWindow2" prefHeight="667.0" prefWidth="1033.0" styleClass="mainBackground"
+                            stylesheets="@../../css/manager.css"/>
+                <AnchorPane fx:id="mainWindow" layoutX="71.0" layoutY="15.0" prefHeight="645.0" prefWidth="1033.0"
+                            style="-fx-background-color: transparent;">
+                    <children>
+                        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="199.0"
+                                mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="123.0"
+                                prefWidth="150.0" styleClass="homeBlock" text="%managerCouriers">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="USERS" size="60" styleClass="blockIcon"/>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="475.0" layoutY="199.0"
+                                mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="123.0"
+                                prefWidth="150.0" styleClass="homeBlock" text="%managerPackages">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="CUBES" size="60" styleClass="blockIcon"/>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="350.0"
+                                mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="123.0"
+                                prefWidth="150.0" styleClass="homeBlock" text="%managerReports">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="FILE_PDF_ALT" size="65" styleClass="blockIcon"/>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="475.0" layoutY="350.0"
+                                mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="123.0"
+                                prefWidth="150.0" styleClass="homeBlock" text="%settings">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="COG" size="70" styleClass="blockIcon"/>
+                            </graphic>
+                        </Button>
+                        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="645.0" layoutY="350.0"
+                                mnemonicParsing="false" prefHeight="123.0" prefWidth="150.0" styleClass="homeBlock"
+                                text="%logout">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="POWER_OFF" onMouseClicked="#logout" size="70"
+                                                     styleClass="blockIcon"/>
+                            </graphic>
+                        </Button>
+                        <Text layoutX="110.0" layoutY="-41.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="textLabel" text="HOME" x="100.0" y="100.0"/>
+                        <FontAwesomeIconView fill="ORANGE" glyphName="HOME" layoutX="100.0" layoutY="-37.0" size="48"
+                                             styleClass="blockIconTitle" x="49.0" y="100.0"/>
+                        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="645.0" layoutY="199.0"
+                                mnemonicParsing="false" onMouseClicked="#openCharts" prefHeight="123.0"
+                                prefWidth="150.0" styleClass="homeBlock" text="%charts">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="PIE_CHART" size="60" styleClass="blockIcon"/>
+                            </graphic>
+                        </Button>
+                    </children>
+                </AnchorPane>
+                <VBox fx:id="paneRight" layoutX="65.0" layoutY="-1.0" prefHeight="673.0" prefWidth="163.0"
+                      styleClass="sideBackground">
+                    <children>
+                        <Pane prefHeight="71.0" prefWidth="156.0"/>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" onMouseClicked="#openHome"
+                                prefHeight="58.0" prefWidth="232.0" styleClass="sideButtons" text="Home"
+                                wrapText="true">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#openCouriers" prefHeight="58.0"
+                                prefWidth="200.0" styleClass="sideButtons" text="%managerCouriers">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#openPackages" prefHeight="58.0"
+                                prefWidth="200.0" styleClass="sideButtons" text="%managerPackages">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#openRaports" prefHeight="58.0"
+                                prefWidth="200.0" styleClass="sideButtons" text="%managerReports">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#openCharts" prefHeight="58.0" prefWidth="200.0"
+                                styleClass="sideButtons" text="%charts">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button id="btnSettings" mnemonicParsing="false" onMouseClicked="#openSettings"
+                                prefHeight="58.0" prefWidth="200.0" styleClass="sideButtons" text="%settings">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="58.0" prefWidth="200.0"
+                                styleClass="sideButtons" text="%logout">
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Pane prefHeight="71.0" prefWidth="156.0"/>
+                    </children>
+                </VBox>
+                <AnchorPane layoutY="13.0" prefHeight="673.0" prefWidth="72.0" styleClass="sideBackground"
+                            AnchorPane.bottomAnchor="-5.0">
+                    <children>
+                        <FontAwesomeIconView fx:id="hamburger" glyphName="BARS" layoutX="-3.0" layoutY="47.0" size="40"
+                                             styleClass="blockIcon" text="  " textOrigin="CENTER"
+                                             wrappingWidth="74.28571319580078"/>
+                        <Button layoutX="-2.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#openHome"
+                                prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="HOME" onMouseClicked="#openHome" size="36"
+                                                     styleClass="blockIcon" text=""/>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button layoutX="-2.0" layoutY="139.0" mnemonicParsing="false" onMouseClicked="#openCouriers"
+                                prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="USERS" size="36" styleClass="blockIcon"/>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button layoutX="-2.0" layoutY="197.0" mnemonicParsing="false" onMouseClicked="#openPackages"
+                                prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="CUBES" onMouseClicked="#openPackages" size="36"
+                                                     styleClass="blockIcon"/>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button layoutX="-2.0" layoutY="256.0" mnemonicParsing="false" onMouseClicked="#openRaports"
+                                prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="FILE_PDF_ALT" size="36" styleClass="blockIcon"/>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button layoutX="-1.0" layoutY="371.0" mnemonicParsing="false" onMouseClicked="#openSettings"
+                                prefHeight="41.0" prefWidth="74.0" styleClass="sideIcons">
+                            <graphic>
+                                <FontAwesomeIconView id="iconSettings" glyphName="COG" onMouseClicked="#openSettings"
+                                                     size="36" styleClass="blockIcon" text=""/>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button layoutY="428.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="41.0"
+                                prefWidth="74.0" styleClass="sideIcons">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="POWER_OFF" onMouseClicked="#logout" size="36"
+                                                     styleClass="blockIcon"/>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                        <Button layoutY="313.0" mnemonicParsing="false" onMouseClicked="#openCharts" prefHeight="41.0"
+                                prefWidth="74.0" styleClass="sideIcons">
+                            <graphic>
+                                <FontAwesomeIconView glyphName="PIE_CHART" size="36" styleClass="blockIcon"/>
+                            </graphic>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </Button>
+                    </children>
+                </AnchorPane>
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1057.0" layoutY="9.0"
+                        mnemonicParsing="false" onAction="#exitApp" prefHeight="31.0" prefWidth="36.0"
+                        style="-fx-background-color: transparent;" styleClass="exitButton" textAlignment="CENTER">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <graphic>
+                        <Pane prefHeight="16.0" prefWidth="13.0" styleClass="exitPane">
+                            <children>
+                                <Line endX="-43.75" layoutX="65.0" layoutY="11.0" rotate="-45.0" scaleX="1.3"
+                                      scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="exitIcon"/>
+                                <Line endX="-43.75" layoutX="65.0" layoutY="11.0" rotate="45.0" scaleX="1.3"
+                                      scaleY="2.1" startX="-65.75" stroke="ORANGE" styleClass="exitIcon"/>
+                            </children>
+                        </Pane>
+                    </graphic>
+                </Button>
+                <Button alignment="BOTTOM_CENTER" contentDisplay="RIGHT" layoutX="1005.0" layoutY="1.0"
+                        mnemonicParsing="false" onAction="#minApp" prefHeight="38.0" prefWidth="40.0"
+                        style="-fx-background-color: transparent;" styleClass="minBtn">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <graphic>
+                        <Line endX="-43.75" scaleX="1.3" scaleY="2.1" startX="-65.75" stroke="ORANGE"
+                              styleClass="minIcon"/>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+        <Pane fx:id="alertPane" layoutX="430.0" layoutY="146.0" prefHeight="123.0" prefWidth="293.0" styleClass="alert">
+            <children>
+                <Button layoutX="154.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutNo" prefHeight="41.0"
+                        prefWidth="99.0" styleClass="btnNext" text="%no">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="CLOSE" size="23" styleClass="iconNext"/>
+                    </graphic>
+                </Button>
+                <Button layoutX="48.0" layoutY="70.0" mnemonicParsing="false" onAction="#logoutYes" prefHeight="42.0"
+                        prefWidth="99.0" styleClass="btnBack" text="%yes">
+                    <graphic>
+                        <FontAwesomeIconView glyphName="CHECK" size="23" styleClass="backIcon"/>
+                    </graphic>
+                </Button>
+                <Label layoutX="33.0" layoutY="20.0" styleClass="alertText" text="%confirmLogout"/>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

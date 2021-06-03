@@ -1,22 +1,17 @@
 package main.java.controllers.manager;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
 import main.java.dao.AreasDAO;
 import main.java.dao.UsersDAO;
-import main.java.entity.Areas;
-import main.java.features.Animations;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ManagerCouriers implements Initializable {
@@ -63,9 +58,8 @@ public class ManagerCouriers implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        if(!AreasDAO.getAreasById(UsersDAO.getUsersById(Login.getUserID()).get(0).getAreaId()).get(0).getName().contains(
-                UsersDAO.getUsersById(Login.getUserID()).get(0).getAreasByAreaId().getVoivodeship()))
-        {
+        if (!AreasDAO.getAreasById(UsersDAO.getUsersById(Login.getUserID()).get(0).getAreaId()).get(0).getName().contains(
+                UsersDAO.getUsersById(Login.getUserID()).get(0).getAreasByAreaId().getVoivodeship())) {
             areaButton.setVisible(false);
             courierButton.setPrefWidth(435);
         }

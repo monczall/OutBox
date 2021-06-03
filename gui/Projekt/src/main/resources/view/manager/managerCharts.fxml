@@ -6,35 +6,45 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCharts">
-   <children>
-      <AnchorPane fx:id="barCharPane" layoutX="144.0" layoutY="158.0" prefHeight="490.0" prefWidth="683.0">
-         <children>
-            <BarChart fx:id="barChart" prefHeight="490.0" prefWidth="710.0" styleClass="barChart" stylesheets="@../../css/client.css">
-               <xAxis>
-                  <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
-               </xAxis>
-               <yAxis>
-                  <NumberAxis side="LEFT" tickLabelFill="WHITE" />
-               </yAxis>
-            </BarChart>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="pieChartPane" layoutX="144.0" layoutY="158.0" prefHeight="496.0" prefWidth="710.0">
-         <children>
-            <PieChart fx:id="pieChart" layoutX="6.0" layoutY="6.0" prefHeight="490.0" prefWidth="683.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="129.0" layoutY="-43.0" prefHeight="200.0" prefWidth="740.0" style="-fx-background-color: #121212;" visible="false" />
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%chartsTitle" />
-      <FontAwesomeIconView fill="ORANGE" glyphName="PIE_CHART" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
-      <AnchorPane fx:id="courierOptions" prefHeight="672.0" prefWidth="1033.0" visible="false" />
-      <Line endX="594.0" endY="0.49554443359375" layoutX="257.0" layoutY="81.0" startX="-114.0" startY="0.49554443359375" stroke="#252525" strokeWidth="2.0" />
-      <ToggleButton fx:id="barChartBtn" layoutX="149.0" layoutY="105.0" mnemonicParsing="false" onAction="#changeBarChart" prefHeight="52.0" prefWidth="349.0" styleClass="settingsBlock" text="%barChart" />
-      <ToggleButton fx:id="pieChartBtn" layoutX="497.0" layoutY="105.0" mnemonicParsing="false" onAction="#changePieChart" prefHeight="52.0" prefWidth="348.0" styleClass="settingsBlock" text="%pieChart" />
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground"
+            stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1"
+            fx:controller="main.java.controllers.manager.ManagerCharts">
+    <children>
+        <AnchorPane fx:id="barCharPane" layoutX="144.0" layoutY="158.0" prefHeight="490.0" prefWidth="683.0">
+            <children>
+                <BarChart fx:id="barChart" prefHeight="490.0" prefWidth="710.0" styleClass="barChart"
+                          stylesheets="@../../css/client.css">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" tickLabelFill="WHITE"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" tickLabelFill="WHITE"/>
+                    </yAxis>
+                </BarChart>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="pieChartPane" layoutX="144.0" layoutY="158.0" prefHeight="496.0" prefWidth="710.0">
+            <children>
+                <PieChart fx:id="pieChart" layoutX="6.0" layoutY="6.0" prefHeight="490.0" prefWidth="683.0"/>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="129.0" layoutY="-43.0" prefHeight="200.0" prefWidth="740.0"
+                    style="-fx-background-color: #121212;" visible="false"/>
+        <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel"
+              text="%chartsTitle"/>
+        <FontAwesomeIconView fill="ORANGE" glyphName="PIE_CHART" layoutX="142.0" layoutY="70.0" size="38"
+                             styleClass="blockIconTitle"/>
+        <AnchorPane fx:id="courierOptions" prefHeight="672.0" prefWidth="1033.0" visible="false"/>
+        <Line endX="594.0" endY="0.49554443359375" layoutX="257.0" layoutY="81.0" startX="-114.0"
+              startY="0.49554443359375" stroke="#252525" strokeWidth="2.0"/>
+        <ToggleButton fx:id="barChartBtn" layoutX="149.0" layoutY="105.0" mnemonicParsing="false"
+                      onAction="#changeBarChart" prefHeight="52.0" prefWidth="349.0" styleClass="settingsBlock"
+                      text="%barChart"/>
+        <ToggleButton fx:id="pieChartBtn" layoutX="497.0" layoutY="105.0" mnemonicParsing="false"
+                      onAction="#changePieChart" prefHeight="52.0" prefWidth="348.0" styleClass="settingsBlock"
+                      text="%pieChart"/>
+    </children>
 </AnchorPane>

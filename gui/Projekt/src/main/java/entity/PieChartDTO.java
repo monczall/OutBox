@@ -1,8 +1,8 @@
 package main.java.entity;
 
 public class PieChartDTO {
-    private String type;
-    private Long quantity;
+    private final String type;
+    private final Long quantity;
 
     public PieChartDTO(String type, Long quantity) {
         this.type = type;

@@ -16,19 +16,17 @@ import java.util.ResourceBundle;
 
 public class InterbranchCourierSettings implements Initializable {
 
+    private final ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
+    private final ObservableList<String> colors = FXCollections.observableArrayList(
+            App.getLanguageProperties("colorOrange"),
+            App.getLanguageProperties("colorRed"),
+            App.getLanguageProperties("colorWhite"));
     @FXML
     private ComboBox<String> pickLanguage;
     @FXML
     private ComboBox<String> pickColor;
     @FXML
     private AnchorPane mainPane;
-
-    private final ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
-
-    private final ObservableList<String> colors = FXCollections.observableArrayList(
-            App.getLanguageProperties("colorOrange"),
-            App.getLanguageProperties("colorRed"),
-            App.getLanguageProperties("colorWhite"));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.PackageType;
 import main.java.entity.PdfAreaDTO;
-import main.java.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -15,9 +14,10 @@ public class PackageTypeDAO {
     /**
      * Method used to get the list of all packages types that are in database.
      * Returned List is type of PackageType.
+     *
      * @return List of package types
      */
-    static public List<PackageType> getPackageTypes(){
+    static public List<PackageType> getPackageTypes() {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery("from PackageType");
@@ -29,14 +29,15 @@ public class PackageTypeDAO {
 
     /**
      * <p>
-     *     Method used to update information about given packageTypeId
+     * Method used to update information about given packageTypeId
      * </p>
+     *
      * @param packTypeId package to edit
-     * @param size max package size of given type (ex. 25cm x 25cm x 25cm)
-     * @param weight max package weight of given type
-     * @param price price to pay for package delivery
+     * @param size       max package size of given type (ex. 25cm x 25cm x 25cm)
+     * @param weight     max package weight of given type
+     * @param price      price to pay for package delivery
      */
-	static public void updatePackageType(int packTypeId, String size, String weight, String price){
+    static public void updatePackageType(int packTypeId, String size, String weight, String price) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -50,14 +51,15 @@ public class PackageTypeDAO {
 
         session.getTransaction().commit();
         session.close();
-	}
+    }
 
     /**
      * <p>
-     *     Method used to get packages in areas in between selected date.
+     * Method used to get packages in areas in between selected date.
      * </p>
+     *
      * @param dateStart starting date
-     * @param dateEnd ending date
+     * @param dateEnd   ending date
      * @return List type of PdfAreaDTO
      */
     static public List<PdfAreaDTO> readAreasForPdf(Date dateStart, Date dateEnd) {

@@ -22,6 +22,7 @@ import main.java.features.Animations;
 import main.java.features.ErrorHandler;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.hibernate.Session;
+
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -33,146 +34,100 @@ import java.util.ResourceBundle;
 
 public class ClientRegisterPackage implements Initializable {
 
-    @FXML
-    private AnchorPane appWindow;
-
-    @FXML
-    private AnchorPane packageSizePane;
-
-    @FXML
-    private ToggleButton smallPackage;
-
-    @FXML
-    private ToggleButton mediumPackage;
-
-    @FXML
-    private ToggleButton bigPackage;
-
-    @FXML
-    private Button btnNextRecipient;
-
-    @FXML
-    private AnchorPane recipientDetailsPane;
-
-    @FXML
-    private CustomTextField nameInput;
-
-    @FXML
-    private CustomTextField surnameInput;
-
-    @FXML
-    private CustomTextField emailInput;
-
-    @FXML
-    private CustomTextField streetInput;
-
-    @FXML
-    private CustomTextField cityInput;
-
-    @FXML
-    private ComboBox<String> provinceInput;
-
-    @FXML
-    private CustomTextField numberInput;
-
-    @FXML
-    private Button btnNextTime;
-
-    @FXML
-    private Button btnBackSize;
-
-    @FXML
-    private AnchorPane deliveryTimePane;
-
-    @FXML
-    private ComboBox<String> pickTimeOfDelivery;
-
-    @FXML
-    private TextArea additionalComment;
-
-    @FXML
-    private AnchorPane registerSummaryPane;
-
-    @FXML
-    private TextArea sumComment;
-
-    @FXML
-    private TextField sumType;
-
-    @FXML
-    private TextField sumSize;
-
-    @FXML
-    private TextField sumName;
-
-    @FXML
-    private TextField sumSurname;
-
-    @FXML
-    private TextField sumEmail;
-
-    @FXML
-    private TextField sumStreet;
-
-    @FXML
-    private TextField sumCity;
-
-    @FXML
-    private TextField sumProvince;
-
-    @FXML
-    private TextField sumNumber;
-
-    @FXML
-    private TextField sumTime;
-
-    @FXML
-    private Circle navCircle;
-
-    @FXML
-    private Button btnNextSummary;
-
-    @FXML
-    private Text smallSize;
-
-    @FXML
-    private Text smallWeight;
-
-    @FXML
-    private Text smallPrice;
-
-    @FXML
-    private Text medSize;
-
-    @FXML
-    private Text medWeight;
-
-    @FXML
-    private Text medPrice;
-
-    @FXML
-    private Text bigSize;
-
-    @FXML
-    private Text bigWeight;
-
-    @FXML
-    private Text bigPrice;
-
-    @FXML
-    private Button btnRegister;
-
-    private ToggleGroup packageGroup = new ToggleGroup();
-
+    private final ToggleGroup packageGroup = new ToggleGroup();
+    private final ObservableList<String> provinces = FXCollections.observableArrayList("Dolnoslaskie",
+            "Kujawsko-pomorskie", "Lubelskie", "Lubuskie", "Lodzkie", "Malopolskie", "Mazowieckie",
+            "Opolskie", "Podkarpackie", "Podlaskie", "Pomorskie", "Slaskie", "Swietokrzyskie",
+            "Warminsko-mazurskie", "Wielkopolskie", "Zachodniopomorskie");
     ArrayList<CustomTextField> list = new ArrayList<CustomTextField>();
-
     ObservableList<String> timeOfDeliveryList = FXCollections.observableArrayList("10:30 - 15:30",
             "15:30 - 17:30", "17:30 - 21:00", App.getLanguageProperties("anyTime"));
-
-    private ObservableList<String> provinces = FXCollections.observableArrayList( "Dolnoslaskie",
-            "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Lodzkie",  "Malopolskie",  "Mazowieckie",
-            "Opolskie",  "Podkarpackie",  "Podlaskie",  "Pomorskie",  "Slaskie",  "Swietokrzyskie",
-            "Warminsko-mazurskie",  "Wielkopolskie",  "Zachodniopomorskie");
+    @FXML
+    private AnchorPane appWindow;
+    @FXML
+    private AnchorPane packageSizePane;
+    @FXML
+    private ToggleButton smallPackage;
+    @FXML
+    private ToggleButton mediumPackage;
+    @FXML
+    private ToggleButton bigPackage;
+    @FXML
+    private Button btnNextRecipient;
+    @FXML
+    private AnchorPane recipientDetailsPane;
+    @FXML
+    private CustomTextField nameInput;
+    @FXML
+    private CustomTextField surnameInput;
+    @FXML
+    private CustomTextField emailInput;
+    @FXML
+    private CustomTextField streetInput;
+    @FXML
+    private CustomTextField cityInput;
+    @FXML
+    private ComboBox<String> provinceInput;
+    @FXML
+    private CustomTextField numberInput;
+    @FXML
+    private Button btnNextTime;
+    @FXML
+    private Button btnBackSize;
+    @FXML
+    private AnchorPane deliveryTimePane;
+    @FXML
+    private ComboBox<String> pickTimeOfDelivery;
+    @FXML
+    private TextArea additionalComment;
+    @FXML
+    private AnchorPane registerSummaryPane;
+    @FXML
+    private TextArea sumComment;
+    @FXML
+    private TextField sumType;
+    @FXML
+    private TextField sumSize;
+    @FXML
+    private TextField sumName;
+    @FXML
+    private TextField sumSurname;
+    @FXML
+    private TextField sumEmail;
+    @FXML
+    private TextField sumStreet;
+    @FXML
+    private TextField sumCity;
+    @FXML
+    private TextField sumProvince;
+    @FXML
+    private TextField sumNumber;
+    @FXML
+    private TextField sumTime;
+    @FXML
+    private Circle navCircle;
+    @FXML
+    private Button btnNextSummary;
+    @FXML
+    private Text smallSize;
+    @FXML
+    private Text smallWeight;
+    @FXML
+    private Text smallPrice;
+    @FXML
+    private Text medSize;
+    @FXML
+    private Text medWeight;
+    @FXML
+    private Text medPrice;
+    @FXML
+    private Text bigSize;
+    @FXML
+    private Text bigWeight;
+    @FXML
+    private Text bigPrice;
+    @FXML
+    private Button btnRegister;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -185,9 +140,9 @@ public class ClientRegisterPackage implements Initializable {
 
         // Reading a list with types of packages and converting them into right string
         // Size, weight and price
-        smallSize.setText(listOfTypeInfo.get(0).getSize().replaceAll("x"," x ") + " cm");
-        medSize.setText(listOfTypeInfo.get(1).getSize().replaceAll("x"," x ") + " cm");
-        bigSize.setText(listOfTypeInfo.get(2).getSize().replaceAll("x"," x  ") + " cm");
+        smallSize.setText(listOfTypeInfo.get(0).getSize().replaceAll("x", " x ") + " cm");
+        medSize.setText(listOfTypeInfo.get(1).getSize().replaceAll("x", " x ") + " cm");
+        bigSize.setText(listOfTypeInfo.get(2).getSize().replaceAll("x", " x  ") + " cm");
 
         smallWeight.setText(listOfTypeInfo.get(0).getWeight() + " kg");
         medWeight.setText(listOfTypeInfo.get(1).getWeight() + " kg");
@@ -232,7 +187,7 @@ public class ClientRegisterPackage implements Initializable {
         ErrorHandler.checkInputs(surnameInput, "[a-zA-Z]+",
                 App.getLanguageProperties("clientSurnamePrompt"));
 
-        ErrorHandler.checkInputs(emailInput,"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
+        ErrorHandler.checkInputs(emailInput, "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
                 App.getLanguageProperties("clientEmailPrompt"));
 
         ErrorHandler.checkInputs(streetInput,
@@ -248,15 +203,13 @@ public class ClientRegisterPackage implements Initializable {
     }
 
 
-
     // Method handles moving pane from Size pane to Recipient pane
     @FXML
     void fromSizeToRecipient(ActionEvent event) {
-        if(packageGroup.getSelectedToggle() != null) {
-            Animations.changePane(packageSizePane,recipientDetailsPane,-800,0.7);
-            Animations.moveByX(navCircle, +114,0.7);
-        }
-        else {
+        if (packageGroup.getSelectedToggle() != null) {
+            Animations.changePane(packageSizePane, recipientDetailsPane, -800, 0.7);
+            Animations.moveByX(navCircle, +114, 0.7);
+        } else {
             Alerts.createAlert(appWindow, btnNextRecipient,
                     "WARNING",
                     App.getLanguageProperties("pickSizeOfPackage"));
@@ -267,13 +220,12 @@ public class ClientRegisterPackage implements Initializable {
     @FXML
     void fromRecipientToTime(ActionEvent event) {
         ErrorHandler.checkIfEmpty(list);
-        if(!nameInput.getRight().isVisible() && !surnameInput.getRight().isVisible() && !emailInput.getRight().isVisible()
-           && !streetInput.getRight().isVisible() && !cityInput.getRight().isVisible() && provinceInput.getValue() != null
-           && !numberInput.getRight().isVisible()) {
-            Animations.changePane(recipientDetailsPane,deliveryTimePane,-800,0.7);
-            Animations.moveByX(navCircle,+114,0.7);
-        }
-        else {
+        if (!nameInput.getRight().isVisible() && !surnameInput.getRight().isVisible() && !emailInput.getRight().isVisible()
+                && !streetInput.getRight().isVisible() && !cityInput.getRight().isVisible() && provinceInput.getValue() != null
+                && !numberInput.getRight().isVisible()) {
+            Animations.changePane(recipientDetailsPane, deliveryTimePane, -800, 0.7);
+            Animations.moveByX(navCircle, +114, 0.7);
+        } else {
             Alerts.createAlert(appWindow, btnNextTime,
                     "WARNING",
                     App.getLanguageProperties("correctOrCompleteFields"));
@@ -284,10 +236,10 @@ public class ClientRegisterPackage implements Initializable {
     // Method handles moving pane from Time pane to Summary pane
     @FXML
     void fromTimeToSummary(ActionEvent event) {
-        if(!pickTimeOfDelivery.getSelectionModel().isEmpty()){
+        if (!pickTimeOfDelivery.getSelectionModel().isEmpty()) {
 
-            Animations.changePane(deliveryTimePane,registerSummaryPane,-800,0.7);
-            Animations.moveByX(navCircle,+114,0.7);
+            Animations.changePane(deliveryTimePane, registerSummaryPane, -800, 0.7);
+            Animations.moveByX(navCircle, +114, 0.7);
 
             // Setting all the inputs from previous panes to the final one
             // It allows use to check if everything was inputted correctly in one place
@@ -302,18 +254,15 @@ public class ClientRegisterPackage implements Initializable {
             sumEmail.setText(emailInput.getText());
             sumNumber.setText(numberInput.getText());
 
-            if(sumType.getText().equals(App.getLanguageProperties("small"))) {
+            if (sumType.getText().equals(App.getLanguageProperties("small"))) {
                 sumSize.setText(smallSize.getText());
-            }
-            else if(sumType.getText().equals(App.getLanguageProperties("medium"))) {
+            } else if (sumType.getText().equals(App.getLanguageProperties("medium"))) {
                 sumSize.setText(medSize.getText());
-            }
-            else {
+            } else {
                 sumSize.setText(bigSize.getText());
             }
 
-        }
-        else {
+        } else {
             Alerts.createAlert(appWindow, btnNextSummary,
                     "WARNING",
                     App.getLanguageProperties("pickTimeOfDelivery"));
@@ -324,22 +273,22 @@ public class ClientRegisterPackage implements Initializable {
     // Method handles moving pane from Recipient pane to Size pane
     @FXML
     void fromRecipientToSize(ActionEvent event) {
-        Animations.changePane(recipientDetailsPane,packageSizePane,+800,0.7);
-        Animations.moveByX(navCircle,-114,0.7);
+        Animations.changePane(recipientDetailsPane, packageSizePane, +800, 0.7);
+        Animations.moveByX(navCircle, -114, 0.7);
     }
 
     // Method handles moving pane from Time pane to Recipient pane
     @FXML
     void fromTimeToRecipient(ActionEvent event) {
-        Animations.changePane(deliveryTimePane,recipientDetailsPane,+800,0.7);
-        Animations.moveByX(navCircle,-114,0.7);
+        Animations.changePane(deliveryTimePane, recipientDetailsPane, +800, 0.7);
+        Animations.moveByX(navCircle, -114, 0.7);
     }
 
     // Method handles moving pane from Summary pane to Time pane
     @FXML
     void fromSummaryToTime(ActionEvent event) {
-        Animations.changePane(registerSummaryPane,deliveryTimePane,+800,0.7);
-        Animations.moveByX(navCircle,-114,0.7);
+        Animations.changePane(registerSummaryPane, deliveryTimePane, +800, 0.7);
+        Animations.moveByX(navCircle, -114, 0.7);
     }
 
     // Method handles moving pane from Summary pane to Time pane
@@ -376,14 +325,12 @@ public class ClientRegisterPackage implements Initializable {
 
         session.save(userInfos);
 
-        if(sumType.getText().equals(App.getLanguageProperties("small"))) {
+        if (sumType.getText().equals(App.getLanguageProperties("small"))) {
             packages.setTypeId(1);
-        }
-        else if(sumType.getText().equals(App.getLanguageProperties("medium"))) {
+        } else if (sumType.getText().equals(App.getLanguageProperties("medium"))) {
             packages.setTypeId(2);
-        }
-        else {
-            packages.setTypeId(3);;
+        } else {
+            packages.setTypeId(3);
         }
 
         packages.setUserId(Login.getUserID());
@@ -391,10 +338,9 @@ public class ClientRegisterPackage implements Initializable {
         packages.setPackageNumber(packageNumber);
         packages.setEmail(sumEmail.getText());
 
-        if(sumTime.getText().equals("Any time")) {
+        if (sumTime.getText().equals("Any time")) {
             packages.setTimeOfPlannedDelivery("Dowolny");
-        }
-        else {
+        } else {
             packages.setTimeOfPlannedDelivery(sumTime.getText());
         }
 

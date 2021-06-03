@@ -1,6 +1,5 @@
 package main.java.entity;
 
-import main.java.App;
 import main.java.features.Preference;
 
 public enum PackageStatus {
@@ -25,15 +24,18 @@ public enum PackageStatus {
         this.engDisplayName = engDisplayName;
     }
 
-    public String displayName() { return displayName; }
+    public String displayName() {
+        return displayName;
+    }
 
-    public String engDisplayName() { return engDisplayName; }
+    public String engDisplayName() {
+        return engDisplayName;
+    }
 
     @Override
     public String toString() {
-        if(Preference.readPreference("language").equals("english")){
+        if (Preference.readPreference("language").equals("english")) {
             return engDisplayName;
-        }
-        else return displayName;
+        } else return displayName;
     }
 }

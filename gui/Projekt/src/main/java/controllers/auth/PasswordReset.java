@@ -35,92 +35,102 @@ import static main.java.dao.UsersDAO.getUsers;
 
 public class PasswordReset implements Initializable {
 
-    @FXML
-    private AnchorPane loginLeftPaneAnchorPane;
-
-    @FXML
-    private Label passwordResetSloganLabel;
-
-    @FXML
-    private Label passwordResetWelcomeLabel;
-
-    @FXML
-    private Label passwordResetInfoLabel;
-
-    @FXML
-    private Button passwordResetReturnButtonButton;
-
-    @FXML
-    private AnchorPane loginRightPaneAnchorPane;
-
-    @FXML
-    private Label passwordResetResetPasswordLabel;
-
-    @FXML
-    private TextField passwordResetEmailField;
-
-    @FXML
-    private Circle passwordResetEmailCircle;
-
-    @FXML
-    private TextField passwordResetVerificationCodeField;
-
-    @FXML
-    private Circle passwordResetVerificationCodeCircle;
-
-    @FXML
-    private TextField passwordResetPasswordField;
-
-    @FXML
-    private Circle passwordResetPasswordCircle;
-
-    @FXML
-    private TextField passwordResetConfirmPasswordField;
-
-    @FXML
-    private Circle passwordResetConfirmPasswordCircle;
-
-    @FXML
-    private Label passwordResetSendCodeLabel;
-
-    @FXML
-    private Button passwordResetSendCodeButton;
-
-    @FXML
-    private Label passwordResetVerifyCodeLabel;
-
-    @FXML
-    private Button passwordResetVerifyCodeButton;
-
-    @FXML
-    private Button passwordResetSetNewPasswordButton;
-
-    @FXML
-    private Label passwordResetSixCharsRequirement;
-
-    @FXML
-    private Label passwordResetSmallLetterRequirement;
-
-    @FXML
-    private Label passwordResetBigLetterRequirement;
-
-    @FXML
-    private Label passwordResetNumberRequirement;
-
-    @FXML
-    private Label passwordResetSpecialCharRequirement;
-
-    @FXML
-    private Label passwordResetSamePasswordsRequirement;
-
-    @FXML
-    private ImageView passwordResetLogoImageView;
-
-    private static Preference pref = new Preference();
-
+    private static final Preference pref = new Preference();
     int userId;
     int userInfoId;
+    @FXML
+    private AnchorPane loginLeftPaneAnchorPane;
+    @FXML
+    private Label passwordResetSloganLabel;
+    @FXML
+    private Label passwordResetWelcomeLabel;
+    @FXML
+    private Label passwordResetInfoLabel;
+    @FXML
+    private Button passwordResetReturnButtonButton;
+    @FXML
+    private AnchorPane loginRightPaneAnchorPane;
+    @FXML
+    private Label passwordResetResetPasswordLabel;
+    @FXML
+    private TextField passwordResetEmailField;
+    @FXML
+    private Circle passwordResetEmailCircle;
+    @FXML
+    private TextField passwordResetVerificationCodeField;
+    @FXML
+    private Circle passwordResetVerificationCodeCircle;
+    @FXML
+    private TextField passwordResetPasswordField;
+    @FXML
+    private Circle passwordResetPasswordCircle;
+    @FXML
+    private TextField passwordResetConfirmPasswordField;
+    @FXML
+    private Circle passwordResetConfirmPasswordCircle;
+    @FXML
+    private Label passwordResetSendCodeLabel;
+    @FXML
+    private Button passwordResetSendCodeButton;
+    @FXML
+    private Label passwordResetVerifyCodeLabel;
+    @FXML
+    private Button passwordResetVerifyCodeButton;
+    @FXML
+    private Button passwordResetSetNewPasswordButton;
+    @FXML
+    private Label passwordResetSixCharsRequirement;
+    @FXML
+    private Label passwordResetSmallLetterRequirement;
+    @FXML
+    private Label passwordResetBigLetterRequirement;
+    @FXML
+    private Label passwordResetNumberRequirement;
+    @FXML
+    private Label passwordResetSpecialCharRequirement;
+    @FXML
+    private Label passwordResetSamePasswordsRequirement;
+    @FXML
+    private ImageView passwordResetLogoImageView;
     private String verificationCode = "";
+
+    /**
+     * <p>
+     * Method used to prepare message that is going to be send to user.
+     * </p>
+     *
+     * @param session            session that is held after login
+     * @param outBoxEmailAccount sender's email
+     * @param recipient          receiver's email
+     * @param firstName          receiver's first name
+     * @param verificationCode   code sent to user
+     * @return returns message or null
+     */
+    private static Message prepareMessage(Session session,
+                                          String outBoxEmailAccount,
+                                          String recipient,
+                                          String firstName,
+                                          String verificationCode) {
+        Message message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress("OutBox_Support"));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            message.setSubject(App.getLanguageProperties("authResetPasswordMailSubject"));
+            message.setText(App.getLanguageProperties("authResetPasswordMailMessage1") + firstName + ",\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage2") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage3") + "\n" +
+                    "\n" + verificationCode + "\n\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage4") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage5") + "\n" +
+                    "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage6") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage7"));
+            return message;
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -133,13 +143,11 @@ public class PasswordReset implements Initializable {
         outboxWhite.setFitWidth(150);
 
         // Changes to UI depending on used theme
-        if(pref.readPreference("color").equals("red")) {
+        if (Preference.readPreference("color").equals("red")) {
             passwordResetLogoImageView.setImage(outboxWhite.getImage());
-        }
-        else if(pref.readPreference("color").equals("orange")) {
+        } else if (Preference.readPreference("color").equals("orange")) {
             passwordResetLogoImageView.setImage(outboxBlack.getImage());
-        }
-        else{
+        } else {
             passwordResetLogoImageView.setImage(outboxBlack.getImage());
         }
     }
@@ -226,28 +234,25 @@ public class PasswordReset implements Initializable {
                 "@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(email);
 
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     /**
      * <p>
-     *     Method used to start procedure of sending email to user, that
-     *     wants to reset password. It sends prepared message to user.
+     * Method used to start procedure of sending email to user, that
+     * wants to reset password. It sends prepared message to user.
      * </p>
-     * @param recipient string representing email address of user,
-     *                 that is receiving email
-     * @param firstName string representing first name of user,
-     *                  that is receiving email
+     *
+     * @param recipient        string representing email address of user,
+     *                         that is receiving email
+     * @param firstName        string representing first name of user,
+     *                         that is receiving email
      * @param verificationCode generated 4-digit string
      * @throws MessagingException in case of error
      */
     public void sendEmail(String recipient,
-                                 String firstName,
-                                 String verificationCode
+                          String firstName,
+                          String verificationCode
     ) throws MessagingException {
         System.out.println("Starting process of sending email");
         Properties properties = new Properties();
@@ -262,12 +267,12 @@ public class PasswordReset implements Initializable {
 
         Session session = Session.getInstance(properties,
                 new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(outBoxEmailAccount,
-                        outBoxEmailPassword);
-            }
-        });
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(outBoxEmailAccount,
+                                outBoxEmailPassword);
+                    }
+                });
 
         Message message = prepareMessage(session,
                 outBoxEmailAccount,
@@ -283,43 +288,6 @@ public class PasswordReset implements Initializable {
                 300, 86, "alertSuccess");
     }
 
-    /**
-     * <p>
-     *     Method used to prepare message that is going to be send to user.
-     * </p>
-     * @param session session that is held after login
-     * @param outBoxEmailAccount sender's email
-     * @param recipient receiver's email
-     * @param firstName receiver's first name
-     * @param verificationCode code sent to user
-     * @return returns message or null
-     */
-    private static Message prepareMessage(Session session,
-                                          String outBoxEmailAccount,
-                                          String recipient,
-                                          String firstName,
-                                          String verificationCode) {
-        Message message = new MimeMessage(session);
-        try {
-            message.setFrom(new InternetAddress("OutBox_Support"));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject(App.getLanguageProperties("authResetPasswordMailSubject"));
-            message.setText(App.getLanguageProperties("authResetPasswordMailMessage1") + firstName + ",\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage2") + "\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage3") + "\n" +
-                    "\n" + verificationCode + "\n\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage4") + "\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage5") + "\n" +
-                    "\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage6") + "\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage7"));
-            return message;
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public void handleVerifyCodeOnEnterPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             verifyCode();
@@ -332,7 +300,7 @@ public class PasswordReset implements Initializable {
 
     /**
      * <p>
-     *     Method that verifies if user passed correct verification code.
+     * Method that verifies if user passed correct verification code.
      * </p>
      */
     public void verifyCode() {
@@ -401,11 +369,12 @@ public class PasswordReset implements Initializable {
 
     /**
      * <p>
-     *     Method verifies if passed strings are correct passwords.
-     *     Passwords should have at least: one small letter, one big letter,
-     *     one digit, six chars and special character. Typed in passwords should
-     *     be the same.
+     * Method verifies if passed strings are correct passwords.
+     * Passwords should have at least: one small letter, one big letter,
+     * one digit, six chars and special character. Typed in passwords should
+     * be the same.
      * </p>
+     *
      * @param password1 user's password
      * @param password2 repeated password
      * @return returns boolean value
@@ -463,8 +432,8 @@ public class PasswordReset implements Initializable {
 
     /**
      * <p>
-     *     Method changes visual appearance of section that shows user
-     *     if typed in password meets its requirements.
+     * Method changes visual appearance of section that shows user
+     * if typed in password meets its requirements.
      * </p>
      */
     private void passwordRequirements() {

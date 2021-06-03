@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class PdfDTO {
 
-    private String packageNumber;
+    private final String packageNumber;
+    private final String city;
+    private final String voivodeship;
+    private final Date date;
     private String size;
-    private String city;
-    private String voivodeship;
-    private Date date;
     private int packageID;
     private Integer areaID;
 
@@ -52,6 +52,10 @@ public class PdfDTO {
         return size;
     }
 
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     public String getCity() {
         return city;
     }
@@ -62,9 +66,5 @@ public class PdfDTO {
 
     public Date getDate() {
         return date;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 }

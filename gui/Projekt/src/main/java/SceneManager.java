@@ -6,15 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import main.java.controllers.courier.Courier;
 import main.java.features.Preference;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.ResourceBundle;
@@ -22,11 +18,11 @@ import java.util.ResourceBundle;
 
 public class SceneManager {
 
-    private static Stage stage;
     private static final Hashtable<String, String> view = new Hashtable<>();
     private static final Preference pref = new Preference();
+    private static final int counter = 0;
+    private static Stage stage;
     private static ResourceBundle bundle;
-    private static int counter = 0;
     private static double yOffset = 0;
     private static double xOffset = 0;
 

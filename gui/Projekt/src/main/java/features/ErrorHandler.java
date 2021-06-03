@@ -4,21 +4,23 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.scene.control.Tooltip;
 import org.controlsfx.control.textfield.CustomPasswordField;
 import org.controlsfx.control.textfield.CustomTextField;
+
 import java.util.ArrayList;
 
 public class ErrorHandler {
 
     /**
      * <p>
-     *  Method that check if input matches regular expression
-     *  It takes three arguments CustomTextField (which is TextField from ControlsFX lib), regular expression formula that will be used for checking the inputs
-     *  and toolTipMessage that will help user understand what did he typed wrong
+     * Method that check if input matches regular expression
+     * It takes three arguments CustomTextField (which is TextField from ControlsFX lib), regular expression formula that will be used for checking the inputs
+     * and toolTipMessage that will help user understand what did he typed wrong
      * </p>
-     * @param textField it will be checked
-     * @param regExp the regular expresion that will be used to check TextField
+     *
+     * @param textField      it will be checked
+     * @param regExp         the regular expresion that will be used to check TextField
      * @param toolTipMessage additional tip message
      */
-    public static void checkInputs(CustomTextField textField, String regExp, String toolTipMessage){
+    public static void checkInputs(CustomTextField textField, String regExp, String toolTipMessage) {
 
         FontAwesomeIconView icon = new FontAwesomeIconView();
         icon.setSize("16");
@@ -32,11 +34,7 @@ public class ErrorHandler {
         textField.setTooltip(tooltip);
 
         textField.setOnKeyReleased(event -> {
-            if(textField.getText().matches(regExp)){
-                textField.getRight().setVisible(false);
-            }
-            else
-                textField.getRight().setVisible(true);
+            textField.getRight().setVisible(!textField.getText().matches(regExp));
         });
     }
 
@@ -49,13 +47,14 @@ public class ErrorHandler {
      * and two toolTipMessages that will help user understand what did he typed wrong
      *
      * </p>
-     * @param password first password field
-     * @param passwordRepeat second password field
-     * @param regExp the regular expresion that will be used to check passwords
-     * @param tipMessagePassword additional tip message
+     *
+     * @param password                 first password field
+     * @param passwordRepeat           second password field
+     * @param regExp                   the regular expresion that will be used to check passwords
+     * @param tipMessagePassword       additional tip message
      * @param tipMessageRepeatPassword additional tip message
      */
-    public static void checkPasswords(CustomPasswordField password,CustomPasswordField passwordRepeat, String regExp, String tipMessagePassword, String tipMessageRepeatPassword){
+    public static void checkPasswords(CustomPasswordField password, CustomPasswordField passwordRepeat, String regExp, String tipMessagePassword, String tipMessageRepeatPassword) {
 
         FontAwesomeIconView icon = new FontAwesomeIconView();
         icon.setSize("16");
@@ -80,20 +79,13 @@ public class ErrorHandler {
 
         password.setOnKeyReleased(event -> {
             passwordRepeat.getRight().setVisible(true);
-            if(password.getText().matches(regExp))
-                password.getRight().setVisible(false);
-            else
-                password.getRight().setVisible(true);
+            password.getRight().setVisible(!password.getText().matches(regExp));
         });
 
         passwordRepeat.setOnKeyReleased(event -> {
-            if(!password.getText().equals(passwordRepeat.getText()))
-                passwordRepeat.getRight().setVisible(true);
-            else
-                passwordRepeat.getRight().setVisible(false);
+            passwordRepeat.getRight().setVisible(!password.getText().equals(passwordRepeat.getText()));
         });
     }
-
 
 
     /**
@@ -101,12 +93,12 @@ public class ErrorHandler {
      * Method that check if inputs are empty
      * It takes ArrayList of CustomTextFields and in FOR loop checks all passed CustomTextFields if they are empty.
      * </p>
+     *
      * @param list list of CustomTxtFields
      */
-    public static void checkIfEmpty(ArrayList<CustomTextField> list){
-        for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getText().isEmpty())
-            {
+    public static void checkIfEmpty(ArrayList<CustomTextField> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getText().isEmpty()) {
                 FontAwesomeIconView icon = new FontAwesomeIconView();
                 icon.setSize("16");
                 icon.setGlyphName("WARNING");
@@ -117,9 +109,6 @@ public class ErrorHandler {
             }
         }
     }
-
-
-
 
 
 }

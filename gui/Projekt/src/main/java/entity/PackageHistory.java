@@ -68,7 +68,7 @@ public class PackageHistory {
     }
 
     @ManyToOne
-    @JoinColumn(name = "packageID", referencedColumnName = "ID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "packageID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
     public Packages getPackagesByPackageId() {
         return packagesByPackageId;
     }

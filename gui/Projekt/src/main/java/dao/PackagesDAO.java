@@ -4,8 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.controllers.auth.Login;
 import main.java.entity.*;
-import main.java.entity.Packages;
-
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -98,6 +96,7 @@ public class PackagesDAO {
      * "Zwrócona do nadawcy". Returned ObservableList is type of PackagesDTO
      * and is grouped by packageNumber.
      * </p>
+     *
      * @param courierId id of courier
      * @return list of packages
      */
@@ -292,6 +291,7 @@ public class PackagesDAO {
      * <p>
      * Method used to return number of package types that are in database.
      * </p>
+     *
      * @param month current month
      * @return List of package types
      */

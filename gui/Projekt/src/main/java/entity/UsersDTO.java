@@ -2,14 +2,14 @@ package main.java.entity;
 
 public class UsersDTO {
 
+    private final String name;
+    private final String surname;
+    private final String phoneNumber;
+    private final String city;
+    private final String email;
     private int userID;
-    private String name;
-    private String surname;
-    private String phoneNumber;
     private String streetAndNumber;
-    private String city;
     private String voivodeship;
-    private String email;
     private String areaName;
     private int userInfoID;
 

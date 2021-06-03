@@ -43,7 +43,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }
@@ -65,7 +65,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }
@@ -87,7 +87,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }
@@ -109,7 +109,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }
@@ -131,7 +131,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }
@@ -153,7 +153,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }
@@ -175,7 +175,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }
@@ -197,7 +197,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }
@@ -219,7 +219,7 @@ public class RegisterTests extends Register {
         Register register = new Register();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
+                () -> Assertions.assertTrue(register.isValid(firstName, lastName, phoneNumber,
                         email, street, city, voivodeship, password, password2))
         );
     }

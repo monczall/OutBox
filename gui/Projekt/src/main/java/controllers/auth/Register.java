@@ -30,124 +30,86 @@ import static main.java.dao.UsersDAO.getUsers;
 
 public class Register implements Initializable {
 
+    private static final Preference pref = new Preference();
     @FXML
     public ComboBox<String> registerVoivodeshipField;
-
+    ObservableList<String> voivodeships =
+            FXCollections.observableArrayList("Dolnoslaskie",
+                    "Kujawsko-pomorskie", "Lubelskie", "Lubuskie", "Lodzkie",
+                    "Malopolskie", "Mazowieckie", "Opolskie", "Podkarpackie",
+                    "Podlaskie", "Pomorskie", "Slaskie", "Swietokrzyskie",
+                    "Warminsko-mazurskie", "Wielkopolskie",
+                    "Zachodniopomorskie");
     @FXML
     private AnchorPane loginRightPaneAnchorPane;
-
     @FXML
     private Button registerExitButtonButton;
-
     @FXML
     private Button registerReturnButtonButton;
-
     @FXML
     private Button registerRegisterButtonButton;
-
     @FXML
     private Circle registerFirstNameCircle;
-
     @FXML
     private TextField registerFirstNameField;
-
     @FXML
     private Circle registerLastNameCircle;
-
     @FXML
     private TextField registerLastNameField;
-
     @FXML
     private Circle registerPhoneNumberCircle;
-
     @FXML
     private TextField registerPhoneNumberField;
-
     @FXML
     private Circle registerEmailAddressCircle;
-
     @FXML
     private TextField registerEmailAddressField;
-
     @FXML
     private Circle registerStreetCircle;
-
     @FXML
     private TextField registerStreetField;
-
     @FXML
     private Circle registerCityCircle;
-
     @FXML
     private TextField registerCityField;
-
     @FXML
     private Circle registerVoivodeshipCircle;
-
     @FXML
     private Circle registerPasswordCircle;
-
     @FXML
     private PasswordField registerPasswordField;
-
     @FXML
     private Circle registerRepeatPasswordCircle;
-
     @FXML
     private PasswordField registerRepeatPasswordField;
-
-
     @FXML
     private Label registerFirstNameErrorExample;
-
     @FXML
     private Label registerLastNameErrorExample;
-
     @FXML
     private Label registerPhoneNumberErrorExample;
-
     @FXML
     private Label registerEmailErrorExample;
-
     @FXML
     private Label registerStreetErrorExample;
-
     @FXML
     private Label registerCityErrorExample;
-
     @FXML
     private Label registerVoivodeshipErrorExample;
-
     @FXML
     private Label registerSixCharsRequirement;
-
     @FXML
     private Label registerSmallLetterRequirement;
-
     @FXML
     private Label registerBigLetterRequirement;
-
     @FXML
     private Label registerNumberRequirement;
-
     @FXML
     private Label registerSpecialCharRequirement;
-
     @FXML
     private Label registerSamePasswordsRequirement;
-
     @FXML
     private ImageView registerLogoImageView;
-
-    private static Preference pref = new Preference();
-
-    ObservableList<String> voivodeships =
-            FXCollections.observableArrayList( "Dolnoslaskie",
-                    "Kujawsko-pomorskie", "Lubelskie", "Lubuskie",  "Lodzkie",
-                    "Malopolskie",  "Mazowieckie", "Opolskie",  "Podkarpackie",
-                    "Podlaskie",  "Pomorskie",  "Slaskie",  "Swietokrzyskie",
-                    "Warminsko-mazurskie",  "Wielkopolskie",
-                    "Zachodniopomorskie");
 
     public void initialize(URL url, ResourceBundle rb) {
         registerVoivodeshipField.setItems(voivodeships);
@@ -162,19 +124,17 @@ public class Register implements Initializable {
         outboxWhite.setFitWidth(150);
 
         // Changes to UI depending on used theme
-        if(pref.readPreference("color").equals("red")) {
+        if (Preference.readPreference("color").equals("red")) {
             registerLogoImageView.setImage(outboxWhite.getImage());
-        }
-        else if(pref.readPreference("color").equals("orange")) {
+        } else if (Preference.readPreference("color").equals("orange")) {
             registerLogoImageView.setImage(outboxBlack.getImage());
-        }
-        else{
+        } else {
             registerLogoImageView.setImage(outboxBlack.getImage());
         }
     }
 
-    public void register(){
-        if(isValid(registerFirstNameField.getText(),
+    public void register() {
+        if (isValid(registerFirstNameField.getText(),
                 registerLastNameField.getText(),
                 registerPhoneNumberField.getText(),
                 registerEmailAddressField.getText(),
@@ -182,7 +142,7 @@ public class Register implements Initializable {
                 registerCityField.getText(),
                 registerVoivodeshipField.getValue(),
                 registerPasswordField.getText(),
-                registerRepeatPasswordField.getText())){
+                registerRepeatPasswordField.getText())) {
             boolean emailExists = false;
             boolean phoneNumberExsists = false;
             int isUserNew = 0;
@@ -197,8 +157,8 @@ public class Register implements Initializable {
 //            }
 
             List<Users> listOfUsers = getUsers();
-            for(int i = 0; i < getUsers().size(); i++){
-                if(registerEmailAddressField.getText().equals(
+            for (int i = 0; i < getUsers().size(); i++) {
+                if (registerEmailAddressField.getText().equals(
                         listOfUsers.get(i).getEmail())) {
                     emailExists = true;
                 }
@@ -212,29 +172,29 @@ public class Register implements Initializable {
                 //}
             }
 
-            if(!phoneNumberExsists){
+            if (!phoneNumberExsists) {
                 isUserNew++;
-            }else{
+            } else {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authPhoneNumberAlreadyInUseAlert"),
                         350, 86, "alertFailure");
                 errorOnPhoneNumber();
             }
 
-            if(!emailExists){
+            if (!emailExists) {
                 isUserNew++;
-            }else{
+            } else {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authEmailAddressAlreadyInUseAlert"),
                         350, 86, "alertFailure");
                 errorOnEmailAddress();
             }
 
-            if(isUserNew >= 2){
+            if (isUserNew >= 2) {
                 String firstName = registerFirstNameField.getText();
                 String lastName = registerLastNameField.getText();
                 String email = registerEmailAddressField.getText();
@@ -261,7 +221,7 @@ public class Register implements Initializable {
                 //REJESTRACJA POMYSLNA
                 System.out.println("Zarejestrowano");
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"CHECK",
+                        registerRegisterButtonButton, "CHECK",
                         App.getLanguageProperties(
                                 "authRegisterSuccessfulAlert"),
                         293, 86, "alertSuccess");
@@ -273,34 +233,35 @@ public class Register implements Initializable {
 
     /**
      * <p>
-     *     Method verifies if passed strings meets requirements that are set
-     *     in patterns.
-     *     First name: contains letters only. Length: [2-30]
-     *     Last name: contains letters only. Length: [2-30]
-     *     Phone number: contains digits only. Length: [9-11]
-     *     Email: contains letters and digits and special chars.
-     *     Street and number: contains letters and digits. Length: [3-131]
-     *     City: contains letters only. Length: [2-120]
-     *     Voivodeship: contains letters, and certain special chars. Length: [7-120]
-     *     Passwords: one small letter, one big letter,
-     *     one digit, six chars and special character. Typed in passwords should
-     *     be the same.
+     * Method verifies if passed strings meets requirements that are set
+     * in patterns.
+     * First name: contains letters only. Length: [2-30]
+     * Last name: contains letters only. Length: [2-30]
+     * Phone number: contains digits only. Length: [9-11]
+     * Email: contains letters and digits and special chars.
+     * Street and number: contains letters and digits. Length: [3-131]
+     * City: contains letters only. Length: [2-120]
+     * Voivodeship: contains letters, and certain special chars. Length: [7-120]
+     * Passwords: one small letter, one big letter,
+     * one digit, six chars and special character. Typed in passwords should
+     * be the same.
      * </p>
-     * @param firstName string passed by user
-     * @param lastName string passed by user
+     *
+     * @param firstName   string passed by user
+     * @param lastName    string passed by user
      * @param phoneNumber string passed by user
-     * @param email string passed by user
-     * @param street string passed by user
-     * @param city string passed by user
+     * @param email       string passed by user
+     * @param street      string passed by user
+     * @param city        string passed by user
      * @param voivodeship string passed by user
-     * @param password string passed by user
-     * @param password2 string passed by user
+     * @param password    string passed by user
+     * @param password2   string passed by user
      * @return returns boolean value
      */
     public boolean isValid(String firstName, String lastName,
-                            String phoneNumber, String email, String street,
-                            String city, String voivodeship, String password,
-                            String password2){
+                           String phoneNumber, String email, String street,
+                           String city, String voivodeship, String password,
+                           String password2) {
         boolean firstNameError = false, lastNameError = false,
                 phoneNumberError = false, emailError = false,
                 streetError = false, cityError = false,
@@ -355,134 +316,134 @@ public class Register implements Initializable {
 
         Matcher matchPassword = patternPassword.matcher(password);
 
-        if(!matchSingleFirstName.matches() && !matchDoubleFirstName.matches()){
+        if (!matchSingleFirstName.matches() && !matchDoubleFirstName.matches()) {
             errorOnFirstName();
             firstNameError = true;
             error++;
         }
-        if(!matchSingleLastName.matches() && !matchDoubleLastName.matches()){
+        if (!matchSingleLastName.matches() && !matchDoubleLastName.matches()) {
             errorOnLastName();
             lastNameError = true;
             error++;
         }
-        if(!matchPhoneNumber.matches() && !matchMobilePhoneNumber.matches()){
+        if (!matchPhoneNumber.matches() && !matchMobilePhoneNumber.matches()) {
             errorOnPhoneNumber();
             phoneNumberError = true;
             error++;
         }
-        if(!matchEmail.matches()){
+        if (!matchEmail.matches()) {
             errorOnEmailAddress();
             emailError = true;
             error++;
         }
-        if(!matchStreet.matches()){
+        if (!matchStreet.matches()) {
             errorOnStreet();
             streetError = true;
             error++;
         }
-        if(!matchCity.matches()){
+        if (!matchCity.matches()) {
             errorOnCity();
             cityError = true;
             error++;
         }
-        if(!matchVoivodeship.matches()){
+        if (!matchVoivodeship.matches()) {
             errorOnVoivodeship();
             voivodeshipError = true;
             error++;
         }
-        if(!matchPassword.matches()){
+        if (!matchPassword.matches()) {
             errorOnPassword();
             passwordError = true;
             errorOnConfirmPassword();
             error++;
-        }else{
-            if(!password.equals(password2)){
+        } else {
+            if (!password.equals(password2)) {
                 errorOnConfirmPassword();
                 passwordNotTheSameError = true;
                 error++;
             }
         }
 
-        if(error <= 0){
+        if (error <= 0) {
             return true;
-        }else if(error == 1){
-            if(firstNameError){
+        } else if (error == 1) {
+            if (firstNameError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties("" +
                                 "authWrongFirstNameFormatAlert"),
                         350, 86, "alertFailure");
             }
-            if(lastNameError){
+            if (lastNameError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongLastNameFormatAlert"),
                         350, 86, "alertFailure");
             }
-            if(phoneNumberError){
+            if (phoneNumberError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongPhoneNumberFormatAlert"),
                         390, 86, "alertFailure");
             }
-            if(emailError){
+            if (emailError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongEmailFormatAlert"),
                         350, 86, "alertFailure");
             }
-            if(streetError){
+            if (streetError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongStreetFormatAlert"),
                         350, 86, "alertFailure");
             }
-            if(cityError){
+            if (cityError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongCityFormatAlert"),
                         380, 86, "alertFailure");
             }
-            if(voivodeshipError){
+            if (voivodeshipError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongVoivodeshipFormatAlert"),
                         365, 86, "alertFailure");
             }
-            if(passwordError){
+            if (passwordError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongPasswordFormatAlert"),
                         350, 86, "alertFailure");
             }
-            if(passwordNotTheSameError){
+            if (passwordNotTheSameError) {
 
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        registerRegisterButtonButton,"WARNING",
+                        registerRegisterButtonButton, "WARNING",
                         App.getLanguageProperties(
                                 "authPasswordsNotTheSameAlert"),
                         350, 86, "alertFailure");
             }
             return false;
-        }else{
+        } else {
 
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    registerRegisterButtonButton,"WARNING",
+                    registerRegisterButtonButton, "WARNING",
                     App.getLanguageProperties(
                             "authErrorsOnTextFieldsAlert"),
                     350, 86, "alertFailure");
@@ -495,8 +456,7 @@ public class Register implements Initializable {
     }
 
     public void handleRegisterOnEnterPressed(KeyEvent keyEvent) {
-        if(keyEvent.getCode() == KeyCode.ENTER)
-        {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
             register();
         }
     }
@@ -506,7 +466,7 @@ public class Register implements Initializable {
     }
 
     //FIRST NAME
-    private void errorOnFirstName(){
+    private void errorOnFirstName() {
         //FirstNameField
         registerFirstNameField.getStyleClass().clear();
         registerFirstNameField.getStyleClass().add("textFieldsError");
@@ -527,8 +487,9 @@ public class Register implements Initializable {
 
         registerFirstNameErrorExample.setVisible(false);
     }
+
     //LAST NAME
-    private void errorOnLastName(){
+    private void errorOnLastName() {
         //LastNameField
         registerLastNameField.getStyleClass().clear();
         registerLastNameField.getStyleClass().add("textFieldsError");
@@ -549,8 +510,9 @@ public class Register implements Initializable {
 
         registerLastNameErrorExample.setVisible(false);
     }
+
     //PHONE NUMBER
-    private void errorOnPhoneNumber(){
+    private void errorOnPhoneNumber() {
         //PhoneNumberField
         registerPhoneNumberField.getStyleClass().clear();
         registerPhoneNumberField.getStyleClass().add("textFieldsError");
@@ -571,8 +533,9 @@ public class Register implements Initializable {
 
         registerPhoneNumberErrorExample.setVisible(false);
     }
+
     //EMAIL ADDRESS
-    private void errorOnEmailAddress(){
+    private void errorOnEmailAddress() {
         //EmailAddressField
         registerEmailAddressField.getStyleClass().clear();
         registerEmailAddressField.getStyleClass().add("textFieldsError");
@@ -593,8 +556,9 @@ public class Register implements Initializable {
 
         registerEmailErrorExample.setVisible(false);
     }
+
     //STREET
-    private void errorOnStreet(){
+    private void errorOnStreet() {
         //StreetField
         registerStreetField.getStyleClass().clear();
         registerStreetField.getStyleClass().add("textFieldsError");
@@ -615,8 +579,9 @@ public class Register implements Initializable {
 
         registerStreetErrorExample.setVisible(false);
     }
+
     //CITY
-    private void errorOnCity(){
+    private void errorOnCity() {
         //CityField
         registerCityField.getStyleClass().clear();
         registerCityField.getStyleClass().add("textFieldsError");
@@ -637,8 +602,9 @@ public class Register implements Initializable {
 
         registerCityErrorExample.setVisible(false);
     }
+
     //VOIVODESHIP
-    private void errorOnVoivodeship(){
+    private void errorOnVoivodeship() {
         //VoivodeshipField
         registerVoivodeshipField.getStyleClass().clear();
         registerVoivodeshipField.getStyleClass().add("textFieldsError");
@@ -659,8 +625,9 @@ public class Register implements Initializable {
 
         registerVoivodeshipErrorExample.setVisible(false);
     }
+
     //PASSWORD
-    private void errorOnPassword(){
+    private void errorOnPassword() {
         //PasswordField
         registerPasswordField.getStyleClass().clear();
         registerPasswordField.getStyleClass().add("textFieldsError");
@@ -683,8 +650,9 @@ public class Register implements Initializable {
         registerRepeatPasswordCircle.getStyleClass().clear();
         registerRepeatPasswordCircle.getStyleClass().add("fill");
     }
+
     //REPEAT PASSWORD
-    private void errorOnConfirmPassword(){
+    private void errorOnConfirmPassword() {
         //RepeatPasswordField
         registerRepeatPasswordField.getStyleClass().clear();
         registerRepeatPasswordField.getStyleClass().add("textFieldsError");
@@ -708,7 +676,7 @@ public class Register implements Initializable {
         registerRepeatPasswordCircle.getStyleClass().add("fill");
     }
 
-    private void passwordRequirements(){
+    private void passwordRequirements() {
         Pattern sixChars = Pattern.compile(".{6,}");
         Pattern smallLetter = Pattern.compile(".*[a-z]+.*");
         Pattern bigLetter = Pattern.compile(".*[A-Z]+.*");
@@ -721,50 +689,50 @@ public class Register implements Initializable {
         Matcher matchNumber = number.matcher(registerPasswordField.getText());
         Matcher matchSpecialChar = specialChar.matcher(registerPasswordField.getText());
 
-        if(matchSixChars.matches()){
+        if (matchSixChars.matches()) {
             registerSixCharsRequirement.getStyleClass().clear();
             registerSixCharsRequirement.getStyleClass().add("successText");
-        }else{
+        } else {
             registerSixCharsRequirement.getStyleClass().clear();
             registerSixCharsRequirement.getStyleClass().add("errorText");
         }
 
-        if(matchSmallLetter.matches()){
+        if (matchSmallLetter.matches()) {
             registerSmallLetterRequirement.getStyleClass().clear();
             registerSmallLetterRequirement.getStyleClass().add("successText");
-        }else{
+        } else {
             registerSmallLetterRequirement.getStyleClass().clear();
             registerSmallLetterRequirement.getStyleClass().add("errorText");
         }
 
-        if(matchBigLetter.matches()){
+        if (matchBigLetter.matches()) {
             registerBigLetterRequirement.getStyleClass().clear();
             registerBigLetterRequirement.getStyleClass().add("successText");
-        }else{
+        } else {
             registerBigLetterRequirement.getStyleClass().clear();
             registerBigLetterRequirement.getStyleClass().add("errorText");
         }
 
-        if(matchNumber.matches()){
+        if (matchNumber.matches()) {
             registerNumberRequirement.getStyleClass().clear();
             registerNumberRequirement.getStyleClass().add("successText");
-        }else{
+        } else {
             registerNumberRequirement.getStyleClass().clear();
             registerNumberRequirement.getStyleClass().add("errorText");
         }
 
-        if(matchSpecialChar.matches()){
+        if (matchSpecialChar.matches()) {
             registerSpecialCharRequirement.getStyleClass().clear();
             registerSpecialCharRequirement.getStyleClass().add("successText");
-        }else{
+        } else {
             registerSpecialCharRequirement.getStyleClass().clear();
             registerSpecialCharRequirement.getStyleClass().add("errorText");
         }
 
-        if(registerRepeatPasswordField.getText().equals(registerPasswordField.getText())){
+        if (registerRepeatPasswordField.getText().equals(registerPasswordField.getText())) {
             registerSamePasswordsRequirement.getStyleClass().clear();
             registerSamePasswordsRequirement.getStyleClass().add("successText");
-        }else{
+        } else {
             registerSamePasswordsRequirement.getStyleClass().clear();
             registerSamePasswordsRequirement.getStyleClass().add("errorText");
         }

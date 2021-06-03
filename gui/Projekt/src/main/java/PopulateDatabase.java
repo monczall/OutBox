@@ -1,6 +1,5 @@
 package main.java;
 
-import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import main.java.dao.*;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
@@ -22,7 +21,7 @@ public class PopulateDatabase {
      *
      * @throws FileNotFoundException is being thrown if there is no file at given location
      */
-    public  void createDbIfNotExists() throws FileNotFoundException {
+    public void createDbIfNotExists() throws FileNotFoundException {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/outbox", "root", "");
             System.out.println("Connection established......");

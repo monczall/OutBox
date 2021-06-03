@@ -3,7 +3,6 @@ package main.java.controllers.client;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,43 +18,31 @@ import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.UserInfos;
 import main.java.features.Animations;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Client implements Initializable {
 
+    boolean hamburgerClicked = false;
     @FXML
     private VBox paneRight;
-
     @FXML
     private FontAwesomeIconView hamburger;
-
     @FXML
     private Pane welcomeMessage;
-
     @FXML
     private AnchorPane mainWindow;
-
     @FXML
     private AnchorPane window;
-
     @FXML
     private Pane alertPane;
-
     @FXML
     private Text name;
 
-    boolean hamburgerClicked = false;
-    
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
 
         //Loading name and surname from database
         UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
@@ -67,7 +54,7 @@ public class Client implements Initializable {
 
         // If hamburger button is clicked then menu slides in and transition last for 0.5s
         hamburger.setOnMouseClicked(event -> {
-            if(hamburgerClicked == false) {
+            if (hamburgerClicked == false) {
 
                 hamburger.setDisable(true);
                 hamburgerClicked = true;
@@ -78,15 +65,14 @@ public class Client implements Initializable {
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,+200,0.5);
-                Animations.moveByX(welcomeMessage,+160,0.5);
-                Animations.moveByX(mainWindow,+70,0.5);
+                Animations.moveByX(paneRight, +200, 0.5);
+                Animations.moveByX(welcomeMessage, +160, 0.5);
+                Animations.moveByX(mainWindow, +70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     hamburger.setDisable(false);
                 });
-            }
-            else {
+            } else {
                 hamburger.setDisable(true);
                 hamburgerClicked = false;
 
@@ -95,9 +81,9 @@ public class Client implements Initializable {
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,-200,0.5);
-                Animations.moveByX(welcomeMessage,-160,0.5);
-                Animations.moveByX(mainWindow,-70,0.5);
+                Animations.moveByX(paneRight, -200, 0.5);
+                Animations.moveByX(welcomeMessage, -160, 0.5);
+                Animations.moveByX(mainWindow, -70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     paneRight.setVisible(false);
@@ -111,7 +97,7 @@ public class Client implements Initializable {
     //Method that handle 'logout' button
     @FXML
     void logout(ActionEvent event) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         window.setDisable(true);
@@ -121,7 +107,7 @@ public class Client implements Initializable {
     //Method that handle 'no' button inside logout popup
     @FXML
     void logoutNo(ActionEvent event) {
-        Animations.moveByY(alertPane,-500,0.3);
+        Animations.moveByY(alertPane, -500, 0.3);
         window.setEffect(null);
         window.setDisable(false);
     }

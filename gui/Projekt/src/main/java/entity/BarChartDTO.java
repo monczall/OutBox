@@ -1,8 +1,8 @@
 package main.java.entity;
 
 public class BarChartDTO {
-    private String day;
-    private Long quantity;
+    private final String day;
+    private final Long quantity;
 
     public BarChartDTO(String day, Long quantity) {
         this.day = day;

@@ -5,22 +5,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import main.java.App;
 import main.java.controllers.auth.Encryption;
 import main.java.controllers.auth.Login;
-import main.java.dao.AreasDAO;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
-import main.java.entity.Areas;
 import main.java.entity.UserInfos;
 import main.java.entity.Users;
 import main.java.features.Alerts;
-import main.java.features.Preference;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -34,209 +32,37 @@ import java.util.ResourceBundle;
 public class ManagerCouriersAdd implements Initializable {
 
     @FXML
+    private final ObservableList<String> role = FXCollections.observableArrayList("Kurier", "Kurier Miedzyoddzialowy");
+    String roleString;
+    List<Users> dataUser;
+    Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
+    @FXML
     private TextField name;
-
     @FXML
     private TextField surname;
-
     @FXML
     private TextField street;
-
     @FXML
     private TextField city;
-
     @FXML
     private TextField email;
-
     @FXML
     private TextField numberPhone;
-
     @FXML
     private AnchorPane appWindow;
-
     @FXML
     private Button addCourierButton;
-
     @FXML
     private Pane alertPane;
-
     @FXML
     private ComboBox<String> comboRole;
 
-    @FXML
-    private ObservableList<String> role = FXCollections.observableArrayList("Kurier","Kurier Miedzyoddzialowy");
-
-    String roleString;
-    List<Users> dataUser;
-
-    Users uu = UsersDAO.getUsersId(Login.getUserID()).get(0);
-
-    /**
-     * Choosing the role of the courier
-     */
-    @FXML
-    void changeRole(ActionEvent event) {
-        if(comboRole.getValue().equals("Kurier")) {
-            roleString = "Kurier";
-        }
-        else {
-            roleString = "Kurier Miedzyoddzialowy";
-        }
-    }
-
-    /**
-     * The method responsible for adding the courier to the database
-     */
-    public void addCourier(MouseEvent mouseEvent) {
-        if(name.getText().toString().equals("") ||
-                surname.getText().toString().equals("") ||
-                street.getText().toString().equals("") ||
-                city.getText().toString().equals("") ||
-                email.getText().toString().equals("") ||
-                numberPhone.getText().toString().equals("")){
-            Alerts.createAlert(appWindow, addCourierButton,"WARNING",
-                    App.getLanguageProperties("completeAllFields"));
-        }
-        else {
-            if (!validation()) {
-                Alerts.createAlert(appWindow, addCourierButton, "WARNING",
-                        App.getLanguageProperties("correctFields"));
-            }
-            else{
-                String nameString = name.getText();
-                String emailString = email.getText();
-                String phoneString = numberPhone.getText();
-                String streetString = street.getText();
-                String surnameString = surname.getText();
-                String cityString = city.getText();
-
-                String password = new Random().ints(10, 33, 122)
-                        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
-
-                try {
-                    sendEmail(emailString,nameString,password);
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                    Alerts.createAlert(appWindow, addCourierButton,"WARNING",
-                            App.getLanguageProperties("errorEmail"));
-                }
-
-                UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
-                dataUser = UsersDAO.getUsersId(ui.getId());
-                int areaId = dataUser.get(0).getAreaId();
-                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString,
-                        ui.getVoivodeship(), Encryption.encrypt(password), roleString, uu.getAreaId());
-
-                alertPane.setVisible(true);
-            }
-        }
-    }
-
-    /**
-     * The method validates the entered data
-     * true - all fields are correct
-     * false - at least one field is incorrect
-     * @return boolean
-     */
-    boolean validation(){
-
-        boolean status = true;
-
-        if (email.getText().matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"))
-        {
-            goodValidation(email);
-        }
-        else
-        {
-            status = false;
-            errorValidation(email);
-        }
-        if (name.getText().matches("[a-zA-Z]+"))
-        {
-            goodValidation(name);
-        }
-        else
-        {
-            status = false;
-            errorValidation(name);
-        }
-        if (surname.getText().toString().matches("[a-zA-Z]+"))
-        {
-            goodValidation(surname);
-        }
-        else
-        {
-            status = false;
-            errorValidation(surname);
-        }
-        if (city.getText().matches("[A-Za-z]+"))
-        {
-            goodValidation(city);
-        }
-        else
-        {
-            status = false;
-            errorValidation(city);
-        }
-        if (street.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?" +
-                "\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}"))
-        {
-            goodValidation(street);
-        }
-        else {
-            status = false;
-            errorValidation(street);
-        }
-        if (numberPhone.getText().matches("[0-9]*") && numberPhone.getText().length() == 9)
-        {
-            goodValidation(numberPhone);
-        }
-        else
-        {
-            status = false;
-            errorValidation(numberPhone);
-        }
-
-        return status;
-    }
-
-    /**
-     * If textfield is valid it is set to the default style
-     * @param name textfield
-     */
-    void goodValidation(TextField name){
-        name.getStyleClass().clear();
-        name.getStyleClass().add("inputBoxCourier");
-    }
-
-    /**
-     * If textfield is incorrect it is set to error style
-     * @param name textfield
-     */
-    void errorValidation(TextField name){
-        name.getStyleClass().clear();
-        name.getStyleClass().add("inputBoxCourierError");
-    }
-
-    /**
-     * Button that closes the window confirming adding a courier
-     */
-    @FXML
-    void confirmButton(MouseEvent event) {
-        name.setText("");
-        surname.setText("");
-        street.setText("");
-        city.setText("");
-        email.setText("");
-        numberPhone.setText("");
-        alertPane.setVisible(false);
-    }
-
     /**
      * The method responsible for sending the generated password to the e-mail address provided
+     *
      * @param recipient e-mail recipient
      * @param firstName name recipient
-     * @param password password recipient
+     * @param password  password recipient
      * @throws MessagingException
      */
     public static void sendEmail(String recipient,
@@ -277,11 +103,12 @@ public class ManagerCouriersAdd implements Initializable {
 
     /**
      * The method responsible for preparing the message
+     *
      * @param session
      * @param outBoxEmailAccount sender e-mail
-     * @param recipient e-mail recipient
-     * @param firstName name recipient
-     * @param password password recipient
+     * @param recipient          e-mail recipient
+     * @param firstName          name recipient
+     * @param password           password recipient
      * @return null
      */
     private static Message prepareMessage(Session session,
@@ -302,6 +129,150 @@ public class ManagerCouriersAdd implements Initializable {
         return null;
     }
 
+    /**
+     * Choosing the role of the courier
+     */
+    @FXML
+    void changeRole(ActionEvent event) {
+        if (comboRole.getValue().equals("Kurier")) {
+            roleString = "Kurier";
+        } else {
+            roleString = "Kurier Miedzyoddzialowy";
+        }
+    }
+
+    /**
+     * The method responsible for adding the courier to the database
+     */
+    public void addCourier(MouseEvent mouseEvent) {
+        if (name.getText().equals("") ||
+                surname.getText().equals("") ||
+                street.getText().equals("") ||
+                city.getText().equals("") ||
+                email.getText().equals("") ||
+                numberPhone.getText().equals("")) {
+            Alerts.createAlert(appWindow, addCourierButton, "WARNING",
+                    App.getLanguageProperties("completeAllFields"));
+        } else {
+            if (!validation()) {
+                Alerts.createAlert(appWindow, addCourierButton, "WARNING",
+                        App.getLanguageProperties("correctFields"));
+            } else {
+                String nameString = name.getText();
+                String emailString = email.getText();
+                String phoneString = numberPhone.getText();
+                String streetString = street.getText();
+                String surnameString = surname.getText();
+                String cityString = city.getText();
+
+                String password = new Random().ints(10, 33, 122)
+                        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+
+                try {
+                    sendEmail(emailString, nameString, password);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                    Alerts.createAlert(appWindow, addCourierButton, "WARNING",
+                            App.getLanguageProperties("errorEmail"));
+                }
+
+                UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+                dataUser = UsersDAO.getUsersId(ui.getId());
+                int areaId = dataUser.get(0).getAreaId();
+                UserInfosDAO.addUserInfo(nameString, surnameString, emailString, phoneString, streetString, cityString,
+                        ui.getVoivodeship(), Encryption.encrypt(password), roleString, uu.getAreaId());
+
+                alertPane.setVisible(true);
+            }
+        }
+    }
+
+    /**
+     * The method validates the entered data
+     * true - all fields are correct
+     * false - at least one field is incorrect
+     *
+     * @return boolean
+     */
+    boolean validation() {
+
+        boolean status = true;
+
+        if (email.getText().matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")) {
+            goodValidation(email);
+        } else {
+            status = false;
+            errorValidation(email);
+        }
+        if (name.getText().matches("[a-zA-Z]+")) {
+            goodValidation(name);
+        } else {
+            status = false;
+            errorValidation(name);
+        }
+        if (surname.getText().matches("[a-zA-Z]+")) {
+            goodValidation(surname);
+        } else {
+            status = false;
+            errorValidation(surname);
+        }
+        if (city.getText().matches("[A-Za-z]+")) {
+            goodValidation(city);
+        } else {
+            status = false;
+            errorValidation(city);
+        }
+        if (street.getText().matches("[A-Za-z]{0,2}\\.?\\s?[A-Za-z]{2,40}\\s?\\-?[A-Za-z]{0,40}?\\s?" +
+                "\\-?[A-Za-z]{0,40}?\\s[0-9]{1,4}\\s?[A-Za-z]?\\s?\\/?\\s?[0-9]{0,5}")) {
+            goodValidation(street);
+        } else {
+            status = false;
+            errorValidation(street);
+        }
+        if (numberPhone.getText().matches("[0-9]*") && numberPhone.getText().length() == 9) {
+            goodValidation(numberPhone);
+        } else {
+            status = false;
+            errorValidation(numberPhone);
+        }
+
+        return status;
+    }
+
+    /**
+     * If textfield is valid it is set to the default style
+     *
+     * @param name textfield
+     */
+    void goodValidation(TextField name) {
+        name.getStyleClass().clear();
+        name.getStyleClass().add("inputBoxCourier");
+    }
+
+    /**
+     * If textfield is incorrect it is set to error style
+     *
+     * @param name textfield
+     */
+    void errorValidation(TextField name) {
+        name.getStyleClass().clear();
+        name.getStyleClass().add("inputBoxCourierError");
+    }
+
+    /**
+     * Button that closes the window confirming adding a courier
+     */
+    @FXML
+    void confirmButton(MouseEvent event) {
+        name.setText("");
+        surname.setText("");
+        street.setText("");
+        city.setText("");
+        email.setText("");
+        numberPhone.setText("");
+        alertPane.setVisible(false);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -316,7 +287,7 @@ public class ManagerCouriersAdd implements Initializable {
 
         comboRole.setItems(role);
         comboRole.setValue(role.get(0));
-        roleString="Kurier";
+        roleString = "Kurier";
     }
 
 }

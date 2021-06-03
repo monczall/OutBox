@@ -4,23 +4,38 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="832.0" stylesheets="@../../css/courier.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.courier.ExpendableRow">
+<?import javafx.scene.text.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="111.0" prefWidth="832.0" stylesheets="@../../css/courier.css"
+      xmlns="http://javafx.com/javafx/15.0.1" fx:controller="main.java.controllers.courier.ExpendableRow">
     <children>
-        <Label layoutX="163.0" layoutY="7.0" text="%sender" />
-        <ComboBox fx:id="changeStatus" layoutX="204.0" layoutY="75.0" onAction="#setStatus" prefHeight="25.0" prefWidth="235.0" styleClass="inputBox" />
-        <Text fill="WHITE" layoutX="-71.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rowText" text="%nameWithColon" textAlignment="RIGHT" textOrigin="CENTER" wrappingWidth="130.0" />
-        <Text fill="WHITE" layoutX="-72.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%cityWithColon" textAlignment="RIGHT" wrappingWidth="130.0" />
-        <Text fill="WHITE" layoutX="183.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%surnameWithColon" textAlignment="RIGHT" wrappingWidth="130.0" />
-        <Text fill="WHITE" layoutX="-72.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%phoneWithColon" textAlignment="RIGHT" wrappingWidth="130.0" />
-        <Text fill="WHITE" layoutX="183.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%streetWithColon" textAlignment="RIGHT" wrappingWidth="130.0" />
-        <Text fx:id="name" fill="WHITE" layoutX="67.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="174.80339813232422" />
-        <Text fx:id="city" fill="WHITE" layoutX="67.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="174.80339813232422" />
-        <Text fx:id="surname" fill="WHITE" layoutX="322.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
-        <Text fx:id="address" fill="WHITE" layoutX="322.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
-        <Text fx:id="phone" fill="WHITE" layoutX="67.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="156.80339813232422" />
-        <TextArea fx:id="comments" editable="false" layoutX="560.0" layoutY="35.0" prefHeight="59.0" prefWidth="262.0" styleClass="inputArea" wrapText="true" />
-        <Label layoutX="655.0" layoutY="7.0" prefHeight="17.0" prefWidth="118.0" text="%comment" textAlignment="CENTER" />
+        <Label layoutX="163.0" layoutY="7.0" text="%sender"/>
+        <ComboBox fx:id="changeStatus" layoutX="204.0" layoutY="75.0" onAction="#setStatus" prefHeight="25.0"
+                  prefWidth="235.0" styleClass="inputBox"/>
+        <Text fill="WHITE" layoutX="-71.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="rowText"
+              text="%nameWithColon" textAlignment="RIGHT" textOrigin="CENTER" wrappingWidth="130.0"/>
+        <Text fill="WHITE" layoutX="-72.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%cityWithColon"
+              textAlignment="RIGHT" wrappingWidth="130.0"/>
+        <Text fill="WHITE" layoutX="183.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="%surnameWithColon" textAlignment="RIGHT" wrappingWidth="130.0"/>
+        <Text fill="WHITE" layoutX="-72.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%phoneWithColon"
+              textAlignment="RIGHT" wrappingWidth="130.0"/>
+        <Text fill="WHITE" layoutX="183.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%streetWithColon"
+              textAlignment="RIGHT" wrappingWidth="130.0"/>
+        <Text fx:id="name" fill="WHITE" layoutX="67.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""
+              wrappingWidth="174.80339813232422"/>
+        <Text fx:id="city" fill="WHITE" layoutX="67.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""
+              wrappingWidth="174.80339813232422"/>
+        <Text fx:id="surname" fill="WHITE" layoutX="322.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""
+              wrappingWidth="156.80339813232422"/>
+        <Text fx:id="address" fill="WHITE" layoutX="322.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""
+              wrappingWidth="156.80339813232422"/>
+        <Text fx:id="phone" fill="WHITE" layoutX="67.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""
+              wrappingWidth="156.80339813232422"/>
+        <TextArea fx:id="comments" editable="false" layoutX="560.0" layoutY="35.0" prefHeight="59.0" prefWidth="262.0"
+                  styleClass="inputArea" wrapText="true"/>
+        <Label layoutX="655.0" layoutY="7.0" prefHeight="17.0" prefWidth="118.0" text="%comment"
+               textAlignment="CENTER"/>
     </children>
 </Pane>

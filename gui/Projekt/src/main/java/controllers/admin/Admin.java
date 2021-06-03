@@ -20,21 +20,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Admin implements Initializable {
+    boolean hamburgerClicked = false;
     @FXML
     private VBox paneRight;
     @FXML
     private FontAwesomeIconView hamburger;
-
     @FXML
     private AnchorPane mainWindow;
-
     @FXML
     private AnchorPane window;
-
     @FXML
     private Pane alertPane;
-
-    boolean hamburgerClicked = false;
+    @FXML
+    private Pane hello;
 
     public Admin() {
     }
@@ -85,10 +83,6 @@ public class Admin implements Initializable {
             }
         });
     }
-
-
-    @FXML
-    private Pane hello;
 
     /**
      * Method that change scene to "admin"

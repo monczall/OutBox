@@ -13,7 +13,6 @@ import main.java.App;
 import main.java.SceneManager;
 import main.java.controllers.auth.Encryption;
 import main.java.controllers.auth.Login;
-import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.features.Alerts;
 import main.java.features.Preference;
@@ -24,59 +23,46 @@ import java.util.ResourceBundle;
 
 public class ManagerSettings implements Initializable {
 
-    @FXML
-    private AnchorPane settingsPane;
-
-    @FXML
-    private ComboBox<String> comboColor;
-
-    @FXML
-    private ComboBox<String> comboLanguage;
-
-    @FXML
-    private CustomPasswordField settPassword;
-
-    @FXML
-    private CustomPasswordField settRepeatPassword;
-
-    @FXML
-    private Button saveInformation;
-
-    @FXML
-    private CustomPasswordField settOldPassword;
-
-    private FontAwesomeIconView alertIcon = new FontAwesomeIconView();
-
-    Preference pref = new Preference();
-
-    private ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
-
-    private ObservableList<String> colors = FXCollections.observableArrayList(
+    private final FontAwesomeIconView alertIcon = new FontAwesomeIconView();
+    private final ObservableList<String> languages = FXCollections.observableArrayList("Polski", "English");
+    private final ObservableList<String> colors = FXCollections.observableArrayList(
             App.getLanguageProperties("colorOrange"),
             App.getLanguageProperties("colorRed"),
             App.getLanguageProperties("colorWhite"));
+    Preference pref = new Preference();
+    @FXML
+    private AnchorPane settingsPane;
+    @FXML
+    private ComboBox<String> comboColor;
+    @FXML
+    private ComboBox<String> comboLanguage;
+    @FXML
+    private CustomPasswordField settPassword;
+    @FXML
+    private CustomPasswordField settRepeatPassword;
+    @FXML
+    private Button saveInformation;
+    @FXML
+    private CustomPasswordField settOldPassword;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         //set language
         comboLanguage.setItems(languages);
-        if(Preference.readPreference("language").equals("english")){
+        if (Preference.readPreference("language").equals("english")) {
             comboLanguage.setValue(languages.get(1));
-        }
-        else{
+        } else {
             comboLanguage.setValue(languages.get(0));
         }
 
         //set colors
         comboColor.setItems(colors);
-        if(Preference.readPreference("color").equals("orange")){
+        if (Preference.readPreference("color").equals("orange")) {
             comboColor.setValue(colors.get(0));
-        }
-        else if(Preference.readPreference("color").equals("red")){
+        } else if (Preference.readPreference("color").equals("red")) {
             comboColor.setValue(colors.get(1));
-        }
-        else{
+        } else {
             comboColor.setValue(colors.get(2));
         }
 
@@ -88,10 +74,9 @@ public class ManagerSettings implements Initializable {
     @FXML
     void changeLanguage(ActionEvent event) {
         Preference pref = new Preference();
-        if(comboLanguage.getValue().equals("English")) {
+        if (comboLanguage.getValue().equals("English")) {
             pref.addPreference("language", "english");
-        }
-        else {
+        } else {
             pref.addPreference("language", "polski");
         }
         SceneManager.renderScene("manager");
@@ -108,13 +93,11 @@ public class ManagerSettings implements Initializable {
             pref.addPreference("color", "orange");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #ffa500;" +
                     "-fx-second-color: #000000;" + "-fx-error-color: #d82020;");
-        }
-        else if (comboColor.getValue().equals("Czerwony") || comboColor.getValue().equals("Red")){
+        } else if (comboColor.getValue().equals("Czerwony") || comboColor.getValue().equals("Red")) {
             pref.addPreference("color", "red");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #d82020;" +
                     "-fx-second-color: #ffffff;" + "-fx-error-color: #ffffff;");
-        }
-        else{
+        } else {
             pref.addPreference("color", "white");
             SceneManager.getStage().getScene().getRoot().setStyle("-fx-main-color: #ffffff;" +
                     "-fx-second-color: #000000;" + "-fx-error-color: #d82020;");
@@ -126,13 +109,12 @@ public class ManagerSettings implements Initializable {
      */
     public void updateInformation(ActionEvent actionEvent) {
         // Checking if passwords were provided, changed and if they contains any error
-        if(!settOldPassword.getText().isEmpty() && !settPassword.getText().isEmpty() &&
+        if (!settOldPassword.getText().isEmpty() && !settPassword.getText().isEmpty() &&
                 !settRepeatPassword.getText().isEmpty()) {
-            if(settPassword.getText().equals(settRepeatPassword.getText()))
-            {
+            if (settPassword.getText().equals(settRepeatPassword.getText())) {
                 if (Encryption.encrypt(settOldPassword.getText()).equals(UsersDAO.readPassword(Login.getUserID()))) {
                     // Updating passwords
-                    UsersDAO.updatePassword(Login.getUserID(),settPassword.getText());
+                    UsersDAO.updatePassword(Login.getUserID(), settPassword.getText());
 
                     Alerts.createAlert(settingsPane, saveInformation,
                             "CHECK",
@@ -147,15 +129,12 @@ public class ManagerSettings implements Initializable {
 
                     settOldPassword.getRight().setVisible(true);
                 }
-            }
-            else
-            {
+            } else {
                 Alerts.createAlert(settingsPane, saveInformation,
                         "WARNING",
                         App.getLanguageProperties("samePasswords"));
             }
-        }
-        else{
+        } else {
             Alerts.createAlert(settingsPane, saveInformation,
                     "WARNING",
                     App.getLanguageProperties("providePasswords"));

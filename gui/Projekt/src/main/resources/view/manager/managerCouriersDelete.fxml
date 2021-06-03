@@ -1,51 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
-
-<AnchorPane fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriersDelete">
-   <children>
-      <FontAwesomeIconView fill="ORANGE" glyphName="USER_TIMES" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%deleteCourierTitle" />
-      <TextField fx:id="name" layoutX="202.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="%name" styleClass="inputBox" />
-      <TextField fx:id="surname" layoutX="381.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="%surname" styleClass="inputBox" />
-      <Button fx:id="findCourierButton" alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#findCourier" prefHeight="39.0" prefWidth="150.0" styleClass="homeBlock" text="%find" />
-      <AnchorPane layoutX="152.0" layoutY="205.0" prefHeight="317.0" prefWidth="730.0" style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
-         <children>
-            <Label fx:id="noDataText" alignment="CENTER" prefHeight="99.0" prefWidth="730.0" styleClass="optionGroup" text="%noDataToDisplay" />
-            <Pane fx:id="paneResults" layoutY="56.0" prefHeight="279.0" prefWidth="692.0" styleClass="packageItem">
-               <children>
-                  <Text layoutX="94.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%nameAndSurname" />
-                  <Text layoutX="94.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%placeOfResidence" />
-                  <Text layoutX="418.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%number" />
-                  <FontAwesomeIconView fill="#8f8f8f" glyphName="USER" layoutX="648.0" layoutY="37.0" size="40" />
-                  <Label fx:id="fullName" layoutX="97.0" layoutY="17.0" styleClass="optionGroup" text="XXX XXX" />
-                  <Label fx:id="cityAndStreet" layoutX="97.0" layoutY="109.0" styleClass="optionGroup" text="XXXX ul. XXXXX 27" />
-                  <Label fx:id="phoneNumber" layoutX="421.0" layoutY="17.0" styleClass="optionGroup" text="XXX XXX XXX" />
-                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="289.0" layoutY="186.0" mnemonicParsing="false" onAction="#confirmDeleteCourierButton" prefHeight="39.0" prefWidth="115.0" styleClass="homeBlock" text="%managerDelete" />
-                  <Text layoutX="418.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%email" wrappingWidth="109.8828125" />
-                  <Label fx:id="email" layoutX="421.0" layoutY="62.0" styleClass="optionGroup" text="XXXX@XXXX.xx" />
-                  <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%voivodeship" />
-                  <Label fx:id="voivodeship" layoutX="97.0" layoutY="62.0" styleClass="optionGroup" text="XXXXXX" />
-                  <Text layoutX="418.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption" text="%adminRole" wrappingWidth="109.8828125" />
-                  <Label fx:id="role" layoutX="421.0" layoutY="109.0" styleClass="optionGroup" text="XXXX@XXXX.xx" />
-               </children>
-            </Pane>
-            <Label fx:id="howManyPackages" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="589.0" layoutY="14.0" prefHeight="30.0" prefWidth="91.0" styleClass="optionGroup" text="1/1" />
-         </children>
-      </AnchorPane>
-      <Pane fx:id="alertPane" layoutX="376.0" layoutY="238.0" prefHeight="139.0" prefWidth="300.0" styleClass="customAlert" visible="false">
-         <children>
-            <Label fx:id="labelAlertPane" alignment="CENTER" layoutX="12.0" layoutY="6.0" prefHeight="79.0" prefWidth="278.0" styleClass="textLabel" text="%courierHasBeenRemoved" textAlignment="CENTER" textFill="#13d301" wrapText="true" />
-            <Button layoutX="126.0" layoutY="85.0" mnemonicParsing="false" onMouseClicked="#confirmButton" styleClass="btnNext" text="OK" />
-         </children>
-      </Pane>
-      <Button fx:id="button1" layoutX="111.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#buttonBack" styleClass="btnNext" text="&lt;" />
-      <Button fx:id="button2" layoutX="883.0" layoutY="348.0" mnemonicParsing="false" onMouseClicked="#buttonNext" styleClass="btnNext" text="&gt;" />
-   </children>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="appWindow" prefHeight="672.0" prefWidth="1033.0"
+            styleClass="mainBackground" stylesheets="@../../css/manager.css"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="main.java.controllers.manager.ManagerCouriersDelete">
+    <children>
+        <FontAwesomeIconView fill="ORANGE" glyphName="USER_TIMES" layoutX="142.0" layoutY="70.0" size="38"
+                             styleClass="blockIconTitle"/>
+        <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel"
+              text="%deleteCourierTitle"/>
+        <TextField fx:id="name" layoutX="202.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0" promptText="%name"
+                   styleClass="inputBox"/>
+        <TextField fx:id="surname" layoutX="381.0" layoutY="119.0" prefHeight="33.0" prefWidth="150.0"
+                   promptText="%surname" styleClass="inputBox"/>
+        <Button fx:id="findCourierButton" alignment="BOTTOM_CENTER" layoutX="749.0" layoutY="116.0"
+                mnemonicParsing="false" onMouseClicked="#findCourier" prefHeight="39.0" prefWidth="150.0"
+                styleClass="homeBlock" text="%find"/>
+        <AnchorPane layoutX="152.0" layoutY="205.0" prefHeight="317.0" prefWidth="730.0"
+                    style="-fx-background-color: #121212;" stylesheets="@../../css/manager.css">
+            <children>
+                <Label fx:id="noDataText" alignment="CENTER" prefHeight="99.0" prefWidth="730.0"
+                       styleClass="optionGroup" text="%noDataToDisplay"/>
+                <Pane fx:id="paneResults" layoutY="56.0" prefHeight="279.0" prefWidth="692.0" styleClass="packageItem">
+                    <children>
+                        <Text layoutX="94.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="textOption" text="%nameAndSurname"/>
+                        <Text layoutX="94.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="textOption" text="%placeOfResidence"/>
+                        <Text layoutX="418.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="textOption" text="%number"/>
+                        <FontAwesomeIconView fill="#8f8f8f" glyphName="USER" layoutX="648.0" layoutY="37.0" size="40"/>
+                        <Label fx:id="fullName" layoutX="97.0" layoutY="17.0" styleClass="optionGroup" text="XXX XXX"/>
+                        <Label fx:id="cityAndStreet" layoutX="97.0" layoutY="109.0" styleClass="optionGroup"
+                               text="XXXX ul. XXXXX 27"/>
+                        <Label fx:id="phoneNumber" layoutX="421.0" layoutY="17.0" styleClass="optionGroup"
+                               text="XXX XXX XXX"/>
+                        <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="289.0" layoutY="186.0"
+                                mnemonicParsing="false" onAction="#confirmDeleteCourierButton" prefHeight="39.0"
+                                prefWidth="115.0" styleClass="homeBlock" text="%managerDelete"/>
+                        <Text layoutX="418.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="textOption" text="%email" wrappingWidth="109.8828125"/>
+                        <Label fx:id="email" layoutX="421.0" layoutY="62.0" styleClass="optionGroup"
+                               text="XXXX@XXXX.xx"/>
+                        <Text layoutX="93.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="textOption" text="%voivodeship"/>
+                        <Label fx:id="voivodeship" layoutX="97.0" layoutY="62.0" styleClass="optionGroup"
+                               text="XXXXXX"/>
+                        <Text layoutX="418.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              styleClass="textOption" text="%adminRole" wrappingWidth="109.8828125"/>
+                        <Label fx:id="role" layoutX="421.0" layoutY="109.0" styleClass="optionGroup"
+                               text="XXXX@XXXX.xx"/>
+                    </children>
+                </Pane>
+                <Label fx:id="howManyPackages" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="589.0"
+                       layoutY="14.0" prefHeight="30.0" prefWidth="91.0" styleClass="optionGroup" text="1/1"/>
+            </children>
+        </AnchorPane>
+        <Pane fx:id="alertPane" layoutX="376.0" layoutY="238.0" prefHeight="139.0" prefWidth="300.0"
+              styleClass="customAlert" visible="false">
+            <children>
+                <Label fx:id="labelAlertPane" alignment="CENTER" layoutX="12.0" layoutY="6.0" prefHeight="79.0"
+                       prefWidth="278.0" styleClass="textLabel" text="%courierHasBeenRemoved" textAlignment="CENTER"
+                       textFill="#13d301" wrapText="true"/>
+                <Button layoutX="126.0" layoutY="85.0" mnemonicParsing="false" onMouseClicked="#confirmButton"
+                        styleClass="btnNext" text="OK"/>
+            </children>
+        </Pane>
+        <Button fx:id="button1" layoutX="111.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#buttonBack"
+                styleClass="btnNext" text="&lt;"/>
+        <Button fx:id="button2" layoutX="883.0" layoutY="348.0" mnemonicParsing="false" onMouseClicked="#buttonNext"
+                styleClass="btnNext" text="&gt;"/>
+    </children>
 </AnchorPane>

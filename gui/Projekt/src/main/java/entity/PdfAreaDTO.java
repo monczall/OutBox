@@ -1,14 +1,12 @@
 package main.java.entity;
 
-import java.util.Date;
-
 public class PdfAreaDTO {
 
 
-    private String areaName;
-    private Long smallPackages;
-    private Long mediumPackages;
-    private Long bigPackages;
+    private final String areaName;
+    private final Long smallPackages;
+    private final Long mediumPackages;
+    private final Long bigPackages;
 
 
     public PdfAreaDTO(String areaName, Long smallPackages, Long mediumPackages, Long bigPackages) {
