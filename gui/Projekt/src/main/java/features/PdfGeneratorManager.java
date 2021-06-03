@@ -94,7 +94,6 @@ public class PdfGeneratorManager {
 
         Paragraph paragraph;
 
-
         if(display){
             paragraph = new Paragraph(
                     App.getLanguageProperties("reportGeneratedBy") + ui.getName() + " "

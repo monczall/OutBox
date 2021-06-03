@@ -106,8 +106,8 @@ public class AdminRaport {
      */
     public void raportLastDay(ActionEvent actionEvent) {
 
-        LocalDate startDataValue = LocalDate.now().minusDays(1);
-        LocalDate endDataValue = startDataValue.plusDays(1);
+        LocalDate startDataValue = LocalDate.now().plusDays(1);
+        LocalDate endDataValue = startDataValue.minusDays(1);
 
         Date startValue = java.sql.Date.valueOf(startDataValue);
         Date endValue = java.sql.Date.valueOf(endDataValue);
@@ -159,8 +159,8 @@ public class AdminRaport {
      */
     public void raportLastMonth(ActionEvent actionEvent) {
 
-        LocalDate startDataValue = LocalDate.now();
-        LocalDate endDataValue = startDataValue.minusMonths(1).plusDays(1);
+        LocalDate startDataValue = LocalDate.now().plusDays(1);
+        LocalDate endDataValue = startDataValue.minusMonths(1).minusDays(1);
 
         Date startValue = java.sql.Date.valueOf(startDataValue);
         Date endValue = java.sql.Date.valueOf(endDataValue);
@@ -210,8 +210,8 @@ public class AdminRaport {
     public void raportLastWeek(ActionEvent actionEvent) {
 
 
-        LocalDate startDataValue = LocalDate.now();
-        LocalDate endDataValue = startDataValue.minusDays(6);
+        LocalDate startDataValue = LocalDate.now().plusDays(1);
+        LocalDate endDataValue = startDataValue.minusDays(7);
 
         Date startValue = java.sql.Date.valueOf(startDataValue);
         Date endValue = java.sql.Date.valueOf(endDataValue);

@@ -77,7 +77,8 @@ public class PdfGenerator {
 
         Paragraph paragraph = new Paragraph(
                 App.getLanguageProperties("reportGeneratedBy") + "Admin" + "\n" + simpleDateFormat.format(now)
-                        + "\n" + App.getLanguageProperties("fromThePeriod") + start + " - " + localEnd.minusDays(1),tableFont);
+                        + "\n" + App.getLanguageProperties("fromThePeriod") + start + " - " + localEnd.minusDays(1),
+                tableFont);
 
 
 
@@ -103,7 +104,6 @@ public class PdfGenerator {
 
         Paragraph data = new Paragraph(App.getLanguageProperties("dataPackages"), subFont);
         document.add(data);
-
         ObservableList<PdfDTO> packList = PackagesDAO.readPackagesForPdf(start, end);
 
         int smallCounter = 0;

@@ -168,12 +168,15 @@ public class PackagesDAO {
 
         String hql = "SELECT NEW main.java.entity.PdfDTO(" +
                 "P.packageNumber, PT.sizeName, " +
-                "P.userInfosByUserInfoId.city, P.userInfosByUserInfoId.voivodeship, PH.date, P.id, P.usersByCourierId.areaId) " +
+                "P.userInfosByUserInfoId.city, P.userInfosByUserInfoId.voivodeship, " +
+                "PH.date, P.id, P.usersByCourierId.areaId) " +
                 "FROM Packages P, PackageHistory PH, PackageType PT " +
                 "WHERE P.id = PH.packageId " +
                 "AND PH.date BETWEEN :dateStart AND :dateEnd " +
                 "AND P.typeId = PT.id " +
-                "AND PH.status = 'Zarejestrowana' " +
+                "AND (PH.status = 'Dostarczona' " +
+                "OR PH.status = 'Zwrocona Do Nadawcy' " +
+                "OR PH.status = 'Do Odebrania W Oddziale') " +
                 "GROUP BY P.packageNumber";
 
         Session session = HibernateUtil.getSessionFactory().openSession();
