@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane fx:id="mainWindow" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerPackages">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainWindow" prefHeight="672.0" prefWidth="1033.0"
+            styleClass="mainBackground" stylesheets="@../../css/manager.css"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="main.java.controllers.manager.ManagerPackages">
     <children>
-        <Text fill="WHITE" layoutX="203.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="optionGroup" text="%shipmentTitle" />
-        <FontAwesomeIconView fill="ORANGE" glyphName="DROPBOX" layoutX="152.0" layoutY="81.0" size="40" styleClass="blockIconTitle" />
-        <TableView fx:id="table" layoutX="102.0" layoutY="169.0" prefHeight="467.0" prefWidth="857.0" stylesheets="@../../css/manager.css">
+        <Text fill="WHITE" layoutX="203.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              styleClass="optionGroup" text="%shipmentTitle"/>
+        <FontAwesomeIconView fill="ORANGE" glyphName="CUBES" layoutX="146.0" layoutY="81.0" size="40"
+                             styleClass="blockIconTitle"/>
+        <TableView fx:id="table" layoutX="102.0" layoutY="169.0" prefHeight="467.0" prefWidth="857.0"
+                   stylesheets="@../../css/manager.css">
             <columns>
-                <TableColumn fx:id="packageNumber" prefWidth="131.3333511352539" text="%packageNumber" />
-                <TableColumn fx:id="name" prefWidth="67.33329772949219" text="%name" />
-                <TableColumn fx:id="surname" prefWidth="100.0" text="%surname" />
-                <TableColumn fx:id="city" minWidth="0.0" prefWidth="85.33331298828125" text="%city" />
-                <TableColumn fx:id="address" minWidth="0.0" prefWidth="130.66671752929688" text="%address" />
-                <TableColumn fx:id="telephone" minWidth="0.0" prefWidth="90.0" text="%phone" />
-                <TableColumn fx:id="state" prefWidth="110.0" text="%packageStatus" />
-                <TableColumn fx:id="time" minWidth="0.0" prefWidth="88.66668701171875" text="%deliveryTime" />
+                <TableColumn fx:id="packageNumber" prefWidth="131.3333511352539" text="%packageNumber"/>
+                <TableColumn fx:id="name" prefWidth="67.33329772949219" text="%name"/>
+                <TableColumn fx:id="surname" prefWidth="100.0" text="%surname"/>
+                <TableColumn fx:id="city" minWidth="0.0" prefWidth="85.33331298828125" text="%city"/>
+                <TableColumn fx:id="address" minWidth="0.0" prefWidth="130.66671752929688" text="%address"/>
+                <TableColumn fx:id="telephone" minWidth="0.0" prefWidth="90.0" text="%phone"/>
+                <TableColumn fx:id="state" prefWidth="110.0" text="%packageStatus"/>
+                <TableColumn fx:id="time" minWidth="0.0" prefWidth="88.66668701171875" text="%deliveryTime"/>
             </columns>
         </TableView>
-        <TextField fx:id="searchField" layoutX="741.0" layoutY="109.0" onKeyReleased="#search" promptText="%search" styleClass="inputBox" />
+        <TextField fx:id="searchField" layoutX="741.0" layoutY="109.0" onKeyReleased="#search" promptText="%search"
+                   styleClass="inputBox"/>
     </children>
 </AnchorPane>

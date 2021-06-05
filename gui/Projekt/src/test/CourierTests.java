@@ -14,7 +14,6 @@ import static main.java.dao.UsersDAO.readUserInfoById;
 public class CourierTests {
 
 
-
     private static SessionFactory sessionFactory;
     private Session session;
 
@@ -27,7 +26,7 @@ public class CourierTests {
 
     @AfterAll
     public static void tearDown() {
-        if(sessionFactory != null){
+        if (sessionFactory != null) {
             sessionFactory.close();
             System.out.println("Zniszczono sessionFactory");
         }
@@ -60,9 +59,9 @@ public class CourierTests {
         System.out.println("Uruchomiono test sprawdzający metodę wczytywania do tabeli...");
         int counter = 0;
         ObservableList<PackagesDTO> packages = getPackagesWithStatus();
-        for(int i = 0; i < packages.size(); i++){
-            if(packages.get(i).getStatus().equals("Dostarczona")
-            || packages.get(i).getStatus().equals("Zwrócona Do Nadawcy")){
+        for (int i = 0; i < packages.size(); i++) {
+            if (packages.get(i).getStatus().equals("Dostarczona")
+                    || packages.get(i).getStatus().equals("Zwrocona Do Nadawcy")) {
                 counter++;
             }
         }
@@ -86,7 +85,7 @@ public class CourierTests {
     @Test
     public void shouldReturnUserInfo() {
         System.out.println("Uruchomiono test sprawdzający ilość statusów w bazie...");
-        if(getPackagesWithStatus().size() > 0) {
+        if (getPackagesWithStatus().size() > 0) {
             Assertions.assertTrue(readUserInfoById(getPackagesWithStatus().get(0).getUserInfosId()).size() == 1);
         }
     }
@@ -100,8 +99,7 @@ public class CourierTests {
 
     @AfterEach
     public void closeSession() {
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
             System.out.println("Zamknięto sesje\n");
         }

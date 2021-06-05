@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
@@ -28,37 +29,27 @@ import java.util.ResourceBundle;
 
 public class Manager implements Initializable {
 
-    @FXML
-    private VBox paneRight;
-
-    @FXML
-    private FontAwesomeIconView hamburger;
-
-    @FXML
-    private Button btnSettings;
-
-    @FXML
-    private FontAwesomeIconView iconSettings;
-
-    @FXML
-    private Button btnHome;
-
-    @FXML
-    private Pane welcomeMessage;
-
-    @FXML
-    private AnchorPane window;
-
-    @FXML
-    private Pane alertPane;
-
-    @FXML
-    private AnchorPane mainWindow;
-
     boolean hamburgerClicked = false;
-
     //Logged in user data loading
     UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
+    @FXML
+    private VBox paneRight;
+    @FXML
+    private FontAwesomeIconView hamburger;
+    @FXML
+    private Button btnSettings;
+    @FXML
+    private FontAwesomeIconView iconSettings;
+    @FXML
+    private Button btnHome;
+    @FXML
+    private Pane welcomeMessage;
+    @FXML
+    private AnchorPane window;
+    @FXML
+    private Pane alertPane;
+    @FXML
+    private AnchorPane mainWindow;
 
     /**
      * Loading the home panel
@@ -71,35 +62,35 @@ public class Manager implements Initializable {
      * Loading the courier management panel
      */
     public void openCouriers(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerCouriers.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerCouriers.fxml", mainWindow);
     }
 
     /**
      * Loading the panel for previewing packages
      */
     public void openPackages(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerPackages.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerPackages.fxml", mainWindow);
     }
 
     /**
      * Loading the panel with settings
      */
     public void openSettings(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerSettings.fxml", mainWindow);
     }
 
     /**
      * Loading the report management panel
      */
     public void openRaports(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerRaports.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerRaports.fxml", mainWindow);
     }
 
     /**
      * Loading the charts panel
      */
     public void openCharts(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/manager/managerCharts.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/manager/managerCharts.fxml", mainWindow);
     }
 
     /**
@@ -107,7 +98,7 @@ public class Manager implements Initializable {
      */
     @FXML
     public void logout(MouseEvent mouseEvent) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         window.setDisable(true);
@@ -119,7 +110,7 @@ public class Manager implements Initializable {
      */
     @FXML
     public void logoutNo(ActionEvent event) {
-        Animations.moveByY(alertPane,-500,0.3);
+        Animations.moveByY(alertPane, -500, 0.3);
         window.setEffect(null);
         window.setDisable(false);
     }
@@ -132,15 +123,33 @@ public class Manager implements Initializable {
         SceneManager.renderScene("login");
     }
 
+    /**
+     * button to close applications
+     */
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * button that minimizes applications
+     */
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
 
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
 
         //If hamburger button is clicked then menu slides in and transition last for 0.5s
         hamburger.setOnMouseClicked(event -> {
-            if(hamburgerClicked == false) {
+            if (hamburgerClicked == false) {
 
                 hamburger.setDisable(true);
                 hamburgerClicked = true;
@@ -151,15 +160,14 @@ public class Manager implements Initializable {
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,+200,0.5);
-                Animations.moveByX(welcomeMessage,+170,0.5);
-                Animations.moveByX(mainWindow,+70,0.5);
+                Animations.moveByX(paneRight, +200, 0.5);
+                Animations.moveByX(welcomeMessage, +170, 0.5);
+                Animations.moveByX(mainWindow, +70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     hamburger.setDisable(false);
                 });
-            }
-            else {
+            } else {
                 hamburger.setDisable(true);
                 hamburgerClicked = false;
 
@@ -168,9 +176,9 @@ public class Manager implements Initializable {
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,-200,0.5);
-                Animations.moveByX(welcomeMessage,-170,0.5);
-                Animations.moveByX(mainWindow,-70,0.5);
+                Animations.moveByX(paneRight, -200, 0.5);
+                Animations.moveByX(welcomeMessage, -170, 0.5);
+                Animations.moveByX(mainWindow, -70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     paneRight.setVisible(false);

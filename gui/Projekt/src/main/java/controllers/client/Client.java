@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -19,37 +18,31 @@ import main.java.controllers.auth.Login;
 import main.java.dao.UserInfosDAO;
 import main.java.entity.UserInfos;
 import main.java.features.Animations;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Client implements Initializable {
 
+    boolean hamburgerClicked = false;
     @FXML
     private VBox paneRight;
-
     @FXML
     private FontAwesomeIconView hamburger;
-
     @FXML
     private Pane welcomeMessage;
-
     @FXML
     private AnchorPane mainWindow;
-
     @FXML
     private AnchorPane window;
-
     @FXML
     private Pane alertPane;
-
     @FXML
     private Text name;
 
-    boolean hamburgerClicked = false;
-    
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
 
         //Loading name and surname from database
         UserInfos ui = UserInfosDAO.getUserInfoByID(Login.getUserInfoID()).get(0);
@@ -61,7 +54,7 @@ public class Client implements Initializable {
 
         // If hamburger button is clicked then menu slides in and transition last for 0.5s
         hamburger.setOnMouseClicked(event -> {
-            if(hamburgerClicked == false) {
+            if (hamburgerClicked == false) {
 
                 hamburger.setDisable(true);
                 hamburgerClicked = true;
@@ -72,15 +65,14 @@ public class Client implements Initializable {
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,+200,0.5);
-                Animations.moveByX(welcomeMessage,+160,0.5);
-                Animations.moveByX(mainWindow,+70,0.5);
+                Animations.moveByX(paneRight, +200, 0.5);
+                Animations.moveByX(welcomeMessage, +160, 0.5);
+                Animations.moveByX(mainWindow, +70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     hamburger.setDisable(false);
                 });
-            }
-            else {
+            } else {
                 hamburger.setDisable(true);
                 hamburgerClicked = false;
 
@@ -89,9 +81,9 @@ public class Client implements Initializable {
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,-200,0.5);
-                Animations.moveByX(welcomeMessage,-160,0.5);
-                Animations.moveByX(mainWindow,-70,0.5);
+                Animations.moveByX(paneRight, -200, 0.5);
+                Animations.moveByX(welcomeMessage, -160, 0.5);
+                Animations.moveByX(mainWindow, -70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     paneRight.setVisible(false);
@@ -105,7 +97,7 @@ public class Client implements Initializable {
     //Method that handle 'logout' button
     @FXML
     void logout(ActionEvent event) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         window.setDisable(true);
@@ -115,7 +107,7 @@ public class Client implements Initializable {
     //Method that handle 'no' button inside logout popup
     @FXML
     void logoutNo(ActionEvent event) {
-        Animations.moveByY(alertPane,-500,0.3);
+        Animations.moveByY(alertPane, -500, 0.3);
         window.setEffect(null);
         window.setDisable(false);
     }
@@ -129,7 +121,7 @@ public class Client implements Initializable {
     //Method that handle 'history' button
     @FXML
     void viewHistory(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientHistoryPackage.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/client/clientHistoryPackage.fxml", mainWindow);
     }
 
     //Method that handle 'home' button
@@ -141,25 +133,26 @@ public class Client implements Initializable {
     //Method that handle 'registerPackage' button
     @FXML
     void viewRegisterPackage(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientRegisterPackage.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/client/clientRegisterPackage.fxml", mainWindow);
     }
 
     //Method that handle 'settings' button
     @FXML
     void viewSettings(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/client/clientSettings.fxml", mainWindow);
     }
 
     //Method that handle 'trackPackage' button
     @FXML
     void viewTrackPackage(ActionEvent event) throws IOException {
-        SceneManager.loadScene("../../../resources/view/client/clientTrackPackage.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/client/clientTrackPackage.fxml", mainWindow);
     }
 
     @FXML
     void exitApp(ActionEvent event) {
         Stage stage = (Stage) mainWindow.getScene().getWindow();
         stage.close();
+        System.exit(0);
     }
 
     @FXML

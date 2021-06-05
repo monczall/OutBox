@@ -2,6 +2,7 @@ package main.java.controllers.auth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,109 +17,140 @@ import main.java.SceneManager;
 import main.java.dao.UsersDAO;
 import main.java.entity.Users;
 import main.java.features.Alerts;
+import main.java.features.Preference;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static main.java.dao.UserInfosDAO.getUserInfoByID;
 import static main.java.dao.UsersDAO.getUsers;
 
-public class PasswordReset {
+public class PasswordReset implements Initializable {
 
-    @FXML
-    private AnchorPane loginLeftPaneAnchorPane;
-
-    @FXML
-    private ImageView passwordResetLogoImageView;
-
-    @FXML
-    private Label passwordResetSloganLabel;
-
-    @FXML
-    private Label passwordResetWelcomeLabel;
-
-    @FXML
-    private Label passwordResetInfoLabel;
-
-    @FXML
-    private Button passwordResetExitButtonButton;
-
-    @FXML
-    private Button passwordResetReturnButtonButton;
-
-    @FXML
-    private AnchorPane loginRightPaneAnchorPane;
-
-    @FXML
-    private Label passwordResetResetPasswordLabel;
-
-    @FXML
-    private TextField passwordResetEmailField;
-
-    @FXML
-    private Circle passwordResetEmailCircle;
-
-    @FXML
-    private TextField passwordResetVerificationCodeField;
-
-    @FXML
-    private Circle passwordResetVerificationCodeCircle;
-
-    @FXML
-    private TextField passwordResetPasswordField;
-
-    @FXML
-    private Circle passwordResetPasswordCircle;
-
-    @FXML
-    private TextField passwordResetConfirmPasswordField;
-
-    @FXML
-    private Circle passwordResetConfirmPasswordCircle;
-
-    @FXML
-    private Label passwordResetSendCodeLabel;
-
-    @FXML
-    private Button passwordResetSendCodeButton;
-
-    @FXML
-    private Label passwordResetVerifyCodeLabel;
-
-    @FXML
-    private Button passwordResetVerifyCodeButton;
-
-    @FXML
-    private Button passwordResetSetNewPasswordButton;
-
-    @FXML
-    private Label passwordResetSixCharsRequirement;
-
-    @FXML
-    private Label passwordResetSmallLetterRequirement;
-
-    @FXML
-    private Label passwordResetBigLetterRequirement;
-
-    @FXML
-    private Label passwordResetNumberRequirement;
-
-    @FXML
-    private Label passwordResetSpecialCharRequirement;
-
-    @FXML
-    private Label passwordResetSamePasswordsRequirement;
-
-
+    private static final Preference pref = new Preference();
     int userId;
     int userInfoId;
+    @FXML
+    private AnchorPane loginLeftPaneAnchorPane;
+    @FXML
+    private Label passwordResetSloganLabel;
+    @FXML
+    private Label passwordResetWelcomeLabel;
+    @FXML
+    private Label passwordResetInfoLabel;
+    @FXML
+    private Button passwordResetReturnButtonButton;
+    @FXML
+    private AnchorPane loginRightPaneAnchorPane;
+    @FXML
+    private Label passwordResetResetPasswordLabel;
+    @FXML
+    private TextField passwordResetEmailField;
+    @FXML
+    private Circle passwordResetEmailCircle;
+    @FXML
+    private TextField passwordResetVerificationCodeField;
+    @FXML
+    private Circle passwordResetVerificationCodeCircle;
+    @FXML
+    private TextField passwordResetPasswordField;
+    @FXML
+    private Circle passwordResetPasswordCircle;
+    @FXML
+    private TextField passwordResetConfirmPasswordField;
+    @FXML
+    private Circle passwordResetConfirmPasswordCircle;
+    @FXML
+    private Label passwordResetSendCodeLabel;
+    @FXML
+    private Button passwordResetSendCodeButton;
+    @FXML
+    private Label passwordResetVerifyCodeLabel;
+    @FXML
+    private Button passwordResetVerifyCodeButton;
+    @FXML
+    private Button passwordResetSetNewPasswordButton;
+    @FXML
+    private Label passwordResetSixCharsRequirement;
+    @FXML
+    private Label passwordResetSmallLetterRequirement;
+    @FXML
+    private Label passwordResetBigLetterRequirement;
+    @FXML
+    private Label passwordResetNumberRequirement;
+    @FXML
+    private Label passwordResetSpecialCharRequirement;
+    @FXML
+    private Label passwordResetSamePasswordsRequirement;
+    @FXML
+    private ImageView passwordResetLogoImageView;
     private String verificationCode = "";
+
+    /**
+     * <p>
+     * Method used to prepare message that is going to be send to user.
+     * </p>
+     *
+     * @param session            session that is held after login
+     * @param outBoxEmailAccount sender's email
+     * @param recipient          receiver's email
+     * @param firstName          receiver's first name
+     * @param verificationCode   code sent to user
+     * @return returns message or null
+     */
+    private static Message prepareMessage(Session session,
+                                          String outBoxEmailAccount,
+                                          String recipient,
+                                          String firstName,
+                                          String verificationCode) {
+        Message message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress("OutBox_Support"));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            message.setSubject(App.getLanguageProperties("authResetPasswordMailSubject"));
+            message.setText(App.getLanguageProperties("authResetPasswordMailMessage1") + firstName + ",\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage2") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage3") + "\n" +
+                    "\n" + verificationCode + "\n\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage4") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage5") + "\n" +
+                    "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage6") + "\n" +
+                    App.getLanguageProperties("authResetPasswordMailMessage7"));
+            return message;
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Outbox logos, they change depending on used theme
+        ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
+        outboxBlack.setFitHeight(200);
+        outboxBlack.setFitWidth(150);
+        ImageView outboxWhite = new ImageView("main/resources/images/outbox_white.png");
+        outboxWhite.setFitHeight(200);
+        outboxWhite.setFitWidth(150);
+
+        // Changes to UI depending on used theme
+        if (Preference.readPreference("color").equals("red")) {
+            passwordResetLogoImageView.setImage(outboxWhite.getImage());
+        } else if (Preference.readPreference("color").equals("orange")) {
+            passwordResetLogoImageView.setImage(outboxBlack.getImage());
+        } else {
+            passwordResetLogoImageView.setImage(outboxBlack.getImage());
+        }
+    }
 
     public void handleSendVerificationCode(
             ActionEvent actionEvent) throws MessagingException {
@@ -184,14 +216,14 @@ public class PasswordReset {
             } else {
                 errorOnEmail();
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetExitButtonButton, "WARNING",
+                        passwordResetSendCodeButton, "WARNING",
                         App.getLanguageProperties("authNoEmailUserFoundAlert"),
-                        350, 86, "alertFailure");
+                        390, 86, "alertFailure");
             }
         } else {
             errorOnEmail();
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetExitButtonButton, "WARNING",
+                    passwordResetSendCodeButton, "WARNING",
                     App.getLanguageProperties("authWrongEmailFormatAlert"),
                     350, 86, "alertFailure");
         }
@@ -202,28 +234,25 @@ public class PasswordReset {
                 "@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(email);
 
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     /**
      * <p>
-     *     Method used to start procedure of sending email to user, that
-     *     wants to reset password. It sends prepared message to user.
+     * Method used to start procedure of sending email to user, that
+     * wants to reset password. It sends prepared message to user.
      * </p>
-     * @param recipient string representing email address of user,
-     *                 that is receiving email
-     * @param firstName string representing first name of user,
-     *                  that is receiving email
+     *
+     * @param recipient        string representing email address of user,
+     *                         that is receiving email
+     * @param firstName        string representing first name of user,
+     *                         that is receiving email
      * @param verificationCode generated 4-digit string
      * @throws MessagingException in case of error
      */
-    public static void sendEmail(String recipient,
-                                 String firstName,
-                                 String verificationCode
+    public void sendEmail(String recipient,
+                          String firstName,
+                          String verificationCode
     ) throws MessagingException {
         System.out.println("Starting process of sending email");
         Properties properties = new Properties();
@@ -238,12 +267,12 @@ public class PasswordReset {
 
         Session session = Session.getInstance(properties,
                 new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(outBoxEmailAccount,
-                        outBoxEmailPassword);
-            }
-        });
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(outBoxEmailAccount,
+                                outBoxEmailPassword);
+                    }
+                });
 
         Message message = prepareMessage(session,
                 outBoxEmailAccount,
@@ -252,44 +281,11 @@ public class PasswordReset {
                 verificationCode);
 
         Transport.send(message);
-        System.out.println("Message sent successfully");
-    }
-
-    /**
-     * <p>
-     *     Method used to prepare message that is going to be send to user.
-     * </p>
-     * @param session session that is held after login
-     * @param outBoxEmailAccount sender's email
-     * @param recipient receiver's email
-     * @param firstName receiver's first name
-     * @param verificationCode code sent to user
-     * @return returns message or null
-     */
-    private static Message prepareMessage(Session session,
-                                          String outBoxEmailAccount,
-                                          String recipient,
-                                          String firstName,
-                                          String verificationCode) {
-        Message message = new MimeMessage(session);
-        try {
-            message.setFrom(new InternetAddress("OutBox_Support"));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject(App.getLanguageProperties("authResetPasswordMailSubject"));
-            message.setText(App.getLanguageProperties("authResetPasswordMailMessage1") + firstName + ",\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage2") + "\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage3") + "\n" +
-                    "\n" + verificationCode + "\n\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage4") + "\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage5") + "\n" +
-                    "\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage6") + "\n" +
-                    App.getLanguageProperties("authResetPasswordMailMessage7"));
-            return message;
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        return null;
+        Alerts.createCustomAlert(loginRightPaneAnchorPane,
+                passwordResetReturnButtonButton, "CHECK",
+                App.getLanguageProperties(
+                        "authEmailSentSuccessfullyAlert"),
+                300, 86, "alertSuccess");
     }
 
     public void handleVerifyCodeOnEnterPressed(KeyEvent keyEvent) {
@@ -304,16 +300,16 @@ public class PasswordReset {
 
     /**
      * <p>
-     *     Method that verifies if user passed correct verification code.
+     * Method that verifies if user passed correct verification code.
      * </p>
      */
     public void verifyCode() {
         if (passwordResetVerificationCodeField.getText().equals(verificationCode)) {
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetExitButtonButton, "CHECK",
+                    passwordResetReturnButtonButton, "CHECK",
                     App.getLanguageProperties(
                             "authVerificationSuccessfulAlert"),
-                    293, 86, "alertSuccess");
+                    300, 86, "alertSuccess");
 
             //Block verification code field and verify button
             passwordResetVerificationCodeField.setDisable(true);
@@ -342,10 +338,10 @@ public class PasswordReset {
         } else {
             errorOnVerificationCode();
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetExitButtonButton, "WARNING",
+                    passwordResetVerifyCodeButton, "WARNING",
                     App.getLanguageProperties(
                             "authVerificationCodeInvalidAlert"),
-                    293, 86, "alertFailure");
+                    300, 86, "alertFailure");
         }
     }
 
@@ -363,8 +359,8 @@ public class PasswordReset {
         if (isValid(passwordResetPasswordField.getText(),
                 passwordResetConfirmPasswordField.getText())) {
 
-            UsersDAO.updatePassword(userId, Encryption.encrypt(
-                    passwordResetPasswordField.getText()));
+            UsersDAO.updatePassword(userId,
+                    passwordResetPasswordField.getText());
             System.out.println("Password Reset Successful");
 
             SceneManager.renderScene("successfulPasswordReset");
@@ -373,11 +369,12 @@ public class PasswordReset {
 
     /**
      * <p>
-     *     Method verifies if passed strings are correct passwords.
-     *     Passwords should have at least: one small letter, one big letter,
-     *     one digit, six chars and special character. Typed in passwords should
-     *     be the same.
+     * Method verifies if passed strings are correct passwords.
+     * Passwords should have at least: one small letter, one big letter,
+     * one digit, six chars and special character. Typed in passwords should
+     * be the same.
      * </p>
+     *
      * @param password1 user's password
      * @param password2 repeated password
      * @return returns boolean value
@@ -409,14 +406,14 @@ public class PasswordReset {
         } else if (error == 1) {
             if (passwordError) {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetExitButtonButton, "WARNING",
+                        passwordResetSetNewPasswordButton, "WARNING",
                         App.getLanguageProperties(
                                 "authWrongPasswordFormatAlert"),
                         350, 86, "alertFailure");
             }
             if (passwordNotTheSameError) {
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        passwordResetExitButtonButton, "WARNING",
+                        passwordResetSetNewPasswordButton, "WARNING",
                         App.getLanguageProperties(
                                 "authPasswordsNotTheSameAlert"),
                         350, 86, "alertFailure");
@@ -425,7 +422,7 @@ public class PasswordReset {
         } else {
 
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    passwordResetExitButtonButton, "WARNING",
+                    passwordResetSetNewPasswordButton, "WARNING",
                     App.getLanguageProperties(
                             "authErrorsOnTextFieldsAlert"),
                     350, 86, "alertFailure");
@@ -435,8 +432,8 @@ public class PasswordReset {
 
     /**
      * <p>
-     *     Method changes visual appearance of section that shows user
-     *     if typed in password meets its requirements.
+     * Method changes visual appearance of section that shows user
+     * if typed in password meets its requirements.
      * </p>
      */
     private void passwordRequirements() {
@@ -588,4 +585,15 @@ public class PasswordReset {
         SceneManager.renderScene("login");
     }
 
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.setIconified(true);
+    }
 }

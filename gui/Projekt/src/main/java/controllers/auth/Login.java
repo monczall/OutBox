@@ -30,83 +30,98 @@ import static main.java.dao.UsersDAO.getUsers;
 
 public class Login implements Initializable {
 
-    @FXML
-    private MenuButton loginSettingsMenuButton;
-
-    @FXML
-    private MenuItem loginPolishLanguageMenuItem;
-
-    @FXML
-    private MenuItem loginEnglishLanguageMenuItem;
-
-    @FXML
-    private MenuItem loginOrangeColorMenuItem;
-
-    @FXML
-    private MenuItem loginRedColorMenuItem;
-
-    @FXML
-    private MenuItem loginWhiteColorMenuItem;
-
-    @FXML
-    private ImageView loginLogoImageView;
-
-    @FXML
-    private AnchorPane loginRightPaneAnchorPane;
-
-    @FXML
-    private Button loginExitButtonButton;
-
-    @FXML
-    private Button loginCreateAccountButton;
-
-    @FXML
-    private Button loginLoginButtonButton;
-
-    @FXML
-    private TextField loginEmailTextField;
-
-    @FXML
-    private Circle loginUserCircleCircle;
-
-    @FXML
-    private PasswordField loginPasswordPasswordField;
-
-    @FXML
-    private Circle loginPasswordCircleCircle;
-
+    private static final Preference pref = new Preference();
     public static int userID;
     public static int userInfoID;
     public static String userEmail;
+    @FXML
+    private MenuButton loginSettingsMenuButton;
+    @FXML
+    private MenuItem loginPolishLanguageMenuItem;
+    @FXML
+    private MenuItem loginEnglishLanguageMenuItem;
+    @FXML
+    private MenuItem loginOrangeColorMenuItem;
+    @FXML
+    private MenuItem loginRedColorMenuItem;
+    @FXML
+    private MenuItem loginWhiteColorMenuItem;
+    @FXML
+    private ImageView loginLogoImageView;
+    @FXML
+    private AnchorPane loginRightPaneAnchorPane;
+    @FXML
+    private Button loginExitButtonButton;
+    @FXML
+    private Button loginCreateAccountButton;
+    @FXML
+    private Button loginLoginButtonButton;
+    @FXML
+    private TextField loginEmailTextField;
+    @FXML
+    private Circle loginUserCircleCircle;
+    @FXML
+    private PasswordField loginPasswordPasswordField;
+    @FXML
+    private Circle loginPasswordCircleCircle;
 
-    private static Preference pref = new Preference();
+    public static int getUserID() {
+        return userID;
+    }
+
+    public static void setUserID(int userID) {
+        Login.userID = userID;
+    }
+
+    public static int getUserInfoID() {
+        return userInfoID;
+    }
+
+    public static void setUserInfoID(int userInfoID) {
+        Login.userInfoID = userInfoID;
+    }
+
+    public static String getUserEmail() {
+        return userEmail;
+    }
+
+    public static void setUserEmail(String userEmail) {
+        Login.userEmail = userEmail;
+    }
 
     public void initialize(URL url, ResourceBundle rb) {
-        List<Packages> packagesList = PackagesDAO.getPackagesWithoutCourierId();
-        List<Users> usersList = UsersDAO.getCouriers("Kurier");
-        for (int i = 0; i < packagesList.size(); i++) {
-            for (int j = 0; j < usersList.size(); j++) {
-                if (packagesList.get(i).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(j).getAreasByAreaId().getVoivodeship())) {
-                    if (packagesList.get(i).getUsersByUserId().getUserInfosByUserInfoId().getCity().equals(usersList.get(j).getAreasByAreaId().getName())) {
-                        List<Users> couriersInArea = UsersDAO.getCouriersByAreaId(usersList.get(j).getAreaId());
-                        if(couriersInArea.size() > 1){
-                            int courierId = couriersInArea.get(0).getId();
-                            Long courierPackages = 999999L;
-                            for(int k = 0; k < couriersInArea.size(); k++){
-                                if(UsersDAO.getPackagesByCourier(couriersInArea.get(k).getId()) < courierPackages){
-                                    courierPackages = UsersDAO.getPackagesByCourier(couriersInArea.get(k).getId());
-                                    courierId = couriersInArea.get(k).getId();
+
+        try {
+            List<Packages> packagesList = PackagesDAO.getPackagesWithoutCourierId();
+            List<Users> usersList = UsersDAO.getCouriers("Kurier");
+            for (int i = 0; i < packagesList.size(); i++) {
+                for (int j = 0; j < usersList.size(); j++) {
+                    if (packagesList.get(i).getUsersByUserId().getUserInfosByUserInfoId().getVoivodeship().equals(usersList.get(j).getAreasByAreaId().getVoivodeship())) {
+                        if (packagesList.get(i).getUsersByUserId().getUserInfosByUserInfoId().getCity().equals(usersList.get(j).getAreasByAreaId().getName())) {
+                            List<Users> couriersInArea = UsersDAO.getCouriersByAreaId(usersList.get(j).getAreaId());
+                            if (couriersInArea.size() > 1) {
+                                int courierId = couriersInArea.get(0).getId();
+                                Long courierPackages = 999999L;
+                                for (int k = 0; k < couriersInArea.size(); k++) {
+                                    if (UsersDAO.getPackagesByCourier(couriersInArea.get(k).getId()) < courierPackages) {
+                                        courierPackages = UsersDAO.getPackagesByCourier(couriersInArea.get(k).getId());
+                                        courierId = couriersInArea.get(k).getId();
+                                    }
                                 }
+                                PackagesDAO.updateCourierId(packagesList.get(i).getId(), courierId);
+                            } else {
+                                PackagesDAO.updateCourierId(packagesList.get(i).getId(), usersList.get(j).getId());
                             }
-                            PackagesDAO.updateCourierId(packagesList.get(i).getId(), courierId);
-                        }else {
-                            PackagesDAO.updateCourierId(packagesList.get(i).getId(), usersList.get(j).getId());
+                            break;
                         }
-                        break;
                     }
                 }
             }
+        } catch (NoClassDefFoundError nce) {
+            System.out.println("Connection failed");
+
         }
+
 
         // Outbox logos, they change depending on used theme
         ImageView outboxBlack = new ImageView("main/resources/images/outbox_black.png");
@@ -125,31 +140,29 @@ public class Login implements Initializable {
         cogsWhite.setFitWidth(30);
 
         // Language changing
-        if(pref.readPreference("language").equals("english")) {
+        if (Preference.readPreference("language").equals("english")) {
             loginPolishLanguageMenuItem.setDisable(false);
             loginEnglishLanguageMenuItem.setDisable(true);
 
-        }else {
+        } else {
             loginPolishLanguageMenuItem.setDisable(true);
             loginEnglishLanguageMenuItem.setDisable(false);
         }
 
         // Changes to UI depending on used theme
-        if(pref.readPreference("color").equals("red")) {
+        if (Preference.readPreference("color").equals("red")) {
             loginRedColorMenuItem.setDisable(true);
             loginOrangeColorMenuItem.setDisable(false);
             loginWhiteColorMenuItem.setDisable(false);
             loginLogoImageView.setImage(outboxWhite.getImage());
             loginSettingsMenuButton.setGraphic(cogsBlack);
-        }
-        else if(pref.readPreference("color").equals("orange")) {
+        } else if (Preference.readPreference("color").equals("orange")) {
             loginRedColorMenuItem.setDisable(false);
             loginOrangeColorMenuItem.setDisable(true);
             loginWhiteColorMenuItem.setDisable(false);
             loginLogoImageView.setImage(outboxBlack.getImage());
             loginSettingsMenuButton.setGraphic(cogsWhite);
-        }
-        else{
+        } else {
             loginRedColorMenuItem.setDisable(false);
             loginOrangeColorMenuItem.setDisable(false);
             loginWhiteColorMenuItem.setDisable(true);
@@ -160,7 +173,7 @@ public class Login implements Initializable {
         if (App.isConnectionError()) {
             // Database connection error alert
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    loginCreateAccountButton, "WARNING",
+                    loginLoginButtonButton, "WARNING",
                     App.getLanguageProperties("authDatabaseConnectionAlert"),
                     425, 86, "alertFailure");
         }
@@ -168,7 +181,7 @@ public class Login implements Initializable {
 
     public void login() {
         // Checking if fields are not empty
-        if (!isEmpty(loginEmailTextField.getText(),loginPasswordPasswordField.getText())) {
+        if (!isEmpty(loginEmailTextField.getText(), loginPasswordPasswordField.getText())) {
             // Checking if email has correct format
             if (isEmail(loginEmailTextField.getText())) {
                 // Getting users to list
@@ -191,10 +204,10 @@ public class Login implements Initializable {
                         } else if (role.equals("Kurier")) {
                             SceneManager.renderScene("courier");
 
-                        } else if (role.equals("Kurier Międzyoddziałowy")) {
+                        } else if (role.equals("Kurier Miedzyoddzialowy")) {
                             SceneManager.renderScene("interbranchCourier");
 
-                        } else if (role.equals("Menadżer")) {
+                        } else if (role.equals("Menadzer")) {
                             SceneManager.renderScene("manager");
 
                         } else if (role.equals("Administrator")) {
@@ -223,9 +236,9 @@ public class Login implements Initializable {
 
                 // No user error alert
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        loginCreateAccountButton, "WARNING",
+                        loginLoginButtonButton, "WARNING",
                         App.getLanguageProperties("authNoUserFoundAlert"),
-                        435, 86, "alertFailure");
+                        485, 86, "alertFailure");
 
             } else {
                 // UserTextField
@@ -238,14 +251,14 @@ public class Login implements Initializable {
 
                 // Wrong email format error alert
                 Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                        loginCreateAccountButton, "WARNING",
+                        loginLoginButtonButton, "WARNING",
                         App.getLanguageProperties("authWrongEmailFormatAlert"),
                         350, 86, "alertFailure");
             }
         } else {
             // Wrong empty fields error alert
             Alerts.createCustomAlert(loginRightPaneAnchorPane,
-                    loginCreateAccountButton, "WARNING",
+                    loginLoginButtonButton, "WARNING",
                     App.getLanguageProperties("authFillFormAlert"),
                     293, 86,
                     "alertFailure");
@@ -254,13 +267,14 @@ public class Login implements Initializable {
 
     /**
      * <p>
-     *     Method is used to check if given strings are empty.
-     *     In case of empty string it marks inputs from where string came
-     *     on red color, indicating that there is error of fields,
-     *     and returns true. If strings are not empty i does nothing and returns
-     *     true.
+     * Method is used to check if given strings are empty.
+     * In case of empty string it marks inputs from where string came
+     * on red color, indicating that there is error of fields,
+     * and returns true. If strings are not empty i does nothing and returns
+     * true.
      * </p>
-     * @param email string that needs to be checked if empty
+     *
+     * @param email    string that needs to be checked if empty
      * @param password string that needs to be checked if empty
      * @return returns boolean value
      */
@@ -288,19 +302,16 @@ public class Login implements Initializable {
             loginPasswordCircleCircle.getStyleClass().add("fillError");
             error++;
         }
-        if (error > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return error > 0;
     }
 
     /**
      * <p>
-     *      Method is used to determinate if given string is email.
-     *      It matches string with given pattern. In case of correct email it
-     *      returns true, otherwise it returns false.
+     * Method is used to determinate if given string is email.
+     * It matches string with given pattern. In case of correct email it
+     * returns true, otherwise it returns false.
      * </p>
+     *
      * @param email string that needs to be checked if its email
      * @return returns boolean value
      */
@@ -309,11 +320,7 @@ public class Login implements Initializable {
                 "@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(email);
 
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public void handleLogin(MouseEvent mouseEvent) {
@@ -334,12 +341,12 @@ public class Login implements Initializable {
         SceneManager.renderScene("passwordReset");
     }
 
-
     /**
      * <p>
-     *     Method is used to clear errors on certain fields.
-     *     It's doing it by changing appearance of them.
+     * Method is used to clear errors on certain fields.
+     * It's doing it by changing their appearance.
      * </p>
+     *
      * @param keyEvent key that is being pressed
      */
     public void clearErrorsOnEmail(KeyEvent keyEvent) {
@@ -350,32 +357,17 @@ public class Login implements Initializable {
         // UserCircle
         loginUserCircleCircle.getStyleClass().clear();
         loginUserCircleCircle.getStyleClass().add("fill");
-
-        // PasswordTextField
-        loginPasswordPasswordField.getStyleClass().clear();
-        loginPasswordPasswordField.getStyleClass().add("textFields");
-
-        // PasswordCircle
-        loginPasswordCircleCircle.getStyleClass().clear();
-        loginPasswordCircleCircle.getStyleClass().add("fill");
     }
 
     /**
      * <p>
-     *     Method is used to clear errors on certain fields.
-     *     It's doing it by changing appearance of them.
+     * Method is used to clear errors on certain fields.
+     * It's doing it by changing their appearance.
      * </p>
+     *
      * @param keyEvent key that is being pressed
      */
     public void clearErrorsOnPassword(KeyEvent keyEvent) {
-        // UserTextField
-        loginEmailTextField.getStyleClass().clear();
-        loginEmailTextField.getStyleClass().add("textFields");
-
-        // UserCircle
-        loginUserCircleCircle.getStyleClass().clear();
-        loginUserCircleCircle.getStyleClass().add("fill");
-
         // PasswordTextField
         loginPasswordPasswordField.getStyleClass().clear();
         loginPasswordPasswordField.getStyleClass().add("textFields");
@@ -385,61 +377,37 @@ public class Login implements Initializable {
         loginPasswordCircleCircle.getStyleClass().add("fill");
     }
 
-    public static int getUserID() {
-        return userID;
-    }
-
-    public static void setUserID(int userID) {
-        Login.userID = userID;
-    }
-
-    public static int getUserInfoID() {
-        return userInfoID;
-    }
-
-    public static void setUserInfoID(int userInfoID) {
-        Login.userInfoID = userInfoID;
-    }
-
-    public static String getUserEmail() {
-        return userEmail;
-    }
-
-    public static void setUserEmail(String userEmail) {
-        Login.userEmail = userEmail;
-    }
-
-
     public void setPolishLanguage(ActionEvent actionEvent) {
-        pref.addPreference("language","polish");
+        pref.addPreference("language", "polish");
         SceneManager.renderScene("login");
     }
 
     public void setEnglishLanguage(ActionEvent actionEvent) {
-        pref.addPreference("language","english");
+        pref.addPreference("language", "english");
         SceneManager.renderScene("login");
     }
 
     public void setOrangeColor(ActionEvent actionEvent) {
-        pref.addPreference("color","orange");
+        pref.addPreference("color", "orange");
         SceneManager.renderScene("login");
     }
 
     public void setRedColor(ActionEvent actionEvent) {
-        pref.addPreference("color","red");
+        pref.addPreference("color", "red");
         SceneManager.renderScene("login");
     }
 
     public void setWhiteColor(ActionEvent actionEvent) {
-        pref.addPreference("color","white");
+        pref.addPreference("color", "white");
         SceneManager.renderScene("login");
     }
 
     /**
      * <p>
-     *     Method used to change visual appearance of settings button on mouse
-     *     enter event
+     * Method used to change visual appearance of settings button on mouse
+     * enter event
      * </p>
+     *
      * @param mouseEvent mouse enter event
      */
     public void handleMouseEnterMenuSettingsButton(MouseEvent mouseEvent) {
@@ -451,22 +419,21 @@ public class Login implements Initializable {
         cogsWhite.setFitHeight(30);
         cogsWhite.setFitWidth(30);
 
-        if(pref.readPreference("color").equals("red")) {
+        if (Preference.readPreference("color").equals("red")) {
             loginSettingsMenuButton.setGraphic(cogsWhite);
-        }
-        else if(pref.readPreference("color").equals("orange")) {
+        } else if (Preference.readPreference("color").equals("orange")) {
             loginSettingsMenuButton.setGraphic(cogsBlack);
-        }
-        else{
+        } else {
             loginSettingsMenuButton.setGraphic(cogsBlack);
         }
     }
 
     /**
      * <p>
-     *     Method used to change visual appearance of settings button on mouse
-     *     exiting event
+     * Method used to change visual appearance of settings button on mouse
+     * exiting event
      * </p>
+     *
      * @param mouseEvent mouse exit event
      */
     public void handleMouseExitMenuSettingsButton(MouseEvent mouseEvent) {
@@ -478,14 +445,24 @@ public class Login implements Initializable {
         cogsWhite.setFitHeight(30);
         cogsWhite.setFitWidth(30);
 
-        if(pref.readPreference("color").equals("red")) {
+        if (Preference.readPreference("color").equals("red")) {
             loginSettingsMenuButton.setGraphic(cogsBlack);
-        }
-        else if(pref.readPreference("color").equals("orange")) {
+        } else if (Preference.readPreference("color").equals("orange")) {
+            loginSettingsMenuButton.setGraphic(cogsWhite);
+        } else {
             loginSettingsMenuButton.setGraphic(cogsWhite);
         }
-        else{
-            loginSettingsMenuButton.setGraphic(cogsWhite);
-        }
+    }
+
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) loginRightPaneAnchorPane.getScene().getWindow();
+        stage.setIconified(true);
     }
 }

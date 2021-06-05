@@ -5,11 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import main.java.controllers.courier.Courier;
 import main.java.features.Preference;
 
 import java.io.IOException;
@@ -19,11 +18,11 @@ import java.util.ResourceBundle;
 
 public class SceneManager {
 
-    private static Stage stage;
     private static final Hashtable<String, String> view = new Hashtable<>();
     private static final Preference pref = new Preference();
+    private static final int counter = 0;
+    private static Stage stage;
     private static ResourceBundle bundle;
-    private static int counter = 0;
     private static double yOffset = 0;
     private static double xOffset = 0;
 
@@ -39,7 +38,7 @@ public class SceneManager {
         else
             bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
 
-        Node newLoadedPane = FXMLLoader.load(Courier.class.getResource(path), bundle);
+        Node newLoadedPane = FXMLLoader.load(SceneManager.class.getClassLoader().getResource(path), bundle);
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(newLoadedPane);
     }
@@ -61,7 +60,7 @@ public class SceneManager {
             else
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
 
-            root = FXMLLoader.load(SceneManager.class.getResource(path), bundle);
+            root = FXMLLoader.load(SceneManager.class.getClassLoader().getResource(path), bundle);
             Scene scene = new Scene(root);
 
 
@@ -93,6 +92,7 @@ public class SceneManager {
             });
 
             stage.setScene(scene);
+            stage.getIcons().add(new Image("main/resources/images/appIcon.png"));
             stage.show();
 
 

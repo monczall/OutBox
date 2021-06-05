@@ -39,8 +39,6 @@ public class ManagerCharts implements Initializable {
     @FXML
     private PieChart pieChart;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ToggleGroup group = new ToggleGroup();
@@ -63,17 +61,18 @@ public class ManagerCharts implements Initializable {
 
         LocalDateTime now = LocalDateTime.now();
 
-        Charts.createBarChart(barChart,dateTimeFormatter.format(now));
+        Charts.createBarChart(barChart, dateTimeFormatter.format(now));
 
-        Charts.createPieChart(pieChart);
+        Charts.createPieChart(pieChart, dateTimeFormatter.format(now));
 
     }
 
 
-    @FXML // bar - 0 pie - -1600
+    @FXML
+        // bar - 0 pie - -1600
     void changeBarChart(ActionEvent event) {
-        Animations.moveByX(barCharPane,-1600,0.5);
-        Animations.moveByX(pieChartPane,-1600,0.5);
+        Animations.moveByX(barCharPane, -1600, 0.5);
+        Animations.moveByX(pieChartPane, -1600, 0.5);
         barChartBtn.setDisable(true);
         barChartBtn.setOpacity(1);
         pieChartBtn.setDisable(false);
@@ -81,8 +80,8 @@ public class ManagerCharts implements Initializable {
 
     @FXML
     void changePieChart(ActionEvent event) {
-        Animations.moveByX(pieChartPane,+1600,0.5);
-        Animations.moveByX(barCharPane,+1600,0.5);
+        Animations.moveByX(pieChartPane, +1600, 0.5);
+        Animations.moveByX(barCharPane, +1600, 0.5);
         pieChartBtn.setDisable(true);
         pieChartBtn.setOpacity(1);
         barChartBtn.setDisable(false);

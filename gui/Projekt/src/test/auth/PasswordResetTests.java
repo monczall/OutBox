@@ -33,7 +33,7 @@ public class PasswordResetTests extends PasswordReset {
 
         PasswordReset passwordReset = new PasswordReset();
 
-        Assertions.assertTrue(passwordReset.isValid(password,password2));
+        Assertions.assertTrue(passwordReset.isValid(password, password2));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class PasswordResetTests extends PasswordReset {
         PasswordReset passwordReset = new PasswordReset();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(passwordReset.isValid(password,
+                () -> Assertions.assertTrue(passwordReset.isValid(password,
                         password2))
         );
     }
@@ -62,7 +62,7 @@ public class PasswordResetTests extends PasswordReset {
         PasswordReset passwordReset = new PasswordReset();
 
         Assertions.assertThrows(NullPointerException.class,
-                ()-> Assertions.assertTrue(passwordReset.isValid(password,
+                () -> Assertions.assertTrue(passwordReset.isValid(password,
                         password2))
         );
     }

@@ -7,126 +7,121 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.chart.BarChart;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import main.java.App;
 import main.java.controllers.auth.Login;
-import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.entity.PackageHistory;
 import main.java.entity.Packages;
 import main.java.entity.PackagesDTO;
 import main.java.features.Animations;
-import main.java.features.Charts;
 import main.java.features.Preference;
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientHistoryPackage implements Initializable {
 
+    private static final Preference pref = new Preference();
+    private static ResourceBundle bundle;
+    private final List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));
     @FXML
     private AnchorPane mainPane;
-
     @FXML
     private AnchorPane trackPackagePane;
-
     @FXML
     private VBox packageLayout;
-
     @FXML
     private Button btnBack;
-
     @FXML
     private AnchorPane moreInformationPane;
-
     @FXML
     private VBox statusesVBox;
-
     @FXML
     private Pane informationAlert;
-
     @FXML
     private Text packageNumber;
-
     @FXML
     private Text senderName;
-
     @FXML
     private Text senderSurname;
-
     @FXML
     private Text senderTelephone;
-
     @FXML
     private Text senderStreet;
-
     @FXML
     private Text senderCity;
-
     @FXML
     private Text senderVoivodeship;
-
     @FXML
     private Text recipientName;
-
     @FXML
     private Text recipientSurname;
-
     @FXML
     private Text recipientTelephone;
-
     @FXML
     private Text recipientStreet;
-
     @FXML
     private Text recipientCity;
-
     @FXML
     private Text recipientVoivodeship;
-
     @FXML
     private Text timeOfDelivery;
-
     @FXML
     private ToggleButton toggleFromClient;
-
     @FXML
     private ToggleButton toggleToClient;
 
-    @FXML
-    private BarChart<String,Long> barChart;
+    /**
+     * <p>
+     * Method used to display all the packages in order from the db by HQL query
+     * (history)
+     * </p>
+     *
+     * @param userId    used to show packages that client registered
+     * @param userEmail used to show packages that are 'coming' to actual client
+     * @return filled List of type PopulatePackageItem it contains info about statuses
+     */
+    public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail) {
 
-    private List<PopulatePackageItem> packageFirst = new ArrayList<>(loadPackagesList(Login.getUserID(), Login.getUserEmail()));;
+        List<PackagesDTO> listOfPackages = ClientTrackPackage.translateLastStatus(PackagesDAO.readHistoryByID(userId, userEmail));
 
-    private static Preference pref = new Preference();
-    private static ResourceBundle bundle;
+        List<PopulatePackageItem> packageItems = new ArrayList<>();
+
+        for (int i = 0; i < listOfPackages.size(); i++) {
+
+            PopulatePackageItem populatePackageItem = new PopulatePackageItem();
+
+            populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
+            populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
+            populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
+
+            if (listOfPackages.get(i).getEmail().equals(Login.getUserEmail())) {
+                populatePackageItem.setType(App.getLanguageProperties("clientSender"));
+                populatePackageItem.setSender(listOfPackages.get(i).getName());
+            } else {
+                populatePackageItem.setType(App.getLanguageProperties("clientRecipient"));
+                populatePackageItem.setSender(listOfPackages.get(i).getRecipentName());
+            }
+
+            packageItems.add(populatePackageItem);
+        }
+
+        return packageItems;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        barChart.getXAxis().setLabel("Dzień");
-        barChart.getXAxis().setId("xAxis");
-
-        barChart.getYAxis().setLabel("Ilość przysyłek");
-        barChart.getYAxis().setId("xAxis");
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM");
-
-        LocalDateTime now = LocalDateTime.now();
-
-        Charts.createBarChart(barChart,dateTimeFormatter.format(now));
-
-        /*Charts.createPieChart(mainPane,"WYKRES ILOŚCI PRZESYŁEK",150,47,500,400);*/
 
         toggleToClient.setSelected(true);
         toggleFromClient.setSelected(true);
@@ -139,58 +134,19 @@ public class ClientHistoryPackage implements Initializable {
         loadPackages(packageFirst);
     }
 
-
-    /**
-     * <p>
-     *  Method used to display all the packages in order from the db by HQL query
-     *  (history)
-     * </p>
-     * @param userId used to show packages that client registered
-     * @param userEmail used to show packages that are 'coming' to actual client
-     * @return filled List of type PopulatePackageItem it contains info about statuses
-     */
-    public static List<PopulatePackageItem> loadPackagesList(int userId, String userEmail){
-
-        List<PackagesDTO> listOfPackages = ClientTrackPackage.translateLastStatus(PackagesDAO.readHistoryByID(userId, userEmail));
-
-        List<PopulatePackageItem> packageItems = new ArrayList<>();
-
-        for(int i = 0; i < listOfPackages.size(); i++){
-
-            PopulatePackageItem populatePackageItem = new PopulatePackageItem();
-
-            populatePackageItem.setPackageNumber(listOfPackages.get(i).getPackageNumber());
-            populatePackageItem.setStatus(listOfPackages.get(i).getStatus());
-            populatePackageItem.setId(listOfPackages.get(i).getPackagesId());
-
-            if(listOfPackages.get(i).getEmail().equals(Login.getUserEmail())) {
-                populatePackageItem.setType(App.getLanguageProperties("clientSender"));
-                populatePackageItem.setSender(listOfPackages.get(i).getName());
-            }
-            else {
-                populatePackageItem.setType(App.getLanguageProperties("clientRecipient"));
-                populatePackageItem.setSender(listOfPackages.get(i).getRecipentName());
-            }
-
-            packageItems.add(populatePackageItem);
-        }
-
-        return packageItems;
-    }
-
     // Method that leads to list of all history packages
     @FXML
     void backToTrackPackage(ActionEvent event) throws IOException {
-        Animations.fadeAway(btnBack,0.2,1,0,false);
-        Animations.fadeAway(toggleFromClient,0.2,0,1,true);
-        Animations.fadeAway(toggleToClient,0.2,0,1,true);
-        Animations.changePane(moreInformationPane,trackPackagePane,+850,0.5);
+        Animations.fadeAway(btnBack, 0.2, 1, 0, false);
+        Animations.fadeAway(toggleFromClient, 0.2, 0, 1, true);
+        Animations.fadeAway(toggleToClient, 0.2, 0, 1, true);
+        Animations.changePane(moreInformationPane, trackPackagePane, +850, 0.5);
     }
 
     // Method handle event on icon that is closing alert
     @FXML
     void closeInfoAlert(javafx.scene.input.MouseEvent mouseEvent) {
-        Animations.moveByY(informationAlert,-850,0.5);
+        Animations.moveByY(informationAlert, -850, 0.5);
     }
 
     // Method handles showing only packages that client registered
@@ -200,21 +156,19 @@ public class ClientHistoryPackage implements Initializable {
 
         /* If both buttons are not selected then VBox is
          cleared (and shows nothing)*/
-        if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
+        if (!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
-        }
-        else if(!toggleFromClient.isSelected() && toggleToClient.isSelected()) {
+        } else if (!toggleFromClient.isSelected() && toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
-            for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
+            for (PopulatePackageItem ppI : packageFirst) {
+                if (ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
                     list.add(ppI);
                 }
             }
             loadPackages(list);
-        }
-        else {
-            for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
+        } else {
+            for (PopulatePackageItem ppI : packageFirst) {
+                if (ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
                     list.add(ppI);
                 }
             }
@@ -229,21 +183,19 @@ public class ClientHistoryPackage implements Initializable {
 
         /* If both buttons are not selected then VBox is
          cleared (and shows nothing)*/
-        if(!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
+        if (!toggleFromClient.isSelected() && !toggleToClient.isSelected()) {
             packageLayout.getChildren().clear();
-        }
-        else if(!toggleToClient.isSelected() && toggleFromClient.isSelected()) {
+        } else if (!toggleToClient.isSelected() && toggleFromClient.isSelected()) {
             packageLayout.getChildren().clear();
-            for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
+            for (PopulatePackageItem ppI : packageFirst) {
+                if (ppI.getType().equals(App.getLanguageProperties("clientRecipient"))) {
                     list.add(ppI);
                 }
             }
             loadPackages(list);
-        }
-        else {
-            for(PopulatePackageItem ppI : packageFirst) {
-                if(ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
+        } else {
+            for (PopulatePackageItem ppI : packageFirst) {
+                if (ppI.getType().equals(App.getLanguageProperties("clientSender"))) {
                     list.add(ppI);
                 }
             }
@@ -258,21 +210,20 @@ public class ClientHistoryPackage implements Initializable {
      *
      * @param list
      */
-    private void loadPackages(List<PopulatePackageItem> list){
+    private void loadPackages(List<PopulatePackageItem> list) {
 
         ClientTrackPackage clientTrackPackage = new ClientTrackPackage();
 
-        for(int i=0; i<list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
 
-            if(pref.readPreference("language").equals("english")) {
+            if (Preference.readPreference("language").equals("english")) {
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
-            }
-            else {
+            } else {
                 bundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
             }
 
-            fxmlLoader.setLocation(getClass().getResource("../../../resources/view/client/packageItem.fxml"));
+            fxmlLoader.setLocation(getClass().getClassLoader().getResource("main/resources/view/client/packageItem.fxml"));
             fxmlLoader.setResources(bundle);
 
             try {
@@ -281,9 +232,9 @@ public class ClientHistoryPackage implements Initializable {
 
                 packageItem.setText(list.get(i).getType());
 
-                pane.setPadding(new Insets(70,0,100,70));       //Adjusting padding of pane
+                pane.setPadding(new Insets(70, 0, 100, 70));       //Adjusting padding of pane
 
-                Button showMore = new Button("Więcej");
+                Button showMore = new Button(App.getLanguageProperties("packageMore"));
 
                 showMore.setLayoutX(549);        //Setting layout where button should be and width + height
                 showMore.setLayoutY(115.5);
@@ -304,26 +255,25 @@ public class ClientHistoryPackage implements Initializable {
                     @Override
                     public void handle(ActionEvent event) {
                         statusesVBox.getChildren().clear();
-                        Animations.changePane(trackPackagePane,moreInformationPane,-850,0.5);
+                        Animations.changePane(trackPackagePane, moreInformationPane, -850, 0.5);
 
                         btnBack.setVisible(true);
                         btnBack.setOpacity(1);
 
-                        List<PackageHistory> statuses = clientTrackPackage.translateStatuses(packageItem.getId());
+                        List<PackageHistory> statuses = ClientTrackPackage.translateStatuses(packageItem.getId());
 
                         // Creating statuses depending on database information
-                        for(int i = 0; i < statuses.size(); i++) {
-                            if(i == statuses.size()-1) {
-                                if(i != 0) {
+                        for (int i = 0; i < statuses.size(); i++) {
+                            if (i == statuses.size() - 1) {
+                                if (i != 0) {
                                     clientTrackPackage.createStep(4, statusesVBox);
                                 }
 
                                 String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(statuses.get(i).getDate());
-                                clientTrackPackage.createCurrentStatus(date,statuses.get(i).getStatus(),
+                                clientTrackPackage.createCurrentStatus(date, statuses.get(i).getStatus(),
                                         clientTrackPackage.addDescription(statuses.get(i).getStatus()), statusesVBox);
-                            }
-                            else {
-                                if(i != 0){
+                            } else {
+                                if (i != 0) {
                                     clientTrackPackage.createStep(2, statusesVBox);
                                 }
 
@@ -331,8 +281,8 @@ public class ClientHistoryPackage implements Initializable {
                                 clientTrackPackage.createStatus(date, statuses.get(i).getStatus(), statusesVBox);
                             }
                         }
-                        Animations.fadeAway(toggleFromClient,0.2,1,0,false);
-                        Animations.fadeAway(toggleToClient,0.2,1,0,false);
+                        Animations.fadeAway(toggleFromClient, 0.2, 1, 0, false);
+                        Animations.fadeAway(toggleToClient, 0.2, 1, 0, false);
                     }
                 });
 
@@ -378,12 +328,12 @@ public class ClientHistoryPackage implements Initializable {
 
                         timeOfDelivery.setText(infoAboutPackage.get(0).getTimeOfPlannedDelivery());
 
-                        Animations.moveByY(informationAlert,+850,0.5);
+                        Animations.moveByY(informationAlert, +850, 0.5);
                     }
                 });
 
-                pane.getChildren().add(1,showMore);
-                pane.getChildren().add(2,fullInfo);
+                pane.getChildren().add(1, showMore);
+                pane.getChildren().add(2, fullInfo);
                 packageItem.setData(list.get(i));
                 packageLayout.getChildren().add(pane);
 

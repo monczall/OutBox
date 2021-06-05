@@ -5,13 +5,12 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.features.Animations;
@@ -21,35 +20,32 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Admin implements Initializable {
+    boolean hamburgerClicked = false;
     @FXML
     private VBox paneRight;
     @FXML
     private FontAwesomeIconView hamburger;
-
     @FXML
     private AnchorPane mainWindow;
-
     @FXML
     private AnchorPane window;
-
     @FXML
     private Pane alertPane;
-
-    boolean hamburgerClicked = false;
+    @FXML
+    private Pane hello;
 
     public Admin() {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb){
-
+    public void initialize(URL url, ResourceBundle rb) {
 
 
         paneRight.setTranslateX(-200);
         alertPane.setTranslateY(-500);
 
         hamburger.setOnMouseClicked(event -> {      // If hamburger button is clicked then menu slides in and transition last for 0.5s
-            if(hamburgerClicked == false) {
+            if (hamburgerClicked == false) {
 
                 hamburger.setDisable(true);
                 hamburgerClicked = true;
@@ -60,15 +56,14 @@ public class Admin implements Initializable {
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,+200,0.5);
-                Animations.moveByX(hello,+170,0.5);
-                Animations.moveByX(mainWindow,+70,0.5);
+                Animations.moveByX(paneRight, +200, 0.5);
+                Animations.moveByX(hello, +170, 0.5);
+                Animations.moveByX(mainWindow, +70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     hamburger.setDisable(false);
                 });
-            }
-            else {
+            } else {
                 hamburger.setDisable(true);
                 hamburgerClicked = false;
 
@@ -77,9 +72,9 @@ public class Admin implements Initializable {
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
 
-                Animations.moveByX(paneRight,-200,0.5);
-                Animations.moveByX(hello,-170,0.5);
-                Animations.moveByX(mainWindow,-70,0.5);
+                Animations.moveByX(paneRight, -200, 0.5);
+                Animations.moveByX(hello, -170, 0.5);
+                Animations.moveByX(mainWindow, -70, 0.5);
 
                 fadeTransition.setOnFinished(event1 -> {
                     paneRight.setVisible(false);
@@ -89,12 +84,9 @@ public class Admin implements Initializable {
         });
     }
 
-
-    @FXML
-    private Pane hello;
-
     /**
      * Method that change scene to "admin"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
@@ -104,65 +96,72 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "editEmployee"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_edit_employee(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminEditEmployee.fxml", mainWindow);
     }
 
     /**
      * Method that change scene to "addManager"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_add_manager(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminAddManager.fxml", mainWindow);
     }
 
     /**
      * Method that change scene to "addArea"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_add_area(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminAddArea.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminAddArea.fxml", mainWindow);
     }
 
     /**
      * Method that change scene to "packSettings"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_pack_settings(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminPackSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminPackSettings.fxml", mainWindow);
     }
 
     /**
      * Method that change scene to "raports"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_raport(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminRaport.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminRaport.fxml", mainWindow);
     }
 
     /**
      * Method that change scene to "settings"
+     *
      * @param mouseEvent mouse event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_settings(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminSettings.fxml", mainWindow);
     }
 
     /**
      * Method that show alert with logout option
+     *
      * @param mouseEvent mosue event
      */
     @FXML
     void go_logout(MouseEvent mouseEvent) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         window.setDisable(true);
@@ -171,17 +170,19 @@ public class Admin implements Initializable {
 
     /**
      * Method that close alert with logout if "NO" is chosen
+     *
      * @param event event
      */
     @FXML
     void logoutNo(ActionEvent event) {
-        Animations.moveByY(alertPane,-500,0.3);
+        Animations.moveByY(alertPane, -500, 0.3);
         window.setEffect(null);
         window.setDisable(false);
     }
 
     /**
      * Method that logout admin
+     *
      * @param event event
      */
     @FXML
@@ -191,10 +192,11 @@ public class Admin implements Initializable {
 
     /**
      * Method that close alert with logout if "NO" is chosen
+     *
      * @param actionEvent event
      */
     public void logout(ActionEvent actionEvent) {
-        Animations.moveByY(alertPane,+500,0.3);
+        Animations.moveByY(alertPane, +500, 0.3);
         GaussianBlur gaussianBlur = new GaussianBlur();
         gaussianBlur.setRadius(8);
         window.setDisable(true);
@@ -203,50 +205,83 @@ public class Admin implements Initializable {
 
     /**
      * Method that change scene to "packSettings"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewPackSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminPackSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminPackSettings.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "raports"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewRaport(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminRaport.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminRaport.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "settings"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminSettings.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "addArea"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewAddArea(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminAddArea.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminAddArea.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "editEmployee"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewEditEmployee(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminEditEmployee.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminEditEmployee.fxml", mainWindow);
     }
+
     /**
      * Method that change scene to "addManager"
+     *
      * @param actionEvent action event
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewAddManager(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/admin/adminAddManager.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminAddManager.fxml", mainWindow);
+    }
+
+    /**
+     * Method that closes the application
+     *
+     * @param event event
+     */
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * Method that minimizes the application
+     *
+     * @param event event
+     */
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.setIconified(true);
     }
 }

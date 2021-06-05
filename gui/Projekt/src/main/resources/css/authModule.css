@@ -1,5 +1,5 @@
 /*-------------COLORS-------------*/
-*{
+* {
     -fx-theme-color: -fx-main-color;
     -fx-theme-secondary-color: -fx-second-color;
     -fx-textFields-bg: #EEEEEE;
@@ -14,56 +14,72 @@
     -fx-shadow: #000;
     -fx-dark-transparent: #121212cc;
 }
+
 /*-------------BACKGROUNDS-------------*/
-.primaryBackground{
+.primaryBackground {
     -fx-background-color: -fx-dark-bg;
 }
-.secondaryBackground{
+
+.secondaryBackground {
     -fx-background-color: -fx-theme-color;
 }
-.primaryBackgroundFill{
+
+.primaryBackgroundFill {
     -fx-fill: -fx-dark-bg;
 }
+
 /*-------------FILLS-------------*/
-.fill{
+.fill {
     -fx-fill: -fx-theme-color;
 }
-.fillDisabled{
+
+.fillDisabled {
     -fx-fill: -fx-disabled;
 }
-.fillCorrect{
+
+.fillCorrect {
     -fx-fill: -fx-success;
 }
-.fillError{
+
+.fillError {
     -fx-fill: -fx-error;
 }
-.fillIcon{
+
+.fillIcon {
     -fx-fill: -fx-theme-secondary-color;
 }
+
 /*-------------TEXT-------------*/
-.mainText{
+.mainText {
     -fx-text-fill: -fx-black;
 }
-.mainInvertText{
+
+.mainInvertText {
     -fx-text-fill: -fx-white;
 }
-.altText{
+
+.altText {
     -fx-text-fill: -fx-alter;
 }
-.themeMainText{
+
+.themeMainText {
     -fx-text-fill: -fx-second-color;
 }
-.themeTouchOfColorText{
+
+.themeTouchOfColorText {
     -fx-text-fill: -fx-theme-color;
 }
-.errorText{
+
+.errorText {
     -fx-text-fill: -fx-error;
 }
-.successText{
+
+.successText {
     -fx-text-fill: -fx-success;
 }
+
 /*-------------BUTTONS-------------*/
-.loginButton{
+.loginButton {
     -fx-background-color: -fx-theme-color;
     -fx-background-radius: 3;
     -fx-min-width: 250;
@@ -75,7 +91,8 @@
     -fx-text-fill: #000000;
     -fx-alignment: center;
 }
-.loginButton:hover{
+
+.loginButton:hover {
     -fx-background-color: #000000;
     -fx-background-radius: 3;
     -fx-border-color: -fx-theme-color;
@@ -89,11 +106,13 @@
     -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
-.loginButton:pressed{
+
+.loginButton:pressed {
     -fx-scale-y: 0.9;
     -fx-scale-x: 0.9;
 }
-.createAccountButton{
+
+.createAccountButton {
     -fx-background-color: -fx-theme-color;
     -fx-background-radius: 3;
     -fx-border-color: -fx-theme-secondary-color;
@@ -103,7 +122,8 @@
     -fx-text-fill: -fx-theme-secondary-color;
     -fx-alignment: center;
 }
-.createAccountButton:hover{
+
+.createAccountButton:hover {
     -fx-background-color: -fx-theme-secondary-color;
     -fx-background-radius: 3;
     -fx-min-width: 91;
@@ -111,11 +131,13 @@
     -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
-.createAccountButton:pressed{
+
+.createAccountButton:pressed {
     -fx-scale-y: 0.9;
     -fx-scale-x: 0.9;
 }
-.exitButton{
+
+.returnButton {
     -fx-background-color: -fx-theme-secondary-color;
     -fx-background-radius: 3;
     -fx-min-width: 60;
@@ -127,7 +149,8 @@
     -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
-.exitButton:hover{
+
+.returnButton:hover {
     -fx-background-color: -fx-theme-color;
     -fx-background-radius: 3;
     -fx-border-color: -fx-theme-secondary-color;
@@ -141,39 +164,48 @@
     -fx-text-fill: -fx-theme-secondary-color;
     -fx-alignment: center;
 }
-.exitButton:pressed{
+
+.returnButton:pressed {
     -fx-scale-y: 0.9;
     -fx-scale-x: 0.9;
 }
-.menuButton{
+
+.menuButton {
     -fx-background-color: -fx-theme-secondary-color;
     -fx-background-radius: 3;
 }
-.menuButton .label{
+
+.menuButton .label {
     -fx-text-fill: -fx-white;
 }
+
 .menu-button > .arrow-button, .menu-button > .arrow-button > .arrow {
     -fx-padding: 0;
 }
+
 .menuButton:hover {
     -fx-background-color: -fx-theme-color;
     -fx-background-radius: 3;
     -fx-border-color: -fx-theme-secondary-color;
     -fx-border-radius: 3;
 }
-.menuItemButton{
+
+.menuItemButton {
     -fx-background-color: -fx-dark-bg;
     -fx-background-radius: 3;
     -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
-.menuItemButton .label{
+
+.menuItemButton .label {
     -fx-text-fill: -fx-white;
 }
-.menuItemButton:disabled{
+
+.menuItemButton:disabled {
     -fx-opacity: 0.9;
 }
-.menuItemButton:hover{
+
+.menuItemButton:hover {
     -fx-background-color: -fx-dark-bg;
     -fx-background-radius: 3;
     -fx-border-color: -fx-theme-secondary-color;
@@ -181,9 +213,11 @@
     -fx-text-fill: -fx-theme-color;
     -fx-alignment: center;
 }
-.menuItemButton:hover .label{
+
+.menuItemButton:hover .label {
     -fx-text-fill: -fx-theme-color;
 }
+
 .context-menu {
     -fx-background-color: -fx-theme-color;
     -fx-background-insets: 0, 1, 2;
@@ -192,8 +226,29 @@
     -fx-border-width: 2;
     -fx-border-radius: 5;
 }
+
+.minIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+
+.minBtn:hover > .minIcon {
+    -fx-scale-y: 4;
+}
+
+.exitIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+
+.exitButton:hover > .exitPane > .exitIcon {
+    -fx-scale-x: 1.625;
+}
+
 /*-------------TEXT FIELDS-------------*/
-.textFields{
+.textFields {
     -fx-background-color: -fx-textFields-bg;
     -fx-background-radius: 9;
     -fx-border-color: -fx-theme-color;
@@ -207,7 +262,8 @@
     -fx-max-height: 35;
     -fx-padding: 0 0 0 30;
 }
-.textFieldsCorrect{
+
+.textFieldsCorrect {
     -fx-background-color: -fx-textFields-bg;
     -fx-background-radius: 9;
     -fx-border-color: -fx-success;
@@ -221,8 +277,9 @@
     -fx-max-height: 35;
     -fx-padding: 0 0 0 30;
 }
-.textFieldsError{
-    -fx-background-color: #FFE0E0;
+
+.textFieldsError {
+    -fx-background-color: #FFC0C0;
     -fx-background-radius: 9;
     -fx-border-color: -fx-error;
     -fx-border-width: 3;
@@ -235,51 +292,62 @@
     -fx-max-height: 35;
     -fx-padding: 0 0 0 30;
 }
+
 /*-------------ALERT-------------*/
-.alertText{
+.alertText {
     -fx-font-size: 16px;
     -fx-text-fill: -fx-main-color;
     -fx-alignment: CENTER;
 }
-.alertSuccess{
-    -fx-background-color:  -fx-dark-transparent; /*#262628*/
+
+.alertSuccess {
+    -fx-background-color: -fx-dark-transparent; /*#262628*/
     -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
     -fx-border-color: -fx-success;
     -fx-border-radius: 0;
 }
-.alertSuccessIcon{
+
+.alertSuccessIcon {
     -fx-fill: -fx-success;
 }
-.alertSuccessText{
+
+.alertSuccessText {
     -fx-font-size: 16px;
     -fx-text-fill: -fx-success;
 }
-.alertFailure{
-    -fx-background-color:  -fx-dark-transparent; /*#262628*/
+
+.alertFailure {
+    -fx-background-color: -fx-dark-transparent; /*#262628*/
     -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
     -fx-border-color: -fx-error;
     -fx-border-radius: 0;
 }
-.alertFailureIcon{
+
+.alertFailureIcon {
     -fx-fill: -fx-error;
 }
-.alertFailureText{
+
+.alertFailureText {
     -fx-font-size: 16px;
     -fx-text-fill: -fx-error;
 }
+
 .minIcon {
     -fx-text-fill: -fx-main-color;
     -fx-fill: -fx-main-color;
     -fx-stroke: -fx-main-color;
 }
+
 .minBtn:hover > .minIcon {
     -fx-scale-y: 4;
 }
+
 .exitIcon {
     -fx-text-fill: -fx-main-color;
     -fx-fill: -fx-main-color;
     -fx-stroke: -fx-main-color;
 }
-.exitButton:hover > .exitPane > .exitIcon{
+
+.exitButton:hover > .exitPane > .exitIcon {
     -fx-scale-x: 1.625;
 }

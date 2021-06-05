@@ -2,12 +2,14 @@ package main.java.entity;
 
 public class PackagesDTO {
 
-    private int userInfosId;
     private final int packagesId;
     private final String packageNumber;
-    private String timeOfPlannedDelivery;
     private final String name;
     private final String surname;
+    private final String recipentName;
+    private final String voivodeship;
+    private int userInfosId;
+    private String timeOfPlannedDelivery;
     private String phoneNumber;
     private String streetAndNumber;
     private String city;
@@ -15,9 +17,7 @@ public class PackagesDTO {
     private String additionalComment;
     private String email;
     private String sizeName;
-    private String recipentName;
     private String recipentSurname;
-    private String voivodeship;
 
     public PackagesDTO(int userInfosId, int packagesId, String packageNumber, String timeOfPlannedDelivery,
                        String name, String surname, String phoneNumber, String streetAndNumber, String city,
@@ -92,6 +92,10 @@ public class PackagesDTO {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getAdditionalComment() {
         return additionalComment;
     }
@@ -104,6 +108,10 @@ public class PackagesDTO {
         return sizeName;
     }
 
+    public void setSizeName(String sizeName) {
+        this.sizeName = sizeName;
+    }
+
     public String getRecipentName() {
         return recipentName;
     }
@@ -112,13 +120,7 @@ public class PackagesDTO {
         return recipentSurname;
     }
 
-    public String getVoivodeship() { return voivodeship; }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setSizeName(String sizeName) {
-        this.sizeName = sizeName;
+    public String getVoivodeship() {
+        return voivodeship;
     }
 }

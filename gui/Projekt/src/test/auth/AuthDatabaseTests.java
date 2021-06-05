@@ -21,29 +21,28 @@ public class AuthDatabaseTests {
         System.out.println("Utworzono sessionFactory");
     }
 
+    @AfterAll
+    public static void tearDown() {
+        if (sessionFactory != null) {
+            sessionFactory.close();
+            System.out.println("Zamknięto sessionFactory");
+        }
+    }
+
     @BeforeEach
     public void openSession() {
         session = sessionFactory.openSession();
-        System.out.println("");
+        System.out.println();
         System.out.println("=============");
         System.out.println("Sesja otwarta");
     }
 
     @AfterEach
     public void closeSession() {
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
             System.out.println("Sesja zamknieta");
             System.out.println("===============");
-        }
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        if(sessionFactory != null){
-            sessionFactory.close();
-            System.out.println("Zamknięto sessionFactory");
         }
     }
 
@@ -82,11 +81,11 @@ public class AuthDatabaseTests {
         String email = "takiuzytkowniknieistnieje@gmail.com";
 
         Query query = session.createQuery("from Users u where u.email = :email");
-        query.setParameter("email",email);
+        query.setParameter("email", email);
 
         List<Users> listOfNonExistingUser = query.list();
 
-        Assertions.assertEquals(0,listOfNonExistingUser.size());
+        Assertions.assertEquals(0, listOfNonExistingUser.size());
     }
 
     @Test
@@ -98,11 +97,11 @@ public class AuthDatabaseTests {
         String email = "klient@gmail.com";
 
         Query query = session.createQuery("from Users u where u.email = :email");
-        query.setParameter("email",email);
+        query.setParameter("email", email);
 
         List<Users> listOfClientUser = query.list();
 
-        Assertions.assertEquals(1,listOfClientUser.size());
+        Assertions.assertEquals(1, listOfClientUser.size());
     }
 
     @Test
@@ -114,11 +113,11 @@ public class AuthDatabaseTests {
         String email = "kurier@gmail.com";
 
         Query query = session.createQuery("from Users u where u.email = :email");
-        query.setParameter("email",email);
+        query.setParameter("email", email);
 
         List<Users> listOfCourierUser = query.list();
 
-        Assertions.assertEquals(1,listOfCourierUser.size());
+        Assertions.assertEquals(1, listOfCourierUser.size());
     }
 
     @Test
@@ -130,11 +129,11 @@ public class AuthDatabaseTests {
         String email = "menadzer@gmail.com";
 
         Query query = session.createQuery("from Users u where u.email = :email");
-        query.setParameter("email",email);
+        query.setParameter("email", email);
 
         List<Users> listOfManagerUser = query.list();
 
-        Assertions.assertEquals(1,listOfManagerUser.size());
+        Assertions.assertEquals(1, listOfManagerUser.size());
     }
 
     @Test
@@ -146,11 +145,11 @@ public class AuthDatabaseTests {
         String email = "administrator@gmail.com";
 
         Query query = session.createQuery("from Users u where u.email = :email");
-        query.setParameter("email",email);
+        query.setParameter("email", email);
 
         List<Users> listOfAdministratorUser = query.list();
 
-        Assertions.assertEquals(1,listOfAdministratorUser.size());
+        Assertions.assertEquals(1, listOfAdministratorUser.size());
     }
 
     @Test
@@ -162,11 +161,11 @@ public class AuthDatabaseTests {
         int id = -1;
 
         Query query = session.createQuery("from UserInfos ui where ui.id = :id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
 
         List<UserInfos> listOfNonExistingUserInfo = query.list();
 
-        Assertions.assertEquals(0,listOfNonExistingUserInfo.size());
+        Assertions.assertEquals(0, listOfNonExistingUserInfo.size());
     }
 
     @Test
@@ -178,11 +177,11 @@ public class AuthDatabaseTests {
         int id = 1;
 
         Query query = session.createQuery("from UserInfos ui where ui.id = :id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
 
         List<UserInfos> listOfClientUserInfo = query.list();
 
-        Assertions.assertEquals(1,listOfClientUserInfo.size());
+        Assertions.assertEquals(1, listOfClientUserInfo.size());
     }
 
     @Test
@@ -194,11 +193,11 @@ public class AuthDatabaseTests {
         int id = 2;
 
         Query query = session.createQuery("from UserInfos ui where ui.id = :id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
 
         List<UserInfos> listOfCourierUserInfo = query.list();
 
-        Assertions.assertEquals(1,listOfCourierUserInfo.size());
+        Assertions.assertEquals(1, listOfCourierUserInfo.size());
     }
 
     @Test
@@ -210,11 +209,11 @@ public class AuthDatabaseTests {
         int id = 3;
 
         Query query = session.createQuery("from UserInfos ui where ui.id = :id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
 
         List<UserInfos> listOfManagerUserInfo = query.list();
 
-        Assertions.assertEquals(1,listOfManagerUserInfo.size());
+        Assertions.assertEquals(1, listOfManagerUserInfo.size());
     }
 
     @Test
@@ -226,11 +225,11 @@ public class AuthDatabaseTests {
         int id = 4;
 
         Query query = session.createQuery("from UserInfos ui where ui.id = :id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
 
         List<UserInfos> listOfAdministratorUserInfo = query.list();
 
-        Assertions.assertEquals(1,listOfAdministratorUserInfo.size());
+        Assertions.assertEquals(1, listOfAdministratorUserInfo.size());
     }
 
 }

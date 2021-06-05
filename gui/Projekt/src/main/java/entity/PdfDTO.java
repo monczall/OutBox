@@ -4,14 +4,16 @@ import java.util.Date;
 
 public class PdfDTO {
 
-    private String packageNumber;
+    private final String packageNumber;
+    private final String city;
+    private final String voivodeship;
+    private final Date date;
     private String size;
-    private String city;
-    private String voivodeship;
-    private Date date;
-    private int areaID;
+    private int packageID;
+    private Integer areaID;
 
-    public PdfDTO(String packageNumber, String size, String city, String voivodeship, Date date, int areaID) {
+
+    public PdfDTO(String packageNumber, String size, String city, String voivodeship, Date date, Integer areaID) {
         this.packageNumber = packageNumber;
         this.size = size;
         this.city = city;
@@ -20,11 +22,25 @@ public class PdfDTO {
         this.areaID = areaID;
     }
 
-    public int getAreaID() {
+    public PdfDTO(String packageNumber, String size, String city, String voivodeship, Date date, int packageID, Integer areaID) {
+        this.packageNumber = packageNumber;
+        this.size = size;
+        this.city = city;
+        this.voivodeship = voivodeship;
+        this.date = date;
+        this.packageID = packageID;
+        this.areaID = areaID;
+    }
+
+    public int getPackageID() {
+        return packageID;
+    }
+
+    public Integer getAreaID() {
         return areaID;
     }
 
-    public void setAreaID(int areaID) {
+    public void setAreaID(Integer areaID) {
         this.areaID = areaID;
     }
 
@@ -34,6 +50,10 @@ public class PdfDTO {
 
     public String getSize() {
         return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 
     public String getCity() {
@@ -46,9 +66,5 @@ public class PdfDTO {
 
     public Date getDate() {
         return date;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 }

@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.PackageType;
 import main.java.entity.PdfAreaDTO;
-import main.java.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -15,9 +14,10 @@ public class PackageTypeDAO {
     /**
      * Method used to get the list of all packages types that are in database.
      * Returned List is type of PackageType.
+     *
      * @return List of package types
      */
-    static public List<PackageType> getPackageTypes(){
+    static public List<PackageType> getPackageTypes() {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery("from PackageType");
@@ -27,20 +27,17 @@ public class PackageTypeDAO {
         return listOfPackageTypes;
     }
 
-    static public List<String> getTypeById(int typeId){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        Query query=session.createQuery("SELECT sizeName from PackageType WHERE id = :typeId");
-
-        query.setParameter("typeId",typeId);
-
-        List<String> type = query.list();
-
-        return type;
-
-    }
-	
-	static public void updatePackageType(int packTypeId, String size, String weight, String price){
+    /**
+     * <p>
+     * Method used to update information about given packageTypeId
+     * </p>
+     *
+     * @param packTypeId package to edit
+     * @param size       max package size of given type (ex. 25cm x 25cm x 25cm)
+     * @param weight     max package weight of given type
+     * @param price      price to pay for package delivery
+     */
+    static public void updatePackageType(int packTypeId, String size, String weight, String price) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -54,22 +51,33 @@ public class PackageTypeDAO {
 
         session.getTransaction().commit();
         session.close();
-	}
+    }
 
-
+    /**
+     * <p>
+     * Method used to get packages in areas in between selected date.
+     * </p>
+     *
+     * @param dateStart starting date
+     * @param dateEnd   ending date
+     * @return List type of PdfAreaDTO
+     */
     static public List<PdfAreaDTO> readAreasForPdf(Date dateStart, Date dateEnd) {
         ObservableList<PdfAreaDTO> packages = FXCollections.observableArrayList();
 
         String hql = "SELECT NEW main.java.entity.PdfAreaDTO(" +
                 "A.name, (SELECT COUNT(P.id) FROM PackageType PT, Packages P, PackageHistory PH, Users U WHERE PT.sizeName = " +
-                "'mała' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
-                "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd), " +
+                "'mala' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "AND (PH.status = 'Dostarczona' OR PH.status = 'Zwrocona Do Nadawcy' OR PH.status = 'Do Odebrania W " +
+                "Oddziale') AND PH.date BETWEEN :dateStart AND :dateEnd), " +
                 "(SELECT COUNT(P.id) FROM PackageType PT, PackageHistory PH, Packages P, Users U WHERE PT.sizeName = " +
-                "'średnia' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
-                "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd), " +
+                "'srednia' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "AND (PH.status = 'Dostarczona' OR PH.status = 'Zwrocona Do Nadawcy' OR PH.status = 'Do Odebrania W " +
+                "Oddziale')  AND PH.date BETWEEN :dateStart AND :dateEnd), " +
                 "(SELECT COUNT(P.id) FROM PackageType PT, PackageHistory PH, Packages P, Users U WHERE PT.sizeName = " +
-                "'duża' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
-                "AND PH.status = 'Zarejestrowana' AND PH.date BETWEEN :dateStart AND :dateEnd))" +
+                "'duza' AND P.typeId = PT.id AND P.courierId = U.id AND U.areaId = A.id AND P.id = PH.packageId " +
+                "AND (PH.status = 'Dostarczona' OR PH.status = 'Zwrocona Do Nadawcy' OR PH.status = 'Do Odebrania W " +
+                "Oddziale') AND PH.date BETWEEN :dateStart AND :dateEnd))" +
                 "FROM Packages P, Users U, Areas A, PackageHistory PH WHERE P.id = PH.packageId AND PH.date BETWEEN " +
                 ":dateStart AND :dateEnd GROUP BY A.name";
 

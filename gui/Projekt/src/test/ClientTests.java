@@ -1,8 +1,6 @@
 package test;
 
 import javafx.collections.ObservableList;
-import main.java.controllers.auth.Encryption;
-import main.java.controllers.auth.Login;
 import main.java.controllers.client.ClientTrackPackage;
 import main.java.controllers.client.PopulatePackageItem;
 import main.java.dao.HibernateUtil;
@@ -53,7 +51,7 @@ public class ClientTests {
 
     @AfterAll
     public static void tearDown() {
-        if(sessionFactory != null){
+        if (sessionFactory != null) {
             sessionFactory.close();
             System.out.println("Zniszcono sessionFactory");
         }
@@ -85,15 +83,15 @@ public class ClientTests {
     public void testList() {
         System.out.println("Uruchomiono test listy...");
 
-        List<PopulatePackageItem> listActual = ClientTrackPackage.loadPackagesList(5,"nenej26509@87708b.com");
+        List<PopulatePackageItem> listActual = ClientTrackPackage.loadPackagesList(5, "nenej26509@87708b.com");
 
-        List<PopulatePackageItem> listExpected = ClientTrackPackage.loadPackagesList(5,"nenej26509@87708b.com");
+        List<PopulatePackageItem> listExpected = ClientTrackPackage.loadPackagesList(5, "nenej26509@87708b.com");
 
         int x = 0;
 
-        for(int i = 0; i < listActual.size(); i++){
-            for(int j = 0 ; j < listExpected.size(); j++){
-                if(listActual.get(i).getPackageNumber().equals(listExpected.get(j).getPackageNumber())){
+        for (int i = 0; i < listActual.size(); i++) {
+            for (int j = 0; j < listExpected.size(); j++) {
+                if (listActual.get(i).getPackageNumber().equals(listExpected.get(j).getPackageNumber())) {
                     x++;
                 }
             }
@@ -107,8 +105,8 @@ public class ClientTests {
         System.out.println("Uruchomiono test szyfrowania (zle) hasła...");
 
         Assertions.assertThrows(AssertionFailedError.class,
-                ()->{
-                    Assertions.assertEquals("9e38e8d688743e0d07d669a1fcbcd35b","zaq1@WSd");
+                () -> {
+                    Assertions.assertEquals("9e38e8d688743e0d07d669a1fcbcd35b", "zaq1@WSd");
                 });
     }
 
@@ -117,15 +115,15 @@ public class ClientTests {
         System.out.println("Uruchomiono test szyfrowania (dobre) hasła...");
 
         Assertions.assertThrows(AssertionFailedError.class,
-                ()->{
-                    Assertions.assertEquals("9e38e8d688743e0d07d669a1fcbcd35b","zaq1@WSX");
+                () -> {
+                    Assertions.assertEquals("9e38e8d688743e0d07d669a1fcbcd35b", "zaq1@WSX");
                 });
     }
 
     @Test
     @Tag("Powinno wyjsc 0 rekordow")
-    public void testReadPackagesById(){
-        ObservableList<PackagesDTO> packages = PackagesDAO.readPackagesByID(22,"niematego@mail.com");
+    public void testReadPackagesById() {
+        ObservableList<PackagesDTO> packages = PackagesDAO.readPackagesByID(22, "niematego@mail.com");
 
         Assertions.assertTrue(packages.size() == 0);
     }
@@ -138,8 +136,7 @@ public class ClientTests {
 
     @AfterEach
     public void closeSession() {
-        if(session != null)
-        {
+        if (session != null) {
             session.close();
             System.out.println("Zamknięto sesje");
         }

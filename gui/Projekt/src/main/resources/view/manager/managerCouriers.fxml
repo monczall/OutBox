@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground" stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.manager.ManagerCouriers">
-   <children>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#addCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%addCourier">
-         <graphic>
-            <FontAwesomeIconView glyphName="USER_PLUS" size="60" styleClass="blockIcon" />
-         </graphic></Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="533.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#deleteCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%removeCourier">
-         <graphic>
-            <FontAwesomeIconView glyphName="USER_TIMES" size="60" styleClass="blockIcon" />
-         </graphic></Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#editCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%editCourier">
-         <graphic>
-            <FontAwesomeIconView glyphName="USER" size="70" styleClass="blockIcon" />
-         </graphic></Button>
-      <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="533.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#areaCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock" text="%unassignedPackages">
-         <graphic>
-            <FontAwesomeIconView glyphName="PACKAGES" size="70" styleClass="blockIcon" />
-         </graphic>
-      </Button>
-      <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel" text="%couriersTitle" />
-      <FontAwesomeIconView fill="ORANGE" glyphName="USERS" layoutX="142.0" layoutY="70.0" size="38" styleClass="blockIconTitle" />
-      <AnchorPane fx:id="courierOptions" prefHeight="672.0" prefWidth="1033.0" visible="false" />
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="672.0" prefWidth="1033.0" styleClass="mainBackground"
+            stylesheets="@../../css/manager.css" xmlns="http://javafx.com/javafx/15.0.1"
+            fx:controller="main.java.controllers.manager.ManagerCouriers">
+    <children>
+        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="196.0" mnemonicParsing="false"
+                onMouseClicked="#addCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock"
+                text="%addCourier">
+            <graphic>
+                <FontAwesomeIconView glyphName="USER_PLUS" size="60" styleClass="blockIcon"/>
+            </graphic>
+        </Button>
+        <Button alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="533.0" layoutY="196.0" mnemonicParsing="false"
+                onMouseClicked="#deleteCourier" prefHeight="123.0" prefWidth="207.0" styleClass="homeBlock"
+                text="%removeCourier">
+            <graphic>
+                <FontAwesomeIconView glyphName="USER_TIMES" size="60" styleClass="blockIcon"/>
+            </graphic>
+        </Button>
+        <Button fx:id="courierButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="305.0" layoutY="336.0"
+                mnemonicParsing="false" onMouseClicked="#editCourier" prefHeight="123.0" prefWidth="207.0"
+                styleClass="homeBlock" text="%editCourier">
+            <graphic>
+                <FontAwesomeIconView glyphName="USER" size="70" styleClass="blockIcon"/>
+            </graphic>
+        </Button>
+        <Button fx:id="areaButton" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="533.0" layoutY="336.0"
+                mnemonicParsing="false" onMouseClicked="#areaCourier" prefHeight="123.0" prefWidth="207.0"
+                styleClass="homeBlock" text="%unassignedPackages">
+            <graphic>
+                <FontAwesomeIconView glyphName="PACKAGES" size="70" styleClass="blockIcon"/>
+            </graphic>
+        </Button>
+        <Text layoutX="202.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textLabel"
+              text="%couriersTitle"/>
+        <FontAwesomeIconView fill="ORANGE" glyphName="USERS" layoutX="142.0" layoutY="70.0" size="38"
+                             styleClass="blockIconTitle"/>
+        <AnchorPane fx:id="courierOptions" prefHeight="672.0" prefWidth="1033.0" visible="false"/>
+    </children>
 </AnchorPane>

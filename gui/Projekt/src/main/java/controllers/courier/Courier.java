@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.SceneManager;
 import main.java.controllers.auth.Login;
@@ -107,7 +108,7 @@ public class Courier implements Initializable {
      * @throws IOException
      */
     public void openSecond(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/courier/courierSecond.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/courier/courierSecond.fxml", mainWindow);
     }
 
     /**
@@ -117,7 +118,7 @@ public class Courier implements Initializable {
      * @throws IOException
      */
     public void openSettings(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("../../../resources/view/courier/courierSettings.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/courier/courierSettings.fxml", mainWindow);
     }
 
     /**
@@ -154,5 +155,17 @@ public class Courier implements Initializable {
     @FXML
     void logoutYes(ActionEvent event) {
         SceneManager.renderScene("login");
+    }
+
+    @FXML
+    void exitApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    void minApp(ActionEvent event) {
+        Stage stage = (Stage) mainWindow.getScene().getWindow();
+        stage.setIconified(true);
     }
 }
