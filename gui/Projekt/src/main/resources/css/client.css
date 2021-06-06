@@ -1,5 +1,5 @@
 /*-------------COLORS-------------*/
-* {
+*{
     -fx-dark-color: #121212;
     -fx-gray-color: #8f8f8f;
     -fx-shadow: #000;
@@ -7,26 +7,21 @@
     -fx-alert-success-color: #38b000;
     -fx-alert-failure-color: #d82020;
 }
-
 /*-------------BACKGROUNDS-------------*/
-.mainBackground {
+.mainBackground{
     -fx-background-color: -fx-dark-color;
 }
-
-.sideBackground {
+.sideBackground{
     -fx-background-color: -fx-main-color;
 }
-
-.actualStatus {
+.actualStatus{
     -fx-background-color: -fx-main-color;
 }
-
-.grayColor {
+.grayColor{
     -fx-background-color: -fx-gray-color;
 }
-
 /*-------------STYLING BUTTONS-------------*/
-.sideButtons {
+.sideButtons{
     -fx-background-color: -fx-main-color;
     -fx-text-fill: -fx-second-color;
     -fx-font-size: 16px;
@@ -35,57 +30,46 @@
     -fx-alignment: BASELINE_LEFT;
     -fx-background-radius: 0;
 }
-
-.sideButtons:hover {
+.sideButtons:hover{
     -fx-background-color: -fx-dark-color;
     -fx-text-fill: -fx-main-color;
     -fx-cursor: hand;
 }
-
 /*-------------STYLING ICONS-------------*/
-.sideIcons {
+.sideIcons{
     -fx-background-color: -fx-main-color;
     -fx-cursor: hand;
     -fx-background-radius: 0;
 }
-
-.icons {
+.icons{
     -fx-fill: -fx-second-color;
 }
-
-.welcomeHello, .welcomeUser {
+.welcomeHello, .welcomeUser{
     -fx-font-size: 20px;
     -fx-fill: white;
 }
-
-.welcomeUser {
+.welcomeUser{
     -fx-fill: -fx-main-color;
     -fx-underline: true;
 }
-
-.partIcon {
+.partIcon{
     -fx-fill: -fx-main-color;
 }
-
-.blockIcon {
+.blockIcon{
     -fx-fill: -fx-second-color;
 }
-
-.navCircle {
+.navCircle{
     -fx-fill: -fx-main-color;
 }
-
-.iconNext {
+.iconNext{
     -fx-fill: -fx-second-color;
 }
-
-.backIcon {
+.backIcon{
     -fx-fill: -fx-gray-color;
 }
-
 /*-------------MENU - HOME-------------*/
 
-.homeBlock {
+.homeBlock{
     -fx-background-color: -fx-main-color;
     -fx-text-fill: -fx-second-color;
     -fx-font-size: 18px;
@@ -94,7 +78,7 @@
     -fx-cursor: hand;
 }
 
-.homeBlock:hover, .homeBlock:hover > .blockIcon {
+.homeBlock:hover, .homeBlock:hover > .blockIcon{
     -fx-background-color: transparent;
     -fx-text-fill: -fx-main-color;
     -fx-border-width: 3px;
@@ -104,7 +88,7 @@
 
 /*-------------MENU - SETTINGS-------------*/
 
-.optionGroup {
+.optionGroup{
     -fx-background-radius: 0;
     -fx-background-color: transparent;
     -fx-font-size: 20px;
@@ -113,20 +97,19 @@
     -fx-font-weight: bold;
 }
 
-.btnLanguage:hover {
+.btnLanguage:hover{
     -fx-border-style: solid;
     -fx-border-color: -fx-main-color;
     -fx-border-width: 0 0 3 0;
 }
 
-.textOption {
+.textOption{
     -fx-text-fill: -fx-gray-color;
     -fx-fill: -fx-gray-color;
     -fx-font-size: 16px;
 }
-
 /*-------------STYLING INPUTS-------------*/
-.inputBox {
+.inputBox{
     -fx-text-fill: -fx-main-color;
     -fx-font-size: 15px;
     -fx-background-color: transparent;
@@ -137,44 +120,37 @@
     -fx-border-width: 0 0 2 0;
     -fx-fill: -fx-main-color;
 }
-
-.inputBox .list-cell {
+.inputBox .list-cell{
     -fx-font-size: 15px;
     -fx-text-fill: -fx-main-color;
     -fx-background: -fx-dark-color;
 
 }
-
-.inputBox .list-view {
+.inputBox .list-view{
     -fx-background-color: -fx-main-color;
     -fx-background: -fx-main-color;
 }
-
-.inputBox .list-view .list-cell:filled:selected {
+.inputBox .list-view .list-cell:filled:selected{
     /*-fx-text-fill: -fx-second-color;*/
     /*-fx-background-color: -fx-main-color;*/
     -fx-font-weight: bold;
 }
-
-.inputBox .list-view .list-cell:filled {
+.inputBox .list-view .list-cell:filled{
     -fx-background-color: -fx-dark-color;
 }
-
-.inputBox .list-view .list-cell:hover {
+.inputBox .list-view .list-cell:hover{
     -fx-text-fill: -fx-second-color;
     -fx-background-color: -fx-main-color;
     -fx-font-weight: bold;
 }
-
-.inputBox .list-view .scroll-bar:vertical .thumb {
+.inputBox .list-view .scroll-bar:vertical .thumb{
     -fx-background-color: -fx-dark-color;
 }
 
-.userIconSettings {
+.userIconSettings{
     -fx-fill: -fx-main-color;
 }
-
-.settingsBlock {
+.settingsBlock{
     -fx-background-color: transparent;
     -fx-text-fill: -fx-main-color;
     -fx-font-size: 18px;
@@ -184,15 +160,13 @@
     -fx-border-style: solid;
     -fx-cursor: hand;
 }
-
-.settingsBlock:selected, .settingsBlock:selected > .userIconSettings {
+.settingsBlock:selected, .settingsBlock:selected > .userIconSettings{
     -fx-background-color: -fx-main-color;
     -fx-text-fill: -fx-dark-color;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
     -fx-fill: -fx-dark-color;
 }
-
-.settingsBlock:hover {
+.settingsBlock:hover{
     /*-fx-background-color: -fx-main-color;*/
     /*-fx-text-fill: -fx-dark-color;*/
     -fx-border-width: 5px;
@@ -200,46 +174,41 @@
 
 /*-------------MENU - REGISTER PACKAGE-------------*/
 
-.packageBlock {
+.packageBlock{
     -fx-background-color: #171717;
     -fx-border-color: -fx-gray-color;
 }
-
-.toggleButton {
+.toggleButton{
     -fx-background-color: transparent;
     -fx-cursor: hand;
 }
-
-.toggleButton:hover > .packageBlock {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.8), 5, 0, 0, 0);
+.toggleButton:hover > .packageBlock{
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 5, 0, 0, 0);
 }
-
-.toggleButton:selected > .packageBlock {
+.toggleButton:selected > .packageBlock{
     -fx-effect: dropshadow(three-pass-box, -fx-main-color, 10, 0, 0, 0);
     -fx-border-color: -fx-main-color;
 }
 
-.inputArea .content {
+.inputArea .content{
     -fx-background-color: -fx-dark-color;
     -fx-border-color: -fx-main-color;
 }
 
-.inputArea {
+.inputArea{
     -fx-border-color: -fx-main-color;
     -fx-text-fill: -fx-main-color;
     -fx-font-size: 15px;
     -fx-background-radius: 0;
     -fx-background-color: -fx-main-color;
 }
-
 /*-------------STYLING SCROLLPANE-------------*/
-.scroll-pane {
+.scroll-pane{
     -fx-background-color: transparent;
     -fx-background: transparent;
 }
-
-.scroll-bar:horizontal, .scroll-bar:vertical {
-    -fx-background-color: transparent;
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
 }
 
 .increment-button, .decrement-button {
@@ -248,7 +217,7 @@
 }
 
 .scroll-bar:horizontal .track,
-.scroll-bar:vertical .track {
+.scroll-bar:vertical .track{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-radius: 0em;
@@ -259,13 +228,12 @@
     -fx-background-color: -fx-main-color;
     -fx-background-radius: 5em;
 }
-
 .scroll-pane > .corner {
     -fx-background-color: transparent;
 }
 
-.scroll-bar:horizontal, .scroll-bar:vertical {
-    -fx-background-color: transparent;
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
 }
 
 .increment-button, .decrement-button {
@@ -274,7 +242,7 @@
 }
 
 .scroll-bar:horizontal .track,
-.scroll-bar:vertical .track {
+.scroll-bar:vertical .track{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-radius: 0em;
@@ -285,13 +253,11 @@
     -fx-background-color: -fx-main-color;
     -fx-background-radius: 5em;
 }
-
 .scroll-pane > .corner {
     -fx-background-color: transparent;
 }
-
 /*-------------STYLING BUTTONS-------------*/
-.btnBack {
+.btnBack{
     -fx-background-color: transparent;
     -fx-text-fill: -fx-gray-color;
     -fx-font-size: 16px;
@@ -301,14 +267,13 @@
     -fx-cursor: hand;
     -fx-content-display: LEFT;
 }
-
-.btnBack:hover, .btnBack:hover > .backIcon {
+.btnBack:hover, .btnBack:hover > .backIcon{
     -fx-background-color: -fx-gray-color;
     -fx-text-fill: -fx-dark-color;
     -fx-fill: -fx-dark-color;
 }
 
-.btnNext {
+.btnNext{
     -fx-background-color: -fx-main-color;
     -fx-border-color: -fx-main-color;
     -fx-text-fill: -fx-second-color;
@@ -319,7 +284,7 @@
     -fx-content-display: LEFT;
 }
 
-.btnNext:hover, .btnNext:hover > .iconNext {
+.btnNext:hover, .btnNext:hover > .iconNext{
     -fx-background-color: transparent;
     -fx-text-fill: -fx-main-color;
     -fx-border-width: 2.5px;
@@ -354,85 +319,71 @@
     -fx-background-color: -fx-gray-color;
 }*/
 
-.packageItem {
-    -fx-background-color: #262628;
+.packageItem{
+    -fx-background-color:  #262628;
 }
-
-.packageItem:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.8), 5, 0, 0, 0);
+.packageItem:hover{
+    -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 5, 0, 0, 0);
 }
-
 /*-------------STYLING TOGGLE SWITCH-------------*/
-.toggleSwitch .thumb {
+.toggleSwitch .thumb{
     -fx-background-color: #424242;
 }
-
-.toggleSwitch .thumb-area {
+.toggleSwitch .thumb-area{
     -fx-background-color: #212121;
 }
-
-.toggleSwitch:selected .thumb-area {
+.toggleSwitch:selected .thumb-area{
     /*-fx-background-color: -fx-main-color;*/
     /*-fx-effect: dropshadow(three-pass-box, rgba(255,165,0,1), 10, 0, 0, 0);*/
 }
-
-.toggleSwitch:selected .thumb {
+.toggleSwitch:selected .thumb{
     -fx-background-color: -fx-main-color;
     -fx-effect: dropshadow(three-pass-box, -fx-main-color, 10, 0, 0, 0);
 }
-
 /*-------------ALERT-------------*/
-.alert {
-    -fx-background-color: -fx-dark-transparent; /*#262628*/
+.alert{
+    -fx-background-color:  -fx-dark-transparent; /*#262628*/
     -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
     -fx-border-color: -fx-main-color;
     -fx-border-radius: 0;
 }
-
-.alertText {
+.alertText{
     -fx-font-size: 16px;
     -fx-text-fill: -fx-main-color;
     -fx-alignment: CENTER;
 }
-
-.alertSuccess {
-    -fx-background-color: -fx-dark-transparent; /*#262628*/
+.alertSuccess{
+    -fx-background-color:  -fx-dark-transparent; /*#262628*/
     -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
     -fx-border-color: -fx-alert-success-color;
     -fx-border-radius: 0;
 }
-
-.alertSuccessIcon {
+.alertSuccessIcon{
     -fx-fill: -fx-alert-success-color;
 }
-
-.alertSuccessText {
+.alertSuccessText{
     -fx-font-size: 16px;
     -fx-text-fill: -fx-alert-success-color;
 }
-
-.alertFailure {
-    -fx-background-color: -fx-dark-transparent; /*#262628*/
+.alertFailure{
+    -fx-background-color:  -fx-dark-transparent; /*#262628*/
     -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
     -fx-border-color: -fx-alert-failure-color;
     -fx-border-radius: 0;
 }
-
-.alertFailureIcon {
+.alertFailureIcon{
     -fx-fill: -fx-alert-success-color;
 }
-
-.alertFailureText {
+.alertFailureText{
     -fx-font-size: 16px;
     -fx-text-fill: -fx-alert-failure-color;
 }
-
-.check-combo-box > .combo-box {
+.check-combo-box > .combo-box{
     -fx-background-radius: 0px;
     -fx-background-color: transparent;
 }
 
-.toggleSort {
+.toggleSort{
     -fx-background-color: transparent;
     -fx-text-fill: -fx-main-color;
     -fx-font-size: 15px;
@@ -442,45 +393,38 @@
     -fx-border-style: solid;
     -fx-cursor: hand;
 }
-
-.toggleSort:selected, .toggleSort:selected > .userIconSettings {
+.toggleSort:selected, .toggleSort:selected > .userIconSettings{
     -fx-background-color: -fx-main-color;
     -fx-text-fill: -fx-dark-color;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
     -fx-fill: -fx-dark-color;
 }
-
-.toggleSort:hover {
+.toggleSort:hover{
     -fx-border-width: 5px;
 }
-
 .minIcon {
     -fx-text-fill: -fx-main-color;
     -fx-fill: -fx-main-color;
     -fx-stroke: -fx-main-color;
 }
-
 .minBtn:hover > .minIcon {
     -fx-scale-y: 4;
 }
-
 .exitIcon {
     -fx-text-fill: -fx-main-color;
     -fx-fill: -fx-main-color;
     -fx-stroke: -fx-main-color;
 }
-
-.exitButton:hover > .exitPane > .exitIcon {
+.exitButton:hover > .exitPane > .exitIcon{
     -fx-scale-x: 1.625;
 }
-
-.sideIcons:hover {
+.sideIcons:hover{
     -fx-translate-x: 2px;
     -fx-background-color: transparent;
 }
-
-.hamburger {
+.hamburger{
     -fx-background-color: -fx-main-color;
+    -fx-fill: -fx-second-color;
     -fx-cursor: hand;
     -fx-background-radius: 0;
 }
