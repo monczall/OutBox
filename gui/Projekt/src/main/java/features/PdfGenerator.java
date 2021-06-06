@@ -206,7 +206,7 @@ public class PdfGenerator {
         addEmptyLine(empty, 2);
         document.add(empty);
 
-        float[] columnWidths = {1, 5, 5, 5, 5, 5};
+        float[] columnWidths = {1, 5, 5, 4, 5, 5};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(100);
         table.getDefaultCell().setUseAscender(true);
@@ -216,9 +216,9 @@ public class PdfGenerator {
         table.addCell(createCell("#", font));
         table.addCell(createCell(App.getLanguageProperties("packageNumber"), font));
         table.addCell(createCell(App.getLanguageProperties("size"), font));
-        table.addCell(createCell(App.getLanguageProperties("city"), font));
-        table.addCell(createCell(App.getLanguageProperties("voivodeship"), font));
-        table.addCell(createCell(App.getLanguageProperties("date"), font));
+        table.addCell(createCell(App.getLanguageProperties("cityRecipient"), font));
+        table.addCell(createCell(App.getLanguageProperties("voivodeshipRecipient"), font));
+        table.addCell(createCell(App.getLanguageProperties("dateRecipient"), font));
         table.getDefaultCell().setBackgroundColor(new GrayColor(0.75f));
 
 
