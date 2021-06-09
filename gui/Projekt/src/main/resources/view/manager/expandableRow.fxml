@@ -17,7 +17,7 @@
         </Button>
         <Label fx:id="labelSender" alignment="CENTER" layoutX="42.0" layoutY="7.0" prefHeight="17.0" prefWidth="303.0"
                styleClass="textLabelSmall" text="Nadawca"/>
-        <ComboBox fx:id="changeStatus" disable="true" layoutX="204.0" layoutY="75.0" prefHeight="25.0" prefWidth="235.0"
+        <ComboBox fx:id="changeStatus" disable="false" layoutX="204.0" layoutY="75.0" prefHeight="25.0" prefWidth="235.0"
                   styleClass="inputBox" visible="false"/>
         <Text fx:id="labelName" fill="SILVER" layoutX="3.0" layoutY="45.0" nodeOrientation="LEFT_TO_RIGHT"
               strokeType="OUTSIDE" strokeWidth="0.0" styleClass="expandableRow" text="Imie:" textAlignment="RIGHT"

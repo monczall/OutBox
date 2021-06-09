@@ -73,6 +73,8 @@ public class ManagerNullCourier implements Initializable {
     @FXML
     private Button buttonNextCourier;
     @FXML
+    private Button acceptButton;
+    @FXML
     private Label packageLabel;
     @FXML
     private Label courierLabel;
@@ -254,8 +256,13 @@ public class ManagerNullCourier implements Initializable {
         } else {
             packageLabel.setVisible(true);
             noDataText.setVisible(false);
+
             setDataLabel();
             howManyPackages.setText((dataIndex + 1) + "/" + getPackages.size());
+        }
+
+        if(getPackages.isEmpty()){
+            acceptButton.setDisable(true);
         }
     }
 
@@ -290,6 +297,10 @@ public class ManagerNullCourier implements Initializable {
             howManyCouriers.setText((dataIndexCourier + 1) + "/" + dataUserCourier.size());
             setDataLabelCourier();
         }
+
+        if(dataUserCourier.isEmpty()){
+            acceptButton.setDisable(true);
+        }
     }
 
     @Override
@@ -299,6 +310,9 @@ public class ManagerNullCourier implements Initializable {
         clearDataPackages();
         clearDataCouriers();
 
+        if(getPackages.isEmpty() || dataUserCourier.isEmpty()){
+            acceptButton.setDisable(true);
+        }
     }
 
 }

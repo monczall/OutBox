@@ -1,18 +1,20 @@
 package main.java.controllers.manager;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import main.java.App;
 import main.java.controllers.auth.Login;
+import main.java.controllers.courier.ExpendableRow;
+import main.java.dao.PackageHistoryDAO;
 import main.java.dao.PackagesDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.*;
@@ -22,6 +24,9 @@ import org.controlsfx.control.table.TableRowExpanderColumn;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ManagerPackages implements Initializable {
@@ -203,12 +208,55 @@ public class ManagerPackages implements Initializable {
      */
     private Pane createEditor(TableRowExpanderColumn.TableRowDataFeatures<PackagesDTO> arg) {
         try {
+            int selectedIndex = arg.getTableRow().getIndex();
             table.getSelectionModel().select(arg.getTableRow().getIndex());
             setId(table.getItems().get(arg.getTableRow().getIndex()).getUserInfosId());
             setPackageId(table.getItems().get(arg.getTableRow().getIndex()).getPackagesId());
             setComment(table.getItems().get(arg.getTableRow().getIndex()).getAdditionalComment());
             setStatus(table.getItems().get(arg.getTableRow().getIndex()).getStatus());
-            pane = FXMLLoader.load(getClass().getClassLoader().getResource("main/resources/view/manager/expandableRow.fxml"));
+            // pane = FXMLLoader.load(getClass().getClassLoader().getResource("main/resources/view/manager/expandableRow.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            ResourceBundle resourceBundle;
+            Preference pref = new Preference();
+            if (Preference.readPreference("language").equals("english"))
+                resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_en");
+            else {
+                resourceBundle = ResourceBundle.getBundle("main.resources.languages.lang_pl");
+            }
+            loader.setLocation(getClass().getClassLoader().getResource("main/resources/view/manager/expandableRow.fxml"));
+            loader.setResources(resourceBundle);
+            pane = loader.load();
+            Button button = new Button(App.getLanguageProperties("deliver"));
+            button.setLayoutX(390);
+            button.setLayoutY(76);
+            button.setPrefHeight(25);
+            button.setPrefWidth(130);
+            if(!table.getItems().get(selectedIndex).getStatus().equals(PackageStatus.WAITING_IN_BRANCH.toString())){
+                button.setVisible(false);
+            }
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                /**
+                 * method which updates status in packages and if specified conditions are
+                 * fulfilled then updates courier which is assigned to package
+                 * @param event
+                 */
+                @Override
+                public void handle(ActionEvent event) {
+                    String status = ExpendableRow.getStatusReturned();
+                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    PackageHistoryDAO.updateStatus(getPackageId(), PackageStatus.DELIVERED.displayName(),
+                                Timestamp.valueOf(dateTimeFormatter.format(now)));
+                    updateTable();
+                }
+            });
+
+            pane.getChildren().add(button);
+            FontAwesomeIconView arrow = new FontAwesomeIconView();      //Creating icon
+            arrow.setGlyphName("CHECK");
+            arrow.setSize("12");
+            arrow.getStyleClass().add("iconNext");
+            button.setGraphic(arrow);
         } catch (IOException e) {
             e.printStackTrace();
         }
