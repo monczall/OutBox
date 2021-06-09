@@ -160,8 +160,6 @@ public class AdminEditArea implements Initializable {
 
 
 
-
-
     /**
      * Method that doing "register" function after button click
      *
