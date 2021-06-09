@@ -121,7 +121,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void go_add_area(MouseEvent mouseEvent) throws IOException {
-        SceneManager.loadScene("main/resources/view/admin/adminAddArea.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminArea.fxml", mainWindow);
     }
 
     /**
@@ -240,7 +240,7 @@ public class Admin implements Initializable {
      * @throws IOException if doesn't find a scene then throw IOException
      */
     public void viewAddArea(ActionEvent actionEvent) throws IOException {
-        SceneManager.loadScene("main/resources/view/admin/adminAddArea.fxml", mainWindow);
+        SceneManager.loadScene("main/resources/view/admin/adminArea.fxml", mainWindow);
     }
 
     /**

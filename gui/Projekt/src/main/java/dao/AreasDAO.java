@@ -3,6 +3,9 @@ package main.java.dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.entity.Areas;
+import main.java.entity.AreasDTO;
+import main.java.entity.Users;
+import main.java.entity.UsersDTO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -117,5 +120,47 @@ public class AreasDAO {
 
         return list;
 
+    }
+
+    static public ObservableList<AreasDTO> getAreaEdit() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("FROM Areas");
+
+        List<Areas> areaList = query.list();
+
+        ObservableList<Areas> area = FXCollections.observableArrayList();
+        for (Areas ent : areaList) {
+            area.add(ent);
+        }
+        ObservableList<AreasDTO> areasDTOS = FXCollections.observableArrayList();
+        for (int i = 0; i < area.size(); i++) {
+            areasDTOS.add(new AreasDTO(area.get(i).getId(),area.get(i).getName(), area.get(i).getDepartmentStreetAndNumber(),
+                    area.get(i).getCity(), area.get(i).getVoivodeship()));
+        }
+
+        session.close();
+
+        return areasDTOS;
+    }
+
+    static public void editArea(int areaId, String name, String voivodeship,
+                                String city, String street
+    ) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Areas area = session.get(Areas.class, areaId);
+
+        area.setName(name);
+        area.setVoivodeship(voivodeship);
+        area.setCity(city);
+        area.setDepartmentStreetAndNumber(street);
+
+
+        session.update(area);
+        session.getTransaction().commit();
+
+        session.close();
     }
 }
