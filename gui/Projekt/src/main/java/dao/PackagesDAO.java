@@ -174,8 +174,7 @@ public class PackagesDAO {
                 "AND PH.date BETWEEN :dateStart AND :dateEnd " +
                 "AND P.typeId = PT.id " +
                 "AND (PH.status = 'Dostarczona' " +
-                "OR PH.status = 'Zwrocona Do Nadawcy' " +
-                "OR PH.status = 'Do Odebrania W Oddziale') " +
+                "OR PH.status = 'Zwrocona Do Nadawcy') " +
                 "GROUP BY P.packageNumber";
 
         Session session = HibernateUtil.getSessionFactory().openSession();
