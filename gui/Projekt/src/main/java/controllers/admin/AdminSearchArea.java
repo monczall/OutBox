@@ -14,10 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import main.java.App;
 import main.java.SceneManager;
 import main.java.dao.AreasDAO;
-
 import main.java.entity.Areas;
 import main.java.entity.AreasDTO;
-
 import main.java.features.Alerts;
 
 import java.io.IOException;
@@ -44,18 +42,34 @@ public class AdminSearchArea implements Initializable {
     @FXML
     private TextField parametr;
 
+    /**
+     * Method that return areaID
+     *
+     * @return return areaID
+     */
     public static int getAreaID() {
         return areaID;
     }
 
     private static int areaID;
 
+    /**
+     * Method that set areaID
+     *
+     * @param areaID areaID
+     */
     public static void setAreaID(int areaID) {
         AdminSearchArea.areaID = areaID;
     }
 
     private final ObservableList<AreasDTO> searchList = AreasDAO.getAreaEdit();
 
+    /**
+     * Method that move as to editing area scene after chose an employee
+     *
+     * @param mouseEvent mose event
+     * @throws IOException if doesn't find a scene then throw IOException
+     */
     public void showEdit(MouseEvent mouseEvent) throws IOException {
         if (table.getSelectionModel().getSelectedIndex() == -1) {
             Alerts.createCustomAlert(edit, editTable, "WARNING",

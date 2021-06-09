@@ -1,6 +1,5 @@
 package main.java.controllers.admin;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,9 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import main.java.App;
 import main.java.dao.AreasDAO;
-import main.java.dao.UsersDAO;
 import main.java.entity.Areas;
-import main.java.entity.Users;
 import main.java.features.Alerts;
 
 import java.net.URL;
@@ -55,7 +52,7 @@ public class AdminEditArea implements Initializable {
     private AnchorPane RightPaneAnchorPane;
 
     /**
-     * Method that adds an area to the base
+     * Method that edit an area
      * Retrieves entered data from inputs and checks their correctness
      */
 

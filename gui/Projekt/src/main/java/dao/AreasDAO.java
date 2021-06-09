@@ -122,6 +122,14 @@ public class AreasDAO {
 
     }
 
+    /**
+     * <p>
+     * Method used to get observable list of columns from area.
+     * Returned list is type of Areas.
+     * </p>
+     *
+     * @return
+     */
     static public ObservableList<AreasDTO> getAreaEdit() {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -144,6 +152,18 @@ public class AreasDAO {
         return areasDTOS;
     }
 
+    /**
+     <p>
+     * Method used update area by given araID.
+     *
+     * </p>
+     *
+     * @param areaId areaID
+     * @param name name
+     * @param voivodeship voivodeship
+     * @param city city
+     * @param street street
+     */
     static public void editArea(int areaId, String name, String voivodeship,
                                 String city, String street
     ) {
