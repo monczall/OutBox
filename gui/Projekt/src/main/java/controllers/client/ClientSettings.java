@@ -17,6 +17,7 @@ import main.java.App;
 import main.java.SceneManager;
 import main.java.controllers.auth.Encryption;
 import main.java.controllers.auth.Login;
+import main.java.dao.PackagesDAO;
 import main.java.dao.UserInfosDAO;
 import main.java.dao.UsersDAO;
 import main.java.entity.UserInfos;
@@ -211,64 +212,73 @@ public class ClientSettings implements Initializable {
     // Method that handle updating information from database
     @FXML
     void updateInformation(ActionEvent event) {
-        settOldPassword.getRight().setVisible(false);
-        // Checking if error icon is visible
-        if (!settStreet.getRight().isVisible() && !settCity.getRight().isVisible()
-                && !settNumber.getRight().isVisible()) {
+        if (PackagesDAO.hasActivePackage(Login.getUserID())) {
 
-            // Checking if current text inside inputs are different from the one
-            // inside the database (without additional query)
-            if (!inputs[0].equals(settStreet.getText()) || !inputs[1].equals(settCity.getText())
-                    || !inputs[2].equals(settProvince.getSelectionModel().getSelectedItem())
-                    || !inputs[3].equals(settNumber.getText())) {
+            settOldPassword.getRight().setVisible(false);
+            // Checking if error icon is visible
+            if (!settStreet.getRight().isVisible() && !settCity.getRight().isVisible()
+                    && !settNumber.getRight().isVisible()) {
 
-                // Updating information
-                UserInfosDAO.updateUserSettings(settProvince.getSelectionModel().getSelectedItem(),
-                        settCity.getText(), settNumber.getText(), settStreet.getText(), Login.getUserID());
+                // Checking if current text inside inputs are different from the one
+                // inside the database (without additional query)
+                if (!inputs[0].equals(settStreet.getText()) || !inputs[1].equals(settCity.getText())
+                        || !inputs[2].equals(settProvince.getSelectionModel().getSelectedItem())
+                        || !inputs[3].equals(settNumber.getText())) {
 
-                // Assigment of new values that are inside database after query
-                inputs[0] = settStreet.getText();
-                inputs[1] = settCity.getText();
-                inputs[2] = settProvince.getSelectionModel().getSelectedItem();
-                inputs[3] = settNumber.getText();
+                    // Updating information
+                    UserInfosDAO.updateUserSettings(settProvince.getSelectionModel().getSelectedItem(),
+                            settCity.getText(), settNumber.getText(), settStreet.getText(), Login.getUserID());
 
-                Alerts.createAlert(settingsPane, saveInformation,
-                        "CHECK",
-                        App.getLanguageProperties("successfullyChanged"));
-            }
-        } else {
-            Alerts.createAlert(settingsPane, saveInformation,
-                    "WARNING",
-                    App.getLanguageProperties("correctOrCompleteFields"));
-        }
-
-        // Checking if passwords were provided, changed and if they contains any error
-        if (!settOldPassword.getText().isEmpty()) {
-            if (!settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()
-                    && Encryption.encrypt(settOldPassword.getText()).equals(UsersDAO.readPassword(Login.getUserID()))) {
-                if (!settPassword.getText().isEmpty()) {
-                    // Updating passwords
-                    UsersDAO.updatePassword(Login.getUserID(), settPassword.getText());
+                    // Assigment of new values that are inside database after query
+                    inputs[0] = settStreet.getText();
+                    inputs[1] = settCity.getText();
+                    inputs[2] = settProvince.getSelectionModel().getSelectedItem();
+                    inputs[3] = settNumber.getText();
 
                     Alerts.createAlert(settingsPane, saveInformation,
                             "CHECK",
                             App.getLanguageProperties("successfullyChanged"));
-                } else {
-                    Alerts.createAlert(settingsPane, saveInformation,
-                            "WARNING",
-                            App.getLanguageProperties("providePasswords"));
-                    settPassword.setRight(alertIcon);
-                    settPassword.getRight().setVisible(true);
-
                 }
-
             } else {
                 Alerts.createAlert(settingsPane, saveInformation,
                         "WARNING",
-                        App.getLanguageProperties("incorrectPassword"));
-
-                settOldPassword.getRight().setVisible(true);
+                        App.getLanguageProperties("correctOrCompleteFields"));
             }
+
+            // Checking if passwords were provided, changed and if they contains any error
+            if (!settOldPassword.getText().isEmpty()) {
+                if (!settPassword.getRight().isVisible() && !settRepeatPassword.getRight().isVisible()
+                        && Encryption.encrypt(settOldPassword.getText()).equals(
+                                UsersDAO.readPassword(Login.getUserID()))) {
+                    if (!settPassword.getText().isEmpty()) {
+                        // Updating passwords
+                        UsersDAO.updatePassword(Login.getUserID(), settPassword.getText());
+
+                        Alerts.createAlert(settingsPane, saveInformation,
+                                "CHECK",
+                                App.getLanguageProperties("successfullyChanged"));
+                    } else {
+                        Alerts.createAlert(settingsPane, saveInformation,
+                                "WARNING",
+                                App.getLanguageProperties("providePasswords"));
+                        settPassword.setRight(alertIcon);
+                        settPassword.getRight().setVisible(true);
+
+                    }
+
+                } else {
+                    Alerts.createAlert(settingsPane, saveInformation,
+                            "WARNING",
+                            App.getLanguageProperties("incorrectPassword"));
+
+                    settOldPassword.getRight().setVisible(true);
+                }
+            }
+        }
+        else {
+            Alerts.createAlert(settingsPane, saveInformation,
+                    "WARNING",
+                    App.getLanguageProperties("cannotEditAcc"));
         }
     }
 

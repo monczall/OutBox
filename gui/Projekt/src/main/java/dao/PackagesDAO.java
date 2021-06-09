@@ -519,4 +519,29 @@ public class PackagesDAO {
         session.close();
     }
 
+    /**
+     * <p>
+     *  Method that check if user has an active package. If he does it returns false.
+     * </p>
+     * @param userId id of an user
+     * @return returns true if user don't have active package
+     */
+    static public boolean hasActivePackage(int userId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery("SELECT PH.status FROM PackageHistory PH, Users U, Packages P " +
+                "WHERE U.id = :id AND PH.packageId = P.id AND U.id = P.userId AND PH.status = " +
+                "(SELECT PH.status FROM PackageHistory PH WHERE PH.id = (SELECT MAX(PH.id) " +
+                "FROM PackageHistory PH WHERE PH.packageId = P.id )) AND " +
+                "NOT PH.status = 'Dostarczona' AND NOT PH.status = 'Zwrocona Do Nadawcy' GROUP BY PH.packageId");
+
+        query.setParameter("id", userId);
+
+        if(query.list().size() != 0) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
