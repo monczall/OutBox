@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" prefHeight="164.0" prefWidth="700.0" styleClass="mainBackground"
+      xmlns="http://javafx.com/javafx/8.0.171" fx:controller="main.java.controllers.client.PackageItem">
+    <children>
+        <Pane layoutX="8.0" layoutY="16.0" prefHeight="148.0" prefWidth="692.0" styleClass="packageItem">
+            <children>
+                <Text layoutX="8.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption"
+                      text="%clientPackageNumber"/>
+                <Text layoutX="10.0" layoutY="67.734375" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textOption"
+                      text="STATUS"/>
+                <Text fx:id="recipientText" layoutX="10.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      styleClass="textOption" text="%clientRecipient"/>
+                <FontAwesomeIconView fill="#8f8f8f" glyphName="TRUCK" layoutX="637.0" layoutY="32.71428680419922"
+                                     size="40"/>
+                <Label fx:id="packageNumber" layoutX="7.0" layoutY="19.0" styleClass="optionGroup" text="PLACEHOLDER"/>
+                <Label fx:id="packageStatus" layoutX="7.0" layoutY="67.0" styleClass="optionGroup" text="PLACEHOLDER"/>
+                <Label fx:id="packageRecipient" layoutX="7.0" layoutY="114.0" styleClass="optionGroup"
+                       text="PLACEHOLDER"/>
+                <TextField fx:id="itemId" layoutX="246.0" layoutY="58.0" styleClass="inputBox" visible="false"/>
+            </children>
+        </Pane>
+    </children>
+</Pane>

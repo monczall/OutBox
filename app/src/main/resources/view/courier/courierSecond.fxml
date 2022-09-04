@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainWindow" prefHeight="672.0" prefWidth="1033.0"
+            styleClass="mainBackground" stylesheets="@../../css/courier.css"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="main.java.controllers.courier.CourierSecond">
+    <children>
+        <Text fill="WHITE" layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              styleClass="optionGroup" text="%activePackages"/>
+        <FontAwesomeIconView fill="ORANGE" glyphName="DROPBOX" layoutX="175.0" layoutY="81.0" size="40"
+                             styleClass="partIcon"/>
+        <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0"
+              startY="0.49554443359375" stroke="#252525" strokeWidth="2.0"/>
+        <TableView fx:id="table" layoutX="102.0" layoutY="151.0" prefHeight="467.0" prefWidth="857.0"
+                   stylesheets="@../../css/courier.css">
+            <columns>
+                <TableColumn fx:id="packageNumber" prefWidth="131.3333511352539" text="%packageNumber"/>
+                <TableColumn fx:id="name" prefWidth="67.33329772949219" text="%name"/>
+                <TableColumn fx:id="surname" prefWidth="100.0" text="%surname"/>
+                <TableColumn fx:id="city" minWidth="0.0" prefWidth="85.33331298828125" text="%city"/>
+                <TableColumn fx:id="address" minWidth="0.0" prefWidth="130.66671752929688" text="%address"/>
+                <TableColumn fx:id="telephone" minWidth="0.0" prefWidth="68.0" text="%phone"/>
+                <TableColumn fx:id="state" prefWidth="132.0" text="%packageStatus"/>
+                <TableColumn fx:id="time" minWidth="0.0" prefWidth="88.66668701171875" text="%deliveryTime"/>
+            </columns>
+        </TableView>
+        <TextField fx:id="searchField" layoutX="741.0" layoutY="110.0" onKeyReleased="#search" styleClass="inputBox"/>
+        <Label layoutX="682.0" layoutY="118.0" text="%search" textFill="WHITE"/>
+    </children>
+</AnchorPane>

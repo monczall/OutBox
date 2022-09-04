@@ -1,0 +1,353 @@
+/*-------------COLORS-------------*/
+* {
+    -fx-theme-color: -fx-main-color;
+    -fx-theme-secondary-color: -fx-second-color;
+    -fx-textFields-bg: #EEEEEE;
+    -fx-error: red;
+    -fx-success: #38B000;
+    -fx-dark-bg: #121212;
+    -fx-white: #FFFFFF;
+    -fx-black: #000000;
+    -fx-alter: #CCCCCC;
+    -fx-disabled: #808080;
+
+    -fx-shadow: #000;
+    -fx-dark-transparent: #121212cc;
+}
+
+/*-------------BACKGROUNDS-------------*/
+.primaryBackground {
+    -fx-background-color: -fx-dark-bg;
+}
+
+.secondaryBackground {
+    -fx-background-color: -fx-theme-color;
+}
+
+.primaryBackgroundFill {
+    -fx-fill: -fx-dark-bg;
+}
+
+/*-------------FILLS-------------*/
+.fill {
+    -fx-fill: -fx-theme-color;
+}
+
+.fillDisabled {
+    -fx-fill: -fx-disabled;
+}
+
+.fillCorrect {
+    -fx-fill: -fx-success;
+}
+
+.fillError {
+    -fx-fill: -fx-error;
+}
+
+.fillIcon {
+    -fx-fill: -fx-theme-secondary-color;
+}
+
+/*-------------TEXT-------------*/
+.mainText {
+    -fx-text-fill: -fx-black;
+}
+
+.mainInvertText {
+    -fx-text-fill: -fx-white;
+}
+
+.altText {
+    -fx-text-fill: -fx-alter;
+}
+
+.themeMainText {
+    -fx-text-fill: -fx-second-color;
+}
+
+.themeTouchOfColorText {
+    -fx-text-fill: -fx-theme-color;
+}
+
+.errorText {
+    -fx-text-fill: -fx-error;
+}
+
+.successText {
+    -fx-text-fill: -fx-success;
+}
+
+/*-------------BUTTONS-------------*/
+.loginButton {
+    -fx-background-color: -fx-theme-color;
+    -fx-background-radius: 3;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 35;
+    -fx-pref-height: 35;
+    -fx-max-height: 35;
+    -fx-text-fill: #000000;
+    -fx-alignment: center;
+}
+
+.loginButton:hover {
+    -fx-background-color: #000000;
+    -fx-background-radius: 3;
+    -fx-border-color: -fx-theme-color;
+    -fx-border-radius: 3;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 35;
+    -fx-pref-height: 35;
+    -fx-max-height: 35;
+    -fx-text-fill: -fx-theme-color;
+    -fx-alignment: center;
+}
+
+.loginButton:pressed {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.createAccountButton {
+    -fx-background-color: -fx-theme-color;
+    -fx-background-radius: 3;
+    -fx-border-color: -fx-theme-secondary-color;
+    -fx-border-radius: 3;
+    -fx-min-width: 91;
+    -fx-min-height: 27;
+    -fx-text-fill: -fx-theme-secondary-color;
+    -fx-alignment: center;
+}
+
+.createAccountButton:hover {
+    -fx-background-color: -fx-theme-secondary-color;
+    -fx-background-radius: 3;
+    -fx-min-width: 91;
+    -fx-min-height: 27;
+    -fx-text-fill: -fx-theme-color;
+    -fx-alignment: center;
+}
+
+.createAccountButton:pressed {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.returnButton {
+    -fx-background-color: -fx-theme-secondary-color;
+    -fx-background-radius: 3;
+    -fx-min-width: 60;
+    -fx-pref-width: 60;
+    -fx-max-width: 60;
+    -fx-min-height: 25;
+    -fx-pref-height: 25;
+    -fx-max-height: 25;
+    -fx-text-fill: -fx-theme-color;
+    -fx-alignment: center;
+}
+
+.returnButton:hover {
+    -fx-background-color: -fx-theme-color;
+    -fx-background-radius: 3;
+    -fx-border-color: -fx-theme-secondary-color;
+    -fx-border-radius: 3;
+    -fx-min-width: 60;
+    -fx-pref-width: 60;
+    -fx-max-width: 60;
+    -fx-min-height: 25;
+    -fx-pref-height: 25;
+    -fx-max-height: 25;
+    -fx-text-fill: -fx-theme-secondary-color;
+    -fx-alignment: center;
+}
+
+.returnButton:pressed {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.menuButton {
+    -fx-background-color: -fx-theme-secondary-color;
+    -fx-background-radius: 3;
+}
+
+.menuButton .label {
+    -fx-text-fill: -fx-white;
+}
+
+.menu-button > .arrow-button, .menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
+.menuButton:hover {
+    -fx-background-color: -fx-theme-color;
+    -fx-background-radius: 3;
+    -fx-border-color: -fx-theme-secondary-color;
+    -fx-border-radius: 3;
+}
+
+.menuItemButton {
+    -fx-background-color: -fx-dark-bg;
+    -fx-background-radius: 3;
+    -fx-text-fill: -fx-theme-color;
+    -fx-alignment: center;
+}
+
+.menuItemButton .label {
+    -fx-text-fill: -fx-white;
+}
+
+.menuItemButton:disabled {
+    -fx-opacity: 0.9;
+}
+
+.menuItemButton:hover {
+    -fx-background-color: -fx-dark-bg;
+    -fx-background-radius: 3;
+    -fx-border-color: -fx-theme-secondary-color;
+    -fx-border-radius: 3;
+    -fx-text-fill: -fx-theme-color;
+    -fx-alignment: center;
+}
+
+.menuItemButton:hover .label {
+    -fx-text-fill: -fx-theme-color;
+}
+
+.context-menu {
+    -fx-background-color: -fx-theme-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-border-color: -fx-dark-bg;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.minIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+
+.minBtn:hover > .minIcon {
+    -fx-scale-y: 4;
+}
+
+.exitIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+
+.exitButton:hover > .exitPane > .exitIcon {
+    -fx-scale-x: 1.625;
+}
+
+/*-------------TEXT FIELDS-------------*/
+.textFields {
+    -fx-background-color: -fx-textFields-bg;
+    -fx-background-radius: 9;
+    -fx-border-color: -fx-theme-color;
+    -fx-border-width: 3;
+    -fx-border-radius: 7;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 35;
+    -fx-pref-height: 35;
+    -fx-max-height: 35;
+    -fx-padding: 0 0 0 30;
+}
+
+.textFieldsCorrect {
+    -fx-background-color: -fx-textFields-bg;
+    -fx-background-radius: 9;
+    -fx-border-color: -fx-success;
+    -fx-border-width: 3;
+    -fx-border-radius: 7;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 35;
+    -fx-pref-height: 35;
+    -fx-max-height: 35;
+    -fx-padding: 0 0 0 30;
+}
+
+.textFieldsError {
+    -fx-background-color: #FFC0C0;
+    -fx-background-radius: 9;
+    -fx-border-color: -fx-error;
+    -fx-border-width: 3;
+    -fx-border-radius: 7;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+    -fx-min-height: 35;
+    -fx-pref-height: 35;
+    -fx-max-height: 35;
+    -fx-padding: 0 0 0 30;
+}
+
+/*-------------ALERT-------------*/
+.alertText {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-main-color;
+    -fx-alignment: CENTER;
+}
+
+.alertSuccess {
+    -fx-background-color: -fx-dark-transparent; /*#262628*/
+    -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
+    -fx-border-color: -fx-success;
+    -fx-border-radius: 0;
+}
+
+.alertSuccessIcon {
+    -fx-fill: -fx-success;
+}
+
+.alertSuccessText {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-success;
+}
+
+.alertFailure {
+    -fx-background-color: -fx-dark-transparent; /*#262628*/
+    -fx-effect: dropshadow(three-pass-box, -fx-shadow, 16, 0, 0, 0);
+    -fx-border-color: -fx-error;
+    -fx-border-radius: 0;
+}
+
+.alertFailureIcon {
+    -fx-fill: -fx-error;
+}
+
+.alertFailureText {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-error;
+}
+
+.minIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+
+.minBtn:hover > .minIcon {
+    -fx-scale-y: 4;
+}
+
+.exitIcon {
+    -fx-text-fill: -fx-main-color;
+    -fx-fill: -fx-main-color;
+    -fx-stroke: -fx-main-color;
+}
+
+.exitButton:hover > .exitPane > .exitIcon {
+    -fx-scale-x: 1.625;
+}

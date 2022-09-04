@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainWindow" prefHeight="672.0" prefWidth="1033.0"
+            styleClass="mainBackground" stylesheets="@../../css/courier.css"
+            xmlns="http://javafx.com/javafx/15.0.1"
+            fx:controller="main.java.controllers.interbranchCourier.InterbranchCourierSecond">
+    <children>
+        <Text fill="WHITE" layoutX="220.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              styleClass="optionGroup" text="%activePackages"/>
+        <FontAwesomeIconView fill="ORANGE" glyphName="DROPBOX" layoutX="175.0" layoutY="81.0" size="40"
+                             styleClass="partIcon"/>
+        <Line endX="594.0" endY="0.49554443359375" layoutX="267.0" layoutY="96.0" startX="-96.0"
+              startY="0.49554443359375" stroke="#252525" strokeWidth="2.0"/>
+        <TextField fx:id="searchField" layoutX="741.0" layoutY="110.0" onKeyReleased="#search" styleClass="inputBox"/>
+        <Label layoutX="682.0" layoutY="116.0" text="%search" textFill="WHITE"/>
+        <TableView fx:id="table" layoutX="102.0" layoutY="151.0" prefHeight="451.0" prefWidth="857.0"
+                   styleClass="tableview">
+            <columns>
+                <TableColumn fx:id="packageNumber" prefWidth="131.3333511352539" text="%numberPackage"/>
+                <TableColumn fx:id="packageType" prefWidth="105.0" text="%packageType"/>
+                <TableColumn prefWidth="220.0" text="%sender">
+                    <columns>
+                        <TableColumn fx:id="senderName" prefWidth="100.0" text="%name"/>
+                        <TableColumn fx:id="senderSurname" prefWidth="120.0" text="%surname"/>
+                    </columns>
+                </TableColumn>
+                <TableColumn prefWidth="220.0" text="%recipient">
+                    <columns>
+                        <TableColumn fx:id="recipentName" prefWidth="100.0" text="%name"/>
+                        <TableColumn fx:id="recipentSurname" prefWidth="120.0" text="%surname"/>
+                    </columns>
+                </TableColumn>
+                <TableColumn fx:id="packageStatus" prefWidth="145.0" text="Status"/>
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

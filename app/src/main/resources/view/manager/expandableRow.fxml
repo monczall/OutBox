@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="111.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/15.0.1"
+      fx:controller="main.java.controllers.manager.ExpendableRow">
+    <children>
+        <Button disable="true" layoutX="455.0" layoutY="76.0" mnemonicParsing="false" onAction="#updateStatus"
+                text="Zatwierdź" visible="false">
+            <graphic>
+                <FontAwesomeIconView glyphName="CHECK" styleClass="iconsAwesome"/>
+            </graphic>
+        </Button>
+        <Label fx:id="labelSender" alignment="CENTER" layoutX="42.0" layoutY="7.0" prefHeight="17.0" prefWidth="303.0"
+               styleClass="textLabelSmall" text="Nadawca"/>
+        <ComboBox fx:id="changeStatus" disable="false" layoutX="204.0" layoutY="75.0" prefHeight="25.0" prefWidth="235.0"
+                  styleClass="inputBox" visible="false"/>
+        <Text fx:id="labelName" fill="SILVER" layoutX="3.0" layoutY="45.0" nodeOrientation="LEFT_TO_RIGHT"
+              strokeType="OUTSIDE" strokeWidth="0.0" styleClass="expandableRow" text="Imie:" textAlignment="RIGHT"
+              wrappingWidth="79.544921875"/>
+        <Text fx:id="labelCity" fill="SILVER" layoutX="2.0" layoutY="68.0" nodeOrientation="LEFT_TO_RIGHT"
+              strokeType="OUTSIDE" strokeWidth="0.0" styleClass="expandableRow" text="Miasto:" textAlignment="RIGHT"
+              wrappingWidth="80.57421875"/>
+        <Text fx:id="labelSurname" fill="SILVER" layoutX="171.0" layoutY="44.0" nodeOrientation="LEFT_TO_RIGHT"
+              strokeType="OUTSIDE" strokeWidth="0.0" styleClass="expandableRow" text="Nazwisko:" textAlignment="RIGHT"
+              wrappingWidth="131.97656249999955"/>
+        <Text fx:id="labelPhone" fill="SILVER" layoutX="204.0" layoutY="68.0" nodeOrientation="LEFT_TO_RIGHT"
+              strokeType="OUTSIDE" strokeWidth="0.0" styleClass="expandableRow" text="Telefon:" textAlignment="RIGHT"
+              wrappingWidth="99.173828125"/>
+        <Text fx:id="labelStreet" fill="SILVER" layoutX="2.0" layoutY="91.0" nodeOrientation="LEFT_TO_RIGHT"
+              strokeType="OUTSIDE" strokeWidth="0.0" styleClass="expandableRow" text="Ulica:" textAlignment="RIGHT"
+              wrappingWidth="80.556640625"/>
+        <Text fx:id="name" fill="WHITE" layoutX="90.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              styleClass="expandableRow" text="x" wrappingWidth="131.9765625"/>
+        <Text fx:id="city" fill="WHITE" layoutX="90.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              styleClass="expandableRow" text="x" wrappingWidth="131.9765625"/>
+        <Text fx:id="surname" fill="WHITE" layoutX="310.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              styleClass="expandableRow" text="x" wrappingWidth="156.80339813232422"/>
+        <Text fx:id="address" fill="WHITE" layoutX="90.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              styleClass="expandableRow" text="x 12" wrappingWidth="221.4765625"/>
+        <Text fx:id="phone" fill="WHITE" layoutX="309.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              styleClass="expandableRow" text="x" wrappingWidth="156.80339813232422"/>
+        <TextArea fx:id="comments" editable="false" layoutX="544.0" layoutY="35.0" prefHeight="59.0" prefWidth="262.0"
+                  styleClass="inputArea" wrapText="true"/>
+        <Label fx:id="labelComment" alignment="CENTER" layoutX="618.0" layoutY="7.0" prefHeight="17.0" prefWidth="110.0"
+               styleClass="textLabelSmall" text="Uwagi"/>
+    </children>
+</Pane>
