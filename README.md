@@ -12,7 +12,7 @@
     
   Desktop application for Transport Company for clients, couriers, managers and admins.
     <br />
-    <a href="#">Page about project</a>
+    <a href="https://filippapiernik.pl/projects/OutBox">Page about project</a>
   </p>
 </div>
 
@@ -117,4 +117,4 @@ All credentials to sample accounts are located in *docs* folder in *pass.txt* fi
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[app-screenshot]: https://i.imgur.com/82btWZ4.png
+[app-screenshot]: https://i.imgur.com/iL4FU3S.png
