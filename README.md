@@ -80,7 +80,7 @@ Installation can be done by cloning the repository and opening project with an I
 
 * Clone the repo
    ```sh
-   git clone https://github.com/LeCarteloo/OutBox.git
+   git clone https://github.com/monczall/OutBox.git
    ```
 Installation can also be done by downloading installer from google drive. (it will generate .exe file).
 * https://drive.google.com/file/d/10dPfEloQHU0z0iD8Sap6Tkk9WIt0N5as/view?usp=sharing
@@ -102,8 +102,8 @@ All credentials to sample accounts are located in *docs* folder in *pass.txt* fi
   * LinkedIn - [@filip-papiernik](https://www.linkedin.com/in/filip-papiernik-390444230/)
   * Email - filippapiernik1999@gmail.com
 * monczall:
-  * LinkedIn - \*
-  * Email - \*
+  * LinkedIn - [@lukasz-maczka](https://www.linkedin.com/in/%C5%82ukasz-m%C4%85czka-38946b263/)
+  * Email - lukaszmaczka3604@gmail.com
 * Blade669:
   * LinkedIn - \*
   * Email - \*
